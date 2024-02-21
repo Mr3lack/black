@@ -1,0 +1,28 @@
+[18:50:45:208]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Command to be executed :: /usr/bin/who|
+[18:50:45:209]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: going to execute :: ScriptExecutionCmd :: /usr/bin/who -b|
+[18:50:45:210]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Arguments passed for the command to be executed :: [-b]|
+[18:50:45:335]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Error output from error buff :: |
+[18:50:45:566]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Command to be executed :: /bin/sh|
+[18:50:45:566]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: going to execute :: ScriptExecutionCmd :: /bin/sh -c netstat -nlp | grep  9090|
+[18:50:45:566]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Arguments passed for the command to be executed :: [-c, netstat -nlp | grep , 9090]|
+[18:50:45:667]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Error output from error buff :: 9090: 1: netstat: not foundUsage: grep [OPTION]... PATTERNS [FILE]...Try 'grep --help' for more information.|
+[18:50:45:669]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Command to be executed :: /bin/sh|
+[18:50:45:669]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: going to execute :: ScriptExecutionCmd :: /bin/sh cat /proc/meminfo|
+[18:50:45:669]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Arguments passed for the command to be executed :: [cat /proc/meminfo]|
+[18:50:45:770]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Error output from error buff :: /bin/sh: 0: cannot open cat /proc/meminfo: No such file|
+[18:50:45:770]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Command to be executed :: /bin/sh|
+[18:50:45:770]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: going to execute :: ScriptExecutionCmd :: /bin/sh cat /proc/cpuinfo|
+[18:50:45:770]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Arguments passed for the command to be executed :: [cat /proc/cpuinfo]|
+[18:50:45:871]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Error output from error buff :: /bin/sh: 0: cannot open cat /proc/cpuinfo: No such file|
+[18:50:45:872]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Command to be executed :: /bin/sh|
+[18:50:45:872]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: going to execute :: ScriptExecutionCmd :: /bin/sh df -h|
+[18:50:45:872]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Arguments passed for the command to be executed :: [df -h]|
+[18:50:45:973]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Error output from error buff :: /bin/sh: 0: cannot open df -h: No such file|
+[18:50:45:973]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Command to be executed :: /bin/sh|
+[18:50:45:973]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: going to execute :: ScriptExecutionCmd :: /bin/sh /usr/bin/top -b -n 1|
+[18:50:45:974]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Arguments passed for the command to be executed :: [/usr/bin/top -b -n 1]|
+[18:50:46:075]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Error output from error buff :: /bin/sh: 0: cannot open /usr/bin/top -b -n 1: No such file|
+[18:50:46:075]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Command to be executed :: /bin/sh|
+[18:50:46:075]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: going to execute :: ScriptExecutionCmd :: /bin/sh netstat -an|
+[18:50:46:075]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Arguments passed for the command to be executed :: [netstat -an]|
+[18:50:46:177]|[02-20-2024]|[SIF_CREATION]|[INFO]|[1]:  ProcessBuilderUtil :: runProcess() :: Error output from error buff :: /bin/sh: 0: cannot open netstat -an: No such file|

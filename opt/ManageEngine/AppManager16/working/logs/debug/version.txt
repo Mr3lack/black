@@ -1,0 +1,10 @@
+Module=APPMANAGER
+BuildLabel=APPMANAGER_16840_HOTFIX_BRANCH_Feb_15_2024_1
+Build_Number=7809434
+Source_Changeset=b9c827e151dbe6cbd4d381e59895c04f0c6f93f4
+BranchName=APPMANAGER_16840_HOTFIX_BRANCH
+BuildType=WEBHOST
+Build_Comment=Release v16841
+Build_Date=15-02-24
+build-timestamp= 1707975414
+Current_Build_Url=https://build.zohocorp.com/me/appmanager/webhost/APPMANAGER_16840_HOTFIX_BRANCH/Feb_15_2024_1

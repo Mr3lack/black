@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+	<jsontemplates>
+		<jsontemplate name="am.insight.traceTree">
+			<key name="parent" type="long" />
+			<key name="component" type="String" />
+			<key name="total" type="long" />
+			<key name="metric" regex="apminsight_traceMetric" />
+			<key name="level" type="int" />
+			<key name="exclusive" type="int" />
+			<key name="id" type="int" />
+			<key name="time" type="long" />
+			<key min-occurrences="0" name="hasSQL" type="boolean" />
+			<key min-occurrences="0" name="sqlIdx" type="int" />
+		</jsontemplate>
+		<jsontemplate name="app_param_view_json">
+			<key name="action" regex="safestring" />
+			<key name="view_id" type="long" />
+			<key label="is_edit_allowed" name="is_edit_allowed"
+				type="boolean" />
+			<key name="view_name" regex="safestring" />
+			<key array-size="0-50" name="view_list" template="longArrayJson"
+				type="JSONArray" />
+			<key name="app_param_ids" template="stringArrayJson"
+				type="JSONArray" />
+			<key max-len="50" name="new_name" regex="^[a-zA-Z0-9 _-]+$"
+				type="String" />
+			<key array-size="0-50" max-len="3000" name="app_param_details"
+				template="app_param_view_details_json" type="JSONArray" />
+		</jsontemplate>
+		<jsontemplate name="stringArrayJson">
+			<value regex="apmInsightSafeString" max-len="500024" />
+		</jsontemplate>
+		<jsontemplate name="app_param_view_details_json">
+			<key min-occurrences="1" name="app_param_id" type="long" />
+			<key label="is_edit_allowed" name="is_edit_allowed"
+				type="boolean" />
+			<key min-occurrences="1" name="app_param_type" type="int" />
+			<key max-len="100" min-occurrences="1" name="grid_details"
+				template="grid_details_json" type="JSONObject" />
+		</jsontemplate>
+		<jsontemplate name="grid_details_json">
+			<key min-occurrences="1" name="minSizeY" type="int" />
+			<key min-occurrences="1" name="sizeX" type="int" />
+			<key min-occurrences="1" name="col" type="int" />
+			<key min-occurrences="1" name="minSizeX" type="int" />
+			<key min-occurrences="1" name="row" type="int" />
+			<key label="is_edit_allowed" name="is_edit_allowed"
+				type="boolean" />
+			<key min-occurrences="1" name="sizeY" type="int" />
+		</jsontemplate>
+		<jsontemplate name="apminsight_profiler_setting">
+			<key name="duration" type="int" />
+			<key name="n_value"  type="int" />
+		</jsontemplate>
+		<jsontemplate name="app_key_txn_params_json">
+			<key min-occurrences="1" name="action" regex="safestring" />
+			<key label="is_edit_allowed" name="is_edit_allowed"
+				type="boolean" />
+			<key array-size="0-50" max-len="1100" name="txnid"
+				template="longArrayJson" type="JSONArray" />
+		</jsontemplate>
+		<jsontemplate name="longArrayJson">
+			<value type="long" />
+		</jsontemplate>
+		<jsontemplate name="apminsight_config_profile_template">
+			<key min-occurrences="1" name="profile_name" type="String" max-len="255" />
+			<key min-occurrences="1" name="agent_type" regex="safestring" />
+			<key label="is_edit_allowed" name="is_edit_allowed"
+				type="boolean" />
+			<key name="is_default" type="boolean" />
+			<key max-len="14000" name="agent_config"
+				template="apminsight_update_config" type="JSONObject" />
+			<key max-len="14000" name="keytxn_config"
+				template="apminsight_update_config" type="JSONObject" />
+		</jsontemplate>
+		<jsontemplate name="apminsight_update_config">
+			<key name="tags" regex="safestring" />
+			<key name="application.group.name" regex="safestring" />
+			<key array-size="0-5000" max-len="10000" name="instanceIds"
+				template="longArrayJson" type="JSONArray" />
+			<key name="apdex.threshold" regex="(\d*[.])?\d+" />
+			<key name="transaction.trace.enabled" type="boolean" />
+			<key name="transaction.trace.sql.parametrize" type="boolean" />
+			<key name="transaction.trace.sql.stacktrace.threshold"
+				regex="(\d*[.])?\d+" />
+			<key name="transaction.tracking.request.interval" regex="(\d+)" />
+			<key name="transaction.trace.threshold" regex="(\d*[.])?\d+" />
+			<key name="autoupgrade.enabled" type="boolean" />
+			<key name="sql.capture.enabled" type="boolean" />
+			<key name="scheduleddayofweek"
+				regex="(?:Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)day" />
+			<key name="scheduledtime" regex="(\d{2}\:\d{2})" />
+			<key name="transaction.skip.listening" regex="[a-zA-Z0-9*., ]*"
+				max-len="2147483646" />
+			<key name="sql.capture.use_reflection" type="boolean" />
+			<key name="sequence.bag.max.tracker" regex="int" />
+			<key name="webtransaction.naming.use.requesturl" type="boolean" />
+			<key name="agent.print.statistics" type="int" />
+			<key name="transient.rootracker.vault.size" type="int" />
+			<key name="transaction.tracestore.size" type="int" />
+			<key name="metricstore.metric.bucket.size" type="int" />
+			<key name="metricstore.bgmetric.bucket.size" type="int" />
+			<key name="thread.dump.maxdepth" type="int" />
+			<key name="transaction.tracker.drop.threshold.autodetect"
+				type="boolean" />
+			<key name="webtransaction.trace.input.params.record"
+				type="boolean" />
+			<key name="webtransaction.trace.input.params.ignore"
+				regex="([a-zA-Z0-9_., ]*)" max-len="2147483646" />
+			<key name="webtransaction.trace.request.headers.record"
+				type="boolean" />
+			<key name="webtransaction.trace.request.headers.ignore"
+				regex="([a-zA-Z0-9\-_., ]*)" />
+			<key name="custom.parameters.record" type="boolean" />
+			<key name="webtransaction.encoding.charset"
+				regex="([a-zA-Z0-9\-]*)" />
+			<key name="webtransaction.record.cputime.enabled" type="boolean" />
+			<key name="webtransaction.record.memory.allocation.enabled"
+				type="boolean" />
+			<key
+				name="webtransaction.trace.external.components.count.threshold"
+				type="int" />
+			<key name="webtransaction.tracker.drop.threshold" type="int" />
+			<key name="webtransaction.timeout" type="double" />
+			<key name="transaction.trace.duplicate" type="boolean" />
+			<key name="bgtransaction.tracking.enabled" type="boolean" />
+			<key name="bgtransaction.trace.enabled" type="boolean" />
+			<key name="bgtransaction.trace.threshold" type="double" />
+			<key name="bgtransaction.record.cputime.enabled" type="boolean" />
+			<key name="capture.all.traces" type="boolean" />
+			<key name="bgtransaction.record.memory.allocation.enabled"
+				type="boolean" />
+			<key
+				name="bgtransaction.trace.external.components.count.threshold"
+				type="int" />
+			<key name="bgtransaction.tracking.request.interval" type="int" />
+			<key name="bgtransaction.tracker.drop.threshold" type="int" />
+			<key name="bgtransaction.timeout" type="double" />
+			<key name="jvm.polling.interval" type="int" />
+			<key name="component.trace.threshold" type="int" />
+			<key name="bgtransaction.enable.web.services" type="boolean" />
+			<key name="trace.collection.threshold" type="int" />
+			<key name="trace.collection.rest.interval" type="int" />
+			<key name="track.metric.interval" type="int" />
+			<key name="enable.metric.trace.collection.optimisation"
+				type="boolean" />
+			<key name="tidy.url.pattern" type="boolean" />
+			<key name="normalize.seq.in.app.thread" type="boolean" />
+			<key name="max.monitors.threshold" type="int" />
+			<key name="external.servercall.enabled" type="boolean" />
+			<key name="enable.error.tracking" type="boolean" />
+			<key name="trace.collection.threshold.min" type="int" />
+			<key name="enable.httpcode.tracking" type="boolean" />
+			<key name="enable.trace.dropping" type="boolean" />
+			<key name="apminsight.log.level"
+				regex="(DEBUG|INFO|WARNING|ERROR|CRITICAL|OFF|FINE)" />
+			<key name="exceptions.ignore" regex="([a-zA-Z0-9.,*+ ]*)"
+				max-len="2147483646" />
+			<key name="capture.http.network.bytes" type="boolean" />
+			<key name="http.errors.ignore" regex="([a-zA-Z0-9.,*+ ]*)"
+				max-len="2147483646" />
+			<key array-size="0-50" max-len="2000"
+				name="transaction.key.transactions" template="longArrayJson"
+				type="JSONArray" />
+			<key name="transaction.skip.patterns"
+				regex="([a-zA-Z0-9.\,\*\/+\-\_\:]*)" max-len="2147483646" />
+			<key name="applyToAll" type="boolean" />
+			<key name="cputime.capture.enabled" type="boolean" />
+			<key name="cputime.threshold" type="int" />
+			<key name="monitor_id" type="long" />
+			<key name="show.instance.port.number" type="boolean" />
+			<key name="dbname.normalization" type="boolean" />
+			<key name="down.alert.enabled" type="boolean" />
+			<key max-len="5000" name="transaction.grouping"
+				regex="safestring" />
+			<key max-len="5000" name="transaction.prefix.grouping"
+				regex="safestring" />
+			<key label="is_edit_allowed" name="is_edit_allowed"
+				type="boolean" />
+			<key name="capture.jmx.metrics" regex="boolean" />
+			<key name="last.modified.time" type="long"/>
+			<key name="custom.instrumentation" regex="apmInsightSafeString" max-len="500024"/>
+			<extrakey  type="String" min-len="0" max-len="1000" limit="10" max-occurrences="10" description="To allow extra keys and values"/>
+		</jsontemplate>
+		<jsontemplate name="apminsight.agent.auto.upgrade">
+			<key name="scheduledtime" regex="^(([0-9]{0,15})|([a-zA-Z0-9]{0,5}|([0-9]{1,4}[- /][0-9][0-9]?[- /][0-9]{1,4})([ ][0-9][0-9]?[:][0-9][0-9])?))?$"/>
+		</jsontemplate> 
+	</jsontemplates>
+	<urls method="post" api="true" throwallerrors="true" url-type="dynamic">
+		<param-group name="am.additional.extra.params" />
+		<param name="license.key" secret="true" type="String" min-occurrences="1" max-occurrences="1"/>
+		<param name="instance_id" regex="long" min-occurrences="0" max-occurrences="1"/>
+		
+		<url path="/arh/connect">
+			<inputstream  secret="true" type="String" max-len="2147483646" description="To allow all APM Insight agents connecitivity info,envrionment,config metrics" />
+		</url>
+		<url path="/arh/agent_config_update">
+			<inputstream  secret="true" type="String" max-len="2147483646" description="To allow all APM Insight agents tracked config metrics" />
+		</url>
+		<url path="/arh/thread_profiler">
+			<inputstream  secret="true" type="String" max-len="2147483646" description="To allow all APM Insight agents tracked thread dump metrics" />
+		</url>
+		<url path="/arh/downloadupdate">
+			<inputstream  secret="true" type="String" max-len="2147483646" description="To allow all APM Insight agents download update status and url metrics" />
+		</url>
+		<url path="/arh/thread_profiler_v2" method="post">
+			<file name="am.apminsight.threadprofile.filename" name-regex="true" max-size="10240" content-type-name="text" allowed-extensions="txt" limit="0-6" />
+		</url>
+
+		<!-- couldnt define a common template for request payload because number of nested arrays could come and their position is also undefined -->
+		<url path="/arh/data">
+			<inputstream  secret="true" type="String" max-len="2147483646" description="To allow all APM Insight agents tracked metrics" />
+		</url>
+		<url path="/arh/trace">
+			<inputstream  secret="true" type="String" max-len="2147483646" description="To allow all APM Insight agents tracked metrics" />
+		</url>
+		<url path="/arh/nvm">
+			<inputstream  secret="true" type="String" max-len="2147483646" description="To allow APM Insight Node js agent tracked NVM metrics" />
+		</url>
+		<url path="/arh/health_check">
+			<param name="insId" type="long" description="To Allow Data Exporter to change the status of the Application" />
+		</url>
+
+	</urls>
+	
+	<urls method="GET" operation-param="method" throwallerrors="true"
+		path="/apminsight.do" authentication="required">
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<url operation-value="viewAPMInsightHome" roles="ADMIN,ENTERPRISEADMIN,OPERATOR,USERS" />
+		<url method="GET" operation-value="showAppData"
+			path="/apminsight.do" roles="ADMIN,ENTERPRISEADMIN,OPERATOR,USERS" custom-scope-validator="com.manageengine.apminsight.apm.client.util.ApmInsightProxyUtil:validateUserBasedIds">
+			<param name="appId" type="long" />
+			<param name="insId" type="long" />
+			<param name="timePeriod" regex="apminsight_timeperiod" />
+		</url>
+		<url method="GET" operation-value="showAgentProfiles"
+			path="/apminsight.do" roles="ADMIN,ENTERPRISEADMIN" >
+			<param name="service" regex="alphanumeric" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+		<url method="GET" operation-value="showAgentProfilesForm"
+			path="/apminsight.do" roles="ADMIN,ENTERPRISEADMIN" >
+			<param name="profileId" regex="long" />
+			<param name="agentType" regex="apminsight.agent.type" />
+			<param name="isOnlyView" type="boolean" />
+		</url>
+		<url operation-value="showAppAssociatesEdit" path="/apminsight.do" roles="ADMIN,ENTERPRISEADMIN" custom-scope-validator="com.manageengine.apminsight.apm.client.util.ApmInsightProxyUtil:validateUserBasedIds">
+			<param name="appId" regex="long" />
+			<param name="insId" regex="long" />
+		</url>
+		<url method="GET" operation-value="viewProfileUsedMOSummary"
+			path="/apminsight.do" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="profileId" regex="long" />
+		</url>
+		<url operation-value="addNewMonitor" roles="ADMIN,ENTERPRISEADMIN,OPERATOR,USERS">
+			<param name="AppType" type="String" />
+			<param name="ref" regex="IntroPageLinks" />
+		</url>
+	</urls>
+	<urls api="true" authentication="required" method="get,post"
+		prefix="/AppManager/(xml|json)" throwallerrors="true"
+		url-type="dynamic" roles="ENTERPRISEADMIN" >
+		<url path="/ApminsightMonitorInfo(\/.*|)$">
+			<param name="eeSyncKey" type="String" secret="true" />
+			<param max-len="2083" name="url" type="String" />
+			<param max-occurrences="1" min-occurrences="1" name="apikey"
+				regex="apikey" secret="true" />
+			<param name="probeId" type="long" />
+			<param name="probeID" type="long" />
+			<param name="method" regex="am.http.methods" />
+		</url>
+	</urls>
+	<urls throwallerrors="true">
+		<url method="post" path="/AppManager/json/getInsightApplicationAgentType"
+			roles="ENTERPRISEADMIN" authentication="required" api="true" throwallerrors="true" privilege-identifier="resId">
+			<param name="eeSyncKey" type="String" secret="true"/>
+			<param name="resId" type="long" />
+			<param name="isApp" type="boolean" />
+			<param max-occurrences="1" min-occurrences="1" name="apikey"
+				regex="apikey" secret="true" />
+			<param name="probeId" type="long" />
+			<param name="probeID" type="long" />
+			<param name="method" regex="am.http.methods" />
+		</url>
+		<url method="post" path="/AppManager/json/updateAPMInsightMetrics"
+			roles="ENTERPRISEADMIN" authentication="required" api="true" throwallerrors="true">
+			<param name="callfromadmin" regex="^(admin)$" />
+			<param max-occurrences="1" min-occurrences="1" name="apikey"
+				regex="apikey" secret="true" />
+			<param name="apminsight.apply.all.mas" regex="apminsight.onlyon.or.boolean" />
+			<param
+				name="^apminsight\.txn\.(apdex|count|error|avgrt|minrt|maxrt|totrt|avgcputime|fatal|avgbytesin|minbytesin|maxbytesin|totbytesin|avgbytesout|minbytesout|maxbytesout|totbytesout)$"
+				name-regex="true" regex="apminsight.onlyon.or.boolean" />
+			<param
+				name="^apminsight\.trace\.(respTime|cpuTime|externalcalls|exceptionCount|sqlTime|traceAvgrt|bytesIn|bytesout|memoryUsed|dtcalls|methodcalls|instanceName)$"
+				name-regex="true" regex="apminsight.onlyon.or.boolean" />
+		</url>
+	</urls>
+	<urls csrf="true" method="POST" operation-param="method"
+		path="/apminsight.do" throwallerrors="true">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param min-occurrences="1" name="resourceId" type="long" />
+		<param name="isApp" type="boolean" />
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<url operation-value="checkApporInsLicense"
+			roles="ADMIN,ENTERPRISEADMIN,OPERATOR"
+			authentication="required" privilege-identifier="resourceId" />
+	</urls>
+	<!-- Start of APIRequestbyPOST URLs -->
+	<urls prefix="/api/v2/apminsight" csrf="true" method="POST"
+		throwallerrors="true" url-type="dynamic" roles="ADMIN,ENTERPRISEADMIN"
+		authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<param name="eeSyncKey" type="String" secret="true" />
+		<param name="probeId" type="long" />
+		<param name="probeID" type="long" />
+		<param name="method" regex="am.http.methods" />
+		<url path="/update/application_configuration/(\d+)/(\d+)/(0|1|2)">
+			<param name="appId" type="long" />
+			<param name="profileId" type="long" />
+			<param name="JSONString" type="String" max-len="2147483646" />
+			<param name="type" type="int" />
+		</url>
+		<url path="/(app|ins)/(\d+)/update/paramview">
+			<param name="url" type="String" />
+			<param max-len="3000" name="JSONString"
+				template="app_param_view_json" type="JSONObject" />
+		</url>
+		<url path="/(app|ins)/(\d+)/create/paramview">
+			<param name="url" type="String" />
+			<param max-len="3000" name="JSONString"
+				template="app_param_view_json" type="JSONObject" />
+		</url>
+		<url path="/(app|ins)/(\d+)/profiler" deny-del-admin="true">
+			<param name="url" type="String" />
+			<param max-len="3000" name="JSONString"
+				template="apminsight_profiler_setting" type="JSONObject" />
+		</url>
+		<url path="/(app|ins)/(\d+)/updatetxn">
+			<param name="url" type="String" />
+			<param max-len="2000" name="JSONString"
+				template="app_key_txn_params_json" type="JSONObject" />
+		</url>
+		<url path="/agent_config_profile">
+			<param max-len="2147483646" name="JSONString"
+				template="apminsight_config_profile_template" type="JSONObject" />
+		</url>
+		<url path="/agent_config_profile/(\d+)">
+			<param name="profile_id" type="long" />
+			<param max-len="2147483646" name="JSONString"
+				template="apminsight_config_profile_template" type="JSONObject" />
+		</url>
+		<url path="/agent_config_profile/delete/(\d+)">
+			<param max-len="2147483646" name="profile_id"
+				template="apminsight_config_profile_template" type="JSONObject" />
+		</url>
+		<url path="/ins/(\d+)/update">
+			<param name="url" type="String" />
+			<param max-len="100" name="JSONString"	
+				template="apminsight.agent.auto.upgrade" type="JSONObject" /> 
+		</url>
+		<url path="/ins/(\d+)/cancel">
+			<param name="url" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/tr/(\d+\_\d+\_\d+)">
+			<param name="url" regex="apminsight.delete.trace.url" />
+		</url>
+	</urls>
+	<!-- End of APIRequestbyPOST URLs -->
+	<!-- Start of APIRequestbyGET URLs -->
+	<urls api="true" method="GET" throwallerrors="true"
+		url-type="dynamic" prefix="/api/v2/apminsight">
+		<param-group name="am.additional.extra.params" />
+		<param name="eeSyncKey" type="String" secret="true" />
+		<param name="probeId" type="long" />
+		<param name="probeID" type="long" />
+		<param name="method" regex="am.http.methods" />
+		<url path="/(app|ins)/(\d+)/monitor-info">
+			<param name="url" type="String" />
+		</url>
+		<url path="/app/((info)|${apminsight.duration})">
+			<param name="url" type="String" />
+		</url>
+		<url path="/app/(\d+)/((info)|${apminsight.duration})">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/app/(\d+)/splitup/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/ins/((info)|${apminsight.duration})">
+			<param name="url" type="String" />
+		</url>
+		<url path="/ins/(\d+)/((info)|${apminsight.duration})">
+			<param name="url" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/(txn|bgtxn|keytxn|errtxn)/(list|table)(/\d+)?(/apdex|/avgrt|/throughput|/totalrt|/errors|/fatal|/cpu|/avgbytesin|/avgbytesout|/bytesin|/bytesout|/totalbytesin|/totalbytesout)?/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="pattern" type="String" />
+			<param name="trace" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/(txn|bgtxn)/(\d+|undefined)/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/(txn|bgtxn)/(\d+|undefined)/raw/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/db/(list|table)(/\d+)?(/avgrt|/throughput|/totalrt|/errors)?/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="pattern" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/db/(\d+)/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/db/(\d+)/raw/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/db/(\d+)/traces/(\d+)/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="txninfo" type="boolean" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/tr/list(/\d+)?(/avgrt|/throughput|/cpu|/ext|/exc|/sql|/bytesout|/bytesin|/mem)?(/\d+)?/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="pattern" type="String" />
+			<param name="page" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/threads/table(/\d+)?(/cpu)?(/\d+)?/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/(txn|bgtxn)/(\d+|undefined)/traces/(\d+)?(/avgrt|/throughput)?(/\d+)?/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="page" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/error/list(/\d+)?(/avgrt|/throughput|/cpu|/ext|/exc|/sql|/bytesout|/bytesin|/mem)?(/\d+)?/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="pattern" type="String" />
+			<param name="page" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/dttrace/list(/\d+)?(/avgrt|/throughput|/cpu|/ext|/exc|/sql|/bytesout|/bytesin|/mem)?(/\d+)?/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="pattern" type="String" />
+			<param name="page" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/(txn|bgtxn)/(\d+)/errors/(\d+)?(/avgrt)?(/\d+)?/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="page" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/tr/(\d+\_\d+\_\d+)">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/threads/(\d+\_\d+\_\d+)">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/txn/(\d+))?/graph/apdex/${apminsight.duration}">
+			<param name="url" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/txn/(\d+))?/graph/avgrt/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="compare" type="boolean" />
+			<param name="compareWith" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/(\d+|undefined))?)?/graph/rtbycomponents/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+			<param name="isBgn" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/rtbyextcomp/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/tpbyextcomp/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/rcbyextcomp/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/trtbyextcomp/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/fcbyextcomp/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/frbyextcomp/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/(txn|bgtxn)/(\d+|undefined))?/graph/components/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/txn/((\d+)|undefined))?/graph/throughput/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="compare" type="boolean" />
+			<param name="compareWith" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/(txn|bgtxn)/(\d+))?/graph/rtandthroughput/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/db(/\d+)?/graph/rtandthroughput/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/db/graph/avgrt/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/db/(\d+)/graph/avgrt/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="compare" type="boolean" />
+			<param name="compareWith" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/db/graph/throughput/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/db/(\d+)/graph/throughput/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="compare" type="boolean" />
+			<param name="compareWith" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/db/(\d+)/graph/throughputbycaller/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/jvm/summary/((graph|raw)/)?${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/jvm/gc/(raw/)?${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/jvm/threads/(raw/)?${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/jvm/threads/(\d+)">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/jvm/config">
+			<param name="url" type="String" />
+		</url>
+		<url path="/ins/(\d+)/config">
+			<param name="url" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/iis/details/${apminsight.duration}">
+			<param name="url" type="String" />
+			<!-- <param name="sub_resources" type="String"/> -->
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/exc/list/(\d+)(/count/\d+)?/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="pattern" type="String" />
+			<param name="trace" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/txn(/(\d+|undefined))?/graph/excsplit/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/exc(/\d+)?/graph/txnsplit/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/(exc|http)(/\d+)?/graph/info/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="compare" type="boolean" />
+			<param name="compareDay" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/(exc|http)(/\d+)?/graph/rate/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="compare" type="boolean" />
+			<param name="compareDay" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/graph/excinfo/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/(exc|http)/(\d+)/raw/${apminsight.duration}">
+			<param name="url" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/(exc|http)/(\d+)/traces/(\d+)/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="txninfo" type="boolean" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/http/list/(\d+)(/count/\d+)?/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/txn(/(\d+|undefined))?/graph/httpsplit/${apminsight.duration}">
+			<param name="url" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/http(/\d+)?/graph/txnsplit/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/notifications" />
+		<url path="/app/(\d+)/(txn|bgtxn|db|exc)">
+			<param name="url" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/service_map/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/comp/table/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+			<param name="is_server" type="boolean" />				
+		</url>
+		<url path="/(app|ins)/(\d+)/comp(/\d+)?/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_id" type="long" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/comp(/\d+)?/txns/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_id" type="long" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/comp(/\d+)?/graph/avgrt/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_id" type="long" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/comp(/\d+)?/graph/throughput/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_id" type="long" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/comp(/\d+)?/graph/totalrt/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_id" type="long" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/comp(/\d+)?/graph/failcount/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_id" type="long" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/comp(/\d+)?/graph/failrate/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_id" type="long" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/comp(/\d+)?/graph/totalrc/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="comp_id" type="long" />
+			<param name="comp_type" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/host" />
+		<url path="/(app|ins)/(\d+)/appparam/list?/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="pattern" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/appparamview/list">
+			<param name="url" type="String" />
+			<param name="pattern" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/appparam(/\d+)?/graph/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="type" type="int" />
+			<param name="compare" type="boolean" />
+			<param name="compareWith" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)/appparamview(/\d+)?/graph/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="compare" type="boolean" />
+			<param name="compareWith" type="int" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/appparamview/(\d+)">
+			<param name="url" type="String" />
+		</url>
+		<url path="/appparamslist">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/availability/${apminsight.duration}">
+			<param name="url" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/txn/list">
+			<param name="url" type="String" />
+		</url>
+		<url
+			path="/(app|ins)/(\d+)(/txn/(\d+|undefined))?/graph/datathroughput/${apminsight.duration}">
+			<param name="url" type="String" />
+			<param name="sub_resources" type="String" />
+		</url>
+		<url path="/(app|ins)/(\d+)/thread_dump/table/${apminsight.duration}" >
+			<param name="url" type="String" />
+		</url>
+		<url path="/ins/(\d+)/thread_dump">
+			<param name="url" type="String" />
+			<param name="ct" type="long" />
+		</url>
+		<!-- APM Insight Agent Config Profile API Start -->
+		<url path="/default_agent_config_profile/(\S+)">
+			<param name="agent_type" type="String" />
+		</url>
+		<url path="/agent_config_profiles" />
+		<url path="/agent_config_profiles/(\S+)">
+			<param name="agent_type" type="String" />
+		</url>
+		<url path="/agent_config_profile/(\d+)">
+			<param name="profile_id" type="long" />
+		</url>
+		<url path="/short/agent_config_profiles" />
+		<url path="/short/agent_config_profiles/(\S+)">
+			<param name="agent_type" type="String" />
+		</url>
+		<!-- APM Insight Agent Config Profile API End -->
+		<url path="/custom_instrument/(\d+)">
+			<param name="applicationId" type="long" />
+		</url>
+		<url path="/(app|ins)/(\d+)/comp/details/graph/rtbycomponents/${apminsight.duration}"/>
+	</urls>
+	<urls method="get" throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<url path="/apminsight/home.do" operation-param="method" operation-value="viewAPMInsightHome" />
+	</urls>
+	<!-- End of APIRequestbyGET URLs -->
+	<!-- APMInsight Get Deny Urls -->
+	<urls deny-operation="true" method="get" operation-param="method"
+		throwallerrors="true">
+		<url
+			operation-value="checkApporInsLicense"
+			path="/apminsight.do" />
+	</urls>
+	<!-- APMInsight Post Deny Urls -->
+	<urls deny-operation="true" method="post" operation-param="method"
+		throwallerrors="true">
+		<url
+			operation-value="showAppData,showAgentProfiles,showAgentProfilesForm,viewProfileUsedMOSummary,viewAPMInsightHome,dismissMessage,showAppAssociatesEdit,addNewMonitor"
+			path="/apminsight.do" />
+	</urls>
+	
+	<!-- APMInsight Servlet GET type method Deny Urls -->
+	<urls deny-operation="true" throwallerrors="true" method="get">
+		<url path="/arh/*" />
+		<url path="/AppManager/(xml|json)/getInsightApplicationAgentType" />
+		<url path="/AppManager/(xml|json)/updateAPMInsightMetrics" />		
+	</urls>
+	
+	<!-- APMInsight Servlet POST type method Deny Urls -->
+	<urls deny-operation="true" throwallerrors="true" method="post">
+		<url path="/AppManager/xml/getInsightApplicationAgentType" />
+		<url path="/AppManager/xml/updateAPMInsightMetrics" />
+	</urls>
+</security>
+
+
+
+		<!-- 
+			@author janarthanan.sv
+			Retaining older changes as comment for future WAF template based Handling 
+		-->
+		<!--arh/connect starts
+		<jsontemplate name="apminsight_agent_info_json">
+			<extrakey type="String" min-len="0" max-len="1000" limit="10" max-occurrences="10" description="To allow extra keys and values"/>
+            <key name="application.type" regex="apminsight.agent.type" min-occurrences="1" />
+            <key name="hostname" regex="am.hostname" min-occurrences="1" max-len="255"/>
+            <key name="port" regex="am.port" min-occurrences="1" max-len="5"/>
+            <key name="agent.version" type="float" min-occurrences="1" />
+            <key name="actual.hostname" regex="am.hostname" max-len="1000"/>
+            <key name="application.name" type="String" min-occurrences="1" max-len="1000" />
+            <key name="host.type" type="String" min-occurrences="0" max-len="100"/>
+            <key name="source.iis" regex="am.common.ZeroOne" />
+            <key name="hostlicense.apply" type="boolean"/>
+            <key name="context.parent.application" type="String" max-len="1000" />--> <!--JAVA agents Monitoring Main parent App Name for all contexts  -->
+            <!-- <key name="cloud.instance.id" regex="^[\p{L}\p{N}\+]{0,40}$" max-len="40" />
+        </jsontemplate>
+        <jsontemplate name="apminsight_environment_json">
+            <extrakey type="String" min-len="0" max-len="10000" limit="200" max-occurrences="200" description="To allow extra keys and values"/>
+            <key name="UserName" type="String" max-len="500" />
+            <key name="OSVersion" type="String" max-len="500" />
+            <key name="MachineName" type="String" max-len="50" />
+            <key name="AgentInstallPath" type="String" max-len="5000" />
+            <key name="NODEJS version" regex="^[v]\d+(\.\d+)*$" max-len="100" />
+            <key name="OSArch" type="String" max-len="100" />
+            <key name="OS" type="String" max-len="25" />
+            <key name="dependencies" type="JSONObject" template="apminsight_dependencies_json"  max-len="2147483646"/>
+            <key name="os_type" type="String" max-len="25" />
+            <key name="php_version" type="String" max-len="1000" /> --> <!-- Combination of PHP version and its OS name with version and framework name with version  -->
+       <!-- <key name="UserDomainName" type="String" max-len="50" />
+            <key name="HeapInitial" type="long" />
+            <key name="TickCount" type="long" />
+            <key name="version" type="String" max-len="100" />
+            <key name=".NET version" regex="^\d+(\.\d+)*$" max-len="100" />
+            <key name="Java Arguments" type="JSONArray" array-size="0-500" template="stringArrayJson"  max-len="2147483646"/>
+            <key name="Application Starttime" type="long" />
+            <key name="Agent Version" type="double" />
+            <key name="Heap Maximum" type="long" />
+            <key name="OS Arch" type="String" max-len="100" />
+            <key name="Class Version" type="double" />
+            <key name="Heap Initial" type="long" max-len="5000" />
+            <key name="Java Version" type="String" max-len="100" />
+            <key name="JVM Version" type="String" max-len="100" />
+            <key name="Agent Install Path" type="String" max-len="5000" />
+            <key name="Non-Heap Initial" type="long" />
+            <key name="OS Version" type="String" max-len="500"/>
+            <key name="JVM Name" type="String" max-len="100" />
+            <key name="Java Vendor" type="String" max-len="100" />
+            <key name="Jvm PID" type="long" />
+            <key name="Java Home" type="String" max-len="5000" />
+            <key name="Non-Heap Maximum" type="int" />
+            <key name="Classpath" type="String" max-len="2147483646"/>
+            <key name="Log4j Version" regex="^\d+(\.\d+)*$" max-len="50"/>
+        </jsontemplate>
+        <jsontemplate name="apminsight_custom_config_json">
+			<extrakey  type="String" min-len="0" max-len="5000" limit="200" max-occurrences="200" description="To allow extra keys and values"/>
+			<key name="last.modified.time" type="long"/>
+			<key name="apdex.threshold" regex="(\d*[.])?\d+" />
+			<key name="apminsight.log.level" regex="^(DEBUG|INFO|WARNING|ERROR|CRITICAL|OFF|FINE|FINER)" />
+			<key name="sql.capture.enabled" regex="apminsight.zeroandone.with.boolean" />
+			<key name="transaction.trace.enabled" regex="apminsight.zeroandone.with.boolean" />
+			<key name="transaction.trace.threshold" regex="(\d*[.])?\d+" />
+			<key name="transaction.trace.sql.parametrize" regex="apminsight.zeroandone.with.boolean" />
+			<key name="transaction.trace.sql.stacktrace.threshold" regex="(\d*[.])?\d+" />
+			<key name="transaction.tracking.request.interval" type="int" />
+			<key name="cputime.capture.enabled" regex="apminsight.zeroandone.with.boolean" />
+			<key name="cputime.threshold" type="int" />
+			<key name="component.trace.threshold" type="int" />
+			<key name="custom.parameters.record" regex="apminsight.zeroandone.with.boolean" />
+			<key name="webtransaction.trace.request.headers.ignore" regex="([a-zA-Z0-9\-_., ]*)" />
+			<key name="webtransaction.trace.input.params.record" regex="apminsight.zeroandone.with.boolean" />
+			<key name="webtransaction.trace.request.headers.record" regex="apminsight.zeroandone.with.boolean" />
+        </jsontemplate>
+        <jsontemplate name="apminsight_dependencies_json">
+        	<key name-regex="true" name="safestring" regex="safestring" max-len="1000" />
+        </jsontemplate>
+        <jsontemplate name="apminsight_arh_connect_json">
+            <key name="environment" type="JSONObject" template="apminsight_environment_json" max-len="2147483646" min-occurrences="0"/>
+            <key name="agent_info" type="JSONObject" template="apminsight_agent_info_json" min-occurrences="1" max-len="5000"/>
+            <key name="custom_config_info" type="JSONObject" template="apminsight_custom_config_json"  max-len="5000"/>
+            <key name="agent_specific_info" type="JSONObject" template="apminsight_update_config" max-len="2147483646"/>
+            <extrakey  type="String" min-len="0" max-len="1000" limit="10" max-occurrences="20" description="To allow extra keys and values"/>
+        </jsontemplate>
+        arh/connect ends-->
+        
+        <!--arh/downloadupdate starts
+	    <jsontemplate name="apm_download_update_json">
+	        <key name="status-code" type="String" max-len="100"/>
+	        <key name="status-message" type="String" max-len="200"/>
+	        <key name="type" type="String" max-len="100"/>
+	    </jsontemplate>
+	  	arh/downloadupdate ends-->
+	 
+	 <!--arh/thread_profile starts
+	    <jsontemplate name="apm_thread_profiler_json">
+	        <key index="0-1"  type="long"/>
+			<key index="2" type="JSONArray" array-size="0-5000" template="apm_thread_profiler_inner_jsonArray" max-len="30000" />
+	    </jsontemplate>
+	    <jsontemplate name="apm_thread_profiler_inner_jsonArray">
+	        <key name="threadID" type="long"/>
+	        <key name="currMethod" type="String" max-len="2000"/>
+			<key name="cputime" type="double"/>
+	        <key name="memalloc" type="double"/>
+	        <key name="stacktrace" type="JSONArray" array-size="0-500" template="apm_thread_stack_trace_json" max-len="5000"/>
+	    </jsontemplate>
+	    <jsontemplate name="apm_thread_stack_trace_json">
+	        <key name="method" type="String" max-len="500"/>
+	        <key name="count" type="int"/>
+	    </jsontemplate>
+		arh/thread_profile ends-->
+	
+	 <!--arh/agent_config_update starts
+	 <jsontemplate name="agent_config_update_json">
+        <key name="custom_config_info" type="JSONObject" template="apminsight_custom_config_json" max-len="5000"/>
+        <key name="agent_specific_info" type="JSONObject" template="apminsight_update_config" max-len="2147483646"/>
+    </jsontemplate>
+    arh/agent_config_update ends-->
+    
+    		
+		<!-- 
+			@author janarthanan.sv
+			Retaining older changes as comment for future WAF template based Handling 
+		-->
+		<!--<url path="/arh/connect">
+			<inputstream  secret="true" type="JSONObject" template="apminsight_arh_connect_json" max-len="2147483646"/>
+		</url>
+		<url path="/arh/agent_config_update">
+			<inputstream  secret="true" type="JSONObject" template="agent_config_update_json" max-len="2147483646"/>
+		</url>
+		<url path="/arh/thread_profiler">
+			<inputstream  secret="true" type="JSONArray" array-size="0-5" template="apm_thread_profiler_json" max-len="40000"/>
+		</url>
+		<url path="/arh/downloadupdate">
+			<inputstream  secret="true" type="JSONObject" template="apm_download_update_json" max-len="300"/>
+		</url>-->

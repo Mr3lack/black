@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./conf/security-apm.xsd">
+
+		<urls throwallerrors="true" method="get" deny-operation="true" >
+			<url operation-param="method" path="/showHistoryData.do" operation-value="insertDowntimeNote"  />
+			<url operation-param="method" path="/adminAction.do" operation-value="saveReportLogo,saveGlobalSettingsConfiguration,updateReportsSettings,updateExportProtect,updateDataCleanUp,deleteReportLogo" />
+			<url operation-param="method" path="/adminAction.do" operation-value="createEmailAction,editEmailAction,deleteEmailAction,createSMSAction,editSMSAction,deleteSMSAction,createExecProgAction,editExecProgAction,deleteProgExecAction,createSendTrapAction,editSendTrapAction,deleteSendTrapAction,addMBeanOperationAction,editMBeanOperationAction,deleteMBeanOperationAction,SdeskLogTicketConfig,ServiceNowTicketConfig,editTicketAction,deleteTicketAction,createVMAction,editVMAction,deleteVMAction,deleteContainerAction" />
+		 	<url operation-param="method" path="/JavaRuntime.do" operation-value="createThreadDumpAction,editThreadDumpAction,deletePerformGCAction,sendActionDetails" />
+		 	<url operation-param="method" path="/HostResourceDispatch.do" operation-value="UpdateWinServiceAction,delWindowsServiceAction" />
+			<url operation-param="method" path="/configureactions.do" operation-value="saveRestAPIAction,deleteRestAPIAction,createEmailActionFromOtherActions" />
+			<url operation-param="method" path="/configureactionsforslack.do" operation-value="saveSlackAction,deleteSlackAction" />
+			<url path="/extDeviceAction.do" operation-param="method" operation-value="APMExtProductConfiguration,auditWarningMessagePopUp"/>
+			<url path="/adminAction.do" operation-param="method" operation-value="SdeskConfiguration,ServiceNowConfiguration"/>
+			<url path="/showresource.do" operation-param="method" operation-value="sendSupport1,deleteDependentMonitor,selectDependentMonitorFilter,associateScript,removeScript"/>
+			<url path="/manageApplications.do" operation-param="method" operation-value="removeMonitorGrpFromDependency,deleteOVM,deleteRHEV,addThresholdConfiguration"/>
+			<url path="/confActions.do" operation-param="method" operation-value="dockerContainerActions,addContainers,executeDockerTestAction,getDockerContainers"/>
+			<url path="/manageNutanixInstance.do" operation-param="method" operation-value="manageInstances"/>
+			<url path="/common/executeAction.do" operation-param="method" operation-value="testAction,testthreaddumpAction" redirect-url="/common/viewActions.do?"/>
+			<url path="/common/executeSMS.do" operation-param="method" operation-value="testAction" redirect-url="/common/viewActions.do?"/>
+			<url path="/common/executeScript.do" operation-param="method" operation-value="TestActionForExecuteProgramAction" redirect-url="/common/viewActions.do?"/>
+			<url path="/common/executeTrap.do" operation-param="method" operation-value="testAction" redirect-url="/common/viewActions.do?"/>
+			<url path="/common/executeMBeanOperation.do" operation-param="method" operation-value="testAction" redirect-url="/common/viewActions.do?"/>
+			<url path="/common/executeTicket.do" operation-param="method" operation-value="testAction" redirect-url="/common/viewActions.do?"/>
+			<url path="/manageEC2Instances.do" operation-param="method" operation-value="triggerAmazonAction" redirect-url="/common/viewActions.do?"/>
+			<url path="/testVMAction.do" operation-param="method" operation-value="testVMAction" redirect-url="/common/viewActions.do?"/>
+			<url path="/HostResourceDispatch.do" operation-param="method" operation-value="manualExecution"/>
+			<url path="/updateScript.do" operation-param="method" operation-value="deleteTableByUser,createscript,updateScript,enableReports,disableReports,updateHostDetails"/>
+			<url path="/fault/AlarmDetails.do" operation-param="method" operation-value="executeActions"/>
+			<url path="/fault/AlarmOperations.do" operation-param="methodCall" operation-value="executeActions"/>
+			<url path="/alertEscalation.do" operation-param="method" operation-value="addRuledetails,updateRuledetails,removeRule,sendEnableDetails,sendActionDetails"/>
+			<url path="/adminAction.do" operation-param="method" operation-value="sendActionDetails"/>
+			<url path="/ProcessTemplates.do" operation-param="method" operation-value="createThreshold,associateProcessTemplate,deleteTemplate"/>
+			<url operation-param="method" path="/admin/createapplication.do" operation-value="configureVCenterDiscovery,configureOVMDiscovery,configureHorizonDiscovery,configureRHEVDiscovery"  />
+			<url path="/viewSIF.do" operation-param="method" operation-value="getSIFDetails,deleteSIFDetails,uploadSIF" />
+			<url operation-param="method" operation-value="deleteType,deleteTable,updateTable" path="/monitorType.do" redirect-url="/monitorType.do?method=showTypes"/>
+			<url path="/ConfigureProxy.do" />
+			<url path="/adminAction.do" operation-param="method" operation-value="saveSMSGateWayConfiguration,openTestSMSGateway,deleteSMSGatewayConfiguration,addActionFromPopup,TestSmtpServer,checkBlackListCommand,mailServerConfiguration" />
+			<url path="/DiagAlertAction.do" operation-param="method" operation-value="clearDiagnosticsAlert,clearMultipleDiagnosticsAlerts,annotateDiagnosticsAlert" />
+			<url path="/resetPassword.do" operation-param="method" operation-value="validateUserDetails,updatePassword" />
+			<url path="/adminAction.do" operation-param="method" operation-value="deleteTrapListener,updateTrapListener,createTrapListener,clearTrapAlert" />
+			<url path="/userSession.do" operation-param="method" operation-value="getUserActiveSessions,getUserHistorySessions,terminateUserSession,getIncorrectLoginDetails" />
+			<url path="/userconfiguration.do" operation-param="method" operation-value="checkUserName,updateUser,updatePassword" />
+			<url path="/admin/userconfiguration.do" operation-param="method" operation-value="createUser,updateUser,deleteUsers,unlockUserStatus,fetchADUser,createUserGroup,createLDAPUserGroup,checkUserGroupName,updateUserGroup,deleteUserGroups,fetchLDAPUserGroups,getGroupUsers,addDomainConfig,checkDomainName,updateDomainConfig,deleteDomainConfig,updateAdminPermission,updatedelegateAdminPermission,updateOperatorPermission,updateUserPermission,updateView,updateAccPolicy,revokeTOTPSecretForUser,updateas400Permission" />
+			<url path="/adminActivities.do" operation-param="method" operation-value="deleteHost" />
+			<url path="/adminActivities.do" operation-param="method" operation-value="createNewHost" />
+			<url path="/slackintegration.do" operation-param="method" operation-value="integrateAPM,updateSlackDetails" />
+			<url path="/alarmsoneintegration.do" operation-param="method" operation-value="integrateAPM,updateAlarmsOneDetails" />
+			<url path="/manageOpenShiftInstances.do" operation-param="method" operation-value="generatePDF,performManageActions" />
+			<url path="/auditLogAction.do" operation-param="method" operation-value="loadAuditLog" />
+			<url path="/performanceActions.do" operation-param="method" operation-value="getMonitorDetails,getTableDetails,getLongRunningQuery,getMissingSchemaInfo,getChildMonitorDetails,logMissingIdRange,killLongRunningQuery,getTabularSummaryDetails,performTableOpeartion" />
+			<url path="/MBeanOperationAction.do" operation-param="method" operation-value="showDomains,showMBeans,showUserInputOperationValuesGetterScreen" redirect-url="/MBeanOperationAction.do?method=showInitialScreen" />
+			<url path="/MBeanOperationAction.do" operation-param="method" operation-value="showMBeansForJMXNotifcation,showJMXNotificationProfileCreateScreen" />
+			<url path="/adminAction.do" operation-param="method" operation-value="updateJMXNotificationProfile"/>
+			<url path="/configureGuestOS.do" operation-param="method" operation-value="updateConfigureOS"/>
+			<url path="/updateIpAction.do" operation-param="method" operation-value="updateIPAddress"/>
+			<url path="/businessHours.do" operation-param="method" operation-value="updateGlobalSettingForAnomalyIntroTab"/>
+			<url path="/manageVMInstances.do" operation-param="method" operation-value="insertConfiguredEvents,modifyEventSeverity,removeConfiguredEvents,removeGuestOSConfiguration,manageInstances,manageKVMInstances,manageRHEVInstances,manageOVMInstances,manageXenInstances"/>
+			<url path="/adminAction.do" operation-param="method" operation-value="createPatternAction,editPatternAction,createThresholdAction,editThresholdAction,deleteThresholds,deleteAnomalyProfiles,createAnomalyProfileAction,editAnomalyProfileAction,AddThresholdActionConfiguration,saveAnomalyDetails"/>
+			<url path="/customReports.do" operation-param="method" operation-value="enableCustomReports,saveSummaryMail" />
+			<url path="/scheduleReports.do" operation-param="method" operation-value="addScheduleDetails,removeScheduler,testAction,updateScheduleDetails,sendActionDetails,sendEnableDetails" />
+			<url path="/showConfigurationData.do" operation-param="method" operation-value="saveNote" />
+			<url path="/showHistoryData.do" operation-param="method" operation-value="deleteDowntimeData" />
+			<url path="/showBussiness.do" operation-param="method" operation-value="addSLA,updateSLA,removeSla,sendTestMail" />
+			<url path="/downTimeScheduler.do" operation-param="method" operation-value="createMaintenanceTask,deleteMaintenanceTask,editMaintenanceTask,getDowntimeSyncDetais" />
+			<url path="/businessHours.do" operation-param="method" operation-value="addBusinessDetails,updateBusinessDetails,removeBusinessDetails" />	
+			<url operation-param="method" path="/GlobalActions.do" operation-value="testAction" />
+			<url path="/eventlogrules.do" operation-param="method" operation-value="checkRuleNameAlreadyExists,addNewEventLog,editEventLog,deleteEventLog,globalDelete,globalEnableDisable,save" />
+			<url path="/istioWorkloadAction.do" operation-param="method" operation-value="setWorkloadsToMonitor" />
+			<url path="/WMIPerfCounters.do" operation-param="method" operation-value="addAttributes,changeReportStatus,createWMIPerfmonitor,deleteAttributes,deleteHost,showAttributesForClasses,updatetHostDetails,validateCredentials" />
+			<url path="/CreateCustomApplicationForm.do" />
+			<url path="/showReports.do" operation-param="actionMethod" operation-value="getInventoryFiles" />
+			<url path="/adminAction.do" operation-param="method" operation-value="saveDB2GlobalSettingsConfiguration,saveMSSQLGlobalSettingsConfiguration" />
+			<url  path="/showCustomReports.do" operation-param="actionMethod" operation-value="saveNoteId" />
+			<url path="/adminAction.do" operation-param="method" operation-value="TestProxyServer"/>
+			<url path="/updateScript.do" operation-param="method" operation-value="filemon"/>
+			<url path="/mobile/webclientview.do" operation-param="method" operation-value="executeAction,executeAlarmAction"></url>
+			<url path="/SelfHelpToolsAction.do" operation-param="method" operation-value="getFormData,getURLResult,getMonitorUrlResult,generateUrlDebugPdf,urlDebugSendToSupport,acknowledgeSensitiveData"/>
+			<url path="/admin/userconfiguration.do" operation-param="method" operation-value="regenerateAPIKeyForUser" />
+			<url path="/userconfiguration.do" operation-param="method" operation-value="regenerateAPIKeyForUser" />
+			<url path="/extDeviceAction.do" operation-param="method" operation-value="addExtIntegResource,deleteAllOPMInMas,editExtDevicePollInterval" />
+			<url path="/jsp/LoginValues.jsp"/>
+			<url path="/jsp/GetValues.jsp"/>
+			<url path="/downTimeScheduler.do" operation-param="method" operation-value="getDowntimeSchedulers" />
+		</urls>
+				
+		<urls prefix="/AppManager/(xml|json)" throwallerrors="true" method="get" deny-operation="true" >
+			<url path="/RegisterForPNS"></url>
+			<url path="/DeRegisterForPNS"></url>
+			<url path="/EditMonitor"></url>
+			<url path="/Authenticator"></url>
+		</urls>
+		
+		<urls throwallerrors="true" method="post" deny-operation="true" >
+			<url path="/showresource.do" operation-param="method" operation-value="getSelectedMonitors,getAssociateMonitors,selectMonitorFilter" />
+			<url path="/showActionProfiles.do" operation-param="method" operation-value="getHAProfiles" />
+			<url path="/StorageMapping.do" operation-param="method" operation-value="showVMStorageMapping" />
+			<url path="/configureGuestOS.do" operation-param="method" operation-value="configureOS"/>
+			<url path="/updateIpAction.do" operation-param="method" operation-value="getHostnameandIP,getResolvednamesforIP,bulkResolveNameandIP,updateIpActionDetails"/>
+			<url path="/manageVMInstances.do" operation-param="method" operation-value="getConfiguredVMwareEvents,associateNewVMwareEvents,getLatestEvents"/>
+			<url path="/showRHEVApplication.do" operation-param="method" operation-value="showResourceSummary,showChildResourcesSummary"/>
+			<url path="/showOVMApplication.do" operation-param="method" operation-value="showResourceSummary,showChildResourcesSummary"/>
+			<url path="/showAttributes.do" operation-param="method" operation-value="sendAttributeDetails,showAlertTimes,showCustomGraph,showArchivedDataValues,showRawDataValues"/>
+			<url path="/adminAction.do" operation-param="method" operation-value="showAnomalyAction,showThresholdAction,showPatternAction,sendAnomalyDetails,showThresholds"/>
+			<url path="/showAllEventLogs.do" operation-param="method" operation-value="execute"/>
+            <url path="/DiagAlertAction.do" operation-param="method" operation-value="getAlertHistory,showDiagnosticsAlerts" />
+			<url path="/jsp/PasswordUpdate.jsp" />
+			<url path="/jsp/UserActiveSessions.jsp"/>
+			<url path="/jsp/UserHistorySessions.jsp"/>
+			<url path="/jsp/IncorrectLoginDetails.jsp"/>
+			<url path="/jsp/MonitorSummary.jsp"/>
+			<url path="/jsp/MonitorTypeSummary.jsp"/>
+			<url path="/jsp/MonitorCountSummary.jsp"/>
+			<url path="/jsp/AddDockerContainers.jsp"/>
+			<url path="/jsp/CiscoUCSFaults.jsp"/>
+			<url path="/jsp/includes/istio_choose_workload.jsp"/>
+			<url path="/jsp/viewlogs/ViewLogFile.jsp"/>
+			<url path="/jsp/UserError.jsp"/>
+			<url path="/resetPassword.do" operation-param="method" operation-value="resetPassword,validateResetPasswordToken" />
+			<url path="/userSession.do" operation-param="method" operation-value="getUserSessionsDetails,getVersionDetails" />
+			<url path="/userconfiguration.do" operation-param="method" operation-value="editUser" />
+			<url path="/admin/userconfiguration.do" operation-param="method" operation-value="editUser,editUserGroup,editDomainConfig,showUsers" />
+			<url path="/adminAction.do" operation-param="method" operation-value="openSMSGatewayConfiguration,showActionProfiles,showEmailAction,showExecProgAction,showMailServerConfiguration,showSMSAction,showSendTrapAction,showTicketAction,showVMAction,showDataCleanUp" />
+			<url path="/configureactions.do" operation-param="method" operation-value="showRestAPIAction" />
+			<url path="/configureactionsforslack.do" operation-param="method" operation-value="showSlackAction" />
+			<url path="/showActionProfiles.do" operation-param="method" operation-value="generateActionUsedbyReport" />
+			<url path="/slackintegration.do" operation-param="method" operation-value="modifySlackConsent" />
+			<url path="/alarmsoneintegration.do" operation-param="method" operation-value="modifyAlarmsOneConsent,reIntegrateAlarmsOne" />
+			<url path="/common/viewActions.do" />
+			<url path="/MBeanOperationAction.do" operation-param="method" operation-value="showInitialScreen,showDomainsForJMXNotifications,executeMBeanOperationActionWithUserIntervention"/>
+			<url path="/customReports.do" operation-param="method" operation-value="sendAttributeDetails,showCustomReports" />
+			<url path="/forecastReport.do" operation-param="actionMethod" operation-value="getForecastAttribute,generateForecastReport"/>
+			<url path="/scheduleReports.do" operation-param="method" operation-value="editScheduler,getSQLServersForUser,newScheduleReports,showScheduleReports,loadCapacityPlaningRules,sendAjaxDetails,getDBServersForResID,checkScheduleName" />
+			<url path="/showConfigurationData.do" operation-param="method" operation-value="getConfigurationData,getGlobalViewData,cancelNote" />
+			<url path="/showHistoryData.do" operation-param="method" operation-value="getData,getChildGraph,getAvailabilityData,getIndividualURLandCompareReportsData,getStandardDeviationData,getheatData,getsegmentByHourData,getsegmentByWeekData,ischildAttribute,cancelDowntimeNote" />
+			<url path="/showBussiness.do" operation-param="method" operation-value="generateApplicationAvailablity,generateSystemAvailablity,generateSLA,generateTroubleTicket,editSla" />
+			<url path="/confActions.do" operation-param="method" operation-value="testDockerContainerActions" />
+			<url path="/viewSIF.do" operation-param="method" operation-value="manageSIFDetails" />
+			<url path="/performanceActions.do" operation-param="method" operation-value="getDatabaseSummary" />
+			<url path="/showresource.do" operation-param="method" operation-value="sendSupport,selectDependentMonitor,searchDependentMonitor,selectDependentMGroups" />
+			<url path="/manageOpenShiftInstances.do" operation-param="method" operation-value="manageInstances,deleteInstance" />
+			<url path="/auditLogAction.do" operation-param="method" operation-value="viewAuditLog,getAuditDetailsForMonitorGroup" />
+			<url path="/dataTableAction.do" operation-param="method" operation-value="getEventLogForXenApp" />
+			<url path="/showActionProfiles.do" operation-param="method" operation-value="getResourceProfiles,monitorGroupAlarmTemplate" />
+			<url path="/eventlogrules.do" operation-param="method" operation-value="showForm,view" />
+			<url path="/istioWorkloadAction.do" operation-param="method" operation-value="getWorkloadList,getWorkloadMetrics,viewWorkloadPopup" />
+			<url operation-param="method" path="/confActions.do" operation-value="getCiscoUCSFaults" />
+			<url path="/WMIPerfCounters.do" operation-param="method" operation-value="getDetails,showClasses,showDetails,showEditHostDetailsForm,showGraph,showSingleGraphScreen" />
+			<url path="/monitorType.do" operation-param="method" operation-value="openEditAttributeType,editType,callReports,validateMonitorType" redirect-url="/monitorType.do?method=showTypes" />
+			<url path="/monitorType.do" operation-param="method" operation-value="showTypes"></url>
+			<url path="/mobile/webclientview.do" operation-param="method" operation-value="showHistoryDetails,showMGDetails,showMonitorDetails,showAlarmDetails,listAlarms,mobileSearch,showHomePage,setEnvironment,ListMonitorsForType,infrastructureView,monitorGroupView,showDashboards,downDevicesViewAction,listActions"></url>
+			<url path="/adminAction.do" operation-param="method" operation-value="reloadHostDiscoveryForm"/>
+			<url path="/viewLogs.do" />
+			<url path="/SelfHelpToolsAction.do" operation-param="method" operation-value="getURLDebug,getProxyStatus,getWMITool"/>
+			<url path="/updateScript.do" operation-param="method" operation-value="editScript,getMonitoringModeForSelectedHost,isWindowsHost,getScriptHostDetails"/>
+			<url path="/Logout.do" />
+			<url path="/admin/createapplicationwiz.do" />
+			<url path="/index.do" />
+			<url path="/applications.do" />
+			<url path="/jsp/monitorerrors.jsp" />
+			<url path="/jsp/Popup_ExecProgramResult.jsp" />
+			<url path="/jsp/MailServerConfigUserArea.jsp" />
+			<url path="/jsp/BreachNotification.jsp" />
+			<url path="/jsp/MonitorGroupPlugin_Admin.jsp" />
+			<url path="/jsp/CredentialManager.jsp" />
+			<url path="/jsp/formpages/AccessRestricted.jsp" />
+			<url path="/jsp/formpages/resolve400Error.jsp" />
+			<url path="/jsp/ErrorPage.jsp" />
+			<url path="/jsp/dump.jsp" />
+			<url path="/jsp/formpages/Error.jsp" />
+			<url path="/jsp/formpages/Error404.jsp" />
+			<url path="/jsp/EditTable.jsp"></url>
+			<url path="/jsp/Monitorsdiv.jsp"></url>
+			<url path="/jsp/displayresources.jsp"></url>
+			<url path="/webclient/mobile/jsp/MobileWidget.jsp"></url>
+			<url path="/jsp/NewMonitorType.jsp"></url>
+			<url path="/jsp/MonitorDetails.jsp"></url>
+			<url path="/jsp/configure_resource.jsp"></url>
+			<url path="/jsp/DCComponentDetails.jsp" ></url>
+			<url path="/jsp/DCComponentMonitorList.jsp"></url>
+			<url path="/jsp/casindex.jsp" />
+		</urls>
+		<urls throwallerrors="true" method="post" deny-operation="true" >
+			<url operation-param="method" operation-value="listTrapListener,editTrapListener" path="/adminAction.do" />
+			<url path="/manageConfMons.do" operation-param="method" operation-value="editMonitor,editPreConfMonitor" />
+			<url path="/downTimeScheduler.do" operation-param="method" operation-value="viewMaintenanceTask,maintenanceTaskListView,getCurrentlyDownCustomSchedule,getCurrentlyDownMonthlySchedule,currentServerTimeWithRespectToTimeZone,getCurrentlyDownMGs,getCurrentlyDownMonitors" />
+			<url path="/businessHours.do" operation-param="method" operation-value="showBusinessHours,editBusinessHours,newBusinessHours,checkName" />
+			 <url  path="/showReports.do" operation-param="actionMethod" operation-value="generateAvailabilityReport,generateAvailabilitySnapShotReport,generateDBUsersReport,generateDashboardReport,generateDowntimeSummaryReport,generateTrendReport,generateEventSummary,generatePeriodAvailabilityDowntimeReport,generatePeriodAvailabilityReport,generateWeeklyMonthlyOutageReport,generateQueryResultsReport,generateSQLJobHistoryReport,generateServerUtilizationReport,generateInventory,getCAMAttributes,getCCMSAttributes,getDivIdsToDisplay,sendAttributeDetails,generateSummaryReport,generateHealthReport,generateIndividualGlanceReport,showEumSummaryReport,emailPDF,generateHAAvailabilityReport,generateHAHealthReport,generateHAResponseTimeReport,generateHASnapShotReport,generateHASnapShotReportWithHostName,generateMttrAvailablityReport,generateCustomAttributeReport,getAvailabilityData,generateAttributeReport,generateGlanceReport,getAjaxInventory,getReportIndex,getUnsupportedWidgetTypes" />
+			 <url path="/showCustomReports.do" operation-param="actionMethod" operation-value="generateDiskPartitionReport,generateIndividualReportCapacityPlanning" />
+			<url path="/businessHourDetails.do" operation-param="method" operation-value="editBusinessHours" />
+			<url path="/testVMAction.do" operation-param="method" operation-value="collectVMs" />
+			<url path="/Consent.do" operation-param="method" operation-value="showAllConsentDetails" />
+			<url path="/showNetworkResource.do" operation-param="method" operation-value="showNWDSnapshot" />
+			<url path="/extDeviceAction.do" operation-param="method" operation-value="getIntegrationDetails,addNewExtDevice,site24x7Reports,editExtDevices" />
+			<url path="/adminAction.do" operation-param="method" operation-value="showLogTicket,getServiceNowSubCategories,getAssignedToTechnicians,getSDPODRequestTemplateDetails,getsubCategories,getTechnicians,getItems,showServiceNowConfiguration,showSdeskConfiguration,showSdeskLogTicket,getCategNames,getSiteNames,getTechgroupNames,getRequestTemplateDetails,getRequesterNames"/>
+			<url path="/adminActivities.do" operation-param="method" operation-value="getScriptHostDetails" />
+			<url operation-param="method" path="/manageMQ.do" operation-value="getEvents,exportEvents,getEventStatus,startService,stopService" />
+		</urls>
+		<urls throwallerrors="true" method="post" deny-operation="true" >
+			<url path="/showReports.do" operation-param="actionMethod" operation-value="filterBasedOnMonitorTypes" />
+			<url path="/jsp/Popup_SLA.jsp" />
+			<url path="/jsp/reports/TrendReportList.jsp" />
+			<url path="/jsp/Popup_EmailPDF.jsp" />
+		</urls>
+		<urls throwallerrors="true" method="get,post" deny-operation="true" >
+			<url operation-param="method" path="/configureactions.do" operation-value="showSlackAction,saveSlackAction,deleteSlackAction" />
+			<url operation-param="method" path="/configureactionsforslack.do" operation-value="showRestAPIAction,saveRestAPIAction,deleteRestAPIAction,createEmailActionFromOtherActions" />
+			<url path="/removeMonitors.do" operation-param="method" operation-value="removeMonitorGrpFromDependency,configureVCenterDiscovery,configureOVMDiscovery,configureHorizonDiscovery,configureRHEVDiscovery,deleteOVM,deleteRHEV,addThresholdConfiguration" />
+			<url path="/admin/createapplication.do" operation-param="method" operation-value="removeMonitorGrpFromDependency,deleteOVM,deleteRHEV,addThresholdConfiguration" />
+			<url operation-param="method" path="/GlobalActions.do" operation-value="testthreaddumpAction,TestActionForExecuteProgramAction,addRuledetails,updateRuledetails,removeRule,sendEnableDetails" />
+			<url operation-param="method" path="/alertEscalation.do" operation-value="testAction,testthreaddumpAction,TestActionForExecuteProgramAction,restartCheck,servercheck,executeMBeanOperationWithChoosableParams,pollNow" />
+			<url operation-param="method" path="/common/executeAction.do" operation-value="TestActionForExecuteProgramAction,addRuledetails,updateRuledetails,removeRule,sendEnableDetails,restartCheck,servercheck,executeMBeanOperationWithChoosableParams,editRule,newRule,showRules,sendAjaxDetails" />
+			<url operation-param="method" path="/common/executeMBeanOperation.do" operation-value="testthreaddumpAction,TestActionForExecuteProgramAction,addRuledetails,updateRuledetails,removeRule,sendEnableDetails,restartCheck,servercheck,executeMBeanOperationWithChoosableParams,pollNow,editRule,newRule,showRules,sendAjaxDetails" />
+			<url operation-param="method" path="/common/executeSMS.do" operation-value="testthreaddumpAction,TestActionForExecuteProgramAction,addRuledetails,updateRuledetails,removeRule,sendEnableDetails,restartCheck,servercheck,executeMBeanOperationWithChoosableParams,editRule,newRule,showRules,sendAjaxDetails" />
+			<url operation-param="method" path="/common/executeScript.do" operation-value="testAction,testthreaddumpAction,addRuledetails,updateRuledetails,removeRule,sendEnableDetails,restartCheck,servercheck,executeMBeanOperationWithChoosableParams,pollNow,editRule,newRule,showRules,sendAjaxDetails" />
+			<url operation-param="method" path="/common/executeTicket.do" operation-value="testthreaddumpAction,TestActionForExecuteProgramAction,addRuledetails,updateRuledetails,removeRule,sendEnableDetails,restartCheck,servercheck,executeMBeanOperationWithChoosableParams,pollNow,editRule,newRule,showRules,sendAjaxDetails" />
+			<url operation-param="method" path="/common/executeTrap.do" operation-value="testthreaddumpAction,TestActionForExecuteProgramAction,addRuledetails,updateRuledetails,removeRule,sendEnableDetails,restartCheck,servercheck,executeMBeanOperationWithChoosableParams,pollNow,editRule,newRule,showRules,sendAjaxDetails" />
+			<url operation-param="method" path="/manageApplications.do" operation-value="configureVCenterDiscovery,configureOVMDiscovery,configureHorizonDiscovery,configureRHEVDiscovery"  />
+			<url operation-param="method" path="/GlobalActions.do" operation-value="sendActionDetails,editRule,newRule,showRules,sendAjaxDetails" />
+			<url operation-param="method" path="/common/executeAction.do" operation-value="sendActionDetails,pollNow" />
+			<url operation-param="method" path="/common/executeMBeanOperation.do" operation-value="sendActionDetails" />
+			<url operation-param="method" path="/common/executeRestAPIAction.do" operation-value="sendActionDetails" />
+			<url operation-param="method" path="/common/executeSMS.do" operation-value="sendActionDetails,pollNow" />
+			<url operation-param="method" path="/common/executeScript.do" operation-value="sendActionDetails" />
+			<url operation-param="method" path="/common/executeSlackAction.do" operation-value="sendActionDetails" />
+			<url operation-param="method" path="/common/executeTicket.do" operation-value="sendActionDetails" />
+			<url operation-param="method" path="/common/executeTrap.do" operation-value="sendActionDetails" />
+			<url path="/configureGuestOS.do" operation-param="method" operation-value="associateNewVMwareEvents,collectVMs,getConfiguredVMwareEvents,getDataStoresforVM,getLatestEvents,getVMTabs,insertConfiguredEvents,manageInstances,manageKVMInstances,manageOVMInstances,manageRHEVInstances,manageXenInstances,modifyEventSeverity,removeConfiguredEvents,removeGuestOSConfiguration,testVMAction"/>
+			<url path="/manageVMInstances.do" operation-param="method" operation-value="configureOS,updateConfigureOS,getDataStoresforVM,getVMTabs" />
+			<url path="/testVMAction.do" operation-param="method" operation-value="configureOS,updateConfigureOS,associateNewVMwareEvents,getConfiguredVMwareEvents,getDataStoresforVM,getLatestEvents,getVMTabs,insertConfiguredEvents,manageInstances,manageKVMInstances,manageOVMInstances,manageRHEVInstances,manageXenInstances,modifyEventSeverity,removeConfiguredEvents,removeGuestOSConfiguration" />
+			<url path="/showOVMApplication.do" operation-param="method" operation-value="showResourceDetails"/>
+			<url path="/showRHEVApplication.do" operation-param="method" operation-value="showResourceDetails"/>
+			<url path="/showapplication.do" operation-param="method" operation-value="showVCenterApplication,showXenResourcePoolApplication"/>
+			<url path="/showresource.do" operation-param="method" operation-value="listESXServerDetails,listXenServerDetails,showScriptMonitorDetails" />
+			<url path="/businessHourDetails.do" operation-param="method" operation-value="updateGlobalSettingForAnomalyIntroTab"/>
+			<url path="/dataTableAction.do" operation-param="method" operation-value="initXenAppEventLogTable" />
+			<url operation-param="method" path="/userconfiguration.do" operation-value="createUser,deleteUsers,unlockUserStatus,fetchADUser,createUserGroup,createLDAPUserGroup,checkUserGroupName,editUserGroup,updateUserGroup,deleteUserGroups,fetchLDAPUserGroups,getGroupUsers,addDomainConfig,checkDomainName,editDomainConfig,updateDomainConfig,deleteDomainConfig,updateAdminPermission,updatedelegateAdminPermission,updateOperatorPermission,updateUserPermission,updateView,updateAccPolicy,showUsers,revokeTOTPSecretForUser,updateas400Permission" />
+			<url operation-param="method" path="/admin/userconfiguration.do" operation-value="updatePassword,checkUserName" />
+			<url path="/businessHourDetails.do" operation-param="method" operation-value="addBusinessDetails,checkName,newBusinessHours,removeBusinessDetails,showBusinessHours,updateBusinessDetails" />
+			<url path="/manageVMInstances.do" operation-param="method" operation-value="testVMAction,collectVMs"/>
+			<url operation-param="method" path="/manageAzureServices.do" operation-value="getCiscoUCSFaults" />
+			<url path="/showCustom.do" operation-param="method" operation-value="showDataforScripts"/>
+			<url path="/adminAction.do" operation-param="method" operation-value="SDPODConfiguration,showServiceNowLogTicket,showSDPODConfiguration"/>
+		</urls>
+		
+		<!-- REST api Deny operations -->
+		<urls url-type="dynamic" deny-operation="true" method="GET" >
+			<url path="/AppManager/(xml|json)/AddTrapListener" />
+		</urls>
+		
+</security>

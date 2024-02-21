@@ -1,0 +1,1525 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id$ -->
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security.xsd">
+
+<!-- 
+Steps to Follow while defining a regex :
+	1) Check if your regex value is already present in security-common.xml and Common Regexes below
+	2) If you cannot find your regex in both, then proceed
+	3) If you think it is a common regex then define it in Common Regexes tag.
+	4) If it is particular to your Module then create a new <regexes> tag and define along with name format "am.[your module name].[Regex name of your choice]".
+	5) Mention your name, If the regexes is particular to your module.
+ -->
+	<regexes>
+		<regex name="am.role.ADMIN.EA"                 	value="^(ADMIN|ENTERPRISEADMIN)$"/>
+		<regex name="am.role.ADMIN.DE"              	value="^(ADMIN|DEMO)$"/>
+		<regex name="am.role.ADMIN.EA.DE"              	value="^(ADMIN|ENTERPRISEADMIN|DEMO)$"/>
+		<regex name="am.role.ADMIN.EA.OP"				value="^(ADMIN|ENTERPRISEADMIN|OPERATOR)$"/>
+		<regex name="am.role.ADMIN.EA.OP.DE"			value="^(ADMIN|ENTERPRISEADMIN|OPERATOR|DEMO)$"/>
+		<regex name="am.role.ADMIN.EA.OP.US"           	value="^(ADMIN|ENTERPRISEADMIN|OPERATOR|USERS)$"/>
+		<regex name="am.role.ADMIN.EA.OP.US.MA" 		value="^(ADMIN|ENTERPRISEADMIN|OPERATOR|USERS|MANAGER)$"/>
+		<regex name="am.role.ADMIN.EA.OP.US.DE" 		value="^(ADMIN|ENTERPRISEADMIN|OPERATOR|USERS|DEMO)$"/>
+		<regex name="am.role.ADMIN.EA.OP.US.DE.MA" 		value="^(ADMIN|ENTERPRISEADMIN|OPERATOR|USERS|DEMO|MANAGER)$"/>
+		<regex name="am.role.ADMIN.EA.OP.US.REP" 		value="^(ADMIN|ENTERPRISEADMIN|OPERATOR|USERS|REPORTER)$"/>
+		<regex name="am.role.ADMIN.EA.OP.US.DE.REP" 	value="^(ADMIN|ENTERPRISEADMIN|OPERATOR|USERS|DEMO|REPORTER)$"/>
+		<regex name="am.role.ADMIN.EA.OP.DE.REP" 		value="^(ADMIN|ENTERPRISEADMIN|OPERATOR|DEMO|REPORTER)$"/>
+		<regex name="am.role.ADMIN.OP.US.DE" 	        value="^(ADMIN|OPERATOR|USERS|DEMO)$"/>
+		<regex name="am.role.ADMIN.OP.US.MA" 	        value="^(ADMIN|OPERATOR|USERS|MANAGER)$"/>
+		<regex name="am.role.ADMIN.EA.OP.US.DE.REP.MA"  value="^(ADMIN|ENTERPRISEADMIN|OPERATOR|USERS|DEMO|REPORTER|MANAGER)$"/>
+		<regex name="am.role.ADMIN.EA.DE.REP.MA"        value="^(ADMIN|ENTERPRISEADMIN|DEMO|REPORTER|MANAGER)$"/>
+		<regex name="am.role.ADMIN.EA.REP.MA"           value="^(ADMIN|ENTERPRISEADMIN|REPORTER|MANAGER)$"/>
+		<regex name="am.role.ADMIN.EA.MA"           	value="^(ADMIN|ENTERPRISEADMIN|MANAGER)$"/>
+		<regex name="am.role.ADMIN.EA.MA.DE"           	value="^(ADMIN|ENTERPRISEADMIN|MANAGER|DEMO)$"/>
+		<regex name="am.role.ADMIN.OP" 	       			value="^(ADMIN|OPERATOR)$"/>
+		<regex name="am.role.ADMIN" 	       			value="^(ADMIN)$"/>
+		<regex name="am.role.ADMIN.EA.OP.US.REP"        value="^(ADMIN|ENTERPRISEADMIN|OPERATOR|USERS|REPORTER)$"/>
+	</regexes>
+
+	<param-groups>
+		<param-group name="am.additional.extra.params" >
+			<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="10"/>
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+			<param name="selectedscheme" regex="am.common.selectedscheme" />
+			<param name="selectedSkin" regex="am.common.selectedSkin" />
+			<param name="proxy" type="boolean"/>
+			<param name="ticket" type="String"/>
+			<param name="aam_jump" type="boolean" description="In SSO setup, Managed server monitor Edit monitor option from admin server" />
+			<param name="editPage" type="boolean" description="In SSO setup, Managed server monitor Edit monitor option from admin server" />
+		</param-group>
+		<param-group name="am.reports.period.common.params">
+			<param name="attribute" regex="am.alphanumeric.comma" max-len="1000"/>
+			<param name="unit"  type="String" max-len="30"/>
+			<param name="businessPeriod" regex="am.report.business.period" max-occurrences="2"/>
+			<param name="attributeName" regex="am.report.schedule.typeofattriute" max-len="500" />
+			<param name="period" regex="am.report.negativeOrPositiveNumber" max-occurrences="2"/>
+			<param name="numberOfRows" regex="am.report.negativeOrPositiveNumber" max-occurrences="3"/>
+			<param name="startDate" regex="am.report.timestamp"/>
+			<param name="laststart" regex="am.report.timestamp"/>
+			<param name="lastend" regex="am.report.timestamp"/>
+			<param name="thisstart" regex="am.report.timestamp"/>
+			<param name="thisend" regex="am.report.timestamp"/>
+			<param name="endDate" regex="am.report.timestamp"/>
+			<param name="Report" regex="yesnotf"/>
+			<param name="interval" regex="am.report.period.interval"/>
+			<param name="reporttype" regex="am.alphanumeric.comma"/>
+			<param name="pdfAttributeName" regex="am.report.schedule.typeofattriute"/>
+			<param name="workingdays" regex="am.report.boolean.empty"/>
+			<param name="reportmethod" regex="am.alphanumeric.comma"/>
+			<param name="columnsAdded" regex="am.reports.numberCommaNull"/>
+			<param name="eumReport" regex="yesnotf"/>
+			<param name="month" regex="am.report.timestamp"/>
+			<param name="licDuration" regex="am.reports.numberCommaNull"/>
+			<param name="year" regex="am.report.timestamp"/>
+			<param name="fromYear" regex="am.report.timestamp"/>
+			<param name="toYear" regex="am.report.timestamp"/>
+			<param name="fromMonth" regex="am.report.timestamp"/>
+			<param name="toMonth" regex="am.report.timestamp"/>
+			<param name="report" type="String"/>
+			<param name="reportname" type="String"/>
+			<param name="customfield" regex="yesnotf" />
+			<param name="customFieldValue" type="String"/>
+			<param name="showcfFilter" regex="yesnotf" />
+			 <param name="customFieldNumberOfRows" regex="am.report.negativeOrPositiveNumber"/> 
+			<param name="capacityPlanningOptions" regex="am.report.negativeOrPositiveNumber"/>
+			<param name="mondaycapacity" type="String"/>
+			<param name="availabilityReportAscSort" regex="am.common.booleanandnull"/>
+			<param name="haid" regex="am.reports.numberCommaNullAll" max-len="5000"/>
+			<param name="sunday" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+			<param name="resid" regex="String" max-len="2000"/>
+			<param name="saturday" type="String"/>
+			<param name="system" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+			<param name="appserver" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+			<param name="dbserver" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+			<param name="webservice" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+			<param name="service" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+			<param name="mailservice" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+			<param name="sapservice" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+			<param name="middlewareserver" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+			<param name="ruleid" regex="am.report.number.empty.null"/>
+			 <param name="groupviewfilterby" type="String" /> 
+			<param name="getpdf" regex="am.common.booleanandnull" />
+			<param name="hid" regex="am.report.booleanNullNumber" />
+			<param name="isschedule" regex="am.common.booleanandnull" />
+		</param-group>
+		<param-group name="am.selfmonact.extra.params" >
+            <param name="REQTYPE" regex="^(AJAX)$" />
+	    	<param name="ajaxRequest" type="boolean" />
+	    	<param name="ALERT_ID" type="long" max-occurrences="1000" />
+        </param-group>
+	</param-groups>
+    
+	<regexes>
+		<regex name="am.datatables_boolean_value" value="^(columns\[\d+\]((\[(orderable|searchable)\])|\[search\]\[regex\]))$" />
+		<regex name="am.datatables_search_value" value="^(columns\[\d+\]\[search\]\[value\])$" />
+		<regex name="am.datatables_data_value" value="^(columns\[\d+\]\[data\])$" />
+		<regex name="am.datatables_name_value" value="^(columns\[\d+\]\[name\])$" />
+		<regex name="am.datatables_int_value" value="^(order\[\d+\]\[column\])$" />
+		<regex name="am.datables_order_dir" value="^(order\[\d+\]\[dir\])$" />
+	</regexes>
+
+	<!-- Common Regexes -->
+	<regexes>
+		<regex name="am.common.build.version" value="^[0-9.]*$" />	
+		<regex name="am.restapi.url.ext" value="(\/.*|)$" />
+		<regex name="am.common.numberandcomma" value="^([0-9]|,)+$"/>
+		<regex name="am.common.numberandsemicolon" value="^([0-9]|:)+$"/>
+		<regex name="am.common.numberaandcolonpluscomma" value="^([0-9]|,|:)+$"/>
+		<regex name="onlyon" value="^(on)$" />
+		<regex name="zeroandone" value="^(0|1)$" />
+		<regex name="zeroandone.ornull" value="^(0|1|null)$" />
+		<regex name="zeroandminusone" value="^(0|-1)$" />
+		<regex name="polling_interval" value="^([1-5])$" />
+		<regex name="yesnonull" value="^(?i)(yes|no|null)$" />
+		<regex name="-1andnumeric" value="^(-1|^[0-9]+$)$" />
+		<regex name="yesnotf" value="^(?i)(yes|no|true|false|null|on)$" />
+		<regex name="monitorsusername" value="^(?i)(username)$"/>
+		<regex name="monitorspassword" value="^(?i)(password)$"/>
+		<regex name="am.common.long" value="^([0-9]+)$" />
+		<regex name="am.common.longbooleanandnull" value="^([0-9\,]+|true|false|null|-)$" />
+		<regex name="am.common.longandnull" value="^([0-9]+|null)$" />
+		<regex name="am.common.doubleandhyphen" value="^([0-9]|.|-)+$"/>
+		<regex name="am.common.longNullCommaSpace" value="^([0-9\, ]+|null)?$" />
+		<regex name="am.common.On" value="^(?i)(on)$" />
+		<regex name="am.common.Conjunction" value="^(OR|AND)$" />
+		<regex name="am.common.TFNull" value="^(?i)(true|false|null)$" />
+		<regex name="am.common.TF.NA.Null" value="^(?i)(true|false|null|NA)$" />
+		<regex name="am.common.ZeroOne" value="^(0|1)$" />
+		<regex name="am.common.datatable.length" value="^(10|25|50|100)$" />
+		<regex name="am.common.selectedscheme" value="^(?i)(default|slim)$" />
+		<regex name="am.common.selectedSkin" value="^(?i)(Grey|White|Blue|Green|Brown|Orange|Red)$" />
+		<regex name="am.common.selectedLanguages" value="^(?i)(zh_CN|de_DE|en_US|es_ES|fr_FR|hu_HU|ja_JP|ko_KR|zh_TW|vi_VN|ru_RU)$" />
+		<regex name="am.common.Null" value="^(null)$" />
+		<regex name="am.alphanumeric" value="^[A-Za-z0-9]+$" />
+		<regex name="am.alphanumeric.comma" value="^([A-Za-z0-9]|,)+$" />
+		<regex name="am.alphanumeric.commaSpace" value="^([A-Za-z0-9]|,| )+$" />
+		<regex name="am.alphanumeric.commaSpaceHyphen" value="^([A-Za-z0-9]|,|-| )+$" />
+		<regex name="am.common.alphaNumeric.ext1.withBraces" value="^[A-Za-z0-9\(\)\_\-]+$"/>
+		<regex name="am.common.alphaNumeric.ext1.withDollar" value="^[A-Za-z0-9\_\-\$]+$"/>
+		<regex name="am.common.alphaNumeric.ext1" value="^[A-Za-z0-9\_\-]+$"/>
+		<regex name="am.common.alphaNumeric.ext2" value="^[a-z0-9\-]+$"/> <!-- Used in Google Cloud Platform Monitor - ProjectID -->
+		<regex name="am.common.alphaNumeric.ext3" value="^[A-Za-z0-9\_\-\: ]+$"/>
+		<regex name="am.common.alphaNumeric.ext4" value="^[A-Za-z0-9\.\_\-\:\,\/ ]+$"/> <!-- Used in RUM & EUM -->
+		<regex name="am.common.alphaNumeric.ext5" value="^[A-Za-z0-9\_\$]+$"/><!-- Used in IBMi monitors -->
+		<regex name="am.common.resourcetype" value="^[A-Za-z0-9\_\$\-\ ]+$"/>
+		<regex name="am.common.urlstartwithslash" value="^(\/?)([a-zA-Z0-9\-\.\?\,\:\'\/\\\+=&amp;%\$#_@;]*)?$" />
+		<regex name="am.common.paramNames" value="^[a-zA-Z0-9\(\)\_\,\ \/\.\-\\]+$" />
+		<regex name="am.common.exparamNames" value="^[\p{L}\p{N}\(\)\_\,\ \/\.\-\\]+$" />
+		<regex name="am.hostname" value="^[\p{L}\p{N}\-\.\_\:\[\]]{1,1024}$"/>
+		<regex name="am.clustername" value="^[\p{L}\p{N}\s\-\.\_\:\[\]]{1,1024}$"/>
+		<regex name="am.eum.agentname" value="^[\p{L}\p{N}\-\#\.\_\:\[\]]{1,1024}$"/>
+		<regex name="am.hostname.ipaddress" value="^[\p{L}\p{N}\-\.\_\:\[\]]+$"/>
+		<regex name="am.common.javascriptDate" value="^[\p{L}\p{N}\ \(\)\+\-\:]+$"/>
+		<regex name="am.common.monitoring.mode" value="^(TELNET|SSH|Powershell|local|WMI)$"/>
+		<regex name="am.common.extended.filename" value="^[a-zA-Z0-9.\-_\(\) ]{0,255}$" />
+		<regex name="am.common.user.profile.filename" value="^[\p{L}\p{N}\`\~\!\@\#\%\^\(\)\-\_\ \{\}\'\,\.]{1,255}$" />
+		<regex name="am.digits.commaseperated" value="^(\d+(,\d+)*,{0,1})$"/>
+        <regex name="am.request.method" value="^[a-zA-Z0-9\$\_]+$" />
+		<regex name="am.common.onlynumeric" value="^[0-9]+$" />
+		<regex name="am.common.mg.subgroup.response" value="^(subgroupdeleted|subgrpAlreadyExists|limitExceeds|subgroupsuccess|refreshstatus)$" />
+		<regex name="am.common.mg.type" value="^(MGDetails|alert)$" />
+		<regex name="am.emptystring" value="^$" />
+		<regex name = "am.common.useragent" value = "^[a-zA-Z0-9 \s\\.,\/:;\+\-_\)\(\[\]\|\#]*$" />
+		<regex name="am.common.onlystring" value="^[A-Za-z]{0,1024}$"/>
+		<regex name="am.common.decimals" value="^[0-9]+(\.)?[0-9]*$"/>	
+		<regex name="am.http.methods" value="^(GET|PUT|POST|DELETE|OPTIONS|TRACE|HEAD|get|post|put|delete|options|trace|head|Get|Post|Put|Delete|Options|Trace|Head)$" />	
+		<regex name="am.hostnameWithComma" value="^[\p{L}\p{N}\-\.\_\:\[\]\,]{1,1024}$"/>
+		<regex name="am.hostname.ext.2" value="^[\p{L}\p{N}\-\.\_\:\[\]\,\/\\\s]*$"/>
+		<regex name="am.hostname.ext.3" value="^[\p{L}\p{N}\-\.\_\:\;\[\]\,\/\\\s]*$"/>
+		<regex name="am.common.numberswithunderscores.commaseparated" value="^([0-9]|,|_)+$"/>
+		<regex name="am.common.all" value="^(All)$"/>
+		<regex name="am.jsonfeed.toReturn.type" value="^(allMGResource|allMonInMG|OpManResource)$" />
+		<regex name="am.jsonfeed.methods" value="^(createMonitorGroupFeed|getMonitorsJSONFeed|getParentGroups|getMonitorCount|getConsoleJSONFeed)$" />
+		<regex name="am.common.long.commaseparatedWithBrackets" value="^[\d\(\)\,]+$"/>
+		<regex name="am.common.long.commaseparatedWithSpaces" value="^[\d\, ]+$"/>
+		<regex name="am.eum.agent.displayName" value="^[\p{L}\p{N}\-\s\(\).\_\:\[\]]{1,1024}$"/>
+		<!-- Regex for url with ipv6 -->
+	    <regex name="urlipv6" value="^(ht|f)tp(s?)\:\/\/(\[?)[-.\w]*([a-zA-Z0-9\-\.\?\]\,\:\*\s\'\/\\\+=&amp;%\()$#_@]*)?$" />
+	    <regex name="am.space_separated.url" value="^(\s*http(s?)\:\/\/(\[?)[-.\w]*([a-zA-Z0-9\-\.\?\]\,\:\'\/\\\+=&amp;%\$#_@]*)?)*\s*$" />
+	    <regex name="am.updateip.json.keys" value="^(newResourceName_[0-9]+|[0-9]+)$" />
+		<regex name="am.updateip.options" value="^(replaceHostIP|replaceHost|replaceIP)$" />
+		<regex name="am.common.resid.sq.bracket" value="^(\[)([0-9 ]|\,)+(\])$" />
+		<regex name="am.encodedauthkey" value="^([A-Za-z0-9- +\/=%]+)$" />
+		<regex name="am.fileupload.values" value="(?i)(^\.\/hotfixes\/$)|(^\.\/mibs\/$)|(^\.\/userUploads\/$)"/>
+		<regex name="am.upload.file.extensions" value="^(?i)(jar|zip|class|jsp|jspf|war)$" />
+		<regex name="am.upload.file.contenttypes" value="^(?i)(application/java-archive|application/zip|application/java-vm|text/x-jsp|application/x-java-web-archive)$" />
+		<regex name="am.displayname.common" value="^[\p{L}\p{N}\.\-\_\ ]+$" />
+		<regex name="am.common.longandall" value="^([0-9]+|all)$"/>
+		<regex name="am.common.booleanandnull" value="^(true|false|null)$" />
+		<regex name="am.common.booleanandundefined" value="^(true|false|undefined)$" />
+		<regex name="am.common.tablename" value="^[0-9a-zA-Z\\_]+$"/>
+		<regex name="am.common.tablename.withSpaceandHyphen" value="^[0-9a-zA-Z\\_\- ]+$"/>
+		<regex name="am.common.numberandundefined" value="^([0-9]|undefined)+$"/>
+		<regex name="am.javathreaddump.monitortype" value="^(jre|cloud|amazon)$" />
+		<!-- Regex to allow all characters in monitor displaynames -->
+		<!-- <regex name="am.displayname.common" value="^[\p{L}\p{N}\W\.\-\_\ ]+$" /> -->
+		<regex name="am.security.settings.cases" value="^(disableHTTP|disableTLSv1|Content-Security-Policy|Strict-Transport-Security|disableFileUpload|disableQueryTool)$" />
+		<regex name="am.query.orderby.list" value="^(?i)(asc|desc)$"/>
+		<regex name="am.common.displayname.commaSeparated" value="^[\p{L}\p{N}\.\-\_\,\ ]+$" />
+		<regex name="am.common.imagelist.commaSeparated" value="^[\p{L}\p{N}\.\-\_\,\ \/]+$" />
+		<regex name="am.common.hexadecimal.color" value="^[A-Za-z0-9\#]+$" />
+		<regex name="am.weekdays.list" value="^(?i)(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)$" />
+		<regex name="am.java.action.methods" value="^(ThreadDump|HeapDump|PerformGC)$" />
+		<regex name="am.actions.displayname" value="^([a-zA-Z0-9 /_.-]*)$" />
+		<regex name="am.common.mas.servertype" value="^(PY|SY)$" />
+		<regex name="am.monitor.DB.summary.type" value="^(QueryTool|TableDetails|TableSummary|LongRunningQuery)$" />
+		<regex name="am.monitor.summary.type" value="^(monitorDetails|monitorTypeDetails|monitorCountDetails)$" />
+		<regex name="am.table.summary.details" value="^(ALL|Alert|Event|AM_ManagedObject|AM_PARENTCHILDMAPPER|AM_HEALTH_ALERTDATA)$" />
+		<regex name="am.table.summary.type" value="^(TabularID|TableColumnLength)$" />
+		<regex name="am.db.table.operations" value="^(vacuum|reindex|deadtuples|dbvacuum)$" />
+		<regex name="am.sif.support.type" value ="^(save|direct)$"/>
+		<regex name="am.audit.category" value ="^(MONITORGROUP)$"/>
+		<regex name="am.configure.alarm.group.type" value ="^(individual|template)$"/>
+		<regex name="am.configure.alarm.category" value ="^(monitors|monitorType|monitorGroups)$"/>
+		<regex name="am.configure.alarm.request.type" value ="^(getFilteredMonitors|getFilteredTypes)$"/>
+		<regex name="am.common.longnullfalse" value="^([0-9]+|-1|null|false)$" />
+		<regex name="am.logs.foldernames" value="^(\/*\\?)([a-zA-Z0-9\\\/ \-\_])*$" />
+		<regex name="am.logs.columnnames" value="^(dateTime|files)$" />
+		<regex name="am.rum.monitor.resids" value="^(\{)([A-Za-z0-9 \,\=])+(\})$" />	
+		<regex name="am.opm.username" value="^[\p{L}\p{N}-\\\._+@$ =%]+$"/>
+		<regex name="am.common.successorfailure" value="^(?i)(Success|Failure)$"/>
+		<regex name="am.common.cert.filename" value="^[a-zA-z0-9\/_.\-\(\)\[\] ]+$"/>
+		<regex name="am.common.one.two" value="^(?i)(1|2)$"/>
+		<regex name="am.monitorstableview.sortbycolumn" value="^(DISPLAYNAME|MONITOR_TYPE|CATEGORY|DISCOVEREDTIME)$"/>
+		<regex name="am.monitorstableview.category" value="^(SER|NET|SYS|URL|MS|APP|DBS|CAM|MOM|ERP|NWD|SAN|VIR|CLD|EMO|CIF|,)+$"/>
+		<regex name="am.common.url.schemaandlength.validator" value="^(https{0,1}:\/\/)[\W*\w*]{2,10000}$" />
+		<regex name="am.common.url.schemaandlength.validator.255" value="^(https{0,1}:\/\/)[\W*\w*]{2,255}$" />
+		<regex name="am.common.ipaddress" value="^[0-9\.]{1,15}+$"/>
+	</regexes>
+	
+	<!-- alarmsone by balaji boopathi -->
+	<regexes>
+		<regex name="am.alarmsone.modifyalarms" value="^(alarmsone)$" />
+	</regexes>
+	
+	<regexes>
+		<regex name="am.opm.probeName" value="[\p{L}\p{N}_\s]+" />
+		<regex name="am.opm.probeName.commaSeparated" value="^[\p{L}\p{N}_\s,]+$" />
+	</regexes>
+	
+	<regexes>		
+		<regex name="am.host.cron.Linux" value="^([Linux]+|null)$" />		
+	</regexes>
+	
+	<regexes><!-- UserManagement[Arul] -->
+		<regex name="am.usermanagement.newDomainService" value="^(ACTIVE DIRECTORY|LDAP|JumpCloud|local|ADAuthentication)$" />
+		<regex name="am.usermanagement.fetchActiveDirectory" value="^(userslist|usergroup)$" />
+		<regex name="am.usermanagement.roles" value="^(ADMIN|ENTERPRISEADMIN|DELEGATEDADMIN|OPERATOR|USERS|MANAGER)$"/>
+		<regex name="am.usermanagement.userGroupMG" value="^(applyselected)$"/>
+		<regex name="am.usermanagement.userName" value="^(DN=)(.*)+$"/>
+		<regex name="am.usermanagement.importUserRole" value="^(importUserRole)$" />
+		<regex name="am.customfield.newuser" value="^(NewUser)$" />
+		<regex name="am.usermanagement.session" value="^(active|history)$"/>
+		<regex name="am.usermanagement.tabName" value="^(accpolicy|samlAuth|tfa)$"/>
+		<regex name="am.usermanagement.showTab" value="^(usergroup|domaindetails)$"/>
+		<regex name="am.usermanagement.passwordError" value="^(pwdinhistory|pwdempty|confirmpwdempty|pwdnotequal|pwdlen|notRegEx|sameasuser|oldpwdnotmatch|pwdinconchar|sameasoldpwd|aduser|noerror|throttleLimit)$"/>
+		<regex name="am.usermanagement.user.password" value="^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[({|,`~.})\'\!\@\#\$\%\^&amp;&quot;&gt;&lt;+=_\-\?\[\]\*]).*$"/>
+	</regexes>
+
+	<regexes>
+		<regex name="am.dbaction.querydetails.product" value="^(apm)$" />
+		<regex name="am.webToken.action" value="^(UpdateWebToken|AddWebToken)$" />
+		<regex name="am.webclient.mapview.type" value="^(new|modify|view)$" />
+		<regex name="am.webclient.resIds.commaSeparated" value="^[0-9\,]{0,30000}$" />
+		<regex name="am.webclient.resIds.commaSeparatedWithNegative" value="^[0-9\,\-]{0,30000}$" />
+		<regex name="am.webclient.domainname" value="^(local|[0-9]+)$" />
+	</regexes>
+	<regexes>
+		<!-- by Arul -->
+		<regex name="excludeHtmlEntities" value="^[^&lt;&gt;&quot;'&amp;]+$" />
+		<regex name="am.version" value="^(JBOSS_HTTP401|lync|sfb2015|2008|selectversion|2010|2007|2003|2011|2013|Dynamics365|2012R2|2013R3|7.6|6.5|2008|2008 R2|2012|2012 R2|2016|Unknown|WLS_6_1|WLS_7_0|WLS_8_1|WLS_9_0|WLS_10_0|WLS_12_0|SSL|TLSv1|TLSv1.1|TLSv1.2|1.x|2.x|JBOSS_HTTP|JBOSS_HTTP40|JBOSS_HTTP402|JBOSS_HTTP60|JBOSS_HTTP7|JBOSS_HTTP8|r11|r12.0|r12.1.3|r12.2.0|r12.2.5|0|2|3|4|5|6|7|5.0|8|9|2019|3.2.x|4.x|4.0.1|4.0.2|5.x|6.x|7.x|8.x|Wildfly_8.x|10.1.2|10.1.3|6.1|7.0|8.1|9.x|10.x|12.x|7.13)$" />
+		<regex name="am.jboss.launchtype" value="^(DOMAIN|False)" />
+		<regex name="am.lync.select-Roles" value="^(FrontEndServer|A\/V Conferencing Server|EdgeServer|MediationServer|RadiusServer|RadiusProxy)$" />
+		<regex name="am.snmp.version" value="^(v1v2|v3)$" />
+		<regex name="am.mailserver.fetchtype" value="^(1|2)$" />
+		<regex name="am.alphanumeric.exchange" value="^[A-Za-z0-9\,\_\-]+$" />
+		<regex name="am.sharepoint.select-services.sp2016" value="^(SharepointServices|ContentDB|WebApplication|TimerJobs|AccessServices|InfoPathServices|VisioWebAccess Services|SearchServices)$" />
+		<regex name="am.sharepoint.select-services" value="^(ExcelServices|DocumentConversions|OfficeSearchGatherer)$" />
+		<regex name="am.sharepoint.select-feature" value="^(SharepointServices|ContentDB|WebApplication|TimerJobs|AccessServices|InfoPathServices|VisioWebAccess Services|ExcelServices|OfficeSearchGatherer)$" />
+		<regex name="am.montype" value="^[A-Za-z0-9\.\-\:\/\(\) ]{1,50}$" />
+		<regex name="am.custom.monitortype" value="^[A-Za-z0-9\:\.\/\(\)\- ]+$" />
+		<regex name="am.custom.monitortype.type" value="^[A-Za-z0-9\:\_\.\/\(\)\- ]+$" />
+		<regex name="am.attribute.name" value="^[A-Za-z0-9\-\ \_\,\r\n]+$" />
+		<regex name="am.conftable.name" value="^[A-Za-z0-9\-\ \_\,\/\r\n]+$" />
+		<regex name="am.runonserver" value="^(runOnServer|true|false)$" />
+		<regex name="am.runonagent" value="^(runOnAgent)$" />
+		<regex name="am.enterprise.selectedserver" value="^[0-9\-]+$" />
+		<regex name="am.enterprise.masselecttype" value="^[0-3]$" />
+		<regex name="am.credentialdetails" value="^(?i)(cm|nocm|oauth|WEBTOKEN|none)$" />
+		<regex name="am.hadoop.authtype" value="^(SimpleAuth|NoAuth)$" />
+		<regex name="am.querymon.existingdbdetails" value="^[\p{L}\p{N}\-\.\_\#\(\)\/ \\]{1,1024}$" />
+		<regex name="am.hadoop.modeofmonitoring" value="^(RESTAPI|JMX)$" />
+		<regex name="am.mssql.authtype" value="^(SQL|Windows)$" />
+		<regex name="am.monitor.type" value="^[A-Za-z0-9\:\.\/\(\)\-\_ ]+$" />
+		<regex name="am.monitor.type.withquotes" value="^[A-Za-z0-9\:\.\/\(\)\-\_&amp;quot; ]+$" />
+		<regex name="am.monitor.type.withcomma" value="^[A-Za-z0-9\:\.\/\-\_\,\(\)\s]+$" />
+		<regex name="am.monitor.type.withsinglequote" value="^[A-Za-z0-9\;\&amp;\#\,\'\:\.\/\(\)\-\_ ]+$" />
+		<regex name="am.wcm.percent" value="^(100|[0-9][0-9]?)$" />
+		<regex name="am.wcm.href" value="^(ht|f)tp(s?)\:\/\/[-.\w]*(\/?)([a-zA-Z0-9\(\)\;\-\.\?\,\:\'\/\\\+=&amp;%\$#_@]*)?$" />
+		<regex name="am.ssl.domainname" value="^(http(s?)\:\/\/[-.\w]*(\/?)([a-zA-Z0-9\-\.\?\,\:\'\/\\\+=&amp;%\$#_@]*)?|^[\p{L}\p{N}\-\.\_]{1,1024})$" />
+		<regex name="am.oraclecoherence.portadd" value="^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]|,)+$" />
+		<!-- Taken From Document -->
+		<regex name="admp.dbtype" value="^(pgsql|mssql)$" />
+		<regex name="am.jboss.server.include" value="^(include|exclude)$" />
+		<regex name="am.jboss.version" value="^(JBOSS_HTTP|JBOSS_HTTP40|JBOSS_HTTP401|JBOSS_HTTP402|JBOSS_HTTP60|JBOSS_HTTP7|JBOSS_HTTP8)$" />
+		<regex name="am.tomcat.version" value="^(3|4|5|6|7)$" />
+		<regex name="am.weblogic.version" value="^(WLS_6_1|WLS_7_0|WLS_8_1|WLS_9_0|WLS_10_0|WLS_12_0)$" />
+		<regex name="am.websphere.mode" value="^(BASE|ND)$" />
+		<regex name="am.websphere.version" value="^(5.0|6|7|8|9)$" />
+		<regex name="jboss.server.include" value="^(include|exclude)$" />
+		<regex name="am.aws.accounttype" value="^(AwsGlobal|AwsChina|AwsGovCloud)$" />
+		<regex name="am.azure.accounttype" value="^(AzureGlobal|AzureGovCloud)$" />
+		<regex name="am.aws.region" value="^[A-Za-z0-9\\-]+$" />
+		<regex name="am.aws.services" value="^(False|ALB|BEANSTALK|DYNAMODB|EC2|LAMBDA|NLB|RDS|S3|SNS|SQS|ECS|EKS|,)+$" />
+		<regex name="am.aws.select-services" value="^(ALB|BEANSTALK|DYNAMODB|EC2|LAMBDA|NLB|RDS|S3|SNS|SQS|ECS|EKS)+$" />
+		<regex name="am.azure.select-services" value="^(All-Supported-Services|VirtualMachines|StorageAccounts|PremiumStorageAccount|SQLDatabases|ServiceBus|KubernetesServices|SQLManagedInstance|LoadBalancer|AzurePostgreSQLServer|AzureAppService|AzureFunctions|AzureVirtualNetwork|AzureVMScaleSets|AzureSynapseAnalytics|AzureMariaDBServer|AzureMySQLServer|AzureRedisCache|AzureCosmosDB|AzureNetworkInterface|AzureExpressRouteCircuit|AzurePublicIPAddress|AzureVNetGateway|AzureApplicationGateway|AzureDNSZone|AzurePrivateDNSZone|AzureFirewall|AzureTrafficManagerProfile|AzureConnection|AzureNetworkWatcherConnection|AzureFrontDoorAndCDNProfile)$" />
+		<regex name="am.azure.discmode" value="^(AzureOrgAccount|AzureSPApp|AzureOAuth)$" />
+		<regex name="am.azure.services" value="^(All-Supported-Services|VirtualMachines|StorageAccounts|PremiumStorageAccount|SQLDatabases|ServiceBus|KubernetesServices|SQLManagedInstance|LoadBalancer|AzurePostgreSQLServer|AzureAppService|AzureFunctions|AzureVirtualNetwork|AzureVMScaleSets|AzureSynapseAnalytics|AzureMariaDBServer|AzureMySQLServer|AzureRedisCache|AzureCosmosDB|AzureNetworkInterface|AzureExpressRouteCircuit|AzurePublicIPAddress|AzureVNetGateway|AzureApplicationGateway|AzureDNSZone|AzurePrivateDNSZone|AzureFirewall|AzureTrafficManagerProfile|AzureConnection|AzureNetworkWatcherConnection|AzureFrontDoorAndCDNProfile|,)+$" />
+		<regex name="am.ceph.CredentialDetails" value="^(?i)(nocm|cm)$" />
+		<regex name="am.exchange.versions" value="^(2003|2007|2010|2013|2016)$" />
+		<regex name="am.ldap.filtercondition" value="^(equals|contains|notequals)$" />
+		<regex name="am.lync.roles" value="^(False|FrontEndServer|A\/V Conferencing Server|EdgeServer|MediationServer|RadiusServer|RadiusProxy|,)+$" />
+		<regex name="am.microsoft.ax.services" value="^(AOS|MSSQLSERVER|RpcSs|IISADMIN|False|,)+$" />
+		<regex name="am.microsoft.select-ax.services" value="^(AOS|MSSQLSERVER|RpcSs|IISADMIN)$" />
+		<regex name="am.microsoft.ax.versions" value="^(2012|2012R2|2013R3)$" />
+		<regex name="am.microsoft.crm.versions" value="^(2011|2013|2016|Dynamics365)$" />
+		<regex name="am.mq.ssl" value="^(NULL_MD5|NULL_SHA|RC4_MD5_EXPORT|RC4_MD5_US|RC4_SHA_US|RC2_MD5_EXPORT|DES_SHA_EXPORT|RC4_56_SHA_EXPORT1024|DES_SHA_EXPORT1024|TRIPLE_DES_SHA_US|TLS_RSA_WITH_AES_128_CBC_SHA|TLS_RSA_WITH_AES_256_CBC_SHA|TLS_RSA_WITH_DES_CBC_SHA|TLS_RSA_WITH_3DES_EDE_CBC_SHA|FIPS_WITH_DES_CBC_SHA|FIPS_WITH_3DES_EDE_CBC_SHA|ECDHE_RSA_3DES_EDE_CBC_SHA|ECDHE_RSA_AES_128_CBC_SHA256|ECDHE_RSA_AES_128_GCM_SHA256|ECDHE_RSA_AES_256_CBC_SHA384|ECDHE_RSA_AES_256_GCM_SHA384|TLS_RSA_WITH_AES_128_CBC_SHA256|TLS_RSA_WITH_AES_128_GCM_SHA256|TLS_RSA_WITH_AES_256_CBC_SHA256|TLS_RSA_WITH_AES_256_GCM_SHA384|ECDHE_ECDSA_AES_128_CBC_SHA256|ECDHE_ECDSA_AES_128_GCM_SHA256|ECDHE_ECDSA_AES_256_CBC_SHA384|ECDHE_ECDSA_AES_256_GCM_SHA384|ECDHE_ECDSA_3DES_EDE_CBC_SHA256|ECDHE_RSA_3DES_EDE_CBC_SHA256)$" />
+		<regex name="am.ibm.mq.timezone" value="^(((?i)default)|GMT-12|GMT-11|GMT-10|GMT-9:30|GMT-9|GMT-8|GMT-7|GMT-6|GMT-5|GMT-4|GMT-3:30|GMT-3|GMT-2|GMT-1|GMT|GMT\+1|GMT\+2|GMT\+3|GMT\+3:30|GMT\+4|GMT\+4:30|GMT\+5|GMT\+5:30|GMT\+5:45|GMT\+6|GMT\+6:30|GMT\+7|GMT\+8|GMT\+8:45|GMT\+9|GMT\+9:30|GMT\+10|GMT\+10:30|GMT\+11|GMT\+12|GMT\+12:45|GMT\+13|GMT\+14)$" />
+		<regex name="am.restapi.RespType" value="^(Text|XML|JSON)$" />
+		<regex name="am.restapi.method" value="^(GET|POST|PUT|DELETE)$" />
+		<regex name="am.restapi.payloadType" value="^(?i)(FORM|Text|XML|JSON|F|T|X|J)$" />
+		<regex name="am.servermonitor.SNMPCredentialDetails" value="^(?i)(nocmSNMP|cmSNMP)$" />
+		<regex name="am.servermonitor.SSHCredentialDetails" value="^(?i)(nocmSSH|cmSSH)$" />
+		<regex name="am.servermonitor.TelnetCredentialDetails" value="^(?i)(nocmTelnet|cmTelnet)$" />
+		<regex name="am.servermonitor.mode" value="^(?i)(BASE|ND|telnet|ssh|snmp|wmi|sh|SSH|TELNET|csh|winrm|null)$" />
+		<regex name="am.servermonitor.snmpSecurityLevel" value="^(?i)(ToSelectValue|NOAUTHNOPRIV|AUTHNOPRIV|AUTHPRIV)$" />
+		<regex name="am.servermonitor.snmpAuthProtocol" value="^(?i)(MD5|SHA|SHA_256|SHA_512)$" />
+		<regex name="am.servermonitor.version" value="^(?i)(2008|2008 R2|2012|2012 R2|2016|)$" />
+		<regex name="am.sharepoint.services.sp2016" value="^(False|SharepointServices|ContentDB|WebApplication|TimerJobs|AccessServices|InfoPathServices|VisioWebAccess Services|SearchServices|,)+$" />
+		<regex name="am.sharepoint.sptype" value="^(Farm|SPServer)$" />
+		<regex name="am.sharepoint.versions" value="^(2007|2010|2013|2016)$" />
+		<regex name="am.sslCertificateMonitor.protocol" value="^(Auto|SSLv3|TLSv1|TLSv1.1|TLSv1.2|TLSv1.3)$" />
+		<regex name="am.windows.CredentialDetails" value="^(?i)(nocmWMI|cmWMI)$" />
+		<regex name="am.windowsCluster.CredentialDetails" value="^(?i)(nocm|cm)$" />
+		<regex name="am.windowsCluster.discoverNodes" value="^(?i)(0|1)$" />
+		<regex name="am.xenapp.version" value="^(7.6|6.5)$" />
+		<regex name="websphere.servername" value="^[\p{L}\p{N}\-\.\_\`\@\!\'\~\>\&lt;\{\}\+\=]{1,1024}$" />
+		<regex name="yesno" value="^(?i)(yes|no)$" />
+		<regex name="am.vmware.guestconfig" value="^[1]$" />
+		<regex name="am.addvms" value="^(?i)(0|1|2|3|yes|false|unmanage|no)$" />
+		<regex name="am.addvms.api" value="^(no|yes|onlyavailability)$" />
+		<regex name="am.ebs.con.req" value="^(False|Completed|Pending|Running|Inactive|,)+$" />
+		<regex name="am.oraclecloud.tenancy" value="^(ocid[0-9]+.tenancy)([a-z0-9.]+)$" />
+		<regex name="am.oraclecloud.userid" value="^(ocid[0-9]+.user)([a-z0-9.]+)$" />
+		<regex name="am.oraclecloud.autodbocid" value="^(ocid[0-9]+.autonomousdatabase)([a-z0-9.\-]+)$" />
+		<regex name="am.oraclecloud.fingerprint" value="^([A-Za-z0-9:]+)$" />
+		<regex name="am.oraclecloud.compartment" value="^([a-zA-Z0-9.\-_,]+)$" />
+		<regex name="am.oraclecloud.regionstomonitor" value="^(False|ap-seoul-1|ap-tokyo-1|ca-toronto-1|eu-frankfurt-1|uk-london-1|us-ashburn-1|us-phoenix-1|ap-mumbai-1|eu-zurich-1|ap-sydney-1|sa-saopaulo-1|ap-melbourne-1|sa-vinhedo-1|ca-montreal-1|sa-santiago-1|eu-paris-1|eu-marseille-1|ap-hyderabad-1|il-jerusalem-1|eu-milan-1|ap-osaka-1|eu-amsterdam-1|me-jeddah-1|ap-singapore-1|af-johannesburg-1|ap-chuncheon-1|eu-stockholm-1|me-abudhabi-1|me-dubai-1|uk-cardiff-1|us-sanjose-1|eu-madrid-1|mx-queretaro-1|us-chicago-1|,)+$" />
+		<regex name="am.oraclecloud.discovery" value="^(Discover|DoNotDiscover)$" />
+		<regex name="am.oraclecloud.actiononterminatedresources" value="^(Remove|Alert|Unmanage|Stop)$" />
+		<regex name="am.oraclecloud.servicestonotdiscover" value="^(False|Compute|Storage|Database|,)+$" />
+		<!-- Google Cloud Platform Regexes -->
+		<regex name="am.gcp.services" value="^(False|ComputeEngine|CloudStorage|CloudFilestore|KubernetesEngine|,)+$" />
+		<regex name="am.gcp.deletedResourceAction" value="^(Alert|Stop|Unmanage|Delete)$" />
+		<!-- Dynamics AX Regex -->
+		<regex name="am.dynamicsAX.SQLCredentials" value="^(AXcred|SQLcred)$" />
+		<!-- Elastic Beanstalk Regex -->
+		<regex name="am.amazon.elasticbeanstalk.envname" value="^[a-zA-Z0-9][a-zA-Z0-9\-]+[a-zA-Z0-9]{40}$" />
+		<!-- Amazon ECS Regex -->
+		<regex name="am.aws.clustername" value="^[a-zA-Z][a-zA-Z0-9\-]+[a-zA-Z0-9]{1,108}$"/>
+		<!-- AWS Regions -->
+		<regex name="am.aws.globalregions" value="^(False|All-Regions|us-east-1|us-east-2|us-west-1|us-west-2|ca-central-1|eu-west-1|eu-west-2|eu-west-3|eu-central-1|eu-north-1|ap-south-1|ap-northeast-1|ap-northeast-2|ap-southeast-1|ap-southeast-2|sa-east-1|ap-east-1|ap-northeast-3|me-south-1|af-south-1|eu-south-1|ap-southeast-3|ap-south-2|eu-central-2|eu-south-2|me-central-1|ap-southeast-4|il-central-1|,)+$" />
+		<regex name="am.aws.select-globalregions" value="^(All-Regions|us-east-1|us-east-2|us-west-1|us-west-2|ca-central-1|eu-west-1|eu-west-2|eu-west-3|eu-central-1|eu-north-1|ap-south-1|ap-northeast-1|ap-northeast-2|ap-southeast-1|ap-southeast-2|sa-east-1|ap-east-1|ap-northeast-3|me-south-1|af-south-1|eu-south-1|ap-southeast-3|ap-south-2|eu-central-2|eu-south-2|me-central-1|ap-southeast-4|il-central-1)+$" />
+		<regex name="am.aws.chinaregions" value="^(False|cn-northwest-1|cn-north-1|,)+$" />
+		<regex name="am.aws.select-chinaregions" value="^(cn-northwest-1|cn-north-1)+$" />
+		<regex name="am.aws.govcloudregions" value="^(False|us-gov-east-1|us-gov-west-1|,)+$" />
+		<regex name="am.aws.select-govcloudregions" value="^(us-gov-east-1|us-gov-west-1)+$" />
+		<regex name="am.aws.name.filter.regex" value="^([.][*]){0,1}(([a-zA-Z0-9\-\_\.])*([.][*]){0,1})*$" />
+		<regex name="am.aws.eks.clustername" value="^[0-9A-Za-z][A-Za-z0-9\-_]*{1,100}$"/>
+		<regex name="am.weblogic.operation.value" value="^(disablewebapp|disableejb|disableservlet)$" />
+	</regexes>
+	<regexes>
+		<regex name="am.windows.username" value="^[\p{L}\p{N}\`\~\!\@\#\$\%\^\&amp;\*\(\)\-\_\=\+\ \{\[\}\]\|\\\:\;\&quot;\'\&lt;\,\>\.\?\/]{1,1024}$" />
+		<regex name="am.onlynumeric" value="^[0-9]+$" />
+		<regex name="am.onlyalpha" value="^[A-Za-z \-]+$" />
+		<regex name="am.alphanumeric.alllanguages" value="^[\p{L}\p{N}]+$" />
+		<regex name="am.alphanumeric.alllanguages.ext1" value="^[\p{L}\p{N}\_\-\.]+$" />
+		<regex name="am.port" value="^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$" />
+		<regex name="am.sqldatabasename" value="^[\p{L}_][\p{L}\p{N}@$#_]{1,128}$" />
+		<regex name="am.boolean" value="^(true|false)$" />
+		<regex name="am.office365.tenantname" value="^[\p{L}\p{N}]{1,28}$" />
+		<regex name="am.office365.select-services" value="^(ExchangeOnline|SharepointOnline|SkypeForBusinessOnline|MicrosoftTeams)$" />
+		<regex name="am.office365.services" value="^(ExchangeOnline|SharepointOnline|SkypeForBusinessOnline|MicrosoftTeams|,)+$" />
+		<regex name="am.sharepoint.features" value="^(False|SharepointServices|ContentDB|WebApplication|TimerJobs|AccessServices|InfoPathServices|VisioWebAccess Services|ExcelServices|OfficeSearchGatherer|,)+$" />
+		<regex name="am.sharepoint.services" value="^(False|ExcelServices|DocumentConversions|OfficeSearchGatherer|,)+$" />
+		<regex name="am.azure.subsIDclientIDTenantID" value="^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$" />
+		<regex name="am.azure.resourceid" value="^[\p{L}\p{N}\-\/\.\_\(\)]{1,1024}$" />
+		<regex name="am.azure.resourcegroup" value="^[\p{L}\p{N}\-\_\(\)\.]{0,90}$" />
+		<regex name="am.azurevm.vmname" value="^[\p{L}\p{N}\-]{1,64}$" />
+		<regex name="am.azurevm.vmusername" value="^[^\\/&quot;\[\]:|&lt;>+=;,?\\*@]{1,15}$" />
+		<regex name="am.azurestorage.accname" value="^[\p{L}\p{N}]{3,24}$" />
+		<regex name="am.azure.servicebusnamespace" value="^[\p{L}\p{N}\-]{6,50}$" />
+		<regex name="am.azure.kubernetes.cluster.name" value="^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$" />
+		<regex name="am.azure.sql.mi.name" value="^[a-z0-9]$|^[a-z0-9][-a-z0-9]{0,61}[a-z0-9]$" />
+		<regex name="am.azure.lb.name" value="^[A-Za-z0-9](?:[A-Za-z0-9._-]{0,78}[A-Za-z0-9_])?$" />
+		<regex name="am.aws.accesskey" value="^[\p{L}\p{N}]{16,128}$" />
+		<regex name="am.monitor.db.locale" value="^[\p{L}\p{N}\-\.\_]{1,1024}$" />
+		<regex name="am.monitor.mssql.instancename" value="^[\p{L}\p{N}]*[\#|\$|\_]?[\p{L}\p{N}]*$" />
+		<regex name="am.monitor.db.name" value="^[\p{L}\p{N}\s\`\~\!\@\#\$\%\^\&amp;\*\(\)\-\_\=\+\{\[\}\]\|\\\:\;\&quot;\'\&lt;\,\>\.\?\/]{1,1024}$" />
+		<regex name="am.mqseries.sysobjects" value="^((?i)include\_|exclude\_)([\p{L}\p{N}\_\:\s\.\,\*\;]?)+$" />
+		<regex name="am.websphere.appservers" value="^([\p{L}\p{N}\_\:\s\.\,\;])+$" />
+		<regex name="am.webserver.anycharacter" value="^[\p{L}\p{N}\W]{1,1024}$" />
+		<regex name="am.webserver.uri" value="^[\p{L}\p{N}\-\.?,:'\/\\+=&amp;;%$#_\[\]@!()*;~\p{L}]*$" />
+		<regex name="am.jboss.domaincontroller" value="^[\p{L}\p{N}\-\.\_\`\@\!\#\$\%\^\'\/\~\[\]\>\{\}\(\)\+\=\|\\]{1,1024}$" />
+		<regex name="am.jboss.appservers" value="^([\p{L}\p{N}\&amp;\-\.\_\`\@\!\#\$\%\^\'\/\~\[\]\>\{\}\+\=\,\:\;\|\\ ])+$" />
+		<regex name="am.jboss.username" value="^[\p{L}\p{N}\,\-\.\/\=\@\\]{1,1024}$" />
+		<regex name="am.resin.username" value="^[\p{L}\p{N}\,\-\.\/\=\@\\]{1,1024}$" />
+		<regex name="am.tomcat.username" value="^[\p{L}\p{N}\-\.\/\~\@\!\#\$\%\^\*\(\)\[\]\{\}\'\&quot;\:\?\|\>\`]{1,1024}$" />
+		<regex name="am.weblogic.username" value="^[\p{L}\p{N}\-\.\/\~\@\!\#\$\%\^\*\(\)\[\]\{\}\'\&quot;\:\?\|\&amp;\&lt;\>\`]{1,1024}$" />
+		<regex name="am.vfabric.username" value="^[\p{L}\p{N}\,\-\.\/\=\@\\]{1,1024}$" />
+		<regex name="am.meadmp.username" value="^[\p{L}\p{N}\-\.\/\~\@\!\#\$\%\^\*\(\)\[\]\{\}\'\&quot;\:\?\|\>\`]{1,1024}$" />
+		<regex name="am.sdp.restapikey" value="^[\p{L}\p{N}\-\_]{1,1024}$" />
+		<regex name="am.saphana.ondemand.accountname" value="^[a-z][a-z0-9]{1,29}$" />
+		<regex name="am.saphana.ondemand.username" value="^[A-Za-z][A-Za-z0-9]{8}$" />
+		<regex name="am.saphana.username" value="^[\p{L}\p{N}\_\#\&amp;]+$" />
+		<regex name="am.saphana.dbname" value="^[A-Za-z][A-Za-z0-9\.\-]+(?!\.)$" />
+		<regex name="am.sapmaxdb.username" value="^[\p{L}\p{N}\_\#\$\@]+$" />
+		<regex name="am.sapmaxdb.dbname" value="^[^\.\_][\p{L}\p{N}\.\-\_][^\/\:\*\?\&quot;\&lt;\>\|\\]+$" />
+		<regex name="am.ftp.file.path" value="^[\/](.*)+$" />
+		<regex name="am.esx.hostname" value="^[\p{L}\p{N}\-\.\_]{1,15}$" />
+		<regex name="am.ceph.prompt" value="^\\W$" />
+		<regex name="am.dns.recordtype" value="^(-None-|A|AAAA|CNAME|MX|NS|PTR|SOA|SPF|SRV|TXT)$" />
+		<regex name="am.dns.searchfield" value="^(-None-|Record Name|Address|Additional Name|Target|Admin|Host|Alias|Port|Priority)$" />
+		<regex name="am.ldap.matchingAttribute" value="^(cn|uid|sn|displayname|givenname|objectclass|dc|ou|DirXML-State)$" />
+		<regex name="am.DBservers.instance" value="^((\p{L}|\p{N})*(\#|\$|\_|\.|\@|\-)*)+$" />
+		<regex name="am.querymonitor.Database" value="^(select|DB2|Informix|Ingres|MaxDB|MsSQL|MySQL|Oracle|OracleRAC|Postgres|SAPHANA|Sybase|AS400DB2)$" />
+		<regex name="am.siebel.insdirectory" value="^(\/|\\\\|\\|[a-zA-Z]){1}(.*)+$" />
+		<regex name="am.snmp.snmpPrivProtocol" value="^(AES|AES_128|AES_192|AES_256|DES)$" />
+		<regex name="am.weblogic.dicoveroption" value="^(0|1|2)$" />
+		<regex name="am.rum.applicationType" value="^(traditional|spa)$" />
+		<regex name="am.rum.domainType" value="^(first|third|cdn)$" />
+		<regex name="am.credManager.monTypes" value="^(RESTAPISequence|TELNET|SNMP v1v2|SNMP v3|SSH|Powershell|WMI|GlassFish|JBOSS-server|Jetty Server|.Net:9080|Resin|RESTAPIMonitor|Tomcat-server|VMware vFabric tc Server|WEBLOGIC:7001|WebSphere-server|ApacheGeronimo|JDK1.5:1099|AS400DB2|Cassandra|Couchbase|DB2:50000|HBase|Informix|MongoDB|MSSQLDB:1433|MYSQLDB:3306|OracleNoSQL|ORACLE-DB-server|PostgreSQL|SapHana|MaxDB|Neo4j|SQLAnywhere-DB-server|SYBASE-DB-server|SYBASE-Replication-server|Microsoft MQ|OfficeSharePointServer|BizTalkServer|RabbitMQ|LyncServer|Kafka|ApacheActiveMQ|OracleEBS|SAP|Microsoft Dynamics CRM|MSDynamicsAX|SAPBusinessOne|OpenStack|Exchange-server|APACHE:80|ApacheSolr|ElasticSearchCluster|OPMMonitor|HAProxy|NginxPlus|UrlMonitor|Coherence|Hazelcast|ApacheSparkMaster|ActiveDirectory|NetworkPolicyServer|LDAP Server|MAIL-server|FTPMonitor|Nutanix|CiscoUCS|Docker|XenApp|OracleVM|Hyper-V-Server|XenServerHost|CitrixVirtualAppsAndDesktop|VMWare ESX/ESXi|all|Telnet|JBoss Server|Microsoft .NET|WebLogic Server|WebSphere Server|Apache Server|Tomcat Server|Java Runtime|DB2|MS SQL|MySQL|Oracle|Sybase|Microsoft MQ \(MSMQ\)|MS Office SharePoint|IBMHTTPServer|OracleHTTPServer|DamengDB|SAPASJava)$" />
+		<regex name="am.credManager.hidden.params" value="^hidden_(password|Password|snmpCommunityString|snmpContextName|snmpAuthPassword|snmpPrivPassword|passphrase|dbPassword)$" />
+		<regex name="am.credManager.password.params" value="^(password|Password|snmpCommunityString|snmpContextName|snmpAuthPassword|snmpPrivPassword|passphrase|dbPassword|,)+$" />
+		<regex name="am.credManager.encoded.decoded" value="^(encoded|decoded)$" />
+		<regex name="am.editmonitor.api.type" value="^(Service Monitoring|SSLCertificateMonitor|UrlMonitor|DNSMonitor|Telnet)$"></regex>
+		<regex name="am.azure.childdiscovery" value="^(?i)(0|1|2|unmanage|monitor|regexfilter)$" />
+		<regex name="am.azure.servicestostop" value="^(False|VirtualMachines|StorageAccounts|PremiumStorageAccount|SQLDatabases|ServiceBus|KubernetesServices|SQLManagedInstance|LoadBalancer|AzurePostgreSQLServer|AzureAppService|AzureFunctions|AzureVirtualNetwork|AzureVMScaleSets|AzureSynapseAnalytics|AzureMariaDBServer|AzureMySQLServer|AzureRedisCache|AzureCosmosDB|AzureNetworkInterface|AzureExpressRouteCircuit|AzurePublicIPAddress|AzureVNetGateway|AzureApplicationGateway|AzureDNSZone|AzurePrivateDNSZone|AzureFirewall|AzureTrafficManagerProfile|AzureConnection|AzureNetworkWatcherConnection|AzureFrontDoorAndCDNProfile|,)+$" />
+	</regexes>
+
+	<!-- MyPage and Dashboard regex starts -->
+	<regexes>
+		<regex name="am.mypage.dashboardtypes" value="^(globalpage|mgtemplate|businesspage)$" />
+		<regex name="am.mypage.dashboard.usertypes" value="^(ADMIN|ENTERPRISEADMIN|DELEGATEDADMIN|OPERATOR|USERS)$" />
+		<regex name="am.mypage.dashboardactions" value="^(newMyPage|editMyPage|createDashboard|updateDashboard)$" />
+		<regex name="am.common.orderby.uppercase" value="^(ASC|DESC|-1)$"/>
+		<regex name="am.widgets.graphtypes" value="^(line|bar|pie|barnotable|dial|inlinebar|linenotable|bignumber|nograph)$" />
+		<regex name="am.widgets.customscaleoptions" value="^(noscale|autoscale|userdefined)$" />
+		<regex name="am.dashboard.generate.types" value="^(Hyper-V-Server|Container|VirtualMachine|XenServerHost|VMWare ESX/ESXi)$" />
+		<regex name="am.widgets.montypewithattribid" value="^[A-Za-z0-9\.\-\:\/\(\)\$\_\#\- ]+$" />
+		<regex name="am.widgets.topn.filterconditions" value="^(GT|LT|GE|LE|EQ|NE)$" />
+		<regex name="am.widgets.alertmsg.filterconditions" value="^(CT|DC|QL|NQ|SW|EW)$" />
+		<regex name="am.widgets.matchcase.conditions" value="^(MatchCase|IgnoreCase)$" />
+		<regex name="am.widgets.selectmongrp.options" value="^(selectMg|onlyMg|onlyMon|[0-9]+)$" />
+		<regex name="am.widgets.selectiontype" value="^[a-zA-z0-9$]+$" />
+		<regex name="am.widgets.businessperiod" value="^(oni|[0-9]+)$" />
+		<regex name="am.widgets.errors.type" value="^(1|2|1,2)$" />
+		<regex name="am.widgets.monitors.category" value="^(APP|ERP|DBS|SYS|MS|URL|SER|CAM|MOM|NWD|SAN|SCR|VIR|CLD|EMO|CIF|NET|All|Trap|HAI)$" />
+		<regex name="am.widgets.montypewithcustomfields" value="^[A-Za-z0-9\.\-\_\:\/\(\)$ ]{1,50}$" />
+		<regex name="am.publish.dashboard.methods" value="^(getPublishedDashboard|getWidgetData|getDependencyViewForMapId|getAlarmSummaryData)$"/>
+		<regex name="am.publishkey.types" value="^(Dashboard|BusinessView|JSONFeed)$"/>
+		<regex name="am.alarmsummary.datatable.param1" value="^(columns\[[0-9]\]\[(data)\])$" />
+		<regex name="am.alarmsummary.datatable.param2" value="^(columns\[[0-9]\]\[(searchable|orderable)\])$" />
+		<regex name="am.alarmsummary.datatable.param4" value="^(columns\[[0-9]\]\[name\])$" />
+		<regex name="am.alarmsummary.datatable.param5" value="^(columns\[[0-9]\]\[search\]\[value\])$" />
+		<regex name="am.alarmsummary.datatable.param3" value="^(columns\[[0-9]\]\[search\]\[regex\])$" />
+		<regex name="am.webclient.monitor.type" value="^[A-Za-z0-9\$\_\-\.\:\(\)\/ ]+$"/>
+		<regex name="am.webclient.monitor.types" value="^[A-Za-z0-9\$\_\-\,\.\:\(\)\/ ]+$"/>
+		<regex name="am.only.category" value="^(category)$" />
+		<regex name="am.only.dashHeat" value="^(dashHeat)$" />
+		<regex name="am.webclient.widgets.selectedtime" value="^([0-9]|td|yd)+$"/>
+	</regexes>
+	<!-- MyPage and Dashboard regex ends -->
+
+	<!-- threshold by balaji S -->
+	<regexes>
+		<regex name="am.threshold.condition" value="^(GT|LT|LE|GE|NE|EQ|CT|DC|QL|NQ|SW|EW)+$" />
+		<regex name="am.threshold.polltotry" value="^([0-9]+|-1|null)$" />
+		<regex name="am.threshold.value" value="^([A-Za-z0-9]|\$7D_MVA|\$10D_MVA|\$30D_MVA|\$6H_MVA|\$LastHourValue|\$10H_MVA|\+|\*|\-|\/|.)+$" />
+		<regex name="am.threshold.type" value="^(thresholdNumeric|thresholdFloat|thresholdPattern)$" />
+		<regex name="am.threshold.typeNumeric" value="^(1|2|3|4)$" />
+		<regex name="am.threshold.baseweek" value="^((([1-6]{1})-([1-9]|0[1-9]|1[0-2])-([0-9]{4}))|Previous Week)$" />
+		<regex name="am.threshold.toDeleteThreshold" value="^([0-9]|,| |null)+$" />
+		<regex name="am.threshold.admin.view" value="^(AppManager|MultiService|console|OpManager|OpStor)$" />
+		<regex name="am.threshold.businessHourAssociatedToThreshold.value" value="^(enabled)$" />
+		<regex name="am.threshold.ftype" value="^(baseline|customExpression)$" />		
+	</regexes>
+		
+		<!-- Certificate Import by Gokul V -->
+	<regexes>
+		<regex  name="am.certificate.UploadType" value="^(certificate|keystore)$"/>
+		<regex  name="am.certificate.selectedStore" value="^(all|cacerts|apmkeystore)$"/>
+		<regex  name="am.certificate.selectedTab" value="^(ssl|applyTrustedCertificates|listCertificates)$"/>
+		<regex  name="am.certificate.service"  value="^(AppManager|OpStor)$"/>
+	</regexes>
+	
+	<!-- anomaly detection by balaji S -->
+	<regexes>
+		<regex name="am.anomaly.state.numeric" value="^(1|4)$" />
+		<regex name="am.anomaly.customexp.comparator" value="^(&lt;|&gt;|\=|\!)+$" />
+		<regex name="am.anomaly.month.yrs" value="^([0-9]|-)+$" />
+		<regex name="am.anomaly.customtype.addnew" value="^(?i)(customExp)$" />
+		<regex name="am.anomaly.exp.value" value="^(Sample expression:|[0-9]|\$7D_MVA|\$10D_MVA|\$30D_MVA|\$6H_MVA|\$LastHourValue|\$10H_MVA|\+|\*|\-|\/|\(|\)|\.| |,)+$" />
+		<regex name="am.anomaly.zero" value="^(0)$" />
+		<regex name="am.anomaly.addnew.typeofformula" value="^(expression)$" />
+		<regex name="am.anomaly.anomalymethod" value="^(editAnomalyProfileAction|createAnomalyProfileAction)$" />
+	</regexes>
+
+	<!-- Trap Listener by Mithun -->
+	<regexes>
+		<regex name="am.trap.varbind.param" value="^(cric|clr|war|filter)(VarBind)([0-9]+)$"/>
+		<regex name="am.trap.varbind.condition.param" value="^(cric|clr|war|filter)(Cond)([0-9]+)$"/>
+		<regex name="am.trap.varbind.text.param" value="^(cric|clr|war|filter)(Text)([0-9]+)$"/>
+		<regex name="am.trap.sel.varbinds.param" value="^(sel)(Cric|Clr|War|Filter)(VarBinds)$"/>
+		<regex name="am.trap.condition.param" value="^(cric|clr|war|filter)(Condition)$"/>
+		<regex name="am.trap.secondary.param" value="^(secondary)(critical|warning|info)(exist)$"/>
+		<regex name="am.trap.threshold.condition.param" value="^(secondary)*((critical)|(warning)|(info))(thresholdcondition)([0-9])*$"/>
+		<regex name="am.trap.threshold.value.param" value="^(secondary)*((critical)|(warning)|(info))(thresholdValue|thresholdvalue)([0-9])*$"/>
+		<regex name="am.trap.threshold.joiner.param" value="^((critical)|(warning)|(info))(conditionjoiner)$"/>
+		<regex name="am.trap.varbind.condition" value="^(QL|NQ|CT|DC|SW|EW|LT|GT|EQ|NE|LE|GE)$"/>
+		<regex name="am.trap.version" value="^(v1|v2c|v3)$"/>
+		<regex name="am.trap.version.ui.msg" value="^(v1|v2|v3)$"/>
+		<regex name="am.trap.selected.varbinds" value="^((cric|clr|war|filter)(VarBind)([0-9]+)(,)*)+$"/>
+		<regex name="am.trap.condition" value="^(AND|OR|WHOLE)$"/>
+		<regex name="am.trap.status" value="^(enable|disable)$"/>
+		<regex name="am.jmx.actions.selected" value="^(Select All)$"/>
+		<regex name="am.trap.specificType" value="^(([0-9]+,)*([0-9])+)|(\*)$"/>
+		<regex name="am.trap.oid" value="^(([\.]?[0-9]+)(\.?[0-9]+)*)$"/>
+		<regex name="am.trap.listener.oid" value="^(([\.]?[0-9]+)(\.?[0-9]+)*(\.\*)?)$"/>
+		<regex name="am.trap.severity.param" value="^(critical|warning|clear|varbindbased)$"/>
+	</regexes>
+	
+	<!-- Regexes for recorder start -->
+	<regexes>
+		<regex name="am.recorder.urlseq.action" value="^(createURLSeqMon|updateURLSeqMon|listAgents)$" />
+		<regex name="am.recorder.version" value="^(6.0.3)$" />
+		<regex name="am.recorder.type" value="^(URLSeq|RBM)$" />
+		<regex name="am.recorder.rbm.operation" value="^(ADDMON|TEST)$" />
+		<regex name="am.recorder.rbm.browserType" value="^(firefox|edge|chrome)$" />
+		<regex name="am.recorder.rbm.screenshotType" value="^(WebpageAnalyzer|RBM)$" />
+		<regex name="am.recorder.rbm.browserVersion" value="^(1701)$" />
+		<regex name="am.recorder.rbm.scriptName" value="^[A-Za-z0-9.-_]{1,100}$" />
+		<regex name="am.recorder.rbm.oneDayinMin" value="^([0-9]{1,3}|[1][0-3][0-9][0-9]|14[0-3][0-9]|1440)$" />
+		<regex name="am.recorder.rbm.browserValue" value="^(1|2|4)$" />
+		<regex name="am.recorder.rbm.runonagent" value="^(runOnAgent)$" />
+		<regex name="am.recorder.long.commaSeparated" value="^[0-9\,]{0,10000}$" />
+		<regex name="am.recorder.long.pipeSeparated" value="^[0-9\|]{0,1000}$" />
+		<regex name="am.recorder.domain.pipeSeparated" value="^[\p{L}\p{N}\-\.\_\|\:\/]{0,1000}$" />
+	</regexes>
+	<!-- Regexes for recorder end -->
+	
+	<!--Regex for OAuth starts --> 
+	<regexes>
+		<regex name="am.oauth.saveCredentials.action" value="^(?i)(new|update)$" />
+		<regex name="am.oauth.grantType" value="^(?i)(authCode|clientCred|resOwnerCred)$" />
+		<regex name="am.oauth.from" value="^(?i)(addMonitorPage|OAuthProviderDetails|AdminTab)$" />
+		<regex name="am.oauth.form.params" value="^[\p{L}\p{N}~0-9_.\-\&amp;= \/:\+\(\)?@\\\]*\[]+$" />
+		<regex name="longandamp" value="^\d+(&amp;\d+)*$"/>
+	</regexes>
+	<!--Regex for OAuth ends -->
+		
+	<!-- Monitor Errors by BalajiBoopathi -->
+	<regexes>
+		<regex name = "am.monitor.error.types" value = "^(all|error|information|dcdelay)$" />
+	</regexes>
+	
+			
+	<!-- For SQL Job Action start -->
+	<regexes>
+		<regex name="am.sqljobaction.jobname" value="^(jobname_)([0-9]+)$"/>
+		<regex name="am.sqljobaction.sqlJobActionTask" value="^(401|402|403)$"/>
+		<regex name="am.sqljobaction.sqlJobActionApplyTo" value="^(1|2|3)$"/>
+		<regex name="am.sqljobaction.blank" value="^()$"/>
+		<regex name="am.sqljobaction.newEmailAction" value="^(^()$|[\w]([\w\-\.\+\'\/]*)@([\w\-\.]*)(\.[a-zA-Z]{2,22}(\.[a-zA-Z]{2}){0,2}))$" />
+		<regex name="am.sqljobaction.returnpath" value="^(\/?)([a-zA-Z0-9\-\.\?\,\:\'\/\\\+=&amp;%\$#_@]*)?$" />
+		<regex name="am.sqljobaction.haid" value="^(null|[0-9]+)$" />
+		<regex name="am.sqljobaction.name" value="^(SQLJobAction)$" />
+		<regex name="am.sqljobaction.displayname" value="^([\\p{L}\\p{N}\\.\\-\\_\\ ])+$" />
+	</regexes>
+	<!-- For SQL Job Action end -->
+	<!-- For Downtime Scheudler start -->
+	<regexes>
+		<regex name="am.downtimescheduler.taskmethod" value="^(monthly|daily|weekly|custom)$" />
+		<regex name="am.downtimescheduler.taskDatacollectionType" value="^(suppressMonitoring|suppressAlarms)$" />
+		<regex name="am.downtimescheduler.timezone" value="^[a-zA-Z0-9\-\:\(\)\/\+\ \_]+$" />
+		<regex name="am.downtimescheduler.numbers" value="^[0-7]$" />
+		<regex name="am.downtimescheduler.numbersMonthly" value="^[1-5]$" />
+        <regex name="am.downtimescheduler.time" value="^[0-9\:\ \-\.]+$" />
+		<regex name="am.downtimescheduler.dateorweekwise" value="^(date|week)$" />
+		<regex name="am.downtimescheduler.datemonthlydatewise" value="^(0[1-9]|[12]\d|[3][0-1])$" />
+		<regex name="am.downtimescheduler.datemonthlydatewiseend" value="^-[1-7]$" />
+		<regex name="am.downtimescheduler.startsonmonthlyweekwise" value="^(-1|[1-4])$" />
+		<regex name="am.downtimescheduler.taskgroup" value="^(allmonitors|allgroups)$" />
+		<regex name="am.downtimescheduler.frequency" value="^(all|biannual|triannual|quarterly|custom|alternateeven|alternateodd)$" />
+		<regex name="am.downtimescheduler.tab" value="^(downtimeSchedulersDiv|downtimeSchedulerSettingsDiv|currentlyDownMonDiv|currentlyDownMGDiv)$"/>
+		<regex name="am.downtimescheduler.settings" value="^(downTimeSchedulerConf|unmanage|gmapkey|general|logging|jsonfeed|Actionalert|performance|Availablity)$" />
+		<regex name="am.downtimescheduler.subbutton" value="^(Save)$"/>
+		<regex name="am.downtimescheduler.restapi.offset" value="^GMT[\+\-]\d{1,2}\:\d{2}$"/>
+		<regex name="am.downtimescheduler.restapi.taskmethod" value="^(monthly|daily|weekly|once)$" />
+		<regex name="am.downtimescheduler.restapi.monthly.date" value="^([1-9]|[12]\d|[3][0-1])$" />
+		<regex name="am.downtimescheduler.restapi.tasktype" value="^(group|monitor)$"/>
+		<regex name="am.downtimescheduler.service" value="^(AppManager|OpManager)$"/>
+		<regex name="am.downtimescheduler.restapi.months" value="^(([1-9]|1[0-2])(,([1-9]|1[0-2]))*)$"/>
+		<regex name="am.downtimescheduler.param.month" value="^month\(([0-9]|1[0-1])\)$"/>
+		<regex name="am.downtimescheduler.param.startdatemonthlydatewise" value="^startDateMonthlyDateWise\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.starttimemonthlydatewise" value="^startTimeMonthlyDateWise\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.starttimemonthlydatewiserev" value="^startTimeMonthlyDateWiseRev\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.endtimemonthlydatewiserev" value="^endTimeMonthlyDateWiseRev\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.endtimemonthlydatewise" value="^endTimeMonthlyDateWise\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.endtimemonthlyweekwise" value="^endTimeMonthlyWeekWise\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.enddatemonthlydatewise" value="^endDateMonthlyDateWise\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.enddatemonthlydatewiserev" value="^endDateMonthlyDateWiseRev\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.startdatemonthlydatewiserev" value="^startDateMonthlyDateWiseRev\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.starttimemonthlyweekwise" value="^startTimeMonthlyWeekWise\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.last" value="^last\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.startsonmonthlyweekwise" value="^startsonMonthlyWeekWise\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.startdaymonthlyweekwise" value="^startDayMonthlyWeekWise\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.endaftermonthlyweekwise" value="^endAfterMonthlyWeekWise\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.endtime" value="^endTime\([0-6]\)$"/>
+		<regex name="am.downtimescheduler.param.starttime" value="^startTime\([0-6]\)$"/>
+		<regex name="am.downtimescheduler.param.endday" value="^endDay\([0-6]\)$"/>
+		<regex name="am.downtimescheduler.param.startday" value="^startDay\([0-6]\)$"/>
+		<regex name="am.downtimescheduler.restapi.param.startson"  value="^startsOn[1-5]$"/>
+		<regex name="am.downtimescheduler.restapi.param.startday" value="^startDay[1-7]$"/>
+		<regex name="am.downtimescheduler.restapi.param.starttime" value="^startTime[1-7]$"/>
+		<regex name="am.downtimescheduler.restapi.param.endafter" value="^endAfter[1-5]$"/>
+		<regex name="am.downtimescheduler.restapi.param.endtime" value="^endTime[1-7]$"/>
+		<regex name="am.downtimescheduler.restapi.param.last" value="^last[1-5]$"/>
+		<regex name="am.downtimescheduler.restapi.param.enddate" value="^endDate[1-5]$"/>
+		<regex name="am.downtimescheduler.restapi.param.startdate" value="^startDate[1-5]$"/>
+		<regex name="am.downtimescheduler.restapi.param.endday" value="^endDay[1-7]$"/>
+		<regex name="am.downtimescheduler.restapi.startsonmonthlyweekwise" value="^(?i)(first|second|third|fourth|last)$"/>
+		<regex name="am.downtimescheduler.restapi.day" value="^(?i)(sun|mon|tues|wednes|thurs|fri|satur)day$"/>
+		<regex name="am.downtimescheduler.restapi.taskid" value="^(\d+(,\d+)*)$"/>
+		<regex name="am.downtimescheduler.param.customTaskStartTime" value="^customTaskStartTime\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.param.customTaskEndTime" value="^customTaskEndTime\([0-4]\)$"/>
+		<regex name="am.downtimescheduler.restapi.param.customTaskStartTime" value="^customTaskStartTime[1-5]{0,1}$"/>
+		<regex name="am.downtimescheduler.restapi.param.customTaskEndTime" value="^customTaskEndTime[1-5]{0,1}$"/>
+	</regexes>
+	<!-- For Downtime Scheudler end -->
+	<!-- Regexes for DB Users Report starts -->
+	<regexes>
+		<regex name="am.schedule.report.typeofreport" value="^(indimonitor|monitorgroup|monitor)$"/>
+		<regex name="am.schedule.report.reportformat" value="^(pdf|excel|csv|html)$"/>
+	</regexes>
+	<!-- Regexes for DB Users Report ends -->
+	<regexes>
+		<regex value="^(StartInstances|StopInstances|RebootInstances)$" name="am.host.vmactions.confirmmsg"/>
+		<regex value="^(Start|Stop|Reboot)$" name="am.host.vmactions"/>	
+		<regex value="^[0-9]{8,10}(,[0-9]{8,10})*$" name="am.host.vmactions.resids"/>
+		<regex value="^(Windows|Linux)$" name="am.vm.guestos.type"/>
+	</regexes>
+	
+	
+	<!-- Regexes for Child Monitor Action Starts -->
+	<regexes>
+		<regex name="am.child.monitor.action.type" value="^(Start|Stop|Restart)$"/>
+		<regex name="am.child.monitor.type" value="^(Docker Container|VirtualMachine|OVMVirtualMachine|HyperVVirtualMachine|KVMVirtualMachine|XenServerVM|NutanixVirtualMachine|RHEVVirtualMachine|OracleCloudInstance|OracleCloudAutonomousDatabase|AzureVirtualMachine|ComputeEngine)$"/>
+	</regexes>
+	<!-- Regexes for Child Monitor Action Ends -->
+	<!-- Regexes for OpenShift Action Starts -->
+	<regexes>
+		<regex name="am.openShift.action.type" value="^(DeleteInstances|DescribeInstances)$" />
+		<regex name="am.openShift.action.resource.type" value="^(Deployment|Job|ReplicationController|ReplicaSet|Node)$" />
+	</regexes>
+	<!-- Regexes for OpenShift Action Ends -->
+	<!-- Regexes for generateAlert Rest API -->
+	<regexes>
+		<regex name="am.generateAlert.entity" value="^(([\p{L}\p{N}\-\.\_]+_[0-9]+)|null|[0-9]+)$"></regex>
+		<regex name="am.generateAlert.severity" value="^(1|4|5)$"></regex>
+		<regex name="am.alert.GroupName" value="^(AppManager|AppManager_Component|AppManager_Trap|AppManager_OPM_Trap)$"></regex>
+	</regexes>
+	<!-- Regexes for generateAlert Rest API ends -->
+	
+	<!--  RHEV Regexes By Balaji S -->
+	<regexes>
+		<regex  name="am.rhev.components.firstLevel" value="^(Datacenter|Cluster)$" />
+		<regex  name="am.ovm.components" value="^(ServerPool|Storage|Repository)$" />
+		<regex  name="am.rhev.components.secondLevel" value="^(Datacenter|Cluster|Host Details|Cluster Details)$" />
+		<regex  name="am.rhev.discoverVM" value="^(0|1|2)$" />
+		<regex  name="am.rhev.name" value="^(RHEV|rhev)$" />
+		<regex  name="am.vcenter.name" value="^vCenter$" />
+		<regex  name="am.horizon.name" value="^VMwareView$" />
+		<regex  name="am.ovm.name" value="^OVM$" />
+		<regex  name="am.rhev.addition.status" value="^(success|failed)$" />
+		<regex name="am.rhev.manager.businessView" value="^(flashview)$" />
+	</regexes>
+	<!-- KVM VM Action from KVM Host Page by Vijayalakshmi -->
+	<!--  <regexes>
+		<regex name="am.host.vmactions.confirmmsg" value="^(StartInstances|StopInstances|RebootInstances)$" />
+		<regex name="am.host.vmactions" value="^(Start|Stop|Reboot)$" />
+		<regex name="am.host.vmactions.resids" value="^[0-9]{8,10}(,[0-9]{8,10})*$"/>
+		<regex name="am.vm.guestos.type" value="^(Windows|Linux)$" />
+	  </regexes>
+	   -->
+	<!-- Adminaction Regex starts -->
+	<regexes>
+		<regex name = "am.globalconfig.mysqlTableData" value = "^(-1|0|60|1440)$" />
+		<regex name = "am.globalconfig.TableData" value = "^(every)$" />
+		<regex name = "am.globalconfig.amazonEC2PrimaryKey" value = "^(instanceId|nameTag)$" />
+		<regex name = "am.globalconfig.awsAutoscalingAlert" value = "^(created|deleted|both)$" />
+		<regex name = "am.globalconfig.typetoshow" value = "^(performance|gmapkey|Availablity|Actionalert|general|logging|performance|jsonfeed|Actionalert)$" />
+		<regex name = "am.globalconfig.dcComponentName" value = "^(SQLIO|SQLCPU|SQLMFE|SQLCLR|SQLMFB|SQLLPR|SQLCMI|SQLSRQ|SQLMEMU|SQLWAITSTATS|SQLBACKUP|SQLRESTORE|DB-DBCC CHECKDB|DB-DBCC INDEX|SHOWMIRRORINGDETAILS|SHOWSQLUSERS|SQLLOGSHIPPING|ALWAYSONAVAILABILITYGROUPS|SQLDCD|SQLSESSION|SQLSESSIONLCK||SQLDATABASE|SQLJOBS|SQLREPLICATIONS|DB-VLF|SQLJOBS-HISTORY|SQLREPLICATIONS-HISTORY)$" />
+		<regex name = "am.globalconfig.repeatHealthActions" value = "^(tillActionCleared|tillActionPicked)$" />
+		<regex name = "am.globalconfig.dateformat" value = "^(custom|default)$" />
+		<regex name = "am.globalconfig.transferEncoding" value = "^(base64|quoted-printable|7bit|8bit|binary)$" />
+		<regex name = "am.globalconfig.specifichosts" value = "^(ALL|null)$" />
+		<regex name = "am.globalconfig.consentModule" value = "^(METRACK)$" />
+		<regex name = "am.globalconfig.preferredSSHKex" value = "^(-1|diffie-hellman-group1-sha1|diffie-hellman-group14-sha1|diffie-hellman-group-exchange-sha1|diffie-hellman-group-exchange-sha256|ecdh-sha2-nistp256|ecdh-sha2-nistp384|ecdh-sha2-nistp521|curve25519-sha256@libssh.org|curve25519-sha256|rsa2048-sha256|rsa1024-sha1|diffie-hellman-group14-sha256|diffie-hellman-group15-sha512|diffie-hellman-group16-sha512|diffie-hellman-group17-sha512|diffie-hellman-group18-sha512)$" />
+		<regex name = "am.globalconfig.settings" value = "^(jsonfeed|enterprise|Actionalert|performance|downTimeSchedulerConf|Availablity|gmapkey|logging|unmanage)$" />
+		<regex name = "am.globalconfig.wmi.encoding" value = "^(?i)cp(\d+)$" />
+		<regex name = "am.globalconfig.wmi.encoding.extended" value = "^(?i)(cp(\d+)|ms(\d+)|GBK|BIG5)$" />
+		<regex name = "am.globalconfig.updateGlobalSettings.key" value = "^(freeuser|intropage|newfeatures|showgettingstarted)$" />
+		<regex name = "am.globalconfig.updateGlobalSettings.value" value = "^(false)$" />
+		<regex name = "am.globalconfig.updateGlobalSettings.redirect" value = "^(support)$" />
+		<regex name = "am.globalconfig.updateGlobalSettings.page" value = "^(login)$" />
+  </regexes>
+	<!-- Adminaction Regex end-->
+	<!-- RestAPI Action by BalajiBoopathi -->
+	<regexes>
+		<regex name = "am.http.method.types" value = "^(GET|POST|PUT|PATCH|DELETE)$" />
+		<regex name = "am.form.submission.types" value = "^(FORM|TEXT|XML|JSON)$" />
+		<regex name = "am.authentication.types" value = "^(Basic / NTLM|No Auth|OAuth)$" />
+		<regex name = "am.mail.types" value = "^(successMail|errorMail)$" />
+		<regex name = "am.action.fromadminlayout.service" value = "^(AppManager)$" />
+		<regex name = "am.restapiaction.responsetype" value = "^(1|2)$" />
+		<regex name = "am.url.ext" value = "^(https{0,1}:\/\/)(\W*\w*)+$" />
+	</regexes>
+	<!-- Regex for selectinig Oracle vm objects from Monitor group view-->
+	<regexes>
+		<regex name="am.ovm.mgview.selectedtype" value="^(ServerPool|Storage)$" />
+	</regexes>
+	<!-- SNMP Trap Actions -->
+	<regexes>
+		<regex name="am.snmp.trap.action.v3.security.level" value="^(noAuthNoPriv|authPriv|authNoPriv|NOAUTHNOPRIV|AUTHPRIV|AUTHNOPRIV)$"> </regex>
+		<regex name="am.snmp.trap.action.v3.privprotocol" value="^(DES|AES_128|AES_192|AES_256)$"></regex>
+	</regexes>
+	
+	<!-- APM Insight Regexes by Bhavishya -->
+	<regexes>
+		<regex name="apminsight_licenseKey" value="^APMI_[A-Fa-f0-9]{64}$" />
+		<regex name="apminsight_timewindow" value="^(hH|H|H3|H6|hD|D|SD)$"/>
+        <regex name="apminsight_threshold" value="^(?:\d+)*\d*(?:\.*\d{1,3})$"/>
+        <regex name="apminsight_selectdate" value="^[0-9]{2}\.[0-9]{2}\.[0-9]{4}"/>
+        <regex name="apminsight_search" value="([a-zA-Z0-9/_.-]*)"/>
+        <!--Date and time Format is 2009-1-27 05:00 or 2009-1-27 05:0 or 2009-11-27 5:00. Also handled if the value is null -->
+        <regex name="apminsight_datetime" value="^(([0-9]{0,15})|([a-zA-Z0-9]{0,5}|([0-9]{1,4}[- /][0-9][0-9]?[- /][0-9]{1,4})([ ][0-9][0-9]?[:][0-9][0-9])?))?$"/>
+        <regex name="apminsight_timeperiod" value="^(hH|H|H3|H6|hD|D|lD|W|M|SD\/[0-9]{2}\.[0-9]{2}\.[0-9]{4}|CR\/[0-9]{2}\.[0-9]{2}\.[0-9]{4}\/([01]?[0-9]|2[0-3])\.[0-5][0-9]\/[0-9]{2}\.[0-9]{2}\.[0-9]{4}\/([01]?[0-9]|2[0-3])\.[0-5][0-9])$"/>
+        <regex name="apminsight_traceMetric" value="^[a-zA-Z0-9\(\)\_\,\\\/\.\- ]+$" />
+        <regex name="apminsight_licenseKey_showHide" value="^(showKey|hideKey)$" />
+        <regex name="apminsight_traceId" value="^[0-9\_]+$" />
+        <regex name="apminsight_onlynumbers" value="^[0-9]{0,32}$"/>
+        <regex name="apminsight_onlystring" value="^[A-Za-z]{0,1024}$"/>
+        <regex name="apminsight_tracekey" value="^(\d+\_\d+\_\d+)$" />
+        <regex name="am.common.operations.name" value="^(update|delete|create)$"/>
+		<regex name="safestring" value="^[\p{L}\p{N}.\-\\_\s:;=&amp;+!@#$%\^\*()\[\]\{\}'&quot;,\/\?~`|]{0,1024}$"/>
+		<regex name="apminsight.duration" value="((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?)" />
+		<regex name="apmInsightSafeString" value="^[\p{L}\p{N}\p{M}\p{Z}\p{S}\p{P}\p{C}.\-\\_\s:;&amp;&lt;&gt;=+!@#$%\^\*()\[\]\{\}'&quot;,/\?~`|]{0,500024}$"/>
+		<regex name="apminsight.zeroandone.with.boolean" value="^(0|1|true|false)$" />
+		<regex name="am.apminsight.threadprofile.filename" value="^(dump[1-5]|pTree)$"/>
+    </regexes>
+	<!--  APM Insight Regexes end -->
+	
+	<!-- No Conf Monitors -->
+	<regexes>
+		<regex name="am.scriptmon.stringatt" value="^(stringatt)([0-9]+)$" />
+		<regex name="am.scriptmon.cdl" value="^(cdl)([0-9]+)$" />
+		<regex name="am.scriptmon.table" value="^(table)([0-9]+)$" />
+		<regex name="am.scriptmon.pcatt" value="^(pcatt)([0-9]+)$" />
+		<regex name="am.scriptmon.numericatt" value="^(numericatt)([0-9]+)$" />
+		<regex name="am.filemon.timeunit" value="^(Minutes|Hours)$" />
+		<regex name="am.filemon.serversite" value="^(local|remote)$" />
+		<regex name="am.filemon.mtype" value="^(file|directory|File System Monitor)$" />
+		<regex name="am.filemon.choosehost" value="^(,|(-)?[0-9])*$" />
+		<regex name="am.urlmon.method" value="^(P|G)$" />
+		<regex name="am.urlmon.sslVersion" value="^(Auto|SSLv3|TLSv1|TLSv1.1|TLSv1.2|TLSv1.3)$" />
+		<regex name="am.urlmon.httpvalue" value="^(LT|GT|EQ|NE|LE|GE)$" />
+		<regex name="am.urlmon.payLoadType" value="^(F|T|X|J)$" />
+		<regex name="am.urlmon.clientCertName" value="^(C:\\fakepath\\)([a-zA-Z0-9.\-_\(\) ]{0,255})$" /> 
+		<regex name="am.urlmon.credtype" value="^(manual|credManager|samlAuth)$" />
+		<regex name="am.urlmon.urltype" value="^(UrlMonitor|UrlEle)$"/>
+		<regex name="am.noconf.type" value="^(WEB:80|SAP:00|JMX1.2-MX4J-RMI:1099|ORACLEAS:7200|WLI:7001|PHP:80|Generic WMI|UrlMonitor|File System Monitor|Script Monitor|Custom-Application|Web Service|SAP-CCMS)$" />
+		<regex name="am.iis.appmanageros" value="^(Windows|NotWindows)$" />
+		<regex name="am.iis.oldTypeToCheck" value="^(IIS|WEB|SAP|JMX1.2-MX4J-RMI|PHP|ORACLEAS|WLI|All)$" /> <!--add the "All" value to the regex, to support all services discovery in add monitor page -->
+		<regex name="am.noconf.version" value="^(2|3|WLS_8_1)$" />
+		<regex name="am.custommon.choosehost" value="^(-1|APP|ERP|DBS|SYS|MS|URL|SER|CAM|MOM|VIR|CLD)$" />
+		<regex name="scriptManageTableRow" value="^(none|retain|delete|unmanage)$" />
+		<regex name="scriptHealthTableRow" value="^(?i)(none|clear|warning|critical)$" />
+		<regex name="am.dir.category" value="^(mod|create|size)$" />
+		<regex name="am.dir.condition" value="^(GT|LT)$" />
+		<regex name="am.dir.unit" value="^(Bytes|KB|MB|GB|Minutes|Hours)$" />
+		<regex name="am.dir.alertSeverity" value="^(1|4|5)$" />
+		<regex name="manageTableRow" value="^(((?i)None)|Retain Row|Delete Row|Unmanage Row and Reset Status|retain|delete|unmanage)$" />
+		<regex name="tableType" value="^(-1|SCRIPT)$"/>
+		<regex name="pageType" value="^(create|update)$"/>
+		<regex name="am.table.row.deletion" value="^(resrows)([0-9]+)$"></regex>
+		<regex name="am.scriptmon.update" value="^(null| |Script Monitor)$" />
+	</regexes>
+	<!-- No Conf Monitors -->
+			
+	<!--  Regex for Mobile wenbclient -->
+	<regexes>
+		<regex name="mobile.viewname" value="^(Server|Search|Alarms|DownDevices)$"/>
+		<regex name="mobile.monitorAction" value="^(UnmanageMonitor|ManageMonitor|Ping|PollNow)$"/>
+		<regex name="mobile.alarmAction" value="^(PickupAlarm|UnpickupAlarm|ClearAlarm)$"/>
+		<regex name="mobile.alertType" value="^(clear|critical_warning|critical)$"/>
+		<regex name="mobileActionList" value="^(NEXT|PREVIOUS)$"/>
+		<regex name="notification.values" value="^(H|A|1|4|5|:| )+$" />
+		<regex name="deviceType.value" value="^(android| )$" />
+		<regex name="mobile.targetClient" value="^(mobile|classic)$" />
+	</regexes>
+	
+	<!-- Screenshot regexes starts -->
+		<regexes>
+			<regex name="am.screengrabber.screenshotName" value="^(AM)((\_|\:|\-)?[0-9])+$" />
+		</regexes>
+	<!-- Screenshot regexes ends -->
+	
+	<!-- Custom Fields regexes starts (customfields)-->
+		<regexes>
+			<regex name="am.customfields.bulkassign.seperatemonitors.fieldvalue" value="^(fieldVal[_|0-9]+|all)$" />
+			<regex name="am.customfields.location.myfield.paramname" value="^(myfield[_|0-9]+|all)$" />
+			<regex name="am.customfields.bulkassign.entityfield.paramname" value="^(entityfield[_|0-9]+|all)$" />
+			<regex name="am.customfields.bulkassign.entitynewfield.paramname" value="^(entitynewfield[_|0-9]+|all)$" />
+			<regex name="am.customfields.bulkassign.resourceid" value="^(bulkassign|([0-9]+|null))$" />
+		</regexes>
+	<!-- Custom Fields regexes ends -->
+	
+	<!-- Business View regexes starts (businessview) -->
+		<regexes>
+			<regex name="am.businessview.saveBusinessViewPropsForADDM.coordinates" value="^\\[^&quot;]+[A-Za-z0-9\_\-]+\\[^&quot;]$" />
+			<regex name="am.businessview.saveState.nodesForSave.posititon.jsonkey" value="^(resourceID|parentID|posX|posY|resourceID_node|parentID_node|posX_node|posY_node)[0-9\_\-]+$" />
+			<regex name="am.businessview.saveBusinessViewPropsForADDM.nodeIdVsResourceId.jsonkey" value="^(node[_|0-9]+)$" />
+			<regex name="am.businessview.coordinates" value="^[0-9.-]*$" />
+		</regexes>
+	<!-- Business View regexes ends -->
+	
+	<!-- Slack Action by Balaji B-->
+	<regexes>
+		<regex name = "am.slackaction.sendto.types" value = "^(1|2)$" />
+		<regex name = "am.slackaction.sendto.types.text" value = "^(Channel|Member)$" />
+		<regex name = "am.slackaction.sendas.types" value = "^(1|2)$" />
+		<regex name = "am.slackaction.sendas.types.text" value = "^(ApplicationsManager|SlackUser)$" />
+		<regex name="am.slack.modifyslack" value="^(slack)$" />
+		<regex name="am.slack.channel.name" value="^[\p{L}\p{N}\-\_]{1,1024}$" />
+	</regexes>
+	
+	<!-- VM Action -->
+	<!-- <regexes>
+		<regex name="am.vmaction.actiontype" value="^(StartVM|StopVM|RestartVM)$"/>
+	</regexes> -->
+	
+	<!-- Adminaction.do,showresoure.do Regex starts-->
+	<regexes>
+		<regex name="am.bulkupdate.showmanage" value="^(null|true|false|critical|All|unauthenticated)$" />
+		<regex name="am.bulkupdate.updatepolling" value="^(updatePolling)$" />
+		<regex name="am.copypastemonitor.mode" value="^(All|Add only server|Service)$" />
+		<regex name="am.bulkupdate.bulkassign" value="^(customFieldValuesFilterby|false)$" />
+		<regex name="am.setdefaultmonview.methods" value="^(showResourceTypes|showGMapView|showMonitorGroupView|showResourceTypes|showResourceTypesAll|showDetailsView|showIconsView)$" />
+		<regex name="am.adminlayout.menutype" value="^(vertical)$" />
+		<regex name="am.adminlayout.configname" value="^[\p{L}\p{N}\/\&amp;\ ]+$" />
+		<regex name="am.search.searchoptionvalue" value="^(all|displayname|monitortype|ipaddress|customfields|)$" />
+		<regex name="am.admin.menuhandler.actions" value="^(verticalmenulist|horizontalmenulist|getAllowedConfigs)$" />
+	</regexes>
+	<!-- Adminaction.do,showresoure.do Regex end -->
+
+	<!--  OraclePDB regexes starts -->
+	<regexes>
+		<regex name="am.oracle.getpdblist.action" value="^(AddPDBInstance)$" />
+	</regexes>
+	<!--  OraclePDB regexes ends -->
+	<!--  Self Help WMI Tool Starts -->
+	<regexes>
+		<regex name="am.selfhelpwmi.result.status" value="^(Passed|Failed)$"/>
+	</regexes>
+	<!-- Self Help WMI Tool Ends -->
+
+	<!-- APM Insight Regexes by jana-9594 -->
+	<regexes>
+		<regex name="apminsight.log.level.types" value="^(DEBUG|INFO|WARNING|CRITICAL|ERROR|OFF)" />
+		<regex name="apminsight.transaction.skip" value="^[a-z0-9*. ,]*$" />
+		<regex name="apminsight.exception.ignore" value="^[a-zA-Z0-9. ,*+]*$" />
+		<regex name="apminsight.transaction.skip.patterns" value="^[a-zA-Z0-9.,*/_:-]*$" />
+		<regex name="apminsight.threshold" value="^[0-9]+(\.[0-9]{1,3})?$" />
+		<regex name="apminsight.transaction.ignore" value="^[\w .,]*$" />
+		<regex name="apminsight.http.error.ignore" value="^[0-9,]*$" />
+		<regex name="apminsight.agent.type" value="^(JAVA|DOTNET|DOTNET_SERVICE|DOTNET_DESKTOP|DOTNET_CORE|RUBY|PHP|PHP_WINDOWS|NODEJS|PYTHON)" />
+		<regex name="apminsight.onlyon.or.boolean" value="^(on|true|false)$" />
+		<regex name="apminsight.delete.trace.url" value="^(\/(app|ins)\/(\d+)\/tr\/(\d+\_\d+\_\d+))$" />
+	</regexes>
+	<!--  APM Insight Regexes end -->
+		
+	<!-- Regex for SQL Driver Type starts -->
+	<regexes>
+		<regex name="am.mssqlmonitor.driverType.value" value="^(jtdsjdbcdriver|microsoftjdbcdriver)$" />
+	</regexes>
+	<!-- Regex for SQL Driver Type ends -->
+	
+	<!-- Mail Server Configuration regexes by Balaji Boopathi -->
+	<regexes>
+		<regex name="am.mailserver.service.types" value="^(AppManager)$" />
+		<regex name="am.mailserver.button.types" value="^(0|1)$" />
+		<regex name="am.mailserver.protocol.types" value="^(SMTP|EWS)$" />
+		<regex name="am.mailserver.authtype.types" value="^(Basic|OAuth)$" />
+		<regex name="am.mailserver.serverauth.types" value="^(?i)(on|off)$" />
+	</regexes>
+	<!--  Mail Server Configuration regexes end -->
+	
+	<!-- WAF Security regexes for Actions by Balaji Boopathi -->
+	<regexes>
+		<regex name="am.emailaction.create.server" value="^(admin)$" />
+		<regex name="am.sms.type" value="^(mail|gateway|sms)$" />
+		<regex name="am.vmaction.jtaskmethod" value="^(StartVM|StopVM|RestartVM)$" />
+		<regex name="am.ticket.action.type" value="^(restapi|credential|OAuth)$" />
+		<regex name="am.vm.action.submit.txt" value="^(Test)$" />
+		<regex name="am.edit.businesshours.operation" value="^(showBusinessHourDetails|ajaxOperation)$" />
+		<regex name="am.businesshours.workingdays" value="^((Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)(,)?){1,7}$" />
+		<regex name="am.smsaction.tonumber" value="^([0-9]|,|\(|\)|\[|\]|:|-|\+| )+$"/>
+	</regexes>
+	<!--  WAF Security regexes for Actions end -->
+	
+	
+	<!-- SAP Business One -->
+	<regexes>
+		<regex name="am.sapbusinessone.sldadapters" value="^([A-Z0-9]|,|\.)*$"/>	
+	</regexes>
+		
+	<!-- vCenter regexes -->
+	<regexes>
+		<regex name="am.vcenter.sslVersion" value="^(SSL|TLSv1|TLSv1.1|TLSv1.2|SSLv3|Auto|TLSv1.3)$" />
+	</regexes>
+	
+	<!-- WEB Service regex -->
+	<regexes>
+		<regex name="am.webservice.operation.type" value="^(?i)(one|two)$"/>
+		<regex name="am.webservice.operation.value" value="^(refreshoperation|two)$"/>
+		<regex name="am.webservice.operation.requestOrResponse" value="^(request|response)$"/>
+		<regex name="am.webservice.operation.numberAndHyphen" value="^([0-9]|-)+$"/>
+		<regex name="am.webservice.operation.frompage" value="^(add|addmonitor)$"/>
+	</regexes>
+	<!-- WEB Service regex ends -->
+	
+	<!-- Integrations -->
+	<regexes>
+		<regex name="am_prometheus_http_protocol_types" value="^(http|https)$"/>
+		<regex name="am_prometheus_dc_types" value="^(API|SSH)$"/>
+		<regex name="am_prometheus_discovery_types" value="^(DISCOVER_AND_MANAGE|DISCOVER_AND_UNMANAGE|PAUSE_DISCOVERY|SELECT_MONITORS)$"/>
+		<regex name="am_prometheus_monitordown_actions" value="^(DELETE_MONITOR|UNMANAGE_MONITOR|DOWN_MONITOR)$"/>
+		<regex name="am_prometheus_discovered_status" value="^(CHOSEN_FOR_MONITORING|ADDED|UNSELECTED_FROM_MONITORING)$"/>
+	</regexes>
+	
+	<!-- anomaly dashboard regex starts -->
+	<regexes>
+		<regex name="am.anomaly.dash.critical.option" value="^(?i)(all|critical)$"/>
+		<regex name="am.anomaly.dash.restype" value="^([A-Za-z0-9\:\.\/\(\)\-\_\@ ]+|null|--select--)$" />
+		<regex name="am.anomaly.dash.long.select" value="^([0-9]+|--select--)$" />
+		<regex name="am.anomaly.dash.date" value="^([\p{L}\p{N}\ \(\)\+\-\:]+|null)$"/>
+		<regex name="am.anomaly.dash.toshow" value="^(tweleve|seven)$"/>
+	</regexes>
+	<!-- anomaly dashboard regex ends -->
+	
+	<!-- threshold configuration regex start -->
+	<regexes>
+		<regex name="am.configure.alarm.tabname" value="^(?i)(threshold|anomaly|adaptive)$"/>
+		<regex name="am.configure.alarm.reset" value="^(?i)(\d{1,14}|Reset)$"/>
+		<regex name="am.configure.alarm.deleteTempConfig" value="^(?i)(false|deleteTemplate|deleteMonConfig)$"/>
+		<regex name="am.configure.alarm.monitorList" value="^([0-9]|\[|\]|,|&amp;quot;|&quot;)+$"/>		
+		<regex name="am.configure.alarm.overrideThresholdConfig" value="^(?i)(overrideThresholdConfig|false|true)+$"/>
+		<regex name="am.configure.alarm.thresholdList" value="^([0-9]|,|Reset|Newfalse|Newtrue|nothingSelected)+$"/>
+	</regexes>
+	<!-- threshold configuration regex ends -->
+	
+	<!-- MG threshold configuration regex start -->
+	<regexes>
+		<regex name="am.configure.alarm.mg.rule.mocount" value="^(moCount|(moCount)[0-9]+(_)(1|4))$"/>
+		<regex name="am.configure.alarm.mg.rule.selectMonType" value="^(selectMonType|(selectMonType)[0-9]+(_)(1|4))$"/>
+		<regex name="am.configure.alarm.mg.rule.conditionAttribute" value="^(conditionAttribute|(conditionAttribute)[0-9]+(_)(1|4))$"/>
+		<regex name="am.configure.alarm.mg.rule.conditionSeverity" value="^(conditionSeverity|(conditionSeverity)[0-9]+(_)(1|4))$"/>
+		<regex name="am.configure.alarm.mg.rule.selectedMonitorType" value="^(selectedMonitorType|(selectedMonitorType)[0-9]+(_)(1|4))$"/>
+		<regex name="am.configure.alarm.mg.rule.selectedMonitorCount" value="^(selectedMonitorCount|(selectedMonitorCount)[0-9]+(_)(1|4))$"/>
+		<regex name="am.configure.alarm.mg.rule.selectedMonitors" value="^(selectedMonitors|(selectedMonitors)[0-9]+(_)(1|4))$"/>
+		<regex name="am.configure.alarm.mg.rule.count" value="^(count|(count)[0-9]+(_)(1|4))$"/>
+		<regex name="am.configure.alarm.mg.rowid" value="^([0-9]|_)+$"/>
+		<regex name="am.configure.alarm.mg.attributeSelected" value="^(attributeSelected)(1|2)$" />
+	</regexes>
+	<!-- MG threshold configuration regex ends -->
+	
+	<!-- Actions regex -->
+	<regexes>
+		<regex name="am.sms.modem.methodname" value="^(SMSServerConfiguration)$"/>
+		<regex name="am.sms.modem.ok" value="^(OK)$"/>
+		<regex name="am.downtime.report.createactionfrom" value="^(DowntimeSummary)$"/>
+		<regex name="am.sms.gateway.provider" value="^(CLICKATELL|SINCH|SMSEAGLE|TWILIO|custom)$"/>
+		<regex name="am.sms.gateway.accType" value="^(platform|communicator)$"/>
+		<regex name="am.sms.gateway.payload" value="^(F|T|X|J)$"/>
+		<regex name="am.sms.gateway.authtype" value="^(NA|basic|oAuth)$"/>
+		<regex name="am.sms.gateway.twilio.number" value="^\+[1-9]\d{1,14}$"/>
+		<regex name="am.sms.gateway.sinch.type" value="^(geographicalapi|generalapi)$"/>
+		<regex name="am.sms.gateway.sinch.region" value="^(us|eu|au|br|ca)$"/>
+		<regex name="am.number.withcomma.separated" value="^(\+|[0-9]\d{0,14}|,| )*$"/>
+		<regex name="am.sms.gateway.button.value" value="^(Test Connectivity|Save|Update|Delete)$"/>
+		<regex name="am.sms.gateway.button2.value" value="^(Cancel)$"/>
+		<regex name="am.sms.gateway.encodevalue" value="^(on|off|true|false)$"/>
+	</regexes>
+	<!-- Actions regex ends -->
+	
+	<!-- DB servers regex starts-->
+	<regexes>
+		<regex name="am.db.monitor.or.monitortype" value="^(MonitorType|Monitor)$"/>
+	</regexes>
+	<!-- DB servers regex ends-->
+	
+	<!-- Cloud module regex - WAF starts -->
+	<regexes>
+		<regex name="am.update.amazon.load" value="^(load|null)$"/>
+		<regex name="am.update.azure.testmail" value="^(TestMail|null)$"/>
+		<regex name="am.monitor.type.azure.vm" value="^(AzureVirtualMachine)$"/>
+		<regex name="am.openstack.actions.name" value="^(os-start|os-stop|reboot)$"/>
+		<regex name="am.dotnet.details" value="^(Availability|DB)$"/>
+		<regex name="am.appName.dotnet" value="^([\p{L}\p{N}\.\-\_\ ]+|null)$"/>
+		<regex name="am.amazon.ec2.os.names" value="^(?i)(AIX|AS400\/iSeries|Centos|Linux|Mac OS|Novell|Red Hat|Sun Solaris|Ubuntu|Unknown|windows|-)$"/>
+		<regex name="am.azure.addServices" value="^(AddServices)$"/>
+		<regex name="am.crm.datatable.param.data" value="^columns\[[0-7]\]\[data\]$"/>
+		<regex name="am.crm.datatable.param.name" value="^columns\[[0-7]\]\[(name|searchable|orderable)\]$"/>
+		<regex name="am.crm.datatable.param.search" value="^columns\[[0-7]\]\[search\]\[(value|regex)\]$"/>
+		<regex name="am.cloud.inventory.method.value" value="^(getUsageStatistics|fetchGCPInventoryData|fetchOCIInventoryData)$"/>
+		<regex name="am.metrack.datetime.format" value="^((([0-9])|([0-2][0-9])|([3][0-1]))\-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\-\d{4}\s([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9])$"/>
+		<regex name="am.oci.compartment.name" value="^[A-Za-z0-9.\-_]{1,100}$" />
+	</regexes>
+	<!-- Cloud module regex - WAF ends -->
+	
+	<!-- ADDM regex -->
+	<regexes>
+		<regex name="am.discovery.fromAddress" value="^fromAddress[0-9]+$"/>
+		<regex name="am.discovery.toAddress" value="^toAddress[0-9]+$"/>
+		<regex name="am.discovery.orderBy" value="^(ASC|DESC)$"/>
+		<regex name="am.discovery.stringAll" value="^(?i)(all)$"/>
+		<regex name="am.discovery.scheduleType" value="^(daily|weekly|monthly|disabled)$"/>
+		<regex name="am.discovery.discoveryType" value="^(range|cidr|virtual)$"/>
+		<regex name="am.discovery.discoveryCateg" value="^(discovery|edit)$"/>
+		<regex name="am.discovery.service" value="^(AppManager)$"/>
+		<regex name="am.discovery.digitsPipeSeperated" value="^(\d+(\|\d+)*\|{0,1})$"/>
+		<regex name="am.discovery.portDetails" value="^((SNMP|SSH|TELNET|Apache-server|Cassandra|DB2-server|Docker|GlassFish|JBOSS-server|JDK1.5|MSSQL-DB-server|MYSQL-DB-server|Memcached|MongoDB|Nginx|ORACLE-DB-server|PostgreSQL|RabbitMQ|Redis|Resin|SYBASE-DB-server|Tomcat-server|VMware vFabric tc Server|WEBLOGIC-server|WebSphere-server|IIS-server|Exchange-server|ActiveDirectory)\#1\:(\d|#|,)+)$"/>
+	    <regex name="am.discovery.digits.commaseperated.orAll" value="^(?i)(\d+(,\d+)*,{0,1}|All)$"/>
+	    <regex name="am.request.method.post" value="^(?i)(post)$"/>
+	    <regex name="am.avoidfilter.name.regex" value="^(avoidFilter(true|false))$"/>
+	    <regex name="am.discovery.longandhyphen" value="^([0-9]+|-)$"/>
+	    <regex name="am.windows.username.empty" value="^[\p{L}\p{N}\`\~\!\@\#\$\%\^\&amp;\*\(\)\-\_\=\+\ \{\[\}\]\|\\\:\;\&quot;\'\&lt;\,\>\.\?\/]{0,1024}$" />
+	</regexes>	
+	
+	<regexes>
+		<regex name="am.template.numberCommaNull" value="^([0-9]|,|null|-)+$"/>
+		<regex name="am.processTemplate.monitorchooser" value="^(monitorlist|monitorgroup|monitortype)$" />
+		<regex name="am.processTemplate.pcmd" value="^pcmd(edit)?(_\d+)?$" />
+		<regex name="am.processTemplate.pcmdregex" value="^pcmdregex(edit)?(_\d+)?$" />
+		<regex name="am.processTemplate.pname" value="^pname(edit)?(_\d+)?$" />
+		<regex name="am.processTemplate.pnameregex" value="^pnameregex(edit)?(_\d+)$" />
+		<regex name="am.processTemplate.pdispname" value="^pdispname(edit)?(_\d+)?$" />
+		<regex name="am.processTemplate.selected" value="^\d+_selected$" />
+		<regex name="am.processTemplate.threshold" value="^threshold_\d+$" />
+		<regex name="am.processTemplate.thresholdname" value="^thresholdname_\d+$" />
+		<regex name="am.processTemplate.criticalaction" value="^criticalaction_\d+$" />
+		<regex name="am.processTemplate.clearaction" value="^clearaction_\d+$" />
+		<regex name="am.processTemplate.warningaction" value="^warningaction_\d+$" />
+		<regex name="am.processTemplate.templatetypestr" value="^(?i)(Process|Service|services)$" />
+		<regex name="am.deleteAnnotation.entity" value="^[\d\_\,]+$" />
+		<regex name="am.alarmsdetails.tab" value="^(tabOne|tabTwo|tabThree)$" />
+		<regex name="am.alarmsdetails.technician" value="^(pickUpAlarm|unPickAlarm)$" />
+		<regex name="am.alarmsaction.restapi" value="^(PickupAlarm|ClearAlarm|AddAnnotation|ListAnnotations|UnpickupAlarm)$" />
+		<regex name="am.alarms.viewID.alert" value="^[a-zA-z0-9\.\-]+?$" />
+		<regex name="am.processTemplate.thresholdValue" value="^([0-9]+|Newfalse|-1)" />
+		<regex name="am.alarm.alertmessage" value="^[\p{L}\p{N}\%\+\.\ \(\)\-\u3002]+$"/>
+		<regex name="am.WindowsCluster.Column" value="^columns(\[[0-8]])?(\[data]|\[searchable]|\[orderable]|\[search]\[regex])$" />
+		<regex name="am.WindowsCluster.Column.name" value="^columns\[[0-8]]\[name]$" />
+		<regex name="am.WindowsCluster.Column.SearchValue" value="^columns\[[0-8]]\[search]\[value]$" />
+		<regex name="am.WindowsCluster.order" value="^order(\[[0-8]])?(\[column]|\[dir])$" />
+		<regex name="am.alarmsdetails.history" value="^(availability|health)History$" />
+		<regex name="am.HyperVCluster.selectedresource" value="^(ClusterDetails|ClusterNodes|ClusterSharedVolume|ClusterNetwork|ClusterVM)$" />
+		<regex name="am.showAction.ticket.status" value="^(Success|Failed)$" />
+		<regex name="am.alarmTemplate.deleteExisting" value="^(deleteexistingthresholds|deleteexistingactions|deleteexistinganomaly)$" />
+		<regex name="am.HyperVMs.filter.action" value="^(run|stop|restart|pause|save|Start|Stop)(VM)?$" />
+		<regex name="am.newaction.type" value="^(EMailAction|SMSAction|ExecProgramAction|SendTrapAction|MBeanOperationAction|LogTicketAction|jreAction|cloudAction|VMAction|WinServiceAction|ContainerAction|RestAPIAction)$" />
+		<regex name="am.servermonitor.os.undefined" value="^(?i)(1|2|3|4|5|Windows 2000|Windows 2003|Windows XP|Windows NT|WindowsNT|Windows 2016|Windows Vista|Windows 7|Windows 2008|Windows 8|Windows 2012|Windows 10|Windows 2019|Windows 11|Windows 2022|AIX|FreeBSD|HP-UX|Linux|Mac OS|Novell|SUN|AS400/iSeries|SNMP|ToSelectValue|undefined|null|Node|All-Monitors|HP-TRU64|Windows|FreeBSD \/ OpenBSD|HP-UX \/ Tru64)$" />
+		<regex name="am.servermonitor.mode.undefined" value="^(?i)(BASE|ND|telnet|ssh|snmp|wmi|undefined|NoMode|null)$" />
+		<regex name="am.servermonitor.TelnetCredentialDetails.undefined" value="^(?i)(nocmTelnet|cmTelnet|undefined)$" />
+		<regex name="am.credentialmanager.operationdonefrom" value="^(AdminServer|RESTAPI|null)$"/>
+		<regex name="-1andnumeric.undefined" value="^(-1|^[0-9]+$|undefined)$" />
+		<regex name="am.servermonitor.SSHCredentialDetails.undefined" value="^(?i)(nocmSSH|cmSSH|undefined)$" />
+		<regex name="am.servermonitor.SNMPCredentialDetails.undefined" value="^(?i)(nocmSNMP|cmSNMP|undefined)$" />
+		<regex name="am.servermonitor.snmpAuthProtocol.undefined" value="^(?i)(MD5|SHA|undefined)$" />	
+		<regex name="am.servermonitor.snmpSecurityLevel.undefined" value="^(?i)(ToSelectValue|NOAUTHNOPRIV|AUTHNOPRIV|AUTHPRIV|undefined)$" />
+		<regex name="am.port.undefined" value="^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]|undefined|null)$" />
+		<regex name="am.snmp.version.undefined" value="^(v1v2|v3|undefined)$" />
+		<regex name="am.version.undefined" value="^(JBOSS_HTTP401|lync|sfb2015|2008|selectversion|2010|2007|2003|2011|2013|Dynamics365|2012R2|2013R3|7.6|6.5|2008|2008 R2|2012|2012 R2|2016|Unknown|WLS_6_1|WLS_7_0|WLS_8_1|WLS_9_0|WLS_10_0|WLS_12_0|SSL|TLSv1|TLSv1.1|TLSv1.2|1.x|2.x|JBOSS_HTTP|JBOSS_HTTP40|JBOSS_HTTP402|JBOSS_HTTP60|JBOSS_HTTP7|JBOSS_HTTP8|r11|r12.0|r12.1.3|r12.2.0|r12.2.5|0|3|4|5|6|7|5.0|8|9|2019|undefined)$" />
+		<regex name="am.snmp.version.undefined" value="^(v1v2|v3|undefined)$" />
+		<regex name="am.host.actionOnServicestrue" value="^(Delete|Restart|Start|Stop|EditSave|Edit|true)$"/>
+		<regex name="am.boolean.NA" value="^(true|false|NA)$" />
+		<regex name="am.hostResource.scheduledTask.option" value="^(clearresultalert|deletetasks)$" />
+		<regex name="am.host.type.remove" value="^(?i)(Disk|NetInterface|NetAdapter)$"/>
+		<regex name="am.eventlog.eventtype" value="^[0-3]{1}(,[0-3]{1})*$"/>
+	</regexes>
+	
+	<!-- Event logs regex -->
+	<regexes>
+		<regex name="am.alarms.eventlogs.category.paramNames" value="^(logCategory|logCategoryName)$"/>
+		<regex name="am.alarms.eventlogs.category.values" value="^(EventLogs)$"/>
+		<regex name="am.alarms.eventlogs.monitorcategory.values" value="^(allmonitor|monitortype|monitorlist|monitorgroup)$" />
+		<regex name="am.alarms.eventlogs.monitorcategory.selectmonitors.commaseperated.resids" value="^[0-9]{5,10}(,[0-9]{5,10})*$"/>
+		<regex name="am.alarms.eventlogs.startendtime.format.24hrs.hhmm" value="^([01]?[0-9]|2[0-3]):[0-5][0-9]$"/>
+		<regex name="am.alarms.eventlogs.saveTypes" value="^(new|edit|enable|disable)$"/>
+		<regex name="am.alarms.eventlogs.status" value="^(?i)(enable|disable|\d)$" />
+		<regex name="am.alarms.eventlogs.action" value="^(?i)(changestatus|add|remove)$"/>
+		<regex name="am.eventlogs.methods" value="^(addNewEvent|editEventLog)$"/>
+		<regex name="am.eventlogs.displayname" value="^([\p{L}\p{N}:@#\s\/\\\[\].!_-]{1,1024})$"/>
+	</regexes>
+	<!-- Event logs ends -->
+	
+	<!-- Istio monitor regexes -->
+	<regexes>
+		<regex name="am.istio.workloads.commaseparated.with.dot.hyphen" value="^[\p{L}\p{N}\-\.\,]*$"/>
+	</regexes>
+	<!-- Istio monitor regex ends -->
+	
+	<!-- WMI Performance counter regexes -->
+	<regexes>
+		<regex name="am.wmi.class.name" value="^([0-9a-zA-Z_]+)$"/>
+		<regex name="am.wmi.performance.counters.attributes.condition.format" value="^(Singleton Class|Name=[\S]*)$"/>
+		<regex name="am.wmi.performance.counters.attributes.id.format" value="^([0-9]+\|[0-9]+)$"/>
+		<regex name="am.wmi.performance.counters.attributes.name.format" value="^([0-9a-zA-Z_]+\|[0-9a-zA-Z_]+)$"/>
+		<regex name="am.wmi.performance.counters.report.status" value="^(enabled|disabled|null)$"/>
+	</regexes>
+	<!-- WMI Performance counter regex ends -->
+	
+	<!-- EUM Regex -->
+	<regexes>
+		<regex name="am.eum.monitorTypes" value="^(None|DNSMonitor|LDAP Server|MAIL-server|Ping Monitor|RBM|Telnet \(EUM\)|zxy)$" />
+		<regex name="am.eum.severitylevel" value="^([0-9]{1,2}|null)$"/>
+	</regexes>
+	
+	<!-- PHP,WEB Server regex -->
+	<regexes>
+		<regex name="am.config.resourcename" value="^(PHP Monitor|Web server)$" />
+		<regex name="am.config.resourcetype" value="^(PHP|WEB-server)$" />
+	</regexes>
+	
+	<regexes>
+		<regex name="am.trapactioncombo.param" value="^trapActionsCombo(\d+|)$" />
+		<regex name="am.trapstatus.value" value="^(enable|disable)$"  />
+		<regex name="am.state.value" value="^(enable|disable|delete)$"/>
+		<regex name="am.monitor.viewtype.value" value="^(?i)(categoryview)$" />
+		<regex name="am.monitor.showres.fromwhere.value" value="^(parentview|unabletocreate|deleteMO|managemonitors|unmanagemonitors|unmanageandresetmonitors|bulkupdate|pollingMessage|operator|monitorgroupview)$" />
+		<regex name="am.isconfigured.value" value="^[\p{L}\p{N}\(\)\.\s\%\+\_\-\,\:]+$"  />
+	</regexes>
+	
+	
+		<!-- Monitor Group regex -->
+	<regexes>
+		<regex name="am.multiple.haid.ids" value="^[0-9|A-Za-z_$]+$"/>
+		<regex name="am.alphanumeric-space" value="^[A-Za-z0-9\,\_\-\(\)\/\. ]+$" />
+		<regex name="am.haid.db.remove" value="^(toremove-(Process|Service|MSSQL-DB-server--DataBase|MYSQL-DB-server--DataBase|DB2-server--DB2-DataBase|SYBASE-DB-server--SYBASE-DataBase|Informix--Informix_DataBases_ROW|PostgreSQL--PostgreSQL_DatabaseDetails_ROW|WebsphereMQ--WebsphereMQ_QueueMonitoring_ROW))+$"/>
+		<regex name="am.haid.db.type.length" value="^(MGList-(Process|Service|MSSQL-DB-server--DataBase|MYSQL-DB-server--DataBase|DB2-server--DB2-DataBase|SYBASE-DB-server--SYBASE-DataBase|Informix--Informix_DataBases_ROW|PostgreSQL--PostgreSQL_DatabaseDetails_ROW|WebsphereMQ--WebsphereMQ_QueueMonitoring_ROW)_length)$+"/>
+		<regex name="am.haid.db.child" value="^(selectedChild-(Process|Service|MSSQL-DB-server--DataBase|MYSQL-DB-server--DataBase|DB2-server--DB2-DataBase|SYBASE-DB-server--SYBASE-DataBase|Informix--Informix_DataBases_ROW|PostgreSQL--PostgreSQL_DatabaseDetails_ROW|WebsphereMQ--WebsphereMQ_QueueMonitoring_ROW))$+"/>
+		<regex name="am.mg.treeview" value="^(toplevel|bottomlevel|all)$"/>
+		<regex name="am.mg.subgroup.name" value="^(ApplicationServerGroup|WebServerGroup|DatabaseGroup|ServersGroup|EdgeDevicesGroup|NetworkDevicesGroup|EndUserTransactionGroup)$+"/>
+		<regex name="am.mg.subgroup.enable" value="^(enable)$"/>
+		<regex name="am.mg.add.name" value="^(monitorgroup|webappgroup)$" />
+		<regex name="am.sub.mg.add.name" value="^(sub-group|WebServerGroup|DatabaseGroup|DatabaseCluster|ServersGroup|EdgeDevicesGroup|NetworkDevicesGroup|EndUserTransactionGroup|Site24x7)$+" />
+	</regexes>
+	<!-- MonitorGrpRule Regex -->
+    <regexes>
+		<regex name="am.credentialManager.operation" value="^(add)$"/>
+		<regex name="am.monitorGrpRule.OverallCondition" value="^(\|\||&amp;&amp;)$"/>
+		<regex name="am.monitorGrpRule.NameField" value="^(Name|Type)$"/>
+	</regexes>
+	<!-- SAP Regex -->
+	<regexes>
+		<regex name="am.sap.alerts" value="^[A-Za-z0-9\,\_\-\+\(\)\.\{\}\/ ]+$"/>
+	</regexes>
+	
+	<!-- Conf Framework regex -->
+	<regexes>
+		<regex name="am.redirectto.value" value="^(thresholdNumeric|thresholdFloat|thresholdPattern)$" />
+		<regex name="am.perfpoll.scriptmon.excepetion.msg.value" value="^(Login Exception|Invalid Passphrase|ConnectException|Unable to get Session|Timed out|Max connections \(per Device\) Reached|System Wide Max Connections Reached|Exit code|Expected output Error)$" />
+		<regex name="am.file.units.value" value="^(Bytes|MB|KB|GB)$" />
+		<regex name="am.configuretype.value" value="^(MonitorType|Monitor)" />
+		<regex name="am.perf.file.rca.value" value="^(appendLastLine|defaultOption|allMatchedContent)$" />	
+		<regex name="am.haid.char_or_num" value="([0-9]|\-)+" />
+		<regex name="am.urlstartswith.slash.splchars" value="^(\/?)([a-zA-Z0-9\-\.\?\,\:\'\/\\\+=&amp;%\$#_@;()]*)?$" />
+		<regex name="am.dccomp.type.pollstatus.update" value="^(custom|-1|[0-9]+)$" />
+		<regex name="am.residswith.dollar.value" value="^[0-9]+((\$|\||\ )+[0-9]+|(\$|\||\ ))*$|^(orphaned)$" />
+		<regex name="am.monitorname.spl_chars" value="^[\p{L}\p{N}\.\-\_\+\ ]+$" />
+		<regex name="am.checkbox.values" value="(?i)(true|false)|(-)|(null)" />
+		<regex name="am.viewtype.value" value="^(showPlasmaView|showResourceTypes|null)$" />
+		<regex name="am.fromwhere.value" value="^(infrastructure)$" />
+		<regex name="am.monitor.operation.value" value="^(Manage|Delete|Unmanage|Enable Actions|Disable Actions|unManageAndReset|null)$" />
+		<regex name="am.monitor.showmanage.value" value="^(All|false|true|critical|null|unauthenticated)$" />
+		<regex name="am.monitor.category.type.value" value="^(-1|APP|ERP|DBS|SYS|MS|URL|SER|CAM|MOM|VIR|CLD|NWD|SAN|EMO|All|null)$" />
+		<regex name="am.monitorgrp.alteraction.value" value="^(enable|disable|null)$" />
+		<regex name="am.monitorgrp.mode.value" value="^(deleteMGwithMO|deleteMG|null)$" />
+		<regex name="am.monitorgrp.todelete.value" value="^(onlymonitors|monitorgrouponly|null)$" />
+		<regex name="am.selectedFieldvalue.value" value="^((VALUEID|USERNAME))(\$\d+|)$" />
+		<regex name="am.monitorgrp.grpfilterby.value" value="^(SYSTEMDATA|USERDATA|LOCATION_TIME|USERNAME|VALUEID|null)$" />
+		<regex name="am.tablename.value" value="^[\p{L}_\p{N}][\p{L}\p{N}@$#_| ]{1,128}$" />
+		<regex name="am.conf.tablename.value" value="^[\p{L}_][\p{L}\p{N}_\-\/\s]{1,128}$" />
+		<regex name="am.addmon.rowname.value" value="^(dbtype|version|ServerRole2019|ServerRole2016|ServerRole2013|ServerRole2010|ServerRole2007|ModeOfMonitoring|NameNodeWebAuthType|Version|JobTrackerWebAuthType|Database|ExistingDatabaseDetail|os|null)$" />
+		<regex name="am.granularity.value" value="^(PolledData|(\d)+|null)$" />
+		<regex name="am.customdate.value" value="(^(([0-9]{0,15})|([a-zA-Z0-9]{0,5}|([0-9]{1,4}[- /][0-9][0-9]?[- /][0-9]{1,4})([ ][0-9][0-9]?[:][0-9][0-9])?))?$|null)" />
+		<regex name="am.monthunit.value" value="(^[0-9]+(\,[0-9]+)$|null)" />
+		<regex name="am.selectedoption.value" value="^[A-Za-z0-9\.\(\)\_ ]+$" />
+		<regex name="am.moname.value" value="^[\p{L}\p{N}\-\.\_\s\:\[\]]{1,1024}$" />
+		<regex name="am.dcc.showmsg" value="^(true|false|error)$"></regex>
+		<regex name="am.dcc.filterby" value="^(ALL|0|-1|custom|(\d{0,5}))$"></regex>
+		<regex name="am.listview.sort" value="^(type)$"></regex>
+		<regex name="am.dccomponent.value" value="^[A-Za-z0-9\-\s]+$" description="PerfPolling -> MSSQL -> Optimize DCC" />
+	</regexes>
+		
+			<!-- Param-name regexes -->
+	<regexes>
+		<regex name="am.resourcetype.ignorecase" value="^(?i)resourcetype$" />
+		<regex name="am.password.ignorecase" value="^(?i)password$" />
+		<regex name="am.port.ignorecase" value="^(?i)port$" />
+		<regex name="am.resids_as_paramname" value="^[0-9]+$" />
+		<regex name="am.username.ignorecase" value="(?i)username$" />
+		<regex name="am.mailserver_fetch.param" value="^fetchEnabled(\d+|)$" />
+		<regex name="am.ContentCheck.param" value="^ContentCheck(\d+|)$" />
+		<regex name="am.isCaseSensitive.param" value="^isCaseSensitive(\d+|)$" />
+		<regex name="am.isRegEx.param" value="^isRegEx(\d+|)$" />
+		<regex name="am.sslenabled.param" value="^sslenabled(\d+|)$" />
+		<regex name="am.serverstatusurl.param" value="^serverstatusurl(\d+|)$" />
+		<regex name="am.ssl.param" value="^ssl(\d+|)$" />
+		<regex name="am.authreq.param" value="^authreq(\d+|)$" />
+		<regex name="am.discoverclusternodes.param" value="^discoverclusternodes(\d+|)$" />
+		<regex name="am.DiscoverAllNodes.param" value="^DiscoverAllNodes(\d+|)$" />
+		<regex name="am.failoverEnabled.param" value="^failoverEnabled(\d+|)$" />
+		<regex name="am.sshPKAuth.param" value="^sshPKAuth(\d+|)$" />
+		<regex name="am.SSLEnabled.param" value="^SSLEnabled(\d+|)$" />
+		<regex name="am.namedInstance.param" value="^namedInstance(\d+|)$" />
+		<regex name="am.encryption.param" value="^encryption(\d+|)$" />
+		<regex name="am.kerberos.param" value="^kerberos(\d+|)$" />
+		<regex name="am.jmxEnabled.param" value="^jmxEnabled(\d+|)$" />
+		<regex name="am.monitorLeafCertOnly.param" value="^monitorLeafCertOnly(\d+|)$" />
+		<regex name="am.enableSSLMonitoring.param" value="^enableSSLMonitoring(\d+|)$" />
+		<regex name="am.isProxyNeeded.param" value="^isProxyNeeded(\d+|)$" />
+		<regex name="am.ignoreHostNameError.param" value="^ignoreHostNameError(\d+|)$" />
+		<regex name="am.AdvancedSettings.param" value="^AdvancedSettings(\d+|)$" />
+		<regex name="am.isCertificateEnabled.param" value="^isCertificateEnabled(\d+|)$" />
+		<regex name="am.isSSLEnabled.param" value="^isSSLEnabled(\d+|)$" />
+		<regex name="am.filterEnabled.param" value="^filterEnabled(\d+|)$" />
+		<regex name="am.discoverchildren.param" value="^discoverchildren(\d+|)$" />
+		<regex name="am.useSSL.param" value="^useSSL(\d+|)$" />
+		<regex name="am.isOndemand.param" value="^isOndemand(\d+|)$" />
+		<regex name="am.jconnect.param" value="^jconnect(\d+|)$" />
+		<regex name="am.fsSSLEnabled.param" value="^fsSSLEnabled(\d+|)|popSSLEnabled$" />
+		<regex name="am.sslEnabled.param" value="^sslEnabled(\d+|)$" />
+		<regex name="am.MonitorPGSQLDB.param" value="^MonitorPGSQLDB(\d+|)$" />
+		<regex name="am.LaunchType.param" value="^LaunchType(\d+|)$" />
+		<regex name="am.isProjectScopedToken.param" value="^isProjectScopedToken(\d+|)$" />
+		<regex name="am.StopDiscovery.param" value="^StopDiscovery(\d+|)$" />
+		<regex name="am.responseHeaderCheck.param" value="^responseHeaderCheck(\d+|)$" />
+		<regex name="am.resolveDNS.param" value="^resolveDNS(\d+|)$" />
+		<regex name="am.EventLog.param" value="^EventLog(\d+|)$" />
+		<regex name="am.Kerberos.param" value="^Kerberos(\d+|)$" />
+		<regex name="am.apiMode.param" value="^apiMode(\d+|)$" />
+		<regex name="am.CredSSP.param" value="^CredSSP(\d+|)$" />	
+	</regexes>
+			<!-- Param-name regexes ends -->
+	
+	<!-- Conf Framework regex ends -->
+	
+	<!--ShowResourceIdForResource and ShowResourceTypes  Starts -->
+	<regexes>
+		<regex name="am.haid.grp.long.value" value="^(-?\d{1,19}|null|orphaned|\-)$" />
+		<regex name="am.viewtype.value" value="^(showIconsView|showPlasmaView|showDetailsView|showDetails|showResourceTypes|showResourceTypesAll)$" />
+	</regexes>
+	
+	<!--ShowResourceIdForResource and ShowResourceTypes  Ends -->
+	
+	
+	<!-- MSSQL Action Management regexes -->
+	<regexes>
+		<regex name="am.mssql.database.management.actions" 	value="^(online|offline|withnowait|withimmediaterollback|withrollbackaftergiventime|delete|enableMonitoring|disableMonitoring|disableMonitoringReset)$"/>
+		<regex name="am.mssql.backup.management.actions" 	value="^(enableMonitoring|disableMonitoring|disableMonitoringReset)$"/>
+		<regex name="am.mssql.jobs.management.actions" 	value="^(start|stop|deletejob|enable|disable|manage|unmanage|unmanagereset|clearjobstatus)$"/>
+		<regex name="am.mssql.jobids" value="^([j0-9]|,)+$"/>
+		<regex name="am.mssql.session.type" value="^(session|block|lock)$"/>
+		<regex name="am.mssql.sessionfrom" value="^(session|database)$"/>
+		<regex name="am.mssql.database.apmmanagement.actions" value="^(enable|disable)$"/>
+		<regex name="am.mssql.database.mirroring.actions" value="^(suspend|resume|failover)$"/>
+	</regexes>
+	<!-- MSSQL Action Management regexes end-->
+	<!-- MSSQL Datatable regex -->
+	<regexes>
+	   	<regex name="am.mssql.datatable.param.search_regex" value="^(search\[regex\])$" />
+		<regex name="am.mssql.datatable.param.search_string_value" value="^(search\[value\])$" />
+	</regexes>
+	<!-- MSSQL Datatable regex end-->
+	<!-- MSSQL monitor regex -->
+	<regexes>
+		<regex name="am.mssql.logshipping.role" value="^(Primary|Secondary|Monitor)$"/>
+		<regex name="am.mssql.performance.hrefname" value="^(QUERYBYCPU|QUERYBYIO|QUERYBYCLR|WAITSTATS|QUERYBYSRQ|QUERYBYMOE|QUERYBYMOB|QUERYBYLPR|QUERYBYCMI|MEMORY)$"/>
+		<regex name="am.mssql.performance.period" value="^(0|4|All|Execution Time)$"/>
+		<regex name="am.mssql.performance.topqrycount" value="^(10|20|30|40|50|100|polledValues)$"/>
+		<regex name="am.mssql.performance.waittype" value="^[A-Za-z _]+$"/>
+		<regex name="am.mssql.session.columnname" value="^(PID|STATUS|USERNAME|HOST|DBNAME|PROGRAM|MEMUSAGE|CPUTIME|IO|BLOCKED|BLOCKING|WAITTIME|MOREINFO|KILL)$"/>
+		<regex name="am.mssql.reporttype" value="^(csv)$"/>
+		<regex name="am.mssql.session.reporttype" value="^(excel)$"/>
+		<regex name="am.mssql.longAll" value="^([0-9]+|All)$"/>
+		<regex name="am.mssql.reportformat" value="^(pdf|excel)$"/>
+		<regex name="am.mssql.sql.version" value="^(sql2000|sql2005|sql2008|sql2008 r2|sql2012|sql2014|sql2016|sql2017|sql2017|sql2019|sql2022|unknown)$"/>
+		<regex name="am.mssql.dcComponent.name" value="^(SQLCPU|SQLSRQ|SQLLPR|SQLIO|SQLMFE|SQLCMI|SQLCLR|SQLMFB|SQLMEMU|SQLWAITSTATS|SQLBACKUP|SQLRESTORE|SQLLOGSHIPPING|SQLSESSION|SQLSESSIONLCK|SQLDCD|DB-DBCC CHECKDB|DB-DBCC INDEX|SHOWSQLUSERS|SHOWMIRRORINGDETAILS|ALWAYSONAVAILABILITYGROUPS|SQLDATABASE|DB-VLF|SQLJOBS|SQLJOBS-HISTORY|SQLREPLICATIONS|SQLREPLICATIONS-HISTORY)$"/>
+	</regexes>
+	<!-- MSSQL monitor regex end-->	
+	<!-- Reports Regex -->
+	<regexes>
+		<regex name="am.report.forecastType" value="^(machinelearning|classic|null)$" />
+		<regex name="am.report.outageperiod" value="^(month|week|day|null)$" />
+		<regex name="am.report.business.period" value="^(null||oni|^[0-9]+$)$" />
+		<regex name="am.report.capacity.type" value="^(|null|oversized|idle|underSized)$"/>
+		<regex name="am.report.schedule.reoccurrence.type" value="^(Hourly|Daily|Weekly|Monthly)$"/>
+		<regex name="am.schedule.report.file" value="^(|null|pdf|excel|csv|htmlfile|html|xls)$"/> 
+		<regex name="am.report.negativeOrPositiveNumber" value="^(\-?([0-9]+$)|null|LOCATION_NAME|VALUEID|USERNAME|(USERDATA\_\d+))$"/>
+		<regex name="am.report.timestamp" value="^(|null|[0-9\:\ \-\.])+$" />
+		<regex name="am.reports.numberCommaNull" value="^([0-9]|,|null|)+$"/>
+		<regex name="am.report.slatype" value="^(|app|sys|null)$" />
+		<regex name="am.report.sla.availability.condition" value="^(|greater than|equal to|greater equal to|null)$" />
+		<regex name="am.report.sla.event.condition" value="^(|less than|equal to|less equal to|null)$" />
+		<regex name="am.report.sla.availability.value" value="^(|avail|null)$" />
+		<regex name="am.report.sla.business.hour.status" value="^(|applyBH|null)$" />
+		<regex name="am.report.sla.event.value" value="^(|tick|null)$" />
+		<regex name="am.report.number.empty.null" value="^([0-9]||null)+$" />
+		<regex name="am.report.boolean.empty" value="^(?i)(|true|false|null)$" />
+		<regex name="am.report.customreport.toshow" value="^(|toshow|null)$" />
+		<regex name="am.report.on.off.empty" value="^(|on|off|null)$" />
+		<regex name="am.report.schedule.sid" value="^(null||undefined|oni|^[0-9]+$)$" />
+		<regex name="am.report.schedule.edit" value="^(||undefined|true|false|^[0-9]+$)$" />
+		<regex name="am.report.tablename.db" value="^[0-9a-zA-Z\\_]+$" />
+		<regex name="am.report.forecast.resourcegroup" value="^(|APP|DBS|SER|SYS|URL|VIR|CLD|MS|ERP|MOM|CIF)$" />
+		<regex name="am.report.history.go" value="^(|Go|null)$" />
+		<regex name="am.report.schedule.report.type" value="^(|event|glancereport|attribute|availability|hasnapshotHost|hasnapshot|availabilitysnapshot|availabilitytrenddowntime|availabilitytrend|capacityplanning|custom|dashboard|dbusers|downtime|downtimeSummary|eumGlancereport|eumSummary|forecast|health|jobfailedhistory|jobhistory|sqlperformance|weeklyoutage|queryresults|serverutilization|sla|summary|thresholdprofile|thresholdconfcsv|advancedReport)$" />
+		<regex name="am.report.sla.mail.check" value="^(|mail|null)$" />
+		<regex name="am.report.schedule.time" value="^([0-9]|:|,||null| )+$" />
+		<regex name="am.report.sla.tabName" value="^(|SLA|null)$" />
+		<regex name="am.report.schedule.typeofattriute" value="^[\p{L}\p{N}\P{InBasicLatin}\:\.\/\(\)\-\,\#\_\s\$\@\%\+]+$" />
+		<regex name="am.report.schedule.actiontype" value="^(?i)(true|false|publish|null)$" />
+		<regex name="am.report.schedule.months.list" value="^(?i)(January|February|March|April|May|June|July|August|September|October|November|December)$" />
+		<regex name="am.report.server.monitoring.mode" value="^(TELNET|SSH|Powershell|local|WMI|SNMP|SSH_KEY)$"/>
+		<regex name="am.report.period.interval" value="^(day|week|month|null|customtime|)$" />
+		<regex name="am.report.inventory.resourcegroup" value="^(|APP|DBS|SER|SYS|URL|VIR|CLD|MS|ERP|MOM|CIF|-|CAM|NET)$" />
+		<regex name="am.report.capacity.planning.reportMethod" value="^(?i)(|generateUnderSizedMonitors|generateOverSizedMonitors|generateIdleMonitors)$" />
+		<regex name="am.longandnull.all.value" value="^([0-9]+|null|all|nomgs|nogroup)$" />
+		<regex name="am.reports.dashboard.foldername" value="^[a-zA-Z0-9\-_]+$" />
+		<regex name="am.reports.alphaNumeric.ext1.withcomma" value="^[A-Za-z0-9\_\-\,]+$"/>
+		<regex name="am.reports.numberCommaNullAll" value="^([0-9]|,|null|Null|all|nomgs|nogroup)+$"/>
+		<regex name="am.report.booleanNullNumber" value="^(||null|true|false|^[0-9]+$)$" />
+		<regex name="am.report.mssql.topquerycnt" value="^(||null|polledValues|^[0-9]+$)$" />
+		<regex name="am.report.sla.period" value="^(0|3|6|1|12|7|2|11|9|8|5)$" />
+		<regex name="am.capacity.planning.condition" value="^(AND|OR)$"/>
+		<regex name="am.capacity.planning.option.condition" value="^(LT|GT|LE|GE)$"/>
+		<regex name="am.capacity.planning.threshold" value="^(null||undefined|empty|^[0-9]+$)$" />
+		<regex name="am.report.polleddata.api.period" value="^(0|3|6|1|12||7|30|-7|2|11|9|8|5|20|4|-30)$" />
+		<regex name="am.report.pdf.orientation" value="^(null|portrait|landscape)$" />
+		<regex name="am.report.file.date.format" value="^(null|YYYY-MM-dd|dd-MM-YYYY|MM-dd-YYYY)$" />
+	</regexes>
+	
+	<!-- Associate Scripts/URL's Server Monitor Regex -->
+	<regexes>
+		<regex name="am.associateMonitor.type" value="^(Script Monitor|UrlMonitor)$"/>
+	</regexes>
+	<!-- MSSQL Jobs regex -->
+	<regexes>
+	<regex name="am.mssql.jobs.steptype" value="^(?i)(TSQL|ACTIVESCRIPTING|CMDEXEC|DISTRIBUTION|SNAPSHOT|LOGREADER|MERGE|QueueReader|ANALYSISQUERY|ANALYSISCOMMAND|SSIS)$"/>
+		<regex name="am.mssql.jobs.form" value="^(step|shedule)$"/>
+		<regex name="am.mssql.jobs.report" value="^(pdf)$"/>
+		<regex name="am.mssql.jobs.resourcetype" value="^(MSSQL-DB-server|DataBase)$"/>
+		<regex name="am.mssql.jobs.fromreport" value="^(jobHistory|jobFailedStatus)$"/>
+		<regex name="am.mssql.report.period" value="^(All|0|1|2|3|5|6|7|8|9|11|12|29|null)$"/>
+		<regex name="am.mssql.jobs.uid" value="^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$" />
+		<regex name="am.mssql.jobs.stepname" value="^(stepName\d+)$" />
+		<regex name="am.mssql.jobs.stepsuccess" value="^(stepSuccess\d+)$" />
+		<regex name="am.mssql.jobs.stepfail" value="^(stepFail\d+)$" />
+		<regex name="am.mssql.jobs.stepretry_attemp" value="^(stepRetry\d+)$" />
+		<regex name="am.mssql.jobs.stepretry" value="^(stepRetryint\d+)$" />
+		<regex name="am.mssql.jobs.stepcommand" value="^(scommand\d+)$" />
+		<regex name="am.mssql.jobs.steptype_nameregex" value="^(stepType\d+)$" />
+		<regex name="am.mssql.jobs.stepdb" value="^(stepdb\d+)$" />
+		<regex name="am.mssql.jobs.proxy" value="^(proxyName\d+)$" />
+		<regex name="am.mssql.jobs.language_nameregex" value="^(language\d+)$" />
+		<regex name="am.mssql.jobs.language" value="^(VBScript|JavaScript|other)$" />
+		<regex name="am.mssql.jobs.newlanguage" value="^(newLang\d+)$" />
+		<regex name="am.mssql.jobs.osexitcode" value="^(osexitcode\d+)$" />
+		<regex name="am.mssql.jobs.stepid" value="^(stepid\d+)$" />
+		<regex name="am.common.null.value" value="^(NULL)$"/>
+		<regex name="am.mssql.jobs.schedid" value="^(schedid\d+)$" />
+		<regex name="am.mssql.jobs.schedname" value="^(shedName\d+)$" />
+		<regex name="am.mssql.jobs.schedenable" value="^(shedEnable\d+)$" />
+		<regex name="am.mssql.jobs.schedtype" value="^(schedtype\d+)$" />
+		<regex name="am.mssql.jobs.rperiod_nameregex" value="^(rperiod\d+)$" />
+		<regex name="am.mssql.jobs.rperiod" value="^(Monthly|Daily|Weekly)$" />
+		<regex name="am.mssql.jobs.schedMfrequency" value="^(shedMfrequency\d+)$" />
+		<regex name="am.mssql.jobs.schedOccurence" value="^(shedOccurence\d+)$" />
+		<regex name="am.mssql.jobs.schedDdays" value="^(shedDdays\d+)$" />
+		<regex name="am.mssql.jobs.schedWDays_nameregex" value="^(shedWDays\d+)$" />
+		<regex name="am.mssql.jobs.schedWWeek" value="^(shedWWeek\d+)$" />
+		<regex name="am.mssql.jobs.schedMdayday" value="^(shedMdayday\d+)$" />
+		<regex name="am.mssql.jobs.SchedMdaymonth" value="^(ShedMdaymonth\d+)$" />
+		<regex name="am.mssql.jobs.schedMmonthonthe" value="^(shedMmonthonthe\d+)$" />
+		<regex name="am.mssql.jobs.SchedMselectonthe" value="^(ShedMselectonthe\d+)$" />
+		<regex name="am.mssql.jobs.SchedMselectdayonthe" value="^(ShedMselectdayonthe\d+)$" />
+		<regex name="am.mssql.jobs.schedFOnceT" value="^(shedFOnceT\d+)$" /> 
+		<regex name="am.mssql.jobs.schedFMultipleT" value="^(shedFMultipleT\d+)$" />
+		<regex name="am.mssql.jobs.schedFMultpleHM" value="^(shedFMultpleHM\d+)$" /> 
+		<regex name="am.mssql.jobs.schedFMultipleStart" value="^(shedFMultipleStart\d+)$" />  
+		<regex name="am.mssql.jobs.schedFMultipleEnd" value="^(shedFMultipleEnd\d+)$" /> 
+		<regex name="am.mssql.jobs.schedDstart" value="^(shedDstart\d+)$" /> 
+		<regex name="am.mssql.jobs.schedDnoenddate" value="^(shedDnoenddate\d+)$" /> 
+		<regex name="am.mssql.jobs.emailcheck" value="^(mail)$" /> 
+		<regex name="am.mssql.jobs.logcheck" value="^(log)$" /> 
+		<regex name="am.mssql.jobs.schededitid" value="^(\d+(,\d+)*,{0,1}|-)$" />
+		<regex name="am.mssql.jobs.dateOnetime" value="^(dateOnetime\d+)$" /> 
+		<regex name="am.mssql.jobs.tOnetime" value="^(tOnetime\d+)$" /> 
+		<regex name="am.mssql.jobs.schedDend" value="^(shedDend\d+)$" /> 
+	</regexes>
+	<!-- MSSQL Jobs regex end -->
+		
+	<regexes>
+		<regex name="am.threshold.onchange" value="^(onChange|customThreshold)$"/>
+		<regex name="am.configurealarm.requesttype" value="^(1|2|3|7|8)$"/>
+		<regex name="am.twodigit.naturalnumber" value="^([1-9]{1}[0-9]{0,2})$"/>
+		<regex name="am.comma.seperated.entity" value="^([0-9]+\_+[0-9]+\,?)+$"/>
+	</regexes>
+	
+	<!-- Security regex for Actions and Integrations -->
+	<regexes>
+		<regex name="am.extdevice.monitortype.value" value="^(network)$" />
+		<regex name="am.helpdesk.product.value" value="^(SERVICENOW|SERVICEDESK)$" />
+		<regex name="am.helpdesk.mail.notification.value" value="^(adminMail|nonAdminMail)$" />
+		<regex name="am.helpdesk.reopen.ticketpolicy.value" value="^(REOPEN_TICKET|REOPEN_TICKET_CUSTOM_PERIOD|NEW_TICKET)$" />
+		<regex name="am.helpdesk.afterclear.ticketpolicy.value" value="^(UPDATE_TICKET|UPDATE_TICKET_CUSTOM_PERIOD|UPDATE_NOTES|NEW_TICKET)$" />
+		<regex name="am.helpdesk.update.ticketpolicy.value" value="^(UPDATE_TICKET|UPDATE_NOTES)$" />
+		<regex name="am.helpdesk.close.ticketpolicy.value" value="^(CLOSE_TICKET_UPDATE_NOTES|UPDATE_NOTES)$" />
+		<regex name="am.consent.module.value" value="^(SDPTICKET|SDPCMDB|SNOWTICKET)$" />
+	</regexes>
+	<!-- Cam JMX/SNMP starts -->
+	<regexes>
+		<regex name="am.cam.jmx.attr.value" value="^([(A-Za-z0-9)(\.\:\|\=\,\-\s\@\$\/)]+)$" />
+		<regex name="am.cam.snmp.attr.value" value="^([(A-Za-z0-9)(\.\:\|\=\,\-\s\$)]+)$" />
+		<regex name="am.cam.snmp.id.value" value="^([(0-9)(\.\,)]+)$" />
+		<regex name="am.cam.oid.displayname.comma.value" value="^[\p{L}\p{N}\.\-\_\s\,]+$" />
+	</regexes>
+	<!-- Cam JMX/SNMP ends -->
+	
+	<regexes>
+		<regex name="am.date.restapi.value" value="^([A-Za-z]{0,3}\s[0-9]{0,2}\,\s[0-9]{4,4}\s(?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d)\s(?i)(AM|PM))$" />
+		<regex name="am.globalconfig.key.value" value="^[(a-zA-Z0-9)(\s\.\-\_\:)]+$" />
+		<regex name="am.restapi.sortby.column.name" value="^[A-Za-z0-9\-\ \_\,]+$" />
+		<regex name="am.globalconfig.value" value="^[A-Za-z0-9\#\@\(\)\|\s\-\.\/\:\_]+$" />
+		<regex name="am.common.comma.longandnull" value="^([0-9\,]+|null)$" />
+		<regex name="am.common.on_off.yes_no.tf.null.value" value="^(?i)(on|off|true|false|yes|no|null)$"/>
+		<regex name="am.filemon.clearconditionruletype.value" value="^(0|1|All)$"/>
+	</regexes>
+	
+	<!-- Security regex for Actions and Integrations -->
+	
+	<!-- Regex for Action and Integration WAF API -->
+	<regexes>
+		<regex name="am.action.threshold.api" value="^(((?i)(all))|uncategorizedMonitors|unassociatedMonitors|(uncategorizedMonitors,unassociatedMonitors)|(unassociatedMonitors,uncategorizedMonitors))$"/>
+		<regex name="am.applytosimilar.monitor.thresholdid" value="^(?i)(\d{1,14}|Reset|noids|Newfalse|-1)$"/>
+		<regex name="am.thresholdprofile.condition" value="^(\d|GT|LT|LE|GE|NE|EQ|CT|DC|QL|NQ|SW|EW|OR|AND)+$" />
+		<regex name="am.annotate.haid.monitorgroup" value="^(?i)(\d|selectmg|mgalarms|allmonitoralarms|null)+$" />
+	</regexes>
+
+	<!-- Regex for Performance Polling Database Servers Migration  -->
+	<regexes>
+		<regex name="am.database.servers.tab.monitortype" value="^(MySql|MongoDB|Cassandra|Redis|Oracle|ORACLE-RAC|DB2)$" />
+		<regex name="am.database.servers.tab.metricname" value="^(Database|Session|ProcessList)$" />
+		<regex name="am.database.servers.tab.pollingfrequency" value="^(-1|0|60|1440)$" />
+		<regex name="am.servers.performance.polling.tab.monitortype" value="^(AIX|FreeBSD / OpenBSD|HP-UX / Tru64|Linux|Mac OS|Novell|Sun Solaris|Windows)$" />
+		<regex name="am.servers.performance.polling.tab.metrictype" value="^(CPUCore|Disk|DiskIOStatics|Errpt|Hardware|InodeUsage|KernelStatistics|LPARCPUStatics|Memory|NetworkAdapter|NetworkInterface|NLBStatus|NTPStatus|ProcessService|ErrorAlert|PrintQueue)$" />
+		<regex name="am.cli.settings.monitortype" value="^(AIX|Ceph Storage|Default|File System Monitor|FreeBSD / OpenBSD|HP-UX / Tru64|Istio|Kubernetes|KVM|Linux|Mac OS|OpenShift|Script Monitors|SiebelEnterpriseServer|Sun Solaris)$" />
+		<regex name="am.wmi.settings.monitortype" value="^(ActiveDirectory|BizTalkServer|Default|File System Monitor|LyncServer|MSDynamicsAX|Microsoft Dynamics CRM|NetworkPolicyServer|Script Monitors|Windows|XenApp)$" />
+	</regexes>
+	
+	<!-- Regex for Server Config  -->
+	<regexes>
+		<regex name="am.server.config.cross.domain.origin"  value="^(https?:\/\/(?:[\w-]+(?:\.[\w-]+)*)(?::\d{1,5})?)(,\s*https?:\/\/(?:[\w-]+(?:\.[\w-]+)*)(?::\d{1,5})?)*$" />
+	</regexes>
+
+	<!-- Regex for Oracle JOB Clear Last Run Status  -->
+	<regexes>
+		<regex name="am.oracle.clearaction.value" value="^(ClearLastRunStatusAlert)$" />
+	</regexes>
+	
+	<regexes>
+		<regex name="am.actions.enabledisable" value="^(enable|disable)$" />
+	</regexes>
+
+</security>

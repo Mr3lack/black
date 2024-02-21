@@ -1,0 +1,1384 @@
+<!--$Id$--> 
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+<!-- ======================================== Form Bean Definitions -->
+
+    <form-beans>
+
+		<form-bean name="AMActionForm" type="com.adventnet.appmanager.struts.form.AMActionForm" >
+			<form-property name = "smsGatewayProviders" type = "java.util.ArrayList" />
+		</form-bean>
+		<form-bean name="BulkMonitorForm" type="com.adventnet.appmanager.struts.form.AMActionForm" />
+		<form-bean name="UserConfiguration"	type="com.adventnet.appmanager.struts.form.UserConfiguration" />
+		<form-bean name="ReportForm" type="com.adventnet.appmanager.reporting.form.ReportForm" />
+		<form-bean name="FlashForm"	type="com.adventnet.appmanager.struts.form.FlashForm" />
+		<form-bean name="MyPageForm" type="com.adventnet.appmanager.struts.form.MyPageForm" />
+		<form-bean name="ProxyConfiguration" type="com.adventnet.appmanager.struts.form.ProxyConfiguration" />
+        <form-bean name="CredentialManagerForm" type="org.apache.struts.action.DynaActionForm"/>
+		<!-- <form-bean name="SeleniumForm" type="com.me.apm.client.selenium.form.SeleniumForm"/> -->
+        <form-bean name="CredentialManagerForm" type="org.apache.struts.action.DynaActionForm">
+        	<form-property name="type" type="java.lang.String" />
+            <form-property name="credentialName" type="java.lang.String" />
+            <form-property name="credentialDescription" type="java.lang.String" />
+            <form-property name="credentialID" type="java.lang.String" />
+        </form-bean>
+	
+        <form-bean name="NewDiscoveryForm" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="discoveryName" type="java.lang.String" />
+        </form-bean>
+		<form-bean name="RuleManagerForm" type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="ruleName" type="java.lang.String"/>
+			<form-property name="description" type="java.lang.String"/>
+			<form-property name="ruleID" type="java.lang.String"/>
+			<form-property name="condition" type="java.lang.String"/>
+			<form-property name="monitorGroupHaid" type="java.lang.String"/>
+			<form-property name="monitorGroupList" type="java.util.ArrayList"/>
+			<form-property name="OverallCondition" type="java.lang.String"/>
+			<form-property name="OverallConditionList" type="java.util.ArrayList"/>
+			<form-property name="NameField" type="java.lang.String"/>
+			<form-property name="NameFieldList" type="java.util.ArrayList"/>
+			<form-property name="conditionField" type="java.lang.String"/>
+			<form-property name="ConditionFieldList" type="java.util.ArrayList"/>
+			<form-property name="valueTextField" type="java.lang.String"/>
+			<form-property name="valueTypeField" type="java.lang.String"/>
+			<form-property name="monitorTypeList" type="java.util.ArrayList"/>
+		</form-bean>
+
+
+		<form-bean name="HostResourceForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="username" type="java.lang.String" />
+			<form-property name="displayname" type="java.lang.String" />
+			<form-property name="pollinterval" type="java.lang.Integer"	initial="5" />
+			<form-property name="password" type="java.lang.String" />
+			<form-property name="description" type="java.lang.String" />
+			<form-property name="os" type="java.lang.String" />
+			<form-property name="instance" type="java.lang.String" />
+			<form-property name="id" type="java.lang.String" />
+			<form-property name="soapport" type="java.lang.String" />
+			<form-property name="mode" type="java.lang.String" />
+			<form-property name="snmpport" type="java.lang.String" />
+			<form-property name="telnetport" type="java.lang.String" />
+			<form-property name="port" type="java.lang.String" />
+			<form-property name="hostos" type="java.lang.String" />
+			<form-property name="community" type="java.lang.String" />
+			<form-property name="command" type="java.lang.String" />
+			<form-property name="processname" type="java.lang.String" />
+			<form-property name="version" type="java.lang.String" />
+			<form-property name="prompt" type="java.lang.String" />
+			<form-property name="sslenabled" type="java.lang.String" />
+			<form-property name="ndhost" type="java.lang.String" />
+			<form-property name="ndport" type="java.lang.String" />
+			<form-property name="eventlog_status" type="java.lang.Boolean" />
+			<form-property name="AppServers" type="java.lang.String" />
+			<form-property name="advanced" type="java.lang.Boolean" />
+			<form-property name="tomcatmanagerurl" type="java.lang.String" initial="/manager" />
+            <form-property name="snmpVersionValue" type="java.lang.String"/>
+            <form-property name="snmpCommunityString" type="java.lang.String"/>
+            <form-property name="snmpSecurityLevel" type="java.lang.String"/>
+            <form-property name="snmpUserName" type="java.lang.String"/>
+            <form-property name="snmpContextName" type="java.lang.String"/>
+            <form-property name="snmpAuthPassword" type="java.lang.String"/>
+            <form-property name="snmpAuthProtocol" type="java.lang.String"/>
+            <form-property name="snmpPrivPassword" type="java.lang.String"/>
+			<form-property name="passphrase" type="java.lang.String"/>
+			<form-property name="timeout" type="java.lang.Integer"	initial="5" />
+		</form-bean>
+	
+		<form-bean name="RbmForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="displayname" type="java.lang.String" />
+			<form-property name="scriptname" type="java.lang.String" />
+			<form-property name="groupname" type="java.lang.String" />
+			<form-property name="haid" type="java.lang.String" />
+			<form-property name="subgroupname" type="java.lang.String" />
+			<form-property name="organization" type="java.lang.String" />
+			<form-property name="rbmagent" type="java.lang.String[]" />
+			<form-property name="pollinterval" type="java.lang.Integer" initial="15" />
+			<form-property name="timeout" type="java.lang.Integer" initial="5" />
+			<form-property name="type" type="java.lang.String" initial="RBMMonitor" />
+			<form-property name="selectAllAgents" type="java.lang.String" />
+			<form-property name="selectedAgents" type="java.lang.String[]" />
+		</form-bean>
+	
+		<form-bean name="UrlForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="userseqid" type="java.lang.String" />
+			<form-property name="userseqname" type="java.lang.String" />
+			<form-property name="groupname" type="java.lang.String" />
+			<form-property name="subgroupname" type="java.lang.String" />
+			<form-property name="organization" type="java.lang.String" />
+			<form-property name="urlid" type="java.lang.String" />
+			<form-property name="monitorname" type="java.lang.String" />
+			<form-property name="url" type="java.lang.String" initial="http://" />
+			<form-property name="pollInterval" type="java.lang.Integer"	initial="5" />
+			<form-property name="userid" type="java.lang.String" />
+			<form-property name="password" type="java.lang.String" />
+			<form-property name="method" type="java.lang.String" initial="G" />
+			<form-property name="payloadType" type="java.lang.String" />
+			<form-property name="requestparams" type="java.lang.String" />
+			<form-property name="checkfor" type="java.lang.String" />
+			<form-property name="haid" type="java.lang.String" />
+			<form-property name="timeout" type="java.lang.Integer" initial="120" />
+			<form-property name="verifyerror" type="java.lang.String" initial="false" />
+			<form-property name="errorcontent" type="java.lang.String" />
+			<form-property name="httpcode" type="java.lang.Integer" />
+			<form-property name="httpvalue" type="java.lang.Integer" initial="200" />
+			<form-property name="httpcondition" type="java.lang.String"	initial="GT" />
+			<form-property name="availableurls" type="java.lang.String[]" />
+			<form-property name="formurl" type="java.lang.String" />
+			<form-property name="frame" type="java.lang.String" />
+			<form-property name="customHeaders" type="java.lang.String" />
+			<form-property name="type" type="java.lang.String" initial="UrlMonitor" />
+			<form-property name="selectedServer" type="java.lang.String" />
+			<form-property name="multipleServers" type="java.lang.String" />
+			<form-property name="masSelectType" type="java.lang.String" initial="0" />
+			<form-property name="masGroupName" type="java.lang.String" />
+			<form-property name="caseSensitive" type="java.lang.Boolean" />
+			<form-property name="regEx" type="java.lang.Boolean" />
+			<form-property name="userAgent" type="java.lang.String" />
+			<form-property name="sslVersion" type="java.lang.String" />
+			<form-property name="clientCertEnabled" type="java.lang.Boolean" />
+			<form-property name="clientCertName" type="java.lang.String" />
+			<form-property name="clientCertPassword" type="java.lang.String" />
+			<form-property name="clientCertFileBrowse" type="org.apache.struts.upload.FormFile" />
+			<form-property name="credType" type="java.lang.String" initial="manual" />
+			<form-property name="credManagerVal" type="java.lang.Long"/>
+			<form-property name="urlSeqDisplayName" type="java.lang.String"/>
+			<form-property name="urlSeqHARFile" type="org.apache.struts.upload.FormFile" />
+			<form-property name="urlSeqPollingInterval" type="java.lang.Integer" initial="10"/>
+			<form-property name="harFileName" type="java.lang.String"/>
+			<form-property name="harData" type="java.lang.String"/>
+			<form-property name="samlconfig" type="java.lang.Long"/>
+		</form-bean>
+		
+		<form-bean name="applicationform" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="haid" type="java.lang.String" />
+			<form-property name="locationid" type="java.lang.String" />
+			<form-property name="name" type="java.lang.String" />
+			<form-property name="description" type="java.lang.String" />
+			<form-property name="owner" type="java.lang.String" />
+			<form-property name="creationdate" type="java.lang.String" />
+			<form-property name="lastmodified" type="java.lang.String" />
+			<form-property name="pollinterval" type="java.lang.String" />
+			<form-property name="displayname" type="java.lang.String" />
+			<form-property name="allowners" type="java.util.ArrayList" />
+			<form-property name="selectedowners" type="java.util.ArrayList" />
+			<form-property name="selectedowners_list" type="java.lang.String[]" />
+			<form-property name="allowners_list" type="java.lang.String[]" />
+			<form-property name="grouptype" type="java.lang.String"	initial="1" />
+			<form-property name="availableMGTypes" type="java.util.ArrayList" />
+			<form-property name="vcHost" type="java.lang.String" />
+			<form-property name="vcPort" type="java.lang.Integer" />
+			<form-property name="discoveryFilterRegex" type="java.lang.String" />
+			<form-property name="rhevHost" type="java.lang.String" />
+			<form-property name="rhevPort" type="java.lang.Integer" />
+			<form-property name="ovmHost" type="java.lang.String" />
+			<form-property name="ovmPort" type="java.lang.Integer" />
+			<form-property name="ovmCredDetails" type="java.lang.String" />
+			<form-property name="ovmCredType" type="java.lang.String" />
+			<form-property name="vCenterCredDetails" type="java.lang.String" />
+			<form-property name="vCenterCredType" type="java.lang.String" />
+			<form-property name="username" type="java.lang.String" />
+			<form-property name="password" type="java.lang.String" />
+			<form-property name="pollInterval" type="java.lang.Integer" initial="10"/>
+			<form-property name="timeout" type="java.lang.Integer" initial="300"/>
+			<form-property name="isHostDCViaVC" type="java.lang.Boolean"	/>
+			<form-property name="discoverVM" type="java.lang.Integer" initial="0" />
+			<form-property name="sslVersion" type="java.lang.String" initial="TLSv1.2"/>
+            <form-property name="snmpVersion" type="java.lang.String"/>
+            <form-property name="snmpCommunityString" type="java.lang.String"/>
+            <form-property name="snmpAuthProtocol" type="java.lang.String"/>
+            <form-property name="snmpAuthPassword" type="java.lang.String"/>
+            <form-property name="snmpPrivProtocol" type="java.lang.String"/>
+            <form-property name="snmpPrivPassword" type="java.lang.String"/>
+            <form-property name="snmpPort" type="java.lang.Integer" initial="161"/>
+            <form-property name="snmpSecurityLevel" type="java.lang.String"/>
+            <form-property name="snmpUserName" type="java.lang.String"/>
+            <form-property name="snmpContextName" type="java.lang.String"/>
+            <form-property name="port" type="java.lang.String"/>
+            <form-property name="authEnabled" type="java.lang.String"/>
+            <form-property name="organization" type="java.lang.String"/>
+            <form-property name="site" type="java.lang.String"/>
+	        <form-property name="createMV" type="java.lang.String"/>
+	        <form-property name="selectedServer" type="java.lang.String" />
+			<form-property name="masSelectType" type="java.lang.String" initial="0" />
+			<form-property name="masGroupName" type="java.lang.String" />  
+			<form-property name="multipleServers" type="java.lang.String" />	          
+			<form-property name="version" type="java.lang.String" initial="0" />	          
+		</form-bean>
+
+		<form-bean name="PasswordExpiryFormBean" type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="newpassword" type="java.lang.String" />
+			<form-property name="confirmpassword" type="java.lang.String" />
+			<form-property name="pwdExpiryStatus" type="java.lang.String" />
+			<form-property name="days" type="java.lang.String" />
+		</form-bean>
+	
+		<form-bean name="ShowAllEventLogsForm" type="com.adventnet.appmanager.struts.actions.ShowAllEventLogsForm">
+			<form-property name="selectedMonitorName" type="java.lang.String" />
+			<form-property name="selectedMonitorId" type="java.lang.String" />
+			<form-property name="resourceid" type="java.lang.String" />
+		</form-bean>
+
+
+		<!-- CAM Form bean tags STARTING -->
+		<form-bean name="CreateCustomApplicationForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="customapplicationname" type="java.lang.String" />
+			<form-property name="customapplicationdescription" type="java.lang.String" />
+			<form-property name="haid" type="java.lang.String" />
+			<form-property name="type" type="java.lang.String" initial="Custom-Application" />
+		</form-bean>
+
+		<form-bean name="CamJMXActionForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="camid" type="java.lang.String" />
+			<form-property name="haid" type="java.lang.String" />
+			<form-property name="method" type="java.lang.String" />
+			<form-property name="screenid" type="java.lang.String" />
+			<form-property name="hostname" type="java.lang.String" />
+			<form-property name="portnumber" type="java.lang.String" />
+			<form-property name="resourcetype" type="java.lang.String" />
+			<form-property name="resourceid" type="java.lang.String" />
+			<form-property name="isfromresourcepage" type="java.lang.String" />
+			<form-property name="domain" type="java.lang.String" />
+			<form-property name="domainfilter" type="java.lang.String" />
+			<form-property name="displayname" type="java.lang.String" />
+			<form-property name="type" type="java.lang.Integer"	initial="0" />
+		</form-bean>
+		
+		<form-bean name="CamSNMPActionForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="camid" type="java.lang.String" />
+			<form-property name="haid" type="java.lang.String" />
+			<form-property name="method" type="java.lang.String" />
+			<form-property name="screenid" type="java.lang.String" />
+			<form-property name="hostname" type="java.lang.String" />
+			<form-property name="portnumber" type="java.lang.String" />
+			<form-property name="resourcetype" type="java.lang.String" />
+			<form-property name="snmpoid" type="java.lang.String" />
+			<form-property name="oiddisplayname" type="java.lang.String" />
+			<form-property name="oidtype" type="java.lang.String" initial="Scalar" />
+			<form-property name="tableoidcolumns" type="java.lang.String[]" />
+			<form-property name="mibname" type="java.lang.String" />
+		</form-bean>
+		<!-- CAM Form bean tags ENDS -->
+	
+		<form-bean name="SearchForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="query" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean name="MBeanOperationActionForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="actionname" type="java.lang.String" />
+			<form-property name="method" type="java.lang.String" />
+			<form-property name="hostname" type="java.lang.String" />
+			<form-property name="portnumber" type="java.lang.String" />
+			<form-property name="resourcetype" type="java.lang.String" />
+			<form-property name="domain" type="java.lang.String" />
+			<form-property name="domainfilter" type="java.lang.String" />
+			<form-property name="mbeanname" type="java.lang.String" />
+			<form-property name="toAdd" type="java.util.ArrayList" />
+			<form-property name="sendmail" type="java.lang.String" />
+			<form-property name="maillist" type="java.util.ArrayList" />
+			<form-property name="priority" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean name="AMProcessTemplateForm"	type="com.adventnet.appmanager.struts.form.AMProcessTemplateForm">
+			<form-property name="templatename" type="java.lang.String" />
+			<form-property name="method" type="java.lang.String" />
+			<form-property name="templatedescription" type="java.lang.String" />
+			<form-property name="addprocessmethod" type="java.lang.String" />
+		</form-bean>
+
+		<!-- Custom Fields Form Bean -->
+		<form-bean name="CustomFieldsForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="customgroupType" type="java.lang.String" initial="1" />
+		</form-bean>
+		  
+		<form-bean name="ConfigureGuestOSForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="resourceID" type="java.lang.String" />
+			<form-property name="selectVMOStype" type="java.lang.String" />
+			<form-property name="method" type="java.lang.String" />
+			<form-property name="host" type="java.lang.String" />
+			<form-property name="fqdn" type="java.lang.String" />
+			<form-property name="mode" type="java.lang.String" />
+			<form-property name="port" type="java.lang.Integer" />
+			<form-property name="username" type="java.lang.String" />
+			<form-property name="password" type="java.lang.String" />
+			<form-property name="prompt" type="java.lang.String" />
+			<form-property name="isEventLogEnabled" type="java.lang.Boolean" />
+			<form-property name="isKerberos" type="java.lang.Boolean" />
+			<form-property name="sshPKAuth" type="java.lang.Boolean" />
+			<form-property name="privateKey" type="java.lang.String" />
+			<form-property name="passPhrase" type="java.lang.String" />
+			<form-property name="isEdit" type="java.lang.Boolean" />
+			<form-property name="isCredentialManager" type="java.lang.String"/>
+			<form-property name="credentialID" type="java.lang.String" />
+			<form-property name="timeOut" type="java.lang.Integer" initial="40" />
+		</form-bean>
+		
+		<form-bean name="OAuthProviderForm" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="providerName" type="java.lang.String" />
+        </form-bean>
+        
+        <form-bean name="WebTokenForm" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="webTokenName" type="java.lang.String" />
+            <form-property name="TOKENREQUESTCLIENTCERTNAME" type="org.apache.struts.upload.FormFile" />
+   		</form-bean>
+        
+        	<!-- Action Configuration Form Bean -->
+        <form-bean name="AMActionURLForm" type="com.adventnet.appmanager.struts.form.AMActionURLForm">
+        
+        	<form-property name = "actionId" type = "java.lang.Long" />
+        	<form-property name = "message" type = "java.lang.String" />
+        	<form-property name = "displayName" type = "java.lang.String" />
+        	<form-property name = "httpUrl" type = "java.lang.String" />
+        	<form-property name = "httpMethod" type = "java.lang.String" />
+        	<form-property name = "userAgent" type = "java.lang.String" />
+        	<form-property name = "authType" type = "java.lang.String" />
+        	<form-property name = "formSubmissionType" type = "java.lang.String" />
+        	<form-property name = "requestHeaders" type = "java.lang.String" />
+        	<form-property name = "httpParameters" type = "java.lang.String" />
+        	<form-property name = "userName" type = "java.lang.String" />
+        	<form-property name = "password" type = "java.lang.String" />
+        	<form-property name = "timeOut" type = "java.lang.Integer" />
+        	<form-property name = "successMailId" type = "java.lang.String" />
+        	<form-property name = "errorMailId" type = "java.lang.String" />
+        	<form-property name = "successMail" type = "java.lang.String" />
+        	<form-property name = "errorMail" type = "java.lang.String" />
+        	<form-property name = "maillist" type = "java.util.ArrayList" />
+			<form-property name = "oAuthProvider" type = "java.lang.String" />
+			<form-property name = "oAuthProviderList" type = "java.util.ArrayList" />
+			<form-property name = "sendResponseType" type = "java.lang.Integer" />
+			
+        </form-bean>
+        
+        <!-- Action Configuration Form Bean -->
+        <form-bean name="SlackActionForm" type="com.adventnet.appmanager.struts.form.SlackActionForm">
+        
+        	<form-property name = "actionId" type = "java.lang.Long" />
+        	<form-property name = "displayName" type = "java.lang.String" />
+			<form-property name = "titleMessage" type = "java.lang.String" />
+			<form-property name = "detailMessage" type = "java.lang.String" />
+			<form-property name = "userOrChannelName" type = "java.lang.String" />
+			<form-property name = "channel" type = "java.lang.String" />
+			<form-property name = "channelId" type = "java.lang.String" />
+			<form-property name = "memberId" type = "java.lang.String" />
+			<form-property name = "channelList" type = "java.util.ArrayList" />
+			<form-property name = "memberList" type = "java.util.ArrayList" />
+        	
+        </form-bean>
+        
+
+	</form-beans>
+
+
+<!-- ================= Global Exception Definitions ===============-->
+    <global-exceptions>     
+
+    </global-exceptions>
+
+<!-- ================== Global Forward Definitions =================-->
+
+	<global-forwards>
+	
+		<forward name="showapplication" path="/showapplication.do?method=showApplication" />
+		<forward name="smsAction" path="/showTile.do?TileName=.SMSActions" />
+		<forward name="emailAction" path="/showTile.do?TileName=.EmailActions" />
+		<forward name="adminEmailAction" path="/showTile.do?TileName=.AdminEmailActions" />
+		
+		<forward name="ticketAction" path="/adminAction.do?method=showLogTicket" />
+		<forward name="sDeskTicketAction" path="/adminAction.do?method=showSdeskLogTicket" />
+		<forward name="serviceNowTicketAction" path="/adminAction.do?method=showServiceNowLogTicket" />
+		<forward name="execProg" path="/showTile.do?TileName=.ExecProg" />
+		<forward name="sendTrap" path="/showTile.do?TileName=.SendTrap" />
+		<forward name="mopAction" path="/showTile.do?TileName=.MBeanOperationActions" />
+		<forward name="mopAction2" path="/showTile.do?TileName=.MBeanOperationActions2" />
+		<forward name="mopAction3" path="/showTile.do?TileName=.MBeanOperationActions3" />
+		
+		<forward name="nomopAction" path="/showTile.do?TileName=.NoMBeanOperationActions" />
+		<forward name="mopAction4" path="/showTile.do?TileName=.MBeanOperationActions4" />
+		<forward name="showMopAction" path="/showTile.do?TileName=.ShowMBeanOperationExecutionAction" />
+		<forward name="DisplayHostResources" path="/jsp/HostResource.jsp" />
+		<forward name="ConfigureHostResources" path="/jsp/HostResourceConfig.jsp" />
+		
+		<forward name="showdetailsofhost" path="/jsp/showDiagnosticOutput.jsp" />
+		<forward name="ThresholdForm" path="/showTile.do?TileName=.ThresholdConf" />
+		<forward name="PatternForm" path="/showTile.do?TileName=.PatternConf" />
+		<forward name="MailServerConfig" path="/jsp/MailServerConfig.jsp" />
+		<forward name="SdeskConfig" path="/jsp/ServiceDesk.jsp" />
+		<forward name="SNowConfig" path="/jsp/ServiceNow.jsp" />
+		
+		<forward name="SdeskLogTicket" path="/jsp/TicketActionForm.jsp" />
+		<forward name="GlobalSettings" path="/jsp/GlobalSettings.jsp" />
+		<forward name="urlconf" path="/jsp/urlconf.jsp" />
+		<forward name="newurlconf" path="/jsp/newurlconf.jsp" />
+		<forward name="newscript" path="/jsp/newscript.jsp" />
+		<forward name="scriptconf" path="/jsp/Scriptconf.jsp" />
+		
+		<forward name="urlseq" path="/jsp/UrlSequenceInfo.jsp" />
+		<forward name="HAProfiles" path="/showActionProfiles.do?method=getHAProfiles" />
+		
+		<forward name="associatemonitors" path="/adminAction.do?method=reloadHostDiscoveryForm" />
+		<forward name="associatemonitorsinwiz" path="/showresource.do?method=associateMonitors" />
+		<forward name="jmxNotification2" path="/showTile.do?TileName=.JMXNotifications2" />
+		
+		<forward name="jmxNotification3" path="/showTile.do?TileName=.JMXNotifications3" />
+		<forward name="jmxNotification4" path="/showTile.do?TileName=.JMXNotifications4" />
+		<forward name="AmazonInstanceAction" path="/showTile.do?TileName=.AmazonInstanceAction" />
+		<forward name="triggerAmazonAction"	path="/manageEC2Instances.do?method=triggerAmazonAction" />
+		<forward name="accessRestricted" path="/jsp/formpages/AccessRestricted.jsp" />
+		<forward name="showBusinessService" path="/showapplication.do?method=showApplication" />
+		
+	</global-forwards>
+	
+
+<!-- ================== Action Mapping Definitions =================-->
+
+	<action-mappings>
+	
+		<action path="/viewLogs" name="viewLog" type="com.adventnet.appmanager.struts.actions.ViewLogsAction" validate="false" scope="request" parameter="method">
+			<forward name="viewLogsPage" path="/jsp/viewlogs/ViewLogs.jsp" contextRelative = "true" />
+		</action>
+
+		<!-- View SIF actions Starts -->
+		<action path="/viewSIF" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.ViewSIFAction" scope="request" parameter="method" validate="false"/>
+		<!-- View SIF actions Ends -->
+
+		<action path="/showTile" name="AMActionForm" validate="false" type="com.adventnet.appmanager.struts.actions.ShowTile">
+			<forward name="success" path="Tile.Exception" />
+		</action>
+		
+		<!-- View Logs -->
+		
+		<action path="/viewLogs" name="viewLog" type="com.adventnet.appmanager.struts.actions.ViewLogsAction" validate="false" scope="request" parameter="method">
+			<forward name="viewLogsPage" path="/jsp/viewlogs/ViewLogs.jsp" contextRelative = "true" />
+		</action>
+		
+		<action path="/Upload" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.UploadAction" validate="false"	scope="request" input="/jsp/Fileupload.jsp">
+			<forward name="success" path="/jsp/Fileupload.jsp" />
+			<forward name="MibUpload.success" path="/jsp/MibUpload.jsp" />
+		</action>
+		
+		<action path="/register" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.RegisterAction" validate="false" scope="request" input="/webclient/common/jsp/RegisterLicence.jsp">
+			<forward name="success" path="/jsp/RegistrationStatus.jsp" />
+		</action>
+	
+		<action path="/deleteMO" type="com.adventnet.appmanager.struts.actions.DataCollectionController" scope="request" parameter="method">
+		</action>
+	
+		<action path="/swMgmt" type="com.adventnet.appmanager.struts.actions.SWMgmtController" scope="request" parameter="method">
+		</action>
+
+
+		<!-- Reports actions starts here -->
+		<action path="/showReports"	type="com.adventnet.appmanager.reporting.actions.AMReportActions" validate="true" scope="request" parameter="actionMethod" name="ReportForm">
+			<forward name="report.success" path=".Reports" />
+			<forward name="report.it360Success" path="IT360.Reports" />
+			<forward name="report.ha.health" path=".HAHealth" />
+			<forward name="report.health" path=".HealthReport" />
+			<forward name="report.ha.availability" path=".HAAvailability" />
+			<forward name="report.servutil" path=".ServerUtil" />
+			<forward name="report.ha.availability.pdf" path="/servlet/PDFReport" />
+			<forward name="report.inventory.pdf" path="/servlet/PDFReport" />
+			
+			<forward name="report.ha.health.pdf" path="/servlet/PDFReport" />
+			<forward name="report.availability.pdf" path="/servlet/PDFReport" />
+			<forward name="report.health.pdf" path="/servlet/PDFReport" />
+			<forward name="report.perf.pdf" path="/servlet/PDFReport" />
+			<forward name="report.snapshot.pdf" path="/servlet/PDFReport" />
+			<forward name="report.availabilitysnapshot.pdf" path="/servlet/PDFReport" />
+			
+			<forward name="report.outagereport.pdf" path="/servlet/PDFReport" />
+			<forward name="report.availabilitytrendreport.pdf" path="/servlet/PDFReport" />
+			<forward name="report.availabilitytrenddowntimereport.pdf"	path="/servlet/PDFReport" />
+			<forward name="report.CustomAttribute.pdf" path="/servlet/PDFReport" />
+			<forward name="report.eventreport.pdf" path="/jsp/reports/HAEventReport.jsp" />
+			<forward name="report.summary.pdf" path="/servlet/PDFReport" />
+			<forward name="report.poll.csv" path="/servlet/PDFReport" />
+			
+			<forward name="report.glancereport.pdf" path="/servlet/PDFReport" />
+			<forward name="report.eumsummary.pdf" path="/servlet/PDFReport" />
+			<forward name="report.availability" path=".AvailabilityReport" />
+			<forward name="report.summary" path=".SummaryReport" />
+			<forward name="report.mttr" path=".MttrReport" />
+			<forward name="report.perf" path=".Performance" />
+			
+			<forward name="report.snapshot" path=".HASnapshot" />
+			<forward name="report.availabilitysnapshot" path=".AvailabilitySnapshot" />
+			<forward name="report.outagereport" path=".outagereport" />
+			<forward name="report.availabilitytrendreport" path=".availabilitytrendreport" />
+			<forward name="report.availabilitytrenddowntimereport" path=".availabilitytrenddowntimereport" />
+			<forward name="report.glancereport" path=".AtAGlanceReport" />
+			<forward name="report.inventory" path=".Inventory"/>
+			<forward name="report.eumsummary" path=".EumSummartReport" />
+
+			
+			<forward name="report.eum.glancereport" path=".EUMAtAGlanceReport" />
+			<forward name="report.tablereport" path=".Tablereport" />
+			<forward name="report.message" path=".Message" />
+			<forward name="report.eventreport" path=".Eventreport" />
+			<forward name="report.managereventreport" path="/jsp/ManagerEventReport.jsp" />
+			<forward name="report.CAMAttributes" path=".CAMAttributes" />
+			
+			<forward name="report.CustomAttribute" path=".AttributeReport" />
+			<forward name="report.ha.health.csv" path="/jsp/reports/HAHealthReport_csv.jsp" />
+			<forward name="report.health.csv" path="/jsp/reports/HealthReport_csv.jsp" />
+			<forward name="report.availability.csv" path="/jsp/reports/AvailabilityReport_csv.jsp" />
+			<forward name="report.perf.csv" path="/jsp/reports/PerformanceReport_csv.jsp" />
+			
+			<forward name="report.availabilitysnapshot.csv" path="/jsp/reports/AvailabilitySnapshot_csv.jsp" />
+			<forward name="report.outagereport.csv" path="/jsp/reports/OutageReport_csv.jsp" />
+			<forward name="report.availabilitytrendreport.csv" path="/jsp/reports/AvailabilityTrendReport_csv.jsp" />
+			<forward name="report.eventreport.csv" path="/jsp/reports/HAEventReport_csv.jsp" />
+			<forward name="report.CustomAttribute.csv" path="/jsp/reports/AttributeReport_csv.jsp" />
+			<forward name="report.inventory" path="/jsp/reports/InventoryReport.jsp" />
+			<forward name="report.dbusers.pdf" path="/servlet/PDFReport" />
+			<forward name="report.queryresults.pdf" path="/servlet/PDFReport" />
+			<forward name="report.jobhistory.pdf" path="/servlet/PDFReport" />
+			<forward name="report.serverutilization.pdf" path="/servlet/PDFReport" />
+			
+			<forward name="report.s247.csv" path="/benchmarkdata.html" />
+				<forward name="report.customreports" path="/showCustomReports.do?method=generateUnderSizedMonitors" />
+	        <forward name="report.customreports.individual" path="/showCustomReports.do?method=generateIndividualReportCapacityPlanning" />
+			<forward name="report.customreports.diskpartition" path="/showCustomReports.do?method=generateDiskPartitionReport" />
+	             
+		</action>
+
+		<action path="/showCustomReports"     type="com.adventnet.appmanager.reporting.actions.CustomReportActions" validate="true" scope="request"  parameter="actionMethod" name="ReportForm">
+			<forward name="report.undersized" path=".UnderSized"/>
+			<forward name="report.oversized" path=".OverSized" />
+			<forward name="report.undersized.pdf"  path="/servlet/PDFReport" />
+			<forward name="report.diskpartition.pdf"  path="/servlet/PDFReport" />
+			<forward name="report.idle" path=".IdleMonitors" />
+			<forward name="report.diskpartition" path=".ServerDiskPartition" />
+			<forward name="report.undersizedjsp" path="/jsp/reports/UnderSizedMonitors.jsp" />
+			<forward name="report.oversizedjsp" path="/jsp/reports/OverSizedMonitors.jsp" />
+			<forward name="report.idlejsp" path="/jsp/reports/IdleMonitorsReports.jsp" />
+			<forward name="report.undersized.csv" path="/jsp/reports/VMCapacityReports_csv.jsp" />
+			<forward name="report.undersized.individual" path=".Capacityplanningindividualreport" />     
+			<forward name="report.undersized.individualcsv" path="/jsp/reports/VMCapacityReportsIndividual_csv.jsp" />     
+		</action>
+		
+				
+		<action path="/forecastReport"     type="com.adventnet.appmanager.reporting.actions.ForecastReportAction" validate="true" scope="request"  parameter="actionMethod" name="ReportForm">
+			<forward name="report.forecast" path="/jsp/reports/ForecastReport.jsp"/>
+			<forward name="report.forecast.csv" path="/jsp/reports/ForecastReport_csv.jsp"/>
+		</action>
+		<!-- Reports actions ends here -->
+	
+		<!-- 7, 30 Data Action starts here -->
+		<action path="/showHistoryData" type="com.adventnet.appmanager.struts.actions.HistoryDataAction" validate="false" scope="request" input="/jsp/Popup_HistoryData.jsp" name="ReportForm" parameter="method">
+			<forward name="historydata.success" path="/jsp/Popup_HistoryData.jsp"/>
+			<forward name="historydata.compare.success" path="/jsp/Popup_CompareHistoryData.jsp"/>
+			<forward name="historydata.success.pdf" path="/servlet/PDFReport"/>
+			<forward name="historydata.success.csv" path="/jsp/reports/PerformanceReport_csv.jsp"/>
+			<forward name="historydata.segmentbyhr" path="/jsp/SegmentedHistory.jsp"/>
+			<forward name="historydata.segmentbywk" path="/jsp/SegmentedHistory.jsp"/>
+			<forward name="historydata.stdDevn" path="/jsp/StandardDeviation.jsp"/>
+			<forward name="historydata.heat" path="/jsp/HeatChart.jsp"/>
+			<forward name="availabilitydata.success" path="/jsp/Popup_AvailabilityData.jsp"/>
+			<forward name="availabilitydata.success.pdf" path="/servlet/PDFReport"/>
+		</action>
+		<!-- 7, 30 Data Action ends here -->
+
+		<!-- anamoly detection starts here -->
+		<action path="/showAttributes" type="com.adventnet.appmanager.struts.actions.AnamolyDetection"	validate="false" scope="request" input="/jsp/AttributeDetails.jsp" name="ReportForm" parameter="method">
+		</action>
+		<!-- anamoly detection ends here -->
+		
+		<!-- bussiness Application starts here -->
+		<action path="/showBussiness" type="com.adventnet.appmanager.struts.actions.BussinessAction" validate="false" scope="request" input="/jsp/ServiceLevelAgreement.jsp" name="ReportForm" parameter="method">
+			<forward name="report.pdf" path="/servlet/PDFReport" />
+		</action>
+
+		<!-- schedule reports starts here -->
+		<action path="/scheduleReports"	type="com.adventnet.appmanager.struts.actions.ScheduleReportAction"	validate="false" scope="request" input="/jsp/ScheduleReportDetails.jsp" name="AMActionForm" parameter="method">
+		</action>
+		<!-- sechedule reports ends here -->
+
+		<!-- Business hours starts here -->
+		<action path="/businessHours" type="com.adventnet.appmanager.struts.actions.BusinessHoursAction" validate="false" scope="request" input="/jsp/BusinessHours.jsp" name="AMActionForm" parameter="method">
+		</action>
+		<!-- The following pathname invokes the same BusinessHourAction. The following 
+			mapping is added because when an operator views the business hour detail 
+			of the action, the path businessHours.do goes to unauthorized to view. In 
+			order to view the detail, a different path name is given. -->
+		<action path="/businessHourDetails"	type="com.adventnet.appmanager.struts.actions.BusinessHoursAction" validate="false" scope="request" input="/jsp/BusinessHours.jsp" name="AMActionForm" parameter="method">
+			<forward name="detailsPage" path="/jsp/BusinessHourDetails.jsp" />
+		</action>
+		<!-- Buiness hours ends here -->
+        	<action path="/monitorGrpRule" type="com.adventnet.appmanager.struts.actions.MonitorGroupRuleAction" validate="false" scope="request" name="RuleManagerForm" parameter="method">
+                        <forward name="RuleManagerPage" path="/showTile.do?TileName=.RuleManager"/>
+                        <forward name="AddRulePage" path="/showTile.do?TileName=.AddRulePage"/>
+		</action>
+
+		<!-- RBM Actions starts here -->
+		<action path="/rbmresources" type="com.adventnet.appmanager.struts.actions.RBMResourceDetails" validate="false" scope="request" input="/jsp/rbmresources.jsp" name="AMActionForm" parameter="method">
+		</action>
+		<!-- RBM Actions ends here -->
+	
+		<!-- custom reports starts here -->
+		<action path="/customReports" type="com.adventnet.appmanager.struts.actions.CustomReportAction"	validate="false" scope="request" input="/jsp/EnableCustomReports.jsp" name="AMActionForm" parameter="method">
+		</action>
+		<!-- Custom report ends here -->
+
+		<!--ipconfiguration starts here -->
+		<!--  
+		<action path="/changeip" type="com.adventnet.appmanager.struts.actions.ChangeIPConfigurationAction"	validate="false" scope="request" input="/jsp/ChangeIPAddress.jsp" name="AMActionForm" parameter="method">	
+		</action>
+		-->
+		<!-- ipconfiguration ends here -->
+	
+		<!-- get PDF Event List View -->
+		<action path="/EventViewPDF" type="com.adventnet.appmanager.struts.actions.AMAlarmViewPDFAction" scope="request">
+			<forward name="eventlist.success.pdf" path="/servlet/PDFReport" />
+		</action>
+		
+		<!-- Weblogic actions starts here -->
+		<action path="/weblogicApps" type="com.adventnet.appmanager.server.wlogic.actions.WlogicActions" validate="false" scope="request" input="/jsp/ShowWebApplications.jsp" parameter="method">
+			<forward name="showWebApps.success" path="/jsp/ShowWebApplications.jsp" />
+			<forward name="showWebAppServlets.success" path="/jsp/ShowWlogicServletData.jsp" />
+			<forward name="showWLIBpm.success" path="/jsp/ShowWLIBpmDetails.jsp" />
+			<forward name="showJMS.success" path="/jsp/ShowJMSDetails.jsp" />
+			<forward name="showWLIAI.success" path="/jsp/ShowWLIAIDetails.jsp" />
+			<forward name="showThread.success" path="/jsp/ShowThreadData.jsp" />
+			<forward name="showSAF.success" path="/jsp/ShowSAFDetails.jsp" />
+			<forward name="showWLIMB.success" path="/jsp/ShowWLIMBDetails.jsp" />
+			<forward name="showJDBC.success" path="/jsp/ShowJDBCDetails.jsp" />
+			<forward name="showEJB.success" path="/jsp/ShowEJBDetails.jsp" />
+			<forward name="showGC.success" path="/jsp/ShowGCDetails.jsp" />
+			<forward name="showMemPool.success" path="/jsp/ShowMemPoolDetails.jsp" />
+			<forward name="showGCImpact.success" path="/jsp/ShowGCImpactDetails.jsp" />
+		</action>
+		<!-- Weblogic actions ends here -->
+		
+		<action path="/showActionProfiles" type="com.adventnet.appmanager.struts.actions.ShowActionProfiles" validate="false" scope="request" input="/jsp/AssociatedThresholds.jsp"	parameter="method" name="AMActionForm">
+			<forward name="report.action.csv" path="/jsp/reports/ActionReport_csv.jsp"/>
+		</action>
+		
+		<!--MIB Browser Action -->
+		<action path="/MibBrowser" type="org.apache.struts.actions.ForwardAction" parameter="/jsp/MibBrowser.jsp">
+		</action>
+
+		<!--MIB Browser Action -->
+		<action path="/ConfigureProxy" name="ProxyConfiguration" type="com.adventnet.appmanager.struts.actions.ConfigureProxy"	validate="false" scope="request" input="/jsp/ProxyConfiguration.jsp">
+			<forward name="configureProxy" path="/jsp/ProxyConfiguration.jsp" />
+		</action>
+	
+		<action path="/applications" type="org.apache.struts.actions.ForwardAction"	parameter="/MyPage.do?method=viewDashBoard" />
+		<action path="/prerequisites" type="org.apache.struts.actions.ForwardAction" parameter="/jsp/Prerequisites.jsp" />
+		<action path="/common/serverinfo" type="org.apache.struts.actions.ForwardAction" parameter="/adminAction.do?method=showAMServerStatus" />
+		<action path="/common/viewThreshold" type="org.apache.struts.actions.ForwardAction"	parameter="/adminAction.do?method=showThresholds" />
+		<action path="/common/viewActions" type="org.apache.struts.actions.ForwardAction" parameter="/adminAction.do?method=showActionProfiles" />
+		<action path="/common/executeAction" type="org.apache.struts.actions.ForwardAction"	parameter="/GlobalActions.do" />
+		<action path="/common/executeSMS" type="org.apache.struts.actions.ForwardAction" parameter="/GlobalActions.do" />
+		<action path="/common/executeScript" type="org.apache.struts.actions.ForwardAction"	parameter="/GlobalActions.do" />
+		<action path="/common/executeTrap" type="org.apache.struts.actions.ForwardAction" parameter="/GlobalActions.do" />
+		<action path="/common/executeMBeanOperation" type="org.apache.struts.actions.ForwardAction"	parameter="/GlobalActions.do" name="AMActionForm" />
+		<action path="/common/executeTicket" type="org.apache.struts.actions.ForwardAction"	parameter="/GlobalActions.do" />
+		<action path="/DBaction" type="com.adventnet.appmanager.struts.actions.DBaction" name="AMActionForm" parameter="method" />
+		
+		<action path="/updateScript" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.CreateScriptMonitor"	validate="false" scope="request" parameter="method">
+ 			<forward name="success" path="/showapplication.do?method=showApplication" />
+		</action>
+		
+		<action path="/monitorType" name="AMActionForm"	type="com.adventnet.appmanager.struts.actions.ManageMonitorType" validate="false" scope="request" parameter="method" />
+		
+		<action path="/manageConfMons" name="AMActionForm"	type="com.adventnet.appmanager.struts.actions.NewMonitorConf" validate="false" scope="request" parameter="method">
+		</action>
+		
+		<action path="/showCustom" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.ShowCustomDetails" validate="false" scope="request" parameter="method"></action>
+		<action path="/showAgent" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.ShowAgentDetails" validate="false" scope="request" parameter="method">
+			<forward name="detailsPage" path="/jsp/EumDetailsPage.jsp" />
+		</action>
+		
+		<!-- action path="/editAgent" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.ShowAgentDetails" validate="false" scope="request" parameter="method">
+		</action -->
+	
+		<action path="/wsm" name="AMActionForm" type="com.adventnet.appmanager.client.wsm.WSMAction" validate="false" scope="request" parameter="method">
+			<forward name="details" path=".webservice.details" />
+			<forward name="operations" path=".webservice.operations" />
+			<forward name="manageoperations" path=".webservice.moperations" />
+			<forward name="operationDetails" path=".webservice.operation.details" />
+		</action>
+
+		<action path="/updateUrl" name="UrlForm" type="com.adventnet.appmanager.struts.urlmonitor.CreateUrlMonitor"	validate="false" scope="request" parameter="actionmethod">
+			<forward name="success" path="/showapplication.do?method=showApplication" />
+			<forward name="configureProxy" path="/jsp/ProxyConfiguration.jsp" />
+		</action>
+	
+		<action path="/createrbm" name="RbmForm" type="com.adventnet.appmanager.struts.rbmmonitor.CreateRBMMonitor"	validate="false" scope="request" parameter="actionmethod">
+			<forward name="success" path="/showapplication.do?method=showApplication" />
+		</action>
+	
+		<action path="/createurlsequence" name="UrlForm" type="com.adventnet.appmanager.struts.urlmonitor.CreateUrlSequence" validate="false" scope="request" parameter="actionmethod">
+			<forward name="configureProxy" path="/jsp/ProxyConfiguration.jsp" />
+			<forward name="success" path="/jsp/urlseqsuccess.jsp" />
+		</action>
+		<action path="/importHAR" type="org.apache.struts.actions.ForwardAction" parameter="/jsp/URLSequence_HAR_Import.jsp" />
+    	<action path="/WTRInfo" type="org.apache.struts.actions.ForwardAction" parameter="/jsp/URLSequence_WTR_Info.jsp" />
+	
+		<action path="/manageApplications" type="com.adventnet.appmanager.struts.actions.HAIDManagerAction" name="applicationform" scope="request" input="/jsp/CreateApplication.jsp" parameter="method">
+			<forward name="applications" path="/showapplication.do?method=showApplications" />
+		</action>
+		
+		<action path="/showRHEVApplication" type="com.adventnet.appmanager.struts.actions.ShowRHEVApplication" name="applicationform" scope="request" input="/jsp/RHEVManagerApplication.jsp" parameter="method">
+		</action>
+	
+		<action path="/showOVMApplication" type="com.adventnet.appmanager.struts.actions.ShowOVMApplication" name="applicationform" scope="request" input="/jsp/OVMManagerApplication.jsp" parameter="method">
+		</action>
+		
+		<action path="/showHyperVClusterApplication" type="com.adventnet.appmanager.struts.actions.ShowHyperVClusterApplication" name="applicationform" scope="request" input="/jsp/hyperv/cluster/HyperVClusterApplication.jsp" parameter="method">
+		</action>
+		
+		<action path="/removeMonitors" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.HAIDManagerAction" scope="request" parameter="method">
+			<forward name="showapplication" path="/showresource.do?method=getMonitorForm" />
+		</action>
+	
+		<action path="/showapplication" name="applicationform" type="com.adventnet.appmanager.struts.actions.ShowApplication" scope="session" parameter="method" input="/applications.do">
+			<forward name="application" path="/jsp/ShowHolisticApplication.jsp" />
+                        <forward name="relationShipView" path="/jsp/ShowRelationshipView.jsp" />
+		</action>
+		<!--For AlarmsOne Integration  -->
+		<action path="/alarmsoneintegration" type="com.adventnet.appmanager.struts.actions.AlarmsOneAPIAction" scope="request" parameter="method" name="AMActionForm">
+		<forward name="AddNewAlarmsOneIntegration" path="/jsp/addNewAlarmsOneIntegration.jsp" />
+		</action>
+		
+		<!--For Slack Integration  -->
+		<action path="/slackintegration" type="com.adventnet.appmanager.struts.actions.SlackAPIAction" scope="request" parameter="method" name="AMActionForm">
+		<forward name="AddNewSlackIntegration" path="/jsp/addNewSlackIntegration.jsp" />
+		</action>
+		
+		
+		
+		<action path="/extDeviceAction" type="com.adventnet.appmanager.struts.actions.ExtDeviceActions" scope="request" parameter="method" name="AMActionForm">
+			<forward name="AddNewExtDevice" path="/jsp/AddNewExtDevice.jsp" />
+			<forward name="site24x7Reports" path="/jsp/site24x7Reports.jsp" />
+			<forward name="site24x7Reports1" path="/jsp/Site24x7Data.jsp" />
+			<forward name="AddNewAlarmsOneIntegration" path="/jsp/addNewAlarmsOneIntegration.jsp" />
+			<forward name="AddNewSlackIntegration" path="/jsp/addNewSlackIntegration.jsp" />
+		</action>
+
+		 <action path="/mapViewAction" type="com.adventnet.appmanager.struts.actions.MapViewActions" scope="request" parameter="method">
+		 </action>
+		<action path="/adminAction" type="com.adventnet.appmanager.struts.actions.AdminActions" scope="request" parameter="method" name="AMActionForm">
+			<!-- success is called by edit/create and delete methods -->
+			<forward name="success" path="/adminAction.do?method=showActionProfiles" />
+			<forward name="actionprofile" path=".ActionProfiles" />
+			<!-- thresholdlist is called by edit/create and delete methods -->
+			<forward name="thresholdlist" path="/adminAction.do?method=showThresholds" />
+			<forward name="thresholdprofile" path=".ThresholdProf" />
+			<forward name="managedservers" path=".ManagedServer" />
+			<forward name="HostDiscoveryForm" path="/jsp/HostDiscoveryForm.jsp" />
+			<forward name="NetworkDiscoveryForm" path="/jsp/NetworkDiscoveryForm.jsp" />
+			<forward name="showTableDetails" path="/jsp/tableDetails.jsp"/>
+			
+			<forward name="securityOperations" path="/jsp/certificateImport/securityOperations.jsp"/>
+			<forward name="applyTrustedCertificates" path="/jsp/certificateImport/applyTrustedCertificates.jsp"/>
+			<forward name="listConfiguredCertificates" path="/jsp/certificateImport/listConfiguredCertificates.jsp"/>
+			<forward name="displayApiDocumentation" path="/jsp/APIDocumentation.jsp"/>
+		</action>
+		<action path="/adminActivities" type="com.adventnet.appmanager.struts.actions.AdminActivitiesActions" scope="request" parameter="method" name="AMActionForm">
+			<forward name="showSSHSettings" path="/jsp/SSHSettings.jsp"/>
+		</action>
+
+                <action path="/newDiscoveryAction" type="com.adventnet.appmanager.struts.actions.NewDiscoveryAction" scope="request" parameter="method" name="NewDiscoveryForm">
+                        <forward name="newDiscoveryPage" path="/jsp/NetworkDiscoveryForm.jsp"/>
+                        <forward name="discoveryProfilesPage" path="/jsp/DiscoveryProfiles.jsp?showlink=network"/>
+                       	<forward name="discoveredDevicesPage" path="/jsp/DiscoveredDevices.jsp?showlink=network"/>
+                    	<forward name="discoveryDeleteMonitorsPage" path="/jsp/discoveryDeleteMonitorsPage.jsp"/>
+                    	<forward name="discoveryDebugPage" path="/jsp/discoveryFailedIpList.jsp"/>
+                    	<forward name="listViewData.success.pdf" path="/servlet/PDFReport"/>
+                    	<forward name="DependencyMapAdditionPage" path="/jsp/DependencyMapAdditionPage.jsp"/>
+						<forward name="DependencyMapEditPage" path="/jsp/DependencyMapEditPage.jsp"/>
+						<forward name="DependencyPage" path="/jsp/DependencyPage.jsp"/>
+                    	<forward name="listViewData.success.pdf" path="/servlet/PDFReport"/>
+                </action>
+	
+			 <action path="/auditLogAction" type="com.manageengine.appmanager.struts.actions.AuditLogAction" scope="request" parameter="method">
+                        <forward name="auditForMG" path="/showTile.do?TileName=Tile.AuditLog"/>
+       		 </action>
+
+		<action scope="request" name="HostResourceForm" path="/HostResource" type="com.adventnet.appmanager.hostresource.struts.HostResourceAction" validate="false" parameter="method" input="/jsp/HostResourceConfig.jsp">
+			<forward name="serverlist" path="/jsp/AssociateTemplateAndProcess.jsp" />
+		</action>
+		
+		<action scope="request" name="AMActionForm" path="/CronJobAction" type="com.adventnet.appmanager.hostresource.struts.CronJobAction" validate="false" parameter="method">
+			<forward name="HostCronJobConfigPage" path="/jsp/HostCronJobConfigPage.jsp" />
+		</action>
+
+		<action scope="request" name="AMActionForm" path="/SelfHelpToolsAction" type="com.adventnet.appmanager.struts.actions.SelfHelpToolsAction" validate="false" parameter="method">
+			<forward name="wmiTool" path="/jsp/SelfHelpWMITool.jsp" />
+			<forward name="report.servlet.selfhelpwmi.pdf" path="/servlet/PDFReport" />
+			<forward name="UrlDebug" path="/jsp/SelfHelpURLDebug.jsp" />
+			<forward name="MonitorResult" path="/jsp/SelfHelpURLDebugResult.jsp"/>
+		</action>
+		
+		<action path="/HostResourceDispatch" name="AMActionForm" type="com.adventnet.appmanager.hostresource.struts.HostResourceDispatchAction" scope="request" parameter="method">
+			<forward name="CpuCoreDetailsPage" path="/jsp/HostCPUCoreDetails.jsp" />
+			<forward name="NetworkDetailsPage" path="/jsp/HostNetworkDetails.jsp" />
+			<forward name="NetworkLoadBalancerPage" path="/jsp/HostWindowsServerNLB.jsp" />
+			<forward name="MemoryDetailsPage" path="/jsp/HostMemoryDetails.jsp" />
+			<forward name="OverViewDetailsPage" path="/jsp/HostOverViewDetails.jsp" />
+			<forward name="EventLogDetailsPage" path="/jsp/HostEventLogDetails.jsp" />
+			<forward name="ScheduledTasksDetailsPage" path="/jsp/HostScheduledTasksDetails.jsp" />
+			<forward name="PrintQueueDetails" path="/jsp/HostPrintQueueDetails.jsp" />
+			<forward name="ConfigDetailsPage" path="/jsp/HostConfigDetails.jsp" />
+			<forward name="TemplateServiceDetails" path="/jsp/ManualProcessAdder.jsp" />
+			<forward name="testWinServiceAction" path="/jsp/Popup_WinServiceActionExec.jsp" />
+			<forward name="HwHealthDetailsPage" path="/jsp/HostHwHealthDetails.jsp" />
+			<forward name="monitorsInSystemDetailsPage" path="/jsp/HostServicesDetails.jsp" />
+			<forward name="cronJobPage" path="/jsp/HostCronJobDetails.jsp" />
+			<forward name="errorLogDetailsPage" path="/jsp/HostErrorLogMonitoring.jsp" />
+		</action>
+		
+		<action path="/RecentAlarms" type="com.adventnet.appmanager.struts.actions.fault.RecentAlarms" validate="false" scope="request" parameter="method">
+			<forward name="recentAlarms" path="/jsp/RecentAlarms.jsp" />
+		</action>
+		
+		<action scope="request" path="/MySql" type="com.adventnet.appmanager.mysql.struts.MySqlAction" name="HostResourceForm" parameter="method">
+			<forward name="details" path="/jsp/MySqlDetails.jsp" />
+			<forward name="overview" path="/jsp/MySqlOverview.jsp" />
+			<forward name="database" path="/jsp/MySqlDatabase.jsp" />
+			<forward name="configuration" path="/jsp/MySqlConfiguration.jsp" />
+			<forward name="replication" path="/jsp/MySqlReplication.jsp" />
+			<forward name="MySqlProcessList" path="/jsp/MySqlProcessInfo.jsp" />
+			<forward name="MySqlSession" path="/jsp/MySqlSession.jsp" />
+			<forward name="MySqlPerformance" path="/jsp/MySqlPerformance.jsp" />
+		</action>
+	
+		<action scope="request" path="/MSSqlDispatch" type="com.adventnet.appmanager.mssql.struts.MsSQLDispatchAction" name="AMActionForm" parameter="method">
+			<forward name="details" path="/jsp/MSSQLDetails.jsp"/>
+			<forward name="overview" path="/jsp/mssql/overview.jsp"/>
+			<forward name="memory" path="/jsp/mssql/memory.jsp"/>
+			<forward name="iooperation" path="/jsp/mssql/iooperation.jsp"/>
+			<forward name="sessions" path="/jsp/mssql/sessions.jsp"/>
+			<forward name="database" path="/jsp/mssql/database.jsp"/>
+			<forward name="database13900" path="/jsp/mssql/database13900.jsp"/>
+			<forward name="backuprestore" path="/jsp/mssql/backuprestore.jsp" />
+			<forward name="replication" path="/jsp/mssql/replication.jsp" />
+			<forward name="jobs" path="/jsp/mssql/jobs.jsp"/>
+			<forward name="performance" path="/jsp/mssql/performance.jsp"/>
+			<forward name="configuredata" path="/jsp/mssql/ConfigureSQLDetails.jsp"/>
+			<forward name="clusterdata" path="/jsp/mssql/SQLClusterDetails.jsp"/>	
+			<forward name="waitstatsqueries" path="/jsp/mssql/WaitStatisticQueries.jsp"/>	
+			<forward name="report.dbtables.csv" path="/jsp/reports/DBTables_csv.jsp" />
+			<forward name="report.driveinfo.csv" path="/jsp/reports/DiskInfoWithDB_csv.jsp" />
+			<forward name="report.sessions.pdf" path="/servlet/PDFReport" />
+			<forward name="alwayson" path="/jsp/mssql/AlwaysOn.jsp" />
+			<forward name="availabilitydatabase" path="/jsp/mssql/AlwaysOnAvailabilityDatabase.jsp" />
+			<forward name="availabilityreplica" path="/jsp/mssql/AlwaysOnAvailabilityReplica.jsp" />
+			<forward name="availabilitydatabaselist" path="/jsp/mssql/AlwaysOnAvailabilityDatabaseList.jsp" />
+			<forward name="logshipping" path="/jsp/mssql/LogShipping.jsp" />
+			
+			
+	   </action>
+	   
+	    <action path="/sqljob" name="AMActionForm" type="com.adventnet.appmanager.mssql.struts.MsSQLJobAction" scope="request" parameter="method"> 
+		<forward name="testSqlJobAction" path="/jsp/Popup_SqlJobActionExec.jsp"/>
+		</action>
+		
+		<action path="/usermgmt" name="AMActionForm" type="com.adventnet.appmanager.mssql.struts.MsSQLUserManagement" scope="request" parameter="method"></action>
+		
+		<action path="/updateSQLconfig" name="AMActionForm" type="com.adventnet.appmanager.mssql.struts.MSSQLUpdateConfigurationAction" scope="request" parameter="method">
+		</action>
+		
+		<action scope="request" path="/OracleDispatch" type="com.adventnet.appmanager.oracle.struts.OracleDispatchAction" name="AMActionForm" parameter="method">
+			<forward name="report.oraclejobs.csv" path="/jsp/reports/OracleJobs_csv.jsp" />
+			<forward name="details" path="/jsp/oraclerac/OracleRACDetails.jsp"/>
+		</action>
+		
+		 <action path="/showMSSQLReports" type="com.adventnet.appmanager.mssql.struts.MSSQLReportActions" validate="true" scope="request" parameter="actionMethod" name="ReportForm">
+			<forward name="report.mssqlperformancereport.pdf" path="/servlet/PDFReport" />
+			<forward name="report.mssqlperformancereport" path="/jsp/mssql/performance.jsp" />
+			<forward name="performance" path="/jsp/mssql/performance.jsp"/>
+			<forward name="report.mssqljobsreport.pdf" path="/servlet/PDFReport" />
+			<forward name="report.mssqljobsreport" path="/jsp/mssql/sqlJobHistory.jsp" />
+			<forward name="report.mssqlusersreport.pdf" path="/servlet/PDFReport" />
+			<forward name="report.mssqlusersreport" path="/jsp/mssql/userManagement.jsp" />
+			<forward name="report.mssqldatabasesreport.pdf" path="/servlet/PDFReport" />
+			<forward name="report.mssqldatabasesreport" path="/jsp/mssql/databaseReport.jsp" />
+			<forward name="report.mirrorhistoryreport.pdf" path="/servlet/PDFReport" />
+			<forward name="report.backup.pdf" path="/servlet/PDFReport" />
+			<forward name="report.unusedobj.pdf" path="/servlet/PDFReport" />
+			<forward name="report.mirrorhistoryreport" path="/jsp/mssql/SQLMirroringHistoryReport.jsp" />
+			<forward name="mssqljobs" path="/jsp/mssql/sqlJobHistory.jsp"/>
+			<forward name="report.backup" path="/jsp/mssql/backup.jsp"/>
+			<forward name="report.unusedobj" path="/jsp/mssql/unusedobject.jsp"/>	  
+		</action>
+	
+		<action scope="request" path="/Sybase" type="com.adventnet.appmanager.server.sybase.struts.SybaseAction" name="HostResourceForm" validate="false" input="/jsp/SybaseDetails.jsp" parameter="method">
+			<forward name="DisplaySybaseData" path="/jsp/SybaseDetails.jsp" />
+		</action>
+
+		<action scope="request" path="/DotNet" type="com.adventnet.appmanager.dotnet.struts.DotNetAction" name="AMActionForm" validate="false" input="/jsp/DotNetConfig.jsp">
+			<forward name="DisplayDotNetData" path="/jsp/DotNet.jsp" />
+			<forward name="ConfigureDotNet" path="/jsp/DotNetConfig.jsp" />
+		</action>
+	
+		<action scope="request" path="/DB2" type="com.adventnet.appmanager.db2.struts.DB2Action" name="AMActionForm" validate="false" input="/jsp/DB2Details.jsp" parameter="method">
+			<forward name="details" path="/jsp/DB2Details.jsp" />
+			<forward name="DisplayDB2Data" path="/jsp/DB2Overview.jsp" />
+			<forward name="DB2Session" path="/jsp/DB2Session.jsp" />
+			<forward name="DB2Performance" path="/jsp/DB2Performance.jsp" />
+		</action>
+	
+		<action path="/oracleas" name="AMActionForm" type="com.adventnet.appmanager.oracleas.struts.OracleASAction" scope="request" parameter="method">
+			<forward name="details" path="/jsp/OracleASDetails.jsp" />
+		</action>
+	
+		<action path="/JavaRuntime" name="AMActionForm" type="com.adventnet.appmanager.client.jdk15.JDK15Action" scope="request" parameter="method">
+			<forward name="details" path="/jsp/JDK15Details.jsp" />
+			<forward name="overview" path="/jsp/JDK15Overview.jsp" />
+			<forward name="garbage" path="/jsp/JDK15Garbage.jsp" />
+			<forward name="threads" path="/jsp/JDK15Threads.jsp" />
+			<forward name="configuration" path="/jsp/JDK15Configuration.jsp" />
+			<forward name="threadinfo" path="/jsp/JDK15ThreadInfo.jsp" />
+			<forward name="actions" path="/jsp/JDK15Action.jsp" />
+			<forward name="viewimpact" path="/jsp/JDK15Viewimpact.jsp" />
+			<forward name="showthreaddump" path="/jsp/JDK15ShowThread.jsp" />
+		</action>
+	
+		<action path="/showConfigurationData" type="com.adventnet.appmanager.struts.actions.ConfigurationDataAction" validate="false" scope="request" input="/jsp/Popup_ConfigurationData.jsp" name="ReportForm" parameter="method">
+			<forward name="historydata.success" path="/jsp/Popup_ConfigurationData.jsp" />
+			<forward name="historydata.success.pdf" path="/servlet/PDFReport" />
+			<forward name="historydata.globalview" path="/jsp/GlobalConfigView.jsp" />
+		</action>
+		
+		<action path="/DebugInfo" type="com.adventnet.appmanager.struts.actions.DebugInfo" scope="request" parameter="method" name="AMActionForm">
+			<forward name="showthreaddump" path="/jsp/JDK15ShowThread.jsp" />
+		</action>
+	
+		<action path="/dashboard" name="ReportForm" type="com.adventnet.appmanager.struts.actions.DashboardAction" scope="request" parameter="method">
+		</action>
+		
+		<!-- action path="/CreateSeleniumMonitor" name="AMActionForm" type="com.me.apm.client.selenium.actions.SeleniumActions" scope="request" parameter="method">
+		</action -->
+		
+		<action path="/SeleniumActions" name="AMActionForm" type="com.me.apm.client.selenium.actions.SeleniumActions" scope="request" parameter="method">
+		</action>
+		
+		<action path="/RestAPIAction" name="AMActionForm" type="com.adventnet.appmanager.client.restapi.RestAPIAction" scope="request" parameter="method">
+		</action>
+
+		<!-- <action path="/androidModule" name="AMActionForm" type="com.me.apm.client.selenium.actions.SeleniumActions" scope="request" parameter="execute">
+		</action> -->
+	
+		<action path="/as400" name="AMActionForm" type="com.adventnet.appmanager.as400.struts.AS400Action" scope="request" parameter="method">
+			<forward name="details" path="/jsp/AS400Details.jsp" />
+			<forward name="overview" path="/jsp/as400/overview.jsp" />
+			<forward name="status" path="/jsp/as400/status.jsp" />
+			<forward name="pool" path="/jsp/as400/pool.jsp" />
+			<forward name="jobs" path="/jsp/as400/jobs.jsp" />
+			<forward name="messages" path="/jsp/as400/messages.jsp" />
+			<forward name="spool" path="/jsp/as400/spool.jsp" />
+			<forward name="printer" path="/jsp/as400/printer.jsp" />
+			<forward name="disk" path="/jsp/as400/disk.jsp" />
+			<forward name="problem" path="/jsp/as400/problem.jsp" />
+			<forward name="subsystem" path="/jsp/as400/subsystem.jsp" />
+			<forward name="admin" path="/jsp/as400/admin.jsp" />
+			<forward name="commandout" path="/jsp/command.jsp" />
+			<forward name="queues" path="/jsp/as400/queues.jsp" />
+            <forward name="historylog" path="/jsp/as400/historyLog.jsp" />
+		</action>
+	
+		<action path="/sap" name="AMActionForm" type="com.adventnet.appmanager.client.sap.SAPAction" scope="request" parameter="method">
+			<forward name="details" path="/jsp/SAPDetails.jsp" />
+			<forward name="overview" path="/jsp/sap/overview.jsp" />
+			<forward name="background" path="/jsp/sap/background.jsp" />
+			<forward name="backgroundjob" path="/jsp/sap/backgroundjob.jsp"/>
+			<forward name="searchbgjob" path="/jsp/sap/searchjob.jsp" />
+			<forward name="jobtrace" path="/jsp/sap/jobtrace.jsp" />
+			<forward name="buffer" path="/jsp/sap/buffer.jsp" />
+			<forward name="dialog" path="/jsp/sap/dialog.jsp" />
+			<forward name="enqueue" path="/jsp/sap/enqueue.jsp" />
+			<forward name="os" path="/jsp/sap/os.jsp" />
+			<forward name="spool" path="/jsp/sap/spool.jsp" />
+			<forward name="alert" path="/jsp/sap/alerts.jsp" />
+			<forward name="processes" path="/jsp/sap/processes.jsp" />
+			<forward name="updateworkprocess" path="/jsp/sap/update.jsp" />
+			<forward name="showmonitorsets" path="/jsp/sap/ccmsmonitorsets.jsp" />
+			<forward name="choosemonitorset" path="/jsp/sap/chooseccmsmonitors.jsp" />
+			<forward name="monitorelementlist" path="/jsp/sap/ccmsmonitorelements.jsp" />
+		</action>
+	
+        <action path="/testCredential" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.TestCredentials" scope="request" parameter="method">
+	</action>
+
+		<action path="/showresource" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.ShowResourceDetails" scope="request" parameter="method">
+			<forward name="application" path="/jsp/ShowHolisticApplication.jsp" />
+		</action>
+	<action path="/showNetworkResource" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.ShowNetworkDeviceDetails" scope="request" parameter="method">
+			<forward name="application" path="/jsp/ShowHolisticApplication.jsp" />
+		</action>
+	
+		<action path="/userconfiguration" name="UserConfiguration" type="com.adventnet.appmanager.struts.actions.UserConfigurationAction" validate="false" scope="request" parameter="method">
+			<forward name="success" path="Tile.USERGROUPS" />
+		</action>
+
+		<action path="/admin/userconfiguration" name="UserConfiguration" type="com.adventnet.appmanager.struts.actions.UserConfigurationAction" validate="false" scope="request" parameter="method">
+			<forward name="success" path="Tile.USERGROUPS" />
+		</action>
+
+		<!-- User Session actions Starts -->
+		<action path="/userSession" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.UserSessionAction" scope="request" parameter="method" validate="false"/>
+		<!-- User Session actions Ends -->
+	
+		<!--<action path="/admin/it360userconfiguration" name="UserConfiguration" type="com.adventnet.appmanager.struts.actions.UserConfigurationAction" validate="false" scope="request" parameter="method">
+			<forward name="success" path="IT360.USERGROUPS" />
+		</action>-->
+		
+		<action path="/alertEscalation" type="com.adventnet.appmanager.struts.actions.AdminTools" validate="false" scope="request" input="/jsp/AlertEscalation.jsp" name="AMActionForm" parameter="method">
+		</action>
+	
+		<action path="/admin/createapplication" type="com.adventnet.appmanager.struts.actions.HAIDManagerAction" name="applicationform" scope="request" parameter="method" />
+		<action path="/admin/createapplicationwiz" type="org.apache.struts.actions.ForwardAction" parameter="/manageApplications.do?method=showCreateApplicationForm" />
+	
+		<!-- CAM ACTION STARTS -->
+		<action path="/CreateCustomApplicationForm" name="CreateCustomApplicationForm" type="com.adventnet.appmanager.struts.actions.CreateCustomApplicationAction" validate="false">
+			<forward name="success" path="/jsp/cam_showapp.jsp" />
+		</action>
+	
+		<action path="/ShowCAM" type="com.adventnet.appmanager.struts.actions.ShowCAMAction" validate="false" scope="session" parameter="method">
+			<forward name="showcamapplication" path="/jsp/cam_showapp.jsp" />
+			<forward name="showscreen" path="/jsp/cam_showcustomscreen.jsp" />
+			<forward name="showsingleattributegraph" path="/jsp/cam_showsingleattributegraph.jsp" />
+			<forward name="configurescreen" path="/jsp/cam_configurescreen.jsp" />
+			<forward name="configureCAMReports" path="/jsp/cam_globalreportsconfig.jsp" />
+			<forward name="bulkEditCAMPage" path="/jsp/bulk_edit.jsp" />
+			<forward name="camGraphsPage" path="/jsp/cam_graphs.jsp" />
+		</action>
+		
+		<action path="/camJMXActions" name="CamJMXActionForm" type="com.adventnet.appmanager.struts.actions.CAMJMXAction" validate="false" scope="session" input="/jsp/cam_configurescreen.jsp" parameter="method">
+			<forward name="showdomains" path="/jsp/cam_choosedomain.jsp" />
+			<forward name="showmbeansandattributes" path="/jsp/cam_showmbeans.jsp" />
+			<forward name="configurescreen" path="/jsp/cam_configurescreen.jsp" />
+			<forward name="snmp" path="/jsp/cam_addsnmpobjects.jsp?noreload=true" />
+		</action>
+	
+	
+		<action path="/camSNMPActions" name="CamSNMPActionForm" type="com.adventnet.appmanager.struts.actions.CAMSNMPAction" validate="false" scope="session" input="/jsp/cam_configurescreen.jsp" parameter="method">
+			<forward name="snmp" path="/jsp/cam_addsnmpobjects.jsp" />
+			<forward name="snmptablescreen" path="/jsp/cam_showsnmptabledetails.jsp" />
+			<forward name="configurescreen" path="/jsp/cam_configurescreen.jsp" />
+		</action>
+		
+		<!-- CAM ACTION ENDS -->
+		
+		<!-- Conf Framework actions to manage the monitors Starts -->
+		<action path="/confActions" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.ConfMonitorAction" scope="request" parameter="method" validate="false">
+			<forward name="DockerAction" path="/jsp/amazon/ManageEC2Instances.jsp" />
+			<forward name="TestDockerAction" path="/jsp/Popup_VMTestAction.jsp" />
+            <forward name="OpenStackAction" path="/jsp/amazon/ManageEC2Instances.jsp" />
+            <forward name="OracleCloudAction" path="/jsp/amazon/ManageEC2Instances.jsp" />
+            <forward name="GCPComputeEngineAction" path="/jsp/amazon/ManageEC2Instances.jsp" />
+            <forward name="OraclePDBDiscovery" path="/jsp/oracle/OraclePDBDiscovery.jsp"></forward>
+            <forward name="AzureVMAction" path="/jsp/amazon/ManageEC2Instances.jsp" />
+		</action>
+		<!-- Conf Framework actions to manage the monitors Ends -->
+				
+		<!-- Database Performance actions Starts -->
+		<action path="/performanceActions" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.DBPerformanceAction" scope="request" parameter="method" validate="false"/>
+		<!-- Database Performance actions Ends -->
+		
+		<!-- Reset Password actions Starts -->
+		<action path="/resetPassword" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.ResetPasswordAction" scope="request" parameter="method" validate="false"/>
+		<!-- Reset Password actions Ends -->
+
+		<!-- DataTable related action Starts-->
+		<action path="/dataTableAction" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.DataTableAction" scope="request" parameter="method" validate="false">
+		</action>
+		<!-- DataTable related action Ends-->
+		
+		<!-- Differnetial Polling and DC Components enable-disable actions Starts -->
+		<action path="/showDCComponents" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.DifferentialPollingAction" scope="request" parameter="method" validate="false">
+		</action>
+	   <!-- Differnetial Polling and DC Components enable-disable actions Ends -->
+		<!-- Amazon/EC2Instance actions to manage the monitors Starts -->
+		<action path="/manageEC2Instances" name="AMActionForm" type="com.manageengine.appmanager.amazon.client.actions.EC2InstanceManageActions" scope="request" parameter="method" validate="false" input="/jsp/amazon/ManageEC2Instances.jsp">
+			<forward name="success" path="/jsp/amazon/ManageEC2Instances.jsp" />
+			<forward name="failure" path="/jsp/amazon/ManageEC2Instances.jsp" />
+		</action>
+		
+		<action path="/manageCloudVMActions" name="AMActionForm" type="com.adventnet.appmanager.cloud.client.actions.CloudMonitorAction" scope="request" parameter="method" validate="false" input="/jsp/ActionProfiles.jsp">
+			<forward name="success" path="/jsp/ActionProfiles.jsp" />
+			<forward name="failure" path="/jsp/ActionProfiles.jsp" />
+		</action>
+	
+		<action path="/manageVMInstances" name="AMActionForm" type="com.manageengine.appmanager.vservers.vmware.actions.VMManageActions" scope="request" parameter="method" validate="false" input="/jsp/amazon/ManageEC2Instances.jsp">
+			<forward name="success" path="/jsp/amazon/ManageEC2Instances.jsp" />
+			<forward name="failure" path="/jsp/amazon/ManageEC2Instances.jsp" />
+		</action>
+		
+		<action path="/manageNutanixInstance" name="AMActionForm" type="com.manageengine.appmanager.vservers.nutanix.actions.NutanixActions" scope="request" parameter="method" validate="false" input="/jsp/amazon/ManageEC2Instances.jsp">
+			<forward name="success" path="/jsp/amazon/ManageEC2Instances.jsp" />
+			<forward name="failure" path="/jsp/amazon/ManageEC2Instances.jsp" />
+		</action>
+	
+		<action path="/testVMAction" name="AMActionForm" type="com.manageengine.appmanager.vservers.vmware.actions.VMManageActions" scope="request" parameter="method" validate="false" input="/jsp/Popup_VmTestAction.jsp">
+			<forward name="success" path="/jsp/Popup_VMTestAction.jsp" />
+			<forward name="failure" path="/jsp/Popup_VMTestAction.jsp" />
+		</action>
+	
+		<action path="/assignOSNames" name="AMActionForm" type="com.manageengine.appmanager.amazon.client.actions.AmazonActions" scope="request" parameter="method" validate="false" input="/jsp/amazon/AssignPlatform.jsp">
+			<forward name="success" path="/jsp/amazon/AssignPlatform.jsp" />
+			<forward name="failed" path="/jsp/amazon/AssignPlatform.jsp" />
+		</action>
+		<!-- Amazon/EC2Instance actions to manage the monitors Ends -->
+		
+		<!-- Hyper-v actions to manage the monitors starts -->
+		<action path="/manageHyperVMs" name="AMActionForm" type="com.manageengine.appmanager.vservers.hyperv.actions.HypervActions" scope="request" parameter="method" validate="false" input="/jsp/hyperv/ManageHyperV.jsp">
+			<forward name="success" path="/jsp/hyperv/ManageHyperV.jsp" />
+			<forward name="failure" path="/jsp/hyperv/ManageHyperV.jsp" />
+		</action>
+		<!-- Hyper-v actions to manage the monitors ends -->
+		<!-- OpenShift actions to manage the monitors starts -->
+		<action path="/manageOpenShiftInstances" name="AMActionForm" type="com.manageengine.appmanager.vservers.openShift.actions.OpenShiftActions" scope="request" parameter="method" validate="false" input="/jsp/ManageOpenShift.jsp">
+			<forward name="success" path="/jsp/ManageOpenShift.jsp" />
+			<forward name="failure" path="/jsp/ManageOpenShift.jsp" />
+			<forward name="report.describe.instance.pdf" path="/servlet/PDFReport"/>
+		</action>
+		<!-- OpenShift actions to manage the monitors ends -->
+		<!-- Edit Displaynames Actions Starts -->
+		<action path="/editDisplaynames" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.EditDisplaynames" scope="request" parameter="method" validate="false" input="/jsp/EditDisplaynames.jsp">
+			<forward name="success" path="/jsp/EditDisplaynames.jsp" />
+			<forward name="failed" path="/jsp/EditDisplaynames.jsp" />
+		</action>
+		<!-- Edit Displaynames Actions Ends -->
+	
+		<!-- UpdateIP Actions Starts -->
+		<action path="/updateIpAction" type="com.adventnet.appmanager.struts.actions.UpdateIpAction" scope="request" parameter="method" validate="false" input="/jsp/UpdateIp.jsp">
+			<forward name="updateIpJsp" path="/jsp/UpdateIp.jsp" />
+		</action>
+		<!-- UpdateIP Actions Ends -->
+	
+		<!-- Search ACTION STARTS -->
+		<action path="/Search" name="SearchForm" type="com.adventnet.appmanager.struts.actions.SearchAction" validate="false">
+		</action>
+		<!-- Search ACTION ENDS -->
+	
+		<action path="/MBeanOperationAction" name="MBeanOperationActionForm" type="com.adventnet.appmanager.struts.actions.MBeanOperationAction" validate="false" scope="session" parameter="method">
+			<!--forward name="snmp" path="/jsp/cam_addsnmpobjects.jsp" / -->
+		</action>
+	
+		<!-- NMS4.5 login page -->
+		<action path="/PasswordExpiry" name="PasswordExpiryFormBean" scope="request" validate="true" input="/webclient/common/jsp/passwordExpiry.jsp" type="com.adventnet.nms.webclient.login.PasswordAction">
+			<forward name="success" path="/showapplication.do?method=showApplications" />
+		</action>
+	
+		<action path="/Logout" type="org.apache.struts.actions.ForwardAction" parameter="/jsp/formpages/logout.jsp" />
+		<action path="/index" type="org.apache.struts.actions.ForwardAction" parameter="/adminAction.do?method=showPrerequisitesConfiguration" />
+		
+		<action path="/eventlogrules" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.WinEventLog" scope="request" parameter="method">
+			<forward name="success" path="/jsp/EventLogRules.jsp" />
+		</action>
+	
+		<action path="/showAllEventLogs" name="ShowAllEventLogsForm" type="com.adventnet.appmanager.struts.actions.ShowAllEventLogsAction" scope="request">
+			<forward name="showAllEventLogsJsp" path="/jsp/AllEvents.jsp" />
+		</action>
+	
+		<action path="/WMIPerfCounters" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.WMIPerfAction" scope="request" parameter="method">
+			<forward name="bulkview" path="/jsp/WMIBulkView.jsp" />
+		</action>
+	
+		<action path="/GlobalActions" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.AdminTools" scope="request" parameter="method">
+			<forward name="success" path="/adminAction.do?method=showActionProfiles" />
+		</action>
+		
+		<action path="/jsonfeed" type="com.adventnet.appmanager.struts.actions.JSONFeed" scope="request" parameter="method">
+		</action>
+	
+		<action path="/BulkAddMonitors" name="BulkMonitorForm" type="com.adventnet.appmanager.struts.actions.BulkAddMonitors" scope="request" parameter="method">
+		</action>
+	
+		<action path="/GraphicalView" name="FlashForm" type="com.adventnet.appmanager.struts.actions.GraphicalView" scope="request" parameter="method">
+		</action>
+		
+		<action path="/BusinessView" name="FlashForm" type="com.adventnet.appmanager.struts.actions.BusinessViewAction" scope="request" parameter="method">
+		</action>
+	
+		<action path="/MyPage" name="MyPageForm" type="com.adventnet.appmanager.struts.actions.MyPageAction" scope="request" parameter="method">
+		</action>
+		
+		<action path="/inAppNotification" type="com.me.apm.notification.client.actions.InAppNotificationAction" scope="request" parameter="method">
+		</action>
+		
+		<action path="/publishPage" name="MyPageForm" type="com.adventnet.appmanager.struts.actions.PublishPages" scope="request" parameter="method">
+		</action>
+	
+		<action path="/myFields" name="CustomFieldsForm" type="com.adventnet.appmanager.struts.actions.MyFieldAction" scope="request" parameter="method">
+			<forward name="success" path="/jsp/MyField_customsettings.jsp" />
+		</action>
+	
+		<action path="/showIT360Tile" type="com.adventnet.it360.struts.actions.ShowIT360Tile" />
+	
+		<action path="/downTimeScheduler" type="com.adventnet.appmanager.struts.actions.DownTimeSchedulerAction" validate="false" scope="request" name="AMActionForm" parameter="method" />
+			
+		<action path="/ProcessTemplates" name="AMProcessTemplateForm" type="com.adventnet.appmanager.struts.actions.ProcessTemplateAction" scope="request" parameter="method">
+			<!--forward name="showalltemplates" path="/jsp/ViewProcessTemplates.jsp" /-->
+			<forward name="showalltemplates" path="/showTile.do?TileName=.Newshowalltemplates"/>
+			<!--forward name="createtemplates" path="/jsp/CreateProcessTemplate.jsp" /-->
+			<forward name="createtemplates" path="/showTile.do?TileName=.Newcreatetemplates" />
+			<!--forward name="serverlist" path="/jsp/HostResourceProcessList.jsp" /-->
+			<!--forward name="templatethresholdactionconfig" path="/jsp/TemplateThresholdConfiguration.jsp" /-->
+			<forward name="templatethresholdactionconfig" path="/showTile.do?TileName=.Newtemplatethresholdactionconfig" />
+			<!--forward name="editprocess" path="/jsp/TemplateProcessChooser.jsp" /-->
+			<forward name="editprocess" path="/showTile.do?TileName=.Neweditprocess" />
+		</action>
+		
+		<!-- <action path="/DiagnosticInfo"  type="com.adventnet.appmanager.struts.actions.DiagnosticInfoAction" scope="request" parameter="method">
+			<forward name="diagnosticValue" path="/jsp/DiagnosticDetails.jsp" />
+		</action>  -->
+
+		<action path="/configureGuestOS" name="ConfigureGuestOSForm"	type="com.manageengine.appmanager.vservers.vmware.actions.VMManageActions" validate="false" scope="request" parameter="method">
+			  <forward name="configure" path="/jsp/ConfigureVM.jsp" />
+		</action>
+		
+		<action path="/createThresholdCSV" name="ThresholdCSVForm" type="com.adventnet.appmanager.struts.actions.ThresholdConfigurationAsCSV" scope="request" parameter="method"/>
+
+		<action path="/StorageMapping" type="com.adventnet.appmanager.struts.actions.StorageMappingAction" scope="request" parameter="method">
+			<forward name="VMPageStorageMap" path="/jsp/VMStorageMappingMap.jsp"/>
+       	</action>
+	
+        <action path="/credentialManager" name="CredentialManagerForm" type="com.adventnet.appmanager.struts.actions.CredentialManagerAction" scope="request" parameter="method">
+            <!-- <forward name="credentialManagerPage" path="/showTile.do?TileName=.CredentialManager"/> -->
+			<!-- <forward name="NewCredentialManagerPage" path="/showTile.do?TileName=.NewCredentialManager"/> -->
+            <forward name="credentialTypePage" path="/showTile.do?TileName=.ShowCredentialTypeRelatedRows"/>
+            <!-- <forward name="monitorsToCredentialPage" path="/showTile.do?TileName=.MonitorsToCredentialPage"/> -->
+		</action>
+
+		<action path="/manageMQ" name="AMActionForm" type="com.me.apm.client.mqseries.actions.MQSeriesAction" scope="request" parameter="method" validate="false">
+		</action>
+		
+		<!-- <action path="/HAAgent" type="com.adventnet.appmanager.struts.actions.HAAgentAction" scope="request" parameter="command" >
+		<forward name="managedservers" path="/adminAction.do?method=showManagedServers" />
+		</action> -->
+		
+		<action path="/adminLayout" type="com.adventnet.appmanager.struts.actions.AdminTemplateAction" validate="true" scope="request">
+			<forward name="adminLayout" path="Tile.General" />
+		</action>
+			
+		<action path="/DiagAlertAction"  type="com.manageengine.appmanager.struts.actions.APMDiagnosticsAlertAction" scope="request" parameter="method">
+			<forward name="ALERT_HISTORY" path="APMDiagAlertHistory"/>
+			<forward name="ALERTS_LIST" path="APMDiagAlertsList"/>
+			<forward name="ALERTS_LIST_NOTILE" path="/jsp/DiagnosticsAlertsList.jsp"/>
+		</action>
+		
+		<action path="/showDCComponentsNonConf" name="AMActionForm" type="com.adventnet.appmanager.mssql.struts.OptimizeDataCollectionAction" scope="request" parameter="method" validate="false">
+		</action>
+		
+		<action path="/AMJavaRuntime"  type="com.adventnet.appmanager.struts.actions.AMThreadDumpAction" scope="request" parameter="method">
+			<forward name="showAMThreadDump" path="/jsp/newThreaddump.jsp"/>
+			<forward name="showAMDiagnostics" path="/jsp/AMDiagnostics.jsp"/>
+		</action>
+		
+		<action path="/Consent"  type="com.me.apm.privacy.struts.action.ConsentAction" scope="request" parameter="method">
+			<forward name="showConsentDetails" path="/jsp/ConsentSettings.jsp"/>
+		</action>
+		
+		<action path="/PIISearch"  type="com.me.apm.privacy.struts.action.PIISearchUpdateAction" scope="request" parameter="method">
+			<forward name="piiSearchPage" path="/jsp/PIISearch.jsp"/>
+		</action>
+		
+		<action path="/OAuthProvider" name="OAuthProviderForm" type="com.adventnet.appmanager.struts.actions.OAuthProvider" scope="request" parameter="method">
+            <forward name="ListOAuthProviders" path="/showTile.do?TileName=.listOAuthProviders"/>
+            <forward name="NewOAuthProvider" path="/jsp/NewOAuthProvider.jsp"/>
+            <forward name="showOAuthProviderDetails" path="/jsp/OAuthProviderDetails.jsp"/>
+		</action>	
+		
+		<action path="/AMMsgQlinkAction" type="com.manageengine.appmanager.struts.actions.MsgFrameworkAction" scope="request" parameter="method"/>	
+		
+		<!-- ActionConfiguration -->
+		
+		<action path="/configureactions" type="com.adventnet.appmanager.struts.actions.ConfigureActions" scope="request" parameter="method" name="AMActionURLForm">
+		<forward name="success" path="/adminAction.do?method=showActionProfiles" />
+		<forward name="restAPIAction" path="/showTile.do?TileName=.RestAPIAction" />
+		</action>
+		
+		<action path="/apminsight" type="com.manageengine.apminsight.apm.client.struts.actions.APMInsightAction" scope="request" parameter="method">
+			<forward name="ApmInsight.Home" path="ApmInsight.Home"/>
+			<forward name="showAgentProfiles" path="/jsp/apminsight/AgentConfigProfile.jsp" />
+			<forward name="showAgentProfilesForm" path="/jsp/apminsight/AgentConfigProfileForm.jsp" />
+			<forward name="ApmInsight.Edit" path="ApmInsight.Edit" />
+			<forward name="viewProfileUsedMOSummary" path="/jsp/apminsight/AgentConfigProfileSummary.jsp" />
+		</action>
+		
+		<!-- Slack Action Configuration -->
+		
+		<action path="/configureactionsforslack" type="com.adventnet.appmanager.struts.actions.ConfigureActions" scope="request" parameter="method" name="SlackActionForm">
+		<forward name="success" path="/adminAction.do?method=showActionProfiles" />
+		<forward name="slackAction" path="/showTile.do?TileName=.SlackAction" />
+		</action>
+		<!-- Istio workload action Starts -->
+		<action path="/istioWorkloadAction" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.IstioWorkloadAction" scope="request" parameter="method" validate="false">
+		</action>
+		<!-- Istio workload action Ends -->
+		<action path="/enterpriseAction" type="com.adventnet.appmanager.struts.actions.EnterpriseAction" scope="request" parameter="method" name="AMActionForm">
+			<forward name="showManagedServersForOP" path=".ManagedServer"/>
+		</action>
+		
+		<action path="/WebToken" name="WebTokenForm" type="com.adventnet.appmanager.struts.actions.WebTokenServlet" scope="request" parameter="method">
+	      <forward name="listWebTokens" path="/showTile.do?TileName=.WebToken"/>
+	      <forward name="openWebTokenForm" path="/jsp/AddUpdateWebToken.jsp"/>
+		</action>
+		
+		<action path="/viewThreadDetails" name="AMActionForm" type="com.adventnet.appmanager.sybaseReplication.struts.SybaseReplicationAction" scope="request" parameter="method" validate="false" input="/jsp/sybaseReplication/ThreadDetailStats.jsp">
+			<forward name="success" path="/jsp/sybaseReplication/ThreadDetailStats.jsp" />
+			<forward name="failure" path="/jsp/ErrorPage.jsp" />
+		</action>
+		
+		<!-- Real User Monitor action Starts -->
+		<action path="/RUMActions" name="AMActionForm" type="com.adventnet.appmanager.struts.actions.RUMAction" scope="request" parameter="method" validate="false">
+		</action>
+		<!-- Real User Monitor action Ends -->			
+	</action-mappings>
+
+
+<!-- ===================================== Controller Configuration -->
+
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor" />
+
+
+<!-- ================================ Message Resources Definitions -->
+
+    <!-- <message-resources parameter="resources.application"/> -->
+
+
+<!-- ======================================= Plug Ins Configuration -->
+
+  <!-- ========== Tiles plugin ===================  -->
+  <!--												-->
+  <!--
+     This plugin initialize Tiles definition factory. This later can takes some
+	 parameters explained here after. The plugin first read parameters from web.xml, then
+	 overload them with parameters defined here. All parameters are optional.
+	 The plugin should be declared in each struts-config file.
+       - definitions-config: (optional) 
+            Specify configuration file names. There can be several comma 
+		    separated file names (default: ?? )
+       - moduleAware: (optional - struts1.1) 
+            Specify if the Tiles definition factory is module aware. If true (default), 
+			there will be one factory for each Struts module. 
+			If false, there will be one common factory for all module. In this later case, 
+			it is still needed to declare one plugin per module. The factory will be 
+			initialized with parameters found in the first initialized plugin (generally the
+			one associated with the default module).
+			  true : One factory per module. (default)
+			  false : one single shared factory for all modules
+	   - definitions-parser-validate: (optional)
+	        Specify if xml parser should validate the Tiles configuration file.
+			  true : validate. DTD should be specified in file header. (default)
+			  false : no validation
+			  
+	  Paths found in Tiles definitions are relative to the main context.
+  -->
+  <!-- comment following if struts1.0.x -->
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+		<set-property property="moduleAware" value="true" />    
+		<set-property property="definitions-parser-validate" value="true" />
+	</plug-in>
+  <!-- end comment if struts1.0.x -->
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+	</plug-in>
+
+</struts-config>

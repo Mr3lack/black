@@ -1,0 +1,462 @@
+STATUS | wrapper  | 2024/02/20 10:30:40.123 | --> Wrapper Started as Console
+STATUS | wrapper  | 2024/02/20 10:30:40.124 | Java Service Wrapper Professional Edition 64-bit 3.5.46
+STATUS | wrapper  | 2024/02/20 10:30:40.124 |   Copyright (C) 1999-2021 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | 2024/02/20 10:30:40.124 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | 2024/02/20 10:30:40.124 |   Licensed to Zoho Corporation Pvt. Ltd. for ManageEngine Applications Manager
+STATUS | wrapper  | 2024/02/20 10:30:40.124 | 
+STATUS | wrapper  | 2024/02/20 10:30:40.505 | Launching a JVM...
+INFO   | jvm 1    | 2024/02/20 10:30:51.623 | INFO: APM Insight javaagent v6.0.1 successfully hooked up with JVM (PID:11598). For more information check agent logs located at /opt/ManageEngine/AppManager16/working/apminsight/self-monitor
+INFO   | jvm 1    | 2024/02/20 10:30:53.028 | WrapperManager: Initializing...
+INFO   | jvm 1    | 2024/02/20 10:30:53.431 | skip OS compatibility check : false
+INFO   | jvm 1    | 2024/02/20 10:30:53.431 | exitcode : 0
+INFO   | jvm 1    | 2024/02/20 10:30:53.431 | OS Architecture : 64
+INFO   | jvm 1    | 2024/02/20 10:30:53.431 | createAPMStartupDetailsFile() :: apmprocessid already present in file : 
+INFO   | jvm 1    | 2024/02/20 10:30:54.434 | AppManagerStartUpUtil -> backup done for About.properties
+INFO   | jvm 1    | 2024/02/20 10:31:08.252 | *****************************************
+INFO   | jvm 1    | 2024/02/20 10:31:08.252 | WARNING : It seems that the DISPLAY variable has not been set properly
+INFO   | jvm 1    | 2024/02/20 10:31:08.252 | *****************************************
+INFO   | jvm 1    | 2024/02/20 10:31:08.453 | This evaluation copy is valid for 29 days
+INFO   | jvm 1    | 2024/02/20 10:31:08.453 | Plugin : false :: DBType ? PGSQL :: isBundledPgsql ? True
+INFO   | jvm 1    | 2024/02/20 10:31:08.453 | CreateSchema :: instantiateConnection :: urlstr --> jdbc:postgresql://localhost:15432/amdb?ApplicationName=ApplicationsManager&dontTrackOpenResources=true&useUnicode=true&characterEncoding=UTF-8
+INFO   | jvm 1    | 2024/02/20 10:31:10.256 | 
+INFO   | jvm 1    | 2024/02/20 10:31:10.757 |  [Tue Feb 20 10:31:10 UTC 2024] Starting Applications Manager "Primary" Server Modules, please wait ...
+INFO   | jvm 1    | 2024/02/20 10:31:11.458 |  
+INFO   | jvm 1    | 2024/02/20 10:31:11.458 | 
+INFO   | jvm 1    | 2024/02/20 10:31:11.458 | 
+INFO   | jvm 1    | 2024/02/20 10:31:11.459 | [Tue Feb 20 10:31:11 UTC 2024] Process : AMServerStartUp                 [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:12.460 | [Tue Feb 20 10:31:12 UTC 2024] Process : DBUserStorageServer             [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:12.460 | [Tue Feb 20 10:31:12 UTC 2024] Process : AuthMgr                         [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:12.460 | [Tue Feb 20 10:31:12 UTC 2024] Process : AMDistributionProcess           [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:13.969 | [Tue Feb 20 10:31:13 UTC 2024] Process : WebTokenRefreshOnStartup        [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:13.969 | [Tue Feb 20 10:31:13 UTC 2024] Process : AMDataCleanupProcess            [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:13.969 | [Tue Feb 20 10:31:13 UTC 2024] Process : Site24x7IntegrationProcess      [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:13.970 | [Tue Feb 20 10:31:13 UTC 2024] Process : RunJSPModule                    [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:14.977 | [Tue Feb 20 10:31:14 UTC 2024] Process : StartRelatedServices            [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:14.977 | [Tue Feb 20 10:31:14 UTC 2024] Process : AMScriptProcess                 [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:14.977 | [Tue Feb 20 10:31:14 UTC 2024] Process : WSMProcess                      [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:15.478 | [Tue Feb 20 10:31:15 UTC 2024] Process : StandaloneApplnProcess          [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:15.478 | [Tue Feb 20 10:31:15 UTC 2024] Process : AMUrlMonitorProcess             [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:17.281 | [Tue Feb 20 10:31:17 UTC 2024] Process : AMRBMProcess                    [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:17.281 | [Tue Feb 20 10:31:17 UTC 2024] Process : NmsPolicyMgr                    [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:17.281 | [Tue Feb 20 10:31:17 UTC 2024] Process : NMSMServer                      [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:17.281 | [Tue Feb 20 10:31:17 UTC 2024] Process : AMCAMProcess                    [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:18.282 | [Tue Feb 20 10:31:18 UTC 2024] Process : ApplnStandaloneBE               [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:18.282 | [Tue Feb 20 10:31:18 UTC 2024] Process : DiscoveryProcess                [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:18.283 | [Tue Feb 20 10:31:18 UTC 2024] Process : ScheduledBackupProcess          [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:18.283 | [Tue Feb 20 10:31:18 UTC 2024] Process : NMSSAServer                     [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:18.283 | [Tue Feb 20 10:31:18 UTC 2024] Process : OAuthRefreshAccessToken         [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:18.283 | [Tue Feb 20 10:31:18 UTC 2024] Process : AMExtProdIntegrationProcess     [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:18.284 | [Tue Feb 20 10:31:18 UTC 2024] Process : APMTracker                      [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:18.285 | [Tue Feb 20 10:31:18 UTC 2024] Process : NmsAuthenticationManager        [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:18.689 | [Tue Feb 20 10:31:18 UTC 2024] Process : NmsConfigurationServer          [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:18.689 | [Tue Feb 20 10:31:18 UTC 2024] Process : NmsAuthManager                  [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:21.593 | [Tue Feb 20 10:31:21 UTC 2024] Process : DBServer                        [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:22.394 | [Tue Feb 20 10:31:22 UTC 2024] Process : Collector                       [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:23.395 | [Tue Feb 20 10:31:23 UTC 2024] Process : MapServerBE                     [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:23.896 | [Tue Feb 20 10:31:23 UTC 2024] Process : AMFaultProcess                  [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:31:24.998 | [Tue Feb 20 10:31:24 UTC 2024] Process : AMEventProcess                  [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:32:44.737 | [Tue Feb 20 10:32:44 UTC 2024] Process : MonitorsAdder                   [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:33:51.732 | [Tue Feb 20 10:33:51 UTC 2024] Process : AMServerFramework               [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:33:54.235 | [Tue Feb 20 10:33:54 UTC 2024] Process : AMDataArchiverProcess           [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:33:54.236 | [Tue Feb 20 10:33:54 UTC 2024] Process : EventFE                         [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:33:54.236 | [Tue Feb 20 10:33:54 UTC 2024] Process : AlertFE                         [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:33:54.236 | [Tue Feb 20 10:33:54 UTC 2024] Process : NmsMainFE                       [ Started ] 
+INFO   | jvm 1    | 2024/02/20 10:33:54.237 | 
+INFO   | jvm 1    | 2024/02/20 10:33:54.438 | Verifying connection with web server... verified 
+INFO   | jvm 1    | 2024/02/20 10:33:54.438 | 
+INFO   | jvm 1    | 2024/02/20 10:33:54.438 | Applications Manager started successfully.
+INFO   | jvm 1    | 2024/02/20 10:33:54.439 | 
+INFO   | jvm 1    | 2024/02/20 10:33:54.439 | Please connect your client to the web server on: [ http://43.205.195.84:9090 ]
+INFO   | jvm 1    | 2024/02/20 10:33:54.439 | 
+INFO   | jvm 1    | 2024/02/20 10:34:09.558 | [20 Feb 2024 10:34:09:517] [com.me.cp.CredentialProvider isPAMConfigured] [SEVERE]: check if PAM is configured from API
+INFO   | jvm 1    | 2024/02/20 10:37:42.836 | [20 Feb 2024 10:37:42:753] [org.apache.coyote.http11.Http11Processor service] [SEVERE]: Error processing request
+INFO   | jvm 1    | 2024/02/20 10:37:42.836 | java.lang.NullPointerException
+INFO   | jvm 1    | 2024/02/20 10:37:42.836 | 	at com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve.invoke(AdventNetHostValve.java:109)
+INFO   | jvm 1    | 2024/02/20 10:37:42.836 | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+INFO   | jvm 1    | 2024/02/20 10:37:42.836 | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+INFO   | jvm 1    | 2024/02/20 10:37:42.836 | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+INFO   | jvm 1    | 2024/02/20 10:37:42.837 | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+INFO   | jvm 1    | 2024/02/20 10:37:42.837 | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+INFO   | jvm 1    | 2024/02/20 10:37:42.837 | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+INFO   | jvm 1    | 2024/02/20 10:37:42.837 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+INFO   | jvm 1    | 2024/02/20 10:37:42.837 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+INFO   | jvm 1    | 2024/02/20 10:37:42.837 | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+INFO   | jvm 1    | 2024/02/20 10:37:42.837 | 	at java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 10:37:42.837 | 
+INFO   | jvm 1    | 2024/02/20 10:37:53.751 | [20 Feb 2024 10:37:53:739] [org.apache.coyote.http11.Http11Processor service] [SEVERE]: Error processing request
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | java.lang.NullPointerException
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | 	at com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve.invoke(AdventNetHostValve.java:109)
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | 	at java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 10:37:53.752 | 
+INFO   | jvm 1    | 2024/02/20 10:38:17.282 | [20 Feb 2024 10:38:17:204] [org.apache.coyote.http11.Http11Processor service] [SEVERE]: Error processing request
+INFO   | jvm 1    | 2024/02/20 10:38:17.282 | java.lang.NullPointerException
+INFO   | jvm 1    | 2024/02/20 10:38:17.282 | 	at com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve.invoke(AdventNetHostValve.java:109)
+INFO   | jvm 1    | 2024/02/20 10:38:17.282 | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+INFO   | jvm 1    | 2024/02/20 10:38:17.282 | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+INFO   | jvm 1    | 2024/02/20 10:38:17.282 | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+INFO   | jvm 1    | 2024/02/20 10:38:17.282 | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+INFO   | jvm 1    | 2024/02/20 10:38:17.282 | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+INFO   | jvm 1    | 2024/02/20 10:38:17.283 | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+INFO   | jvm 1    | 2024/02/20 10:38:17.283 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+INFO   | jvm 1    | 2024/02/20 10:38:17.283 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+INFO   | jvm 1    | 2024/02/20 10:38:17.283 | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+INFO   | jvm 1    | 2024/02/20 10:38:17.283 | 	at java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 10:38:17.283 | 
+INFO   | jvm 1    | 2024/02/20 10:38:44.416 | [20 Feb 2024 10:38:44:373] [org.apache.coyote.http11.Http11Processor service] [SEVERE]: Error processing request
+INFO   | jvm 1    | 2024/02/20 10:38:44.416 | java.lang.NullPointerException
+INFO   | jvm 1    | 2024/02/20 10:38:44.416 | 	at com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve.invoke(AdventNetHostValve.java:109)
+INFO   | jvm 1    | 2024/02/20 10:38:44.417 | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+INFO   | jvm 1    | 2024/02/20 10:38:44.417 | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+INFO   | jvm 1    | 2024/02/20 10:38:44.417 | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+INFO   | jvm 1    | 2024/02/20 10:38:44.417 | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+INFO   | jvm 1    | 2024/02/20 10:38:44.417 | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+INFO   | jvm 1    | 2024/02/20 10:38:44.417 | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+INFO   | jvm 1    | 2024/02/20 10:38:44.417 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+INFO   | jvm 1    | 2024/02/20 10:38:44.417 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+INFO   | jvm 1    | 2024/02/20 10:38:44.417 | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+INFO   | jvm 1    | 2024/02/20 10:38:44.417 | 	at java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 10:38:44.417 | 
+INFO   | jvm 1    | 2024/02/20 10:39:13.754 | [20 Feb 2024 10:39:13:659] [org.apache.coyote.http11.Http11Processor service] [SEVERE]: Error processing request
+INFO   | jvm 1    | 2024/02/20 10:39:13.754 | java.lang.NullPointerException
+INFO   | jvm 1    | 2024/02/20 10:39:13.754 | 	at com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve.invoke(AdventNetHostValve.java:109)
+INFO   | jvm 1    | 2024/02/20 10:39:13.754 | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+INFO   | jvm 1    | 2024/02/20 10:39:13.754 | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+INFO   | jvm 1    | 2024/02/20 10:39:13.755 | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+INFO   | jvm 1    | 2024/02/20 10:39:13.755 | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+INFO   | jvm 1    | 2024/02/20 10:39:13.755 | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+INFO   | jvm 1    | 2024/02/20 10:39:13.755 | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+INFO   | jvm 1    | 2024/02/20 10:39:13.755 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+INFO   | jvm 1    | 2024/02/20 10:39:13.755 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+INFO   | jvm 1    | 2024/02/20 10:39:13.755 | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+INFO   | jvm 1    | 2024/02/20 10:39:13.755 | 	at java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 10:39:13.755 | 
+INFO   | jvm 1    | 2024/02/20 10:39:45.696 | [20 Feb 2024 10:39:45:673] [org.apache.coyote.http11.Http11Processor service] [SEVERE]: Error processing request
+INFO   | jvm 1    | 2024/02/20 10:39:45.696 | java.lang.NullPointerException
+INFO   | jvm 1    | 2024/02/20 10:39:45.696 | 	at com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve.invoke(AdventNetHostValve.java:109)
+INFO   | jvm 1    | 2024/02/20 10:39:45.697 | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+INFO   | jvm 1    | 2024/02/20 10:39:45.697 | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+INFO   | jvm 1    | 2024/02/20 10:39:45.697 | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+INFO   | jvm 1    | 2024/02/20 10:39:45.697 | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+INFO   | jvm 1    | 2024/02/20 10:39:45.697 | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+INFO   | jvm 1    | 2024/02/20 10:39:45.697 | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+INFO   | jvm 1    | 2024/02/20 10:39:45.697 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+INFO   | jvm 1    | 2024/02/20 10:39:45.697 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+INFO   | jvm 1    | 2024/02/20 10:39:45.697 | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+INFO   | jvm 1    | 2024/02/20 10:39:45.697 | 	at java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 10:39:45.697 | 
+INFO   | jvm 1    | 2024/02/20 10:40:13.231 | [20 Feb 2024 10:40:13:175] [org.apache.coyote.http11.Http11Processor service] [SEVERE]: Error processing request
+INFO   | jvm 1    | 2024/02/20 10:40:13.231 | java.lang.NullPointerException
+INFO   | jvm 1    | 2024/02/20 10:40:13.231 | 	at com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve.invoke(AdventNetHostValve.java:109)
+INFO   | jvm 1    | 2024/02/20 10:40:13.231 | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+INFO   | jvm 1    | 2024/02/20 10:40:13.231 | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+INFO   | jvm 1    | 2024/02/20 10:40:13.231 | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+INFO   | jvm 1    | 2024/02/20 10:40:13.231 | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+INFO   | jvm 1    | 2024/02/20 10:40:13.231 | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+INFO   | jvm 1    | 2024/02/20 10:40:13.231 | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+INFO   | jvm 1    | 2024/02/20 10:40:13.231 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+INFO   | jvm 1    | 2024/02/20 10:40:13.231 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+INFO   | jvm 1    | 2024/02/20 10:40:13.231 | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+INFO   | jvm 1    | 2024/02/20 10:40:13.232 | 	at java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 10:40:13.232 | 
+INFO   | jvm 1    | 2024/02/20 10:40:40.766 | [20 Feb 2024 10:40:40:667] [org.apache.coyote.http11.Http11Processor service] [SEVERE]: Error processing request
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | java.lang.NullPointerException
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | 	at com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve.invoke(AdventNetHostValve.java:109)
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | 	at java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 10:40:40.767 | 
+INFO   | jvm 1    | 2024/02/20 10:41:12.307 | [20 Feb 2024 10:41:12:224] [org.apache.coyote.http11.Http11Processor service] [SEVERE]: Error processing request
+INFO   | jvm 1    | 2024/02/20 10:41:12.307 | java.lang.NullPointerException
+INFO   | jvm 1    | 2024/02/20 10:41:12.307 | 	at com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve.invoke(AdventNetHostValve.java:109)
+INFO   | jvm 1    | 2024/02/20 10:41:12.307 | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+INFO   | jvm 1    | 2024/02/20 10:41:12.307 | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+INFO   | jvm 1    | 2024/02/20 10:41:12.307 | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+INFO   | jvm 1    | 2024/02/20 10:41:12.307 | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+INFO   | jvm 1    | 2024/02/20 10:41:12.307 | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+INFO   | jvm 1    | 2024/02/20 10:41:12.307 | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+INFO   | jvm 1    | 2024/02/20 10:41:12.307 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+INFO   | jvm 1    | 2024/02/20 10:41:12.307 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+INFO   | jvm 1    | 2024/02/20 10:41:12.307 | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+INFO   | jvm 1    | 2024/02/20 10:41:12.308 | 	at java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 10:41:12.308 | 
+INFO   | jvm 1    | 2024/02/20 10:41:40.443 | [20 Feb 2024 10:41:40:357] [org.apache.coyote.http11.Http11Processor service] [SEVERE]: Error processing request
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | java.lang.NullPointerException
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | 	at com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve.invoke(AdventNetHostValve.java:109)
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | 	at java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 10:41:40.444 | 
+INFO   | jvm 1    | 2024/02/20 10:42:07.980 | [20 Feb 2024 10:42:07:930] [org.apache.coyote.http11.Http11Processor service] [SEVERE]: Error processing request
+INFO   | jvm 1    | 2024/02/20 10:42:07.980 | java.lang.NullPointerException
+INFO   | jvm 1    | 2024/02/20 10:42:07.980 | 	at com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve.invoke(AdventNetHostValve.java:109)
+INFO   | jvm 1    | 2024/02/20 10:42:07.980 | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+INFO   | jvm 1    | 2024/02/20 10:42:07.980 | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+INFO   | jvm 1    | 2024/02/20 10:42:07.980 | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+INFO   | jvm 1    | 2024/02/20 10:42:07.980 | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+INFO   | jvm 1    | 2024/02/20 10:42:07.980 | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+INFO   | jvm 1    | 2024/02/20 10:42:07.980 | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+INFO   | jvm 1    | 2024/02/20 10:42:07.980 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+INFO   | jvm 1    | 2024/02/20 10:42:07.980 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+INFO   | jvm 1    | 2024/02/20 10:42:07.980 | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+INFO   | jvm 1    | 2024/02/20 10:42:07.981 | 	at java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 10:42:07.981 | 
+INFO   | jvm 1    | 2024/02/20 10:42:37.617 | [20 Feb 2024 10:42:37:528] [org.apache.coyote.http11.Http11Processor service] [SEVERE]: Error processing request
+INFO   | jvm 1    | 2024/02/20 10:42:37.617 | java.lang.NullPointerException
+INFO   | jvm 1    | 2024/02/20 10:42:37.617 | 	at com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve.invoke(AdventNetHostValve.java:109)
+INFO   | jvm 1    | 2024/02/20 10:42:37.617 | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+INFO   | jvm 1    | 2024/02/20 10:42:37.617 | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+INFO   | jvm 1    | 2024/02/20 10:42:37.618 | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+INFO   | jvm 1    | 2024/02/20 10:42:37.618 | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+INFO   | jvm 1    | 2024/02/20 10:42:37.618 | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+INFO   | jvm 1    | 2024/02/20 10:42:37.618 | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+INFO   | jvm 1    | 2024/02/20 10:42:37.618 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+INFO   | jvm 1    | 2024/02/20 10:42:37.618 | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+INFO   | jvm 1    | 2024/02/20 10:42:37.618 | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+INFO   | jvm 1    | 2024/02/20 10:42:37.618 | 	at java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 10:42:37.618 | 
+STATUS | wrapper  | 2024/02/20 11:47:11.469 | TERM trapped.  Shutting down.
+INFO   | jvm 1    | 2024/02/20 11:47:13.400 | Interrupt signal received.. shutting down Applications Manager
+INFO   | jvm 1    | 2024/02/20 11:47:14.170 | 
+INFO   | jvm 1    | 2024/02/20 11:47:14.170 | 
+INFO   | jvm 1    | 2024/02/20 11:47:14.170 | Trying to Shutdown Applications Manager
+INFO   | jvm 1    | 2024/02/20 11:47:14.270 | ##########################################################
+INFO   | jvm 1    | 2024/02/20 11:47:14.270 | Connection to the Database is lost. Trying to reconnect to the Database -[Tue Feb 20 11:47:14 UTC 2024]
+INFO   | jvm 1    | 2024/02/20 11:47:14.270 | Please Wait ...
+INFO   | jvm 1    | 2024/02/20 11:47:14.270 | DBReconnection: Monitoring thread to check connection hung is initiated.
+INFO   | jvm 1    | 2024/02/20 11:47:14.270 | DBReconnection: Suspending Modules before refreshing connections
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 | [20 Feb 2024 11:47:14:271] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [waf_scheduler] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:215)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2083)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1093)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:809)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 | [20 Feb 2024 11:47:14:272] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [Timer-7] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.lang.Object.wait(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.TimerThread.mainLoop(Timer.java:552)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.TimerThread.run(Timer.java:505)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 | [20 Feb 2024 11:47:14:273] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [Timer-8] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.lang.Object.wait(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.TimerThread.mainLoop(Timer.java:552)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.TimerThread.run(Timer.java:505)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 | [20 Feb 2024 11:47:14:273] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [pool-12-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:215)
+INFO   | jvm 1    | 2024/02/20 11:47:14.371 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2083)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1093)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:809)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 | [20 Feb 2024 11:47:14:274] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [dataprocessor-1-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 | [20 Feb 2024 11:47:14:275] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [datainserter-2-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 | [20 Feb 2024 11:47:14:276] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [datainserter-2-thread-2] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.372 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 | [20 Feb 2024 11:47:14:276] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [datainserter-2-thread-3] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 | [20 Feb 2024 11:47:14:277] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [datainserter-2-thread-4] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 | [20 Feb 2024 11:47:14:278] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [datainserter-2-thread-5] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.373 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 | [20 Feb 2024 11:47:14:279] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [dataprocessor-1-thread-2] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 | [20 Feb 2024 11:47:14:280] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [datainserter-2-thread-6] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 | [20 Feb 2024 11:47:14:280] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [datainserter-2-thread-7] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.374 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 | [20 Feb 2024 11:47:14:281] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [datainserter-2-thread-8] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 | [20 Feb 2024 11:47:14:282] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [datainserter-2-thread-9] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 | [20 Feb 2024 11:47:14:283] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [datainserter-2-thread-10] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 | [20 Feb 2024 11:47:14:284] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [dataprocessor-1-thread-3] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.375 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 | [20 Feb 2024 11:47:14:284] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [dataprocessor-1-thread-4] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 | [20 Feb 2024 11:47:14:285] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [dataprocessor-1-thread-5] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 | [20 Feb 2024 11:47:14:286] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [dataprocessor-1-thread-6] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 | [20 Feb 2024 11:47:14:286] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [dataprocessor-1-thread-7] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.376 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 | [20 Feb 2024 11:47:14:287] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [dataprocessor-1-thread-8] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 | [20 Feb 2024 11:47:14:288] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [dataprocessor-1-thread-9] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 | [20 Feb 2024 11:47:14:289] [org.apache.catalina.loader.WebappClassLoaderBase clearReferencesThreads] [WARNING]: The web application [ROOT] appears to have started a thread named [dataprocessor-1-thread-10] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  sun.misc.Unsafe.park(Native Method)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2044)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO   | jvm 1    | 2024/02/20 11:47:14.377 |  java.lang.Thread.run(Thread.java:750)
+INFO   | jvm 1    | 2024/02/20 11:47:29.195 | 
+INFO   | jvm 1    | 2024/02/20 11:47:29.196 | Schedulers Stopped successfully
+INFO   | jvm 1    | 2024/02/20 11:47:44.413 | DBReconnection: Entering to refresh the ConnectionPool
+INFO   | jvm 1    | 2024/02/20 11:48:04.441 | DBReconnection: Reconnecting to Database. Reconnection Count Down 
+INFO   | jvm 1    | 2024/02/20 11:48:24.465 | DBReconnection: Reconnecting to Database. Reconnection Count Down 

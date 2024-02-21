@@ -1,0 +1,6 @@
+[ 2024-02-20 10.30.56.468 UTC ]:OUTBUFF:  waiting for server to start....[ 2024-02-20 16:00:56.124 IST ]:LOG:  listening on IPv4 address "127.0.0.1", port 15432
+[ 2024-02-20 16:00:56.129 IST ]:LOG:  listening on Unix socket "./.s.PGSQL.15432"
+[ 2024-02-20 16:00:56.307 IST ]:LOG:  redirecting log output to logging collector process
+[ 2024-02-20 16:00:56.307 IST ]:HINT:  Future log output will appear in directory "pgsql_log".
+ done
+server started

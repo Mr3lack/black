@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+	
+	<urls>
+		<!-- For enterprise admin assignOSNames is not allowed. -->
+		<param-group name="am.additional.extra.params" />
+		<url path="/assignOSNames.do" method="POST" roles="am.role.ADMIN.EA" authentication="required" operation-param="method" operation-value="assignOSNames" csrf="true" privilege-identifier="rowIds" priv-delim=",">
+	    	<param name="rowIds" 									regex="am.host.vmactions.resids" max-len="10000"/>
+	    	<param name="am.common.longandnull" name-regex="true" 	regex="am.amazon.ec2.os.names"/>
+	    </url>
+	</urls>
+	
+	<urls path="/confActions.do" operation-param="method">
+		<param-group name="am.additional.extra.params" />
+    	<url method="GET" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required" operation-value="getDataTablesLanguageSettings"/>
+		<url method="GET" roles="am.role.ADMIN.EA" authentication="required" operation-value="getAzureVMServicesAndProcesses" privilege-identifier="resourceId">
+			<param name="action" 		regex="am.azure.addServices"/>
+			<param name="_" 			type="long"/>
+			<param name="resourceId" 	type="long"/>
+	    </url>
+	    <!-- Added privilege for resourceId because rowIds are tabular MOs as no separate permission can be given for those -->
+	    <url method="GET" roles="am.role.ADMIN.EA" authentication="required" operation-value="openStackInstancesAction" privilege-identifier="resourceId">
+	    	<param name="typeId" 		regex="am.common.longandnull"/>
+	    	<param name="resourceId" 	regex="am.common.longandnull"/>
+	    	<param name="rowIds" 		regex="am.host.vmactions.resids" max-len="10000"/>
+	    	<param name="action" 		regex="am.openstack.actions.name"/>
+    	</url>
+    	<url method="POST" roles="am.role.ADMIN.EA" authentication="required" operation-value="gcpInstancesAction,oracleCloudInstancesAction,oracleCloudDatabasesAction" api="true" systemadmin_enterprise="true" privilege-identifier="resIds" priv-delim=",">
+			<param name="action" 		regex="am.host.vmactions"/>
+			<param name="resIds" 		regex="am.host.vmactions.resids" max-len="10000"/>
+		</url>
+		<url method="POST" roles="am.role.ADMIN.EA" authentication="required" operation-value="azureVMAction" api="true" systemadmin_enterprise="true" privilege-identifier="resIds" priv-delim=",">
+			 <param name="action" 		regex="am.child.monitor.action.type"/>
+			 <param name="resIds" 		regex="am.host.vmactions.resids" max-len="10000"/>
+		</url>
+	    <url method="POST" roles="am.role.ADMIN.EA" authentication="required" operation-value="addAzureVMServicesAndProcesses" api="true" systemadmin_enterprise="true" privilege-identifier="resourceId">
+			<param name="action" 		regex="am.azure.addServices"/>
+			<param name="resourceId" 	type="long"/>
+			<param name="serviceName" 	type="String" max-occurrences="100"/>
+	    </url>
+    </urls>
+	
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url path="/dataTableAction.do" method="GET" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required" operation-param="method" operation-value="getEventLogForDynamicsCRM" privilege-identifier="resourceid">
+			<param name="_" 				type="long"/>
+			<param name="resourceid" 		type="long"/>
+			<param name="draw" 				type="int" />
+			<param name="length" 			type="int" />
+			<param name="start" 			type="int" />
+			<param name="order[0][column]" 	type="int" />
+			<param name="order[0][dir]" 	regex="am.query.orderby.list" />
+			<param name="search[regex]" 	type="boolean" />
+			<param name="search[value]" 	type="String" />
+			<param name="am.crm.datatable.param.data" 	name-regex="true" type="int" />
+			<param name="am.crm.datatable.param.name" 	name-regex="true" regex="am.common.TFNull" />
+			<param name="am.crm.datatable.param.search" name-regex="true" regex="am.common.TFNull" />
+	    </url>
+	</urls>
+	
+	<urls path="/DotNet.do" authentication="required" privilege-identifier="resourceid">
+		<param-group name="am.additional.extra.params" />
+		<param name="name" 			type="String" max-len="2000"/>
+		<param name="appName" 		regex="am.appName.dotnet"/>
+		<param name="haid" 			regex="am.common.longandnull"/>
+		<param name="resourceid" 	regex="am.common.longandnull"/>
+		<param name="resourcename" 	type="String" max-len="2000"/>
+		<url method="GET" roles="am.role.ADMIN.EA.OP.US.DE">
+	    	<param name="dbid" 			regex="am.common.longandnull"/>
+	    	<param name="dbname" 		regex="am.displayname.common"/>
+	    	<param name="details" 		regex="am.dotnet.details"/>
+	    	<param name="message"		type="boolean"/>
+	    	<param name="isConfigured"	regex="am.isconfigured.value"  max-len="1000"/>
+	    </url>
+	    <url method="POST" roles="am.role.ADMIN.EA.OP.US" csrf="true">
+			<param name="configure" 	type="boolean"/>
+			<param name="configured" 	regex="am.common.TFNull"/>
+			<param name="displayname" 	regex="am.displayname.common" max-len="500"/>
+			<param name="password" 		type="String" secret="true" max-len="255"/>
+			<param name="pollInterval" 	type="int" />
+			<param name="username" 		regex="am.windows.username" />
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+	    </url>
+	</urls>
+	
+	<urls path="/manageCloudVMActions.do" roles="am.role.ADMIN.EA" authentication="required" operation-param="method" custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkUserCanViewExecuteAction">
+		<param-group name="am.additional.extra.params" />
+		<param name="actionID" 		regex="am.common.longandnull"/>
+	    <url method="GET" operation-value="testCloudVMAction">
+	    	<param name="remote" 		regex="am.common.TFNull"/>
+	    </url>
+	    <url method="POST" operation-value="triggerCloudVMAction" api="true" systemadmin_enterprise="true">
+	    	<param name="update" 		regex="am.update.azure.testmail"/>
+	    	<param name="monitorType" 	regex="am.monitor.type.azure.vm"/>
+			<param name="haid" 			regex="am.common.longandnull"/>
+			<param name="testaction" 	regex="am.mailserver.serverauth.types"/>
+	    </url>
+	</urls>
+	
+	<urls path="/manageEC2Instances.do" roles="am.role.ADMIN.EA" authentication="required" operation-param="method">
+		<param-group name="am.additional.extra.params" />
+		<!-- privilege is given for resIds/rowIds as they are separate child monitors and privilege can be given separately for all child monitors -->
+		<url method="GET" operation-value="filterStartStopInstances" privilege-identifier="rowIds" priv-delim=",">
+			<param name="rowIds" 		regex="am.host.vmactions.resids" max-len="10000"/>
+			<param name="action" 		regex="am.host.vmactions.confirmmsg"/>
+			<param name="parentId" 		regex="am.common.longandnull"/>
+		</url>
+		<url method="GET" operation-value="testamazonactions" custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkUserCanViewExecuteAction">
+			<param name="actionID" 		regex="am.common.longandnull"/>
+			<param name="haid" 			regex="am.common.longandnull"/>
+			<param name="remote" 		regex="am.common.TFNull"/>
+	    </url>
+	    <url method="GET" operation-value="getSystemLog" privilege-identifier="rowIds">
+			<param name="rowIds" 		regex="am.host.vmactions.resids" max-len="10"/>
+	    </url>
+		<url method="POST" operation-value="triggerAmazonAction" api="true" systemadmin_enterprise="true" custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkUserCanViewExecuteAction">
+			<param name="actionID" 		regex="am.common.longandnull"/>
+			<param name="haid" 			regex="am.common.longandnull"/>
+			<param name="update" 		regex="am.update.amazon.load"/>
+			<param name="testaction" 	regex="am.mailserver.serverauth.types"/>
+	    </url>
+	    <url method="POST" operation-value="manageInstances" api="true" systemadmin_enterprise="true" privilege-identifier="resIds" priv-delim=",">
+			<param name="action" 		regex="am.host.vmactions"/>
+			<param name="resIds" 		regex="am.host.vmactions.resids" max-len="10000"/>
+	    </url>
+	</urls>
+	<urls method="POST" auth-keytype="SyncKey" api="true">
+		<param-group name="am.additional.extra.params" />
+		<!-- Skipping encoding of parameter (inventoryData) to validate JSON Object -->
+		<url path="/AppManager/json/ApmAdminServices/fetchCloudInventoryData" skip-bad-input-encoding="true">
+			<param name="method" regex="am.cloud.inventory.method.value" />
+			<param name="eeSyncKey" regex="am.encodedauthkey" secret="true" />
+			<param name="masId" type="int" />
+			<param name="resID" type="long" />
+			<param name="inventoryData"  type="JSONObject" template="am.cloudapps.inventory.jsonArray" max-len="2147483646"/>
+		</url>
+	</urls>
+	<!-- WAF Handling for JSPs -->
+	<urls method="GET">
+		<param-group name="am.additional.extra.params" />
+		<url path="/jsp/amazon/AssignPlatform.jsp" roles="am.role.ADMIN" authentication="required" privilege-identifier="rowIds" priv-delim=",">
+			<param name="rowIds" regex="am.host.vmactions.resids" max-len="10000"/>
+			<param name="action" regex="^(AssignPlatform)$"/>
+		</url>
+		<url path="/jsp/microsoftazure/AddAzureVMServicesProcesses.jsp" roles="am.role.ADMIN.EA" privilege-identifier="resourceId" authentication="required" >
+			<param name="resourceId" type="long"/>
+			<param name="action" regex="am.azure.addServices"/>
+		</url>
+	</urls>
+	
+	<!-- WAF for cloud tab page -->
+	<urls>
+		<url path="/showresource.do" method="get" operation-param="method" operation-value="viewCloudTab" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required">
+			<param-group name="am.additional.extra.params" />
+			<param name="monitorType" regex="am.monitor.type" />
+		</url>
+	</urls>
+	
+	<jsontemplates>
+		<jsontemplate name="am.cloudapps.inventory.jsonArray">
+			<key name="AdminServerSyncTime" regex="am.metrack.datetime.format"/>
+			<key name="DateCollected" 		regex="am.metrack.datetime.format"/>
+			<key name="ResourceId"			type="long"/>
+			<!-- Amazon inventory params - Commenting the params as we dont collect inventory data hereafter for Amazon (May 2023)
+			<key name="CloudFront"			type="int"/>
+			<key name="Kinesis"				type="int"/>
+			<key name="ElastiCache"			type="int"/>
+			<key name="EKS"					type="int"/>
+			<key name="RedShift"			type="int"/>-->
+			<!-- Azure Inventory Params - Commenting the params as we dont collect inventory data hereafter for Azure (May 2023)
+			<key name="ContainerInstancesGroup"	type="int"/>
+			<key name="AppService"				type="int"/>
+			<key name="RedisCache"				type="int"/>
+			<key name="DatabaseAccounts"		type="int"/>
+			<key name="LogicApps"				type="int"/>
+			<key name="PGSQLServers"			type="int"/>
+			<key name="LoadBalancers"			type="int"/>
+			<key name="VMScaleSets"				type="int"/>
+			<key name="Functions"				type="int"/>
+			<key name="VirtualNetworks"			type="int"/>
+			<key name="MariaDBServers"			type="int"/>
+			<key name="MYSQLServers"			type="int"/>
+			<key name="SQLManagedInstances"		type="int"/> -->
+			<!-- GCP Inventory Params -->
+			<key name="CloudSQL"		type="int"/>
+			<key name="Bigtable"		type="int"/>
+			<key name="BigQuery"		type="int"/>
+			<key name="CloudPubSub"		type="int"/>
+			<key name="CloudFunctions"	type="int"/>
+			<key name="AppEngine"		type="int"/>
+			<key name="CloudDataflow"	type="int"/>
+			<!-- OCI Inventory Params -->
+			<key name="DBSystems"		type="int"/>
+			<key name="NoSQL"			type="int"/>
+			<key name="ExternalDB"		type="int"/>
+			<key name="LoadBalancer"	type="int"/>
+			<key name="Functions"		type="int"/>
+			<key name="Stream"			type="int"/>
+			<key name="DataFlow"		type="int"/>
+		</jsontemplate>
+	</jsontemplates>
+	
+	<!-- DENY -->
+	<urls throwallerrors="true" method="POST" deny-operation="true" operation-param="method">
+		<url path="/confActions.do" 			operation-value="openStackInstancesAction,getDataTablesLanguageSettings,getAzureVMServicesAndProcesses"/>
+		<url path="/dataTableAction.do" 		operation-value="getEventLogForDynamicsCRM"/>
+		<url path="/manageCloudVMActions.do" 	operation-value="testCloudVMAction"/>
+		<url path="/manageEC2Instances.do" 		operation-value="filterStartStopInstances,testamazonactions,getSystemLog"/>
+		<url path="/jsp/amazon/AssignPlatform.jsp"/>
+		<url path="/jsp/microsoftazure/AddAzureVMServicesProcesses.jsp"/>
+		<url path="/showresource.do" operation-value="viewCloudTab"/>
+	</urls>
+	<urls throwallerrors="true" method="GET" deny-operation="true" operation-param="method">
+		<url path="/assignOSNames.do" 			operation-value="assignOSNames" />
+		<url path="/confActions.do" 			operation-value="gcpInstancesAction,azureVMAction,oracleCloudInstancesAction,oracleCloudDatabasesAction,addAzureVMServicesAndProcesses"/>
+		<url path="/manageCloudVMActions.do" 	operation-value="triggerCloudVMAction"/>
+		<url path="/manageEC2Instances.do" 		operation-value="manageInstances"/>
+		<!-- Removed 'triggerAmazonAction' as it is added in common security-deny-operations.xml along with redirect URL -->
+	</urls>
+	<urls throwallerrors="true" method="POST,GET" deny-operation="true" >
+		<url path="/dataTableAction.do" 		operation-param="method" operation-value="initDynamicsCRMEventLogTable" />
+		<url path="/confActions.do" 			operation-param="method" operation-value="getServiceMapForEks,getServiceMapForAks"/>
+		<url path="/AppManager/xml/ApmAdminServices/fetchCloudInventoryData"/>
+		<url path="/AppManager/xml/fetchCloudInventoryData"/>
+		<url path="/AppManager/json/fetchCloudInventoryData"/>
+	</urls>
+	<urls throwallerrors="true" method="GET" deny-operation="true">
+		<url path="/AppManager/json/ApmAdminServices/fetchCloudInventoryData"/>
+	</urls>
+</security>

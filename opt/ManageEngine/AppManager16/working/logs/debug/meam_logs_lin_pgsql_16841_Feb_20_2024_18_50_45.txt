@@ -1,0 +1,11 @@
+[18:50:45:189]|[02-20-2024]|[com.adventnet.appmanager.util.SupportZipUtil]|[INFO]: Creating support from command prompt.|
+[18:50:45:340]|[02-20-2024]|[com.adventnet.appmanager.util.SupportZipUtil]|[INFO]: ======= Machine Started On ===2024-02-20 18:49=============|
+[18:50:45:340]|[02-20-2024]|[com.adventnet.appmanager.util.SupportZipUtil]|[INFO]: =======Product Installed Date ===Tue Feb 20 10:29:42 UTC 2024=============|
+[18:50:45:341]|[02-20-2024]|[com.adventnet.appmanager.util.SupportZipUtil]|[INFO]: =======Product Started On ===Tue Feb 20 10:31:21 UTC 2024=============|
+[18:50:45:341]|[02-20-2024]|[com.adventnet.appmanager.util.SupportZipUtil]|[INFO]: =======Product Build Number ===16841=============|
+[18:50:45:342]|[02-20-2024]|[com.adventnet.appmanager.util.SupportZipUtil]|[INFO]: List of PPMs Applied
+	No PPM applied|
+[18:50:45:343]|[02-20-2024]|[com.adventnet.appmanager.util.SupportZipUtil]|[INFO]: Archived TimeTaken -1 CleanUp TimeTaken -1 MaxDCTime -1 Resource -1|
+[18:50:45:549]|[02-20-2024]|[com.adventnet.appmanager.util.SupportZipUtil]|[INFO]: Unable to get connection to database. So monitor details will not be available.|
+[18:50:45:550]|[02-20-2024]|[com.adventnet.appmanager.util.SupportZipUtil]|[INFO]: Unable to get connection to database. So EUMAgent details will not be available.|
+[18:50:45:551]|[02-20-2024]|[com.adventnet.appmanager.util.SupportZipUtil]|[INFO]: Unable to get connection to database. So Database details will not be available.|

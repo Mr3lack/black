@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+	
+	<regexes>
+		<regex name="am.command.operation" value="^(?i)(command|operation)$" />
+		<regex name="am.alphanumeric.withdot" value="^([A-Za-z0-9]|.| )+$" />
+		<regex name="am.common.ee.old.synchkey" value="^[a-zA-Z0-9 \s\\.,\/\=\+\-\_\%]*$"/>
+    </regexes>
+    
+	<jsontemplates>
+	    <jsontemplate name="am.sync.event.JsonObject">
+	           <key name="severity" regex="^(1|4|5|6|-1)$" />
+	           <key name="node" type="String" />
+	           <key name="groupName" regex="am.alert.GroupName" />
+	           <key name="stringseverity" regex="^(?i)(none|clear|warning|critical|Info|Unknown)$" />
+	           <key name="source"  type="long" />
+	           <key name="id" type="long" />
+	           <key name="time" type="long"/>
+	           <key name="text"  type="String" max-len="100000000" />
+	           <key name="category" type="long" />
+	           <key name="entity" regex="am.hostname.ext.3"/>
+			   <key name="statusChangedTime" regex="^([0-9\-\ ]+|null)$"/>
+               <key name="previousSeverity" regex="^([0-9\-\ ]+|null)$"/>
+	    </jsontemplate>
+		<jsontemplate name="am.customfields.sync.data">
+			<key name="LOCATIONDATA" type="JSONObject" template="am.customfields.obj" max-len="150000" />
+			<key name="LOCATION" type="JSONObject" template="am.customfields.obj" max-len="150000" />
+			<key name="ENUM" type="JSONObject" template="am.customfields.obj" max-len="150000" />
+			<key name="FIELD" type="JSONObject" template="am.customfields.obj" max-len="150000" />
+			<key name="FIELDDATA"  type="JSONObject" template="am.customfields.obj" max-len="150000" />
+			<key name="Newlyadded"  regex="am.boolean" />
+		</jsontemplate>
+		<jsontemplate name="am.customfields.obj">
+			<key name="am.common.onlynumeric" name-regex="true" template="am.customfields.data" type="JSONObject" max-len="150000" />
+		</jsontemplate>
+		<jsontemplate name="am.customfields.data">
+			<key name="LOCATIONDATA" template="am.customfields.location.data" type="JSONObject" max-len="10000" />
+			<key name="LOCATION_FLOOR" type="String" max-len="1000"/>
+			<key name="LOCATION_BUILDING" type="String" max-len="1000"/>
+			<key name="LOCATION_CITY" type="String" max-len="1000"/>
+			<key name="LOCATION_COUNTRY" type="String" max-len="1000"/>
+			<key name="LOCATION_POSTALCODE" type="String" max-len="1000"/>
+			<key name="LOCATION_STATE" type="String" max-len="1000"/>
+			<key name="LOCATION_NAME" type="String" max-len="255"/>
+			<key name="METADATA" template="am.customfields.meta.data" type="JSONObject" max-len="2000" />
+			<key name="DISPLAYNAME" type="String" max-len="255"/>
+			<key name="DATATYPE" regex="am.common.alphaNumeric.ext1.withBraces" max-len="100"/>
+			<key name="FIELDTYPE" type="int" />
+			<key name="DESCRIPTION" type="String" max-len="255"/>
+			<key name="ALIASNAME" regex="am.common.tablename" max-len="100"/>
+			<key name="DATATABLE" regex="am.common.tablename" max-len="70"/>
+			<key name="ENABLED" type="int" />
+			<key name="ISPII" regex="am.boolean" max-len="5"/>
+			<key name="FIELDID" type="int" />
+			<key name="FIELDVALUE" type="String" max-len="100000" />
+			<key name="TASKACTION" regex="am.common.alphaNumeric.ext5" />
+			<key name="VALUE" type="String" max-len="255" />
+		</jsontemplate>
+		<jsontemplate name="am.customfields.location.data">
+			<key name="LOCATION_FLOOR" type="String" max-len="1000"/>
+			<key name="LOCATION_BUILDING" type="String" max-len="1000"/>
+			<key name="LOCATION_CITY" type="String" max-len="1000"/>
+			<key name="LOCATION_COUNTRY" type="String" max-len="1000"/>
+			<key name="LOCATION_POSTALCODE" type="String" max-len="1000"/>
+			<key name="LOCATION_STATE" type="String" max-len="1000"/>
+			<key name="LOCATION_NAME" type="String" max-len="255"/>
+		</jsontemplate>
+		<jsontemplate name="am.customfields.meta.data">
+			<key name="DISPLAYNAME" type="String" max-len="255"/>
+			<key name="DATATYPE" regex="am.common.alphaNumeric.ext1.withBraces" max-len="100"/>
+			<key name="FIELDTYPE" type="int" />
+			<key name="DESCRIPTION" type="String" max-len="255"/>
+			<key name="ALIASNAME" regex="am.common.tablename" max-len="100"/>
+			<key name="DATATABLE" regex="am.common.tablename" max-len="70"/>
+			<key name="ENABLED" type="int" />
+			<key name="ISPII" regex="am.boolean" max-len="5"/>
+		</jsontemplate>
+	</jsontemplates>
+	
+	<urls path="/enterpriseAction.do" operation-param="method" throwallerrors="true">
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url method="GET" operation-value="getManagedServersPatchesList,getConfigurationList" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="SelectedManagedServers[]" regex="am.common.longandall" max-occurrences="500" />
+		</url>
+		<url method="GET" operation-value="getManagedServerSyncState" roles="ENTERPRISEADMIN" deny-del-admin="true" authentication="required" >
+			<param name="serverId" type="int" />
+		</url>
+		<url method="GET" operation-value="showManagedServers" roles="OPERATOR" authentication="required" />		
+		<url method="GET" operation-value="getAdminserverStatus" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required" />
+		
+		<url method="POST" operation-value="getManagedServersPatchesList,getConfigurationList,getAdminserverStatus,showManagedServers,getManagedServerSyncState" deny-operation="true" />
+	</urls>
+	
+    <urls path="/adminAction.do" operation-param="method" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url method="GET" operation-value="getMaxValueForTables" roles="ADMIN,ENTERPRISEADMIN" authentication="required" >
+		     <param name="serverId" type="int" /> 
+	    </url>
+		<url method="POST" operation-value="getMaxValueForTables" deny-operation="true" />
+		
+		<url method="GET" operation-value="getProbRegistrationKey" roles="ENTERPRISEADMIN" authentication="required"  allow-only-superadmin="true"/>
+        <url method="POST" operation-value="getProbRegistrationKey" deny-operation="true" />
+
+	    <url method="GET" operation-value="regenerateProbeRegistrationKey" deny-operation="true" />
+		<url method="POST" operation-value="regenerateProbeRegistrationKey" csrf="true" roles="ENTERPRISEADMIN" authentication="required"  allow-only-superadmin="true"/>
+	   
+	    <url method="GET" operation-value="pushAuthKeyToManagedServer" deny-operation="true" redirect-url="/adminAction.do?method=showManagedServers" />
+		<url method="POST" operation-value="pushAuthKeyToManagedServer" csrf="true" roles="ENTERPRISEADMIN" deny-del-admin="true" authentication="required">
+             <param name="id" type="int" /> 
+	         <param name="headercheckbox" regex="onlyon"/>
+	         <param name="checkbox" type="long" max-occurrences="500" />
+	    </url>
+	   	 
+	   	 <url method="GET" operation-value="fetchDataNowForManagedServer" deny-operation="true" redirect-url="/adminAction.do?method=showManagedServers" />
+	     <url method="POST" operation-value="fetchDataNowForManagedServer" csrf="true" roles="ENTERPRISEADMIN" deny-del-admin="true" authentication="required">
+	         <param name="serverID" type="int" /> 
+	         <param name="serverType" regex="am.common.mas.servertype" /> 
+	         <param name="id" type="int" /> 
+	         <param name="headercheckbox" regex="onlyon"/>
+             <param name="checkbox" type="long" max-occurrences="500"/> 
+	    </url>
+	    
+	    <url method="GET" operation-value="resyncTable" deny-operation="true" />
+	    <url method="POST" operation-value="resyncTable" csrf="true" roles="ENTERPRISEADMIN" deny-del-admin="true" authentication="required">
+             <param name="selectManagedServer" type="int" /> 
+	         <param name="managedServerDropDown" type="int" /> 
+	         <param name="ServerID" type="String" max-len="100000000"/> 
+             <param name="serverId" type="int" /> 
+	         <param name="tableList_length" type="int" /> 
+	         <param name="selectedTable"  type="String" max-occurrences="500"/> 
+	         <param name="selectedReportTable" regex="am.common.alphaNumeric.ext1" max-occurrences="500" />
+	     </url>
+	     
+	     <url method="GET" operation-value="deleteManagedServers" deny-operation="true" redirect-url="/adminAction.do?method=showManagedServers" />
+		 <url method="POST" operation-value="deleteManagedServers" csrf="true" roles="ENTERPRISEADMIN" authentication="required" deny-del-admin="true" skip-bad-input-encoding="true">
+             <param name="id" type="int" /> 
+	         <param name="headercheckbox" regex="onlyon" max-occurrences="10"/>
+	         <param name="checkbox" type="long" max-occurrences="500" />
+             <param name="addNewServer" type="String" /> 
+             <param name="displayname" type="String" max-len="250" /> 
+             <param name="masGroupName" type="String" max-len="250" /> 
+             <param name="newMasGroupName" type="String" max-len="250" />
+             <param name="editDomainName" type="String" max-len="250" />
+             <param name="host" regex="am.hostname" /> 
+             <param name="externalhost" regex="am.hostname" max-len="250" /> 
+             <param name="category" type="int" />
+             <param name="port" type="int" /> 
+             <param name="timeout" type="int" />
+             <param name="password" type="String" secret="true" /> 
+	     </url>
+	     
+	     <url method="GET" operation-value="applyCustomServerDownMessageForMAS" deny-operation="true" />
+		 <url method="POST" operation-value="applyCustomServerDownMessageForMAS" csrf="true" roles="ENTERPRISEADMIN" authentication="required">
+             <param name="message" type="String" max-len="50000"/> 
+             <param name="sId" type="int" /> 
+             <param name="applyAll" type="boolean" />
+	     </url>
+	     
+		 <url method="GET" operation-value="showManagedServers" roles="ENTERPRISEADMIN,DEMO" deny-del-admin="true" authentication="required">
+             <param name="serverType" regex="am.common.mas.servertype" /> 
+             <param name="edit" type="boolean" />
+             <param name="boolValue" type="boolean" />
+             <param name="serverID" type="int" />
+             <param name="plugin_view" type="boolean" />
+             <param name="checkbox" type="long" max-occurrences="500" />
+             <param name="opm_user" regex="am.opm.username" max-len="255"/>
+             <param name="enableOrDisable" regex="^(enable|disable)$" />
+	     </url>
+	     <url method="POST" operation-value="showManagedServers" deny-operation="true" />
+	     
+	     <url method="GET" operation-value="updateManagedServers" deny-operation="true" />
+	     <url method="POST" operation-value="updateManagedServers" csrf="true" roles="ENTERPRISEADMIN" deny-del-admin="true" authentication="required" skip-bad-input-encoding="true">
+             <param name="update" regex="^(update)$" />
+             <param name="serverID" type="int" />
+             <param name="serverType" regex="am.common.mas.servertype" />
+             <param name="_isfromProbeSettings" type="boolean" />
+             <param name="displayname" type="String" max-len="250" /> 
+             <param name="masGroupName" type="String" max-len="250" />
+             <param name="newMasGroupName" type="String" max-len="250" />
+             <param name="editDomainName" type="String" max-len="250" />
+             <param name="fromaddress" type="String" />
+             <param name="externalhost" regex="am.hostname" max-len="250"/>
+             <param name="category" type="int" />
+             <param name="priority" type="int" />
+             <param name="password" type="String" secret="true" /> 
+             <param name="sslenabled" regex="^(adminMail|nonAdminMail)$" />
+             <param name="failOvercheckbox" regex="onlyon" /> 
+             <param name="toaddress" regex="am.hostname" />
+             <param name="technician" type="int" />
+             <param name="instance" type="int" />
+             <param name="sendmail" type="int" />
+             <param name="hostname" type="String"/>
+   	     </url>
+	     
+	    <url method="GET" operation-value="updateMasDomainName" deny-operation="true" />
+	    <url method="POST" operation-value="updateMasDomainName" csrf="true" roles="ENTERPRISEADMIN" authentication="required">
+             <param name="oldMasGroupName" type="String" max-len="250" /> 
+             <param name="newMasGroupName" type="String" max-len="250" /> 
+	    </url>
+	</urls>
+	
+	<urls path="/admin/userconfiguration.do" operation-param="method" throwallerrors="true" roles="ENTERPRISEADMIN" authentication="required">
+	  	<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+	  	<url method="GET"  operation-value="ssoJarCheck"/> 
+		<url method="POST" operation-value="ssoJarCheck" deny-operation="true" />
+		
+		<url method="GET" operation-value="updateSSO" deny-operation="true" />
+		<url method="POST" operation-value="updateSSO" csrf="true">
+			 <param name="ssoenable" type="boolean"/>
+	    </url>
+    </urls>
+    <urls path="/userconfiguration.do" operation-param="method" method="GET,POST" throwallerrors="true" deny-operation="true">
+	    <url operation-value="ssoJarCheck,updateSSO" />
+    </urls>
+    
+    <urls path="/swMgmt.do" operation-param="method" throwallerrors="true" >
+        <param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+        <url method="GET" operation-value="initiateCentralDownload,initiateCentralUpgrade,initiateDownload,initiateUpgrade" deny-operation="true" />
+	    <url method="POST" operation-value="initiateCentralDownload,initiateCentralUpgrade" csrf="true" roles="ADMIN,ENTERPRISEADMIN" authentication="required" />
+	    <url method="POST" operation-value="initiateDownload,initiateUpgrade" csrf="true" roles="ADMIN,ENTERPRISEADMIN" allow-only-superadmin="true" authentication="required">
+	       	 <param name="id" type="int" /> 
+	         <param name="headercheckbox" regex="onlyon"/>
+             <param name="checkbox" type="long" max-occurrences="500"/>
+	    </url>
+    </urls>
+    
+    <!-- servlet configurations -->
+    <urls method="POST" api="true" throwallerrors="true">
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200"/>
+		<param name="bn" type="long" />
+		<param name="masId" type="long" />
+		<param name="file" regex="^(Master)$" />
+        <url path="/servlet/WieldFeedServlet" />
+	</urls>
+    <urls throwallerrors="true" method="get" deny-operation="true" >
+        <url path="/servlet/WieldFeedServlet" />
+    </urls>
+	
+	<urls throwallerrors="true" method="POST" api="true" >
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200" />
+		<param name="oldSyncKey" regex="am.common.ee.old.synchkey" secret="true" max-len="200" />
+		<param name="am.command.operation" name-regex="true" regex="^(pushAuthKey|UnRegister_Me_MAS|getPatchesList|resyncReportTable|getConfigList|SYNCH_AAM|dataSynchup|resyncTable)$" max-occurrences="10" />
+		<param name="sysEnterprise" type="String" secret="true" max-len="500" />
+		<param name="syncTableList" type="String" max-len="100000000" />
+		<param name="synctablesMaxID" type="long" />
+		<param name="unregisterMAS" type="boolean" />
+		<param name="probeId" type="long" />
+		<param name="adminSyncStatus" type="boolean" />
+		<param name="adminChecksum" type="String"  max-len="90000000" />
+		<param name="reporttable" regex="am.common.alphaNumeric.ext1" max-len="500" />
+		<param name="maxarchivedtime" type="long" />
+		<param name="querylimit" type="long" />
+        <param name="bn" regex="am.common.longandnull" />
+        <param name="adC" type="long"/>
+		<param name="AMRBMDATA_RESID" type="long" />
+		<param name="AM_CONFIGURATION_INFO" type="long" />
+		<param name="doNormalSync" type="boolean" />
+		<param name="amApacheconfig" type="long" />
+		<param name="hotfix_timestamp" type="String" />
+		<param name="GUESTOSMAP_RESID" type="long" />
+		<param name="upgradeStatus" type="String" />
+		<param name="ARCHIVERATTRID" type="long" />
+		<param name="ugLe" type="boolean" />
+		<param name="fetchNow" type="boolean" />
+		<param name="EC2INSTANCEOSMAP_RESID" type="long" />
+		<param name="alertsOnly" type="boolean" />
+		<param name="DowntimeData_DownTime" type="long" />
+		<param name="archiving-tables" type="String" max-len="100000" />
+		<param name="SynchReportsTableNow" type="boolean" />
+		<param name="unManagedNodeCount" type="long" />
+		<param name="serverID" type="long" />
+		<param name="ANOMALYCOUNT" type="long" />
+		<param name="admin_protocol" type="String" />
+		<param name="hotfix_packageName" type="String" />
+		<param name="quickSynch" type="boolean" />
+		<param name="AM_EUMAGENT_DOWNTIMEDATA_RELID" type="long" />
+		<param name="central_chksum" type="String" />
+		<param name="serverType" type="String" />
+		<param name="AM_MYFIELDS_ENTITYDATA_RELID" type="long" />
+		<param name="central_version" type="long" />
+		<param name="amResourceConfig" type="long" />
+		<param name="backupRequired" type="boolean" />
+		<param name="RBMCOUNT" type="long" />
+		<param name="AM_MYFIELDS_LABELDATA_RELID" type="long" />
+		<param name="AM_MYFIELDS_LISTDATA_RELID" type="long" />
+		<param name="AM_MYFIELDS_TEXTDATA_RELID" type="long" />
+		<param name="isReportSyncEnabled" type="boolean" />
+		<param name="AM_MYSQL_CONFIGURATION_INFO" type="long" />
+		<param name="newlyAdded" type="boolean" />
+		<param name="MSAPIkeys" type="String" secret="true" />
+		<param name="alottedRangeForMas" type="long" />
+		<param name="AM_MONITOR_DEBUG_INFO" type="long" />
+		<param name="hotfix_checksum" type="String" />
+		<param name="DowntimeData_HealthAlertData" type="long" />
+		<param name="synchStatus" type="String" />
+		<param name="AM_HOSTINFO" type="long" />
+		<param name="ARCHIVERRESID" type="long" />
+		<param name="hotfix_maxTimestamp" type="long" />
+		<param name="central_pkgname" type="String" />
+		<param name="AM_PROMETHEUS_DISCOVERED_MONITORS_TIME" type="long" />
+		<param name="time_stamp" type="long" />
+		<param name="admin_host" regex="am.hostname" />
+		<param name="url" type="String" max-len="500000" />
+		<param name="firstTime" type="boolean" />
+		<param name="RESTYPEID" type="long" />
+		<param name="admin_port" type="long" />
+		<param name="dbtype" type="String" />
+		<param name="isHttpClientSyncEnabledInAdmin" type="boolean" />
+		<param name="downloadStatus" type="String" />
+		<param name="AM_HOST_CONFIG_INFO" type="long" />
+		<param name="AMMO_RESID" type="long" />
+		<param name="AMMO_RESTYPEID" type="long" />
+		<param name="AMRBMAGENTDATA_AGENTID" type="long" />
+		<param name="AMRUMAGENTDATA_AGENTID" type="long" />
+		<param name="RUMAGENTMETRACKDATA_AGENTID" type="long" />
+		<param name="EUMAGENTMETRACKDATA_AGENTID" type="long" />
+		<param name="Cam_AttrID" type="long" />
+		<param name="adminSSLPort" type="long" />
+		<param name="Cam_ScreenID" type="long" />
+		<param name="ExtDeviceRID" type="long" />
+		<param name="DISCOVERYID" type="long" />
+		<param name="AM_EUM_PARENTCHILD_MAPPING_RELID" type="long" />
+		<param name="SCANDISCOVERYID" type="long" />
+		<param name="DIAGNOSTICSALERT_TIME" type="long" />
+		<param name="INFOID" type="long" />
+		<param name="adminServerName" type="String" />
+		<param name="EventID" type="long" />
+		<param name="Cam_GroupID" type="long" />
+		<param name="AssociatedModTime" type="long" />
+		<param name="AnnotationModTime" type="long" />
+		<param name="AM_AttrID" type="long" />
+		<param name="LOCATION_ID" type="long" />
+		<param name="DISCOVEREDDEVICESINFO_MODTIME" type="long" />
+		<param name="AM_RESOURCE_AGENT_MAPPING_RELID" type="long" />
+		<param name="ExtInterfaceRID" type="long" />
+		<param name="NEWLOCATION_ID" type="long" />
+		<param name="DISCOVERYTOCREDID" type="long" />
+		<param name="Cam_archiverID" type="long" />
+		<param name="DIAGNOSTICSANNOTATION_TIME" type="long" />
+		<param name="AMPARENTCHILD_RELID" type="long" />
+		<param name="DIAGNOSTICSEVENT_TIME" type="long" />
+		<param name="AlertModTime" type="long" />
+		<param name="SERVICE_RESID" type="long" />
+		<param name="DefaultMonitorCount" regex="^([0-9]+|null|-1)$" />
+		<param name="EventHistoryData_ArchTime" regex="am.common.longandnull" />
+		<param name="adminDatabaseHostName" regex="am.hostname.ext.3" />
+		<param name="adminDatabaseName" type="String" max-len="500"/>
+		<param name="resynch-tables" regex="am.common.useragent" max-len="50000000"/>
+		<param name="csrfToken" regex="am.alphanumeric.commaSpaceHyphen" max-len="500" secret="true" />
+		<param name="_zcsr_tmp" regex="am.alphanumeric.commaSpaceHyphen" max-occurrences="2"  max-len="500" secret="true" />
+		<param name="442b5845d7" regex="am.alphanumeric.commaSpaceHyphen" max-len="500" />
+		<param name="zccpn" regex="am.alphanumeric.commaSpaceHyphen" max-len="500" />
+		<param name="ZCNEWLIVEUI" regex="am.alphanumeric.commaSpaceHyphen" max-len="500" />
+		<param name="Content-Type" type="String" max-len="500" />
+		<param name="am.common.tablename" name-regex="true" regex="am.alphanumeric.commaSpaceHyphen" max-len="500" max-occurrences="100"/>
+		<param name="SYNCH_WLS_DISABLE_STATS" type="long" max-occurrences="1" />
+        <url path="/servlet/mas_servercmd" />
+	</urls>
+    <urls throwallerrors="true" method="get" deny-operation="true" >
+        <url path="/servlet/mas_servercmd" />
+    </urls>
+	
+	<urls method="POST" api="true" throwallerrors="true">
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200" />
+		<param name="sysEnterprise" type="String" secret="true" max-len="500" />
+		<param name="am.command.operation" name-regex="true" regex="^(dataSynchup|MAS_Compatible|SYNCH_AAM|Register_Me_MAS|Update_SSL_Port_Global_Range)$" />
+        <param name="bn" regex="am.common.longandnull" />
+		<param name="masId" type="long" />	
+		<param name="serverID" type="long" />	
+		<param name="probeID" type="long" />
+		<param name="probeId" type="int" />
+		<param name="dbtype" regex="^(?i)(pgsql|mssql|mysql)$" />
+		<param name="adminSyncStatus" type="boolean" />
+		<param name="archiving-tables" regex="am.common.tablename" max-len="-1" />
+		<param name="maxarchivedtime" type="long" />
+		<param name="url" type="String" max-len="500000" />
+	    <param name="Content-Type" regex="^(text/plain)$" />
+		<param name="querylimit" type="long" />
+		<param name="ProbeRegistrationKey" regex="am.encodedauthkey" secret="true"/>
+		<param name="host" regex="am.hostname" />
+		<param name="port" type="int" />
+		<param name="time_stamp" type="long" />
+		<param name="entity" regex="^([0-9]|_| |,)+$" max-len="500"/>
+		<param name="ttime" type="long" />
+		<param name="globalrange" type="long" />
+		<param name="sslport" type="int" />
+		<param name="updateSSLPort" type="boolean" />
+		<param name="Edition" regex="^(?i)(ENTERPRISE|ENTERPRISE  EDITION)$" />
+        <url path="/servlet/aam_servercmd" />
+	</urls>
+    <urls throwallerrors="true" method="get" deny-operation="true" >
+        <url path="/servlet/aam_servercmd" />
+    </urls>
+	
+	<urls method="POST" api="true" throwallerrors="true">
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200" />
+		<param name="status" type="boolean" />
+		<param name="masId" type="long" /> 
+		<param name="probeId" type="long" />
+		<param name="operation" regex="^(setPushModelStatus|pickupalarm|unpickalarm|clearAlarm|deleteAlarm|setAnnotation|editAnnotation|deleteAnnotation|checkEventSynch)$" />
+		<param name="EventID" type="long" />
+		<param name="entity" regex="am.hostname.ext.3" max-len="500"/>
+		<param name="requestFromAdmin" type="boolean" />
+		<param name="userName" type="String" />
+		<param name="eventParams" type="JSONObject" template="am.sync.event.JsonObject" max-len="80000000" />
+		<param name="info" type="long" />
+		<param name="annotationMessage" type="String" max-len="300" />
+		<param name="Modtime" type="long" />
+		<param name="text" type="String" max-len="300" />
+		<param name="ttime" type="long" />
+		<param name="time" regex="am.common.longandnull" />
+		<url path="/servlet/SyncEventServlet" />
+	</urls>
+    <urls throwallerrors="true" method="get" deny-operation="true" >
+        <url path="/servlet/SyncEventServlet" />
+    </urls>
+    
+	<urls method="POST" api="true" throwallerrors="true">
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200" />
+		<param name="masId" type="long" />
+		<param name="isSyncConfigtoUserMap" type="boolean" />
+		<param name="chkRestrictedRole" type="boolean" />
+		<param name="userId" type="long" />
+		<param name="ForMasRange" type="long" />
+		<url path="/servlet/AMUserResourcesSyncServlet" />
+	</urls>
+    <urls throwallerrors="true" method="get" deny-operation="true" >
+        <url path="/servlet/AMUserResourcesSyncServlet" />
+    </urls>
+	
+	<urls method="POST" api="true" throwallerrors="true">
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="AUTHKEY" type="String" secret="true" max-len="200"/>
+		<param name="masId" type="long" />
+		<param name="operation" regex="^(checkheartbeat|copyfile|getfailover|registerstandy|listdirectory|unregisterstandby|compressMlBasedAnomalyData)$" />
+		<param name="fileName" type="String" max-len="500000" />
+		<param name="standbyprops" type="String" max-len="500000" />
+		<param name="rootDirectory" type="String" max-len="500000"/>
+		<param name="standbyID" type="String" />
+		<url path="/servlet/FailOverHelperServlet" />
+	</urls>
+    <urls throwallerrors="true" method="get" deny-operation="true" >
+        <url path="/servlet/FailOverHelperServlet" />
+    </urls>
+    
+    <!-- RESTAPI WAF configurations -->
+    <jsontemplates>
+	    <jsontemplate name="am.dc.Components.Configs.JsonArray">
+			 <key index="0-300" type="JSONObject" template="am.dc.Components.Configs.JsonObject" max-len="80000000"/>
+		</jsontemplate>
+	    <jsontemplate name="am.dc.Components.Configs.JsonObject">
+	           <key name="pollingInterval" type="long" />
+	           <key name="dcComponentsSelect" regex="am.common.useragent"  />
+	           <key name="Monitortype" regex="am.common.useragent" />
+	           <key name="configureBy" regex="^(Monitor Type|Monitors)$" />
+	           <key name="status" regex="^(every|true|false)$"  />
+	    </jsontemplate>
+	     <jsontemplate name="am.allMismatchAlertId.JsonObject">
+	     	   <key name="minId" type="long"/>
+	           <key name="maxId" type="long"/>
+	           <key name="am.common.numberandcomma" name-regex="true" type="long" max-occurrences="100000" />
+	    </jsontemplate>
+	 </jsontemplates>
+    
+    <urls prefix="/AppManager/(xml|json)" url-type="dynamic" method="POST" api="true" roles="am.role.ADMIN.EA" authentication="required" throwallerrors="true" >
+	   	
+	    <url path="/ListManagedServers" >
+	         <param name="apikey" regex="apikey" secret="true" max-len="200" />
+	    </url>
+	    
+	    <url path="/ssoprops/update">
+	         <param name="apikey" regex="apikey" secret="true"  max-len="200"/>
+	         <param name="am.sso.enabled" type="boolean" />
+	         <param name="apicallfrom" regex="^(admin)$"/>
+	    </url>
+	    <url path="/SSHSettings" sync-admin="only" deny-del-admin="true">
+	         <param name="apikey" regex="apikey" secret="true" max-len="32" min-len="32"/>
+	         <param name="CipherSuites" regex="am.cam.jmx.attr.value" max-len="100000"/>
+	         <param name="KeyExchanges" regex="am.cam.jmx.attr.value" max-len="100000"/>
+	         <param name="HMAC" regex="am.cam.jmx.attr.value" max-len="100000"/>
+	    </url>
+	    <url path="/lamaintegration/update"  deny-del-admin="true">
+	         <param name="apikey" regex="apikey" secret="true"  max-len="200"/>
+	         <param name="txnNames" type="String" max-len="3000"/>
+	         <param name="resourceIds" regex="am.webclient.resIds.commaSeparated" max-len="3000" />
+	    </url>
+	    
+	    <url path="/disableConfigs/update" >
+	         <param name="apikey" regex="apikey" secret="true" max-len="200" />
+	         <param name="diskInodeLinux" type="boolean"/>
+	         <param name="diskIOAix" type="boolean"/>
+	         <param name="diskIOLinux" type="boolean"/>
+	         <param name="diskIOSun" type="boolean"/>
+	         <param name="diskIOWindows" type="boolean"/>
+	         <param name="diskInodeAIX" type="boolean"/>
+	    </url>
+		 
+	    <url path="/dcComponentsConfigs/update" >
+	         <param name="apikey" regex="apikey" secret="true"  max-len="200"/>
+	         <param name="AlldcComponent" type="JSONArray" template="am.dc.Components.Configs.JsonArray" array-size="0-300" max-len="80000000"/>
+	         <param name="pollingInterval" type="long" />
+		     <param name="dcComponentsSelect" regex="am.alphanumeric"  />
+		     <param name="Monitortype" regex="am.common.useragent" />
+		     <param name="configureBy" regex="^(Monitor Type|Monitors|DatabaseTab)$" />
+		     <param name="status" regex="^(every|true|false)$"  />
+		     <param name="resourceIds" type="long" />
+		     <param name="isMonitorType" regex="^(true|false)$"  />
+	    </url>
+	    
+	     <url path="/monitorDcSettings" deny-del-admin="true">
+	         <param name="apikey" regex="apikey" secret="true" max-len="32" min-len="32"/>
+	         <param name="configureBy" regex="^(MonitorType|Monitor)$" min-occurrences="1"/>
+	         <param name="MonitorType" regex="am.common.useragent"  min-occurrences="1"/>
+	         <param name="SettingsKey" regex="am.common.useragent" max-len="500" min-occurrences="1"/>
+	         <param name="SettingsValue" regex="am.common.useragent" max-len="20000"/>
+	         <param name="ResourceId" type="long" />
+	    </url>
+
+	    <url path="/dbpoll" >
+	         <param name="apikey" regex="apikey" secret="true"  max-len="200" />
+	         <param name="RESOURCES" type="String" secret="true"  max-len="500" />
+	         <param name="AGENTREPORT" type="String" secret="true"  max-len="500" />
+	         <param name="apicallfrom" regex="^(admin)$"/>
+	    </url>
+	    
+	    <url path="/confFileProps/update" >
+	         <param name="apikey" regex="apikey" secret="true"  max-len="200"/>
+	         <param name="bulksave" type="boolean"/>
+	         <param name="conffiletype" regex="^(dbparams|threads|jvmparams|amserver)$"  />
+	         <param name="maxPermgenSize" type="long" />
+	         <param name="maxHeap" type="long" />
+	         <param name="NON_TRANS_CONNECTIONS" type="long" />
+	         <param name="CustomMonitor" type="long"/>
+	         <param name="MQSeries" type="long"/> 
+	         <param name="KeyValue_Monitor" type="long"/>
+	         <param name="QueryMonitor" type="long"/>
+	         <param name="WebService_Monitor" type="long" />
+	         <param name="main" type="long" />
+	         <param name="URLMonitor" type="long" />
+	         <param name="DataCollection" type="long" />
+	         <param name="am.wmi.encoding" regex="am.globalconfig.wmi.encoding" />
+	         <param name="am.alphanumeric.withdot" name-regex="true" regex="am.common.useragent" />
+	    </url>
+	    
+	    <url path="/serverConfigs/update" skip-bad-input-encoding="true">
+	         <param name="apikey" regex="apikey" secret="true"  max-len="200" />
+	         <param name="ntpAix" type="boolean"/>
+             <param name="ntpLinux" type="boolean"/>
+             <param name="am.disks.ignore" type="String" max-len="5000" />
+          	 <param name="netInterfaceAix" type="boolean"/>
+             <param name="netInterfaceLinux" type="boolean"/>
+             <param name="netInterfaceWindows" type="boolean"/>
+             <param name="lPARCPUStatAix" type="boolean"/>
+			 <param name="am.networks.ignore" type="String" max-len="5000" />
+			 <param name="am.errpt.hardware.ignore" type="String" max-len="5000" />
+	         <param name="am.alphanumeric.withdot" name-regex="true" regex="^[a-zA-Z0-9 \| \s\\.,\/:;\+\-_\)\(\[\]]*$" max-len="250"/>
+	         <param name="errptHardwareAix" type="boolean"/>
+	    </url>
+	    
+	    <url path="/perfConfigs/update" >
+	         <param name="apikey" regex="apikey" secret="true" />
+	         <param name="am.common.useragent" name-regex="true" regex="am.common.useragent" max-len="200"/>
+	    </url>  
+	    <url path="/fetchNowForManagedServer" deny-operation="true"/>
+	</urls> 
+	
+	<urls prefix="/AppManager/json/ApmAdminServices" url-type="dynamic" throwallerrors="true" method="POST" api="true" auth-keytype="SyncKey">
+		<param-group name="am.additional.extra.params" />
+		<param name="eeSyncKey" regex="am.encodedauthkey" secret="true" />
+		<param name="masId" type="int"/>
+		<url path="/monitorDcSettings" >
+	         <param name="configureBy" regex="^(MonitorType|Monitor)$" min-occurrences="1"/>
+	         <param name="MonitorType" regex="am.common.useragent"  min-occurrences="1"/>
+	         <param name="SettingsKey" regex="am.common.useragent" max-len="500" min-occurrences="1"/>
+	         <param name="SettingsValue" regex="am.common.useragent" max-len="20000"/>
+	         <param name="ResourceId" type="long" />
+	    </url>
+	</urls>
+
+	<urls prefix="/AppManager/(xml|json)" url-type="dynamic" method="GET" api="true" roles="ENTERPRISEADMIN" deny-del-admin="true" authentication="required" throwallerrors="true">
+	    <url path="/fetchNowForManagedServer" >
+	         <param name="apikey" regex="apikey" secret="true"  max-len="200" />
+	         <param name="serverID" type="long"/>
+	    </url>
+	</urls>
+
+	<urls prefix="/AppManager/xml" method="POST" api="true" roles="am.role.ADMIN.EA" sync-admin="only" authentication="required" throwallerrors="true" >
+		<url path="/customfields/sync" >
+			<param name="apikey" regex="apikey" secret="true" />
+			<param name="customfieldsdata" template="am.customfields.sync.data" type="JSONObject" max-len="750000" />
+		</url>
+		<url path="/customfields/newManagedServerSync" >
+			<param name="apikey" regex="apikey" secret="true" />
+			<param name="customfieldsdata" template="am.customfields.sync.data" type="JSONObject" max-len="750000" />
+		</url>
+	</urls>
+
+	<urls prefix="/AppManager/(xml|json)" url-type="dynamic" method="GET" >
+	 	<url path="/ListManagedServers" deny-operation="true" />
+	 	<url path="/ssoprops/update" deny-operation="true" />
+	 	<url path="/disableConfigs/update" deny-operation="true" />
+	 	<url path="/dcComponentsConfigs/update" deny-operation="true" />
+	 	<url path="/dbpoll" deny-operation="true" />
+	 	<url path="/confFileProps/update" deny-operation="true" />
+	 	<url path="/serverConfigs/update" deny-operation="true" />
+	 	<url path="/perfConfigs/update" deny-operation="true" />
+	 	<url path="/customfields/sync" deny-operation="true" />
+	 	<url path="/customfields/newManagedServerSync" deny-operation="true" />
+	 	<url path="/Users/resourceSync" deny-operation="true" />
+	</urls> 
+    
+    <urls prefix="/AppManager/(xml|json)" url-type="dynamic" method="GET,POST" deny-operation="true" >
+	 	<url path="/syncDisableforManagedserver" />
+        <url path="/getMissedDowntimeData" />
+        <url path="/GetAllMissingMoAndDeleteStrayMO" />
+        <url path="/GetAllMissingPcmId" />
+        <url path="/GetAllMisMatchAlertId" />
+        <url path="/GetAllMonitorResourceIdWithOutAlert" />
+        <url path="/latestEvent" />
+        <url path="/getTableMaxValueFromMAS" />
+	</urls> 
+	 
+    <urls prefix="/AppManager/(xml|json)/ApmAdminServices" url-type="dynamic" method="POST" api="true" throwallerrors="true" >
+	    <url path="/syncDisableforManagedserver">
+	         <param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200" />
+	         <param name="masId" type="long"/>
+	         <param name="syncdisable" type="boolean" /> 
+	         <param name="ALLOTED_GLOBAL_RANGE" type="long"/>
+	    </url>
+	    
+	    <url path="/getMissedDowntimeData" >
+	         <param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200" />
+	         <param name="masId" type="long"/>
+	         <param name="lastDownTime" type="long"/>
+	         <param name="limitForQuerySync" type="long"/>
+	         <param name="downtimeData" regex="^[0-9\,\_]*$" max-len="90000000"/>
+	    </url>
+	    
+	    <url path="/GetAllMissingMoAndDeleteStrayMO" >
+	         <param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200" />
+	         <param name="masId" type="long"/>
+	         <param name="minResourceId" type="long"/>
+	         <param name="maxResourceId" type="long"/>
+	         <param name="resourceIdListFromManagedServer" regex="^[0-9\,\_]*$" max-len="90000000"/>
+	    </url>
+	    
+	    <url path="/GetAllMissingPcmId" >
+	         <param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200" />
+	         <param name="masId" type="long"/>
+	         <param name="minRelationshipId" type="long"/>
+	         <param name="maxRelationshipId" type="long"/>
+	         <param name="relationshipIdListFromManagedServer" regex="^[0-9\,\_]*$" max-len="90000000"/>
+	    </url>
+	    
+	    <url path="/GetAllMisMatchAlertId" skip-bad-input-encoding="true" >
+	         <param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200" />
+	         <param name="masId" type="long"/>
+	         <param name="minId" type="long"/>
+	         <param name="maxId" type="long"/>
+	         <param name="alertDataFromManagedServer" type="JSONObject" template="am.allMismatchAlertId.JsonObject" max-len="80000000" />
+	    </url>
+	    
+	    <url path="/GetAllMonitorResourceIdWithOutAlert" >
+	         <param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200" />
+	         <param name="masId" type="long"/>
+	    </url>
+	    
+	    <url path="/latestEvent" >
+	         <param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200" />
+	         <param name="masId" type="long"/>
+	         <param name="entity" type="String" max-len="50000000" />
+	         <param name="getEventForDependency" type="boolean" />
+	    </url>
+	    
+	    <url path="/getTableMaxValueFromMAS" >
+	     	 <param name="eeSyncKey" regex="am.alphanumeric" secret="true" max-len="200" />
+	         <param name="probeID" type="long"/>
+	         <param name="probeId" type="long"/>  
+	    </url>
+    </urls>
+    
+    <urls prefix="/AppManager/(xml|json)/ApmAdminServices" url-type="dynamic" method="GET" deny-operation="true" >
+        <url path="/syncDisableforManagedserver" />
+        <url path="/getMissedDowntimeData" />
+        <url path="/GetAllMissingMoAndDeleteStrayMO" />
+        <url path="/GetAllMissingPcmId" />
+        <url path="/GetAllMisMatchAlertId" />
+        <url path="/GetAllMonitorResourceIdWithOutAlert" />
+        <url path="/latestEvent" />
+        <url path="/getTableMaxValueFromMAS" />
+    </urls>
+    <!-- RESTAPI WAF configurations -->
+    
+    <!-- JSP WAF configurations -->
+    <urls method="GET" authentication="required">
+        <param-group name="am.additional.extra.params" />
+		<url path="/jsp/EnterpriseDeleteExtraMonitors.jsp" roles="ENTERPRISEADMIN" ></url>
+		<url path="/jsp/MASError404.jsp" roles="am.role.ADMIN.EA.OP.US.DE" ></url>
+	</urls>
+	
+	<urls method="POST" throwallerrors="true" deny-operation="true">
+		<url path="/jsp/EnterpriseDeleteExtraMonitors.jsp"></url>
+		<url path="/jsp/MASError404.jsp" ></url>
+	</urls>
+     <!-- JSP WAF configurations -->
+    
+    
+</security>

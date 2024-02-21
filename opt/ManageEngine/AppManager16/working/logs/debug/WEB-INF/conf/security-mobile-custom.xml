@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+	
+	<!-- Mobile web client end points starts -->
+	<urls  path="/mobile/webclientview.do" throwallerrors="true"  roles="am.role.ADMIN.EA.OP.US.DE" authentication="required" method="GET">
+		<param name="PRINTER_FRIENDLY"  type="boolean" />
+		<url operation-param="method" operation-value="showHomePage"></url>
+		<url operation-param="method" operation-value="setEnvironment">
+			<param name="pageScreenHeight" type="int"></param>
+		</url>
+		<url operation-param="method" operation-value="showAlarmDetails" privilege-identifier="resourceid">
+			<param name="resourceid" regex="am.common.longandnull"></param>
+		</url>
+		
+		<url operation-param="method" operation-value="infrastructureView,monitorGroupView,showDashboards,listActions"></url>
+		<url operation-param="method" operation-value="ListMonitorsForType,downDevicesViewAction">
+			<param name="type" regex="am.monitor.type"></param>
+			<param name="typeName" regex="am.monitor.type"></param>
+			<param name="viewName" regex="mobile.viewname"></param>
+		</url>
+		<url operation-param="method" operation-value="listAlarms">
+			<param name="type" regex="mobile.alertType"></param>
+			<param name="viewName" regex="mobile.viewname"></param>
+			<param name="FROM_INDEX" type="int"></param>
+			<param name="TO_INDEX" type="int"></param>
+			<param name="criteria" regex="onlyon"></param>
+			<param name="PAGE_NUMBER" type="int"></param>
+			<param name="ACTION" regex="mobileActionList"></param>
+		</url>
+		<url operation-param="method" operation-value="mobileSearch">
+			<param name="searchTerm" type="String" max-len="1000"></param>
+			<param name="viewName" regex="mobile.viewname"></param>
+		</url>		
+	</urls>
+	
+	<urls path="/mobile/webclientview.do" csrf="true" throwallerrors="true"  roles="am.role.ADMIN.EA.OP.US.DE" authentication="required" method="POST">
+		<url operation-param="method" operation-value="executeAction" privilege-identifier="resourceid">
+			<param name="action" regex="mobile.monitorAction"></param>
+			<param name="resourceid" type="long"></param>
+		</url>
+		<url operation-param="method" operation-value="executeAlarmAction" privilege-identifier="entity">
+			<param name="action" regex="mobile.alarmAction"></param>
+			<param name="entity" regex="am.deleteAnnotation.entity"></param>
+		</url>
+	</urls>
+	
+	<urls path="/mobile/webclientview.do" throwallerrors="true"  roles="am.role.ADMIN.EA.OP.US.DE" authentication="required" method="GET">
+			<param name="PRINTER_FRIENDLY"  type="boolean" />
+			<param name="attributeID" type="int"></param>
+			<param name="haid" type="long"></param>
+		<url  operation-param="method" operation-value="showHistoryDetails" privilege-identifier="resourceid">			
+			<param name="resourceid" type="long"></param>
+			<param name="period" type="int" range="20,-7,-30"></param>
+			<param name="report" regex="onlyon"></param>
+		</url>
+		<url  operation-param="method" operation-value="showMonitorDetails" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"></param>
+		</url>
+		<url  operation-param="method" operation-value="showMGDetails" privilege-identifier="groupId">
+			<param name="groupId" type="long"></param>
+		</url>
+	</urls>
+	<!-- Mobile web client end points ends -->
+	
+	<!-- Mobile App API starts -->
+	<urls prefix="/AppManager/(xml|json)" url-type="dynamic" method="POST" roles="am.role.ADMIN.EA.OP.US.DE" throwallerrors="true" authentication="required" api="true">
+			<param name="deviceType" regex="deviceType.value" />
+			<param name="apikey" regex="apikey" secret="true" min-len="32" max-len="32"/>
+			<param name="deviceId" type="long"/>
+			<url path="/RegisterForPNS">
+				<param name="enabledNotifications" regex="notification.values" max-len="250"/>
+				<param name="deviceToken" regex="am.common.alphaNumeric.ext3" max-len="230"/>
+			</url>
+			<url path="/DeRegisterForPNS"></url>
+	</urls>
+	<urls prefix="/AppManager/(xml|json)" url-type="dynamic" method="POST" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url path="/Authenticator" duration="1" lock-period="5" threshold="100">
+			<param name="j_username" type="String" max-len="100"/>
+			<param name="j_password" type="String" secret="true" max-len="250"/>
+			<param name="operationName" regex="^(resendOTP|twoFactorAuth)" />
+			<param name="2factor_password" type="long" />
+			<param name="authKey" regex="am.alphanumeric" max-len="32" />
+			<param name="fromRecorder" type="boolean" />
+			<param name="version" type="double" />
+			<param name="isAdmin" type="boolean" />
+		</url>
+	</urls>
+	<!-- Mobile App API ends -->
+	
+	<!-- Custom new monitor type -Starts -->
+	<urls path="/monitorType.do" method="GET"  throwallerrors="true" operation-param="method"  authentication="required" deny-del-admin="true" roles="am.role.ADMIN.EA">
+		<param-group name="am.additional.extra.params" />
+		<url operation-value="createType,updateType,enableReports,disableReports,editAttributeType" dynamic-redirect="true" redirect-url-template="/monitorType.do?method=showTypes" >
+			<param name="type" regex="am.noconf.type" />
+			<param name="baseid" regex="am.common.longandnull" />
+			<param name="basetype" regex="am.custom.monitortype.type"></param>
+		</url>
+	</urls>
+	<urls path="/monitorType.do" csrf="true" method="POST" throwallerrors="true" operation-param="method"   authentication="required" deny-del-admin="true">
+		<param-group name="am.additional.extra.params" />
+		<url   operation-value="createType" roles="am.role.ADMIN.EA">
+	  		<param name="type" regex="am.noconf.type" />
+			<param name="baseid" regex="am.common.longandnull" />
+			<param name="numeric_att" description="Numeric Attributes" max-len="10000" regex="am.attribute.name"/>
+			<param name="string_att"  description="String Attributes" max-len="10000" regex="am.attribute.name"/>
+			<param name="delimiter" type="String" description="Delimiter" max-len="1"/>
+			<param name="table_row" type="int" />
+			<param name="displayname" description="am.webclient.monitorgroupsecond.category.type" regex="am.custom.monitortype" max-len="510"/>
+			<param name="choosehost" regex="am.custommon.choosehost" description="am.select.category"/>
+			<param name="tablespresent" regex="onlyon" description="am.webclient.newscript.tablesinoutput.text"/>
+			<param name="am.scriptmon.stringatt" description="String Attribute of Table" max-len="10000" name-regex="true" regex="am.attribute.name"/>
+			<param name="am.scriptmon.numericatt" description="Numeric Attribute of Table" max-len="10000" name-regex="true" regex="am.attribute.name"/>
+			<param name="am.scriptmon.table" description="Table Name" max-len="10000" name-regex="true" regex="am.attribute.name"/>
+			<param name="am.scriptmon.pcatt" description="Unique Column" max-len="10000" name-regex="true" regex="am.attribute.name"/>
+			<param name="am.scriptmon.cdl" type="String" description="Column Delimiter" name-regex="true" max-len="1"/>
+			<param name="manageTableRow" regex="scriptManageTableRow" description="am.scriptmonitor.managetablerow"/>
+			<param name="healthTableRow" regex="scriptHealthTableRow" description="am.scriptmonitor.healthtablerow"/>
+			<param name="checkSeverity" regex="onlyon" description="am.webclient.enable.severitycontrol"/>
+			<param name="basetype" type="String" max-len="500" />
+		</url>
+	</urls>
+	<urls path="/monitorType.do" throwallerrors="true" operation-param="method"  authentication="required" deny-del-admin="true">
+		<param-group name="am.additional.extra.params" />
+		<url csrf="true" method="POST" operation-value="updateType" roles="am.role.ADMIN.EA">
+	  		<param name="type" regex="am.noconf.type" />
+			<param name="baseid" regex="am.common.longandnull" />
+			<param name="numeric_att" description="Numeric Attributes" max-len="10000" regex="am.attribute.name"/>
+			<param name="string_att"  description="String Attributes" max-len="10000" regex="am.attribute.name"/>
+			<param name="delimiter" type="String" description="Delimiter" max-len="1"/>
+			<param name="table_row" type="int" />
+			<param name="displayname" description="am.webclient.monitorgroupsecond.category.type" regex="am.custom.monitortype" max-len="510"/>
+			<param name="choosehost" regex="am.custommon.choosehost" description="am.select.category"/>
+			<param name="tablespresent" regex="onlyon" description="am.webclient.newscript.tablesinoutput.text"/>
+			<param name="am.scriptmon.stringatt" description="String Attribute of Table" max-len="10000" name-regex="true" regex="am.attribute.name"/>
+			<param name="am.scriptmon.numericatt" description="Numeric Attribute of Table" max-len="10000" name-regex="true" regex="am.attribute.name"/>
+			<param name="am.scriptmon.table" description="Table Name" max-len="10000" name-regex="true" regex="am.attribute.name"/>
+			<param name="am.scriptmon.pcatt" description="Unique Column" max-len="10000" name-regex="true" regex="am.attribute.name"/>
+			<param name="am.scriptmon.cdl" type="String" description="Column Delimiter" name-regex="true" max-len="1"/>
+			<param name="manageTableRow" regex="scriptManageTableRow" description="am.scriptmonitor.managetablerow"/>
+			<param name="healthTableRow" regex="scriptHealthTableRow" description="am.scriptmonitor.healthtablerow"/>
+			<param name="checkSeverity" regex="onlyon" description="am.webclient.enable.severitycontrol"/>
+			<param name="basetype" type="String" max-len="500" />
+		</url>
+		<url csrf="true" method="POST" operation-value="deleteType" roles="am.role.ADMIN.EA">
+			<param name="baseid" regex="am.common.longandnull" />
+			<param name="type" regex="am.custom.monitortype.type" />
+			<param name="org.apache.struts.taglib.html.TOKEN" type="String" />
+		</url>
+		<url operation-value="callReports,editType" method="GET" roles="am.role.ADMIN.EA.DE">
+			<param name="baseid" regex="am.common.longandnull"></param>
+			<param name="basetype" regex="am.custom.monitortype.type"></param>
+		</url>
+		<url csrf="true" operation-value="deleteTable" method="POST" roles="am.role.ADMIN.EA">
+			<param name="org.apache.struts.taglib.html.TOKEN" type="String" />
+			<param name="baseid" regex="am.common.longandnull"></param>
+			<param name="tableid" type="int"></param>
+			<param name="table_row" type="int"></param>
+			<param name="type" regex="tableType"></param>
+			<param name="displayname" regex="am.custom.monitortype" max-len="510"></param>
+			<param name="numeric_att" description="Numeric Attributes" max-len="10000" regex="am.attribute.name"/>
+			<param name="string_att"  description="String Attributes" max-len="10000" regex="am.attribute.name"/>
+			<param name="delimiter" type="String" description="Delimiter" max-len="1"/>
+			<param name="basetype" regex="am.custom.monitortype.type"></param>
+			<param name="tablespresent" regex="onlyon" description="am.webclient.newscript.tablesinoutput.text"/>
+		</url>
+		<url csrf="true" operation-value="enableReports,disableReports" method="POST" roles="am.role.ADMIN.EA">
+			<param name="baseid" regex="am.common.longandnull"></param>
+			<param name="checkbox" type="long" max-occurrences="2147483647" min-occurrences="1"/>
+			<param name="headercheckbox" regex="onlyon"/>
+		</url>
+		<url operation-value="updateTable" method="POST" csrf="true" roles="am.role.ADMIN.EA">
+			<param name="tableid" type="int"></param>
+			<param name="baseid" regex="am.common.longandnull"></param>
+			<param name="basetype" regex="am.custom.monitortype.type" />
+			<param name="numatts" description="Numeric Attributes" max-len="10000" regex="am.attribute.name"/>
+			<param name="stratts"  description="String Attributes" max-len="10000" regex="am.attribute.name"/>
+			<param name="tname" description="Table Name" max-len="10000" regex="am.attribute.name"/>
+			<param name="uncol" description="Unique Column" max-len="10000" regex="am.attribute.name"/>
+			<param name="coldelimiter" type="String" description="Column Delimiter" max-len="1"/>			
+		</url>
+		<url operation-value="showTypes" method="GET" roles="am.role.ADMIN.EA.DE">
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+		<url operation-value="validateMonitorType" method="GET" roles="am.role.ADMIN.EA.DE">
+			<param name="displayname" type="String" max-len="510"></param>
+			<param name="pagetype" regex="pageType"></param>
+			<param name="typeid" regex="am.common.longandnull"></param>
+		</url>
+	</urls>	
+	<urls path="/monitorType.do" throwallerrors="true" operation-param="method" privilege-identifier="baseid" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<param name="baseid" regex="am.common.longandnull" />
+		<param name="isPopup" type="boolean"/>
+		<url operation-value="openEditAttributeType" method="GET" roles="am.role.ADMIN.EA.DE">
+			<param name="basetype" regex="am.custom.monitortype.type" />
+		</url>	
+		<url operation-value="editAttributeType" method="POST" csrf="true" roles="am.role.ADMIN.EA">
+			<param name="numericFloat_1" type="long" max-occurrences="2147483647" />
+			<param name="numericFloat_2" type="long" max-occurrences="2147483647" />
+		</url>	
+	</urls>
+	<urls throwallerrors="true" authentication="required" method="GET">
+	    <param-group name="am.additional.extra.params" />
+		<url path="/jsp/EditTable.jsp" roles="am.role.ADMIN.DE" deny-del-admin="true">
+			<param name="tableid" type="long"></param>
+			<param name="baseid" type="long"></param>
+			<param name="basetype" regex="am.custom.monitortype.type"></param>
+			<param name="toclose" type="boolean"></param>
+			<param name="sid" type="String" max-len="100"></param>
+		</url>
+		<url path="/jsp/Monitorsdiv.jsp" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="user" type="String" max-len="100"></param>
+			<param name="time" type="long"></param>
+		</url>
+		<url path="/jsp/displayresources.jsp" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="isFromEnterpriseSearch" regex="am.common.TFNull"></param>
+			<param name="customField" type="String" max-len="1000"></param>
+			<param name="selectedNetwork" regex="ipaddress"></param>
+			<param name="query" type="String"></param>
+			<param name="detailspage" regex="am.common.TFNull"></param>
+			<param name="quickLinks" type="String"></param>
+			<param name="type" regex="am.custom.monitortype.type"></param>
+			<param name="sortBy" regex="am.listview.sort"></param>
+			<param name="orderBy" regex="am.query.orderby.list"></param>
+			<param name="haid" regex="am.common.longandnull"></param>
+			<param name="network" regex="am.custom.monitortype.type"></param>
+			<param name="selectedPage" type="int"></param>
+			<param name="showmanage" regex="am.bulkupdate.showmanage"></param>
+			<param name="method" regex="am.viewtype.value"></param>
+			<param name="group" regex="am.custom.monitortype.type"></param>
+			<param name="oldtab" regex="am.common.longandnull" max-occurrences="2"></param>
+			<param name="isReqFromAdmin" type="boolean"></param>
+			<param name="viewmontype" regex="am.custom.monitortype.type"></param>
+			<param name="assignCustomValues" regex="am.common.TFNull"></param>
+			<param name="customValue" regex="am.common.alphaNumeric.ext1.withDollar"></param>
+			<param name="serverId" type="long"></param>
+			<param name="noOfRows" type="int"></param>
+			<param name="mas_host" regex="am.hostname.ipaddress"></param>
+			<param name="mas_port" type="int"></param>
+			<param name="listview" regex="am.common.TFNull"></param>
+			<param name="search" regex="am.common.TFNull"></param>
+		</url>
+		<url path="/webclient/mobile/jsp/MobileWidget.jsp" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="dashboardid" type="long"></param>
+			<param name="widgetid" type="long"></param>
+			<param name="dashboard" type="String"></param>
+			<param name="widget" type="String"></param>
+		</url>
+		<url path="/jsp/NewMonitorType.jsp" roles="am.role.ADMIN.DE" deny-del-admin="true">
+			<param name="baseid" type="long"></param>
+			<param name="exparam" type="String"></param>
+		</url>
+		<url path="/jsp/MonitorDetails.jsp" roles="am.role.ADMIN.EA">
+			<param name="type" regex="am.monitor.error.types"></param>
+		</url>
+		<url path="/jsp/configure_resource.jsp" roles="am.role.ADMIN">
+			<param name="resid" regex="am.common.comma.longandnull"></param>
+			<param name="haid" regex="am.common.comma.longandnull"></param>
+			<param name="resourcename" type="String" max-len="2000"></param>
+			<param name="resourceid" regex="am.common.comma.longandnull"></param>
+			<param name="name" type="String" max-len="2000"></param>
+			<param name="moname" type="String" max-len="2000"></param>
+			<param name="type" regex="am.custom.monitortype.type"></param>
+		</url>
+	</urls>
+	<urls method="POST" path="/updateScript.do" csrf="true" throwallerrors="true" operation-param="method" roles="am.role.ADMIN.EA" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<param-group name="am.monitor.details.extra.params" />
+		<param name="resourcename" type="String" max-len="515" ></param>
+		<param name="type" regex="am.monitor.type"></param>
+		<param name="original_type" regex="am.monitor.type" ></param>
+		<param name="baseid" type="long"></param>
+		<param name="resourceid" regex="am.common.numberandcomma" max-len="1000" ></param>
+		<param name="monitorname" type="String" max-len="515" ></param>
+		<param name="moname" type="String" max-len="2000"></param>
+		<param name="tabId" regex="am.common.longbooleanandnull" />
+		<param name="tableid" type="long"></param>
+		<param name="tableName" regex="am.conftable.name" max-len="80" ></param>
+		<param name="sqlmanid" regex="am.common.longandnull"></param>
+		<param name="scriptid" regex="am.common.longandnull"></param>
+		<param name="rowid" regex="am.common.numberandcomma" max-len="10000" ></param>
+		<param name="fromConfDetails" type="boolean"></param>
+		<param name="collectionTime" type="long"></param>
+		<param name="creationTime" type="long"></param>
+		<param name="pollinterval" type="int"></param>
+		<param name="isParentMonitor" type="boolean"></param>    
+		<param name="headercheckbox" regex="onlyon"/>         
+		<param name="am.table.row.deletion" name-regex="true" type="long"></param>
+		<param name="attList" type="long"></param>
+		<param name="fromPopUpWindow" type="boolean"/>
+		<param name="fromRestAPI" type="boolean" />
+		<url operation-value="deleteRowByUser,disableRowByUser" privilege-identifier="resourceid" />
+		<url operation-value="enableRowByUser" privilege-identifier="resourceid" >
+			<param name="table_health" type="long"></param>
+			<param name="mon_health" type="long"></param>	
+		</url>
+	</urls>
+	<urls method="get" operation-param="method" deny-operation="true" >
+		<url path="/updateScript.do" operation-value="enableRowByUser,disableRowByUser,deleteRowByUser" />
+	</urls>
+	<!-- Custom new monitor type -ends -->
+</security>
+	

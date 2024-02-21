@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+
+	<!-- Docker Container URLS START-->		
+	<urls path="/confActions.do" operation-param="method" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url method="POST" operation-value="addContainers" api="true" systemadmin_enterprise="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN" privilege-identifier="resourceId">
+			<param name="DockerContainers_length" type="int"/>
+			<param name="resourceId" type="long"/>
+			<param name="containerId" regex="am.alphanumeric.alllanguages.ext1" max-occurrences="10000"/>
+		</url>
+		<url method="POST" operation-value="executeDockerTestAction" csrf="true" authentication="required" custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkUserCanViewExecuteAction" roles="ADMIN,ENTERPRISEADMIN" ignore-extraparam ="true">
+			<param name="actionID" type="long"/>
+			<param name="haid" regex="am.common.longandnull"/>
+			<param name="executeVMActions" regex="am.common.TFNull"/>
+		</url>
+		<url method="POST" operation-value="getDockerContainers" api="true" systemadmin_enterprise="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+		</url>
+		<url method="POST" operation-value="dockerContainerActions" api="true" systemadmin_enterprise="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="action" regex="am.child.monitor.action.type"/>
+			<param name="resIds" regex="am.common.numberandcomma"/>
+			<param name="parentId" type="long"/>
+		</url>
+		<url method="GET" operation-value="testDockerContainerActions" authentication="required" custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkUserCanViewExecuteAction" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="actionID" type="long"/>
+		</url>
+	</urls>
+	<!-- Docker Container URLS END-->
+
+	<!-- OpenShift Action URLS START-->		
+	<urls path="/manageOpenShiftInstances.do" operation-param="method" throwallerrors="true" privilege-identifier="parentId">
+		<param name="resId" type="long"/>
+		<param name="parentId" type="long"/>
+		<param-group name="am.additional.extra.params" />
+		<url method="GET" operation-value="manageInstances" authentication="required" roles="ADMIN,ENTERPRISEADMIN"/>
+		<url method="GET" operation-value="deleteInstance" authentication="required" roles="ADMIN,ENTERPRISEADMIN"/>
+		<url method="POST" operation-value="performManageActions" api="true" systemadmin_enterprise="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="action" regex="am.openShift.action.type" min-occurrences="1"/>
+			<param name="resourceType" regex="am.openShift.action.resource.type" min-occurrences="1"/>
+		</url>
+		<url method="POST" operation-value="generatePDF" api="true" systemadmin_enterprise="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="displayName" type="String" min-occurrences="1" max-len="300"/>
+			<param name="resourceType" regex="am.openShift.action.resource.type" min-occurrences="1"/>
+		</url>
+	</urls>
+	<!-- OpenShift Action URLS END-->
+	
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url path="/showActionProfiles.do"  method="GET" operation-param="method" operation-value="monitorGroupAlarmTemplate" throwallerrors="true" authentication="required" privilege-identifier="haid" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="haid" type="long"/>
+		</url>
+	</urls>
+	<urls>
+		<param name="resourceId" type="long"/>
+		<param-group name="am.additional.extra.params" />
+		<url path="/jsp/AddDockerContainers.jsp" method="GET" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="action" regex="^(AddContainersLink)$"/>
+		</url>
+		<url path="/jsp/CiscoUCSFaults.jsp" method="GET" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceId">
+			<param name="action" regex="^(ShowAllFaults)$"/>
+		</url>
+		<url path="/jsp/includes/istio_choose_workload.jsp" method="GET" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="action" regex="^(AddServices)$"/>
+		</url>
+	</urls>
+</security>

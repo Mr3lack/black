@@ -1,0 +1,75 @@
+[10:31:09:219]|[02-20-2024]|[HEADER]|[ERROR]|[18]: Logging Started|
+[11:47:44:391]|[02-20-2024]|[TUSER]|[INFO]|[245]: 	  ******************* Logging Started *******************
+	  -------General Information------
+	  Product = Applications Manager 16(Build 16841)
+	  OS Name = Linux
+	  OS Version = 6.2.0-1017-aws
+	  OS Architecture = amd64
+	  Tomcat version = 9.0.70
+	  Java Version = 1.8.0_352
+	  Java Vendor = Azul Systems, Inc.
+	  Java Specification = Java Platform API Specification
+	  Java Specification Version = 1.8
+	  Java VM Name = OpenJDK 64-Bit Server VM
+	  Java VM Information = mixed mode
+	  Java Compiler = null
+	  ********************************************************
+	  -------RDBMS Related Information------
+	  Database Product Name = PostgreSQL
+	  Database Product Version = 11.16
+	  Database Driver Name = PostgreSQL JDBC Driver
+	  Database Driver Version = 42.4.0
+	  Database User Name = dbuser
+	  Database URL = jdbc:postgresql://localhost:15432/amdb?ApplicationName=ApplicationsManager&dontTrackOpenResources=true&useUnicode=true&characterEncoding=UTF-8
+	  ********************************************************|
+[11:47:44:391]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:47:44:391]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:47:44:403]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:47:44:403]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:47:44:403]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:47:44:404]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:47:44:404]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:47:44:404]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:47:44:405]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:47:44:405]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:47:44:405]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:47:44:406]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:47:44:406]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:47:44:406]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:47:44:408]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:47:44:408]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:47:44:408]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:48:04:409]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:48:04:409]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:48:04:410]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:48:04:410]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:48:04:411]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:48:04:411]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:48:04:411]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:48:04:411]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:48:04:412]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:48:04:412]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:48:04:412]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:48:04:412]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:48:04:412]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:48:04:412]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:48:04:413]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:48:04:413]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:48:04:413]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:48:24:414]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:48:24:414]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:48:24:415]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:48:24:415]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:48:24:415]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:48:24:416]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:48:24:416]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:48:24:416]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:48:24:416]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:48:24:416]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:48:24:416]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:48:24:417]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:48:24:417]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:48:24:417]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|
+[11:48:24:417]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : DB Connections REFRESHED Successfully ...!|
+[11:48:24:417]|[02-20-2024]|[TUSER]|[INFO]|[245]:  #############################################################|
+[11:48:24:417]|[02-20-2024]|[TUSER]|[INFO]|[245]:  [ConnectionPool] : Entering into Refresh Database Connections.!|

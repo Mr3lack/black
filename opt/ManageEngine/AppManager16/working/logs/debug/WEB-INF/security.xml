@@ -1,0 +1,2510 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./conf/security-apm.xsd">
+	<properties>
+		<!--<property name="use.iam" value="false" />-->
+		<property name="csrf.cookie.name" value="csrfToken" />
+		<property name="csrf.param.name" value="csrfParam" />
+		<property name="dynamic.params.max.occurrence.limit" value="1500"/>
+		<property name="content.type.detect.option" value="tika"/>
+		<property name="com.adventnet.iam.security.provider" value="com.me.apm.common.api.security.APMSecurityProvider"/>
+		<property name="ignore.trailing.slash" value="true" />
+		<property name="uri.ignore.prefix" value="/client"/>
+		<property name="disable.authcsrf" value="false"/>
+		<property name="com.adventnet.iam.authentication.provider" value="com.me.apm.common.api.security.APMCustomAuthenticationProvider"/>
+	</properties>
+	<default-response-headers disable-safe-headers="X-Frame-Options"/><!-- for plugin build -->
+	
+	<throttles window="ROLLING" scope="APPSERVER" key="url.path+user.zuid">
+		<throttle duration="1M" threshold="1000" lock-period="3M"/>
+	</throttles>
+
+	<!-- TODO - conversion of request type changes required similar to other agent types -->
+	<urls method="post">
+		<url path="/resources/apminsight-dotnetagent\.(msi\.sha256|msi)"  url-type="dynamic" />
+	</urls>
+	
+	<urls method="get">
+		<param-group name="am.additional.extra.params" />
+		<param name="rev" type="long" />
+		<param name="version" type="long" />
+		<param name="_" regex="am.common.decimals" />
+		<param name="sid" regex="am.common.decimals" />
+		<param name="date" type="String" max-len="200" />
+		<param name="eeSyncKey" regex="am.encodedauthkey" secret="true" />
+		<param name="method" regex="am.request.method" />
+		<param name="probeId" type="int" />
+		<url path="/" />
+		<url path="/webclient.html" />
+		<url path="/images/.*\.(css|gif|htc|html|jpg|js|png|properties|svg|swf|woff|map)" url-type="dynamic"/>
+		<url path="/Debug-Info/URL/.*\.html" url-type="dynamic" authentication="required" roles="am.role.ADMIN.EA.OP.US">
+			<throttle duration="1M" threshold="100" lock-period="5M"/>
+		</url>
+		<url path="/webclient/temp/jfreechart-[0-9]{0,35}\.(jpg|png)" url-type="dynamic" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE.MA" auth-keytype="Dashboard,SyncKey">
+			<param name="publishkey" regex="cleartextpattern" max-occurrences="1" secret="true"/>
+			<param name="pageid" type="long"/>
+		</url>
+        <url path="/appliedHotfixes/.*\.(ppm|zip)" url-type="dynamic"/>
+        <url path="/Debug-Info/.*\.(html|json)" url-type="dynamic"/>
+		<url path="/it360/images/.*\.(?i)(css|gif|jpeg|jpg|png|htc)" url-type="dynamic"/>
+		<url path="/images/images/pen.cur" />
+		<url path="/template/.*\.(css|js|map|woff|png|svg)" url-type="dynamic"/>
+		<url path="/webclient/.*\.(css|js|jpg|png|gif|svg|ttf|ttc|xml|json)" url-type="dynamic"/>
+		<url path="/webclient/ember/index.html" />
+		<url path="/webclient/common/html/Login.html" />
+		<url path="/support/.*\.zip.gz" url-type="dynamic"/>
+		<url path="/users/(guest|root)/.*\.(xml|conf|dtd)" url-type="dynamic"/>
+		<url path="/users/.*\.(jpg|gif|png|jpeg)" url-type="dynamic"/><!-- Language update properties ??? -->
+		<url path="/apminsight/style/.*\.(css|png)" url-type="dynamic"/>
+		<url path="/apminsight/template/.*\.html" url-type="dynamic"/>		
+		<url path="/apminsight/images/.*\.(jpg|gif|png|jpeg)" url-type="dynamic"/>
+		<url path="/apminsight/js/.*\.js" url-type="dynamic"/>
+		<!-- <url path="/projects/rbmsuite.*\.(proj|xml|conf|properties|py)" url-type="dynamic"/> -->
+		<url path="/html/Data/JREMonitor/ThreadDump/.*\.html" url-type="dynamic" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" min-occurrences="1"/>
+		</url>
+		<url path="/html/.*\.html" url-type="dynamic">
+			<param name="resourceid" type="long" />
+		</url>
+		<url path="/html/en/EnglishToNative.properties" roles="am.role.ADMIN.EA" authentication="required">
+			<param name="apikey" regex="apikey" max-len="32" min-len="32" secret="true" min-occurrences="1" />
+		</url>
+		<url path="/bulkadd/.*\.txt" url-type="dynamic" />
+		<url path="/resources/APMSiebelCommands.txt" />
+		<url path="/resources/WLSMBeans.jar" />
+		<url path="/resources/apminsight-javaagent.(zip.sha256|zip)" />
+		<!--<url path="/resources/(agent_php|agent_php_alpine|agent_php_arm).(zip.sha256|zip|msi.sha256|msi)" /> PHP Agent Auto Upgrade Support has been removed -->
+		<url path="/resources/apminsight-dotnetcoreagent\.(zip\.sha256|zip)"  url-type="dynamic" />
+		<url path="/resources/apminsight.conf" />
+		<url path="/resources/apminsightnode.json" />
+		<url path="/resources/audio/alarm/.*\.(mp3|wav)" url-type="dynamic"/>
+		<url path="/resources/jbossagent.sar" />
+		<url path="/resources/phpstats.php" />
+		<url path="/resources/registermbeans.war" />
+		<url path="/resources/.*\DeployMBeans.txt" url-type="dynamic"/>
+		<url path="/projects/webscripts/.*\.(json|png)" url-type="dynamic"/>
+		<url path="/wpa/Resources/.*\.(json|png)" url-type="dynamic"/>
+		<url path="/patches/.*\.(ppm|txt)" url-type="dynamic" />
+		<url path="/ipconfig.txt" />
+		<url path="/netstat.txt" />
+		<url path="/desktop.ico" />
+		<url path="/favicon.ico" />
+	</urls>
+	<urls>
+		<url path="/index.html" method="get" > <!-- demo user login landing page -->
+			<param name="from_opm" type="String" />
+		</url>
+	</urls>
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url path="/Logout.do" method="get" throwallerrors="true" roles="am.role.ADMIN.EA.OP.US.DE.REP.MA" authentication="required" >
+			<param name="showPreLogin" type="boolean"/>
+		</url>
+		<url path="/index.do" method="get" >
+			<param name="showPreLogin" type="boolean" />
+			<param name="redirect" regex="^(redirect|mypage)$" />
+			<param name="from_singlesignon" type="boolean" />
+			<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="3"/>
+			<param name="targetClient" regex="^(classic|mobile)$" />
+			<param name="theme" regex="am.common.selectedSkin" />
+			<param name="plugin_view" type="boolean"/>
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+			<param name="technician" type="String" description="Unknown param which is not used in APM" />
+		</url>
+		<url path="/applications.do" method="get" >
+			<param name="shouldSaveRequisitesSettings" type="boolean" />	
+		</url>
+		<url path="/admin/createapplicationwiz.do" method="get" />
+		<url path="/jsp/formpages/AccessRestricted.jsp" method="get" >
+			<param name="EnableCookiesInIE" type="boolean" />		
+		</url>
+		<url path="/jsp/formpages/resolve400Error.jsp" method="get"/>
+		<url path="/jsp/ErrorPage.jsp" method="get" >
+			<param name="errorPrint" type="String" max-len="2147483646" />
+			<param name="message" type="String" max-len="1000000" />
+			<param name="errorType" type="int" />
+			<param name="errorTrace" type="String" />
+			<param name="addMessage" type="String" />
+		</url>
+		<url path="/jsp/formpages/Error.jsp" method="get" >
+			<param name="id" type="int" />
+			<param name="cas" type="boolean" />
+		</url>
+		<url path="/jsp/formpages/Error404.jsp" method="get" />
+		<url path="/jsp/formpages/Login.jsp" method="POST,GET" >
+			<param name="casredirecturl" type="String" max-len="2000" />
+			<param name="logoutRequest" type="String" max-len="1000" />
+			<param name="caserror" type="boolean" max-occurrences="2"/>
+		</url>
+		<url path="/jsp/casindex.jsp" method="get" >
+			<param name="pgtIou" type="String" max-len="2000" />
+			<param name="pgtId" type="String" max-len="2000" />
+		</url>
+		<!--  Need to check all possible use cases and remove the unused params -->
+		<url path="/j_security_check" method="POST" throwallerrors="true" >
+			<param name="j_username" type="String" />
+			<param name="j_password" type="String" secret="true" max-len="250"/>
+			<param name="username" type="String" />
+			<param name="ScreenWidth" type="int" />
+			<param name="ScreenHeight" type="int" />
+			<param name="domain" regex="am.webclient.domainname" />
+			<param name="submit" type="String" />
+			<param name="remember" regex="am.common.on_off.yes_no.tf.null.value" />
+			<param name="clienttype" regex="^(mobile|html)$" />
+			<param name="auto" type="boolean" />
+			<param name="service" type="String" max-len="2000" />
+			<param name="password" type="String" secret="true" max-len="255" />
+			<param name="webstart" type="String" max-len="255" />
+			<param name="casredirecturl" type="String" max-len="2000" />
+			<param name="trustBrowser" regex="am.common.on_off.yes_no.tf.null.value" />
+			<param name="two_factor_password" type="int" secret="true" max-len="6" />
+			<param name="theme" regex="am.common.selectedSkin" />
+			<param name="clienttype2" regex="^(html)$" />
+		</url>
+		<url path="/j_security_check" method="GET" throwallerrors="true" dynamic-redirect="true" redirect-url-template="/index.do" />
+	</urls>
+	<urls>
+		<url path="/GlobalActions.do" method="get" operation-param="method" operation-value="shutdownServer" roles="am.role.ADMIN.EA" deny-del-admin="true" authentication="required" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:checkIfShutdownAllowed" />
+		<url path="/GlobalActions.do" method="post" csrf="true" operation-param="method" operation-value="shutdownServer" roles="am.role.ADMIN.EA" deny-del-admin="true" authentication="required" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:checkIfShutdownAllowed" />
+		<param name="alert" type="boolean" />
+		<param name="service" regex="alphanumeric" />
+		<param name="reqForAdminLayout" type="boolean" />
+	</urls>
+	
+	<urls>
+		<url method="get" path="/common/viewThreshold.do" throwallerrors="true">
+			<param name="haid" regex="am.common.longandnull"/>
+			<param name="isanomaly" regex="yesnotf"/>
+			<param name="service" regex="am.threshold.admin.view"/>
+			<param name="reqForAdminLayout" regex="yesnotf"/>
+			<param name="sid" type="long" />
+			<param name="thresholdconfigid" type="long" />
+			<param name="threshname" type="String" />
+			<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+			<param name="plugin_view" type="boolean"/>
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		</url>
+
+		<url path="/alarmsoneintegration.do" method="post" csrf="true"
+			operation-param="method" operation-value="integrateAPM" roles="am.role.ADMIN.EA" deny-del-admin="true" authentication="required">
+			<param name="aoApiKey" regex="cleartextpattern" secret="true" />
+			<param name="is_remote" regex="am.common.On" />
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+			<param name="PRINTER_FRIENDLY" type="boolean" />
+		</url>
+		<url path="/alarmsoneintegration.do" method="post" csrf="true" operation-param="method" operation-value="updateAlarmsOneDetails" roles="am.role.ADMIN.EA" deny-del-admin="true" authentication="required">
+			<param name="aoApiKey" regex="cleartextpattern" secret="true" />
+			<param name="alarmsOneStatusEnabled" regex="am.common.On" />
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+			<param name="PRINTER_FRIENDLY" type="boolean" />
+		</url>
+		<url path="/alarmsoneintegration.do" method="get" operation-param="method" operation-value="reIntegrateAlarmsOne" roles="am.role.ADMIN.EA" deny-del-admin="true" authentication="required">
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		</url>
+		<url path="/alarmsoneintegration.do" method="get" operation-param="method" operation-value="modifyAlarmsOneConsent" roles="am.role.ADMIN.EA" deny-del-admin="true" authentication="required">
+			<param name="prodName" regex="am.alarmsone.modifyalarms" />
+			<param name="PRINTER_FRIENDLY" type="boolean" />
+		</url>
+		<url path="/extDeviceAction.do" method="get" operation-param="method" operation-value="showExtDeviceConfigurations">
+			<param name="id" type="long"/>
+			<param name="prodName" regex="alphanumeric" />
+			<param name="admin" type="boolean" />
+			<param name="updateStatus" type="boolean" />
+			<param name="service" regex="alphanumeric" />
+			<param name="reqForAdminLayout" type="boolean" />
+			<param name="PRINTER_FRIENDLY" type="boolean" />
+		</url>
+		<!--<url path="/extDeviceAction.do" method="post" operation-param="method"
+			operation-value="deleteDeviceConfiguration">
+			<param name="prodName" regex="alphanumeric" />
+			<param name="id" type="long" />
+			<param name="deleteTickets" type="boolean" />
+			<param name="updateStatus" type="boolean" />
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		</url> -->
+		
+	</urls>
+	<!-- Web Console Downtime Scheduler start--> 
+	<urls>
+	<param name="customTaskServeTime" regex="am.downtimescheduler.time" />
+	<param name="taskName" type="String" />
+	<param name="taskDescription" type="String" max-len="250"/>
+	<param name="taskStatus" regex="am.trap.status" /> 
+	<param name="taskMethod" regex="am.downtimescheduler.taskmethod" /> 
+	<param name="timezone" regex="am.downtimescheduler.timezone" />
+	<param name="taskStartTime" regex="am.downtimescheduler.time" />
+	<param name="taskEndTime" regex="am.downtimescheduler.time" />
+	<param name="taskEffectFrom" regex="am.downtimescheduler.time" />
+	<param name="numbers" regex="am.downtimescheduler.numbers" />
+	<param name="taskCount" type="int" />
+	<param name="am.downtimescheduler.param.startday" name-regex="true" regex="am.downtimescheduler.numbers"/>
+	<param name="am.downtimescheduler.param.endday" name-regex="true" regex="am.downtimescheduler.numbers"/>
+	<param name="am.downtimescheduler.param.starttime" name-regex="true" regex="am.downtimescheduler.time"/>
+	<param name="am.downtimescheduler.param.endtime" name-regex="true" regex="am.downtimescheduler.time"/>
+	<param name="numbersMonthly" regex="am.downtimescheduler.numbersMonthly" />
+	<param name="taskCountMonthly" type="int" />
+	<param name="dataCollectionType" regex="am.downtimescheduler.taskDatacollectionType" />
+	<param name="taskEffectFromMonthly" regex="am.downtimescheduler.time" />
+	<param name="frequency" regex="am.downtimescheduler.frequency" />
+	<param name="am.downtimescheduler.param.month" name-regex="true" regex="onlyon" />
+	<param name="dateOrWeekWise" regex="am.downtimescheduler.dateorweekwise" />
+	<param name="am.downtimescheduler.param.startdatemonthlydatewise" name-regex="true" regex="am.downtimescheduler.datemonthlydatewise" />
+	<param name="am.downtimescheduler.param.startdatemonthlydatewiserev" name-regex="true" regex="am.downtimescheduler.datemonthlydatewiseend"/>
+	<param name="am.downtimescheduler.param.enddatemonthlydatewise" name-regex="true" regex="am.downtimescheduler.datemonthlydatewise"/>
+	<param name="am.downtimescheduler.param.enddatemonthlydatewiserev" name-regex="true" regex="am.downtimescheduler.datemonthlydatewiseend"/>
+	<param name="am.downtimescheduler.param.starttimemonthlydatewise" name-regex="true" regex="am.downtimescheduler.time" />
+	<param name="am.downtimescheduler.param.starttimemonthlydatewiserev" name-regex="true" regex="am.downtimescheduler.time" />
+	<param name="am.downtimescheduler.param.endtimemonthlydatewiserev" name-regex="true" regex="am.downtimescheduler.time" />
+	<param name="am.downtimescheduler.param.endtimemonthlydatewise" name-regex="true" regex="am.downtimescheduler.time" />
+	<param name="am.downtimescheduler.param.starttimemonthlyweekwise" name-regex="true" regex="am.downtimescheduler.time" />
+	<param name="am.downtimescheduler.param.endtimemonthlyweekwise" name-regex="true" regex="am.downtimescheduler.time"/>
+	<param name="am.downtimescheduler.param.last" name-regex="true" regex="am.common.On"/>
+	<param name="am.downtimescheduler.param.startsonmonthlyweekwise" name-regex="true" regex="am.downtimescheduler.startsonmonthlyweekwise"/>
+	<param name="am.downtimescheduler.param.startdaymonthlyweekwise" name-regex="true" regex="am.downtimescheduler.numbers"/>
+	<param name="am.downtimescheduler.param.endaftermonthlyweekwise" name-regex="true" regex="am.downtimescheduler.numbers"/>
+	<param name="am.downtimescheduler.param.customTaskStartTime" name-regex="true" regex="am.downtimescheduler.time" />
+	<param name="am.downtimescheduler.param.customTaskEndTime" name-regex="true" regex="am.downtimescheduler.time" />
+	<param name="numberscustom" regex="am.downtimescheduler.numbersMonthly"/>
+	<param name="taskGroup" regex="am.downtimescheduler.taskgroup" />
+	<param name="searchByName" type="String" max-len="515"/>
+	<param name="maintenanceCombo1" max-occurrences="2147483647" type="long"/>
+	<param name="maintenanceCombo2" max-occurrences="2147483647" type="long"/>
+	<param name="select" max-occurrences="2147483647" type="long"/>
+	<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+	<param name="PRINTER_FRIENDLY" type="boolean" />
+	<param max-occurrences="2147483647" name="mgName" type="String" max-len="515"/>
+	<url path="/downTimeScheduler.do" method="post" operation-param="method" operation-value="createMaintenanceTask" roles="ADMIN,ENTERPRISEADMIN,OPERATOR" authentication="required" csrf="true" throwallerrors="true" skip-bad-input-encoding="true"  custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkTaskIdAssociatedForUser">
+	</url>
+	<url path="/downTimeScheduler.do" method="post" operation-param="method" operation-value="editMaintenanceTask" roles="ADMIN,ENTERPRISEADMIN,OPERATOR" authentication="required" csrf="true" throwallerrors="true" skip-bad-input-encoding="true" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkTaskIdAssociatedForUser">
+		<param name="taskid" type="long" />
+	</url>
+	<url path="/downTimeScheduler.do" method="post" operation-param="method" operation-value="getDowntimeSyncDetais" roles="ADMIN,ENTERPRISEADMIN,OPERATOR,DEMO" authentication="required" csrf="true" throwallerrors="true">
+		<param name="taskId" type="long" />
+	</url>
+</urls>
+
+<urls>
+	<param name="PRINTER_FRIENDLY" type="boolean" />
+	<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric"/>
+	<url path="/downTimeScheduler.do" method="post" operation-param="method" operation-value="deleteMaintenanceTask" roles="ADMIN,ENTERPRISEADMIN,OPERATOR" authentication="required" throwallerrors="true" csrf="true" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkTaskIdAssociatedForUser">
+		<param name="taskId" type="long" max-occurrences="2147483647" />
+	</url>
+	<url path="/downTimeScheduler.do" method="get" operation-param="method" operation-value="maintenanceTaskListView" roles="ADMIN,ENTERPRISEADMIN,OPERATOR,DEMO" authentication="required" throwallerrors="true" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkTaskIdAssociatedForUser">
+		<param name="service" regex="am.downtimescheduler.service"/>
+		<param name="reqForAdminLayout" type="boolean"/>
+		<param name="tabtoLoad" regex="am.downtimescheduler.tab" /> <!-- value= downtimeSchedulerSettingsDiv -->
+	</url>
+	<url path="/downTimeScheduler.do" method="get" operation-param="method" operation-value="viewMaintenanceTask" roles="ADMIN,ENTERPRISEADMIN,OPERATOR,DEMO" authentication="required" throwallerrors="true" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkTaskIdAssociatedForUser">
+		<param name="readonly" type="boolean"/>
+		<param name="taskid" type="long"/>
+		<param name="edit"  type="boolean"/><!--true-->
+	</url>
+	<url path="/downTimeScheduler.do" method="get" operation-param="method" operation-value="getCurrentlyDownMonthlySchedule" roles="ADMIN,ENTERPRISEADMIN,OPERATOR,DEMO" authentication="required" throwallerrors="true">
+		<param name="taskid" type="long" />
+	</url>
+	<url path="/downTimeScheduler.do" method="get" operation-param="method" operation-value="getCurrentlyDownCustomSchedule" roles="ADMIN,ENTERPRISEADMIN,OPERATOR,DEMO" authentication="required" throwallerrors="true">
+		<param name="taskid" type="long" />
+	</url>
+	<url path="/downTimeScheduler.do" method="get" operation-param="method" operation-value="currentServerTimeWithRespectToTimeZone" roles="ADMIN,ENTERPRISEADMIN,OPERATOR" authentication="required" throwallerrors="true">
+		<param name="timezone" regex="am.downtimescheduler.timezone"/>
+	</url>
+	<url path="/downTimeScheduler.do" method="get" operation-param="method" operation-value="getCurrentlyDownMGs" roles="ADMIN,ENTERPRISEADMIN" authentication="required" throwallerrors="true">
+	</url>
+	<url path="/downTimeScheduler.do" method="get" operation-param="method" operation-value="getCurrentlyDownMonitors" roles="ADMIN,ENTERPRISEADMIN" authentication="required" throwallerrors="true">
+	</url>
+</urls>
+<!-- Web Console Downtime Scheduler End --> 
+
+	<!--RECORDER URLS START -->	
+		<urls>
+			<param name="fromRecorder" type="boolean" />
+			<url path="/AppManager/json/ApmAdminServices/CheckRecorderCompatibility" api="true" method="get">
+				<param name="version" type="float" />			
+			</url>			
+			<url path="/AppManager/json/ApmAdminServices/isEUMAllowed" api="true" method="post"></url>
+			<url path="/AppManager/json/ApmAdminServices/DomainDetails" api="true" method="post"></url>
+			<url path="/AppManager/json/ApmAdminServices/DomainDetails" method="GET" deny-operation="true"/>
+			<url path="/AppManager/xml/ApmAdminServices/DomainDetails" method="GET,POST" deny-operation="true"/>
+		</urls>
+		<urls>
+			<param name="PRINTER_FRIENDLY"  type="boolean" />
+			<param name="apikey" regex="apikey" secret="true" />
+			<param name="fromRecorder" type="boolean" />
+			<url path="/AppManager/json/ListAgents" api="true" roles="am.role.ADMIN.EA" deny-del-admin="true" authentication="required" method="post">
+				<param name="version" type="int" />	
+				<param name="action" regex="am.recorder.urlseq.action" />
+				<param name="type" regex="am.recorder.type" />
+			</url>
+			<url path="/AppManager/json/GetUrlSeqNames" api="true" roles="am.role.ADMIN.EA" deny-del-admin="true" authentication="required" method="post"></url>
+			<url path="/AppManager/json/GetUrlSequenceElements" api="true" roles="am.role.ADMIN.EA" deny-del-admin="true" authentication="required" method="post">
+				<param name="resourceID" type="long" />
+			</url>
+			<url path="/AppManager/json/getRBMPlaybackStatus" api="true" roles="am.role.ADMIN.EA" deny-del-admin="true" authentication="required" method="post">
+				<param name="scriptName" regex="am.recorder.rbm.scriptName" />
+				<param name="agentId" type="long" />
+				<param name="serverid" type="int" />
+			</url>	
+			<url path="/AppManager/json/AddMonitorRecorder" api="true" roles="am.role.ADMIN.EA" deny-del-admin="true" authentication="required" method="post">
+				<param name="type" regex="am.recorder.type" />
+				<param name="action" regex="am.recorder.urlseq.action" />
+				<param name="Type" regex="am.recorder.type" />
+				<param name="Version" regex="am.recorder.version" />
+				<param name="transactionname" type="String" max-len="100" />
+				<param name="transactionID" type="long" />
+				<param name="pollinterval" type="int" />
+				<param name="connectionTimeout" type="int" />
+				<param name="haid" regex="am.recorder.long.commaSeparated"/>
+				<param name="displayname" regex="am.displayname.common" max-len="100"/>
+				<param name="OPRN" regex="am.recorder.rbm.operation"/>
+				<param name="BT" regex="am.recorder.rbm.browserType"/>
+				<param name="BV" regex="am.recorder.rbm.browserVersion"/>
+				<param name="TT" regex="int"/>
+				<param name="PGLT" regex="int"/>
+				<param name="BD" regex="am.recorder.domain.pipeSeparated"/>
+				<param name="acceptUntrustedCert" type="boolean"/>
+				<param name="showScreenShot" type="boolean"/>
+				<param name="showPerformance" type="boolean"/>
+				<param name="DN" regex="am.displayname.common" max-len="100"/>
+				<param name="PID" regex="long"/>
+				<param name="LID" regex="am.recorder.long.commaSeparated"/>
+				<param name="SL" regex="am.recorder.long.commaSeparated"/>
+				<param name="filename" type="String"  max-len="50"/>
+				<param name="STC" type="boolean"/>
+				<param name="JTC" type="boolean"/>
+				<param name="JSONSCRIPT" type="String" max-len="2147483646"/>
+				<file allowed-extensions="txt,zip" content-type-name="recorder"	max-size="5000" name="File" />
+			</url>
+			<url path="/AppManager/RBMTestPlayBack" method="post" api="true" roles="am.role.ADMIN.EA" deny-del-admin="true" authentication="required">
+				<param name="type" regex="am.recorder.type" />
+				<param name="OPRN" regex="am.recorder.rbm.operation"/>
+				<param name="BT" regex="am.recorder.rbm.browserType"/>
+				<param name="BV" regex="am.recorder.rbm.browserVersion"/>
+				<param name="TT" regex="int"/>
+				<param name="PGLT" regex="int"/>
+				<param name="BD" regex="am.recorder.domain.pipeSeparated"/>
+				<param name="acceptUntrustedCert" type="boolean"/>
+				<param name="LID" regex="am.recorder.long.commaSeparated"/>
+				<param name="SL" regex="am.recorder.long.commaSeparated"/>
+				<param name="DN" regex="am.displayname.common" max-len="100"/>
+				<param name="STC" type="boolean"/>
+				<param name="JTC" type="boolean"/>
+				<param name="JSONSCRIPT" type="String" max-len="2147483646"/>
+				<param name="filename" type="String" max-len="50"/>	
+				<param name="action" regex="am.recorder.urlseq.action" />			
+				<file allowed-extensions="txt,zip" content-type-name="recorder"	max-size="5000" name="File" />
+			</url>
+		</urls>
+		<!-- RECORDER URLS END -->
+		<urls>
+			<param name="PRINTER_FRIENDLY"  type="boolean" />
+			<url path="/AMMsgQlinkAction.do" method="get" operation-param="method" operation-value="getMsgDetailsForGroup" roles="am.role.ADMIN.EA.OP.US.DE.MA" authentication="required">
+				<param name="msgGroup" regex="am.monitor.type" />
+			</url>
+			<url path="/AMMsgQlinkAction.do" method="get" operation-param="method" operation-value="getQuickLinksForGroup" roles="am.role.ADMIN.EA.OP.US.DE.MA" authentication="required">
+				<param name="qLinkGroupName" regex="am.monitor.type" />
+			</url>
+			<url path="/AMMsgQlinkAction.do" method="post" operation-param="method" operation-value="hideMsgForUser" csrf="true" roles="am.role.ADMIN.EA.OP.US.MA" authentication="required" throwallerrors="true">
+				<param name="msgName" regex="am.monitor.type" />
+			</url>
+			<url path="/AMMsgQlinkAction.do" method="post" operation-param="method" operation-value="showQlinksForUser" csrf="true" roles="am.role.ADMIN.EA.OP.US.DE.MA" authentication="required" throwallerrors="true">
+				<param name="qLinkGroupName" regex="am.monitor.type" />
+			</url>
+			<url path="/AMMsgQlinkAction.do" method="post" operation-param="method" operation-value="hideQlinksForUser" csrf="true" roles="am.role.ADMIN.EA.OP.US.DE.MA" authentication="required" throwallerrors="true">
+				<param name="qLinkGroupName" regex="am.monitor.type" />
+			</url>
+			<url path="/AMMsgQlinkAction.do" method="post" operation-param="method" operation-value="reShowAllMessages" csrf="true" roles="am.role.ADMIN.EA" authentication="required" throwallerrors="true"/>
+		</urls>		
+	
+	<!-- Security for Numeric,String,Float Threshold Create,Edit starts-->
+	<urls path="/adminAction.do" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" skip-bad-input-encoding="true">
+		<param min-occurrences="1" name="criticalthresholdcondition" regex="am.threshold.condition"/>
+		<param name="warningthresholdcondition" regex="am.threshold.condition"/>
+		<param name="infothresholdcondition" regex="am.threshold.condition"/>
+		<param name="criticalthresholdmessage" type="String" max-len="250"/>
+		<param name="warningthresholdmessage" type="String" max-len="250"/>
+		<param name="infothresholdmessage" type="String" max-len="250"/>
+		<param name="secondarycriticalexist" regex="am.common.TFNull"/>
+		<param name="secondarywarningexist" regex="am.common.TFNull"/>
+		<param name="secondaryinfoexist" regex="am.common.TFNull"/>
+		<param name="criticalconditionjoiner" regex="am.common.Conjunction"/>
+		<param name="warningconditionjoiner" regex="am.common.Conjunction"/>
+		<param name="infoconditionjoiner" regex="am.common.Conjunction"/>
+		<param name="secondarycriticalthresholdcondition" regex="am.threshold.condition"/>
+		<param name="secondarywarningthresholdcondition" regex="am.threshold.condition"/>
+		<param name="secondaryinfothresholdcondition" regex="am.threshold.condition"/>
+		<param name="consecutive_criticalpolls" regex="am.threshold.polltotry"/>
+		<param name="consecutive_warningpolls" regex="am.threshold.polltotry"/>
+		<param name="consecutive_clearpolls" regex="am.threshold.polltotry"/>
+		<param name="consecutive_mincriticalpolls" regex="am.threshold.polltotry"/>
+		<param name="consecutive_minwarningpolls" regex="am.threshold.polltotry"/>
+		<param name="consecutive_minclearpolls" regex="am.threshold.polltotry"/>
+		<param name="haid" regex="am.common.longandnull"/>
+		<param name="description" type="String" max-len="250"/>
+		<param name="id" regex="am.common.longandnull"/>
+		<param min-occurrences="1" name="displayname" type="String"/>
+		<param name="select" regex="am.threshold.type"/>
+		<param name="checkbox1" regex="am.common.On"/>
+		<param name="adaptiveType" regex="am.common.ZeroOne"/>
+		<param name="adaptiveBaseformulaType" regex="am.common.ZeroOne"/>
+		<param name="adaptiveBaseWeek" regex="am.threshold.baseweek"/>
+		<param name="adaptiveHigherPercentage" regex="am.common.ZeroOne"/>
+		<param name="percentagevalue" regex="am.common.ZeroOne"/>
+		<param description="Hidden parameter for OPM plugin" max-occurrences="2" name="PRINTER_FRIENDLY" type="boolean"/>
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric"/>
+		<param name="thresholdType" regex="am.common.ZeroOne"/>
+		<param name="returnpath" max-len="1000" regex="am.sqljobaction.returnpath" />
+		<param name="businessHourAssociatedToThreshold" regex="am.threshold.businessHourAssociatedToThreshold.value" />
+		<param name="businessType" regex="am.common.ZeroOne" />
+		<param name="selectedBusinessHourID" type="long"/>
+		
+		<url csrf="true" method="post" operation-param="method" operation-value="createPatternAction" >
+			<param min-occurrences="1" max-len="1000" name="criticalthresholdvalue" type="String"/>
+			<param max-len="1000" name="warningthresholdvalue" type="String"/>
+			<param max-len="1000" name="infothresholdvalue" type="String"/>	
+			<param name="secondarycriticalthresholdvalue" type="String"/>
+			<param name="secondarywarningthresholdvalue" type="String"/>
+			<param name="secondaryinfothresholdvalue" type="String"/>	
+		</url>
+	
+		<url csrf="true" method="post" operation-param="method" operation-value="editPatternAction" 
+		custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="type" regex="am.threshold.typeNumeric"/>
+			<param min-occurrences="1" max-len="1000" name="criticalthresholdvalue" type="String"/>
+			<param max-len="1000" name="warningthresholdvalue" type="String"/>
+			<param max-len="1000" name="infothresholdvalue" type="String"/>	
+			<param name="secondarycriticalthresholdvalue" type="String"/>
+			<param name="secondarywarningthresholdvalue" type="String"/>
+			<param name="secondaryinfothresholdvalue" type="String"/>
+			<param name-regex="true" name="^((monday|tuesday|wednesday|thursday|friday|saturday|sunday)(Start|End)(Hour|Minute))$" type="int" />
+	    	<param name="workingdays" regex="am.businesshours.workingdays" max-occurrences="7" />
+		</url>
+		
+		<url csrf="true" method="post" operation-param="method" operation-value="createThresholdAction" >
+			<param min-occurrences="1" name="criticalthresholdvalue" regex="am.threshold.value"/>
+			<param name="warningthresholdvalue" regex="am.threshold.value"/>
+			<param name="infothresholdvalue" regex="am.threshold.value"/>
+			<param name="secondarycriticalthresholdvalue" regex="am.threshold.value"/>
+			<param name="secondarywarningthresholdvalue" regex="am.threshold.value"/>
+			<param name="secondaryinfothresholdvalue" regex="am.threshold.value"/>
+		</url>
+		
+		<url csrf="true" method="post" operation-param="method" operation-value="editThresholdAction"
+		custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="type" regex="am.threshold.typeNumeric"/>
+			<param min-occurrences="1" name="criticalthresholdvalue" regex="am.threshold.value"/>
+			<param name="warningthresholdvalue" regex="am.threshold.value"/>
+			<param name="infothresholdvalue" regex="am.threshold.value"/>
+			<param name="secondarycriticalthresholdvalue" regex="am.threshold.value"/>
+			<param name="secondarywarningthresholdvalue" regex="am.threshold.value"/>
+			<param name="secondaryinfothresholdvalue" regex="am.threshold.value"/>
+			<param name-regex="true" name="^((monday|tuesday|wednesday|thursday|friday|saturday|sunday)(Start|End)(Hour|Minute))$" type="int" />
+	    	<param name="workingdays" regex="am.businesshours.workingdays" max-occurrences="7" />
+		</url>
+		
+	</urls>
+	<!-- Security for Numeric,String,Float Threshold Create,Edit ends-->
+	
+	<!-- Security for Threshold Delete starts-->
+	<urls>
+
+		<url csrf="true" method="post" operation-param="method" operation-value="deleteThresholds" path="/adminAction.do" throwallerrors="true"
+			authentication="required" roles="am.role.ADMIN.EA"
+			custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param max-occurrences="10000" name="checkbox" type="long"/>
+			<param description="Hidden parameter for datatable length" name="thresholdTable_length" regex="am.common.datatable.length"/>
+			<param description="Hidden parameter for datatable length" name="adaptiveTable_length" regex="am.common.datatable.length"/>
+			<param name="adaptiveheadercheckbox" regex="am.common.On"/>
+			<param name="headercheckbox" regex="am.common.On"/>
+			<param name="haid" regex="am.common.Null"/>
+			<param max-occurrences="10000" name="adaptivecheckbox" type="long"/>
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric"/>
+			<param description="Hidden parameter for OPM plugin" max-occurrences="2" name="PRINTER_FRIENDLY" type="boolean"/>
+		</url>
+	 </urls>
+	<!-- Security for Threshold Delete ends-->
+	
+	<!-- Security for Anomaly Create,Edit,Delete starts-->
+	<urls path="/adminAction.do" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" skip-bad-input-encoding="true">
+		<param name="comparisonType" regex="am.common.ZeroOne"/>
+		<param name="baseWeek" regex="am.threshold.typeNumeric"/>
+		<param name="baselineType" regex="am.common.ZeroOne"/>
+		<param name="alarmTypeExpression" regex="am.anomaly.state.numeric"/>
+		<param name="higherPercentage" regex="am.common.ZeroOne"/>
+		<param name="leftselect" regex="am.anomaly.customexp.comparator"/>
+		<param name="rightselect" regex="am.anomaly.customexp.comparator"/>
+		<param name="sendmail" regex="am.anomaly.zero"/>
+		<param name="baseformulaType" regex="am.common.ZeroOne"/>
+		<param name="alarmType" regex="am.anomaly.state.numeric"/>
+		<param name="loweralarmTypeExpression" regex="am.anomaly.state.numeric"/>
+		<param name="monthYears" regex="am.anomaly.month.yrs"/>
+		<param name="anomalyId" regex="am.common.longandnull"/>
+		<param name="higherValue" type="int"/>
+		<param name="loweralarmType" regex="am.anomaly.state.numeric"/>
+		<param name="leftexp2" regex="am.anomaly.exp.value" max-len="255"/>
+		<param name="leftexp1" regex="am.anomaly.exp.value" max-len="255"/>
+		<param name="rightexp2" regex="am.anomaly.exp.value" max-len="255"/>
+		<param name="rightexp1" regex="am.anomaly.exp.value" max-len="255"/>
+		<param name="anomalyName" type="String"/>
+		<param name="lowerValue" type="int"/>
+		<param name="percentagevalue" regex="am.common.ZeroOne"/>
+		<param name="anomalymethod" regex="am.anomaly.anomalymethod" />
+		<param description="Hidden parameter for OPM plugin" name="PRINTER_FRIENDLY" type="boolean"/>
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url csrf="true" method="post" operation-param="method" operation-value="createAnomalyProfileAction">
+		</url>
+		<url csrf="true" method="post" operation-param="method" operation-value="editAnomalyProfileAction"
+		custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="editanomaly" regex="yesnonull"/>
+		</url>
+	</urls>
+	<urls>
+		<url csrf="true" method="post" operation-param="method" operation-value="deleteAnomalyProfiles" path="/adminAction.do" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA">
+			<param name="haid" regex="am.common.Null"/>
+			<param description="" max-occurrences="1000" min-occurrences="0" name="anomalycheckbox" type="long"/>
+			<param description="" max-occurrences="1000" min-occurrences="0" name="anomalyexpressioncheckbox" type="long"/>
+			<param name="anomalyheadercheckbox" regex="am.common.On"/>
+			<param name="anomalyexpressionheadercheckbox" regex="am.common.On"/>
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param name="thresholdTable_length" regex="am.common.datatable.length"/>
+			<param name="adaptiveTable_length" regex="am.common.datatable.length"/>
+		</url>
+	</urls>
+	<!-- Security for Anomaly Create,Edit,Delete ends-->
+	
+	<!-- Trap Listener configuration starts -->
+	<urls throwallerrors="true" method="post" roles="am.role.ADMIN.EA" authentication="required" deny-del-admin="true" >
+		<param-group name="am.additional.extra.params" />
+		<param max-occurrences="1000" name="trapActionsCombo1" type="long"/>
+		<param max-occurrences="1000" name="trapActionsCombo2" type="long"/>
+		<param max-occurrences="1000" name="availableactions_critical" type="long"/>
+		<param max-occurrences="1000" name="selectedactions_critical" type="long"/>
+		<param max-occurrences="1000" name="availableactions_warning" type="long"/>
+		<param max-occurrences="1000" name="selectedactions_warning" type="long"/>
+		<param max-occurrences="1000" name="availableactions_clear" type="long"/>
+		<param max-occurrences="1000" name="selectedactions_clear" type="long"/>
+		<param max-occurrences="1000" name="mgName" type="String"/>
+		<param name="am.trap.varbind.param" name-regex="true" type="int"/>
+		<param name="am.trap.varbind.condition.param" name-regex="true" regex="am.trap.varbind.condition"/>
+		<param name="am.trap.varbind.text.param" name-regex="true" type="String"  max-len="1000"/>
+		<param name="am.trap.sel.varbinds.param" name-regex="true" regex="am.trap.selected.varbinds" max-len="500"/>
+		<param max-occurrences="4" name="am.trap.condition.param" name-regex="true" regex="am.trap.condition"/>
+		<param name="am.trap.threshold.condition.param" name-regex="true" regex="am.trap.varbind.condition"/>
+		<param name="am.trap.threshold.value.param" name-regex="true" type="String"/>
+		<param name="am.trap.threshold.joiner.param" name-regex="true" regex="am.common.Conjunction"/>
+		<param name="trapOID" regex="am.trap.listener.oid"/>
+		<param name="v3UserName" regex="am.windows.username"/>
+		<param name="thresholdList" regex="am.alphanumeric"/>
+		<param name="trapVersion" regex="am.trap.version"/>
+		<param name="trapName" type="String" max-len="255"/>
+		<param name="trapType" regex="[0-6]"/>
+		<param name="trapStatus" regex="am.trap.status"/>
+		<param name="enterpriseOID" regex="am.trap.listener.oid"/>
+		<param name="trapCustomVarbinds" type="String" max-len="10000"/>
+		<param name="trapHost" regex="am.hostname"/>
+		<param name="specificType" regex="am.trap.specificType"/>
+		<param name="chkAssociateTrapSeverity" regex="am.common.On"/>
+		<param name="chkTrapHost" regex="am.common.On"/>
+		<param name="associateMonitorGrp" regex="am.common.On"/>
+		<param name="chkCustomizeVarbinds" regex="am.common.On"/>
+		<param name="chkConfigureVarbinds" regex="am.common.On"/>
+		<param name="advancedVarBind" regex="am.common.On"/>
+		<param max-occurrences="1000000" name="select" type="String"/>
+		<param name="am.trap.secondary.param" name-regex="true" type="boolean"/>
+		<param name="thresName" type="String"/>
+		<param name="showOption" regex="am.common.On"/>
+		<param name="description" type="String"/>
+		<param name="checkbox2" regex="am.common.On"/>
+		<param name="displayname" type="String"/>
+		<url operation-value="createTrapListener" csrf="true" path="/adminAction.do" operation-param="method" >
+		</url>
+		<url operation-value="updateTrapListener" csrf="true" path="/adminAction.do" operation-param="method" >
+			<param name="trapid" type="long" />
+		</url>
+	</urls>
+	<urls operation-param="method" path="/adminAction.do" authentication="required" throwallerrors="true" deny-del-admin="true">
+		<param-group name="am.additional.extra.params" />
+		<url method="get" operation-value="editTrapListener" roles="am.role.ADMIN.EA.DE">
+			<param name="trapid" type="long" />
+			<param name="edit" type="boolean" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param max-occurrences="3" name="am.trap.condition.param" name-regex="true" regex="am.trap.condition"/>
+			<param name="am.trap.threshold.condition.param" name-regex="true" regex="am.trap.varbind.condition"/>
+			<param name="am.trap.threshold.value.param" name-regex="true" type="String"/>
+			<param name="am.trap.threshold.joiner.param" name-regex="true" regex="am.common.Conjunction"/>
+		</url>
+		<url method="get" operation-value="listTrapListener" roles="am.role.ADMIN.EA.DE">
+			<param name="service" regex="alphanumeric" />
+			<param name="reqForAdminLayout"  type="boolean" />
+		</url>
+		<url method="POST" csrf="true" operation-value="deleteTrapListener" roles="am.role.ADMIN.EA">
+			<param name="checkbox" type="long" max-occurrences="10000" />
+			<param name="headercheckbox" regex="am.common.On" />
+		</url>
+		<url csrf="true" method="post" operation-value="clearTrapAlert" roles="am.role.ADMIN.EA">
+			<param name="trapid" type="long" />
+		</url>
+	</urls>
+	<urls  throwallerrors="true" method="post" roles="am.role.ADMIN.EA" authentication="required" deny-del-admin="true">
+	    <url path="/AppManager/(xml|json)/AddTrapListener" api="true" url-type="dynamic">
+			<param name="apikey" regex="apikey" />
+			<param name="trapName" type="String" max-len="255"/>
+			<param name="trapStatus" regex="am.trap.status"/>
+			<param name="trapVersion" regex="am.trap.version.ui.msg"/>
+			<param name="severity" regex="am.trap.severity.param" />
+			<param name="trapType" regex="[0-6]"/>
+			<param name="specificType" regex="am.trap.specificType"/>
+			<param name="enterpriseOID" regex="am.trap.listener.oid"/>
+			<param name="trapOID" regex="am.trap.listener.oid"/>
+			<param name="v3UserName" regex="am.windows.username"/>
+			<param name="associateTrapSeverity" regex="^(?i)(true|false)$"/>
+			<param name="filterCondition" regex="^(?i:(AND|OR))$" />
+			<param name="filterText" regex="^((\{(&quot;varId&quot;:&quot;[0-9]+&quot;),(&quot;varCondition&quot;:&quot;(QL|NQ|CT|DC|SW|EW)&quot;),(&quot;varValue&quot;:&quot;[^\}]{1,40}&quot;)\},){0,19}\{(&quot;varId&quot;:&quot;[0-9]+&quot;),(&quot;varCondition&quot;:&quot;(QL|NQ|CT|DC|SW|EW)&quot;),(&quot;varValue&quot;:&quot;[^\}]{1,40}&quot;)\})$" max-len="1000000"/>
+			<param name="trapCustomVarbinds" type="String" max-len="10000"/>
+			<param name="monitorGroups" regex="am.common.numberandcomma" max-len="1000000"/>
+			<param name-regex="true" name="^(criticalCondition|warningCondition|clearCondition)$" regex="^(?i:(AND|OR|WHOLE))$" />
+			<param name-regex="true" name="^(criticalThreshold|warningThreshold|clearThreshold)$" regex="^((\{(&quot;varId&quot;:&quot;[0-9]+&quot;),(&quot;varCondition&quot;:&quot;(QL|NQ|CT|DC|SW|EW)&quot;),(&quot;varValue&quot;:&quot;[^\}]{1,40}&quot;)\},){0,19}\{(&quot;varId&quot;:&quot;[0-9]+&quot;),(&quot;varCondition&quot;:&quot;(QL|NQ|CT|DC|SW|EW)&quot;),(&quot;varValue&quot;:&quot;[^\}]{1,40}&quot;)\}) | ((\{(&quot;varId&quot;:&quot;[0-9]+&quot;),(&quot;varCondition&quot;:&quot;(QL|NQ|CT|DC|SW|EW)&quot;),(&quot;varValue&quot;:&quot;[^\{\}]+&quot;)\}))$" max-len="1000000"/>
+			<param name-regex="true" name="^(criticalActions|warningActions|clearActions)$" regex="am.common.numberandcomma" max-len="1000000"/>
+	     </url>
+	
+     	</urls>
+     	
+     <urls prefix="/AppManager/(xml|json)" api="true" throwallerrors="true" authentication="required" >
+     <param name="apikey" regex="apikey" secret="true"/>
+     	<url path="/Search" method="GET" roles="am.role.ADMIN.EA.OP.US.DE.MA" >
+			<param name="query" type="String" max-len="10000" />
+			<param name="searchCondition" regex="am.search.searchoptionvalue" />
+		</url>
+     </urls>
+     <urls prefix="/AppManager/(xml|json)" >
+        <url path="/Search" method="POST" deny-operation="true"  />        
+     </urls>
+	
+	
+	<!-- Trap Listener configuration ends -->
+	<urls throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<url path="/adminAction.do" method="GET" operation-param="method" operation-value="reloadHostDiscoveryForm" roles="am.role.ADMIN.EA.DE" authentication="required" privilege-identifier="haid" ><!-- to generate CSRF Cookie -->
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="restype" regex="am.monitor.type" />
+			<param name="type" regex="am.monitor.type" />											   												   
+			<param name="hideFieldsForIT360" regex="am.common.TFNull" />
+			<param name="exparam" regex="am.common.exparamNames" max-occurrences="100" max-len="300" />
+			<param name="port" regex="am.port" />
+			<param name="redirectto" regex="am.common.urlstartwithslash"  max-len="2083"/>
+			<param name="hideMonitorType" regex="am.boolean"  />
+			<param name="plugin_view" type="boolean"/>
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>																											  																			   
+			<param name="ref" regex="IntroPageLinks" />
+			<param name="fromCloudTab" type="boolean"/>
+		</url>
+		<url path="/adminAction.do" method="GET" operation-param="method" operation-value="apiDocumentation" deny-del-admin="true" roles="am.role.ADMIN.EA.DE" authentication="required" >
+			<param name="service" regex="am.action.fromadminlayout.service" />
+    		<param name="reqForAdminLayout" type="boolean" />
+		</url>
+		
+		<!-- OAUTH URLS START -->
+		<param name="from"  regex="am.oauth.from" max-len="30"/>
+		<url path="/OAuthProvider.do" method="GET" operation-param="method" operation-value="newOAuthProvider"  authentication="required" roles="am.role.ADMIN.EA.DE" custom-scope-validator="com.adventnet.appmanager.utils.client.WebPrivilegeHandler:checkIfOAuthIsEditable">
+			<param name="action" regex="am.oauth.saveCredentials.action" max-len="10"/>
+			<param name="providerID"  type="long" />
+			<param name="grantType"  regex="am.oauth.grantType" max-len="20" />
+			<param name="PRINTER_FRIENDLY"  type="boolean" />
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		</url>
+		<url path="/OAuthProvider.do" method="GET" operation-param="method" operation-value="showOAuthProviderDetails"  authentication="required" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.WebPrivilegeHandler:checkIfOAuthIsEditable">
+			<param name="providerID"  type="long" />
+			<param name="PRINTER_FRIENDLY"  type="boolean" />
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		</url>
+		<url path="/OAuthProvider.do" csrf="true" method="POST" operation-param="method" operation-value="deleteOAuthProvider" authentication="required" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.WebPrivilegeHandler:checkIfOAuthIsEditable">
+			<param name="deleteData" type="JSONObject" template="am.oauth.delete.data" max-len="1000" />
+			<param name="PRINTER_FRIENDLY"  type="boolean" />
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		</url>
+		<url path="/OAuthProvider.do" csrf="true" method="POST" operation-param="method" operation-value="saveCredentials" authentication="required" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.WebPrivilegeHandler:checkIfOAuthIsEditable">			
+			<param name="action" regex="am.oauth.saveCredentials.action" max-len="10" />
+			<param name="providerID"  type="long" />
+			<param name="providerName"  regex="am.oauth.form.params" max-len="100" />
+			<param name="redirectUri"  regex="am.common.url.schemaandlength.validator" max-len="100"/>
+			<param name="clientID"  regex="am.oauth.form.params" max-len="500" secret="true"/>
+			<param name="clientSecret"  type="String" max-len="500" secret="true"/>
+			<param name="authEndpointUrl"  regex="am.common.url.schemaandlength.validator" max-len="100"/>
+			<param name="tokenUri"  regex="am.common.url.schemaandlength.validator" max-len="100"/>
+			<param name="tokenReqMethod"  regex="am.common.one.two" max-len="5"/>
+			<param name="resOwnerUsername"  regex="am.oauth.form.params" max-len="500"/>
+			<param name="resOwnerPwd"  regex="^.{1,100}$" max-len="500" secret="true"/>
+			<param name="reqAuthMethod"  regex="am.common.one.two" max-len="5"/>
+			<param name="authReqParamName"  regex="am.oauth.form.params" max-len="2000"/>
+			<param name="authReqParamValue"  regex="password"  max-len="2000" secret="true"/>
+			<param name="grantType"  regex="am.oauth.grantType" max-len="20" />
+			<param name="authorizationCode"  regex="am.oauth.form.params" max-len="3000" secret="true"/>
+			<param name="scope"  regex="am.oauth.form.params" max-len="3000" />
+			<param name="authCodeReqPrams"  regex="am.oauth.form.params" max-len="2000" />
+			<param name="accessTokenReqParams"  regex="am.oauth.form.params" max-len="2000" />
+			<param name="PRINTER_FRIENDLY"  type="boolean" />
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		</url>
+		<!-- OAUTH URLS END-->		
+	</urls>
+	
+			<!-- NoConf Monitors starts (with different new monitor page/url)  -->
+	<urls>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="masSelectType" regex="am.enterprise.masselecttype" description="EnterpriseSetup" />
+		<param name="masGroupName" type="String" description="EnterpriseSetup"/>
+		<param name="selectedServer" regex="am.enterprise.selectedserver" description="EnterpriseSetup" />
+		<param name="description" type="String" description="am.webclient.hostdiscovery.ssh.privateKey" max-len="5000"/>
+		<param name="haid" regex="am.common.longandnull" description="am.webclient.common.util.MGSTR" max-occurrences="1000"/>
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric"/>
+		<param name="hideFieldsForIT360" regex="am.common.TFNull"/>
+		<param name="addtoha" regex="am.common.TFNull"/>
+		<param name="timeout" type="int" description="am.webclient.newscript.tiemout.text"/>
+		<param name="table_row" type="String"/>
+		<param name="choosehost" regex="am.filemon.choosehost" description="am.webclient.script.choosehost"/>
+		<param name="host" regex="am.hostname" description="am.webclient.hostdiscovery.hostname" max-len="255"/>
+		<param name="isCredManager" type="boolean" description="Credential Details"/>
+		<param name="groupname" regex="am.displayname.common" description="webclient.map.mapsymboldetails.groupname" max-len="515"/>
+		<param name="serversite" regex="am.filemon.serversite" description="Script Location"/>
+		<param name="pollInterval" type="int" description="am.webclient.common.pollinginterval.text"/>
+		<param name="port" regex="am.port" description="am.webclient.script.port"/>
+		<param name="displayname" regex="am.displayname.common" description="am.webclient.common.displayname.text" max-len="515"/>
+		<param name="monitoringmode" regex="am.common.monitoring.mode" description="am.webclient.hostdiscovery.mode"/>
+		<param name="passphrase" type="String" description="am.webclient.hostdiscovery.passphrase" max-len="250" secret="true"/>
+		<param name="prompt" type="String" description="am.webclient.hostdiscovery.commandprompt"/>
+		<param name="username" regex="am.windows.username" description="am.webclient.hostdiscovery.username"/>
+		<param name="sshkey" regex="onlyon" description="am.webclient.hostdiscovery.ssh.privateKeyMessage" secret="true"/>
+		<param name="credentialID" type="long" description="Credential Manager"/>
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<!-- File/Directory Monitor -->
+		<url csrf="true" method="POST" operation-param="method" operation-value="filemon,updateFile" path="/updateScript.do" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="selectChangeType" regex="am.common.ZeroOne" description="am.webclient.fileDirAgeChk.if.text"/>
+			<param name="resolveHost" type="boolean" description="resolveHost"/>
+			<param name="checkEmpty" regex="onlyon" description="am.webclient.filedir.donotCheckEmptyContent"/>
+			<param name="mtype" regex="am.filemon.mtype" description="Type"/>
+			<param name="password" type="String" description="am.webclient.hostdiscovery.message.passwordleave" max-len="250" secret="true"/>
+			<param name="filepath" type="String" description="am.webclient.newscript.absolutepath.text" max-len="4096"/>
+			<param name="timeval" type="int" description="am.webclient.filedir.monstatus.text"/>
+			<param name="timeUnit" regex="am.filemon.timeunit" description="am.webclient.filedir.monstatus.text"/>
+			<param name="fileDirAge" regex="onlyon" description="am.webclient.fileDirAgeChk.text"/>
+			<param name="contentChk" regex="onlyon" description="am.webclient.filedir.doconchk.text"/>
+			<param name="clearConditionCountVal" regex="am.threshold.typeNumeric" description="am.webclient.filedir.conmatch.clear.condn.up.text"/>
+			<param name="fileCheckType" regex="am.common.ZeroOne" description="am.webclient.filedir.conParseType.text"/>
+			<param name="selectMonStatus" regex="am.common.ZeroOne" description="am.webclient.filedir.monstatus.text"/>
+			<param name="ccontent" type="JSONArray" template="am.filedirmon.ccontent" array-size="0-3" description="am.file.contents.configured" max-len="400000000"/>
+			<param name="subDirCntChk" regex="onlyon" description="am.webclient.subDirCount.text"/>
+			<param name="regexChk" regex="onlyon" description="am.webclient.filedir.regexp.text"/>
+			<param name="type" regex="am.filemon.mtype"/>
+			<param name="affectSeverity" regex="am.common.ZeroOne" description="am.file.affect.severity"/>
+			<param name="checkFileAvailability" regex="onlyon" description="am.file.alert.filenotexists"/>
+			<param name="filterFiles" type="JSONObject" template="am.dirmon.filefilter" max-len="400000000" />
+			<param name="resourceid" type="long" />
+		</url>
+		<!-- Script Monitor -->
+		<url csrf="true" method="POST" operation-param="method" roles="am.role.ADMIN.EA" authentication="required" operation-value="createscript,updateScript" path="/updateScript.do" throwallerrors="true">
+			<param name="numeric_att" regex="am.attribute.name" description="Numeric Attributes" max-len="10000"/>
+			<param name="mode" type="String" description="am.webclient.newscript.enterthemode.text"/>
+			<param name="password" type="String" description="am.webclient.hostdiscovery.password" max-len="250" secret="true"/>
+			<param name="isCommand" type="boolean" description="Script Type"/>
+			<param name="delimiter" type="String" description="Delimiter" max-len="1"/>
+			<param name="opfile" regex="onlyon" description="am.webclient.newscript.outputsettings.text"/>
+			<param name="workingdirectory" type="String" description="am.webclient.newscript.scriptdirectory.text" max-len="255"/>
+			<param name="serverpath" type="String" description="am.webclient.newscript.scripttomonitor.text" max-len="255"/>
+			<param name="message" type="String" description="am.webclient.newscript.arguments.text" max-len="-1"/>
+			<param name="string_att" regex="am.attribute.name" description="String Attributes" max-len="10000"/>
+			<param name="tablespresent" regex="onlyon" description="am.webclient.newscript.tablesinoutput.text"/>
+			<param name="isFile" type="boolean" description="am.script.output.from.file"/>
+			<param name="outputfile" type="String" description="am.webclient.newscript.outputfile.text" max-len="255"/>
+			<param name="am.scriptmon.stringatt" regex="am.attribute.name" description="String Attribute of Table" max-len="10000" name-regex="true"/>
+			<param name="am.scriptmon.numericatt" regex="am.attribute.name" description="Numeric Attribute of Table" max-len="10000" name-regex="true"/>
+			<param name="am.scriptmon.table" regex="am.attribute.name" description="Table Name" max-len="10000" name-regex="true"/>
+			<param name="am.scriptmon.pcatt" regex="am.attribute.name" description="Unique Column" max-len="10000" name-regex="true"/>
+			<param name="am.scriptmon.cdl" type="String" description="Column Delimiter" name-regex="true" max-len="1"/>
+			<param name="type" type="String" max-len="515"/>
+			<param name="monitorType" type="String" max-len="515" />
+			<param name="customType" type="boolean" />
+			<param name="manageTableRow" regex="scriptManageTableRow" description="am.scriptmonitor.managetablerow"/>
+			<param name="healthTableRow" regex="scriptHealthTableRow" description="am.scriptmonitor.healthtablerow"/>
+			<param name="checkSeverity" regex="onlyon" description="am.webclient.enable.severitycontrol"/>
+			<param name="resourceid" type="long" />
+			<param name="baseid" regex="am.common.longnullfalse" />
+			<param name="basetype" regex="am.scriptmon.update" />
+		</url>
+	</urls>
+	<urls>
+		<!-- Web Services Monitor -->
+			<param name="displayname" regex="am.displayname.common" description="am.webclient.common.displayname.text" max-len="515"/>
+			<param name="customHeaders" type="String" description="am.webclient.wsm.header.text" max-len="1000"/>
+			<param name="tokenAndOperation" type="String" description="am.webclient.wsm.authtoken.text" max-len="1000"/>
+			<param name="username" type="String" description="am.webclient.common.username.text" max-len="255"/>
+			<param name="timeout" type="int" description="am.webclient.hostdiscovery.timeout" range="1-120"/>
+			<param name="password" type="String" description="am.webclient.common.password.text" max-len="255" secret="true"/>
+			<param name="PRINTER_FRIENDLY" type="boolean" />
+			<param name="masSelectType" regex="am.enterprise.masselecttype" description="EnterpriseSetup" />
+			<param name="masGroupName" type="String" description="EnterpriseSetup"/>
+			<param name="selectedServer" regex="am.enterprise.selectedserver" description="EnterpriseSetup" />
+			<param name="multipleServers" type="int" max-occurrences="50" description="am.webclient.admin.addmonitor.select.mas.text" />
+			<param name="haid" regex="am.common.longandnull" max-occurrences="1000"/>
+			<param name="hideFieldsForIT360" regex="am.common.TFNull" />
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+			<param name="type" regex="am.noconf.type" />
+			<param name="addtoha" regex="am.common.TFNull" />
+			<param name="groupname" regex="am.displayname.common"  max-len="515"/>
+		<url csrf="true" method="POST" operation-param="method" operation-value="addMonitor" path="/wsm.do" throwallerrors="true" roles="am.role.ADMIN.EA" authentication="required">
+			<param name="WSDLUrl" regex="String" description="am.webclient.wsm.wsdlurl.text" max-len="10000"/>
+		    <param name="resFulWebservice" type="boolean" description="am.webservice.isrestful.text"/>
+			<param name="endPointUrl" regex="String" description="Endpoint Address" max-len="2083"/>
+			<param name="value" type="int" />
+			<param name="pollInterval" type="int" description="am.webclient.common.pollinginterval.text" range="1-4320"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="editmonitor" path="/wsm.do" throwallerrors="true" roles="am.role.ADMIN" authentication="required" privilege-identifier="resourceid">
+		    <param name="resourceid" type="long" />
+			<param name="endpoint" regex="String" description="Endpoint Address" max-len="2083"/>
+			<param name="pollinterval" type="int" description="am.webclient.common.pollinginterval.text" range="1-4320"/>
+		</url>
+	</urls>
+	<urls>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="masSelectType" regex="am.enterprise.masselecttype" description="EnterpriseSetup-Type" />
+		<param name="masGroupName" type="String" description="EnterpriseSetup-GroupName"/>
+		<param name="selectedServer" regex="am.enterprise.selectedserver" description="EnterpriseSetup-SelectedServer" />
+		<param name="language" regex="country_code" description="am.webclient.hostdiscovery.sap.language"/>
+		<param name="type" regex="am.monitor.type" />
+		<param name="restype" regex="am.monitor.type" />
+		<param name="addtoha" regex="am.common.TFNull" />
+		<param name="username" regex="am.windows.username" description="am.webclient.hostdiscovery.username" max-len="255"/>
+		<param name="usedRouterString" type="boolean" description="am.webclient.hostdiscovery.sap.connect.withrouterstring"/>
+		<param name="routerString" type="String" description="am.webclient.hostdiscovery.sap.routerstring" max-len="4000"/>
+		<param name="pollInterval" type="int" description="am.webclient.hostdiscovery.polling"/>
+		<param name="password" type="String" secret="true" description="am.webclient.hostdiscovery.password" max-len="250"/>
+		<param name="logonClient" type="int" description="am.webclient.hostdiscovery.sap.logonclient"/>
+		<param name="host" regex="am.hostname" description="am.webclient.hostdiscovery.hostname" max-len="255"/>
+		<param name="groupname" regex="am.displayname.common"  max-len="515"/>
+		<param name="displayname" regex="am.displayname.common" description="am.webclient.common.displayname.text" max-len="515"/>
+		<param name="haid" regex="am.template.numberCommaNull" max-occurrences="1000"/>
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="hideFieldsForIT360" regex="am.common.TFNull" />
+		<!-- IIS,WEB-SERVER,SAP-Server,PHP,Oracle appserver,Weblogic Integration,JMX Applications -->
+		<url csrf="true" method="POST" operation-param="method" operation-value="configureHostDiscovery" path="/adminAction.do" throwallerrors="true">
+			<param name="appmanageros" regex="am.iis.appmanageros" />
+			<param name="istestavailability" type="boolean" />
+			<param name="it360LicenseViolation" type="boolean" />
+			<param name="netmask" regex="ipaddress" description="am.webclient.hostdiscovery.subnetmask" max-len="255"/>
+			<param name="port" type="int" description="am.webclient.hostdiscovery.port"/>
+			<param name="resolveDNS" regex="onlyon" description="am.webclient.hostdiscovery.dnsname"/>
+			<param name="sslenabled" regex="onlyon" description="am.webclient.hostdiscovery.ssl"/>
+			<param name="oldTypeToCheck" regex="am.iis.oldTypeToCheck" />
+			<param name="value" type="int" />
+			<param name="authEnabled" regex="onlyon" description="am.webclient.hostdiscovery.globalsecurity"/>
+			<param name="jmxEnabled" regex="onlyon" description="am.webclient.hostdiscovery.jmxenabled"/>
+			<param name="jmxurl" type="String" description="am.webclient.hostdiscovery.jmxurl.name" max-len="2083"/>
+			<param name="jndiurl" regex="am.common.urlstartwithslash" description="am.webclient.hostdiscovery.jndi.name" max-len="2083"/>
+			<param name="serverpath" regex="am.webserver.uri" description="am.webclient.hostdiscovery.phppath" max-len="255"/>
+			<param name="version" regex="am.noconf.version" />
+			<param name="redirectto" regex="am.common.urlstartwithslash"  max-len="2083"/>
+			<param name="CredentialManager" regex="am.urlmon.credtype" description="am.webclient.SAP.isCredManager" />
+			<param name="credManagerVal" type="int" description="am.webclient.SAP.credval.sapinfo" />
+		</url>
+		<url method="GET" operation-param="method" operation-value="configureHostDiscovery" path="/adminAction.do" throwallerrors="true" dynamic-redirect="true" redirect-url-template="/adminAction.do?method=reloadHostDiscoveryForm&amp;type=$type$&amp;restype=$restype$&amp;haid=null" >
+		</url>
+	</urls>
+	<urls>
+		<url csrf="true" method="POST" operation-param="method" operation-value="saveBGMap" path="/mapViewAction.do" roles="am.role.ADMIN.EA" authentication="required">
+			<file allowed-extensions="jpg,gif,png,jpeg" content-type-name="image" max-size="5000" name="bgBrowseFile" >
+				<filename regex="am.common.extended.filename" max-len="250"/>
+			</file>
+			<param name="mapLocation" type="String" />
+			<param name="PRINTER_FRIENDLY"  type="boolean" />
+		</url>
+		
+		<url csrf="true" method="POST" operation-param="method" operation-value="saveDeviceImage" path="/mapViewAction.do" roles="am.role.ADMIN.EA" authentication="required">
+			<file allowed-extensions="jpg,gif,png,jpeg" content-type-name="image" max-size="5000" name="BrowseDevices" >
+				<filename regex="am.common.extended.filename" max-len="250"/>
+			</file>
+			<param name="deviceList" type="String" />
+		</url>
+
+	</urls>
+	<urls>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="masSelectType" regex="am.enterprise.masselecttype" description="EnterpriseSetup" />
+		<param name="masGroupName" type="String" description="EnterpriseSetup"/>
+		<param name="selectedServer" regex="am.enterprise.selectedserver" description="EnterpriseSetup" />
+		<param name="hideFieldsForIT360" regex="am.common.TFNull" />
+		<param name="haid" regex="am.common.longandnull" max-occurrences="1000"/>
+		<param name="type" regex="am.noconf.type" />
+		<param name="org.apache.struts.taglib.html.TOKEN" type="String" />
+		<!-- JMX/SNMP Dashboard-->
+		<url csrf="true" method="POST" path="/CreateCustomApplicationForm.do" throwallerrors="true">
+			<param name="configurealerts" type="boolean" />
+			<param name="customapplicationdescription" type="String" description="Description" max-len="-1"/>
+			<param name="customapplicationname" regex="am.displayname.common" description="am.webclient.common.name.text" max-len="515"/>
+		</url>
+	</urls>
+	<!-- NoConf Monitors ends (with different new monitor page)  -->
+	<content-types>
+		<content-type content-types=".*" name="recorder" />
+ 		<content-type content-types=".*" name="cert" />
+		<content-type content-types="image/jpeg|image/gif|image/png" name="image"/>
+		<content-type content-types="application/.*" name="p12"/>
+		<content-type content-types="text/plain|text/csv" name="csv"/>
+		<content-type name="certificate" content-types="application/x-java-keystore|application/x-pkcs12|application/pkix-cert|application/x-x509-ca-cert|text/plain" />
+		<content-type name="xml" content-types="text/plain|text/xml|application/xml"/>
+		<content-type name="text" content-types="text/plain" />
+		<content-type name="apminsight_export" content-types="image/png|text/plain|application/pdf|application/zip"/>
+	</content-types>
+	<!-- query tool https://bugbounty.zoho.com/bb/#/bug/101000001477759 -->
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url path="/DBaction.do" operation-value="querydetails" operation-param="method"  method="POST" csrf="true" authentication="required" allow-only-superadmin="true" throwallerrors="true">
+			<param max-len="-1" name="description" type="String"/>
+			<param name="ServerType" regex="^(AdminServer|ManagedServer)$"/>
+			<param name="SelectedManagedServer" type="long"/>
+		</url>
+		<url method="GET" path="/jsp/dump.jsp" throwallerrors="true"/>
+		<url path="/adminActivities.do" method="GET" operation-param="method" operation-value="getHostConfigurationSettings" authentication="required" roles="am.role.ADMIN.EA.DE" deny-del-admin="true" throwallerrors="true">
+			<param name="SettingsType" regex="^(CLISettings|WMISettings)$" min-occurrences="1"/>
+			<param name="service" regex="am.certificate.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+		<url path="/adminActivities.do" method="GET" operation-param="method" operation-value="getServerMonitorTypeDetails" authentication="required" roles="am.role.ADMIN.EA.DE" deny-del-admin="true" throwallerrors="true">
+			<param name="MonitorType" regex="am.servers.performance.polling.tab.monitortype" min-occurrences="1"/>
+			<param name="_" type="long"/>
+		</url>
+		<url path="/adminActivities.do" method="GET" operation-param="method" operation-value="getServerPerformancePollingValue" authentication="required" roles="am.role.ADMIN.EA.DE" deny-del-admin="true" throwallerrors="true">
+			<param name="MonitorType" regex="am.servers.performance.polling.tab.monitortype" min-occurrences="1"/>
+			<param name="MetricType" regex="am.servers.performance.polling.tab.metrictype" min-occurrences="1"/>
+			<param name="ConfigType" regex="am.db.monitor.or.monitortype" min-occurrences="1"/>
+			<param name="_" type="long"/>
+		</url>
+		<url path="/adminActivities.do" method="POST" operation-param="method" operation-value="updateServerMonitorPerformancePolling" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true" throwallerrors="true" csrf="true">
+			<param name="MonitorType" regex="am.servers.performance.polling.tab.monitortype" min-occurrences="1"/>
+			<param name="MetricType" regex="am.servers.performance.polling.tab.metrictype" min-occurrences="1"/>
+			<param name="ConfigType" regex="am.db.monitor.or.monitortype" min-occurrences="1"/>
+			<param name="resourceId" type="long" max-occurrences="100000"/>
+			<param name="UpdateDetails" regex="^(PollingInterval|MonitorSettings)$"/>
+			<param name="PollingStatus" regex="^(-1|0|custom)$"/>
+			<param name="PollingInterval" type="long"/>
+			<param name="SelectedTimeUnit" regex="^(minutes|hours)$"/>
+			<param name="Delete" type="boolean"/>
+			<param name="Delete_Count" type="long"/>
+			<param name="Ignore" type="String" max-len="10000"/>
+			<param name="Cache" type="boolean"/>
+			<param name="Volume_Mount" type="boolean"/>
+			<param name="Network_Drives" type="boolean"/>
+			<param name="Temperature" type="boolean"/>
+			<param name="PowerSupply" type="boolean"/>
+			<param name="Fan" type="boolean"/>
+			<param name="Cpu" type="boolean"/>
+			<param name="Disk" type="boolean"/>
+			<param name="Array" type="boolean"/>
+			<param name="Chassis" type="boolean"/>
+			<param name="Memory_Device" type="boolean"/>
+			<param name="Voltage" type="boolean"/>
+			<param name="Battery" type="boolean"/>
+			<param name="Critical_Severity" type="String" max-len="10000"/>
+			<param name="Warning_Severity" type="String" max-len="10000"/>
+			<param name="Clear_Severity" type="String" max-len="10000"/>
+			<param name="Process_Down_Status_Behavior" type="boolean"/>
+			<param name="Process_Instance" type="boolean"/>
+			<param name="Process_ListAll" type="boolean"/>
+			<param name="Service_Down_Status_Behavior" type="boolean"/>
+			<param name="Disk_Removed" type="boolean"/>
+			<param name="Server_Restart" type="boolean"/>
+			<param name="NetworkAdapter_Removed" type="boolean"/>
+			<param name="NetworkInterface_Removed" type="boolean"/>
+			<param name="Process_Restart" type="boolean"/>
+			<param name="Scheduled_Task_Removed" type="boolean"/>
+			<param name="Scheduled_Task_Status" type="boolean"/>
+		</url>
+		<url path="/adminActivities.do" method="GET" operation-param="method" operation-value="getCLISettingsDetails" authentication="required" roles="am.role.ADMIN.EA.DE" deny-del-admin="true" throwallerrors="true">
+			<param name="MonitorType" regex="Default" min-occurrences="1"/> <!-- am.cli.settings.monitortype - need to use this regex for CLI Setting in Server perforamnce polling M2-->
+			<param name="_" type="long"/>
+		</url>
+		<url path="/adminActivities.do" method="POST" operation-param="method" operation-value="updateCLISettingsDetails" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true" throwallerrors="true" csrf="true">
+			<param name="MonitorType" regex="Default" min-occurrences="1"/> <!-- am.cli.settings.monitortype - need to use this regex for CLI Setting in Server perforamnce polling M2-->
+			<param name="CLIBulkExecute" type="boolean" min-occurrences="1"/>
+			<param name="CLILoginPrefix" type="boolean" min-occurrences="1"/>
+			<param name="CLISessionCache" type="boolean" min-occurrences="1"/>
+			<param name="CLITelnetTimeout" type="long" min-occurrences="1"/>
+			<param name="CLIBulkExecuteTimeout" type="long" min-occurrences="1"/>
+			<param name="CLIResponseTimeout" type="long" min-occurrences="1"/>
+		</url>
+		<url path="/adminActivities.do" method="GET" operation-param="method" operation-value="getWMISettingsDetails" authentication="required" roles="am.role.ADMIN.EA.DE" deny-del-admin="true" throwallerrors="true">
+			<param name="MonitorType" regex="am.wmi.settings.monitortype" min-occurrences="1"/>
+			<param name="_" type="long"/>
+		</url>
+		<url path="/adminActivities.do" method="POST" operation-param="method" operation-value="updateWMISettingsDetails" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true" throwallerrors="true" csrf="true">
+			<param name="MonitorType" regex="am.wmi.settings.monitortype" min-occurrences="1"/>
+			<param name="WMIScriptReExecute" type="boolean" min-occurrences="1"/>
+			<param name="WMIEncoding" type="String" max-len="10000"/>
+		</url>
+		<url method="GET" roles="ADMIN,ENTERPRISEADMIN" authentication="required" deny-del-admin="true" operation-param="method" operation-value="querydetails" path="/DBaction.do" throwallerrors="true"/>
+	</urls>
+		<!-- USERMANAGEMENT -->
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<throttles window="ROLLING" scope="APPSERVER" key="url.path" >
+			<throttle duration="1M" threshold="120" lock-period="5M"/>
+		</throttles>
+		<url method="GET" operation-param="method" operation-value="samlTestConnection" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true" ignore-extraparam ="true" deny-plugin-edition="true"/>
+		<url method="POST" operation-param="method" operation-value="checkSAMLTestConnection" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true" csrf="true" ignore-extraparam ="true" deny-plugin-edition="true"/>
+		<url method="GET" operation-param="method" operation-value="getMGListForSAML" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA.DE" deny-del-admin="true" deny-plugin-edition="true"/>
+		<url method="GET" operation-param="method" operation-value="downloadSPCertificate" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true" deny-plugin-edition="true"/>
+		<url method="POST" operation-param="method" operation-value="regenerateSPCertificate" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true" csrf="true" deny-plugin-edition="true"/>
+		<url method="POST" operation-param="method" operation-value="configureSAMLIdPDetails" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true" csrf="true" deny-plugin-edition="true">
+		    <param name="samlIdPConfigureType" regex="^(metadata|manual)$"/>
+		    <param name="samlIdPName" type="String"/>
+		    <param name="samlUserRole" regex="am.usermanagement.roles"/>
+		    <param name="samlIdPFormat" regex="^(transient|persistent)$"/>
+		    <param name="samlIdPLoginURL" regex="am.space_separated.url" max-len="255"/>
+		    <param name="samlIdPLogoutURL" regex="am.space_separated.url" max-len="255"/>
+		    <param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric"/>
+		    <file allowed-extensions="xml" content-type-name="xml" max-size="250" name="samlIdPMetadataFile" >
+				<filename regex="am.common.user.profile.filename"  min-len="5"/>
+			</file>
+			<file allowed-extensions="cer,der,crt,cert,pem" content-type-name="p12" max-size="10" name="samlIdPCertFile" >
+				<filename regex="am.common.user.profile.filename"  min-len="5"/>
+			</file>
+			<param name="selectedMonitorGroupCount" type="long"/>
+			<param name="selectedMultiMonitors" type="long" max-occurrences="25000"/>
+		</url>
+		<url method="POST" operation-param="method" operation-value="updateSAMLAuthStatus" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true" csrf="true" deny-plugin-edition="true">
+		    <param name="module" regex="^(enableSAMLSSO|disableOtherAuth)$"/>
+		    <param name="status" type="boolean"/>
+		</url>
+		 <!-- SAML Login and Logout request with Get method specifically for TestConnection alone -->
+		<url path="/sso_loginreq" method="GET,POST" deny-plugin-edition="true">
+			<param name="testConnection" regex="^(true)$"/>
+		</url>
+		<url path="/sso_login" method="GET,POST" deny-plugin-edition="true">
+			<param name="SAMLResponse" type="String" max-len="-1" secret="true"/>
+			<param name="RelayState" type="String" allow-empty="true" max-len="150" />
+			<param name="SigAlg" type="String" />
+		</url>
+		<url path="/sso_logoutreq" method="GET,POST" deny-plugin-edition="true">
+			<param name="testConnection" regex="^(true)$"/>
+		</url>
+		<url path="/sso_logout" method="GET,POST" deny-plugin-edition="true">
+			<param name="SAMLResponse" type="String" max-len="-1" />
+			<param name="SAMLRequest" type="String" max-len="-1" />
+			<param name="Signature" type="String" max-len="-1" />
+			<param name="RelayState" type="String" allow-empty="true" max-len="150" />
+			<param name="SigAlg" type="String" />
+		</url>
+		<url method="GET" path="/saml/generateSPMetaData" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true" deny-plugin-edition="true">
+			<response>
+				<headers>
+					<header name="Content-Type" value="application/xml;charset=UTF-8"/>
+					<!-- overwriting header to change downloading file name -->
+					<header name="Content-Disposition" value="attachment; filename=apm-sp-metadata.xml"/>
+				</headers>
+			</response>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="revokeTOTPSecretForUser" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true">
+			<param-group name="am.additional.extra.params" />
+			<param max-occurrences="100" name="usercheckbox" type="long"/>
+			<param name="headercheckbox2" regex="onlyon"/>
+		</url>
+	</urls>
+	<urls>
+		<param name="domainAuthentication" regex="am.usermanagement.newDomainService"/>
+		<param name="fetchActiveDirectory" regex="am.usermanagement.fetchActiveDirectory"/>
+		<param name="ldapdomainValue" regex="am.hostnameWithComma" max-occurrences="2"/>
+		<param name="description" type="String"/>
+		<param name="usergroupName" type="String"/>
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric"/>
+		<param name="associatedUserGroups" regex="am.common.numberandcomma"/>
+		<param name="domainID" type="int"/>
+		<param name="password" type="String" secret="true"/>
+		<param max-occurrences="10000000" name="mgName" type="String"/>
+		<param name="domainPassword" type="String" secret="true"/>
+		<param name="authType" regex="am.usermanagement.newDomainService"/>
+		<param name="confirmpassword" type="String" secret="true"/>
+		<param name="email" regex="email"/>
+		<param name="searchFilter" type="String"  max-len="-1"/>
+		<param name="ldapdomainName" type="String"/>
+		<param name="newDomainController" regex="am.hostname"/>
+		<param name="domainController" regex="am.hostname"/>
+		<param max-len="250" name="userGroupUsers" regex="am.common.numberandcomma"/>
+		<param name="groups" regex="am.usermanagement.roles"/>
+		<param name="userName" type="String"/>
+		<param name="domainUsername" type="String"/>
+		<param name="domainBaseDN" type="String"/>
+		<param name="newDomainName" type="String"/>
+		<param name="domainName" regex="domain"/>
+		<param name="newDomainPort" regex="am.port"/>
+		<param name="newDomainPermission" regex="zeroandone"/>
+		<param name="storeADPassword" regex="onlyon"/>
+		<param name="domainPort" regex="am.port"/>
+		<param max-occurrences="2" name="domainValue" type="String"/>
+		<param name="newDomainService" regex="am.usermanagement.newDomainService"/>
+		<param name="resourceid" type="long"/>
+		<param name="CustomField" regex="am.customfield.newuser" />
+		<param name="businessHourAssociatedToUser" regex="yesnotf" />
+		<param name="businessType" regex="am.common.ZeroOne" />
+		<param name="selectedBusinessHourID" type="long"/>
+		<param name="actualBussinessID" type="long"/>
+		<url csrf="true" method="POST" operation-param="method" operation-value="createUser" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<file allowed-extensions="jpg,gif,png,jpeg" content-type-name="image" max-size="3000" name="theFile" >
+				<filename regex="am.common.user.profile.filename" max-len="250"/>
+			</file>
+			<param max-occurrences="10000000" name="select" type="long"/>
+			<param name="domainUserRole" regex="am.usermanagement.roles"/>
+			<param name="mgList" type="long"/>
+			<param max-occurrences="10000000" name="adUserSelect" type="String"/>
+			<param max-len="1000" name="am.usermanagement.userName" name-regex="true" type="String" max-occurrences="10000000"/>
+			<param max-occurrences="10000000" name="selectedGroup" type="long"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="updateUser" path="/admin/userconfiguration.do" authentication="required" skip-bad-input-encoding="true" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<file allowed-extensions="jpg,gif,png,jpeg" content-type-name="image" max-size="3000" name="theFile" >
+				<filename regex="am.common.user.profile.filename" max-len="250"/>
+			</file>
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param name="deletePic" type="boolean"/>
+			<param max-occurrences="10000000" name="select" type="long"/>
+			<param name="updateChk" regex="onlyon"/>
+			<param name="endAllSessions" type="boolean"/>
+			<param name="userid" type="long"/>
+			<param name="change" type="boolean"/>
+			<param name="oldpassword" type="String" secret="true"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="updateUser" path="/userconfiguration.do" authentication="required" skip-bad-input-encoding="true" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isSelfUpdateRequest" roles="am.role.ADMIN.EA.OP.US.MA">
+			<file allowed-extensions="jpg,gif,png,jpeg" content-type-name="image" max-size="3000" name="theFile" >
+				<filename regex="am.common.user.profile.filename" max-len="250"/>
+			</file>
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param name="deletePic" type="boolean"/>
+			<param max-occurrences="10000000" name="select" type="long"/>
+			<param name="updateChk" regex="onlyon"/>
+			<param name="endAllSessions" type="boolean"/>
+			<param name="userid" type="long"/>
+			<param name="change" type="boolean"/>
+			<param name="oldpassword" type="String" secret="true"/>
+			<param name="updateProfile" type="boolean"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="deleteUsers" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param max-occurrences="100" name="usercheckbox" type="long"/>
+			<param name="headercheckbox2" regex="onlyon"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="addDomainConfig" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<file allowed-extensions="jpg,gif,png,jpeg" content-type-name="image" max-size="3000" name="theFile" >
+				<filename regex="am.common.user.profile.filename" max-len="250"/>
+			</file>
+			<param name="sslenable" regex="onlyon"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="updateDomainConfig" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<file allowed-extensions="jpg,gif,png,jpeg" content-type-name="image" max-size="3000" name="theFile" >
+				<filename regex="am.common.user.profile.filename" max-len="250"/>
+			</file>
+			<param name="sslenable" regex="onlyon"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="deleteDomainConfig" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="headercheckbox3" regex="onlyon"/>
+			<param max-occurrences="100" name="domaincheckbox" type="int"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="createUserGroup" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<file allowed-extensions="jpg,gif,png,jpeg" content-type-name="image" max-size="3000" name="theFile" >
+				<filename regex="am.common.user.profile.filename" max-len="250"/>
+			</file>
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param max-occurrences="10000000" name="select" type="long"/>
+			<param name="userGroupMG" regex="am.usermanagement.userGroupMG"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="updateUserGroup" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<file allowed-extensions="jpg,gif,png,jpeg" content-type-name="image" max-size="3000" name="theFile" >
+				<filename regex="am.common.user.profile.filename" max-len="250"/>
+			</file>
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param max-occurrences="10000000" name="select" type="long"/>
+			<param name="groupid" type="int"/>
+			<param name="userGroupMG" regex="am.usermanagement.userGroupMG"/>
+			<param name="domainUserRole" regex="am.usermanagement.roles"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="deleteUserGroups" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param max-occurrences="10000000" name="usergroupcheckbox" type="int"/>
+			<param name="headercheckbox3" regex="onlyon"/>
+		</url>  
+	</urls>
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url csrf="true" method="POST" operation-param="method" operation-value="fetchADUser" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="domainName" regex="domain"/>
+			<param name="domainController" regex="am.hostname"/>
+			<param name="searchFilter" type="String" max-len="-1"/>
+			<param name="domainUsername" type="String"/>
+			<param name="domainPassword" type="String" secret="true"/>
+			<param name="domainBaseDN" type="String"/>
+			<param name="port" regex="am.port"/>
+			<param name="domainValue" type="int"/>
+			<param name="fetchValue" regex="am.usermanagement.fetchActiveDirectory"/>
+			<param name="authType" regex="am.usermanagement.newDomainService"/>
+			<param name="date" regex="am.common.javascriptDate"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="fetchLDAPUserGroups" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="domainName" regex="domain"/>
+			<param name="domainController" regex="am.hostname"/>
+			<param name="searchFilter" type="String" max-len="-1"/>
+			<param name="domainUsername" type="String"/>
+			<param name="domainPassword" type="String" secret="true"/>
+			<param name="domainBaseDN" type="String"/>
+			<param name="ldapPort" regex="am.port"/>
+			<param name="domainValue" type="int"/>
+			<param name="fetchldap" regex="am.usermanagement.fetchActiveDirectory"/>
+			<param name="date" regex="am.common.javascriptDate"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="getGroupUsers" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="selectedGroup" type="long" max-occurrences="10000000"/>
+			<param name="mgList" type="long"/>
+			<param name="adUserSelect" type="String" max-occurrences="10000000" />
+			<param max-len="1000" name="am.usermanagement.userName" name-regex="true" type="String" max-occurrences="10000000"/>
+			<param name="multipleSelect" type="String" max-occurrences="10000000"  max-len="400"/>
+			<param name="importUserRole" regex="am.usermanagement.importUserRole"/>
+			<param name="ldapdomainPassword" type="String" secret="true"/>
+			<param name="domainName" regex="domain"/>
+			<param name="domainID" type="int"/>
+			<param name="ldapsearchBase" type="String"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="createLDAPUserGroup" path="/admin/userconfiguration.do" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param max-occurrences="10000000" name="selectedGroup" type="long"/>
+			<param name="mgList" type="long"/>
+			<param max-occurrences="10000000" name="adUserSelect" type="String"/>
+			<param max-len="1000" name="am.usermanagement.userName" name-regex="true" type="String" max-occurrences="10000000"/>
+			<param max-occurrences="10000000" name="multipleSelect" type="String" max-len="400"/>
+			<param name="importUserRole" regex="am.usermanagement.importUserRole"/>
+			<param name="domainUserRole" regex="am.usermanagement.roles"/>
+			<param name="ldapdomainPassword" type="String" secret="true"/>
+			<param name="domainName" regex="domain"/>
+			<param name="domainID" type="int"/>
+			<param name="ldapsearchBase" type="String"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="updateAdminPermission" path="/admin/userconfiguration.do" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true">
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param name="allowSuperAdminUpdate" type="boolean"/>
+			<param name="allowAdminWindowsServices" regex="am.common.TFNull"/>
+			<param name="allowAdminToManageDB" type="boolean"/>
+			<param name="allowAdminToManageSQLUser" type="boolean"/>
+			<param name="allowAdminToUpdateConfig" type="boolean"/>
+			<param name="shutdownPermission" type="boolean"/>
+			<param name="createDomainUser" regex="am.common.TFNull"/>
+			<param name="disableRestrictedAdmin" regex="am.common.TFNull"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="updatedelegateAdminPermission" path="/admin/userconfiguration.do" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param name="allowDAdminViewAllCredentials" type="boolean"/>
+			<param name="allowDAdminViewAllThresholds" type="boolean"/>
+			<param name="allowDAdminViewAllActions" type="boolean"/>
+			<param name="delAdmin_sendEmail" type="boolean"/>
+			<param name="delAdmin_sms" type="boolean"/>
+			<param name="delAdmin_program" type="boolean"/>
+			<param name="delAdmin_trap" type="boolean"/>
+			<param name="delAdmin_sdp" type="boolean"/>
+			<param name="delAdmin_mbean" type="boolean"/>
+			<param name="delAdmin_heap" type="boolean"/>
+			<param name="delAdmin_amazon" type="boolean"/>
+			<param name="delAdmin_vm" type="boolean"/>
+			<param name="delAdmin_container" type="boolean"/>
+			<param name="delAdmin_windows" type="boolean"/>
+			<param name="allowDelAdminToTrustCertificates" type="boolean"/>
+			<param name="allowDelAdminToManageDB" type="boolean"/>
+			<param name="allowDelAdminToManageSQLUser" type="boolean"/>
+			<param name="allowDelAdminToUpdateConfig" type="boolean"/>
+			<param name="delAdmin_sqlJobAction" type="boolean"/>
+			<param name="delAdmin_restapi" type="boolean"/>
+			<param name="delAdmin_slack" type="boolean"/>
+			<param name="allowDAdminEditEUMAgents" type="boolean"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="updateOperatorPermission" path="/admin/userconfiguration.do" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param name="allowManage" type="boolean"/>
+			<param name="allowReset" type="boolean"/>
+			<param name="allowExecute" type="boolean"/>
+			<param name="allowServices" type="boolean"/>
+			<param name="allowUpdateIP" type="boolean"/>
+			<param name="allowEdit" type="boolean"/>
+			<param name="allowOPRProcess" type="boolean"/>
+			<param name="allowDownTimeSchedule" type="boolean"/>
+			<param name="allowOprViewAllDownTimeSchedule" type="boolean"/>
+			<param name="allowJumptoLink" type="boolean"/>
+			<param name="allowClearAlarms" type="boolean"/>
+			<param name="allowOperatorEditTabs" type="boolean"/>
+			<param name="allowNonAdminUsersEditUsername" type="boolean"/>
+			<param name="allowManageDB" type="boolean"/>
+			<param name="allowUpdateConfig" type="boolean"/>
+			<param name="showManagedServersForOP" type="boolean"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="updateUserPermission" path="/admin/userconfiguration.do" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param name="allowUserEditTabs" type="boolean"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="updateas400Permission" path="/admin/userconfiguration.do" throwallerrors="true" deny-del-admin="true">
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param name="allowAL" type="boolean"/>
+			<param name="allowCMD" type="boolean"/>
+			<param name="allowCS" type="boolean"/>
+			<param name="allowCSU" type="boolean"/>
+			<param name="allowDT" type="boolean"/>
+			<param name="allowJOB" type="boolean"/>
+			<param name="allowLL" type="boolean"/>
+			<param name="allowML" type="boolean"/>
+			<param name="allowMSG" type="boolean"/>
+			<param name="allowNA" type="boolean"/>
+			<param name="allowSC" type="boolean"/>
+			<param name="allowSPL" type="boolean"/>
+			<param name="allowSUB" type="boolean"/>
+			<param name="allowAS400" type="boolean"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="updateView" path="/admin/userconfiguration.do" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param name="drilldown" type="boolean"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="updateAccPolicy" path="/admin/userconfiguration.do" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true">
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param name="accLockout" type="boolean"/>
+			<param name="singleSession" type="boolean"/>
+			<param name="singleSessionBehavior" regex="^(RestrictLatestLogin|AllowLatestLogin)$"/>
+			<param name="pwdPolicy" type="boolean"/>
+			<param name="accLockoutTimeout" type="long"/>
+			<param name="accLockOutCount" type="long"/>
+			<param name="accForceUpdatePassword" type="boolean"/>
+			<param name="pwdExpiry" type="boolean"/>
+			<param name="pwdExpiryDays" type="long"/>
+			<param name="pwdMinLength" type="long"/>
+			<param name="cacheUpdate" type="boolean"/>
+			<param name="businessHours" type="boolean"/>
+			<param name="userOperationRestriction" type="boolean"/>
+			<param name="resetPassword" type="boolean"/>
+		</url>
+	</urls>
+	<urls>
+		<param name="PRINTER_FRIENDLY" type="boolean"/>
+		<param name="CustomField" regex="am.customfield.newuser" />
+		<param name="resourceid" type="long"/>
+		<param name="username" type="String"/>
+		<param name="userid" type="long"/>
+		<url method="GET" operation-param="method" operation-value="editUser" path="/userconfiguration.do" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA.OP.US.MA" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isSelfUpdateRequest" />
+		<url method="GET" operation-param="method" operation-value="editUser" path="/admin/userconfiguration.do" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true"/>
+	</urls>
+	<urls>
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+		<url path="/resetPassword.do" method="GET" operation-param="method" operation-value="resetPassword">
+			<param name="errType" regex="am.usermanagement.passwordError" />
+			<param name="ThrottleAccountUnLockTime" type="long"/>
+		</url>
+		<url path="/resetPassword.do" method="POST" operation-param="method" operation-value="validateUserDetails" csrf="true">
+			<throttles key="url.path+param.userName" window="ROLLING" scope="APPSERVER">
+				<throttle duration="10M" threshold="5" lock-period="1H"/>
+			</throttles>
+			<param name="userName" type="String"/>
+			<param name="mailId" regex="email"/>
+		</url>
+		<url path="/resetPassword.do" method="GET" operation-param="method" operation-value="validateResetPasswordToken">
+			<param name="reset_password_token" type="String" secret="true"/>
+		</url>
+		<url path="/resetPassword.do" method="POST" operation-param="method" operation-value="updatePassword" skip-bad-input-encoding="true" csrf="true">
+			<param name="password" type="String" secret="true"/>
+			<param name="confirmpassword" type="String" secret="true"/>
+			<param name="resetToken" type="String" secret="true"/>
+		</url>
+		<url path="/jsp/UserActiveSessions.jsp" method="GET" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA.OP.US.MA"/>
+		<url path="/jsp/UserHistorySessions.jsp" method="GET" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA.OP.US.MA"/>
+		<url path="/jsp/IncorrectLoginDetails.jsp" method="GET" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true"/>
+		<url path="/userSession.do" method="GET" operation-param="method" operation-value="getUserSessionsDetails" authentication="required" roles="am.role.ADMIN.EA.OP.US.MA"/>
+		<url path="/userSession.do" method="POST" operation-param="method" operation-value="getUserActiveSessions" csrf="true" authentication="required" roles="am.role.ADMIN.EA.OP.US.MA">
+			<param name="type" regex="am.usermanagement.session"/>
+		</url>
+		<url path="/userSession.do" method="POST" operation-param="method" operation-value="getUserHistorySessions" csrf="true" authentication="required" roles="am.role.ADMIN.EA.OP.US.MA">
+			<param name="type" regex="am.usermanagement.session"/>
+		</url>
+		<url path="/userSession.do" method="POST" operation-param="method" operation-value="terminateUserSession" csrf="true" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true">
+			<param name="sessionId" type="long" max-occurrences="10000000"/>
+		</url>
+		<url path="/userSession.do" method="POST" operation-param="method" operation-value="getIncorrectLoginDetails" csrf="true" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true"/>
+		<url path="/jsp/PasswordUpdate.jsp" method="GET" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA.OP.US.MA">
+			<param name="sucess" type="boolean"/>
+			<param name="pwdExpired" type="boolean"/>
+			<param name="errType" regex="am.usermanagement.passwordError" />
+		</url>
+		<url path="/userconfiguration.do" method="POST" operation-param="method" operation-value="updatePassword" csrf="true" authentication="required" skip-bad-input-encoding="true" roles="am.role.ADMIN.EA.OP.US.MA">
+			<param name="oldpassword" type="String" secret="true"/>
+			<param name="password" type="String" secret="true"/>
+			<param name="confirmpassword" type="String" secret="true"/>
+		</url>
+		<url path="/userconfiguration.do" method="POST" operation-param="method" operation-value="checkUserEmailId" csrf="true" authentication="required" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isSelfUpdateRequest" roles="am.role.ADMIN.EA.OP.US.MA">
+			<param name="email" type="String"/>
+			<param name="userid" type="long"/>
+		</url>
+		<url path="/userconfiguration.do" method="POST" operation-param="method" operation-value="checkUserName" csrf="true" authentication="required" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isSelfUpdateRequest" roles="am.role.ADMIN.EA.OP.US.MA">
+			<param name="userName" type="String"/>
+			<param name="userid" type="long"/>
+		</url>
+		<url path="/admin/userconfiguration.do" method="POST" operation-param="method" operation-value="checkDomainName" csrf="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true" skip-bad-input-encoding="true">
+			<param name="domainname" type="String"/>
+		</url>
+		<url path="/admin/userconfiguration.do" method="POST" operation-param="method" operation-value="checkUserGroupName" csrf="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true" skip-bad-input-encoding="true">
+			<param name="groupname" type="String"/>
+		</url>
+		<url path="/admin/userconfiguration.do" method="POST" operation-param="method" operation-value="unlockUserStatus" csrf="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="userid" type="long"/>
+		</url>
+		<url path="/admin/userconfiguration.do" method="GET" operation-param="method" operation-value="editUserGroup" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="groupid" type="long"/>
+			<param name="usergroup" type="boolean"/>
+		</url>
+		<url path="/admin/userconfiguration.do" method="GET" operation-param="method" operation-value="editDomainConfig" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="domainid" type="long"/>
+			<param name="domainconfig" type="boolean"/>
+		</url>
+		<url path="/admin/userconfiguration.do" method="GET" operation-param="method" operation-value="showUsers" authentication="required" roles="am.role.ADMIN.EA.DE" deny-del-admin="true">
+			<param name="resourceid" type="long"/>
+			<param name="adUserAdd" type="boolean"/>
+			<param name="unlockMessage" type="boolean"/>
+			<param name="tabName" regex="am.usermanagement.tabName" />
+			<param name="showtab" regex="am.usermanagement.showTab" />
+			<param name="CustomField" regex="am.customfield.newuser" />
+			<param name="service" regex="am.action.fromadminlayout.service" />
+    		<param name="reqForAdminLayout" type="boolean" />
+		</url>
+	</urls>
+		<!-- USERMANAGEMENT -->
+		
+		<!-- For BlackListing Commands by balaji boopathi -->
+		  <urls>
+		  	<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+		  	<param name="plugin_view" type="boolean"/>
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		   <url path="/adminAction.do" method="get"
+		    operation-param="method" operation-value="showExecProgAction" roles="am.role.ADMIN.EA.DE" authentication="required">
+		    <param name="isPluginNotification" regex="am.common.booleanandnull" />
+		    <param name="actionID" type="long" />
+		    <param name="haid" regex="am.common.longandnull" />
+		    <param name="global" type="boolean" />
+		    <param name="returnpath" type="String" max-len="2000" />
+		   </url>
+		   <url path="/adminAction.do" method="post" csrf="true"
+		    operation-param="method" operation-value="checkBlackListCommand" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+		    <param name="command" type="String" max-len="-1" />
+		    <param name="mode" regex = "am.common.monitoring.mode" />
+		   </url>
+		  </urls>
+		  
+		  <!-- Monitor Error Page Status-->
+
+	<urls>
+		<param name="PRINTER_FRIENDLY" type="boolean"/>
+		<param name="type" regex="am.monitor.error.types" />
+		<param name="enableErrorMail" type="boolean" />
+		<param name="errorpollCount" type="int" />
+		<param name="errMailToAddr" type="String" max-len="10000" />
+		<url path="/jsp/monitorerrors.jsp" method="GET" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			
+		</url>
+		<url path="/showresource.do" operation-param="method" operation-value="monitorErrors" roles="ADMIN,ENTERPRISEADMIN" authentication="required" method="GET" />
+		<url path="/showresource.do" operation-param="method" operation-value="monitorErrors" roles="ADMIN,ENTERPRISEADMIN" authentication="required" method="POST" csrf="true" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:checkIfResourcesEditableByDA" skip-bad-input-encoding="true">
+			<param name="isSave" type="boolean" />
+			<param name="resourceids" type="JSONArray" template="am.update.monitorErrors.mail" max-len="10000"  />
+		</url>
+	
+	</urls>
+	
+	<jsontemplates>
+		<jsontemplate name="am.wcm.childNodesForWDM">
+			<key name="selectedChild" type="boolean" />
+			<key name="displayname" type="String" max-len="10000" />
+			<key name="href" regex="am.common.url.schemaandlength.validator" max-len="10000" />
+			<key name="scriptPercent" regex="am.wcm.percent" />
+			<key name="textPercent" regex="am.wcm.percent" />
+		</jsontemplate>
+		<jsontemplate name="am.api.sequence">
+			<key name="stepName" regex="am.displayname.common" max-len="250" />
+			<key name="url" regex="am.common.url.schemaandlength.validator" max-len="10000" />
+			<key name="stopOnError" type="boolean" />
+			<key name="timeout" type="long" />
+			<key name="resourceId" type="long" />
+			<key name="method" regex="am.restapi.method" />
+			<key name="payLoadType" regex="am.restapi.payloadType" />
+			<key name="payLoad" type="String"  max-len="48000" />
+			<key name="headers" type="String" max-len="48000" />
+			<key name="CredentialDetails" regex="am.credentialdetails" />
+			<key name="cmValue" type="long" />
+			<key name="OAuthVal" type="long" />
+			<key name="WEBTOKENVAL" type="long" />
+			<key name="UserName" regex="String" max-len="250"/>
+			<key name="Password" type="String" max-len="250" />
+			<key name="upStatusCodes" regex="am.common.numberaandcolonpluscomma" max-len="250" />
+			<key name="RespType" regex="am.restapi.RespType" />
+			<key name="ContentCheck" type="boolean" />
+			<key name="contains" type="String" max-len="250"/>
+			<key name="notContain" type="String" max-len="250" />
+			<key name="isCaseSensitive" type="boolean" />
+			<key name="isRegEx" type="boolean" />
+			<key name="ResponseFormat" regex="am.restapi.RespType" />
+			<key name="paramterToForward" type="String" max-len="48000" />
+			<key name="cookieFormat" type="String" max-len="48000" />
+			<key name="index" type="long" />
+		</jsontemplate>
+		 <jsontemplate name="arrayjson">
+                     <key index="0-999" type="String"/>
+       </jsontemplate>
+       <jsontemplate name="arrayjson.len100000">
+                     <key index="0-99999" type="String"/>
+       </jsontemplate>
+       <jsontemplate name="arrayjson.len255">
+       		<key index="0-999" type="String" max-len="255"/>
+       </jsontemplate>
+       <jsontemplate name="arrayLongjson">
+                     <key index="0-999" type="long"/>
+       </jsontemplate>
+       <jsontemplate name="am.generateAlert.eventParams">
+			<key name="resourceid" type="long"></key>
+			<key name="attributeid" type="long"></key>
+			<key name="severity" regex="am.generateAlert.severity"></key>
+			<key name="alarmMessage" type="String" max-len="-1"></key>
+			<key name="actualAlarmMessage" type="String" max-len="-1"></key>
+			<key name="entity" regex="am.generateAlert.entity"></key>
+			<key name="text" type="String" max-len="-1"></key>
+			<key name="time" type="long"></key>
+			<key name="id" type="int"></key>
+			<key name="source" type="String" max-len="-1"></key>
+			<key name="node" type="String"></key>
+			<key name="category" type="long"></key>
+			<key name="groupName" regex="am.alert.GroupName"></key>
+		</jsontemplate>
+		<jsontemplate name="am.screengrabber.jsonArray">
+			 <key index="0-4" type="JSONObject" template="am.screengrabber.jsonObject" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="am.screengrabber.jsonObject">
+			<key name="image" type="String" max-len="-1"></key>			 
+			<key name="screenshotName" regex="am.screengrabber.screenshotName"></key>			 
+		</jsontemplate>
+		<jsontemplate name="am.businessview.pdf.jsonArray">
+			 <key index="0-200" type="JSONObject" template="am.businessview.pdf.jsonObject" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="am.businessview.pdf.jsonObject">
+			<key name="bv_imageName" regex="apminsight_traceId" max-len="15"></key>			 
+			<key name="bv_imageSource" type="String" max-len="-1"></key>			 
+		</jsontemplate>
+		<jsontemplate name="am.filedirmon.ccontent">
+			<key name="severityCriteria" type="int" />
+			<key name="contents" type="JSONArray" template="arrayjson" array-size="0-5" max-len="516" />
+			<key name="condition" regex="am.emptystring" />
+			<key name="isRegex" type="boolean" />
+			<key name="ruleType" type="int" />
+			<key name="caseSensitive" type="boolean" />
+			<key name="matchWholeWord" type="boolean" />
+		</jsontemplate>
+		<jsontemplate name="am.urlseq.harData">
+			<key name="headers" type="String" max-len="-1" />
+			<key name="extension" type="String" />
+			<key name="method" regex="am.http.methods" />
+			<key name="domain" regex="am.hostname" max-len="1024" />
+			<key name="User-Agent" regex="am.common.useragent" max-len="1000"/>
+			<key name="queryString" type="String"  max-len="-1"/>
+			<key name="postData" type="String"  max-len="-1"/>
+			<key name="contentType" regex="^[a-zA-Z0-9 \\;\+\=\/\-\.]*$" max-len="1000"/>
+			<key name="url" regex="am.common.url.schemaandlength.validator" max-len="10000"/>
+			<key name="displayname" type="String" description="am.webclient.common.displayname.text" max-len="515"/>
+			<key name="password" type="String"/>
+			<key name="keywordPresent" regex="String" max-len="250"/>
+			<key name="keywordNotPresent" regex="String" max-len="250"/>
+			<key name="username" type="String" max-len="100"/>
+			<key name="ResponseCondition" regex="^(Greater than|Equal to|Not Equal to|Less than|Less than or equal)$"/>
+			<key name="ResponseCode" type="int"/>
+			<key name="authType" regex="am.urlmon.credtype"/>
+			<key name="cmValue" type="long"/>
+			<key name="mimeType" regex="am.form.submission.types"/>
+		</jsontemplate>
+		<jsontemplate name="am.updateip.jsonkeys">
+			<key name="am.updateip.json.keys" name-regex="true" max-occurrences="50" max-len="255" regex="am.hostname" />
+		</jsontemplate>
+		<jsontemplate name="am.webclient.bulkupdateip.jsonkeys">
+			<key name="am.updateip.json.keys" name-regex="true" max-occurrences="100" max-len="255" regex="am.hostname" />
+		</jsontemplate>
+		
+		<jsontemplate name="am.dirmon.filefilter">
+			<key name="filepattern" type="String"/>
+			<key name="category" regex="am.dir.category"/>
+			<key name="condition" regex="am.dir.condition"/>
+			<key name="unit" regex="am.dir.unit"/>
+			<key name="alertSeverity" type="int"/>
+			<key name="value" type="int"/>
+		</jsontemplate>
+		<jsontemplate name="am.update.monitorErrors.mail">
+			<key name="rId" type="long"/>
+			<key name="status" type="boolean"/>
+		</jsontemplate>
+		<!--  Template for oauth provider delete data starts -->
+		<jsontemplate name="am.oauth.delete.data">
+			<key name="deleteData" type="JSONArray" template="am.oauth.delete.list" array-size="0-15" max-len="1000"/>
+		</jsontemplate>
+		
+		<jsontemplate name="am.oauth.delete.list">
+			<key index="0-16" type="JSONObject" template="am.oauth.delete.obj" max-len="75" />
+		</jsontemplate>
+		
+		<jsontemplate name="am.oauth.delete.obj">
+			<key name="providerID" type="long" />
+			<key name="grantType" regex="am.oauth.grantType" />
+		</jsontemplate>
+		<!--  Template for oauth provider delete data ends -->
+	</jsontemplates>
+	
+	<!-- Threshold Action Configuration URLS START-->		
+	<!-- 
+	<urls>
+		<url path="/adminAction.do" method="POST" operation-param="method" operation-value="AddThresholdActionConfiguration" csrf="true" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+	    	<param name="^(.*)$" name-regex="true" type="String" max-len="100000" limit="1000" max-occurrences="1000" description="To allow all parameters and values"/>
+	    </url>
+	</urls>
+	 -->
+	<!-- Threshold Action Configuration URLS END-->
+	
+	<!-- RHEV SECURITY FILTER STARTS -->
+	<urls>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />	
+		<url method="get" operation-param="method" operation-value="showResourceSummary" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" path="/showRHEVApplication.do">
+			<param name="haid" type="long" />
+			<param name="selectedResource" regex="am.rhev.components.firstLevel" />
+		</url>
+		<url method="get" operation-param="method" operation-value="showChildResourcesSummary" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" path="/showRHEVApplication.do">
+			<param name="haid" type="long" />
+			<param name="type" regex="am.rhev.components.secondLevel" />
+		</url>
+	</urls>
+	<!-- RHEV SECURITY FILTER ENDS -->
+	
+	<!-- RestAPI Action by BalajiBoopathi -->
+	
+	<urls>
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+		<param name="haid" regex="am.common.longandnull" />
+		<param name="global" type="boolean" />
+		<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		<param name="plugin_view" type="boolean"/>
+		<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		<url path="/configureactions.do" method="GET" operation-param="method"
+			operation-value="showRestAPIAction" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="actionID" type="long" />
+			<param name="returnpath" type="String" max-len="2000" />
+		</url>
+		<url path="/adminAction.do" method="GET" operation-param="method" throwallerrors="true"
+			operation-value="showActionProfiles">
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+			<param name="Delete" type="int" />
+			<param name="actionId" type="int" />
+			<param name="actionName" type="String" />
+			<param name="plugin_view" type="boolean"/>
+		    <param name="opm_user" regex="am.opm.username" max-len="255"/>
+		</url>
+		<url path="/configureactions.do" method="POST" csrf="true"
+			operation-param="method" operation-value="saveRestAPIAction" roles="ADMIN,ENTERPRISEADMIN" authentication="required" custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkActionEditableForDA">
+			<param name="fromedit" type="boolean" />
+			<param name="actionID" type="long" />
+			<param name="displayName" type="String" />
+			<param name="httpUrl" regex="am.url.ext" max-len="2083" />
+			<param name="httpMethod" regex="am.http.method.types" />
+			<param name="formSubmissionType" regex="am.form.submission.types" />
+			<param name="httpParameters" type="String" max-len="-1" />
+			<param name="paramInput" type="String" max-occurrences="1000" max-len="-1"/>
+			<param name="requestHeaders" type="String" max-len="-1"/>
+			<param name="headerInput" type="String" max-occurrences="1000" max-len="-1"/>
+			<param name="userAgent" regex = "am.common.useragent" max-len="1000"/>
+			<param name="authType" regex="am.authentication.types" />
+			<param name="userName" type="String" />
+			<param name="password" type="String" />
+			<param name="successMailId" regex="am.common.longandnull" />
+			<param name="errorMailId" regex="am.common.longandnull" />
+			<param name="successMail" regex="email"/>
+			<param name="errorMail" regex="email" />
+			<param name="timeout" type="int" />
+			<param name="actions" regex="am.common.urlstartwithslash" max-len="2000" />
+			<param name="returnpath" regex="am.common.urlstartwithslash"
+				max-len="2000" />
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+			<param name="oAuthProvider" type="String" />
+			<param name="sendResponseType" regex="am.restapiaction.responsetype" />
+		</url>
+		<url path="/configureactions.do" method="POST" csrf="true"
+			operation-param="method" operation-value="createEmailActionFromOtherActions">
+			<param name="mailId" regex="email" />
+			<param name="displayName" type="String" />
+			<param name="mailType" regex="am.mail.types" />
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		</url>
+	</urls>
+		<!-- 
+		<url method="get" operation-param="method" operation-value="goToCronJobConfigPage" path="/HostResource.do" throwallerrors="true">
+			<param   name="resourceid" type="long"/>
+			<param   name="resType" regex="am.monitor.type"/>
+			<param   name="cronId" regex="am.common.longandnull"/>
+			<param   name="cronDisplayName" type="String" max-len="250"/>
+			<param   name="cronGraceTime" regex="am.common.longandnull"/>
+			<param   name="sid" regex="am.common.longandnull"/>
+			<param   name="PRINTER_FRIENDLY"  type="boolean" />
+			<param   name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		</url>
+		-->
+	
+	<!-- Trap Action starts -->
+	<urls operation-param="method" path="/adminAction.do" authentication="required" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+	 	<param name ="redirectTo" regex="am.common.urlstartwithslash"/>
+		<param name ="snmpVersionList" type="int"/>
+		<param name ="id" type="long"/>
+		<param name ="displayname" type="String"/>
+		<param name ="trapDestinationAddress" regex="am.hostname"/>
+		<param name ="trapDestinationPort" regex="am.port"/>
+		<param name ="objectID" regex="am.trap.oid"/>
+		<param name ="mibName" type="String"/>
+		<param name ="trapVarbinds" type="String" max-len="10000"/>
+		<param name ="messageFormat" type="int"/>
+		<param name ="trapCommunity" type="String"/>
+		<param name ="v1TrapGenericType" type="int"/>
+		<param name ="v1TrapSpecificType" type="long"/>
+		<param name ="v1TrapEnterprise" regex="am.trap.oid"/>
+		<param name ="cancel" type="boolean"/>
+		<param name ="v2SNMPTrapOID" regex="am.trap.oid"/>
+		<param name ="v3SNMPTrapOID" regex="am.trap.oid"/>
+		<param name ="v3TrapUser" type="String"/>
+		<param name ="v3TrapContextName" type="String"/>
+		<param name ="v3TrapEngineID" regex="String"/>
+		<param name ="v3TrapSecurityLevel" regex="am.snmp.trap.action.v3.security.level"/>
+		<param name ="v3TrapAuthPassword" secret="true" type="String"/>
+		<param name ="v3TrapAuthProtocol" regex="am.servermonitor.snmpAuthProtocol"/>
+		<param name ="v3TrapPrivPassword" secret="true" type="String"/>
+		<param name ="v3TrapPrivProtocol" regex="am.snmp.trap.action.v3.privprotocol"/>
+		<param name ="actions" regex="am.common.urlstartwithslash" max-len="500"/>
+		<param name="global" type="boolean" />
+		<param name="returnpath" type="String"
+				max-len="500" />
+		<param name ="haid" regex="am.common.longandnull"/>
+		<param name="businessHourAssociatedToAction" regex="am.threshold.businessHourAssociatedToThreshold.value" />
+		<param name="businessType" regex="am.common.ZeroOne" />
+		<param name="selectedBusinessHourID" type="long"/>
+		<param name="actualBussinessID" type="long"/>
+		<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		<param name="plugin_view" type="boolean"/>
+		<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		<url csrf="true" method="POST" operation-value="createSendTrapAction">
+			<param name-regex="true" name="^((monday|tuesday|wednesday|thursday|friday|saturday|sunday)(Start|End)(Hour|Minute))$" type="int" />
+			<param name="workingdays" regex="am.businesshours.workingdays" max-occurrences="7" />
+		</url>
+		<url csrf="true" method="POST" operation-value="editSendTrapAction"  custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkActionEditableForDA">
+			<param name-regex="true" name="^((monday|tuesday|wednesday|thursday|friday|saturday|sunday)(Start|End)(Hour|Minute))$" type="int" />
+			<param name="workingdays" regex="am.businesshours.workingdays" max-occurrences="7" />
+		</url>
+		<url method="GET" operation-value="reloadSendTrapActionForm" roles="am.role.ADMIN.EA.DE">
+			<param name-regex="true" name="^((monday|tuesday|wednesday|thursday|friday|saturday|sunday)(Start|End)(Hour|Minute))$" type="int" />
+			<param name="workingdays" regex="am.businesshours.workingdays" max-occurrences="7" />
+		</url>
+		<url csrf="true" method="POST" operation-value="reloadSendTrapActionForm" roles="am.role.ADMIN.EA.DE">
+			<param name-regex="true" name="^((monday|tuesday|wednesday|thursday|friday|saturday|sunday)(Start|End)(Hour|Minute))$" type="int" />
+			<param name="workingdays" regex="am.businesshours.workingdays" max-occurrences="7" />
+		</url>
+		<url method="GET" operation-value="showSendTrapAction" roles="am.role.ADMIN.EA">
+			<param name="actionID" type="long"/>
+		</url>
+	</urls>
+	<!-- Trap Action ends -->
+	
+   <!-- VM Action By Srinivasan S -->
+   <!-- <urls>
+   		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="haid" regex="am.common.longandnull" />
+		<param name="global" type="boolean" />
+   		<url path="adminAction.do" operation-param="method" operation-value="showVMAction" method="GET" throwallerrors="true" />
+   		<url path="adminAction.do" operation-param="method" operation-value="deleteVMAction" method="POST" throwallerrors="true">
+   			<param name="vmcheckbox" regex="am.digits.commaseperated"/>
+   		</url>
+   </urls>
+   
+   <urls>
+   		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="haid" regex="am.common.longandnull" />
+		<param name="global" type="boolean" />
+		<param name="id" type="int"/>
+   		<param name="displayname" type="String"/>
+   		<param name="hostType" type="int"/>
+   		<param name="jtaskMethod" regex="am.vmaction.actiontype"/>
+   		<param name="esxHostOptions" type="int"/>
+   		<param name="hypervHostoptions" type="int"/>
+   		<param name="xenHostOptions" type="int"/>
+   		<param name="containerOptions" type="int"/>
+   		<param name="ovmHostOptions" type="int"/>
+   		<param name="logConfig" type="int"/>
+   		<param name="selectedMG" type="Long"/>
+   		<param name="selectedhost" type="Long"/>
+   		<param name="selectedHyperVVM" type="Long"/>
+   		<param name="selectedXenVM" type="Long"/>
+   		<param name="selectedjre" type="Long"/>
+   		<param name="selectedhypervhost" type="Long"/>
+   		<param name="selectedXenHost" type="Long"/>
+   		<param name="selectedOVMHost" type="Long"/>
+   		<param name="selectedOVMVM" type="Long"/>
+   		<param name="tddelay" type="int"/>
+   		<param name="sendmail" type="int"/>
+   		<param name="priority" type="int"/>
+   		<url path="adminAction.do" operation-param="method" operation-value="createVMAction" method="POST" throwallerrors="true"/>
+   		<url path="adminAction.do" operation-param="method" operation-value="editVMAction" method="POST" throwallerrors="true"/>
+   </urls> -->
+   
+		<!-- Slack Action by BalajiBoopathi -->
+	
+	<urls>
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+		<param name="haid" regex="am.common.longandnull" />
+		<param name="global" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		<param name="plugin_view" type="boolean"/>
+		<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		<url path="/configureactionsforslack.do" method="GET" operation-param="method" throwallerrors="true"
+			operation-value="showSlackAction" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="actionID" type="long" />
+			<param name="returnpath" type="String" max-len="2000" />
+		</url>
+		<url path="/configureactionsforslack.do" method="POST" csrf="true" throwallerrors="true"
+			operation-param="method" operation-value="saveSlackAction" roles="ADMIN,ENTERPRISEADMIN" authentication="required" skip-bad-input-encoding="true"
+			 custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkActionEditableForDA">
+			<param name="fromedit" type="boolean" />
+			<param name="actionID" type="long" />
+			<param name="displayName" type="String" />
+			<param name="actions" regex="am.common.urlstartwithslash" max-len="2000" />
+			<param name="returnpath" regex="am.common.urlstartwithslash"
+				max-len="2000" />
+			<param name="sendTo" regex="am.slackaction.sendto.types" />
+			<param name="sendAs" regex="am.slackaction.sendas.types" />
+			<param name="channelDetail" regex="am.slack.channel.name" />
+			<param name="memberDetail" type="String" />
+			<param name="titleMessage" type="String" max-len="250" />
+			<param name="detailMessage" type="String" max-len="5000" />
+		</url>
+	</urls>
+	
+	<!-- Slack Integration Starts -->
+	<urls>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		<url path="/slackintegration.do" method="post" csrf="true" throwallerrors="true"
+			operation-param="method" operation-value="integrateAPM">
+			<param name="authToken" regex="cleartextpattern" secret="true" />
+			<param name="redirectToActionsPage" type="boolean" />
+		</url>
+		<url path="/slackintegration.do" method="post" csrf="true" operation-param="method" throwallerrors="true" operation-value="updateSlackDetails">
+			<param name="authToken" regex="cleartextpattern" secret="true" />
+			<param name="fromedit" type="boolean" />
+			<param name="actionID" type="long" />
+		</url>
+		<url path="/slackintegration.do" method="get" operation-param="method" throwallerrors="true" operation-value="modifySlackConsent">
+			<param name="prodName" regex="am.slack.modifyslack" />
+		</url>
+	</urls>
+	<!-- Slack Integration Ends -->
+   	
+	<!-- WAF handling for Bulk import configuration starts -->
+	<urls throwallerrors="true" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<url path="/BulkAddMonitors.do" operation-param="method" operation-value="showBulkImportForm" method="GET" roles="am.role.ADMIN.EA.DE">
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+			<param name="type" regex="am.monitor.type" />
+		</url>
+		<url path="/BulkAddMonitors.do" operation-param="method" operation-value="getConfMonitorHeader" method="GET" roles="am.role.ADMIN.EA.DE">
+	    	<param name="resType" regex="am.monitor.type" />
+	    </url>
+	    <url path="/BulkAddMonitors.do" operation-param="method" operation-value="startBulkDiscovery" method="POST" csrf="true" roles="am.role.ADMIN.EA">
+			<param name="filename" regex="am.common.extended.filename" max-len="250"/>
+			<param name="monitortype" regex="am.monitor.type" />
+		</url>
+		<url path="/BulkAddMonitors.do" operation-param="method" operation-value="uploadFile" method="POST" csrf="true" roles="am.role.ADMIN.EA">
+			<file allowed-extensions="csv" content-type-name="csv" max-size="50000" name="theFile" >
+				<filename regex="am.common.extended.filename" max-len="250"/>
+			</file>
+			<param name="type" regex="am.monitor.type" />
+	    	<param name="filename" regex="am.common.extended.filename" max-len="250"/>
+			<param name="monitortype" regex="am.monitor.type" />
+	    </url>
+	</urls>
+	<!-- WAF handling for Bulk import configuration ends -->
+   
+   <!-- WAF handling for Search Action /Search.do -->
+   <urls authentication="required" roles="am.role.ADMIN.EA.OP.US.DE.MA">
+   		<param-group name="am.additional.extra.params" />
+		 <url path="/Search.do" method="GET" >
+			 <param name="query" type="String" max-len="10000" />
+			 <param name="url" regex="am.common.urlstartwithslash" max-len="2083"/>
+			 <param name="searchOptionValue" regex="am.search.searchoptionvalue" />
+			 <param name="searchSubmit" regex="searchSubmit"/>
+		 </url>
+		 <url path="/Search.do" method="POST" csrf="true">
+			 <param name="query" type="String" max-len="10000" />
+			 <param name="url" regex="am.common.urlstartwithslash" max-len="2083"/>
+			 <param name="searchOptionValue" regex="am.search.searchoptionvalue" />
+			 <param name="searchSubmit" regex="searchSubmit"/>
+		 </url>
+	 </urls>
+	 
+   <!-- UpdateIP security starts -->
+	<urls>
+		<param name="PRINTER_FRIENDLY" type="boolean"/>
+		<url method="get" operation-param="method" operation-value="updateIpActionDetails" roles="am.role.ADMIN.EA.OP.DE" authentication="required" path="/updateIpAction.do" throwallerrors="true"
+		custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkUserlevelAccess">
+			<param name="resids" regex="am.common.numberandcomma" max-len="1000" />
+		</url>	
+	
+		<url csrf="true" method="post" operation-param="method" operation-value="updateIPAddress" roles="am.role.ADMIN.EA.OP" authentication="required" path="/updateIpAction.do" throwallerrors="true"
+		custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkUserlevelAccess">
+			<param name="resids" regex="am.common.resid.sq.bracket" max-len="1000" />
+			<param name="updateIPDetailsObj" type="JSONObject" max-len="10000" template="am.webclient.bulkupdateip.jsonkeys" />
+			<param name="replaceHostIP" regex="am.boolean" />
+			<param name="replaceHost" regex="am.boolean" />
+			<param name="replaceIP" regex="am.boolean" />
+			<param name="updateAllMonitors" regex="am.boolean" />
+		</url>	
+	
+		<url method="get" operation-param="method" operation-value="getResolvednamesforIP" roles="am.role.ADMIN.EA.OP.DE" authentication="required" path="/updateIpAction.do" throwallerrors="true">
+			<param name="updateIPDetailsObj" type="JSONObject" max-len="10000" template="am.updateip.jsonkeys" />
+		</url>
+		
+		<url method="get" operation-param="method" operation-value="getHostnameandIP" roles="am.role.ADMIN.EA.OP.DE" authentication="required" path="/updateIpAction.do" throwallerrors="true"
+		custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkUserlevelAccess">
+			<param name="resids" regex="am.common.resid.sq.bracket" max-len="1000" />
+		</url>
+		
+		<url method="get" operation-param="method" operation-value="bulkResolveNameandIP" roles="am.role.ADMIN.EA.OP.DE" authentication="required" path="/updateIpAction.do" throwallerrors="true"
+		custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkUserlevelAccess">
+			<param name="resids" regex="am.common.resid.sq.bracket" max-len="1000" />
+			<param name="type" regex="am.updateip.options" />
+		</url>
+	</urls>	
+	
+	<!-- UpdateIP security ends -->
+	
+	<!-- FILE UPLOAD SERVLET -->
+ 	<urls throwallerrors="true">
+		 <url path="/FileUploadServlet" method="POST" api="true">
+			 <param name="apikey" regex="apikey" max-occurrences="1" min-occurrences="1" secret="true"/>
+			 <param name="type" regex="^(url)$" max-len="3"/>
+			 <file name="File" allowed-extensions="p12" content-type-name="p12" max-size="500" >
+			 	<filename regex="am.common.extended.filename" max-len="250"/>
+			 </file>
+			 <throttle duration="1M" threshold="100" lock-period="5M"/>
+		 </url>
+	 </urls>
+
+	 <!-- HTTP URL MONITOR STARTS -->
+	 <urls authentication="required">
+		  <param name="PRINTER_FRIENDLY" type="boolean" />
+			<param name="masSelectType" regex="am.enterprise.masselecttype" description="EnterpriseSetup" />
+			<param name="masGroupName" type="String" description="EnterpriseSetup"/>
+			<param name="selectedServer" regex="am.enterprise.selectedserver" description="EnterpriseSetup" />
+			<param name="multipleServers" type="int" max-occurrences="50" description="am.webclient.admin.addmonitor.select.mas.text" />
+			<param name="haid" regex="am.common.longandnull" max-occurrences="1000"/>
+			<param name="hideFieldsForIT360" regex="am.common.TFNull" max-len="20"/>
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+			<param name="type" regex="am.noconf.type" max-len="40"/>
+			<param name="addtoha" regex="am.common.TFNull" max-len="20"/>
+			<param name="groupname" type="String"  max-len="515"/>
+			<param name="timeout" type="int" description="am.webclient.hostdiscovery.timeout"/>
+			<param name="pollInterval" type="int" description="am.webclient.common.pollinginterval.text"/>
+			<param name="password" type="String" description="am.webclient.common.password.text" max-len="250" secret="true"/>
+			<param name="headerInput" type="String" description="urlcreation.customheaders" max-len="48000" max-occurrences="100"/>
+			<param name="requestparams" type="String" description="am.webclient.hostdiscovery.urlmon.reqparams" max-len="100000"/>
+			<param name="method" regex="am.urlmon.method" description="am.webclient.hostdiscovery.urlmon.formsub"/>
+			<param name="sslVersion" regex="am.urlmon.sslVersion" description="am.webclient.url.sslversion.enabled" max-len="20"/>
+			<param name="userAgent" type="String" description="am.webclient.hostdiscovery.urlmon.useragent" max-len="1000"/>
+			<param name="userid" regex="am.windows.username" description="am.webclient.hostdiscovery.urlmon.urlauthinfo" max-len="255"/>
+			<param name="url" regex="am.common.url.schemaandlength.validator" description="am.webclient.hostdiscovery.urlmon.urladd" max-len="10000"/>
+			<param name="clientCertName" regex="am.urlmon.clientCertName" description="am.webclient.url.client.certificate.name" max-len="250"/>
+			<param name="clientCertPassword" type="String" description="am.webclient.url.client.certificate.password" max-len="250" secret="true"/>
+			<param name="httpcondition" regex="am.urlmon.httpvalue" description="am.webclient.hostdiscovery.urlmon.responsecodeerror"/>
+			<param name="httpvalue" type="int" description="am.webclient.hostdiscovery.urlmon.responsecodeerror"/>
+			<param name="checkfor" type="String" description="am.webclient.hostdiscovery.urlmon.htmlcontent" max-len="250"/>
+			<param name="errorcontent" type="String" description="am.webclient.hostdiscovery.urlmon.matcherror" max-len="250"/>
+			<param name="subgroupname" regex="am.displayname.common" max-len="515"/>
+			<param name="customHeaders" type="String" description="urlcreation.customheaders" max-len="48000"/>
+			<param name="payloadType" regex="am.urlmon.payLoadType" description="am.webclient.hostdiscovery.restapi.payload.type"/>
+			<param name="verifyerror" type="boolean" description="am.webclient.hostdiscovery.urlmon.errormessage"/>
+			<file name="clientCertFileBrowse" allowed-extensions="p12" content-type-name="p12" max-size="5000">
+				<filename regex="am.common.extended.filename" max-len="250"/>
+			</file>
+			<param name="regEx" regex="onlyon" description="am.webclient.filedir.regexp.text" max-len="20"/>
+			<param name="caseSensitive" regex="onlyon" description="am.webclient.hostdiscovery.urlmon.caseSensitive" max-len="20"/>
+			<param name="clientCertEnabled" type="boolean" description="am.webclient.url.client.certificate"/>
+			<param name="credType" regex="am.urlmon.credtype" description="am.webclient.hostdiscovery.urlmon.urlauthinfo"/>
+			<param name="credManagerVal" type="int" description="am.webclient.hostdiscovery.urlmon.urlauthinfo" />
+			<param name="samlconfig" type="long"/>
+			<param name="monitorname" regex="am.displayname.common" description="am.webclient.common.displayname.text" max-len="515"/>
+		 <!-- New Url Monitor -->
+		 <url csrf="true" method="post" operation-param="actionmethod" operation-value="createUrlMonitor" path="/updateUrl.do" throwallerrors="true" roles="am.role.ADMIN.EA.DE">
+		 </url>
+
+		 <!-- Edit Url Monitor and checkMonitorAvailability(To check monitor availability before adding or updating monitor) -->
+		 <url csrf="true" method="post" operation-param="actionmethod" operation-value="updateUrlMonitor" path="/updateUrl.do" throwallerrors="true" roles="am.role.ADMIN" privilege-identifier="urlid">
+			 <param name="urlid" type="long" />
+		 </url>
+		 <url csrf="true" method="post" operation-param="actionmethod" operation-value="checkMonitorAvailability" path="/updateUrl.do" throwallerrors="true" roles="am.role.ADMIN.EA" privilege-identifier="urlid">
+			 <param name="urlid" type="long" />
+		 </url>
+ 	</urls>
+	<!-- HTTP URL MONITOR ENDS -->
+		
+	<!--Create URL Sequence HAR import URLs start -->
+	  <urls>
+		 <param name="urlSeqDisplayName" type="String" max-len="515" />
+		 <param name="urlSeqPollingInterval" type="int" />
+		 <param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		 <param name="PRINTER_FRIENDLY" type="boolean"/>
+		 <!-- Import HAR File Request -->
+		 <url path="/createurlsequence.do" operation-param="actionmethod" operation-value="importHARFile" method="POST" csrf="true" authentication="required" roles="am.role.ADMIN.EA" throwallerrors="true">
+			 <file allowed-extensions="har"	content-type-name="recorder" max-size="60000" name="urlSeqHARFile">
+			 	<filename regex="^[a-zA-z0-9_.\-\(\)\[\] ]+$" max-len="150"/>
+			 </file>
+			 <param name="monitorType" regex="^RESTAPISequence$" />
+			 <param name="type" regex="^UrlMonitor$" />
+		 </url>
+		 
+		 <!-- Create Sequence Monitor Request -->
+		 <url path="/createurlsequence.do" operation-param="actionmethod" operation-value="createMonitorfromHAR" method="POST" csrf="true" authentication="required" roles="am.role.ADMIN.EA" throwallerrors="true">
+			 <param name="timeout" type="int"/>
+			 <param name="harData" type="JSONArray" template="am.urlseq.harData" array-size="0-26" max-len="500000" />
+			 <param name="harFileName" regex="^[a-zA-z0-9_.\-\(\) ]*.har\b$" max-len="150" />
+			 <param name="settingOptn" regex="onlyon" />
+			 <param name="payloadOptn" regex="onlyon" />
+			 <param name="basicAuthSettingOptn" regex="am.urlmon.credtype" />
+			 <param name="haid" type="long" max-occurrences="1000"/>
+			 <param name="groupname" regex="am.displayname.common"/>
+			 <param name="masSelectType" regex="am.enterprise.masselecttype"/>
+			 <param name="selectedServer" regex="am.enterprise.selectedserver"/>
+			 <param name="multipleServers" type="int" max-occurrences="50"/>
+		 </url>
+	 </urls>
+	 <!--Create URL Sequence HAR import URLs end -->
+
+	 <!-- REST API Monitor Update schema Rest API STARTS-->
+	 <urls roles="am.role.ADMIN" api="true" authentication="required" throwallerrors="true" privilege-identifier="resourceid">
+	 	<param name="apikey" regex="apikey" max-occurrences="1" min-occurrences="1" secret="true"/>
+	 	<param name="resourceid" regex="am.common.numberandcomma" max-len="10000"/>
+	 	<param name="responseType" regex="^(XML|JSON)$"/>
+	 	<param name="schema" type="String" max-len="1000000"/>
+	    <url path="/AppManager/xml/updateRestAPIMonitorSchema" method="POST"/>
+	    <url path="/AppManager/json/updateRestAPIMonitorSchema" method="POST"/>
+	 </urls>
+	 <!-- REST API Monitor Update schema Rest APIENDS -->
+	 
+   	 <!-- Self Help WMI Tool Starts -->
+	<urls path="/SelfHelpToolsAction.do" operation-param="method" roles="ADMIN" authentication="required" deny-del-admin="true">
+	 	<param-group name="am.additional.extra.params" />
+	 	<url operation-value="getWMITestResults" throwallerrors="true" method="POST" csrf="true"
+	 	roles="am.role.ADMIN.EA" authentication="required" >
+			<param name="resourceID" type="long"/>
+			<param name="hostName" regex="am.hostname" max-len="255" />
+			<param name="hostResourceType" regex="^(Windows|ScriptHost|ActiveDirectory|Exchange-server|OfficeSharePointServer|Microsoft MQ|Microsoft Dynamics CRM|MSDynamicsAX|BizTalkServer|LyncServer|NetworkPolicyServer|IIS-server)$" />
+			<param name="credentialsFrom" regex="am.urlmon.credtype"/>
+			<param name="credID" type="long" />
+			<param name="userName" regex="am.windows.username" />
+			<param name="passWord" type="String" max-len="10000" secret="true" />
+			<param name="kerberos" type="boolean"/>
+			<param name="type" regex="^(monitorType|nameSpace)$" />
+			<param name="isAllNamespace" type="boolean"/>
+			<param name="resourceType" regex="^(Windows|Exchange Server Mailbox Role|Exchange Server Edge Role|MS Office SharePoint|Active Directory|Microsoft Dynamics CRM / 365 \(On-Premise\)|Microsoft Dynamics AX|Microsoft BizTalk|Microsoft Skype for Business|Network Policy Server|Microsoft MQ \(MSMQ\)|IIS Server)$"/>
+			<param name="nameSpace" type="String" max-len="10000" />
+			<param name="query" type="String" max-len="10000" />
+			<param name="metrics[]" regex="am.common.paramNames" max-occurrences="100"/>
+			<param name="timeOut" type="int"/>
+		 </url>
+		 
+		 <url operation-value="generateReport" method="POST" csrf="true">
+			<param name="WMIToolResultIndex" type="int"/>
+		 </url>
+		 
+		 <url operation-value="sendToSupport" method="POST" csrf="true">
+			<param name="reportSubject" type="String" max-len="100"/>
+			<param name="reportMessage" type="String" max-len="1500"/>
+			<param name="WMIToolResultIndex" type="int"/>
+		 </url>
+		 
+		 <url operation-value="getWMITool" method="GET">
+			<param name="service" regex="am.action.fromadminlayout.service"/>
+			<param name="reqForAdminLayout" type="boolean"/>
+		 </url>
+	 </urls>
+ 	 <!-- Self Help WMI Tool Ends -->
+ 	<!-- RBM New Monitor Page URL -->
+   <!-- <urls throwallerrors="true">
+  		 <param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+  		 <param name="PRINTER_FRIENDLY" type="boolean"/>
+		 <param name="selectedscheme" regex="am.common.selectedscheme" />
+		 <param name="selectedSkin" regex="am.common.selectedSkin" />
+		 <param name="proxy" type="boolean"/>
+		ZVE-2021-0811
+		<url path="/credentialManager.do" method="post" csrf="true" operation-param="method" operation-value="deleteCredential" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="credentialID" type="long" />
+   		</url>
+   </urls> -->
+	<!-- ZVE-2021-0814 -->
+	<urls path="/Upload.do" deny-del-admin="true" >
+		<param-group name="am.additional.extra.params" />
+		<param name="operation" regex="^(executeMib)$" />
+		<param name="uploadDir" regex="am.fileupload.values" />
+		<param name="returnpath" regex="am.urlstartswith.slash.splchars"/>
+		<url method="post" csrf="true" authentication="required" roles="am.role.ADMIN.EA" >
+			<file content-type-name="recorder" max-size="51200" name="theFile" >
+				<filename type="String" max-len="100"/>
+			</file>
+		</url>
+		<url method="get" >
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+	</urls>
+   <urls>
+	    <url throwallerrors="true" path="/DiagAlertAction.do" method="post" csrf="true" operation-param="method" operation-value="clearDiagnosticsAlert,clearMultipleDiagnosticsAlerts" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+	    	<param-group name="am.additional.extra.params" />	    
+	    	<param-group name="am.selfmonact.extra.params" />
+	    </url>
+	    <url throwallerrors="true" path="/DiagAlertAction.do" method="post" csrf="true" operation-param="method" operation-value="annotateDiagnosticsAlert" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+	    	<param-group name="am.additional.extra.params" />	    
+	    	<param-group name="am.selfmonact.extra.params" />
+		   	<param name="ID" type="long" />
+		   	<param name="NOTE" type="String" max-len="100000" max-occurrences="1000" />
+		</url>
+	    <url throwallerrors="true" path="/DiagAlertAction.do" method="get" operation-param="method" operation-value="getAlertHistory" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+	    	<param-group name="am.additional.extra.params" />	    
+			<param-group name="am.selfmonact.extra.params" />
+	    	<param name="LIMIT" type="long" />
+	    	<param name="noOfRows" type="long" />
+	    	<param name="selectedPage" type="long" />
+	    </url>
+	    <url throwallerrors="true" path="/DiagAlertAction.do" method="get" operation-param="method" operation-value="showDiagnosticsAlerts" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+	    	<param-group name="am.additional.extra.params" />    
+			<param-group name="am.selfmonact.extra.params" />    		
+    		<param name="fromAlertTab" type="boolean" />
+	       	<param name="LIMIT" type="long" />
+  		    <param name="SHOW_ALL" type="boolean" />
+	    	<param name="noOfRows" type="long" />
+	    	<param name="selectedPage" type="long" />
+	    </url>
+	    <!-- <url path="/showReports.do" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE.REP" method="get,post" operation-param="actionMethod" 
+	    		operation-value="getReportIndex">
+	    	<extraparam type="String" max-len="100000" limit="1000" max-occurrences="1000" />
+	    </url> -->
+	   </urls>
+	   
+	   <urls operation-param="method" throwallerrors="true" method="post" csrf="true">
+	   		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+		    <url path="/showHistoryData.do" operation-value="insertDowntimeNote" roles="am.role.ADMIN.EA.OP.US.MA" privilege-identifier="resourceid" authentication="required" skip-bad-input-encoding="true">
+				<param name="downtime" type="long" />
+				<param name="reasonid" type="long" />
+				<param name="textValue" type="String" max-len="250" />
+				<param name="resourceid" type="long" />				
+		    </url>
+		    <url path="/adminAction.do" operation-value="saveReportLogo" authentication="required" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true" >
+	 			<file allowed-extensions="jpg,gif,png,jpeg" content-type-name="image" max-size="105" name="reportLogo" />
+	 		</url>
+	   </urls>
+    <!-- Mail Server Configuration by Balaji Boopathi -->
+	
+	<urls>
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+		<param name="admin" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="mailserverredirecturl" regex="am.common.urlstartwithslash" max-len="2083" />
+		<param name="redirectto" regex="am.common.urlstartwithslash" max-len="2083" />
+		<param name="global" type="boolean" />
+		<param name="haid" regex="am.common.longandnull" />
+		<param name="returnpath" type="String" max-len="10000" />
+		<url path="/adminAction.do" method="GET" operation-param="method"
+			operation-value="showMailServerConfiguration" deny-del-admin="true">
+			<param name="service" regex="am.mailserver.service.types" />
+			<param name="reqForAdminLayout" type="boolean" />
+			<param name="popup" type="boolean" />
+		</url>
+		<url path="/adminAction.do" method="POST" csrf="true"
+			operation-param="method" operation-value="mailServerConfiguration" roles="ADMIN,ENTERPRISEADMIN" authentication="required" skip-bad-input-encoding="true" deny-del-admin="true">
+			<param name="buttonType" regex="am.mailserver.button.types" />
+			<param name="primaryProtocol" regex="am.mailserver.protocol.types" />
+			<param name="primaryAuthType" regex="am.mailserver.authtype.types" />
+			<param name="smtpserver" regex="am.hostname" max-len="255" />
+			<param name="primaryUrl" regex="am.url.ext" />
+			<param name="smtpport" regex="am.port" />
+			<param name="emailAddress" type="String" max-len="250"/>
+			<param name="primaryOAuthProvider" type="long" />
+			<param name="SMTPServerAuth" regex="am.mailserver.serverauth.types" />
+			<param name="SMTPServerUserName" type="String" />
+			<param name="SMTPServerPassword" secret="true" type="String" max-len="150" />
+			<param name="prmTlsAuth" regex="am.mailserver.serverauth.types" />
+			<param name="prmSSLAuth" regex="am.mailserver.serverauth.types" />
+			<param name="seccheck" regex="am.mailserver.serverauth.types" />
+			<param name="secondaryProtocol" regex="am.mailserver.protocol.types" />
+			<param name="secondaryAuthType" regex="am.mailserver.authtype.types" />
+			<param name="smtpsecserver" regex="am.hostname" max-len="255" />
+			<param name="secondaryUrl" regex="am.url.ext" />
+			<param name="smtpsecport" regex="am.port" />
+			<param name="secemailAddress" type="String" max-len="250"/>
+			<param name="secondaryOAuthProvider" type="long" />
+			<param name="SMTPsecServerAuth" regex="am.mailserver.serverauth.types" />
+			<param name="SMTPsecServerUserName" type="String" />
+			<param name="SMTPsecServerPassword" secret="true" type="String" max-len="150" />
+			<param name="secTlsAuth" regex="am.mailserver.serverauth.types" />
+			<param name="secSSLAuth" regex="am.mailserver.serverauth.types" />
+			<param name="masMailServer" regex="am.mailserver.serverauth.types" />
+			<param name="actions" type="String" max-len="-1" />
+			<param name="checkMailForTicket" regex="^(showSdeskLogTicket4)$" />
+		</url>
+	</urls>
+	 <urls>
+		 	 <param name="from"  regex="am.oauth.from" max-len="30"/>
+		 	 <param name="action"  regex="am.webToken.action" max-len="20"/>
+			 <param name="PRINTER_FRIENDLY"  type="boolean" />
+			 <param name="TOKENID"  type="long" />
+			 <url path="/WebToken.do" method="POST" csrf="true" operation-param="method" operation-value="deleteWebToken" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.WebPrivilegeHandler:checkIfWebTokenIsEditable">
+				 <param name="TOKENID" regex="longandamp" max-len="1000" />
+	     </url>
+	 </urls>
+   <urls>
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url method="get" operation-param="method" operation-value="loadSAPB1adapters" path="/confActions.do" throwallerrors="true" authentication="required" roles="ADMIN,DEMO">
+			<param name="resourceid" type="long" />
+		</url>	
+	
+		<url csrf="true" method="post" operation-param="method" operation-value="saveadapters" path="/confActions.do" throwallerrors="true" authentication="required" roles="ADMIN">
+			<param name="resourceid" type="long" />
+			<param name="selectedadapters" regex="am.sapbusinessone.sldadapters" max-len="255" />
+		</url>	
+	</urls>
+		
+	 <!-- SSO MAS USER RESOURCE SYNC FROM AAM - START -->
+   	<urls>
+		<param name="apikey" regex="apikey" max-occurrences="1" min-occurrences="1" secret="true"/>
+		<param name="userid" type="long"/>
+		<param name="resourceIds" type="String" max-len="-1"/>
+	    <url path="/AppManager/xml/Users/resourceSync" method="post" status-on-sso="only_synch_req" ></url>
+	</urls>
+	<!-- SSO MAS USER RESOURCE SYNC FROM AAM - END -->
+	
+	<!-- CSRF handling for Integrations -->
+	<urls method="POST" csrf="true" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+		  <param name="PRINTER_FRIENDLY" type="boolean"/>
+		  <param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric"/>
+	      <url path="/extDeviceAction.do" operation-param="method" operation-value="APMExtProductConfiguration" deny-del-admin="true" >
+	       <param name="productName" regex="^(Site24x7|OpStor|OpManager|Facilities)$"/>
+	       <param name="productId" type="int"/>
+	       <param name="fromEditPage" regex="^(?i)(true|false|pollInterval)$"/>
+	       <param name="OAuthAuthorization" type="boolean"/>
+	       <param name="protocol" regex="^(http|https)$"/>
+	       <param name="host" regex="am.hostname"/>
+	       <param name="port" type="int"/>
+	       <param name="username" regex="am.windows.username"/>
+	       <param name="password" type="String" max-len="-1" secret="true"/>
+	       <param name="gettingstarted" regex="^(on)$"/>
+	       <param name="authToken" type="String" max-len="-1" secret="true"/>
+	       <param name="apikey" regex="cleartextpattern" secret="true"/>
+	       <param name="email" type="String" max-len="-1"/><!-- input type with name email is used to send display name for Site24x7 Integration, hence couldn't use email regex here -->
+	       <param name="pollInter" type="int"/>
+	       <param name="gettingsync" type="boolean"/>
+	       <param name="addDeviceDefault" regex="^(on)$"/>
+	       <param name="timeout" type="int"/>
+	       <param name="OAuthProvider" type="int"/>
+	       <param name="importall" regex="^(on)$"/>
+	       <param name="adminMailConfigured" type="boolean"/>
+		   <param name="mailSettingsEnabled" type="boolean"/>
+		   <param name="mailServerConfigured" type="boolean"/>
+		   <param name="mailNotification" regex="am.helpdesk.mail.notification.value"/>
+		   <param name="priority" type="String"/>
+		   <param name="appendMsg" type="String" max-len="1000"/>
+		   <param name="appendMessageCheckBox" regex="am.mailserver.serverauth.types" />
+		   <param name="repeatMailUntilUp" regex="am.mailserver.serverauth.types"/>
+		   <param name="repeatInterval" type="int"/>
+		   <param name="sendmail" type="long"/>
+	      </url>
+		  <url path="/extDeviceAction.do" operation-param="method" operation-value="auditWarningMessagePopUp">
+		  <param name="ProductName" regex="^(OPMConnector|SDPCloud|SdpMsp)$"/>
+		  </url>
+	</urls>
+	
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url path="/userSession.do" operation-param="method" operation-value="getVersionDetails" roles="am.role.ADMIN.EA.OP.US.DE.REP.MA" method="get" authentication="required"/>
+	</urls>
+
+	<!-- CSRF handling for Webservice Monitor -->
+	<urls path="/wsm.do" method="POST" operation-param="method" csrf="true" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid" custom-scope-validator="com.adventnet.appmanager.utils.client.WebPrivilegeHandler:checkIfWebServiceOperationIsOwned">
+		
+		<url operation-value="deleteoperations">
+			<param name="enable" regex="am.common.TFNull"/>
+			<param name="resourceid" type="long"/>
+			<param name="instance" type="String" max-occurrences="1000"/>
+		</url>
+	</urls>		
+	<!-- adminAction security starts -->
+	<urls csrf="true" operation-param="method" path="/adminAction.do" throwallerrors="true" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<url method="post" operation-value="saveDB2GlobalSettingsConfiguration" roles="am.role.ADMIN.EA">
+			<param name="db2AvailabilityCheck" type="boolean" />
+		</url>
+		<url method="post" operation-value="saveMSSQLGlobalSettingsConfiguration" roles="am.role.ADMIN.EA">
+			<param name="dbAvailabilityCheck" type="boolean" />
+		</url>	
+	</urls>
+	<!-- adminAction security ends -->
+	<urls>
+	    <param-group name="am.additional.extra.params" />
+	    <url path="/adminAction.do" method="post" roles="am.role.ADMIN.EA" authentication="required" operation-param="method" operation-value="TestProxyServer" csrf="true">
+			<param name="bypassproxy" regex="onlyon" />
+			<param name="dontProxyList" type="String" max-len="20000"/>
+			<param name="proxyHost" regex="am.hostname"/>
+			<param name="proxyPassword" type="String" secret="true" max-len="515"/>
+			<param name="proxyPort" regex="am.port" />
+			<param name="proxyUserName" type="String" max-len="515"/>
+			<param name="testurl" type="String" max-len="10000"/>
+			<param name="useproxy" regex="am.mailserver.serverauth.types" />
+		</url>
+	</urls>
+	
+	<!-- Script Monitor URL configuration starts -->
+	<urls path="/updateScript.do" operation-param="method">
+		<param-group name="am.additional.extra.params" />
+		<url method="GET" roles="am.role.ADMIN" authentication="required" operation-value="editScript" privilege-identifier="resourceid" >
+			<param name="baseid" 		type="long"/>
+			<param name="basetype" 		regex="^(Script Monitor)$"/>
+			<param name="customType" 	type="boolean"/>
+			<param name="resourceid" 	type="long"/>
+			<param name="resourcename" 	type="String" max-len="10000"/>
+			<param name="mtype" 		regex="am.custom.monitortype.type"/>
+			<param name="type" 			regex="am.custom.monitortype.type"/>
+			<param name="haid"          regex="am.common.longandnull"/>
+		</url>
+		<url method="POST" roles="am.role.ADMIN" authentication="required" operation-value="enableReports,disableReports" csrf="true" privilege-identifier="resourceid" >
+			<param name="checkbox" 			type="long" max-occurrences="100"/>
+			<param name="resourceid" 		type="long"/>
+			<param name="headercheckbox" 	regex="onlyon"/>
+		</url>
+		<url method="GET" roles="am.role.ADMIN.EA" authentication="required" operation-value="getMonitoringModeForSelectedHost" >
+			<param name="host" 			type="long"/>
+		</url>
+		<url method="GET" roles="am.role.ADMIN.EA" authentication="required" operation-value="isWindowsHost" >
+			<param name="hostId" 		type="long"/>
+		</url>
+		<url method="GET" roles="am.role.ADMIN" authentication="required" operation-value="getScriptHostDetails" privilege-identifier="resourceid" >
+			<param name="mapperid" 		type="long"/>
+			<param name="resourceid" 	type="long"/>
+			<param name="mtype" 		regex="am.custom.monitortype.type"/>
+		</url>
+		<url method="POST" roles="am.role.ADMIN.EA" authentication="required" operation-value="updateHostDetails" csrf="true" privilege-identifier="resourceid" >
+			<param name="avoidFilter" 		type="boolean" />
+			<param name="description" 		type="String" max-len="2000" />
+			<param name="host" 				regex="am.hostname" max-len="255" />
+			<param name="resolveHost" 		type="boolean" />
+			<param name="isCredManager" 	type="boolean" />
+			<param name="credentialID" 		type="int" />
+			<param name="mapperid" 			type="long" />
+			<param name="monitoringmode" 	regex="^(TELNET|SSH|WMI|Powershell)$" />
+			<param name="passphrase" 		type="String" max-len="10000" secret="true" />
+			<param name="password" 			type="String" max-len="10000" secret="true" />
+			<param name="port" 				regex="am.port" />
+			<param name="prompt" 			type="String" />
+			<param name="resourceid" 		regex="am.common.longandnull" />
+			<param name="username" 			regex="am.windows.username" />
+			<param name="sshkey" 			regex="onlyon" />
+			<param name="org.apache.struts.taglib.html.TOKEN" 	regex="am.alphanumeric" max-occurrences="2"/>
+		</url>
+		<url method="POST" roles="am.role.ADMIN" authentication="required" operation-value="deleteTableByUser" csrf="true" privilege-identifier="resourceid" >
+			<param name="resourceid" 		type="long"/>
+			<param name="tableid" 			type="int"/>
+		</url>
+	</urls>
+	<urls path="/showresource.do" roles="am.role.ADMIN" authentication="required" operation-param="method">
+		<param-group name="am.additional.extra.params" />
+		<url method="POST" operation-value="associateScript,removeScript" csrf="true" privilege-identifier="hostid" >
+			<param name="selectedresource" 						type="long" max-occurrences="1000"/>
+			<param name="monitors" 								type="long" max-occurrences="1000"/>
+			<param name="hostid" 								type="long"/>
+			<param name="org.apache.struts.taglib.html.TOKEN" 	regex="am.alphanumeric" max-occurrences="2"/>
+		</url>
+	</urls>
+	<!-- Script Monitor URL configuration ends -->
+	
+	<!-- URL Debug tool -->
+	<urls roles="am.role.ADMIN" authentication="required" deny-del-admin="true">
+		<param-group name="am.additional.extra.params" />
+			
+		<url path="/SelfHelpToolsAction.do" method="GET" operation-param="method" operation-value="getURLDebug">
+			<param name="service" regex="am.certificate.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+		<url path="/SelfHelpToolsAction.do" method="POST" operation-param="method" operation-value="getURLResult" csrf="true">
+			<param name="urladdress" regex="am.common.url.schemaandlength.validator" max-len="10000"/>
+			<param name="isproxy" regex="onlyon"/>
+			<param name="timeout" type="int"/>
+			<param name="GETPOST" regex="am.restapi.method"/>
+			<param name="payloadtype" regex="am.urlmon.payLoadType"/>
+			<param name="reqparam" type="String" max-len="40000"/>
+			<param name="credmanager" type="int" range="0-5"/>
+			<param name="username" type="String" max-len="250"/>
+			<param name="password" type="String" max-len="250" secret="true"/>
+			<param name="credname" type="long"/>
+			<param name="oauthcredname" type="long"/>
+			<param name="webtokencredname" type="long"/>
+			<param name="header" type="String" max-len="48000" max-occurrences="20"/>
+			<param name="value" type="String" max-len="48000" max-occurrences="20"/>
+			<param name="sslversion" regex="am.urlmon.sslVersion"/>
+			<param name="iscertificate" regex="onlyon"/>
+			<param name="certpass" type="String" max-len="250"/>
+			<param name="Monitor_name" type="String" max-len="515"/>
+			<param name="Monitortype" regex="am.alphanumeric.exchange"/>
+			<file name="ClientCertFile" allowed-extensions="p12" content-type-name="p12" max-size="5000">
+				<filename regex="am.common.extended.filename" max-len="250"/>
+			</file>
+			<param name="urlDebugCertFileName" type="String" max-len="250"/>
+			<param name="samlauth" type="long"/>
+		</url>
+
+		<url path="/SelfHelpToolsAction.do" method="POST" operation-param="method" operation-value="getFormData" csrf="true">
+			<param name="monitorName" type="String" max-len="550"/>
+			<param name="monitorType" regex="am.alphanumeric.exchange"/>
+		</url>
+
+		<url path="/SelfHelpToolsAction.do" method="POST" operation-param="method" operation-value="getMonitorUrlResult" csrf="true" skip-bad-input-encoding="true">
+			<param name="UrlAddress" regex="am.common.url.schemaandlength.validator" max-len="10000"/>
+			<param name="Host" type="String" max-len="250"/>
+			<param name="Port" regex="am.port"/>
+			<param name="ssl" regex="onlyon"/>
+			<param name="Username" type="String" max-len="250"/>
+			<param name="Password" type="String" max-len="250" secret="true"/>
+			<param name="useproxy" regex="onlyon"/>
+			<param name="API" type="String" max-len="5000" max-occurrences="15"/>
+			<param name="Monitor_name" type="String" max-len="515"/>
+			<param name="Monitortype" regex="am.alphanumeric.exchange"/>
+			<param name="Time_out" type="int"/>
+			<param name="credential" regex="am.common.ZeroOne"/>
+			<param name="credname" type="long"/>
+		</url>
+
+		<url path="/SelfHelpToolsAction.do" method="POST" operation-param="method" operation-value="urlDebugSendToSupport" csrf="true">
+			<param name="subject" type="String" max-len="250"/>
+			<param name="description" type="String" max-len="1500"/>
+		</url>
+
+		<url path="/SelfHelpToolsAction.do" method="POST" operation-param="method" operation-value="generateUrlDebugPdf" csrf="true">
+		</url>
+		
+		<url path="/SelfHelpToolsAction.do" method="GET" operation-param="method" operation-value="getProxyStatus">
+			<param name="_" type="long"/>
+		</url>
+		
+		<url path="/SelfHelpToolsAction.do" method="POST" operation-param="method" operation-value="acknowledgeSensitiveData" csrf="true">
+		</url>
+	</urls>
+</security>

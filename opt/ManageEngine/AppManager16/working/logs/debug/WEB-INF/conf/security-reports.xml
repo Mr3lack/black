@@ -1,0 +1,1165 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+
+<!-- CSRF Security handling for Reports-->
+
+<urls path="/adminAction.do" method="get" operation-param="method" roles="ADMIN,ENTERPRISEADMIN,DEMO" authentication="required" throwallerrors="true" >
+    <param-group name="am.additional.extra.params" />
+    <url operation-value="showDataCleanUp">
+        <param name="reqForAdminLayout" type="boolean" />
+        <param name="service" regex="am.action.fromadminlayout.service" />
+        <param name="tabtoLoad" type="String" max-len="50" />
+        <param name="tabName" regex="^(exportprotectsettings|null|)$"  />
+    </url>
+</urls>
+<urls path="/customReports.do" method="get" operation-param="method" roles="am.role.ADMIN.EA.DE" throwallerrors="true" authentication="required" >
+    <param-group name="am.additional.extra.params" />
+    <param name="service" regex="am.action.fromadminlayout.service" />
+	<param name="reqForAdminLayout" type="boolean" />
+    <url operation-value="sendAttributeDetails">
+        <param name="todaytime" type="long"/>
+        <param name="resourcetype" regex="am.monitor.type"/>
+    </url>
+    <url operation-value="showCustomReports" >
+        <param name="selectedType" regex="am.monitor.type" />
+        <param name="toshow" regex="am.report.customreport.toshow" />
+        <param name="popup" regex="am.report.boolean.empty"/>
+        <param name="resourceid" regex="am.common.longandnull"/>
+        <param name="attributeid" regex="am.common.longandnull"/>
+        <param name="todaytime" type="long" />
+        <param name="childType" regex="am.monitor.type"/>
+    </url>
+</urls>
+
+<urls path="/customReports.do" method="post" csrf="true" operation-param="method" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true" throwallerrors="true" authentication="required" >
+    <param-group name="am.additional.extra.params" />
+    <url operation-value="enableCustomReports" >
+        <param name="selectall" regex="am.report.on.off.empty"/>
+        <param name="attributetypes" regex="am.reports.numberCommaNull" max-occurrences="2000" />
+        <param name="resTypeValue" regex="am.monitor.type"  />
+        <param name="resourceid" regex="am.common.longandnull"  />
+        <param name="attributeid" regex="am.common.longandnull"  />
+        <param name="popup" regex="yesnotf"  />
+        <param name="selectedType" regex="am.monitor.type"  />
+    </url>
+    <url operation-value="saveSummaryMail" >
+        <param name="status" regex="am.trap.status"  />
+        <param name="maxDowntimeMonitors" type="long"  />
+        <param name="downtimePeriod" type="long"  />
+        <param name="dailyhour" type="long"   />
+        <param name="dailyminute" type="long"   />
+        <param name="sendmail" type="String" max-len="250" />
+        <param name="resourceid" regex="am.common.longandnull"  />
+        <param name="attributeid" regex="am.common.longandnull"  />
+        <param name="popup" regex="yesnotf" />
+        <param name="priority" type="String" max-len="50"/>
+    </url>
+</urls>
+
+<!-- Forecast report -->
+<urls path="/forecastReport.do" method="get" operation-param="actionMethod" roles="am.role.ADMIN.EA.OP.US.DE.REP" throwallerrors="true" authentication="required" >
+    <param-group name="am.additional.extra.params" />
+    <url operation-value="getForecastAttribute">
+        <param name="resourcegroup" regex="am.report.forecast.resourcegroup"/>
+    </url>
+    <url operation-value="generateForecastReport">
+        <param name="attributeid" regex="am.common.numberandcomma"/>
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="numberOfRows" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="resourceid" regex="am.report.number.empty.null"/>
+        <param name="individualReport" regex="am.report.boolean.empty"/>
+        <param name="growthtrend"  regex="am.report.number.empty.null" />
+        <param name="scheduleforecasttype" regex="am.report.forecastType"/>
+        <param name="customFutureDate" regex="am.report.timestamp"/>
+        <param name="reporttype" regex="am.schedule.report.file"/>
+        <param name="haid" regex="am.common.numberandcomma"/>
+        <param name="mgreport" regex="am.report.boolean.empty"/>
+        <param name="forecasttype" regex="am.report.on.off.empty"/>
+        <param name="ml_check" regex="am.report.on.off.empty"/>
+        <param name="startDate" regex="am.report.timestamp"/>
+        <param name="endDate" regex="am.report.timestamp"/>
+        <param name="ml_status" regex="am.report.on.off.empty"/>
+        <param name="isschedule" regex="yesnotf"/>
+    </url>
+</urls>
+
+<!-- Schedule reports configuration -->
+<urls path="/scheduleReports.do" method="post" csrf="true" operation-param="method" roles="am.role.ADMIN.EA.DE" throwallerrors="true" authentication="required" >
+    <param-group name="am.additional.extra.params" />
+   <url operation-value="addScheduleDetails" roles="am.role.ADMIN.EA" skip-bad-input-encoding="true">
+        <param name="taskName" type="String" max-len="50"/>
+        <param name="taskDescription" type="String" max-len="500"/>
+        <param name="taskStatus" regex="am.trap.status" />
+        <param name="typeofreport" regex="am.report.schedule.report.type"/>
+        <param name="typeofperformance" regex="am.common.onlystring" />
+        <param name="forecasttype" regex="am.report.forecastType"/>
+        <param name="typeofforecastattribute" regex="am.report.schedule.typeofattriute" />
+        <param name="typeofattributeperiod" type="long"/>
+        <param name="typeofjobsperiod" type="long"/>
+        <param name="typeofperiod" type="long"/>
+        <param name="typeofServUtilperiod" type="long" />
+        <param name="typeofperformanceperiod" type="long" />
+        <param name="forecastTypeofperiod" type="long" />
+        <param name="typeofoutageperiod" regex="am.report.outageperiod" />
+        <param name="typeoftrendperiod" regex="am.report.outageperiod" />
+        <param name="typeofattribute" regex="am.report.schedule.typeofattriute"  />
+        <param name="typeofPolledAttribute" regex="am.report.schedule.typeofattriute"  />
+        <param name="businessPeriod" regex="am.report.business.period" />
+        <param name="forecastTrend" type="long" />
+        <param name="slatype" regex="am.common.onlystring"/>
+        <param name="reportmonitor" regex="am.schedule.report.typeofreport"/>
+        <param name="downtimePeriod" type="long"/>
+        <param name="serverType" regex="am.report.capacity.type" />
+        <param name="maxDowntimeMonitors" type="long" />
+        <param name="queryMonitor" regex="-1andnumeric"/>
+        <param name="mssqlMonitor" regex="-1andnumeric"/>
+        <param name="selectedEumInSchedule" type="String"  max-len="150" />
+        <param name="trapName" type="String"  max-len="5000" />
+        <param name="sqlDBPerf" type="String"  />
+        <param name="sqlServerPerf" type="String"  />
+        <param name="resourcestypes"  type="String" max-occurrences="2000"/>
+        <param name="taskMethod" regex="am.report.schedule.reoccurrence.type" />
+        <param name="scheulehour" type="long" max-occurrences="20"/>
+        <param name="dailyhour" type="long"  max-occurrences="20"/>
+        <param name="dailyminute" type="long"  max-occurrences="20"/>
+        <param name="selectday" type="long"  max-occurrences="20"/>
+        <param name="actionsEnabled" regex="am.report.schedule.actiontype"/>
+        <param name="reportDelivery" regex="am.schedule.report.file"/>
+        <param name="HTMLEmbedded" regex="am.schedule.report.file"/>
+        <param name="sendmail" type="long"/>
+        <param name="priority" type="String"/>
+        <param name="capacityAttribute" type="String"  max-len="150"/>
+        <param name="capacityVMAttribute" type="String"  max-len="150"/>
+        <param name="capacityReportType"  type="String"  max-len="30"/>
+        <param name="capacityIsVMAdded" regex="am.boolean"/>
+        <param name="capacityVirtualMachine" type="String" max-len="200"/>
+        <param name="multipleTime" regex="am.report.schedule.time" />
+        <param name="customFieldID"  type="String"  max-len="25"/>
+        <param name="customFieldValueID" type="String"  max-len="50" />
+        <param name="filterScheduleReport" type="String" max-len="50"/>
+        <param name="selectFieldVal" type="String" max-len="50"/>
+        <param name="selectedMSSQLResource" regex="am.report.number.empty.null"/>
+        <param name="sqlDBforPerformance" type="String" max-len="50" />
+        <param name="capacityMonitorGroup" type="String" max-len="50"/>
+        <param name="capacityServer" type="String" max-len="250" />
+        <param name="capacityRule" regex="am.report.negativeOrPositiveNumber" />
+        <param name="capacityVMRule" regex="am.report.negativeOrPositiveNumber" />
+        <param name="capacityNoMonitors" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="scheduleReportResCombo2" type="String" max-occurrences="2000"/>
+        <param name="searchByName" type="String" />
+        <param name="searchBydashboardName" type="String"/>
+        <param name="searchByJobName" type="String"/>
+        <param name="days" regex="am.weekdays.list" max-occurrences="10"/>
+        <param name="months" regex="am.report.schedule.months.list" max-occurrences="15"/>
+        <param name="mode" regex="am.discovery.stringAll"/>
+        <param name="showConsolidated" regex="am.report.on.off.empty"/>
+        <param name="scheduleReportDashboardCombo1" regex="am.common.longandnull" max-occurrences="2000"/>
+        <param name="scheduleReportDashboardCombo2" regex="am.common.longandnull" max-occurrences="2000"/>
+        <param name="scheduleReportResCombo1" regex="am.common.longandnull" max-occurrences="2000"/>
+        <param name="scheduleAdvancedReportSelectedCombo" regex="am.common.longandnull" max-occurrences="3"/>
+        <param name="dbMonitors" regex="am.monitor.type" max-occurrences="100"/>
+        <param name="selectallbox" regex="yesnotf"/>
+        <param name="nogroupbox" regex="yesnotf" />
+        <param name="nothresholdbox" regex="yesnotf" />
+    </url>
+    <url operation-value="updateScheduleDetails" roles="am.role.ADMIN.EA" skip-bad-input-encoding="true" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+        <param name="sid" regex="am.report.schedule.sid"/>
+        <param name="edit" regex="am.report.boolean.empty"/>
+        <param name="taskName" type="String" max-len="250"/>
+        <param name="taskDescription" type="String" max-len="500"/>
+        <param name="taskStatus" regex="am.trap.status" />
+        <param name="typeofreport" regex="am.report.schedule.report.type"/>
+        <param name="typeofperformance" regex="am.common.onlystring" />
+        <param name="forecasttype" regex="am.report.forecastType"/>
+        <param name="typeofforecastattribute" regex="am.report.schedule.typeofattriute"/>
+        <param name="typeofattributeperiod" type="long"/>
+        <param name="typeofjobsperiod" type="long"/>
+        <param name="typeofperiod" type="long"/>
+        <param name="typeofServUtilperiod" type="long" />
+        <param name="typeofperformanceperiod" type="long" />
+        <param name="forecastTypeofperiod" type="long" />
+        <param name="typeofoutageperiod" regex="am.report.outageperiod" />
+        <param name="typeoftrendperiod" regex="am.report.outageperiod" />
+        <param name="typeofattribute" regex="am.report.schedule.typeofattriute"   />
+        <param name="typeofPolledAttribute" regex="am.report.schedule.typeofattriute" />
+        <param name="businessPeriod" regex="am.report.business.period" />
+        <param name="forecastTrend" type="long" />
+        <param name="slatype" regex="am.common.onlystring"/>
+        <param name="reportmonitor" regex="am.schedule.report.typeofreport"/>
+        <param name="downtimePeriod" type="long"/>
+        <param name="serverType" regex="am.report.capacity.type" />
+        <param name="maxDowntimeMonitors" type="long" />
+        <param name="queryMonitor" regex="-1andnumeric"/>
+        <param name="mssqlMonitor" regex="-1andnumeric"/>
+        <param name="selectedEumInSchedule" type="String"  max-len="150" />
+        <param name="trapName" type="String"  max-len="5000" />
+        <param name="sqlDBPerf" type="String"  />
+        <param name="sqlServerPerf" type="String"  />
+        <param name="resourcestypes"  type="String" max-occurrences="2000"/>
+        <param name="taskMethod" regex="am.report.schedule.reoccurrence.type" />
+        <param name="scheulehour" type="long" max-occurrences="20"/>
+        <param name="dailyhour" type="long"  max-occurrences="20"/>
+        <param name="dailyminute" type="long"  max-occurrences="20"/>
+        <param name="selectday" type="long"  max-occurrences="20"/>
+        <param name="actionsEnabled" regex="am.report.schedule.actiontype"/>
+        <param name="reportDelivery" regex="am.schedule.report.file"/>
+        <param name="HTMLEmbedded" regex="am.schedule.report.file"/>
+        <param name="sendmail" type="long"/>
+        <param name="priority" type="String"/>
+        <param name="capacityAttribute" type="String"  max-len="150"/>
+        <param name="capacityVMAttribute" type="String"  max-len="150"/>
+        <param name="capacityIsVMAdded" regex="am.boolean"/>
+        <param name="capacityVirtualMachine" type="String" max-len="200"/>
+        <param name="capacityReportType"  type="String"  max-len="30"/>
+        <param name="multipleTime" regex="am.report.schedule.time"/>
+        <param name="customFieldID"  type="String"  max-len="25"/>
+        <param name="customFieldValueID" type="String"  max-len="50" />
+        <param name="filterScheduleReport" type="String" max-len="50"/>
+        <param name="selectFieldVal" type="String" max-len="50"/>
+        <param name="selectedMSSQLResource" regex="am.report.number.empty.null"/>
+        <param name="sqlDBforPerformance" type="String" max-len="50" />
+        <param name="capacityMonitorGroup" type="String" max-len="50"/>
+        <param name="capacityServer" type="String" max-len="250" />
+        <param name="capacityRule" regex="am.report.negativeOrPositiveNumber" />
+        <param name="capacityVMRule" regex="am.report.negativeOrPositiveNumber" />
+        <param name="capacityNoMonitors" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="scheduleReportResCombo2" type="String" max-occurrences="2000"/>
+        <param name="searchByName" type="String" />
+        <param name="searchBydashboardName" type="String"/>
+        <param name="searchByJobName" type="String"/>
+        <param name="days" regex="am.weekdays.list" max-occurrences="10"/>
+        <param name="months" regex="am.report.schedule.months.list" max-occurrences="15"/>
+        <param name="mode" regex="am.discovery.stringAll"/>
+        <param name="showConsolidated" regex="am.report.on.off.empty"/>
+        <param name="scheduleReportDashboardCombo1" regex="am.common.longandnull" max-occurrences="1000"/>
+        <param name="scheduleReportDashboardCombo2" regex="am.common.longandnull" max-occurrences="1000"/>
+        <param name="scheduleReportResCombo1" regex="am.common.longandnull" max-occurrences="1000"/>
+        <param name="scheduleAdvancedReportSelectedCombo" regex="am.common.longandnull" max-occurrences="3"/>
+        <param name="dbMonitors" regex="am.monitor.type" max-occurrences="100"/>
+        <param name="selectallbox" regex="yesnotf"/>
+        <param name="nogroupbox" regex="yesnotf" />
+        <param name="nothresholdbox" regex="yesnotf" />
+    </url>
+    <url operation-value="sendActionDetails" roles="am.role.ADMIN.EA">
+        <param name="emailid" type="String" max-len="250" />
+        <param name="emailname" type="String" max-len="250" />
+    </url>
+    <url operation-value="removeScheduler" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+        <param name="scheduleids" type="long" max-occurrences="1000" />
+        <param name="headercheckbox" regex="am.report.on.off.empty"/>
+    </url>
+    <url operation-value="testAction" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+        <param name="sid" type="long" />
+    </url>
+    <url operation-value="sendEnableDetails" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+        <param name="id" type="long" />
+    </url>
+</urls>
+<urls path="/scheduleReports.do" method="get" operation-param="method" roles="ADMIN,ENTERPRISEADMIN,DEMO" authentication="required" throwallerrors="true" >
+    <param-group name="am.additional.extra.params" />
+    <param name="service" regex="am.action.fromadminlayout.service" />
+    <param name="reqForAdminLayout" type="boolean" />
+    <url operation-value="editScheduler" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+        <param name="sid" type="long" />
+    </url>
+    <url operation-value="getDBServersForResID">
+        <param name="resourceID" regex="am.common.longandnull" />
+        <param name="_" type="long"/>
+    </url>
+    <url operation-value="getSQLServersForUser">
+        <param name="_" type="long"/>
+    </url>
+    <url operation-value="newScheduleReports">
+    </url>
+    <url operation-value="showScheduleReports">
+    </url>
+    <url operation-value="loadCapacityPlaningRules">
+        <param name="reportName" regex="am.alphanumeric"/>
+        <param name="vmReportName" regex="am.alphanumeric"/>
+        <param name="sid" type="long" />
+    </url>
+     <url operation-value="sendAjaxDetails">
+        <param name="sid" regex="am.report.schedule.sid"/>
+        <param name="edit" regex="am.report.schedule.edit"/>
+        <param name="report" regex="am.report.schedule.report.type" />
+        <param name="resource" type="String" max-len="250" />
+        <param name="attribute" type="String" max-len="300"/>
+        <param name="resourcetypes" type="String" max-len="5000" />
+        <param name="customAttribute" type="String" max-len="50"/>
+        <param name="monitorresid" regex="am.report.number.empty.null" />
+        <param name="todaytime"  regex="am.common.longandnull"/>
+        <param name="customFieldValue" type="String" max-len="50"/>
+        <param name="customfield" regex="yesnotf"/>
+    </url>
+    <url operation-value="checkScheduleName">
+        <param name="schedulename" type="String" />
+        <param name="edit" regex="am.common.TFNull"/>
+    </url>
+</urls>
+
+<urls path="/showConfigurationData.do" method="post" operation-param="method" roles="am.role.ADMIN.EA.OP.US.DE" throwallerrors="true" authentication="required" api="true" systemadmin_enterprise="true" >
+    <param-group name="am.additional.extra.params" />
+    <url operation-value="saveNote" >
+        <param name="resourceid" type="long"/>
+        <param name="downtime" type="long"/>
+        <param name="reasonid" type="long" />
+        <param name="textValue" type="String" max-len="500"/>
+        <param name="tblname" regex="am.report.tablename.db" />
+    </url>
+
+</urls>
+
+<urls path="/showConfigurationData.do" method="get" operation-param="method" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required" throwallerrors="true" >
+    <param-group name="am.additional.extra.params" />
+    <url operation-value="cancelNote">
+        <param name="tblname" regex="am.report.tablename.db"/>
+        <param name="downtime" type="long" />
+        <param name="reasonid" type="long" />
+        <param name="textValue" type="String" max-len="500"/>
+        <param name="resourceid" type="long" />
+        <param name="date" regex="am.report.timestamp"/>
+    </url>
+     <url operation-value="getConfigurationData">
+       <param name="resourceid" type="long"/> 
+       <param name="attributeid" type="long"/>
+       <param name="period" regex="am.report.negativeOrPositiveNumber" />
+       <param name="sid" type="String" max-len="200"/>
+       <param name="tblname" regex="am.report.tablename.db"/>
+       <param name="reporttype" regex="am.schedule.report.file" />
+       <param name="childid" regex="am.common.longandnull" />
+       <param name="resourcename" type="String" max-len="2000"/>
+       <param name="frompop" regex="am.common.TFNull"/>
+       <param name="tabsel" regex="am.common.longandnull"/>
+       <param name="startDate" regex="am.report.timestamp"/>
+       <param name="endDate" regex="am.report.timestamp"/>
+       <param name="todaytime" regex="am.common.longandnull"/>
+       <param name="restype" type="String" />
+       <param name="businessPeriod" regex="am.report.business.period" />
+       <param name="altattributeid" regex="yesnotf" />
+       <param name="groupid" type="String"/>
+       <param name="pdfresid" type="String"/>
+       <param name="selectedattrid" type="String" max-len="1000"/>
+       <param name="mode"  regex="am.report.server.monitoring.mode"/>
+       <param name="customstarttime" regex="am.report.timestamp" />
+       <param name="customendtime" regex="am.report.timestamp" />
+       <param name="show" regex="am.displayname.common"/>
+	   <param name="childType" regex="am.monitor.type"/>
+    </url> 
+    <url operation-value="getGlobalViewData">
+        <param name="tblname" regex="am.report.tablename.db"/>
+        <param name="reporttype" regex="am.schedule.report.file" />
+        <param name="altattributeid" regex="yesnotf" />
+        <param name="resourceid" type="long"/>
+        <param name="childid" regex="am.common.longandnull" />
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="attributeid" regex="am.common.longandnull" />
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="frompop" regex="am.common.TFNull"/>
+        <param name="tabsel" regex="am.common.longandnull"/>
+        <param name="startDate" regex="am.report.timestamp"/>
+        <param name="endDate" regex="am.report.timestamp"/>
+        <param name="todaytime" regex="am.common.longandnull"/>
+        <param name="restype" type="String" />
+        <param name="businessPeriod" regex="am.report.business.period" />
+        <param name="groupid" type="String"/>
+        <param name="pdfresid" type="String"/>
+        <param name="selectedattrid" type="String" max-len="1000"/>
+    </url>
+</urls>
+
+<!--History Data action-->
+<urls path="/showHistoryData.do" method="post" csrf="true" operation-param="method" roles="ADMIN,ENTERPRISEADMIN" throwallerrors="true" authentication="required" >
+    <param-group name="am.additional.extra.params" />
+    <url operation-value="deleteDowntimeData">
+        <param name="resourceid" type="long"/>
+        <param name="typeid" type="long"/>
+        <param name="reasonid" regex="-1andnumeric"/>   
+        <param name="downtime" type="long"/>
+        <param name="uptime" type="long"/>
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="haid" regex="am.common.longandnull"/>
+        <param name="redirectto" type="String" max-len="10000" />
+    </url>
+</urls>
+
+<urls path="/showHistoryData.do" method="get" operation-param="method" roles="am.role.ADMIN.EA.OP.US.DE.MA" authentication="required" throwallerrors="true" >
+    <param-group name="am.additional.extra.params" />
+    <url operation-value="getData" roles="am.role.ADMIN.EA.OP.US.DE" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isResourceIDOwnedByUser" >
+         <param name="resourceid" type="long"/>
+        <param name="attributeid" type="long" />
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="pollPeriod" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="frompop" regex="yesnotf"/>
+        <param name="businessPeriod" regex="am.report.business.period" max-occurrences="2"/>
+        <param name="fromDropdown" regex="yesnotf"/>
+        <param name="startDate" regex="am.report.timestamp"/>
+        <param name="endDate" regex="am.report.timestamp"/>
+        <param name="confStartTime" regex="am.report.timestamp"/>
+        <param name="confEndTime" regex="am.report.timestamp" />
+        <param name="sid" type="String"/>
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="childid" regex="am.common.longandnull"/>
+        <param name="reporttype" regex="am.schedule.report.file" />
+        <param name="todaytime" type="long"/>
+        <param name="tabsel" type="long"/>
+        <param name="customstarttime" regex="am.report.timestamp" />
+        <param name="customendtime" regex="am.report.timestamp" />
+        <param name="show" regex="am.displayname.common"/>
+        <param name="type" regex="am.monitor.type" max-len="115" description="JDK.15" />
+        <param name="endPollDate" regex="am.report.timestamp" />
+        <param name="pollDataPeriod" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="startPolldate" regex="am.report.timestamp" />
+    </url>
+    <url operation-value="getDataRetentionDetails" >
+		<param name="period" regex="am.report.negativeOrPositiveNumber"/>
+		<param name="attributeID"  regex="am.alphanumeric.comma" max-len="2000"/>
+		<param name="startDate" regex="am.report.timestamp"/>
+        <param name="endDate" regex="am.report.timestamp"/>
+	</url>
+    <url operation-value="getChildGraph" roles="am.role.ADMIN.EA.OP.US.DE" >
+        <param name="resType" type="String" />
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="resourceid" type="long" />
+        <param name="attributeid" type="long"/>
+    </url>
+    <url operation-value="getAvailabilityData">
+        <param name="resourceid" type="long"/>
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="startDate" regex="am.report.timestamp"/>
+        <param name="endDate" regex="am.report.timestamp"/>
+        <param name="reporttype" regex="am.schedule.report.file"/>
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="sid" type="String"/>
+        <param name="show" regex="am.report.history.go"/>
+        <param name="attributeid" type="long"/>
+    </url>  
+    <url operation-value="getIndividualURLandCompareReportsData" roles="am.role.ADMIN.EA.OP.US.DE">
+        <param name="resourceid" regex="-1andnumeric" />
+        <param name="attributeid" regex="am.reports.numberCommaNull" max-len="1000000"/>
+        <param name="childid" regex="am.reports.numberCommaNull" max-len="1000000"/>
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="sid" type="String"/>
+        <param name="startDate" regex="am.report.timestamp"/>
+        <param name="endDate" regex="am.report.timestamp"/>
+        <param name="reporttype" regex="am.schedule.report.file"/>
+        <param name="businessPeriod" regex="am.report.business.period" />
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="confStartTime" regex="am.report.timestamp" />
+        <param name="confEndTime" regex="am.report.timestamp" />
+        <param name="customstarttime" regex="am.report.timestamp"/>
+        <param name="customendtime" regex="am.report.timestamp"/>
+        <param name="show" regex="am.report.history.go" />
+        <param name="startdate" regex="am.report.timestamp"/>
+        <param name="enddate" regex="am.report.timestamp"/>
+    </url>  
+    <url operation-value="getStandardDeviationData" roles="am.role.ADMIN.EA.OP.US.DE">
+        <param name="resourceid" type="long"/>
+        <param name="attributeid" type="long" />
+        <param name="tabsel" type="long"/>
+        <param name="reporttype" regex="am.schedule.report.file" />
+        <param name="childid" regex="am.reports.numberCommaNull" />
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="businessPeriod" regex="am.report.business.period" />
+        <param name="startdate" regex="am.report.timestamp"/>
+        <param name="enddate" regex="am.report.timestamp" />
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="frompop" regex="yesnotf"/>
+        <param name="todaytime" type="long" />
+        <param name="startDate" regex="am.report.timestamp"/>
+        <param name="endDate" regex="am.report.timestamp" />
+    </url>
+    <url operation-value="getheatData" roles="am.role.ADMIN.EA.OP.US.DE">
+        <param name="resourceid" type="long"/>
+        <param name="attributeid" type="long" />
+        <param name="tabsel" type="long"/>
+        <param name="reporttype" regex="am.schedule.report.file" />
+        <param name="childid" regex="am.reports.numberCommaNull" />
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="frompop" regex="yesnotf"/>
+        <param name="todaytime" type="long" />
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="userThresh" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="isThresh" regex="am.report.boolean.empty" />
+        <param name="threshC1" type="String" max-len="20" />
+        <param name="threshV1" regex="am.report.number.empty.null" />
+        <param name="threshC2" type="String"  max-len="20" />
+        <param name="threshV2" regex="am.report.number.empty.null" />
+        <param name="threshC3" type="String"  max-len="20" />
+        <param name="threshV3" regex="am.report.number.empty.null" />
+
+    </url>
+    <url operation-value="getsegmentByHourData" roles="am.role.ADMIN.EA.OP.US.DE">
+        <param name="resourceid" type="long"/>
+        <param name="attributeid" type="long" />
+        <param name="tabsel" type="long"/>
+        <param name="reporttype" regex="am.schedule.report.file" />
+        <param name="childid" regex="am.reports.numberCommaNull" />
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="frompop" regex="yesnotf"/>
+        <param name="todaytime" type="long" />
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="startDate" regex="am.report.timestamp"/>
+        <param name="endDate" regex="am.report.timestamp" />
+        <param name="businessPeriod" regex="am.report.business.period" />
+    </url>
+    <url operation-value="getsegmentByWeekData" roles="am.role.ADMIN.EA.OP.US.DE">
+        <param name="resourceid" type="long"/>
+        <param name="attributeid" type="long" />
+        <param name="tabsel" type="long"/>
+        <param name="reporttype" regex="am.schedule.report.file" />
+        <param name="childid" regex="am.reports.numberCommaNull" />
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="frompop" regex="yesnotf"/>
+        <param name="todaytime" type="long" />
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="startDate" regex="am.report.timestamp"/>
+        <param name="endDate" regex="am.report.timestamp" />
+        <param name="businessPeriod" regex="am.report.business.period" />
+    </url>
+    <url operation-value="ischildAttribute" roles="am.role.ADMIN.EA.OP.US.DE">
+        <param name="resourceid" type="long"/>
+        <param name="attributeid" type="long"/>
+    </url>
+    <url operation-value="cancelDowntimeNote">
+        <param name="resourceid" type="long"/>
+        <param name="reasonid" type="long"/>
+        <param name="downtime" type="long"/>
+        <param name="textValue" type="String" max-len="500"/>
+    </url>
+</urls>
+
+<urls path="/showBussiness.do" method="post" csrf="true" operation-param="method" roles="am.role.ADMIN.EA.MA" deny-del-admin="true" throwallerrors="true" authentication="required" >
+    <param-group name="am.additional.extra.params" />
+    <url operation-value="addSLA" skip-bad-input-encoding="true">
+        <param name="slaname" type="String" max-len="250"/>
+        <param name="sladesc" type="String" max-len="250"/>
+        <param name="slaapplication" regex="am.report.slatype"/>
+        <param name="availablity" regex="am.report.sla.availability.value"/>
+        <param name="appoperator" regex="am.report.sla.availability.condition"/>
+        <param name="appvalue" regex="am.common.decimals"/>
+        <param name="applyBH" regex="am.report.sla.business.hour.status"/>
+        <param name="businessPeriod" regex="am.report.business.period" />
+        <param name="slaticket" regex="am.report.sla.event.value"/>
+        <param name="ticketoperator" regex="am.report.sla.event.condition"/>
+        <param name="ticketvalue" regex="am.common.decimals"/>
+        <param name="slaCombo" regex="am.report.number.empty.null" max-occurrences="20000"/>
+        <param name="slaCombo1" regex="am.report.number.empty.null" max-occurrences="20000"/>
+        <param name="systemCombo1" regex="am.report.number.empty.null" max-occurrences="20000"/>
+        <param name="systemCombo2" regex="am.report.number.empty.null" max-occurrences="20000"/>
+        <param name="from" type="String" max-len="250"/>
+        <param name="to" type="String" max-len="10000" />
+        <param name="subject" type="String" />
+        <param name="message" type="String" max-len="500" />
+        <param name="defaultView" regex="am.report.boolean.empty"/>
+        <param name="reqForAdminLayout" regex="am.report.boolean.empty"/>
+        <param name="sla" type="boolean"/>
+        <param name="mailcheck" regex="am.report.sla.mail.check" />
+        <param name="disablemail" regex="am.report.boolean.empty"/>
+    </url>
+    <url operation-value="updateSLA" skip-bad-input-encoding="true">
+        <param name="slaid" type="long"/>
+        <param name="slaname" type="String" max-len="250"/>
+        <param name="sladesc" type="String" max-len="250"/>
+        <param name="slaapplication" regex="am.report.slatype"/>
+        <param name="availablity" regex="am.report.sla.availability.value"/>
+        <param name="appoperator" regex="am.report.sla.availability.condition"/>
+        <param name="appvalue" regex="am.common.decimals"/>
+        <param name="applyBH" regex="am.report.sla.business.hour.status"/>
+        <param name="businessPeriod" regex="am.report.business.period" />
+        <param name="slaticket" regex="am.report.sla.event.value"/>
+        <param name="ticketoperator" regex="am.report.sla.event.condition"/>
+        <param name="ticketvalue" regex="am.common.decimals"/>
+        <param name="slaCombo" regex="am.report.number.empty.null" max-occurrences="20000"/>
+        <param name="slaCombo1" regex="am.report.number.empty.null" max-occurrences="20000"/>
+        <param name="systemCombo1" regex="am.report.number.empty.null" max-occurrences="20000"/>
+        <param name="systemCombo2" regex="am.report.number.empty.null" max-occurrences="20000"/>
+        <param name="from" type="String" max-len="250"/>
+        <param name="to" type="String" max-len="10000" />
+        <param name="subject" type="String" />
+        <param name="message" type="String" max-len="500" />
+        <param name="defaultView" regex="am.report.boolean.empty"/>
+        <param name="reqForAdminLayout" regex="am.report.boolean.empty"/>
+        <param name="sla" type="boolean"/>
+        <param name="mailcheck" regex="am.report.sla.mail.check" />
+        <param name="disablemail" regex="am.report.boolean.empty"/>
+    </url>
+    <url operation-value="removeSla">
+        <param name="reqForAdminLayout" regex="am.report.boolean.empty"/>
+        <param name="slaids" type="long" max-occurrences="200"/>
+    </url>
+    <url operation-value="sendTestMail">
+        <param name="from" type="String" max-len="250" />
+        <param name="to" type="String" max-len="10000" />
+    </url>
+</urls>
+
+<urls path="/showBussiness.do" method="get" operation-param="method" roles="am.role.ADMIN.EA.DE.REP.MA" authentication="required" throwallerrors="true" >
+    <param-group name="am.additional.extra.params" />
+    <param name="defaultView" regex="am.report.boolean.empty"/>
+    <param name="reqForAdminLayout" regex="am.report.boolean.empty" max-occurrences="2"/>
+    <url operation-value="generateApplicationAvailablity" roles="am.role.ADMIN.EA.REP.MA">
+        <param name="period" regex="am.report.business.period"/>
+        <param name="fromSchedule" regex="am.report.boolean.empty"/>
+        <param name="sla"  regex="am.report.boolean.empty" />
+        <param name="value" regex="am.report.number.empty.null"/>
+        <param name="isschedule" regex="am.report.boolean.empty"/>
+        <param name="sid" regex="am.report.number.empty.null"/>
+        <param name="reportType"  regex="am.schedule.report.file"/>
+        <param name="startDate" regex="am.report.timestamp"/>
+        <param name="endDate" regex="am.report.timestamp" />
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="resourceid" regex="am.report.number.empty.null"/>
+        <param name="selectTabName" regex="am.report.sla.tabName" />
+        <param name="per" regex="am.report.number.empty.null" />
+        <param name="show" regex="am.displayname.common"/>
+        <param name="Report" regex="yesnotf"/>
+    </url>
+    <url operation-value="generateSystemAvailablity" roles="am.role.ADMIN.EA.REP.MA">
+        <param name="period" regex="am.report.business.period"/>
+        <param name="fromSchedule" regex="am.report.boolean.empty"/>
+        <param name="sla"  regex="am.report.boolean.empty" />
+        <param name="value" regex="am.report.number.empty.null"/>
+        <param name="isschedule" regex="am.report.boolean.empty"/>
+        <param name="sid" regex="am.report.number.empty.null"/>
+        <param name="reportType"  regex="am.schedule.report.file"/>
+        <param name="startDate" regex="am.report.timestamp"/>
+        <param name="endDate" regex="am.report.timestamp" />
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="resourceid" regex="am.report.number.empty.null"/>
+        <param name="selectTabName" regex="am.report.sla.tabName" />
+        <param name="per" regex="am.report.number.empty.null" />
+        <param name="show" regex="am.displayname.common"/>
+        <param name="Report" regex="yesnotf"/>
+    </url>
+    <url operation-value="generateSLA" roles="am.role.ADMIN.EA.MA.DE">
+        <param name="service" regex="am.action.fromadminlayout.service" />
+        <param name="sla"  regex="am.report.boolean.empty" />
+        <param name="showdiv"  regex="am.report.boolean.empty" />
+    </url>
+    <url operation-value="generateTroubleTicket" roles="am.role.ADMIN.EA.MA">
+        <param name="value" regex="am.report.number.empty.null"/>
+        <param name="period" regex="am.report.business.period"/>
+        <param name="startDate" regex="am.report.timestamp"/>
+        <param name="endDate" regex="am.report.timestamp" />
+        <param name="resourceid" regex="am.report.number.empty.null"/>
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="show" regex="am.displayname.common"/>
+    </url>
+    <url operation-value="editSla" roles="am.role.ADMIN.EA.MA.DE" deny-del-admin = "true">
+        <param name="slaid" type="long"/>
+        <param name="name" type="String" max-len="250"/>
+    </url>
+</urls>
+
+<urls path="/showCustomReports.do" method="post" operation-param="actionMethod" roles="am.role.ADMIN.EA.OP.US" authentication="required" throwallerrors="true" csrf="true">
+    <url operation-value="generateUnderSizedMonitors">
+        <param-group name="am.additional.extra.params" />
+        <param name="Report" regex="yesnotf"/>
+        <param name-regex="true" name="^(option[0-9]+)$" regex="am.capacity.planning.option.condition" />
+        <param name-regex="true" name="^(thresName[0-9]+)$" regex="am.capacity.planning.threshold" />
+        <param name-regex="true" name="^(unconfiguredthresName[0-9]+)$" regex="am.capacity.planning.threshold" />
+        <param name="timecond" regex="am.capacity.planning.option.condition" />
+        <param name="timeused" type="long" />
+        <param name="combination" regex="am.capacity.planning.condition" />
+        <param name="currentRule" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="isRuleChange" regex="yesnotf" />
+        <param name="attribute" regex="am.reports.numberCommaNull"/>
+        <param name="unconfiguredids" regex="am.reports.numberCommaNull"/>
+        <param name="reload" regex="yesnotf" />
+        <param name="reportName" regex="am.alphanumeric" />
+        <param name="reportmethod" regex="am.report.capacity.planning.reportMethod"/>
+        <param name="haid" regex="am.longandnull.all.value" />
+        <param name="numberOfRows" regex="am.report.negativeOrPositiveNumber" />
+        <param name="reporttype" regex="am.alphanumeric"  />
+        <param name="period" regex="am.report.negativeOrPositiveNumber" />
+        <param name="customfield" regex="yesnotf" />
+        <param name="mondaycapacity" type="String" max-len="500"/>
+        <param name="divid" regex="^(newresponsediv|null)$" />
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+        <param name="ruleName" type="String" max-len="300"/>
+        <param name="deleteRule" regex="yesnotf" />
+        <param name="customFieldValue" type="String"/>
+        <param name="diskStateConsidered" type="boolean"/>
+		<param name="noOfDisks" regex="am.report.number.empty.null"/>
+		<param name="diskCondnType" regex="^(all|any|null)$"/>
+    </url>
+</urls>
+
+<urls path="/showCustomReports.do" method="get" operation-param="actionMethod" roles="am.role.ADMIN.EA.OP.US.DE.REP" authentication="required" throwallerrors="true" >
+    <url operation-value="generateDiskPartitionReport" roles="am.role.ADMIN.EA.OP.US.DE.REP">
+        <param-group name="am.reports.period.common.params" />
+        <param-group name="am.additional.extra.params" />
+        <param name="report" type="long"/>
+        <param name="resourceid" type="long"/>
+        <param name="reportmethod" regex="am.report.capacity.planning.reportMethod"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+        <param name="ruleid" type="long"/>
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="sid" type="long"/>
+    </url>
+     <url operation-value="generateIndividualReportCapacityPlanning" roles="am.role.ADMIN.EA.OP.US.DE.REP">
+        <param-group name="am.reports.period.common.params" />
+        <param-group name="am.additional.extra.params" />
+        <param name="report" type="long"/>
+        <param name="attribute" regex="am.reports.numberCommaNull"/>
+        <param name="resourceid" type="long"/>
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="businessPeriod" regex="am.report.business.period"/>
+        <param name="reportmethod" regex="am.report.capacity.planning.reportMethod"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+        <param name="ruleid" type="long"/>
+        <param name="sid" regex="am.common.longandnull"/>
+    </url>
+    <url operation-value="generateUnderSizedMonitors" roles="am.role.ADMIN.EA.OP.US.DE.REP">
+        <param-group name="am.reports.period.common.params" />
+        <param-group name="am.additional.extra.params" />
+        <param name="Report" regex="yesnotf"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+        <param name="attribute" regex="am.reports.numberCommaNull"/>
+        <param name="reportName" type="String" />
+        <param name="reportmethod" regex="am.report.capacity.planning.reportMethod"/>
+        <param name="haid" regex="am.longandnull.all.value" max-occurrences="2" />
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="mondaycapacity" type="String"/>
+        <param name="customfield" regex="yesnotf"/>
+        <param name="sid" regex="am.common.longandnull"/>
+        <param name="NumberOfRows" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="isRuleChange" regex="am.common.booleanandnull"/>
+        <param name="fromSchedule" regex="am.common.booleanandnull"/>
+        <param name="currentRule" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="resourceid" type="long"/>
+    </url>
+
+</urls>
+
+<urls path="/showCustomReports.do" method="post" csrf="true" operation-param="actionMethod" roles="am.role.ADMIN.EA.OP.US" throwallerrors="true" authentication="required" skip-bad-input-encoding="true">
+    <url operation-value="saveNoteId">
+        <param-group name="am.additional.extra.params" />
+        <param name="resourceid" type="long"/>
+        <param name="reportid" type="long"/>
+        <param name="fieldvalue" type="String" max-len="250"/>
+    </url>
+</urls>
+<urls path="/showReports.do" method="post" csrf="true" operation-param="actionMethod" roles="am.role.ADMIN.EA.OP.US.DE" throwallerrors="true" authentication="required" >
+    <url operation-value="getInventoryFiles">
+        <param-group name="am.additional.extra.params" />
+        <param name="data" type="String" max-len="300000000"/>
+        <param name="reportType" regex="am.schedule.report.file"/>
+        <param name="fromUI" type="boolean" />
+    </url>
+	<url operation-value="emailPDFAsync">
+        <param-group name="am.additional.extra.params" />
+		<param name="aMethod" regex="am.common.onlystring"/>
+        <param name="resourceid" regex="am.reports.numberCommaNullAll"/>
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+		<param name="resourceType" regex="am.monitor.type"/>
+		<param name="emailid" type="String" max-len="250"/>
+    </url>
+</urls>
+
+ <urls path="/showReports.do" method="get" operation-param="actionMethod" roles="am.role.ADMIN.EA.OP.US.DE.REP" authentication="required" throwallerrors="true" >
+ <url operation-value="getUnsupportedWidgetTypes" roles="am.role.ADMIN.EA">
+		<param-group name="am.additional.extra.params" />
+		<param name="dashboardIds"  regex="am.reports.numberCommaNullAll"/>
+	</url>
+    <url operation-value="generateAvailabilityReport">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+        <param name="showcfFilter" type="boolean"/>
+        <param name="attribute" regex="^(availability|null|)$"/>
+        <param name="customfield" regex="am.common.alphaNumeric.ext1.withDollar"/>
+    </url>         
+    <url operation-value="generateAvailabilitySnapShotReport">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />  
+        <param name="resourceid" regex="am.reports.numberCommaNullAll" max-len="5000"/>
+        <param name="resourceType" regex="am.monitor.type"/>
+    </url>
+    <url operation-value="generateDBUsersReport" roles="REPORTER">  
+        <param-group name="am.additional.extra.params" /> 
+        <param name="typeOfReport" regex="am.schedule.report.typeofreport" />
+		<param name="reportformat" regex="am.schedule.report.reportformat" />
+		<param name="restype" regex="am.monitor.type.withcomma" />
+		<param name="haid" regex="am.common.numberandcomma" max-len="5000" description="Approximately 555 monitor group can be selected with comma."/> 
+		<param name="resids" regex="am.common.numberandcomma" max-len="5000" description="Approximately 555 DBS monitors can be selected with comma." />
+    </url>
+    <url operation-value="generateDashboardReport" roles="REPORTER">
+        <param-group name="am.additional.extra.params" />
+        <param name="reportType" regex="am.schedule.report.file" />
+        <param name="folderName" regex="am.reports.dashboard.foldername" />
+        <param name="pageid" type="long"/>
+    </url>
+    <url operation-value="generateDowntimeSummaryReport" roles="REPORTER">
+        <param-group name="am.additional.extra.params" />
+        <param name="fromadd" type="String" max-len="250"/>
+        <param name="toadd" type="String" max-len="2000"/>
+        <param name="period" regex="am.report.negativeOrPositiveNumber"/>
+        <param name="maxmonitors" type="int"/>
+    </url>
+    <url operation-value="generateEventSummary" roles="am.role.ADMIN.EA.OP.US.DE.REP.MA">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" /> 
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll"/> 
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+        <param name="bsm"  regex="yesnotf"/>
+        <param name="endTime" regex="am.report.timestamp"/>
+        <param name="strTime" regex="am.report.timestamp"/>
+    </url>
+    <url operation-value="generateInventory">
+        <param-group name="am.additional.extra.params" />
+        <param name="checkboxes" regex="am.reports.numberCommaNull"/>
+        <param name="selectedMonitorType" regex="am.report.inventory.resourcegroup"/>
+        <param name="firstLoad" type="boolean"/>
+        <param name="customMonitorAvail" type="boolean"/>
+    </url>
+    <url operation-value="generatePeriodAvailabilityDowntimeReport">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />  
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll" max-len="5000"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+    </url>
+    <url operation-value="generatePeriodAvailabilityReport">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />  
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll" max-len="5000"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+    </url>
+    <url operation-value="generateWeeklyMonthlyOutageReport">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" /> 
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll" max-len="5000"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+    </url>
+    <url operation-value="generateQueryResultsReport" roles="REPORTER">
+        <param-group name="am.additional.extra.params" />
+        <param name="resid" type="long"/>
+        <param name="tableids" regex="am.common.numberandcomma" max-len="1000"/>
+    </url>
+    <url operation-value="generateSQLJobHistoryReport" roles="REPORTER">
+        <param-group name="am.additional.extra.params" />
+        <param name="resid" regex="am.common.numberandcomma" max-len="20000" />
+		<param name="jobids" type="long" max-occurrences="1000" split="," />
+		<param name="reporttype" regex="^(|jobhistory|jobfailedhistory|null)$" />
+		<param name="period" regex="am.report.negativeOrPositiveNumber" />
+    </url>
+    <url operation-value="generateServerUtilizationReport" roles="am.role.ADMIN.EA.OP.US.DE.REP" privilege-identifier="resids">
+        <param-group name="am.additional.extra.params" />
+		<param-group name="am.reports.period.common.params" />
+        <param name="typeOfReport" regex="am.schedule.report.typeofreport" />
+        <param name="reporttype" regex="am.schedule.report.reportformat" />
+        <param name="period" type="long"  />
+        <param name="haid" regex="am.common.numberandcomma" max-len="1000" />
+        <param name="resids" regex="am.common.numberandcomma" max-len="2000"/>
+        <param name="businessPeriod" regex="am.alphanumeric" />
+		<param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+		<param name="resourceid"  regex="am.reports.numberCommaNullAll" max-len="500" />
+    </url>
+     <url operation-value="getAjaxInventory" roles="am.role.ADMIN.EA.OP.US.DE">
+        <param-group name="am.additional.extra.params" />
+        <param name="checkboxes" regex="am.reports.numberCommaNull"/>
+        <param name="selectedMonitorType" regex="am.report.inventory.resourcegroup"/>
+        <param name="selectedCategoryType" regex="am.monitor.type.withsinglequote"/>
+        <param name="firstLoad" type="boolean"/>
+        <param name="customMonitorAvail" type="boolean"/>
+        <param name="reportType" regex="am.schedule.report.file"/>
+    </url> 
+    <url operation-value="getCAMAttributes" roles="am.role.ADMIN.EA.OP.US.DE">
+    	 <param-group name="am.additional.extra.params" />
+    </url>
+     <url operation-value="getCCMSAttributes" roles="am.role.ADMIN.EA.OP.US.DE">
+     	<param-group name="am.additional.extra.params" />
+    </url>
+    <url operation-value="isServerMonitor" roles="am.role.ADMIN.EA.OP.US.DE">
+     	<param-group name="am.additional.extra.params" />
+		<param name="resid" type="long"/>
+    </url>
+    <url operation-value="getDivIdsToDisplay" roles="am.role.ADMIN.EA.OP.US">
+        <param-group name="am.additional.extra.params" />
+        <param name="monitorType" regex="am.monitor.type.withsinglequote" max-len="2000" />
+        <param name="divIds" regex="am.reports.alphaNumeric.ext1.withcomma" max-len="2000"/>
+        <param name="attributes" regex="am.alphanumeric.comma"/>
+    </url>
+    <url operation-value="sendAttributeDetails" roles="am.role.ADMIN.EA.OP.US.DE">
+        <param-group name="am.additional.extra.params" />
+        <param name="hid" regex="am.reports.numberCommaNull"/>
+    </url>
+    <url operation-value="generateGlanceReport">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll" max-len="500" />
+        <param name="eumMonId" regex="am.alphanumeric.comma"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+        <param name="sid" regex="am.report.schedule.sid"/>
+        <param name="isEUM" regex="yesnotf" />
+    </url>
+    <url operation-value="getReportIndex" roles="am.role.ADMIN.EA.OP.US.DE">
+        <param-group name="am.additional.extra.params" />
+        <param name="type" regex="am.monitor.type.withsinglequote" />
+        <param name="opm_user" type="String" max-len="255"/>
+		<param name="plugin_view" regex="yesnotf" />
+    </url>
+    <url operation-value="generateSummaryReport" privilege-identifier = "resid">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+    </url>
+    <url operation-value="generateTrendReport" roles="am.role.ADMIN.EA.OP.US.DE"  privilege-identifier = "resourceid">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+        <param name="sid" type="long" />
+    </url>
+    <url operation-value="generateMttrAvailablityReport" privilege-identifier = "resourceid">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+    </url>
+    <url operation-value="generateAttributeReport">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+    </url>
+    <url operation-value="generateCustomAttributeReport">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll" />
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+    </url>
+    <url operation-value="getAvailabilityData">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+    </url>
+    <url operation-value="generateHealthReport">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+    </url>
+    <url operation-value="generateIndividualGlanceReport" privilege-identifier="resid">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+    </url>
+    <url operation-value="showEumSummaryReport">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000"/>
+        <param name="isEUM" regex="yesnotf" />
+    </url>
+    <url operation-value="emailPDF" roles="am.role.ADMIN.EA.OP.US.REP">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="period" type="String" />
+        <param name="resourceid" regex="am.reports.numberCommaNullAll"/>
+        <param name="aMethod" regex="am.common.onlystring"/>
+        <param name="brule" regex="am.report.business.period"/>
+        <param name="comment" regex="am.displayname.common" max-len="1000"/>
+        <param name="columnHeadings" type="String"/>
+        <param name="database" type="String"/>
+        <param name="emailid" type="String" max-len="250"/>
+        <param name="emailpdf" type="boolean" />
+        <param name="fromDate" regex="am.report.timestamp"/>
+        <param name="toDate" regex="am.report.timestamp"/>
+        <param name="fromReport" type="String"/>
+        <param name="topqrycnt" regex="am.report.mssql.topquerycnt"/>
+        <param name="hrefname" regex="am.alphanumeric" />
+        <param name="jobid" regex="am.reports.numberCommaNull"/>
+        <param name="jobname" type="String"/>
+        <param name="reportType" type="String"/>
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="save" type="String" max-len="250"/>
+        <param name="selectedColumns" regex="am.reports.numberCommaNull"/>
+        <param name="sqlresid" regex="am.reports.numberCommaNull"/>
+        <param name="emailReport" regex="am.schedule.report.file"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000" max-occurrences="2"/>
+        <param name="ruleid" regex="am.reports.numberCommaNull"/>
+		<param name="resids" regex="am.reports.numberCommaNull"/>
+    </url>
+</urls>
+<urls path="/adminAction.do" operation-param="method" throwallerrors="true" csrf="true" method="POST" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true" authentication="required">
+    <param-group name="am.additional.extra.params" />
+<url  operation-value="updateReportsSettings">
+       <param name="settings" regex="am.emptystring"/> 
+       <param name="rulefrom" type="boolean" /> 
+       <param name="addmaintenance" type="boolean" /> 
+       <param name="addunmanage" type="boolean" />
+       <param name="graphType" type="boolean" /> 
+       <param name="mtype" type="boolean" />
+       <param name="showPollPeriodDropDown" type="boolean" /> 
+       <param name="seventhirtyMA" type="int" />
+       <param name="machinelearning" type="boolean" /> 
+	   <param name="pageOrientation" regex="am.report.pdf.orientation" />
+	   <param name="fileDateFormat" regex="am.report.file.date.format" />
+</url>
+<url operation-value="deleteReportLogo">
+</url>
+<url operation-value="updateExportProtect">
+       <param name="passProtStatus" type="boolean" /> 
+       <param name="accessPasswordStatus" type="boolean" /> 
+       <param name="fileAccessPassword" type="String" secret="true" />
+       <param name="sendmailpwd" regex="^(all|admin|none)$" />
+       <param name="pdfPassword" type="String" secret="true" />
+</url>
+<url operation-value="updateDataCleanUp">
+       <param name="dataclean" type="int" />
+       <param name="dailyclean" type="int" />
+       <param name="unsolTrapsCleanHrs" type="int" />
+       <param name="diskDataClean" type="int" />
+       <param name="availCleanup" type="int" />
+       <param name="healthCleanup" type="int" />
+       <param name="eventCountCleanup" type="int" />
+</url>
+</urls>
+<!-- WAF -->
+<urls path="/showReports.do"  operation-param="actionMethod" authentication="required" throwallerrors="true" roles="am.role.ADMIN.EA.OP.US.DE.REP" method="get">		
+    <url operation-value="generateHAHealthReport,generateHAResponseTimeReport,generateHASnapShotReport,generateHASnapShotReportWithHostName" >
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll" max-len="5000" />
+        <param-group name="am.additional.extra.params" />
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000" />
+        <param name="sid" regex="am.report.schedule.sid"/>
+    </url>
+    <url method="get" operation-value="generateHAAvailabilityReport" roles="am.role.ADMIN.EA.OP.US.DE.REP.MA">
+        <param-group name="am.reports.period.common.params" />
+        <param name="resourceid"  regex="am.reports.numberCommaNullAll" max-len="5000" />
+        <param-group name="am.additional.extra.params" />
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000" />
+        <param name="bsm"  regex="yesnotf"/>
+        <param name="endTime" regex="am.report.timestamp"/>
+        <param name="strTime" regex="am.report.timestamp"/>
+        <param name="sid" regex="am.report.schedule.sid"/>
+    </url>
+</urls>
+<!-- Capacity planning - filterBasedOnMonitorTypes -->
+<urls>
+	<param-group name="am.additional.extra.params" />
+	<url path="/showReports.do" method="get" operation-param="actionMethod" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" operation-value="filterBasedOnMonitorTypes">
+        <param name="mgValue" regex="^(all|nomgs|nogroup|[0-9]+|^(((USERDATA\_\d+)|USERNAME|VALUEID|LOCATION_NAME)\$(\d+))$)$" max-len="1000" />
+	</url>
+</urls>
+<!--API WAF STARTS-->
+<urls prefix="/AppManager/(xml|json)" api="true" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA.MA" deny-del-admin="true">
+    <param name="apikey" regex="apikey" secret="true"/>
+    <param name="period" regex="am.report.sla.period"/>
+    <param name="startTime" type="long"/>
+    <param name="endTime" type="long"/>
+    <url path="/slaReport" method="get" >
+        <param name="showOnlySlaAppliedBAs" type="boolean"/>
+    </url>
+    <url path="/serverSlaReport" method="get">
+        <param name="showOnlySlaAppliedServers" type="boolean"/>
+    </url>
+</urls>
+<urls prefix="/AppManager/(xml|json)" api="true" throwallerrors="true" authentication="required" deny-del-admin="true">
+    <url path="/slaDetails" method="get" roles="am.role.ADMIN.EA.MA" >
+        <param name="apikey" regex="apikey" secret="true"/>
+        <param name="slaId" regex="am.common.numberandcomma"/>
+    </url>
+</urls>
+<urls prefix="/AppManager/(xml|json)" >
+    <url path="/slaReport" method="post" deny-operation="true"  />        
+    <url path="/serverSlaReport" method="post" deny-operation="true"  />        
+    <url path="/slaDetails" method="post" deny-operation="true"  />
+    <url path="/ShowPolledData" method="post" deny-operation="true"  />        
+</urls>
+<urls prefix="/AppManager/json" >
+    <url path="/getDBUsersDetails" method="get" deny-operation="true"  />
+</urls>
+<urls prefix="/AppManager/json" api="true" throwallerrors="true" authentication="required" >
+    <url path="/getDBUsersDetails" method="post" roles="am.role.ADMIN.EA" >
+        <param name="apikey" regex="apikey" secret="true"/>
+        <param name="resids" regex="am.common.numberandcomma" max-len="10000"/>
+    </url>
+</urls>
+
+<urls prefix="/AppManager/(xml|json)" api="true" throwallerrors="true" authentication="required" >
+    <url path="/ShowPolledData" method="get" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+    	<param-group name="am.additional.extra.params" />
+        <param name="apikey" regex="apikey" secret="true"/>
+        <param name="resourceid" type="long" />
+		<param name="attributeID" type="long"/>
+		<param name="period" regex="am.report.polleddata.api.period"/>
+		<param name="startDate" regex="am.report.timestamp"/>
+		<param name="endDate" regex="am.report.timestamp"/>
+    </url>
+</urls>
+
+<!--API WAF ENDS-->
+
+<!--Servlet WAF starts-->
+<urls api="true" throwallerrors="true">
+    <url path="/FetchReportFiles/*" method="get">
+        <param name="file_key" type="String" max-len="10000"/>
+    </url>
+    <url path="/FetchReportFiles/*" method="post">
+        <param name="file_key" type="String" max-len="10000"/>
+        <param name="password" type="String" secret="true" max-len="1000"/>
+    </url>
+    <url path="/Reports/.*" method="post">
+        <param name="password" type="String" secret="true" max-len="1000"/>
+    </url>
+    <url path="/Reports/.*" method="get">
+    </url>
+</urls>
+<!--Servlet WAF ends-->
+
+<urls>
+    <url path="/jsp/Popup_SLA.jsp" authentication="required" roles="am.role.ADMIN.EA.MA.DE">
+    	<param-group name="am.additional.extra.params" />
+        <param name="sid" type="long" />
+    </url>
+    <url path="/jsp/reports/TrendReportList.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+    	<param-group name="am.additional.extra.params" />
+        <param name="todaytime" type="long" />
+        <param name="resid" type="long"/>
+    </url>
+    <url path="/jsp/Popup_EmailPDF.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+        <param-group name="am.additional.extra.params" />
+        <param-group name="am.reports.period.common.params" />
+        <param name="period" type="String" />
+        <param name="resourceid" regex="am.reports.numberCommaNullAll"/>
+        <param name="actionMethod" regex="am.common.onlystring"/>
+        <param name="brule" regex="am.report.business.period"/>
+        <param name="columnHeadings" type="String"/>
+        <param name="database" type="String"/>
+        <param name="emailpdf" type="boolean" />
+        <param name="fromDate" regex="am.report.timestamp"/>
+        <param name="toDate" regex="am.report.timestamp"/>
+        <param name="fromReport" type="String"/>
+        <param name="topqrycnt" regex="am.report.mssql.topquerycnt"/>
+        <param name="hrefname" regex="am.alphanumeric" />
+        <param name="jobid" regex="am.reports.numberCommaNull"/>
+        <param name="jobname" type="String"/>
+        <param name="reportType" type="String"/>
+        <param name="resourcename" type="String" max-len="2000"/>
+        <param name="save" type="String" max-len="250"/>
+        <param name="selectedColumns" regex="am.reports.numberCommaNull"/>
+        <param name="sqlresid" regex="am.reports.numberCommaNull"/>
+        <param name="emailReport" regex="am.schedule.report.file"/>
+        <param name="resourceType" regex="am.monitor.type.withsinglequote" max-len="2000" max-occurrences="2"/>
+        <param name="inter" regex="am.report.period.interval"/>
+        <param name="customfieldrows" regex="am.report.negativeOrPositiveNumber"/> 
+        <param name="sucess" regex="am.common.TFNull"/>
+		<param name="resids" regex="am.reports.numberCommaNullAll"/>
+    </url>
+</urls>
+
+<urls>
+<url path="/jsp/Popup_AsyncEmail.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US">
+    	<param-group name="am.additional.extra.params" />
+        <param name="resourceid" type="long" />
+    </url>
+</urls>
+
+</security>

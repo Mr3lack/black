@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url path="/fault/AlarmOperations.do" method="post"
+			roles="am.role.ADMIN.EA.OP.US" authentication="required"
+			operation-param="methodCall"
+			operation-value="pickUpAlarm,unPickAlarm"
+			privilege-identifier="selectedEntity" priv-delim="," priv-split="_"
+			csrf="true">
+			<param name="redirectto" type="String" max-len="2000" />
+			<param name="selectedEntity" regex="am.deleteAnnotation.entity"
+				max-len="2500" />
+			<param name="displayName" type="String" />
+			<param name="viewId" regex="am.alarms.viewID.alert" />
+			<param name="ajaxRequest" type="boolean" />
+			<param name="ajaxrequest" type="boolean" />
+		</url>
+		<url path="/showresource.do" method="get" operation-param="method"
+			operation-value="getAlarmDetails">
+			<param name="type" type="int" />
+			<param name="resourceId" type="long" />
+			<param name="attributeId" type="int" />
+			<param name="_" type="long" />
+		</url>
+		<url path="/fault/AlarmOperations.do" method="post"
+			roles="am.role.ADMIN.EA.OP" authentication="required"
+			operation-param="methodCall" operation-value="clearAlarm"
+			privilege-identifier="selectedEntity" priv-delim="," priv-split="_"
+			csrf="true">
+			<param name="alertdetails" type="boolean" />
+			<param name="fromWidget" type="boolean" />
+			<param name="category" regex="am.alphanumeric" />
+			<param name="displayName" regex="am.displayname.common" />
+			<param name="haid" regex="am.annotate.haid.monitorgroup" />
+			<param name="header" type="String" />
+			<param name="monitor" type="String" />
+			<param name="monitortype" regex="am.custom.monitortype.type" />
+			<param name="redirectto" type="String" max-len="2000"
+				max-occurrences="2" />
+			<param name="selectedEntity" regex="am.deleteAnnotation.entity"
+				max-len="2500" />
+			<param name="source" type="String" />
+			<param name="viewId" regex="am.alarms.viewID.alert"
+				max-occurrences="2" />
+			<param name="ajaxRequest" type="boolean" />
+			<param name="bulkmonitor" type="boolean" />
+		</url>
+		<url path="/fault/AlarmDetails.do" method="post"
+			roles="am.role.ADMIN.EA.OP.US" authentication="required"
+			operation-param="method" operation-value="deleteAnnotation"
+			priv-delim="," priv-split="_"
+			csrf="true" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:validatePrivilegeForAnnotation">
+			<param name="entity" regex="am.deleteAnnotation.entity" />
+			<param name="checkbox" regex="long" max-occurrences="10" />
+			<param name="redirect" type="String" max-len="2000" />
+			<param name="headercheckbox" regex="onlyon" />
+			<param name="parentId" type="long" />
+			<param name="checkForChild" type="boolean" />
+		</url>
+		<!-- <url path="/fault/AlarmDetails.do" method="GET" operation-param="method" 
+			operation-value="loadEventHistoryData"> <param name="entity" regex="am.deleteAnnotation.entity" 
+			/> <param name="historyDetails" regex="am.alarmsdetails.history" /> <param 
+			name="pageIndex" type="int" /> <param name="resid" type="long" /> </url> -->
+		<url path="/fault/AlarmDetails.do" method="GET"
+			operation-param="method" operation-value="viewAnnotationAndHistory"
+			roles="am.role.ADMIN.EA.OP.US.DE" authentication="required"
+			custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:validatePrivilegeForAnnotation" priv-delim="," priv-split="_">
+			<param name="displayname" type="String" />
+			<param name="entity" regex="am.deleteAnnotation.entity" />
+			<param name="popup" type="boolean" />
+			<param name="alertMessage" regex="am.alarm.alertmessage"
+				max-len="500" />
+			<param name="parentId" type="long" />
+			<param name="checkForChild" type="boolean" />
+		</url>
+		<url path="/fault/AlarmDetails.do" method="GET"
+			operation-param="method" operation-value="doAnnotate"
+			roles="am.role.ADMIN.EA.OP.US.DE" authentication="required"
+			custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:validatePrivilegeForAnnotation" priv-delim="," priv-split="_">
+			<param name="category" regex="am.alphanumeric" />
+			<param name="displayname" type="String" />
+			<param name="entity" regex="am.deleteAnnotation.entity"
+				max-len="2500" />
+			<param name="haid" regex="am.annotate.haid.monitorgroup" />
+			<param name="monitor" type="String" />
+			<param name="redirectto" type="String" max-len="2000" />
+			<param name="source" type="String" />
+			<param name="bulkannotate" type="boolean" />
+			<param name="edit" type="boolean" />
+			<param name="time" type="long" />
+			<param name="fromIcon" type="boolean" />
+			<param name="parentId" type="long" />
+			<param name="checkForChild" type="boolean" />
+		</url>
+		<url path="/fault/AlarmDetails.do" method="post"
+			roles="am.role.ADMIN.EA.OP.US" authentication="required"
+			operation-param="method"
+			operation-value="editAnnotation,setAnnotation"
+			priv-delim="," priv-split="_"
+			csrf="true" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:validatePrivilegeForAnnotation">
+			<param name="source" type="String" />
+			<param name="time" type="long" />
+			<param name="bulkannotate" type="boolean" />
+			<param name="redirectto" type="String" max-len="2000"
+				max-occurrences="2" />
+			<param name="text" type="String" max-len="470" />
+			<param name="category" regex="am.alphanumeric" />
+			<param name="displayname" type="String" />
+			<param name="entity" regex="am.deleteAnnotation.entity"
+				max-len="2500" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="fromIcon" type="boolean" />
+			<param name="parentId" type="long" />
+			<param name="checkForChild" type="boolean" />
+		</url>
+		<url path="/fault/AlarmDetails.do" method="GET"
+			roles="am.role.ADMIN.EA.OP.US.DE" authentication="required"
+			privilege-identifier="entity" priv-delim="," priv-split="_"
+			operation-param="method" operation-value="traversePage">
+			<param name="entity" regex="am.oraclecloud.compartment"
+				max-len="1000" />
+			<param name="monitortype" type="String" />
+			<param name="tab" regex="am.alarmsdetails.tab" />
+			<param name="category" regex="am.alphanumeric" />
+			<param name="displayName" type="String" />
+			<param name="haid" type="String" />
+			<param name="header" type="String" />
+			<param name="monitor" type="String" />
+			<param name="redirectto" type="String" max-len="2000"
+				max-occurrences="2" />
+			<param name="source" type="String" />
+			<param name="technician" regex="am.alarmsdetails.technician"
+				max-occurrences="2" />
+			<param name="viewId" regex="am.alarms.viewID.alert" />
+			<param name="alertMessage" regex="am.alarm.alertmessage"
+				max-len="500" />
+			<param name="adminrequest" type="boolean" />
+			<param name="sid" type="String" max-len="200" />
+		</url>
+		<url path="/fault/AlarmDetails.do" method="GET"
+			roles="am.role.ADMIN.EA.OP.US" authentication="required"
+			operation-param="method" operation-value="getTemplateInfo">
+			<param name="userName" regex="^admin$" />
+			<param name="bulkannotate" type="boolean" />
+			<param name="entity" regex="am.deleteAnnotation.entity"
+				max-len="1000" />
+			<param name="reqTemplateId" regex="^[A-Za-z0-9\_\s]+$" />
+			<param name="API" type="boolean" />
+		</url>
+		<url path="/EventViewPDF.do" method="GET">
+			<param name="displayName" type="String" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="monitor" type="String" />
+			<param name="reportType"
+				regex="am.schedule.report.reportformat" />
+			<param name="selectedEntity" regex="am.deleteAnnotation.entity"
+				max-len="2500" />
+			<param name="time" regex="am.alarms.viewID.alert" /> <!-- [#AM35197] -  WAF Issue while fetching pdf report from Alarms Tab for uri /EventViewPDF.do - Broken since 15500. -->
+			<param name="viewId" regex="am.alarms.viewID.alert" />
+		</url>
+		<url path="/alertEscalation.do" method="get"
+			roles="am.role.ADMIN.EA" authentication="required"
+			operation-param="method" operation-value="editRule"
+			custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="rid" type="int" />
+		</url>
+		<url path="/alertEscalation.do" method="get"
+			operation-param="method" operation-value="newRule" />
+		<url path="/alertEscalation.do" method="get"
+			operation-param="method" operation-value="showRules">
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+		<url path="/alertEscalation.do" method="post"
+			operation-param="method" operation-value="removeRule"
+			roles="am.role.ADMIN.EA" authentication="required" csrf="true"
+			custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="ruleids" type="int" max-occurrences="50" />
+			<param name="headercheckbox2" regex="onlyon" />
+		</url>
+		<url path="/alertEscalation.do" method="post"
+			operation-param="method" operation-value="sendEnableDetails"
+			roles="am.role.ADMIN.EA" authentication="required" csrf="true" 
+			custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="id" type="int" />
+		</url>
+		<url path="/alertEscalation.do" method="GET"
+			roles="am.role.ADMIN.EA" authentication="required"
+			operation-param="method" operation-value="sendAjaxDetails">
+			<param name="resource" regex="^(monitorgroup)$" />
+			<param name="sid" regex="am.common.longandnull" />
+		</url>
+		<url path="/showHyperVClusterApplication.do" method="GET"
+			operation-param="method" operation-value="showResourceSummary">
+			<param name="haid" type="long" />
+			<param name="subResType" type="String" />
+			<param name="selectedResource"
+				regex="am.HyperVCluster.selectedresource" />
+		</url>
+		<url path="/manageApplications.do" method="post"
+			operation-param="method" operation-value="deleteHyperVClusterGroup"
+			csrf="true">
+			<param name="select" type="long" />
+		</url>
+		<url path="/manageHyperVMs.do" method="get"
+			operation-param="method" operation-value="filterVMs">
+			<param name="HostName" regex="am.hostname" />
+			<param name="rowIds" regex="am.recorder.long.commaSeparated" />
+			<param name="action" regex="am.HyperVMs.filter.action" />
+		</url>
+		<url path="/ProcessTemplates.do" method="post"
+			roles="am.role.ADMIN.EA" authentication="required"
+			operation-param="method" operation-value="associateProcessTemplate" csrf="true"
+			custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="templatetype" type="int" />
+			<param name="templateName" type="String" max-len="50" />
+			<param name="templateDescription" type="String" max-len="1000" />
+			<param name="matchinterval" type="int" />
+			<param name="processcheckbox" type="int" max-occurrences="1000" />
+			<param name="servertypelist" type="int" />
+			<param name="mgName" type="String" max-occurrences="2147483647" />
+			<param name="monitorchooser"
+				regex="am.processTemplate.monitorchooser" />
+			<param name="edit" type="boolean" />
+			<param name="selectedservertype" type="String" />
+			<param name="servertypecheckbox" type="String"
+				max-occurrences="14" /> <!-- For every windows support increase the max-occurrences -->
+			<param name="templateid" type="int" />
+			<param name="select" type="long" max-occurrences="2147483647" />
+			<param name="am.processTemplate.pcmd" type="String"
+				name-regex="true" max-len="8191" />
+			<param name="am.processTemplate.pcmdregex" type="int"
+				name-regex="true" />
+			<param name="am.processTemplate.pname" type="String"
+				name-regex="true" max-len="250" />
+			<param name="am.processTemplate.pnameregex" type="int"
+				name-regex="true" />
+			<param name="am.processTemplate.pdispname" type="String"
+				name-regex="true" max-len="250" />
+			<param name="am.processTemplate.selected" type="long"
+				name-regex="true" />
+			<param name="am.processTemplate.threshold"
+				regex="am.processTemplate.thresholdValue" name-regex="true" />
+			<param name="am.processTemplate.thresholdname" type="String"
+				name-regex="true" />
+			<param name="am.processTemplate.criticalaction"
+				regex="am.recorder.long.commaSeparated" name-regex="true"
+				max-len="1000" />
+			<param name="am.processTemplate.warningaction"
+				regex="am.recorder.long.commaSeparated" name-regex="true"
+				max-len="1000" />
+			<param name="am.processTemplate.clearaction"
+				regex="am.recorder.long.commaSeparated" name-regex="true"
+				max-len="1000" />
+
+		</url>
+		<url path="/ProcessTemplates.do" method="get"
+			roles="am.role.ADMIN.EA.DE" authentication="required"
+			operation-param="method" operation-value="createProcessTemplate"
+			custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="templateid" type="int" />
+			<param name="edit" type="boolean" />
+			<param name="templatetype" type="int" />
+		</url>
+		<url path="/ProcessTemplates.do" method="post"
+			roles="am.role.ADMIN.EA" authentication="required"
+			operation-param="method" operation-value="deleteTemplate" csrf="true"
+			custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="templatetype" type="int" />
+			<param name="checkbox" type="int" max-occurrences="50" />
+			<param name="headercheckbox" regex="onlyon" />
+		</url>
+		<url path="/ProcessTemplates.do" method="get"
+			roles="am.role.ADMIN.EA.DE" authentication="required"
+			operation-param="method" operation-value="showAllTemplates">
+			<param name="templatetype" type="int" />
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+		<url path="/ProcessTemplates.do" method="post"
+			roles="am.role.ADMIN.EA" authentication="required"
+			operation-param="method" operation-value="createThreshold"
+			csrf="true">
+			<param name="displayname" type="String" max-len="100" />
+			<param name="criticalthresholdcondition"
+				regex="am.threshold.condition" />
+			<param name="warningthresholdcondition"
+				regex="am.threshold.condition" />
+			<param name="infothresholdcondition"
+				regex="am.threshold.condition" />
+			<param name="criticalthresholdvalue" type="int"
+				min-occurrences="1" />
+			<param name="warningthresholdvalue" type="int" />
+			<param name="infothresholdvalue" type="int" />
+		</url>
+		<url path="/ProcessTemplates.do" method="get"
+			roles="am.role.ADMIN.EA" authentication="required"
+			operation-param="method" operation-value="editProcess">
+			<param name="templatetype" type="int" />
+			<param name="templatetypestr"
+				regex="am.processTemplate.templatetypestr" />
+			<param name="editprocess" type="boolean" />
+			<param name="processid" type="int" />
+			<param name="sid" type="long" />
+		</url>
+		<url path="/ProcessTemplates.do" method="get"
+			roles="am.role.ADMIN.EA" authentication="required"
+			operation-param="method" operation-value="getThresholdActionList">
+			<param name="attributeid" type="long" />
+			<param name="attributename" type="String" />
+			<param name="templatetype" type="int" />
+			<param name="thresholdactionexist" type="boolean" />
+			<param name="thresholdid" type="long" />
+			<param name="critical" regex="am.recorder.long.commaSeparated"
+				max-len="1000" />
+			<param name="warning" regex="am.recorder.long.commaSeparated"
+				max-len="1000" />
+			<param name="clear" regex="am.recorder.long.commaSeparated"
+				max-len="1000" />
+			<param name="thresholdname" type="String" />
+			<param name="thresholdType" regex="am.common.one.two"/>
+		</url>
+		<url path="/ProcessTemplates.do" method="get"
+			roles="am.role.ADMIN.EA" authentication="required"
+			operation-param="method" operation-value="getAllServerList">
+			<param name="templatetype" type="int" />
+			<param name="templatetypestr"
+				regex="am.processTemplate.templatetypestr" />
+			<param name="sid" type="long" />
+		</url>
+		<url path="/adminAction.do" method="POST" csrf="true"
+			roles="am.role.ADMIN.EA" authentication="required"
+			operation-param="method" operation-value="applyTemplateSettings">
+			<param name="headercheckbox" regex="onlyon" />
+			<param name="monitors" type="long" max-occurrences="500" />
+			<param name="resourcedisplayname" regex="am.displayname.common" />
+			<param name="resourceid" type="long" />
+			<param name="resourcetype" regex="am.montype" />
+			<param name="am.alarmTemplate.deleteExisting" type="boolean"
+				name-regex="true" />
+		</url>
+		<url path="/confActions.do" method="get" operation-param="method"
+			operation-value="getEventLogForWindowsCluster" privilege-identifier="resourceid" 
+			roles="am.role.ADMIN.EA.OP.US.DE" authentication="required">
+			<param name="resourceid" type="long" />
+			<param name="draw" type="int" />
+			<param name="am.WindowsCluster.Column"
+				regex="^([0-8]|true|false)$" name-regex="true" />
+			<param name="am.WindowsCluster.Column.name" type="String"
+				name-regex="true" />
+			<param name="am.WindowsCluster.Column.SearchValue"
+				type="String" name-regex="true" />
+			<param name="am.WindowsCluster.order"
+				regex="^([0-8]|asc|desc)$" name-regex="true" />
+			<param name="start" type="int" />
+			<param name="length" type="int" />
+			<param name="search[value]" type="String" />
+			<param name="search[regex]" type="boolean" />
+			<param name="_" type="long" />
+		</url>
+		<url path="/fault/AlarmDetails.do" roles="am.role.ADMIN.EA.OP"
+			authentication="required" method="POST" operation-param="method"
+			operation-value="executeActions" csrf="true">
+			<param name="actionOption" type="String" />
+			<param name="actionType" regex="am.newaction.type"
+				max-occurrences="2" />
+			<param name="entity" regex="am.deleteAnnotation.entity"
+				max-occurrences="2" max-len="2500" />
+		</url>
+		<url path="/fault/AlarmDetails.do" method="GET"
+			roles="am.role.ADMIN.EA.OP" authentication="required"
+			operation-param="method" operation-value="showActions">
+			<param name="bulkannotate" type="boolean" />
+			<param name="entity" regex="am.deleteAnnotation.entity"
+				max-occurrences="2" max-len="2500" />
+			<param name="sid" type="long" />
+			<param name="actionType" regex="am.newaction.type" />
+			<param name="ticketStatus" regex="am.showAction.ticket.status" />
+		</url>
+		<url path="/fault/AlarmOperations.do" method="post"
+			roles="am.role.ADMIN.EA.OP" authentication="required"
+			operation-param="methodCall" operation-value="executeActions"
+			csrf="true">
+			<param name="accName" type="String" max-len="1000" />
+			<param name="reqName" type="String" max-len="1000" />
+			<param name="siteName" type="String" max-len="500" max-occurrences="100" />
+			<param name="ATTRIBUTEID" type="int" />
+			<param name="RESOURCEID" type="long" />
+			<param name="SEVERITY" type="int" />
+			<param name="actionId" regex="^(\d+|NotSelected)$" />
+			<param name="executedFrmAlarm" type="boolean" />
+			<param name="message" type="String" max-len="1000" />
+			<param name="reqTemplate" regex="^[A-Za-z0-9\_\s]+$" />
+			<param name="selectView" regex="^(Action|Form)$" />
+			<param name="selectedEntity" regex="am.deleteAnnotation.entity" max-len="2500"/>
+			<param name="subject" type="String" />
+			<param name="persist" type="boolean" />
+		</url>
+		<url path="/adminAction.do" method="get" operation-param="method"
+			operation-value="getAllDetailsOfHost" roles="am.role.ADMIN.EA"
+			authentication="required">
+			<param name="type" regex="am.monitor.type" />
+			<param name="hostName" regex="am.hostname" />
+			<param name="serverType" regex="am.servermonitor.os.undefined" />
+			<param name="modeOfMonitor"
+				regex="am.servermonitor.mode.undefined" />
+			<param name="userName" type="String" max-len="256" />
+			<param name="TelnetCredentialDetails"
+				regex="am.servermonitor.TelnetCredentialDetails.undefined" />
+			<param name="cmTelnetValue" regex="-1andnumeric.undefined" />
+			<param name="SSHCredentialDetails"
+				regex="am.servermonitor.SSHCredentialDetails.undefined" />
+			<param name="cmSSHValue" regex="-1andnumeric.undefined" />
+			<param name="SNMPCredentialDetails"
+				regex="am.servermonitor.SNMPCredentialDetails.undefined" />
+			<param name="cmSNMPValue" regex="-1andnumeric.undefined" />
+			<param name="snmpAuthProtocol"
+				regex="am.servermonitor.snmpAuthProtocol.undefined" />
+			<param name="snmpAuthPassword" type="String" max-len="12" secret="true"/>
+			<param name="snmpPrivPassword" type="String" max-len="9" secret="true"/>
+			<param name="snmpSecurityLevel"
+				regex="am.servermonitor.snmpSecurityLevel.undefined" />
+			<param name="snmpUserName" regex="am.windows.username" />
+			<param name="snmpContextName" max-len="255" type="String" />
+			<param name="password" type="String" max-len="256"
+				secret="true" />
+			<param name="sshKey" type="String" max-len="10000" secret="true"/>
+			<param name="portNumber" regex="am.port.undefined" />
+			<param name="snmpPort" regex="am.port.undefined" />
+			<param name="snmpVersionValue"
+				regex="am.snmp.version.undefined" />
+			<param name="community" max-len="255" type="String" secret="true"/>
+			<param name="prompt" type="String" />
+			<param name="version" regex="am.version.undefined" />
+			<param name="soapPort" regex="am.port.undefined" />
+			<param name="mode" regex="am.servermonitor.mode.undefined" />
+			<param name="ndHost" regex="am.hostname" />
+			<param name="ndPort" regex="am.port.undefined" />
+			<param name="sslEnabled" type="boolean" />
+			<param name="urlName" type="String" max-len="2083" />
+		</url>
+		<url path="/manageHyperVMs.do" method="post"
+			operation-param="method" operation-value="manageVMs" api="true"
+			systemadmin_enterprise="true" authentication="required">
+			<param name="action" regex="am.HyperVMs.filter.action" />
+			<param name="resIds" regex="am.recorder.long.commaSeparated" />
+		</url>
+		<url path="/HostResourceDispatch.do" method="GET"
+			operation-param="method" operation-value="getMonitorsInSystem"
+			roles="am.role.ADMIN.EA.OP.US.DE" authentication="required"
+			privilege-identifier="resourceid">
+			<param name="mode" regex="am.servermonitor.mode.undefined" />
+			<param name="randid" type="int" />
+			<param name="resourceType" regex="am.servermonitor.os.undefined" />
+			<param name="resourceid" type="long" min-occurrences="1" />
+			<param name="resourcename" regex="am.hostname.ext.3" />
+		</url>
+		<url path="/createThresholdCSV.do"
+			roles="am.role.ADMIN.EA.OP.US.DE.REP" authentication="required"
+			method="POST" operation-param="method"
+			operation-value="createThresholdConfCSV" csrf="true">
+			<param name="allSelected" regex="onlyon" />
+			<param name="selectedGroups" type="long" max-occurrences="2000" />
+			<param name="unAssociatedMonitors" regex="onlyon" />
+			<param name="unCatMonitors" regex="onlyon" />
+		</url>
+	</urls>
+
+	<urls path="/alertEscalation.do" method="post"
+			roles="am.role.ADMIN.EA" authentication="required"
+			operation-param="method">
+		<param-group name="am.additional.extra.params" />
+		<param name="rulename" type="String" max-len="250" />
+		<param name="monitortype" type="int" />
+		<param name="searchByName" type="String" max-len="250" />
+		<param name="timeinterval" type="int" />
+		<param name="monitorseverity" type="int" />
+		<param name="timeperiod" type="int" />
+		<param name="timeunit" regex="am.filemon.timeunit" />
+		<param name="sendmail" type="long" />
+		<param name="selectedAction" type="long" />
+		<param name="attributename" type="String" />
+		<param name="priority" type="String" max-len="250" />
+		<param name="optmail" regex="am.boolean" />
+		<param name="ack" regex="am.boolean" />
+		<param name="execute" regex="am.boolean" />
+		<param name="ruleid" type="int" />
+		<param name="maintenanceCombo1" type="int"
+			max-occurrences="1000" />
+		<param name="maintenanceCombo2" type="int"
+			max-occurrences="1000" />
+		<param name="mgName" type="String" max-occurrences="2147483647" />
+		<param name="select" type="long" max-occurrences="2147483647" />
+		<param name="sid" type="int" /> <!-- this is a extra param for method="updateRuledetails" -->
+		<url operation-value="updateRuledetails" csrf="true"
+			custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+		</url>
+		<url operation-value="addRuledetails" csrf="true" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin"/>
+	</urls>
+
+	<urls roles="am.role.ADMIN.EA.OP.US.DE" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<param name="header" type="String" />
+		<param name="plugin_view" type="boolean" />
+		<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		<param name="isCorrelated" type="String" />
+		<param name="viewId" regex="am.alarms.viewID.alert" />
+		<param name="timeId" regex="am.alarms.viewID.alert" />
+		<param name="displayName" regex="am.displayname.common" />
+		<param name="FROM_INDEX" type="int" max-occurrences="2" />
+		<param name="TO_INDEX" type="int" max-occurrences="2" />
+		<param name="RANGE" type="int" />
+		<param name="orderByColumn" type="String" />
+		<param name="isAscending" type="boolean" />
+		<param name="PAGE_NUMBER" type="int" max-occurrences="2" />
+		<param name="severity" type="int" />
+		<param name="viewLength" type="int" />
+		<param name="monitor" regex="am.webclient.monitor.type" />
+		<param name="haid" regex="am.alphanumeric.alllanguages" />
+		<param name="widgetId" regex="am.common.longandnull" />
+		<param name="technician" regex="am.alarmsdetails.technician" max-occurrences="2"/>
+		<url path="/fault/AMAlarmView.do" method="GET" />
+		<url path="/fault/AlarmView.do" method="GET">
+			<param name="alarmSearchQuery" type="String" max-len="200" />
+			<param name="alertpagetype" regex="^showPage$" />
+			<param name="alarmSearchMessage" type="String" max-len="200" />
+			<param name="alarmSearchName" type="String" max-len="200" />
+			<param name="alarmSearchType" type="String" max-len="200" />
+			<param name="alarmSearchUser" type="String" max-len="200" />
+			<param name="ajaxRequest" regex="am.boolean" />
+			<param name="alarmSearchMASName" type="String" max-len="200" />
+			<param name="statusMsg" type="String" max-len="200" />
+			<param name="entity" regex="am.deleteAnnotation.entity"
+				max-len="200" />
+			<param name="multipleSelect" type="String" max-occurrences="1000" />
+			<param name="rowSelection" regex="apminsight_traceId" max-occurrences="200" />
+			<param name="toggleAll" regex="onlyon" />
+		</url>
+	</urls>
+	<!-- Configure Alarm URLS START-->
+	<urls method="GET" operation-param="method" throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<url path="/showActionProfiles.do" operation-value="getResourceProfiles" authentication="required" roles="am.role.ADMIN.EA.DE">
+			<param name="haid" type="long" max-occurrences="10"/>
+			<param name="haidValue" type="long"/>
+			<param name="resourceid" type="long"/>
+			<param name="all" type="boolean"/>
+			<param name="admin" type="boolean"/>
+			<param name="monitor" type="boolean"/>
+			<param name="include" type="boolean"/>
+			<param name="isThreshold" type="boolean"/>
+			<param name="groupTemplate" type="boolean"/>
+			<param name="mtype" regex="am.monitor.type" max-len="200" />
+			<param name="montype" regex="am.webclient.monitor.type" max-len="200" />
+			<param name="mgTemplateType" regex="am.webclient.monitor.type" max-len="200" />
+			<param name="siteName" type="String" max-len="200" />
+			<param name="organization" type="String" max-len="200" />
+			<param name="viewBy" regex="am.configure.alarm.category" />
+			<param name="reqID" regex="am.configure.alarm.request.type" />
+			<param name="groupActions" regex="am.configure.alarm.group.type" />
+			<param name="redirectto" type="String" max-len="1000"/>
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+			<param name="plugin_view" type="boolean" />
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+			<param name="mgTemplateMonitorType" regex="am.custom.monitortype.type" />
+		</url>
+	</urls>	
+	<!-- Configure Alarm URLS END-->
+
+	<!-- Dependent Device URLS START-->		
+	<urls path="/showresource.do" operation-param="method" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<param name="service" regex="am.action.fromadminlayout.service" />
+		<param name="reqForAdminLayout" type="boolean" />
+		<url operation-value="deleteDependentMonitor" method="POST" csrf="true" authentication="required" privilege-identifier="childId" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="parentId" type="long"/>
+			<param name="childId" type="long"/>
+		</url>
+		<url operation-value="selectDependentMonitor" method="GET" authentication="required" privilege-identifier="haid" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="sid" type="long"/>
+			<param name="haid" type="long"/>
+			<param name="selectedMonitors" type="JSONArray" template="arrayjson" array-size="0-1000" max-len="100000"/>
+		</url>
+		<url operation-value="selectDependentMGroups" method="GET" authentication="required" privilege-identifier="haid" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="sid" type="long"/>
+			<param name="haid" type="long"/>
+			<param name="fromADDM" type="boolean"/>
+			<param name="search" type="String" max-len="200"/>
+			<param name="selectedDepMonGroups" regex="am.common.numberandcomma" max-len="100000"/>
+		</url>
+		<url operation-value="searchDependentMonitor" method="GET" authentication="required" privilege-identifier="haid" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="haid" type="long"/>
+			<param name="query" type="String" max-len="-1"/>
+		</url>
+		<url operation-value="selectDependentMonitorFilter" method="POST" csrf="true" authentication="required" privilege-identifier="haid" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="haid" type="long"/>
+			<param name="managedServer" type="String"/>
+			<param name="type" type="String" max-len="200"/>
+			<param name="selectedMonitors" type="JSONArray" template="arrayjson" array-size="0-1000" max-len="100000"/>
+		</url>
+	</urls>
+
+	<urls method="POST" operation-param="method" csrf="true" throwallerrors="true" >
+		<param name="fromAjax" type="boolean"/>
+		<param-group name="am.additional.extra.params" />
+		<url path="/manageApplications.do" operation-value="removeMonitorGrpFromDependency" authentication="required" roles="ADMIN,ENTERPRISEADMIN" privilege-identifier="parentGroupId">
+			<param name="parentGroupId" type="long"/>
+			<param name="selectedGroupId" type="long"/>
+		</url>
+	</urls>
+	<!-- Dependent Device URLS END-->
+	
+	<!-- WAF for WEB Starts -->
+	<urls method="GET" throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<url path="/jsp/AttributeDetails.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="fromAlerts" type="boolean" />
+			<param name="haid" regex="am.deleteAnnotation.entity" />
+			<param name="alertid" regex="am.deleteAnnotation.entity" />
+			<param name="oldalertid" regex="am.generateAlert.entity" />
+			<param name="showtime" type="long" />
+			<param name="customgraph" type="boolean" />
+			<param name="severity" regex="scriptHealthTableRow" />
+			<param name="resType" regex="am.anomaly.dash.restype" />
+			<param name="cst" type="String" max-len="250"/>
+			<param name="time" type="long" />	
+		</url>
+		
+		<url path="/jsp/Systemoptions.jsp" authentication="required" roles="am.role.ADMIN.EA.DE"> </url>
+				
+		<url path="/jsp/NewThresholdConfiguration.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="resourceid" type="long" max-occurrences="2"/>
+			<param name="haid" type="long"/>
+			<param name="attributeIDs" regex="am.recorder.long.commaSeparated" max-len="2000" />
+			<param name="attributeToSelect" regex="am.recorder.long.commaSeparated" max-len="2000" />
+			<param name="redirectto" type="String" max-len="2000" />
+			<param name="global" type="boolean" />
+			<param name="popup" type="boolean" />
+			<param name="hideArea" type="boolean"/>
+			<param name="method" regex="am.custom.monitortype" />
+			<param name="isFromHealthAvailability" type="boolean"/>
+		</url>
+		
+		<url path="/jsp/FaultTemplateOptions.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="resourceid" type="long" />
+			<param name="resourcename" type="String" max-len="200" />
+			<param name="resourcetype" regex="am.custom.monitortype" />
+			<param name="resourceDisplayName" regex="am.custom.monitortype" max-len="200" />
+			<param name="resourcetypedisplayname" regex="am.custom.monitortype" max-len="200" />
+			<param name="sid" type="long" />
+		</url>
+		
+		<url path="/jsp/RCA.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="monitorType" regex="am.custom.monitortype" />
+			<param name="resourceid" type="long" />
+			<param name="attributeid" type="long" />
+			<param name="alertconfigurl" type="String" max-len="2000" />
+			<param name="sid" type="String" max-len="200" />
+		</url>
+		
+		<url path="/jsp/RCATop.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="monitorType" regex="am.custom.monitortype" />
+			<param name="resourceid" type="long" />
+			<param name="attributeid" type="long" />
+			<param name="nodeClicked" type="long" />
+			<param name="alertconfigurl" type="String" max-len="2000" />
+			<param name="normal" regex="am.common.TFNull" />
+			<param name="sid" type="String" max-len="200" />
+			<param name="selectedscheme" regex="am.common.selectedscheme" max-occurrences="2"/>
+			<param name="selectedSkin" regex="am.common.selectedSkin" max-occurrences="2"/>
+		</url>
+		
+		<url path="/jsp/includes/SelectedMonitorThreshold.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="monitorType" type="String" max-len="100" />
+			<param name="resourceid" type="long" />
+			<param name="attributeid" type="long" />
+			<param name="resourcetype" regex="am.custom.monitortype.type" />
+			<param name="thresholdid" regex="am.applytosimilar.monitor.thresholdid" />
+			<param name="anomalyid" regex="am.applytosimilar.monitor.thresholdid" />
+			<param name="groupTemplate" regex="am.common.TFNull" />
+			<param name="haid" regex="am.common.longandnull" max-occurrences="2"/>
+			<param name="sid" type="String" max-len="200" />
+		</url>
+		
+		<url path="/jsp/ThresholdProfile.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="monitorType" regex="am.custom.monitortype.type" />
+			<param name="thresholdid" regex="am.configure.alarm.thresholdList" />
+			<param name="thresName" type="String" max-len="10000" />
+			<param name="criticalCondition" regex="am.thresholdprofile.condition" />
+			<param name="warningCondition" regex="am.thresholdprofile.condition" />
+			<param name="clearCondition" regex="am.thresholdprofile.condition" />
+			<param name="criticalValue" regex="am.threshold.value" />
+			<param name="warningValue" regex="am.threshold.value" />
+			<param name="clearValue" regex="am.threshold.value" />
+			<param name="time" regex="am.common.javascriptDate" max-len="200" />
+		</url>
+		
+		<url path="/jsp/Alarm.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" > </url>
+	</urls>
+	
+	<urls method="get,post" throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<!-- Fix for AM34246 
+			 Unwanted params where sent for this URI through improper encoding of redirectto param from various places
+			 Ignored extra params for the URI /jsp/ThresholdActionConfiguration.jsp -->
+		<url path="/jsp/ThresholdActionConfiguration.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" ignore-extraparam="true">
+			<param name="attributeIDs" regex="am.recorder.long.commaSeparated" max-len="2000" />
+			<param name="attributeToSelect" regex="am.recorder.long.commaSeparated" max-len="2000" />
+			<param name="groupTemplate" regex="am.common.TFNull" />
+			<param name="haid" regex="am.common.longandnull" max-occurrences="2"/>
+			<param name="resourceid" regex="am.common.longandnull" max-occurrences="2"/>
+			<param name="requesttype" type="int" />
+			<param name="tabname" regex="am.configure.alarm.tabname" />
+			<param name="anomid" regex="am.configure.alarm.reset" />
+			<param name="appName" type="String" />
+			<param name="global" regex="am.common.TFNull" />
+			<param name="isAnomaly" type="boolean"/>
+			<param name="deleteConfigType" regex="am.configure.alarm.deleteTempConfig" />
+			<param name="redirectto" type="String" max-len="10000" max-occurrences="2" />
+			<param name="isredirect" regex="am.common.TFNull" max-occurrences="2" />
+			<param name="thresholdactionparams" type="String" max-len="10000"/>
+			<param name="noreload" regex="am.common.TFNull" />
+			<param name="depDeviceId" type="String" max-len="100000"/>
+			<param name="selectedMonitors" regex="am.configure.alarm.monitorList" max-len="1000" />
+			<param name="attributeList" regex="am.common.numberandcomma" />
+			<param name="thresholdProfile" regex="am.configure.alarm.tabname" />
+			<param name="thresholdList" regex="am.configure.alarm.thresholdList" />
+			<param name="anomalyProfiles" regex="am.configure.alarm.thresholdList" />
+			<param name="secondarycriticalexist" regex="am.common.TFNull" />
+			<param name="secondarywarningexist" regex="am.common.TFNull" />
+			<param name="secondaryinfoexist" regex="am.common.TFNull" />
+			<param name="thresName" type="String" max-len="10000" />
+			<param name="criticalthresholdcondition1" regex="am.threshold.condition" max-occurrences="3" />
+			<param name="criticalthresholdvalue1" regex="am.threshold.value" max-occurrences="3" />
+			<param name="criticalconditionjoiner" regex="am.common.Conjunction" />
+			<param name="secondarycriticalthresholdcondition" regex="am.threshold.condition" max-occurrences="3" />
+			<param name="secondarycriticalthresholdvalue" regex="am.threshold.value" />
+			<param name="warningconditionjoiner" regex="am.common.Conjunction" />
+			<param name="secondarywarningthresholdvalue" regex="am.threshold.value" />
+			<param name="infoconditionjoiner" regex="am.common.Conjunction" />
+			<param name="secondaryinfothresholdvalue" regex="am.threshold.value" />
+			<param name="checkbox1" regex="am.common.On" />
+			<param name="checkbox2" regex="am.common.On" />
+			<param name="checkbox1A" regex="am.common.On" />
+			<param name="selectedactions_critical" type="long" max-occurrences="10000" />
+			<param name="selectedactions_warning" type="long" max-occurrences="10000" />
+			<param name="selectedactions_clear" type="long" max-occurrences="10000" />
+			<param name="selected_dependencies" regex="am.common.numberandsemicolon" max-occurrences="10000"/>
+			<param name="availableactions_critical" type="long" max-occurrences="10000" />
+			<param name="availableactions_warning" type="long" max-occurrences="10000" />
+			<param name="availableactions_clear" type="long" max-occurrences="10000" />
+			<param name="radiobutton" regex="zeroandminusone" />
+			<param name="any_count" type="int" />
+			<param name="criticalpollscount" type="int" />
+			<param name="clearpollscount" type="int" />
+			<param name="isSecondaryLevelAttr" type="boolean" />
+			<param name="all" type="boolean" />
+			<param name="resourceType" regex="am.webclient.monitor.type" />
+			<param name="isThreshold" type="boolean" />
+			<param name="isConfigured" type="String" max-len="1000"/>
+			<param name="multimonitors" regex="am.usermanagement.userGroupMG" />
+			<param name="similarmonitors_selected" type="long" max-occurrences="10000" />
+			<param name="similarmonitors_available" type="long" max-occurrences="10000" />
+			<param name="overrideConfig" regex="am.configure.alarm.overrideThresholdConfig" />
+			<param name="description" type="String" max-len="250"/>
+			<param name="displayname" type="String"/>
+			<param name="criticalthresholdcondition" regex="am.threshold.condition" />
+			<param name="criticalthresholdvalue" regex="am.threshold.value" />
+			<param name="warningthresholdcondition" regex="am.threshold.condition" />
+			<param name="secondarywarningthresholdcondition" regex="am.threshold.condition" />
+			<param name="warningthresholdvalue" regex="am.threshold.value" />
+			<param name="infothresholdcondition" regex="am.threshold.condition" />
+			<param name="secondaryinfothresholdcondition" regex="am.threshold.condition" />
+			<param name="infothresholdvalue" regex="am.threshold.value" />
+			<param name="showOption" regex="am.common.On" />
+			<param name="confAttThresholdOption" regex="am.threshold.onchange" />
+			<param name="method" regex="am.custom.monitortype" />
+			<param name="suppressAlert" type="int" />
+			<param name="editname" type="String" max-len="10000" />
+			<param name="monitor" type="boolean" />
+			<param name="check" type="boolean" />
+			<param name="hideArea" type="boolean"/>
+			<param name="popup" type="boolean" />
+			<param name="admin" type="boolean" />
+			<param name="showOnlyDependencies" regex="am.common.TFNull" />
+			<param name="sid" type="String" max-len="200" />
+			<param name="isFromHealthAvailability" type="boolean"/>
+		</url>
+		
+		<url path="/webclient/common/jsp/AlarmPaging.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="PAGE_LENGTHS" type="String" max-len="50" />
+			<param name="RECORDS" type="int" />
+			<param name="PAGENUMBER" type="int" />
+			<param name="viewLength" type="int" />
+		</url>
+	</urls>
+	<!-- WAF for WEB Ends --> 
+
+	<!-- url for deny entries -->
+	
+	<urls throwallerrors="true" method="POST" deny-operation="true" >
+		<url path="/jsp/Alarm.jsp" />
+		<url path="/jsp/ThresholdProfile.jsp" />
+		<url path="/jsp/includes/SelectedMonitorThreshold.jsp" />
+		<url path="/jsp/RCATop.jsp" />
+		<url path="/jsp/RCA.jsp" />
+		<url path="/jsp/FaultTemplateOptions.jsp" />
+		<url path="/jsp/NewThresholdConfiguration.jsp" />
+		<url path="/jsp/Systemoptions.jsp" />
+		<url path="/jsp/AttributeDetails.jsp" />
+	</urls>
+	
+	<urls throwallerrors="true" deny-operation="true">
+		<!-- deny- method="get" -->
+		<url path="/createThresholdCSV.do" operation-param="method"
+			operation-value="createThresholdConfCSV" method="get" />
+		<url path="/fault/AlarmOperations.do" operation-param="methodCall"
+			operation-value="pickUpAlarm,unPickAlarm,clearAlarm" method="get" />
+		<url path="/fault/AlarmDetails.do" operation-param="method"
+			operation-value="deleteAnnotation,editAnnotation,setAnnotation"
+			method="get" />
+		<url path="/adminAction.do" operation-param="method"
+			operation-value="applyTemplateSettings" method="get" />
+		<url path="/manageApplications.do" operation-param="method"
+			operation-value="deleteHyperVClusterGroup" method="get" />
+		<url path="/manageHyperVMs.do" operation-param="method"
+			operation-value="manageVMs" method="get" />
+		<!-- deny- method="post" -->
+		<url path="/HostResourceDispatch.do" operation-param="method"
+			operation-value="getMonitorsInSystem" method="post" />
+		<url path="/fault/AlarmDetails.do" operation-param="method"
+			operation-value="doAnnotate,viewAnnotationAndHistory,showActions,traversePage,loadEventHistoryData,getTemplateInfo"
+			method="post" />
+		<url path="/manageHyperVMs.do" operation-param="method"
+			operation-value="filterVMs" method="post" />
+		<url path="/showresource.do" operation-param="method"
+			operation-value="getAlarmDetails" method="post" />
+		<url path="/alertEscalation.do" operation-param="method"
+			operation-value="editRule,newRule,showRules,sendAjaxDetails"
+			method="post" />
+		<url path="/ProcessTemplates.do" operation-param="method"
+			operation-value="createProcessTemplate,showAllTemplates,editProcess,getThresholdActionList,getAllServerList"
+			method="post" />
+		<url path="/EventViewPDF.do" method="post" />
+		<url path="/fault/AMAlarmView.do" method="post" />
+		<url path="/fault/AlarmView.do" method="post" />
+		<url path="/showHyperVClusterApplication.do"
+			operation-param="method" operation-value="showResourceSummary"
+			method="post" />
+		<url path="/confActions.do" operation-param="method"
+			operation-value="getEventLogForWindowsCluster" method="post" />
+		<url path="/adminAction.do" operation-param="method"
+			operation-value="getAllDetailsOfHost" method="post" />
+		<!-- deny- method="get,post" -->
+		<url path="/fault/PrintAMAlarmView.do" method="get,post" />
+		<url path="/fault/PrintAlarmView.do" method="get,post" />
+		<url path="/RecentAlarms.do" operation-param="method"
+			operation-value="getRecentAlarms" method="get,post" />
+		<url path="/fault/AlarmDetails.do" operation-param="method"
+			operation-value="doExecuteActions" method="get,post" />
+		<url path="/showHyperVClusterApplication.do"
+			operation-param="method" operation-value="showResourceDetails"
+			method="get,post" />
+		<url path="/fault/AlarmDetails.do" operation-param="method"
+			operation-value="getActionsForActionType,alertProperties,viewMergedAnnotationAndHistory,otherFailures"
+			method="get,post" />
+		<url path="/showresource.do" operation-param="method"
+			operation-value="listHyperVServerDetails" method="get,post" />
+	</urls>
+
+</security>

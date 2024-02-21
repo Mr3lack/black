@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+
+	<regexes>
+		 <regex name="am.servers.alphanumeric.special.characters" value="^([A-Z]|[a-z]|[0-9]|\*|,|/|.|-| )+$" />
+		 <regex name="am.servers.numericorall" value="^([0-9]+|\*ALL|ALL)$" />
+		 <regex name="am.servers.ibmi.jobandlib.name" value="^[A-Za-z0-9\_\* ]+$" />
+		 <regex name="am.common.numberwithcommaandspace" value="^([0-9]|,| )+$"/>
+    </regexes>
+	<jsontemplates>
+	    <jsontemplate name="am.IBMi.Add.jobs.JsonArray">
+			 <key index="0-300" type="JSONObject" template="am.IBMi.Add.jobs.JsonObject" max-len="-1"/>
+		</jsontemplate>
+	    <jsontemplate name="am.IBMi.Add.jobs.JsonObject">
+	           <key name="ID" type="int" />
+	           <key name="USERNAME" regex="am.alphanumeric"  />
+	           <key name="JOBNAME" regex="am.common.alphaNumeric.ext5" />
+	           <key name="TYPE" regex="^(Autostart|Batch|Subsystem|System|Not Valid|Interactive|Spooled Reader|Spooled Writer|Source PF System)$" />
+	           <key name="SUBSYSTEM" regex="am.common.alphaNumeric.ext5"  />
+	           <key name="NUMBER" type="long" />
+	           <key name="COLLECTIONTIME" type="long"/>
+	    </jsontemplate>
+	    
+	    <jsontemplate name="am.IBMi.Add.subs.JsonArray">
+			 <key index="0-300" type="JSONObject" template="am.IBMi.Add.subs.JsonObject" max-len="-1"/>
+		</jsontemplate>
+	    <jsontemplate name="am.IBMi.Add.subs.JsonObject">
+	           <key name="ID" type="int" />
+	           <key name="NAME" regex="am.common.alphaNumeric.ext1" />
+	           <key name="LIB" regex="am.common.alphaNumeric.ext1" />
+	           <key name="COLLECTIONTIME" type="long"/>
+	    </jsontemplate>
+	    
+	    <jsontemplate name="am.IBMi.Add.queues.JsonArray">
+			 <key index="0-300" type="JSONObject" template="am.IBMi.Add.queues.JsonObject" max-len="-1"/>
+		</jsontemplate>
+	    <jsontemplate name="am.IBMi.Add.queues.JsonObject">
+	           <key name="ID" type="int" />
+	           <key name="QUEUENAME" regex="am.common.alphaNumeric.ext1" />
+	           <key name="LIBNAME" regex="am.common.alphaNumeric.ext1" />
+	           <key name="TYPE" regex="^(DTAQ|JOBQ|OUTQ)$" />
+	           <key name="COLLECTIONTIME" type="long"/>
+	    </jsontemplate>
+	    
+	     <jsontemplate name="am.IBMi.settings.jobs.JsonArray">
+			 <key index="0-300" type="JSONObject" template="am.IBMi.settings.jobs.JsonObject" max-len="-1"/>
+		</jsontemplate>
+	    <jsontemplate name="am.IBMi.settings.jobs.JsonObject">
+	           <key name="ID" type="int" />
+	           <key name="RESNAME" regex="am.common.useragent" max-len="250"/>
+	           <key name="EXCLUDE" type="String" />
+	    </jsontemplate>
+	</jsontemplates> 
+
+	<urls path="/CronJobAction.do" operation-param="method" throwallerrors="true" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+	    <url method="GET" operation-value="addCronJob" deny-operation="true" />
+		<url csrf="true" method="POST" operation-value="addCronJob">
+			<param name="displayName" type="String" max-len="250" />
+			<param name="cronExpression" type="String" />
+			<param name="cronTimeZone" type="String" />
+			<param name="parentResourceId" regex="am.common.onlynumeric" />
+			<param name="jobWaitingTime" regex="am.common.onlynumeric" />
+			<param name="jobScript" type="String" max-len="1000" />
+		</url>
+	    <url method="GET" operation-value="updateCronDetails" deny-operation="true" />
+		<url csrf="true" method="POST" operation-value="updateCronDetails">
+			<param name="parentResourceId" regex="am.common.onlynumeric" />
+			<param name="cronId" regex="am.common.onlynumeric" />
+			<param name="crondisplayName" type="String" max-len="250" />
+			<param name="cronGraceTime" regex="am.common.onlynumeric" />
+		</url>
+	    <url method="GET" operation-value="deleteSelectedCronJob" deny-operation="true" />		
+		<url csrf="true" method="POST" operation-value="deleteSelectedCronJob">
+			<param name="resourceid" type="long" />
+			<param name="hostResType" regex="am.host.cron.Linux" />
+			<param name="selectedCrons" max-occurrences="200" min-occurrences="0"  type="long"/>
+			<param name="cronCheckBox" regex="onlyon" />
+			<param name="name" type="String" />
+		</url>
+		<url method="GET" operation-param="method" operation-value="checkJobTimeOut">
+			<param name="cronId" type="long" />
+			<param name="jobWaitingTime" type="int" />
+		</url>
+		<url method="POST" operation-value="checkJobTimeOut"
+			deny-operation="true" />
+	</urls>
+
+	<!-- HostResourceAction extend DispatchAction -->
+	<urls> <!-- execute (default method calling) -->
+		<url path="/HostResource.do" method="GET" throwallerrors="true"
+			roles="am.role.ADMIN.EA.OP.US.DE" authentication="required"
+			privilege-identifier="resourceid">
+			<param-group name="am.additional.extra.params" />
+			<param name="sqlmanid" regex="am.common.longandnull" />
+			<param name="resourceid" type="long" />
+			<param name="name" type="String" />
+			<param name="opmanager" regex="^(opmanager)$" />
+			<param name="addtotemplate" regex="am.common.TFNull" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="appName" type="String" />
+			<param name="actiononServices" regex="am.host.actionOnServicestrue" />
+			<param name="addProcesScreen" regex="am.common.TFNull" />
+			<param name="reconfigure" regex="am.common.TFNull" />
+			<param name="include" regex="am.common.TFNull" />
+			<param name="showconfigdiv" regex="am.common.TFNull" />
+			<param name="configured" type="boolean" />
+			<param name="disableEdit" type="boolean" />
+			<param name="editProcess" type="boolean" />
+			<param name="processid" type="long" />
+			<param name="type" regex="am.servermonitor.os.undefined" />
+			<param name="isConfigured" type="String" max-len="1000" />
+			<param name="templatetype" type="int" />
+			<param name="message" type="String" max-len="1000" />
+		</url>
+	</urls>
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url path="/adminActivities.do" method="GET" operation-param="method" operation-value="showSSHSettingsPage" authentication="required" roles="am.role.ADMIN.EA.DE" deny-del-admin="true">
+			<param name="service" regex="am.action.fromadminlayout.service"/>
+			<param name="reqForAdminLayout" type="boolean"/>
+		</url>
+		<url path="/adminActivities.do" method="POST" operation-param="method" operation-value="updateSSHSettings" csrf="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="ciphersSuitId" regex="am.DBservers.instance" max-occurrences="5000"/>
+			<param name="keyExchangeId" regex="am.DBservers.instance" max-occurrences="5000"/>
+			<param name="hmacId" regex="am.DBservers.instance" max-occurrences="5000"/>
+		</url>
+	</urls>
+	<urls path="/HostResource.do" operation-param="method"
+		throwallerrors="true" privilege-identifier="resourceid">
+		<param-group name="am.additional.extra.params" />
+		<param name="sqlmanid" regex="am.common.longandnull" />
+		<param name="resourceid" type="long" />
+		<param name="name" type="String" />
+		<param name="opmanager" regex="^(opmanager)$" />
+		<param name="addtotemplate" regex="am.common.TFNull" />
+		<param name="haid" regex="am.haid.grp.long.value" />
+		<param name="appName" type="String" />
+		<param name="actiononServices"
+			regex="am.host.actionOnServicestrue" />
+		<param name="addProcesScreen" regex="am.common.TFNull" />
+		<param name="reconfigure" regex="am.common.TFNull" />
+		<param name="include" regex="am.common.TFNull" />
+		<param name="showconfigdiv" regex="am.common.TFNull" />
+		<param name="configured" type="boolean" />
+		<param name="disableEdit" type="boolean" />
+		<param name="editProcess" type="boolean" />
+		<param name="processid" type="long" />
+		<url method="post" operation-value="showHostConfig" csrf="true"
+			roles="am.role.ADMIN.EA.DE" authentication="required">
+			<param name="passphrase" type="String" />
+			<param name="sshPKAuth" regex="yesnotf" />
+			<param name="timeout" type="int" />
+			<param name="os" regex="am.servermonitor.os.undefined" />
+			<param name="displayName" regex="am.displayname.common" />
+			<param name="configure" regex="am.boolean.NA" />
+			<param name="description" type="String" max-len="5000"/>
+			<param name="displayname" regex="am.displayname.common" />
+			<param name="hostos" regex="am.iis.appmanageros" />
+			<param name="mode" regex="am.servermonitor.mode.undefined" />
+			<param name="password" type="String" max-len="256"
+				secret="true" />
+			<param name="pollinterval" type="int" />
+			<param name="port" regex="am.port.undefined" />
+			<param name="prompt" type="String" />
+			<param name="username" regex="am.windows.username"
+				max-len="256" />
+			<param name="snmpVersionValue"
+				regex="am.snmp.version.undefined" />
+			<param name="snmpCommunityString" max-len="255" type="String" />
+			<param name="snmpSecurityLevel"
+				regex="am.servermonitor.snmpSecurityLevel.undefined" />
+			<param name="snmpUserName" regex="am.windows.username" />
+			<param name="snmpContextName" max-len="255" type="String" />
+			<param name="snmpAuthProtocol"
+				regex="am.servermonitor.snmpAuthProtocol.undefined" />
+			<param name="snmpAuthPassword" type="String" max-len="12"
+				secret="true" />
+			<param name="snmpPrivPassword" type="String" max-len="9"
+				secret="true" />
+			<param name="eventlog_status" regex="yesnotf" />
+		</url>
+		<url method="POST" roles="ADMIN" authentication="required"
+			operation-value="removeDrive" csrf="true">
+			<param name="drives" type="long" max-occurrences="10" />
+			<param name="type" regex="am.host.type.remove" />
+			<param name="headercheckbox" regex="onlyon" />
+		</url>
+		<url method="post" operation-value="serviceAction"
+			roles="am.role.ADMIN.EA.OP" authentication="required" csrf="true">
+			<param name="services" type="long" max-occurrences="50" />
+			<param name="displayname" type="String" />
+			<param name="msid" type="String" />
+			<param name="processname" type="String" />
+			<param name="serviceid" type="long" />
+			<param name="enabled" regex="am.boolean.NA" />
+			<param name="managedservice" regex="am.boolean.NA" />
+			<param name="unmanageAndResetService" regex="am.boolean.NA" />
+			<param name="headercheckbox" regex="onlyon" />
+			<param name="isVM" regex="am.boolean.NA" />
+			<param name="isRemoveGuestOSConfig" regex="true" />
+		</url>
+		<url method="GET" operation-value="editServiceAction"
+			roles="am.role.ADMIN.EA" authentication="required">
+			<param name="displayname" type="String" />
+			<param name="serviceid" type="long" />
+			<param name="servicename" type="String" />
+		</url>
+		<url method="post" operation-value="addProcess,addServices"
+			roles="am.role.ADMIN.EA" authentication="required" csrf="true">
+			<param name="am.processTemplate.templatetypestr"
+				name-regex="true" type="int" max-occurrences="50" />
+			<param name="command" type="String" max-len="2147483647" />
+			<param name="displayname" type="String" />
+			<param name="edit" type="boolean" />
+			<param name="processid" type="long" />
+			<param name="processname" type="String" />
+		</url>
+		<url method="POST" operation-value="removeProcess" csrf="true"
+			roles="am.role.ADMIN.EA.OP" authentication="required">
+			<param name="enabled" regex="am.boolean.NA" />
+			<param name="managedprocess" regex="am.boolean.NA" />
+			<param name="monitors" type="long" max-occurrences="50" />
+			<param name="unmanageAndResetProcess" regex="am.boolean.NA" />
+			<param name="headercheckbox" regex="onlyon" />
+			<param name="isVirtualMachine" regex="yesnotf" />
+			<param name="tabId" regex="am.common.longbooleanandnull" />
+			<param name="isRemoveGuestOSConfig" regex="true" />
+		</url>
+		<url method="POST" operation-value="addScheduledTasks"
+			roles="ADMIN" authentication="required" csrf="true">
+			<param name="selectedtasks" type="int" max-occurrences="50" />
+		</url>
+		<url method="POST" operation-value="scheduledTasksAction"
+			roles="ADMIN" authentication="required" csrf="true">
+			<param name="option"
+				regex="am.hostResource.scheduledTask.option" />
+			<param name="taskIds" regex="am.common.numberandcomma"
+				max-len="1000" />
+		</url>
+		<url method="GET" operation-value="getProcessList" ignore-extraparam ="true" 
+			roles="am.role.ADMIN.EA.OP.US" authentication="required">
+			<param name="show" type="boolean" />
+			<param name="MBValue" regex="am.common.longandnull" />
+			<param name="PercentMB" regex="am.common.longandnull" />
+			<param name="resType" regex="am.servermonitor.os.undefined" />
+			<param name="sid" type="String" max-len="200" />
+			<param name="templatetype" type="int" />
+			<param name="tabId" regex="am.common.longbooleanandnull" />
+		</url>
+		<url method="GET"
+			operation-value="getServiceList,getScheduledTasksList,goToCronJobConfigPage"
+			roles="am.role.ADMIN.EA" authentication="required">
+			<param name="resType" regex="am.servermonitor.os.undefined" />
+			<param name="sid" type="String" max-len="200" />
+			<param name="templatetype" type="int" />
+			<param name="cronId" regex="am.common.onlynumeric" />
+			<param name="cronDisplayName" type="String" max-len="250" />
+			<param name="cronGraceTime" regex="am.common.onlynumeric" />
+		</url>
+		<url method="GET" operation-value="validateServiceList"
+			roles="am.role.ADMIN.EA" authentication="required">
+			<param name="isTemplate" type="boolean" />
+			<param name="services" regex="am.common.numberandcomma"
+				max-len="1000" />
+		</url>
+		<url method="GET" operation-value="showNetworkInterface"
+			roles="am.role.ADMIN.EA.OP.US.DE" authentication="required">
+			<param name="net_resourceid" type="long" />
+			<param name="sid" type="String" max-len="200" />
+		</url>
+	</urls>
+
+	<!-- url for deny entries -->
+	<urls throwallerrors="true" deny-operation="true">
+		<!-- deny- method="get" -->
+		<url path="/HostResource.do" operation-param="method"
+			operation-value="removeDrive,serviceAction,addProcess,removeProcess,addServices,addScheduledTasks,scheduledTasksAction,showHostConfig"
+			method="get" />
+		<!-- deny- method="post" -->
+		<url path="/HostResource.do" method="post" /> <!-- deny post for execute (default method calling) -->
+		<url path="/HostResource.do" operation-param="method"
+			operation-value="editServiceAction,getProcessList,getServiceList,getScheduledTasksList,validateServiceList,showNetworkInterface,goToCronJobConfigPage"
+			method="post" />
+		<!-- deny- method="get,post" -->
+		<url path="/HostResource.do" operation-param="method"
+			operation-value="editProcess,getAllServerList" method="get,post" />
+	</urls>
+	
+	<urls path="/HostResourceDispatch.do" operation-param="method" throwallerrors="true" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required" privilege-identifier="resourceid">
+	    <param-group name="am.additional.extra.params" />
+	    <url method="GET" operation-param="method" operation-value="getOverViewDetails,getConfigDetails,getCpuCoreDetails,getCronJobDetails,getMemoryDetails,getNetworkDetails,getHardwareHealthDetails,getErrorLogDetails">
+			<param name="resourceid" type="long"/>
+			<param name="resourcename" regex="am.hostname.ext.3"/>
+			<param name="resourceType" regex="am.servermonitor.os.undefined"/>
+			<param name="mode" regex="^(SNMP|SSH|Powershell|TELNET|WMI|local|NoMode|null)$"/>
+			<param name="randid" type="int"/>
+		</url>
+	</urls>
+	
+	<urls path="/as400.do" operation-param="method" throwallerrors="true" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required" privilege-identifier="resourceid">
+	    <param-group name="am.additional.extra.params" />
+	    <url method="GET" operation-value="subsystemMonitor,msgandlogging,dateandtime,systemcontrol,librarylist,storage,allocation,security,productlist,userlist">
+			<param name="resourceid" type="long" />
+			<param name="sid" type="long" />
+		</url>
+		<url method="GET" operation-value="systemvalue">
+			<param name="resourceid" type="long" />
+			<param name="sid" type="long" />
+			<param name="dtype" type="long" />
+			<param name="type" regex="am.servers.alphanumeric.special.characters" />
+			<param name="edit" type="boolean" />
+			<param name="displayname" regex="am.alphanumeric" />
+			<param name="SUBREQUEST" type="boolean" />
+			<param name="port" regex="am.servers.alphanumeric.special.characters" />
+		</url>
+		<url method="POST" operation-value="subsystemMonitor,msgandlogging,systemvalue,dateandtime,systemcontrol,librarylist,storage,allocation,security,productlist,userlist" deny-operation="true" />
+	
+		<url method="GET" operation-value="overviewDetails,jobsDetails,statusDetails,poolDetails,spoolDetails,printerDetails,diskDetails,problemDetails,subsystemDetails,historyLogDetails,queueDetails"  >
+			<param name="resourceid" type="long" />
+			<param name="noredirect" type="boolean" />
+			<param name="date" type="String" max-len="200"/>
+		</url>
+		<url method="GET" operation-value="messagesDetails" >
+		    <param name="resourceid" type="long" />
+			<param name="noredirect" type="boolean" />
+			<param name="date" type="String" max-len="200"/>
+			<param name="status" regex="^(allmsg|messagesDetails|null|msgneedreply)$"/> 
+		</url>
+		<url method="GET" operation-value="adminDetails">
+		    <param name="resourceid" type="long" />
+			<param name="noredirect" type="boolean" />
+			<param name="date" type="String" max-len="200"/>
+			<param name="getDiskLibraryName" type="boolean" />
+			<param name="getmonjobs" type="boolean" /> 
+			<param name="rand" type="double"/>
+		</url>
+		<url method="POST" operation-value="overviewDetails,jobsDetails,statusDetails,poolDetails,messagesDetails,spoolDetails,printerDetails,diskDetails,problemDetails,subsystemDetails,historyLogDetails,queueDetails,adminDetails" deny-operation="true" />
+	    
+	    <url method="GET" operation-value="msgview,spoolview">
+			<param name="resourceid" type="long" />
+			<param name="rowids" type="long" />
+			<param name="sid" type="long" />
+		</url>
+		<url method="POST" operation-value="msgview,spoolview" deny-operation="true" />
+		
+		<url method="GET" operation-value="historyFilter,subsystemFilter,messageFilter,spoolFilter"> 
+			<param name="resourceid" regex="am.common.longandnull" />
+			<param name="sid" type="long" />
+			<param name="status" regex="^(allmsg|critical|clear|warning)$"/>
+            <param name="monvalue" regex="am.servers.numericorall"/> 
+            <param name="catvalue" regex="^(allmsg|critical|clear|warning|msgneedreply)$"/>
+            <param name="isConfigured" regex="am.servers.alphanumeric.special.characters" />
+		</url>
+		<url method="POST" operation-value="historyFilter,subsystemFilter,messageFilter,spoolFilter" deny-operation="true" />
+		
+		<url method="GET" operation-value="jobFilter"> 
+			<param name="resourceid" type="long" />
+			<param name="sid" type="long" />
+			<param name="fromAS400" regex="am.common.TFNull" />
+			<param name="jname" regex="am.servers.alphanumeric.special.characters" />
+			<param name="juser" regex="am.servers.alphanumeric.special.characters" />
+			<param name="jtype" regex="am.servers.alphanumeric.special.characters" />
+			<param name="jresid" regex="am.servers.alphanumeric.special.characters" />
+			<param name="objname" regex="am.servers.alphanumeric.special.characters" />
+			<param name="objlib" regex="am.servers.alphanumeric.special.characters" />
+			<param name="status" regex="^(allmsg|critical|clear|warning|subsystem|subsystem|jobinqueue|jobfromqueue|active|jobq|outq)$"/>
+            <param name="monvalue" regex="am.servers.numericorall"/> 
+            <param name="catvalue" regex="^(allmsg|critical|clear|warning)$"/>
+            <param name="jobsFrom" regex="am.servers.alphanumeric.special.characters" />
+		</url>
+		<url method="POST" operation-value="jobFilter" deny-operation="true" />
+		
+		
+		<url method="GET" operation-value="queueMonitor">
+			<param name="resourceid" type="long" />
+			<param name="fromAS400" type="boolean" />
+			<param name="queueType" regex="^(\*DTAQ|DTAQ|\*JOBQ|JOBQ|\*OUTQ|OUTQ|\*ALL)$"/>
+			<param name="libName" regex="am.servers.ibmi.jobandlib.name" max-len="50"/>
+			<param name="queueName" regex="am.servers.ibmi.jobandlib.name" max-len="50"/>
+			<param name="sid" type="long" />
+		</url>
+		<url method="GET" operation-value="querydetailsl">
+			<param name="resourceid" type="long" />
+			<param name="sid" type="long" />
+		</url>
+		<url method="GET" operation-value="jobMonitor">
+			<param name="resourceid" type="long" />
+			<param name="fromAS400" type="boolean" />
+			<param name="sid" type="long" />
+			<param name="jobName" regex="am.servers.ibmi.jobandlib.name" />
+			<param name="userName" regex="am.servers.ibmi.jobandlib.name" />
+			<param name="jobNumber" regex="am.servers.numericorall" />
+			<param name="jobType" regex="^(A|B|I|M|R|S|W|X|\*JOBQ|\*OUTQ|\*)$" />
+		</url>
+		<url method="POST" operation-value="jobMonitor,queueMonitor,querydetailsl" deny-operation="true" />
+		
+		<url method="GET" operation-value="dspjoblog">
+			<param name="resourceid" type="long" />
+			<param name="jobNumber" type="long" />
+			<param name="user" regex="am.alphanumeric" max-len="500"/>
+			<param name="jobName" regex="am.common.alphaNumeric.ext5" max-len="500"/>
+			<param name="sid" type="long" />
+		</url>
+		<url method="POST" operation-value="dspjoblog" deny-operation="true" />
+		
+	    <url method="GET" operation-value="getenabledetails">
+			<param name="type" regex="(AS400\/iSeries|AS400\\x2FiSeries)$" max-len="30"/>
+			<param name="sid" type="long"/>
+			<param name="resourceid" type="long" />
+		</url>
+		<url method="POST" operation-value="getenabledetails" deny-operation="true" />
+		
+		<url method="GET,POST" operation-value="showdetails" deny-operation="true" />
+	</urls>
+	
+	<urls path="/as400.do" operation-param="method" throwallerrors="true" roles="am.role.ADMIN.EA.OP" authentication="required" privilege-identifier="resourceid" >
+	    <param-group name="am.additional.extra.params" />
+		
+		<url method="GET" operation-value="updateDiskLibrary" deny-operation="true" />
+	    <url method="POST" operation-value="updateDiskLibrary" csrf="true">
+			<param name="diskName" regex="am.servers.alphanumeric.special.characters"/>
+			<param name="resourceid" type="long" />
+		</url>
+		
+		<url method="GET" operation-value="addSubsystem" deny-operation="true" />
+	    <url method="POST" operation-value="addSubsystem" csrf="true">
+			<param name="subsIBMi" type="JSONArray" template="am.IBMi.Add.subs.JsonArray" array-size="0-300" max-len="-1"/>
+			<param name="resourceid" type="long" />
+		</url>
+		
+		<url method="GET" operation-value="addQueue" deny-operation="true" />
+	    <url method="POST" operation-value="addQueue" csrf="true">
+            <param name="queuesIBMi" type="JSONArray" template="am.IBMi.Add.queues.JsonArray" array-size="0-350" max-len="-1"/>			
+            <param name="resourceid" type="long" />
+			<param name="fromAS400" type="boolean" />
+		</url>
+		
+		<url method="GET" operation-value="addJob" deny-operation="true" />
+	    <url method="POST" operation-value="addJob" csrf="true">
+            <param name="jobsIBMi" type="JSONArray" template="am.IBMi.Add.jobs.JsonArray" array-size="0-300" max-len="-1"/>			
+            <param name="resourceid" type="long" />
+			<param name="fromAS400" type="boolean" />
+		</url>
+		
+		<url method="GET" operation-value="jobActions" deny-operation="true" />
+	    <url method="POST" operation-value="jobActions" csrf="true">
+			<param name="rowids" regex="am.common.numberwithcommaandspace" max-len="50000"/>
+			<param name="fn" regex="^(removejob|End|Release|Hold)$" />
+			<param name="specificmonitor" type="boolean" />
+			<param name="spoolSel" regex="onlyon" />
+			<param name="resourceid" type="long" />
+			<param name="checkuncheck" max-occurrences="300" type="long" />
+		</url>
+		
+		<url method="GET" operation-value="subsystemActions" deny-operation="true" />
+	    <url method="POST" operation-value="subsystemActions" csrf="true">
+			<param name="rowids" regex="am.common.numberwithcommaandspace" max-len="50000"/>
+			<param name="fn" regex="^(removesub|Delete|End|Start|Refresh)$" />
+			<param name="specificmonitor" type="boolean" />
+			<param name="spoolSel" regex="onlyon" />
+			<param name="resourceid" type="long" />
+			<param name="checkuncheck" max-occurrences="300" type="long" />
+		</url>
+		
+		<url method="GET" operation-value="queueActions" deny-operation="true" />
+	    <url method="POST" operation-value="queueActions" csrf="true">
+			<param name="rowids" regex="am.common.numberwithcommaandspace" max-len="50000"/>
+			<param name="fn" regex="^(removequeue)$" />
+			<param name="specificmonitor" type="boolean" />
+			<param name="spoolSel" regex="onlyon" />
+			<param name="resourceid" type="long" />
+			<param name="checkuncheck" max-occurrences="300" type="long" />
+		</url>
+		
+		<url method="GET" operation-value="spoolAction" deny-operation="true" />
+	    <url method="POST" operation-value="spoolAction" csrf="true">
+			<param name="rowids" regex="am.common.numberwithcommaandspace" max-len="50000"/>
+			<param name="fn" regex="^(Delete|Release|Hold|MoveToTop)$" />
+			<param name="specificmonitor" type="boolean" />
+			<param name="spoolSel" regex="onlyon" />
+			<param name="resourceid" type="long" />
+			<param name="checkuncheck" max-occurrences="300" type="long" />
+		</url>
+		
+		<url method="GET" operation-value="msgAction" deny-operation="true" />
+	    <url method="POST" operation-value="msgAction" csrf="true">
+			<param name="rowids" regex="am.common.numberwithcommaandspace" max-len="50000"/>
+			<param name="fn" regex="^(Remove ALL|Remove KEEP_UNANSWERED|Remove NEW|Remove OLD)$" />
+			<param name="msgFilter" type="boolean" />
+			<param name="spoolSel" regex="onlyon" />
+			<param name="resourceid" type="long" />
+			<param name="checkuncheck" max-occurrences="300" type="long" />
+		</url>
+		
+		<url method="GET" operation-value="editMonitor" deny-operation="true" />
+	    <url method="POST" operation-value="editMonitor" csrf="true">
+			<param name="applicationname" regex="^[\p{L}\p{N}\.\-\_\+\ ]+$"/>
+			<param name="type" regex="^(AS400\/iSeries|AS400\\x2FiSeries)$" max-len="30" />
+			<param name="displayname" type="String" max-len="515" />
+			<param name="username" type="String" />
+			<param name="resourceid" type="long" />
+			<param name="password" secret="true" type="String" />
+			<param name="pollInterval" type="long" />
+		</url>
+		
+		<url method="GET" operation-value="applyAS400Settings" deny-operation="true" />
+	    <url method="POST" operation-value="applyAS400Settings" csrf="true">
+			<param name="resourcetypedisplayname" regex="^([A-Z]|,)+$" max-len="200"/>
+			<param name="unselected" regex="^([A-Z]|,)+$" />
+			<param name="resourceid" type="long" />
+			<param name="resource" regex="^[A-Z]+$" max-occurrences="10"/> 
+			<param name="monsettings" regex="^(jobs)$" />
+			<param name="jobsIBMi" type="JSONArray" template="am.IBMi.settings.jobs.JsonArray" array-size="0-500" max-len="-1"/>
+			<param max-len="1000" name="am.common.useragent" name-regex="true" regex="am.alphanumeric" max-occurrences="100000"/>
+			<param name="rand" type="double"/>
+		</url>
+		
+		<url method="GET" operation-value="querydetails,querydetaild,querydetaildall" deny-operation="true" />
+	    <url method="POST" operation-value="querydetails,querydetaild,querydetaildall" csrf="true">
+			<param name="description" type="String" max-len="100000"/>
+			<param name="resourceid" type="long" />
+		</url>
+		
+		<url method="GET" operation-value="modifysystemvalue" deny-operation="true" />
+	    <url method="POST" operation-value="modifysystemvalue" csrf="true">
+			<param name="dtype" type="String" max-len="10000"/>
+			<param name="resourceid" type="long" />
+			<param name="name" regex="am.servers.alphanumeric.special.characters" />
+			<param name="type" regex="am.common.resourcetype" />
+			<param name="displayname" regex="am.servers.alphanumeric.special.characters" />
+			<param name="port" regex="am.servers.alphanumeric.special.characters" max-len="500"/>
+		</url>
+	</urls>
+</security>

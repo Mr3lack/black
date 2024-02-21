@@ -1,0 +1,33 @@
+<!-- $Id: web-footer.xml,v 1.8 2003/11/03 11:17:11 rsathish Exp $ -->
+
+<servlet-mapping>
+	<servlet-name>jsp.index</servlet-name>
+	<url-pattern>/jsp/index.jsp</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+	<servlet-name>jsp.WebStart</servlet-name>
+	<url-pattern>/jsp/WebStart.jsp</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+	<servlet-name>action</servlet-name>
+	<url-pattern>*.do</url-pattern>
+</servlet-mapping>
+
+<session-config>
+    <session-timeout>35</session-timeout>
+</session-config>
+
+<error-page>
+     <exception-type>java.lang.Throwable</exception-type>
+     <location>/Exception.do</location>
+</error-page>
+
+<error-page>
+     <error-code>404</error-code>
+     <location>/404Error.do</location>
+</error-page>
+
+</web-app>
+

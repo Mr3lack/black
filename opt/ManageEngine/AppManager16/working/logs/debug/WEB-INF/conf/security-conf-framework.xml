@@ -1,0 +1,1227 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+	<!-- $Id : $ -->	
+	
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+
+	<param-groups> 
+		<param-group name="am.monitor.details.extra.params" >
+			<param name="granularity" regex="am.granularity.value" />
+			<param name="customDate" regex="am.customdate.value" />
+			<param name="monthUnit" regex="am.monthunit.value" />
+			<param name="weekUnit" regex="am.common.longandnull" />
+			<param name="TimeUnit" regex="am.common.longandnull" />
+		</param-group>
+		<param-group name="am.monitor.addition.params">
+		    <param name="am.DiscoverAllNodes.param" name-regex="true" regex="yesnotf" />			
+		    <param name="tabId" regex="am.common.longbooleanandnull" />
+		    <param name="exparam" regex="am.common.paramNames" max-occurrences="100" max-len="300" />
+		    <param name="restype" regex="am.monitor.type" />
+		    <param name="addtoha" regex="am.common.TFNull" />
+		    <param name="isAgentAssociated" type="boolean" />
+		    <param name="resourcename" type="String" max-len="2000"/>
+		    <param name="montype" regex="am.montype" />
+		    <param name="runOnServer" regex="am.runonserver" />
+		    <param name="runOnAgent" regex="am.runonagent" />
+		    <param name="groupname" regex="am.displayname.common" /><!-- monitorgroupname -->
+		    <param name="type" regex="am.monitor.type" /><!-- no constraint for displayname -->
+		    <param name="childNodesForWDM" type="JSONArray" template="am.wcm.childNodesForWDM" array-size="0-100" max-len="-1" />
+		    <param name="childAPIDetails" type="JSONArray" template="am.api.sequence" array-size="0-25" max-len="-1" description="RESTAPISequence.xml"/>
+		    <param name="APIDetails" type="String" max-len="1" description="RESTAPISequence.xml" secret="true" />
+		    <param name="pollinterval" type="int" />
+		    <param name="resourceid" type="long" />
+		    <param name="haid" regex="am.common.longbooleanandnull" max-occurrences="2147483647" />
+		    <param name="selectedAgents" regex="am.webclient.resIds.commaSeparated" max-occurrences="10000" />
+		    <param name="displayname" regex="am.displayname.common" max-len="515"/><!-- also wdm_displayname -->
+		    <param name="DisplayName" regex="am.displayname.common" max-len="515"/>
+		    <param name="isAgentEnabled" regex="yesnonull" />
+		    <param name="hideFieldsForIT360" regex="am.common.TFNull" />
+		    <param name="selectAllAgents" regex="am.common.On" />
+		    <param name="masSelectType" regex="am.enterprise.masselecttype" description="EnterpriseSetup" />
+		    <param name="masGroupName" type="String"/>
+		    <param name="selectedServer" regex="am.enterprise.selectedserver" description="EnterpriseSetup" />
+		    <param name="hostname" regex="am.hostname" max-len="255"  description="Cassandra.xml, Zookeeper.xml, VMwareConnectionBroker.xml, SDPMonitor.xml, Informix.xml, Couchbase.xml, ADMPMonitor.xml, Nginx.xml, MongoDB.xml, OpManagerMonitor.xml, Redis.xml, CitrixVirtualAppsAndDesktop.xml" />
+		    <param name="port" regex="am.port" description="Cassandra.xml, Zookeeper.xml, SDPMonitor.xml, MailServer.xml, Informix.xml, Couchbase.xml, Tomcat.xml, JBoss.xml, MaxDB.xml, ServiceMonitor.xml, ADMPMonitor.xml, SSLCertificateMonitor.xml, SapHana.xml, WebSphere.xml, OracleDBServer.xml, TelnetMonitor.xml, Nginx.xml, MongoDB.xml, OpManagerMonitor.xml, Redis.xml, DB2Monitor.xml, SybaseASE.xml, JMXApplications.xml, WebLogic.xml, ApacheServer.xml, JavaRuntime.xml, MSSQLMonitor.xml, MySQLMonitor.xml, CiscoUCS.xml, WebpageAnalyzer.xml,TelnetEUMMonitor.xml, IISServer.xml, UDPPortMonitor.xml, SAPBusinessOne.xml, SybaseReplication.xml, CitrixVirtualAppsAndDesktop.xml, SAPASJava.xml, OracleRACMonitor.xml" />
+		    <param name="am.discoverclusternodes.param" name-regex="true" regex="yesnotf" description="Cassandra.xml, Zookeeper.xml, Redis.xml" />
+		    <param name="CredentialDetails" regex="am.credentialdetails" description="Cassandra.xml, AS400DB2.xml, ActiveDirectory.xml, Zookeeper.xml, OpenStack.xml, ApacheSparkMaster.xml, BizTalk.xml, RabbitMQ.xml, OracleEBS.xml, RESTAPI.xml, LyncServer.xml, SharePoint.xml, Informix.xml, HBase.xml, ExchangeServer.xml, Couchbase.xml, OracleNoSQL.xml, Tomcat.xml, JBoss.xml, SpringTcServer.xml, MaxDB.xml, WindowsCluster.xml, PostgreSQL.xml, ADMPMonitor.xml, ElasticSearchCluster.xml, SapHana.xml, MicrosoftMQ.xml, Jetty.xml, Docker.xml, GlassFish.xml, WebSphere.xml, ApacheSolr.xml, Tuxedo.xml, MSDynamicsAX.xml, OracleDBServer.xml, ApacheGeronimo.xml, Kafka.xml, ApacheActiveMQ.xml, CEPH.xml, XenApp.xml, MongoDB.xml, MSDynamicsCRM.xml, HAProxy.xml, OpManagerMonitor.xml, Resin.xml, Hazelcast.xml, OracleCoherence.xml, MicrosoftNet.xml, DB2Monitor.xml, SybaseASE.xml, WebLogic.xml, ApacheServer.xml, JavaRuntime.xml, MSSQLMonitor.xml, MySQLMonitor.xml, NetworkPolicyServer.xml, SQLAnywhere.xml, IISServer.xml, SybaseReplication.xml, CitrixVirtualAppsAndDesktop.xml, IBMHTTPServer.xml, OracleHTTPServer.xml, SAPASJava.xml, OracleRACMonitor.xml" />
+		    <param name="cmValue" regex="-1andnumeric" description="Cassandra.xml, AS400DB2.xml, ActiveDirectory.xml, Zookeeper.xml, OpenStack.xml, ApacheSparkMaster.xml, BizTalk.xml, RabbitMQ.xml, OracleEBS.xml, RESTAPI.xml, LyncServer.xml, SharePoint.xml, Informix.xml, HBase.xml, ExchangeServer.xml, Couchbase.xml, OracleNoSQL.xml, Tomcat.xml, JBoss.xml, SpringTcServer.xml, MaxDB.xml, WindowsCluster.xml, PostgreSQL.xml, ADMPMonitor.xml, ElasticSearchCluster.xml, SapHana.xml, MicrosoftMQ.xml, Jetty.xml, Docker.xml, GlassFish.xml, WebSphere.xml, ApacheSolr.xml, Tuxedo.xml, MSDynamicsAX.xml, OracleDBServer.xml, ApacheGeronimo.xml, Kafka.xml, ApacheActiveMQ.xml, CEPH.xml, XenApp.xml, MongoDB.xml, MSDynamicsCRM.xml, HAProxy.xml, OpManagerMonitor.xml, Resin.xml,Hazelcast.xml , OracleCoherence.xml, MicrosoftNet.xml, DB2Monitor.xml, SybaseASE.xml, WebLogic.xml, ApacheServer.xml, JavaRuntime.xml, MSSQLMonitor.xml, MySQLMonitor.xml, NetworkPolicyServer.xml, SQLAnywhere.xml, IISServer.xml, SybaseReplication.xml, CitrixVirtualAppsAndDesktop.xml, IBMHTTPServer.xml, OracleHTTPServer.xml, DamengDB.xml, SAPASJava.xml, OracleRACMonitor.xml" />
+		    <param name="address" type="String" description="Hazelcast.xml" />
+		    <param name="am.authreq.param" name-regex="true" regex="yesnotf" description="Cassandra.xml, Zookeeper.xml, Nginx.xml, MongoDB.xml, Redis.xml" />
+		    <param name="monitorsusername" name-regex="true" regex="am.windows.username" />
+		    <param name="monitorspassword" name-regex="true" type="String" max-len="500" secret="true"/>
+		    <param name="clustername" regex="am.clustername" max-len="255"  description="Cassandra.xml, Zookeeper.xml, Redis.xml" />
+		    <param name="HostName" regex="am.hostname" max-len="255"  description="AS400DB2.xml, ActiveDirectory.xml, ApacheSparkMaster.xml, SilverStream.xml, BizTalk.xml, RabbitMQ.xml, OracleEBS.xml, LyncServer.xml, SharePoint.xml, MailServer.xml, HBase.xml, ExchangeServer.xml, OracleNoSQL.xml, SpringTcServer.xml, WindowsCluster.xml, PostgreSQL.xml, SiebelEnterpriseServer.xml, ElasticSearchCluster.xml, MicrosoftMQ.xml, Jetty.xml, Docker.xml, GlassFish.xml, ApacheSolr.xml, MSDynamicsAX.xml, ApacheGeronimo.xml, Kafka.xml, MemCached.xml, ApacheActiveMQ.xml, CEPH.xml, HyperVHost.xml, XenApp.xml, XenServerHost.xml, VMWareESX.xml, MSDynamicsCRM.xml, HAProxy.xml, QueryMonitor.xml, PingMonitor.xml, ElasticSearchNode.xml, Resin.xml,Hazelcast.xml , OracleCoherence.xml, ApacheSparkWorker.xml, NetworkPolicyServer.xml, Kubernetes.xml, OpenShift.xml, SQLAnywhere.xml, IBMHTTPServer.xml, OracleHTTPServer.xml, DamengDB.xml, OracleRACMonitor.xml" />
+		    <param name="netmask" regex="ipaddress" description="AS400DB2.xml, WebSphere.xml, OracleDBServer.xml, MicrosoftNet.xml, DB2Monitor.xml, SybaseASE.xml, Novell.xml, HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, JMXApplications.xml, WebLogic.xml, HPTRU64Unix.xml, FreeBSD.xml, AS400ISeries.xml, SNMP.xml, Windows.xml, SUNSolaris.xml, ApacheServer.xml, JavaRuntime.xml, MSSQLMonitor.xml, MySQLMonitor.xml, SybaseReplication.xml, OracleRACMonitor.xml" />
+		    <param name="am.resolveDNS.param" name-regex="true" regex="yesnotf" description="AS400DB2.xml, WebSphere.xml, OracleDBServer.xml, MicrosoftNet.xml, DB2Monitor.xml, SybaseASE.xml, Novell.xml, HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, JMXApplications.xml, WebLogic.xml, HPTRU64Unix.xml, FreeBSD.xml, AS400ISeries.xml, SNMP.xml, Windows.xml, SUNSolaris.xml, ApacheServer.xml, JavaRuntime.xml, MSSQLMonitor.xml, MySQLMonitor.xml, IISServer.xml, OracleRACMonitor.xml" />
+		    <param name="am.responseHeaderCheck.param" name-regex="true" regex="yesnotf" description="IISServer.xml" />
+		    <param name="Queue Manager" regex="am.hostname" max-len="255"  description="MQSeries.xml, MQBroker.xml" />
+		    <param name="Host Name" regex="am.hostname" max-len="255"  description="MQSeries.xml, MQBroker.xml" />
+		    <param name="Listener Port" regex="am.port" description="MQSeries.xml, MQBroker.xml" />
+		    <param name="CCSID" regex="am.onlynumeric" description="MQSeries.xml, MQBroker.xml" />
+		    <param name="Server Connection Channel" regex="am.hostname" max-len="255"  description="MQSeries.xml, MQBroker.xml" />
+		    <param name="am.SSLEnabled.param" name-regex="true" type="boolean" description="MQSeries.xml, SDPMonitor.xml, PostgreSQL.xml, ADMPMonitor.xml, OracleDBServer.xml, OracleRACMonitor.xml, MQBroker.xml, OpManagerMonitor.xml" />
+		    <param name="SSLCipherSpec" regex="am.mq.ssl" description="MQSeries.xml, MQBroker.xml" />
+		    <param name="AuthEnabled" type="boolean" description="MQSeries.xml, MQBroker.xml" />
+		    <param name="FilterSysObject" type="boolean" description="MQSeries.xml, MQBroker.xml" />
+		    <param name="SysObjects" max-len="-1" regex="am.mqseries.sysobjects" description="MQSeries.xml" />
+		    <param name="MonitorBroker" type="boolean" description="MQSeries.xml" />
+		    <param name="v10" type="boolean" description="MQSeries.xml, MQBroker.xml" />
+		    <param name="BrokerPort" regex="am.port" description="MQSeries.xml, MQBroker.xml" />
+		    <param name="BrokerAuthEnabled" type="boolean" description="MQSeries.xml, MQBroker.xml" />
+		    <param name="brokerusername" type="String" description="MQSeries.xml, MQBroker.xml" />
+		    <param name="brokerpassword" type="String" max-len="500" secret="true" description="MQSeries.xml, MQBroker.xml" />
+		    <param name="baseAuthURL" regex="url" max-len="2083" description="OpenStack.xml" />
+		    <param name="tenantName" type="String" description="OpenStack.xml" />
+		    <param name="am.isProxyNeeded.param" name-regex="true" regex="yesnotf" description="OpenStack.xml, SSLCertificateMonitor.xml,WebpageAnalyzer.xml" />
+		    <param name="am.isProjectScopedToken.param" name-regex="true" regex="boolean" description="OpenStack.xml" />
+		    <param name="Port" regex="am.port" description="ApacheSparkMaster.xml, SilverStream.xml, RabbitMQ.xml, OracleEBS.xml, HBase.xml, OracleNoSQL.xml, SpringTcServer.xml, PostgreSQL.xml, ElasticSearchCluster.xml, Jetty.xml, Docker.xml, GlassFish.xml, ApacheSolr.xml, ApacheGeronimo.xml, Kafka.xml, MemCached.xml, ApacheActiveMQ.xml, XenServerHost.xml, VMWareESX.xml, HAProxy.xml, QueryMonitor.xml, ElasticSearchNode.xml, Resin.xml,Hazelcast.xml , OracleCoherence.xml, ApacheSparkWorker.xml, Kubernetes.xml, OpenShift.xml, SQLAnywhere.xml, DamengDB.xml, IBMHTTPServer.xml, OracleHTTPServer.xml" />
+		    <param name="am.ssl.param" name-regex="true" regex="yesnotf" description="ApacheSparkMaster.xml, SDPMonitor.xml, ElasticSearchCluster.xml, ApacheSolr.xml, Nginx.xml, HAProxy.xml" />
+		    <param name="DiscoverAllNodes" regex="yesnotf" description="ApacheSparkMaster.xml, ElasticSearchCluster.xml" />
+		    <param name="authEnabled" regex="am.common.on_off.yes_no.tf.null.value" description="ApacheSparkMaster.xml, ADMPMonitor.xml, ElasticSearchCluster.xml, WebSphere.xml, ApacheSolr.xml, HAProxy.xml, OpManagerMonitor.xml, JMXApplications.xml, ApacheServer.xml, JavaRuntime.xml, IBMHTTPServer.xml, OracleHTTPServer.xml" />
+		    <param name="Version" regex="am.version" description="BizTalk.xml, OracleEBS.xml, SharePoint.xml, WindowsCluster.xml, MSDynamicsAX.xml, Hadoop.xml, HyperVHost.xml, XenApp.xml, MSDynamicsCRM.xml" />
+		    <param name="PowerShell" type="boolean" description="BizTalk.xml, MicrosoftMQ.xml" />
+		    <param name="am.CredSSP.param" name-regex="true" regex="yesnotf" description="BizTalk.xml, SharePoint.xml, ActiveDirectory.xml" />
+		    <param name="DBServer" regex="am.hostname" max-len="255"  description="BizTalk.xml,AzureSQLDatabase.xml" />
+		    <param name="DBName" regex="am.monitor.db.name" max-len="1024" description="BizTalk.xml, SDPMonitor.xml, ADMPMonitor.xml, OpManagerMonitor.xml,AzureSQLDatabase.xml, CitrixVirtualAppsAndDesktop.xml" />
+		    <param name="AmazonServices" regex="am.aws.services" description="Amazon.xml" />
+		    <param name="accessKey" regex="am.aws.accesskey" max-len="128" description="Amazon.xml" secret="true"/>
+		    <param name="AccountType" regex="am.aws.accounttype" description="Amazon.xml" />
+ 			<param name="AzureAccountType" regex="am.azure.accounttype" description="MicrosoftAzure.xml" />
+		    <param name="DomainURL" regex="am.common.url.schemaandlength.validator" max-len="10000" description="WebsiteDefacement.xml" />
+		    <param name="AutoOverwrite" regex="am.checkbox.values" description="WebsiteDefacement.xml" />
+		    <param name="AutoOverwrite1" regex="am.checkbox.values" description="WebsiteDefacement.xml" />
+		    <param name="TenantName" regex="am.office365.tenantname" description="SharepointOnline.xml, SkypeForBusinessOnline.xml, ExchangeOnline.xml" />
+		    <param name="Timeout" regex="-1andnumeric" description="SharepointOnline.xml, RESTAPI.xml, MailServer.xml, AzureVirtualMachine.xml, Office365.xml, SSLCertificateMonitor.xml, SkypeForBusinessOnline.xml, ExchangeOnline.xml, AzureStorageAccount.xml, FTPMonitor.xml, LDAPServer.xml, MicrosoftAzure.xml, PingMonitor.xml, DNSMonitor.xml,AzureSQLDatabase.xml,MicrosoftMQ.xml,ExchangeServer.xml,WebpageAnalyzer.xml" />
+		    <param name="timeToWaitForAjax" regex="-1andnumeric" description="WebpageAnalyzer.xml"/>
+	        <param name="pageLoadTimeout" regex="-1andnumeric" description="WebpageAnalyzer.xml"/>
+			<param name="allowEdit" regex="am.common.TFNull" description="SharepointOnline.xml, SharePoint.xml, AzureVirtualMachine.xml, JBoss.xml, SkypeForBusinessOnline.xml, ExchangeOnline.xml, AzureStorageAccount.xml, WebSphere.xml,AzureSQLDatabase.xml,DynamoDB.xml,AmazonEKS.xml,AzureAKS.xml" />
+		    <param name="am.sslenabled.param" name-regex="true" regex="am.common.on_off.yes_no.tf.null.value" description="RabbitMQ.xml, Tomcat.xml, JBoss.xml, WebSphere.xml, WebLogic.xml, ApacheServer.xml, IISServer.xml, MongoDB.xml, IBMHTTPServer.xml, OracleHTTPServer.xml" />
+		    <param name="SSL Enabled" regex="yesnotf" description="OracleEBS.xml" />
+		    <param name="restapiKey" type="String" max-len="500" secret="true" description="SDPMonitor.xml" />
+		    <param name="DiscoverNode" regex="yesno" description="Neo4j.xml" />
+		    <param name="am.MonitorPGSQLDB.param" name-regex="true" regex="yesnotf" description="SDPMonitor.xml, ADMPMonitor.xml, OpManagerMonitor.xml" />
+		    <param name="Available"  regex="am.emptystring" description="Neo4j.xml" />
+		    <param name="dbtype" regex="admp.dbtype" description="SDPMonitor.xml, ADMPMonitor.xml, OpManagerMonitor.xml" />
+		    <param name="DBHost" regex="am.hostname" max-len="255"  description="SDPMonitor.xml, ADMPMonitor.xml, OpManagerMonitor.xml" />
+		    <param name="DBPort" regex="am.port" description="SDPMonitor.xml, ADMPMonitor.xml, OpManagerMonitor.xml" />
+		    <param name="DBUserName" regex="am.windows.username" description="SDPMonitor.xml, ADMPMonitor.xml, OpManagerMonitor.xml,AzureSQLDatabase.xml,OracleCloudAutonomousDatabase.xml" />
+		    <param name="DBPassword" type="String" max-len="500" secret="true" description="SDPMonitor.xml, ADMPMonitor.xml, OpManagerMonitor.xml,AzureSQLDatabase.xml,OracleCloudAutonomousDatabase.xml" />
+		    <param name="am.namedInstance.param" name-regex="true" regex="yesnotf" description="SDPMonitor.xml, ADMPMonitor.xml, OpManagerMonitor.xml, MSSQLMonitor.xml, CitrixVirtualAppsAndDesktop.xml" />
+		    <param name="instance" type="String" description="SDPMonitor.xml, OracleEBS.xml,ADMPMonitor.xml, SapHana.xml, OracleDBServer.xml, OracleRACMonitor.xml, OpManagerMonitor.xml, DB2Monitor.xml, SybaseASE.xml, MSSQLMonitor.xml, MySQLMonitor.xml, SybaseReplication.xml, CitrixVirtualAppsAndDesktop.xml" />
+		    <param name="API" regex="am.common.url.schemaandlength.validator" max-len="10000" description="RESTAPI.xml" />
+		    <param name="Method" regex="am.restapi.method" description="RESTAPI.xml,WebpageAnalyzer.xml" />
+		    <param name="payLoadType" regex="am.restapi.payloadType" description="RESTAPI.xml" />
+		    <param name="payLoad" type="String" description="RESTAPI.xml,WebpageAnalyzer.xml" max-len="-1" />
+		    <param name="customHeaders" type="String" max-len="48000" description="RESTAPI.xml,WebpageAnalyzer.xml" />
+		    <param name="RespType" regex="am.restapi.RespType" description="RESTAPI.xml" />
+		    <param name="am.ContentCheck.param" name-regex="true" type="boolean" description="RESTAPI.xml,WebpageAnalyzer.xml" />
+		    <param name="contains" type="String" description="RESTAPI.xml,WebpageAnalyzer.xml" />
+		    <param name="notContain" type="String" description="RESTAPI.xml,WebpageAnalyzer.xml" />
+		    <param name="am.isCaseSensitive.param" name-regex="true" type="boolean" description="RESTAPI.xml,WebpageAnalyzer.xml" />
+		    <param name="am.isRegEx.param" name-regex="true" type="boolean" description="RESTAPI.xml" />
+		    <param name="Roles" regex="am.lync.roles" description="LyncServer.xml,NetworkPolicyServer.xml" />
+		    <param name="SP2016Services" regex="am.sharepoint.services.sp2016" description="SharePoint.xml" max-len="-1" />
+		    <param name="Services" regex="am.sharepoint.features" description="SharePoint.xml" max-len="-1" />
+		    <param name="Service" regex="am.sharepoint.services" description="SharePoint.xml" max-len="-1" />
+		    <param name="Powershell" type="boolean" description="SharePoint.xml" />
+		    <param name="SPType" regex="am.sharepoint.sptype" description="SharePoint.xml" />
+		    <param name="versionUpdated" type="boolean" description="SharePoint.xml" />
+		    <param name="am.sslEnabled.param" name-regex="true" regex="yesnotf" description="MailServer.xml" />
+		    <param name="tlsEnabled" type="boolean" description="MailServer.xml" />
+		    <param name="emailId" type="String" max-len="320" description="MailServer.xml" />
+		    <param name="authRequired" regex="yesnotf" description="MailServer.xml" />
+		    <param name="am.mailserver_fetch.param" regex="yesnotf" name-regex="true" description="MailServer.xml" />
+		    <param name="fetchType" regex="am.mailserver.fetchtype" description="MailServer.xml" />
+		    <param name="fsHost" regex="am.hostname" max-len="255"  description="MailServer.xml" />
+		    <param name="am.fsSSLEnabled.param" name-regex="true" regex="yesnotf" description="MailServer.xml" />
+		    <param name="fsTLSEnabled" type="boolean" description="MailServer.xml" />
+		    <param name="fsport" regex="am.port" description="MailServer.xml" />
+		    <param name="fsUserName" regex="am.windows.username" description="MailServer.xml" />
+		    <param name="fsPassword" type="String" max-len="500" secret="true" description="MailServer.xml" />
+		    <param name="mailSubject" type="String" description="MailServer.xml" />
+		    <param name="isParent" type="boolean" description="MailServer.xml, LDAPServer.xml, PingMonitor.xml, DNSMonitor.xml, TelnetEUMMonitor.xml" />
+		    <param name="UT" type="long" description="MailServer.xml, LDAPServer.xml, PingMonitor.xml, DNSMonitor.xml, TelnetEUMMonitor.xml" />
+		    <param name="SubscriptionID" regex="am.azure.subsIDclientIDTenantID" description="AzureStorageAccount.xml, MicrosoftAzure.xml" />
+		    <param name="REGION" regex="am.aws.region" description="RDSInstance.xml, EC2Instance.xml,DynamoDB.xml,AWSLambda.xml,AmazonECS.xml,AmazonEKS.xml" />
+		    <param name="INSTANCEID" regex="am.aws.region" description="RDSInstance.xml, EC2Instance.xml" />
+		    <param name="subscriptionId" regex="am.azure.subsIDclientIDTenantID" description="AzureVirtualMachine.xml,AzureSQLDatabase.xml" />
+		    <param name="VMName" regex="am.azurevm.vmname" description="AzureVirtualMachine.xml" />
+		    <param name="VMResourceID" regex="am.azure.resourceid" description="AzureVirtualMachine.xml" max-len="1000"/>
+			<param name="ResourceGroupName" regex="am.azure.resourcegroup" description="AzureVirtualMachine.xml,AzureSQLDatabase.xml,AzureARMServiceBus.xml,AzureAKS.xml,AzureSQLManagedInstance.xml,AzureLoadBalancer.xml" />
+		    <param name="EnableGuestOS" regex="yesnotf" description="AzureVirtualMachine.xml" />
+		    <param name="IsDiagnosticsEnabled" regex="am.common.TFNull" description="AzureVirtualMachine.xml" />
+		    <param name="informixserver" regex="am.monitor.db.name" description="Informix.xml" />
+		    <param name="dblocale" regex="am.monitor.db.locale" description="Informix.xml" />
+		    <param name="typeOfNode" regex="alphanumeric" description="HBase.xml" />
+		    <param name="AuthReq" regex="yesnotf" description="HBase.xml" />
+		    <param name="JNDIPath" regex="am.common.urlstartwithslash" max-len="2083" description="HBase.xml, OracleNoSQL.xml, SpringTcServer.xml, ADMPMonitor.xml, Jetty.xml, GlassFish.xml, ApacheGeronimo.xml, Kafka.xml, ApacheActiveMQ.xml, Hadoop.xml, OpManagerMonitor.xml, Resin.xml,Hazelcast.xml , OracleCoherence.xml" />
+		    <param name="version" regex="am.version" description="ExchangeServer.xml, Tomcat.xml, JBoss.xml, WebSphere.xml, VMWareESX.xml, WebLogic.xml" />
+		    <param name="ServerRole2019" regex="am.alphanumeric" description="ExchangeServer.xml" />
+		    <param name="ServerRole2016" regex="am.alphanumeric" description="ExchangeServer.xml" />
+		    <param name="ServerRole2013" regex="am.alphanumeric" description="ExchangeServer.xml" />
+		    <param name="ServerRole2010" regex="am.alphanumeric" description="ExchangeServer.xml" />
+		    <param name="ServerRole2007" regex="am.alphanumeric" description="ExchangeServer.xml" />
+		    <param name="MBXServices2019" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="EDGEServices2019" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="MBXServices2016" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="EDGEServices2016" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="MBXServices2013" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="CASServices2013" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="EDGEServices2013" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="MBXServices2010" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="CASServices2010" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="HUBServices2010" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="EDGEServices2010" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="UMServices2010" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="MBXServices2007" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="CASServices2007" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="HUBServices2007" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="EDGEServices2007" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="UMServices2007" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="Services2003" regex="am.alphanumeric.exchange" description="ExchangeServer.xml" max-len="-1" />
+		    <param name="UsePowershell" regex="yesno" description="ExchangeServer.xml" />
+		    <param name="Advanced" regex="yesnotf" description="ExchangeServer.xml,IISServer.xml" />
+		    <param name="ConnecUriInput" regex="url" max-len="2083" description="ExchangeServer.xml" />
+		    <param name="host" max-len="-1" regex="am.hostname" description="Tomcat.xml, JBoss.xml, MaxDB.xml, ServiceMonitor.xml, SapHana.xml, WebSphere.xml, OracleDBServer.xml, TelnetMonitor.xml, MicrosoftNet.xml, DB2Monitor.xml, SybaseASE.xml, Novell.xml, HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, JMXApplications.xml, WebLogic.xml, HPTRU64Unix.xml, FreeBSD.xml, AS400ISeries.xml, SNMP.xml, Windows.xml, SUNSolaris.xml, ApacheServer.xml, JavaRuntime.xml, MSSQLMonitor.xml, MySQLMonitor.xml, CiscoUCS.xml, TelnetEUMMonitor.xml, IISServer.xml, UDPPortMonitor.xml,SAPBusinessOne.xml, SybaseReplication.xml, SAPASJava.xml, OracleRACMonitor.xml" />
+		    <param name="tomcatmanagerurl" regex="am.common.urlstartwithslash" max-len="2083" description="Tomcat.xml" />
+		    <param name="GuestConfig" regex="am.vmware.guestconfig" description="XenServerVM.xml, VMWareVM.xml" />
+		    <param name="am.LaunchType.param" name-regex="true" regex="am.jboss.launchtype" description="JBoss.xml" />
+		    <param name="DomainController" max-len="255" regex="am.jboss.domaincontroller" description="JBoss.xml" />
+		    <param name="am.filterEnabled.param" name-regex="true" type="boolean" description="JBoss.xml, WebSphere.xml, OpenShift.xml, Kubernetes.xml" />
+		    <param name="filterCondition" regex="am.jboss.server.include" description="JBoss.xml, WebSphere.xml, OpenShift.xml, Kubernetes.xml" />
+		    <param name="AppServers" max-len="-1" regex="am.jboss.appservers" description="JBoss.xml, WebSphere.xml" />
+		    <param name="HostController" max-len="255" regex="am.jboss.domaincontroller" description="JBoss.xml" />
+		    <param name="ServerName" max-len="255" regex="am.jboss.domaincontroller" description="JBoss.xml" />
+		    <param name="isDmgr" type="boolean" description="JBoss.xml, WebSphere.xml" />
+		    <param name="Database" regex="am.sapmaxdb.dbname" description="MaxDB.xml, QueryMonitor.xml" />
+			<param name="timeout" regex="-1andnumeric" description="MaxDB.xml, ServiceMonitor.xml, Tuxedo.xml, TelnetMonitor.xml, Novell.xml, HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, HPTRU64Unix.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml, Kubernetes.xml, OpenShift.xml, CiscoUCS.xml,OracleCloudAutonomousDatabase.xml,WebpageAnalyzer.xml, TelnetEUMMonitor.xml, UDPPortMonitor.xml,AmazonEKS.xml,AzureAKS.xml, IBMHTTPServer.xml, OracleHTTPServer.xml, DamengDB.xml" />
+		    <param name="command" max-len="255" type="String" description="ServiceMonitor.xml, UDPPortMonitor.xml" />
+		    <param name="search" max-len="255" type="String" description="ServiceMonitor.xml, UDPPortMonitor.xml" />
+		    <param name="DiscoverNodes" regex="am.windowsCluster.discoverNodes" description="WindowsCluster.xml" />
+		    <param name="am.EventLog.param" name-regex="true" regex="yesnotf" description="WindowsCluster.xml, XenApp.xml, MSDynamicsCRM.xml" />
+		    <param name="DBname" regex="am.monitor.db.name" description="PostgreSQL.xml" />
+		    <param name="MonitorDatabase" type="boolean" description="PostgreSQL.xml" />
+		    <param name="Office365TenantName" regex="am.office365.tenantname" description="Office365.xml" />
+		    <param name="Office365Useremail" type="String" max-len="320" description="Office365.xml" />
+		    <param name="Office365Password" max-len="500" secret="true" type="String" description="Office365.xml" />
+		    <param name="Office365Services" regex="am.office365.services" description="Office365.xml" />
+		    <param name="os" regex="am.servermonitor.os.undefined" description="SiebelEnterpriseServer.xml, Novell.xml, HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, HPTRU64Unix.xml, FreeBSD.xml, AS400ISeries.xml, SNMP.xml, Windows.xml, SUNSolaris.xml" />
+		    <param name="prompt" type="String" description="SiebelEnterpriseServer.xml, CEPH.xml, HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, HPTRU64Unix.xml, FreeBSD.xml, Windows.xml, SUNSolaris.xml, Kubernetes.xml, OpenShift.xml" />
+		    <param name="GatewayServer" regex="am.hostname" max-len="255"  description="SiebelEnterpriseServer.xml" />
+		    <param name="EnterpriseServer" regex="am.hostname" max-len="255"  description="SiebelEnterpriseServer.xml" />
+		    <param name="SUserName" regex="am.windows.username" description="SiebelEnterpriseServer.xml" />
+		    <param name="SPassword" type="String" max-len="500" secret="true" description="SiebelEnterpriseServer.xml" />
+		    <param name="InsDirectory" regex="am.siebel.insdirectory" description="SiebelEnterpriseServer.xml" max-len="250"/>
+		    <param name="domain" regex="am.hostname" max-len="255" description="SSLCertificateMonitor.xml,WebpageAnalyzer.xml" />
+		    <param name="protocol" regex="am.sslCertificateMonitor.protocol" description="SSLCertificateMonitor.xml,WebpageAnalyzer.xml" />
+		    <param name="am.ignoreHostNameError.param" name-regex="true" regex="yesnotf" description="SSLCertificateMonitor.xml,WebpageAnalyzer.xml" />
+		    <param name="am.isOndemand.param" name-regex="true" type="boolean" description="SapHana.xml" />
+		    <param name="accountName" regex="am.saphana.ondemand.accountname" description="SapHana.xml" />
+		    <param name="dbUser" regex="am.saphana.username" description="SapHana.xml" />
+		    <param name="dbPassword" type="String" max-len="500" secret="true" description="SapHana.xml" />
+		    <param name="am.isSSLEnabled.param" name-regex="true" type="boolean" description="Docker.xml" />
+		    <param name="AddContainers" regex="am.addvms" description="Docker.xml" />
+		    <param name="am.isCertificateEnabled.param" name-regex="true" type="boolean" description="Docker.xml" />
+		    <param name="clientCertName" type="String" max-len="250" description="Docker.xml" />
+		    <param name="keystorePassword" type="String" max-len="500" secret="true" description="Docker.xml" />
+		    <param name="StorageAccName" regex="am.azurestorage.accname" description="AzureStorageAccount.xml" />
+		    <param name="StorageAccKey" type="String" description="AzureStorageAccount.xml" secret="true"/>
+		    <param name="StorageResourceID" regex="am.azure.resourceid" description="AzureStorageAccount.xml" max-len="1000"/>
+		    <param name="StorageResourceGroupName" regex="am.azure.resourcegroup" description="AzureStorageAccount.xml" />
+			<param name="AKSClusterName" regex="am.azure.kubernetes.cluster.name" description="AzureAKS.xml" />
+			<param name="AKSClusterID" regex="am.azure.resourceid" max-len="1024" description="AzureAKS.xml"/>
+			<param name="InstanceName" regex="am.azure.sql.mi.name" description="AzureSQLManagedInstance.xml" />
+			<param name="InstanceID" regex="am.azure.resourceid" description="AzureSQLManagedInstance.xml" max-len="1024"/>
+			<param name="LoadBalancerName" regex="am.azure.lb.name" description="AzureLoadBalancer.xml" />
+			<param name="LoadBalancerID" regex="am.azure.resourceid" description="AzureLoadBalancer.xml" max-len="1024"/>
+			<param name="AzureFrontDoorAndCDNProfileID" regex="am.azure.resourceid" description="AzureFrontDoorAndCDNProfile.xml" max-len="1024"/>
+			<param name="AzureConnectionID" regex="am.azure.resourceid" description="AzureConnection.xml" max-len="1024"/>
+			<param name="AzureTrafficManagerProfileID" regex="am.azure.resourceid" description="AzureTrafficManagerProfile.xml" max-len="1024"/>
+			<param name="AzureNetworkWatcherConnectionID" regex="am.azure.resourceid" description="AzureNetworkWatcherConnection.xml" max-len="1024"/>
+			<param name="AzurePrivateDNSZoneID" regex="am.azure.resourceid" description="AzurePrivateDNSZone.xml" max-len="1024"/>
+			<param name="AzureFirewallID" regex="am.azure.resourceid" description="AzureFirewall.xml" max-len="1024"/>
+			<param name="AzureDNSZoneID" regex="am.azure.resourceid" description="AzureDNSZone.xml" max-len="1024"/>
+			<param name="AzurePublicIPAddressID" regex="am.azure.resourceid" description="AzurePublicIPAddress.xml" max-len="1024"/>
+			<param name="AzureVNetGatewayID" regex="am.azure.resourceid" description="AzureVNetGateway.xml" max-len="1024"/>
+			<param name="AzureNetworkInterfaceID" regex="am.azure.resourceid" description="AzureNetworkInterface.xml" max-len="1024"/>
+			<param name="AzureExpressRouteCircuitID" regex="am.azure.resourceid" description="AzureExpressRouteCircuit.xml" max-len="1024"/>
+            <param name="AzureApplicationGatewayID" regex="am.azure.resourceid" description="AzureApplicationGateway.xml" max-len="1024"/>
+            <param name="AzureSynapseAnalyticsID" regex="am.azure.resourceid" description="AzureSynapseAnalytics.xml" max-len="1024"/>
+			<param name="AzureVMScaleSetsID" regex="am.azure.resourceid" description="AzureVMScaleSets.xml" max-len="1024"/>
+			<param name="AzureVirtualNetworkID" regex="am.azure.resourceid" description="AzureVirtualNetwork.xml" max-len="1024"/>
+			<param name="AzureFunctionsID" regex="am.azure.resourceid" description="AzureFunctions.xml" max-len="1024"/>
+			<param name="AzureCosmosDBID" regex="am.azure.resourceid" description="AzureCosmosDB.xml" max-len="1024"/>
+			<param name="AzureRedisCacheID" regex="am.azure.resourceid" description="AzureRedisCache.xml" max-len="1024"/>
+			<param name="AzureMySQLServerID" regex="am.azure.resourceid" description="AzureMySQLServer.xml" max-len="1024"/>
+			<param name="AzureMariaDBServerID" regex="am.azure.resourceid" description="AzureMariaDBServer.xml" max-len="1024"/>
+			<param name="AzurePostgreSQLServerID" regex="am.azure.resourceid" description="AzurePostgreSQLServer.xml" max-len="1024"/>
+			<param name="AzureAppServiceID" regex="am.azure.resourceid" description="AzureAppService.xml" max-len="1024"/>
+		    <param name="Target Address" regex="am.hostname" max-len="255" description="FTPMonitor.xml, DNSMonitor.xml" />
+		    <param name="Port No" regex="am.port" description="FTPMonitor.xml" />
+		    <param name="User Name" regex="am.windows.username" description="FTPMonitor.xml" />
+		    <param name="Is Secured" regex="yesno" description="FTPMonitor.xml, LDAPServer.xml" />
+		    <param name="Download File" regex="yesno" description="FTPMonitor.xml" />
+		    <param name="DownloadAvailability" regex="yesno" description="FTPMonitor.xml" />
+		    <param name="Remote Source File Name" regex="am.ftp.file.path" description="FTPMonitor.xml" max-len="250"/>
+		    <param name="Local Destination File Name" type="String" description="FTPMonitor.xml" max-len="250"/>
+		    <param name="Upload File" regex="yesno" description="FTPMonitor.xml" />
+		    <param name="UploadAvailability" regex="yesno" description="FTPMonitor.xml" />
+		    <param name="Local Source File Name" type="String" description="FTPMonitor.xml" max-len="250"/>
+		    <param name="Remote Destination File Name" regex="am.ftp.file.path" description="FTPMonitor.xml" max-len="250"/>
+		    <param name="LDAP Server" regex="am.hostname" max-len="255" description="LDAPServer.xml" />
+		    <param name="LDAP Server Port" regex="am.port" description="LDAPServer.xml" />
+		    <param name="Search Base" max-len="-1" type="String" description="LDAPServer.xml" />
+		    <param name="Search Filter" max-len="-1" type="String" description="LDAPServer.xml" />
+		    <param name="Matching Attribute" regex="am.ldap.matchingAttribute" description="LDAPServer.xml" />
+		    <param name="Filter Condition" regex="am.ldap.filtercondition" description="LDAPServer.xml" />
+		    <param name="Search Result" max-len="-1" type="String" description="LDAPServer.xml" />
+		    <param name="mode" regex="am.servermonitor.mode" description="WebSphere.xml, Novell.xml, HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, HPTRU64Unix.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml, Kubernetes.xml, OpenShift.xml,IISServer.xml" />
+		    <param name="soapport" regex="am.port" description="WebSphere.xml" />
+		    <param name="ndhost" regex="am.hostname" max-len="255" description="WebSphere.xml" />
+		    <param name="ndport" regex="am.port" description="WebSphere.xml" />
+		    <param name="nodeName" regex="websphere.servername" description="WebSphere.xml" />
+		    <param name="serverName" regex="websphere.servername" description="WebSphere.xml" />
+		    <param name="HOST" regex="am.hostname" max-len="255" description="Tuxedo.xml" />
+		    <param name="SNMPPORT" regex="am.port" description="Tuxedo.xml" />
+		    <param name="snmpCommunityString" max-len="255" type="String" description="Tuxedo.xml, Novell.xml, Linux.xml, MacOS.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml" secret="true"/>
+		    <param name="AXServices" regex="am.microsoft.ax.services" description="MSDynamicsAX.xml" />
+		    <param name="controller_KafkaController_ActiveControllerCount" type="int" description="Kafka.xml" />
+		    <param name="AzureServices" regex="am.azure.services" description="MicrosoftAzure.xml" max-len="1024"/>
+		    <param name="DiscoveryMode" regex="am.azure.discmode" description="MicrosoftAzure.xml" />
+		    <param name="AzureOrgUserName" type="String" max-len="320" description="MicrosoftAzure.xml" />
+		    <param name="AzureOrgPassword" type="String" max-len="500" secret="true" description="MicrosoftAzure.xml" />
+		    <param name="ClientID" regex="am.azure.subsIDclientIDTenantID" description="MicrosoftAzure.xml, Office365.xml" />
+		    <param name="TenantID" regex="am.azure.subsIDclientIDTenantID" description="MicrosoftAzure.xml, Office365.xml" />
+		    <param name="AppKey" type="String" max-len="500" secret="true" description="MicrosoftAzure.xml" />
+		    <param name="Transaction" regex="yesno" description="MemCached.xml" />
+		    <param name="am.failoverEnabled.param" name-regex="true" type="boolean" description="ApacheActiveMQ.xml" />
+		    <param name="FailoverHostName" regex="am.hostname" max-len="255" description="ApacheActiveMQ.xml" />
+		    <param name="FailoverPort" regex="am.port" description="ApacheActiveMQ.xml" />
+		    <param name="apdexThreshold" regex="am.onlynumeric" description="RUM.xml" />
+		    <param name="script" type="String" description="WUE.xml" max-len="600"/>
+		    <param name="ModeOfMonitoring" regex="am.hadoop.modeofmonitoring" description="Hadoop.xml" />
+		    <param name="NameNodeHost" regex="am.hostname" max-len="255" description="Hadoop.xml" />
+		    <param name="NameNodeJMXPort" regex="am.port" description="Hadoop.xml" />
+		    <param name="NameNodeWebPort" regex="am.port" description="Hadoop.xml" />
+		    <param name="NameNodeSSLEnabled" regex="yesnotf" description="Hadoop.xml" />
+		    <param name="NameNodeWebAuthType" regex="am.hadoop.authtype" description="Hadoop.xml" />
+		    <param name="NameNodeUserName" regex="am.windows.username" description="Hadoop.xml" />
+		    <param name="NameNodePassWord" type="String" max-len="500" secret="true" description="Hadoop.xml" />
+		    <param name="NameNodeJNDIPath" regex="am.common.urlstartwithslash" max-len="2083" description="Hadoop.xml" />
+		    <param name="JobTrackerHost" regex="am.hostname" max-len="255"  description="Hadoop.xml" />
+		    <param name="JobTrackerJMXPort" regex="am.port" description="Hadoop.xml" />
+		    <param name="JobTrackerWebPort" regex="am.port" description="Hadoop.xml" />
+		    <param name="JobTrackerSSLEnabled" regex="yesnotf" description="Hadoop.xml" />
+		    <param name="JobTrackerWebAuthType" regex="am.hadoop.authtype" description="Hadoop.xml" />
+		    <param name="nginxstatusurl" regex="am.webserver.uri" max-len="10000" description="Nginx.xml" />
+		    <param name="AddVMS" regex="am.addvms" description="HyperVHost.xml, XenServerHost.xml, VMWareESX.xml" />
+		    <param name="Namespace" regex="am.azure.servicebusnamespace" description="AzureARMServiceBus.xml" />
+		    <param name="am.discoverchildren.param" name-regex="true" regex="yesnotf" description="MongoDB.xml" />
+		    <param name="process" regex="am.onlyalpha" description="MongoDB.xml" />
+		    <param name="bvresourceid" type="long" description="MongoDB.xml" />
+		    <param name="single" regex="yesno" description="MongoDB.xml" />
+		    <param name="HostType" type="boolean" description="QueryMonitor.xml" />
+		    <param name="ExistingDatabaseDetail" max-len="400" regex="am.querymon.existingdbdetails" description="QueryMonitor.xml" />
+		    <param name="DBServerName" regex="am.monitor.db.name" description="QueryMonitor.xml" />
+		    <param name="Database Name" regex="am.monitor.db.name" description="QueryMonitor.xml" />
+		    <param name="JDBC Url (Optional)" type="String" max-len="2083" description="QueryMonitor.xml" />
+		    <param name="Queries" max-len="-1" type="String" description="QueryMonitor.xml" />
+		    <param name="Show Query Output" regex="yesno" description="QueryMonitor.xml" />
+		    <param name="mappedresourceid" type="long" description="QueryMonitor.xml" />
+		    <param name="webpageURL" regex="am.common.url.schemaandlength.validator" max-len="10000" description="WebpageAnalyzer.xml" />
+		    <param name="RegexString" type="String" description="WebpageAnalyzer.xml" />
+		    <param name="blockDomains" type="String" description="WebpageAnalyzer.xml" />
+		    <param name="am.enableSSLMonitoring.param" name-regex="true" type="boolean" description="WebpageAnalyzer.xml" />
+		    <param name="affectMonitorAvailability" type="boolean" description="RUM.xml" />
+		    <param name="applicationType" regex="am.rum.applicationType" description="RUM.xml" />
+		    <param name="rumAgent" type="long" description="RUM.xml" />
+		    <param name="RUMKey" max-len="50" regex="am.alphanumeric" description="RUM.xml" secret="true"/>
+		    <param name="websiteURL" regex="am.common.url.schemaandlength.validator" max-len="10000" description="RUM.xml" />
+		    <param name="trackAjaxCalls" type="boolean" description="RUM.xml"/>			
+		    <param name="trackCDNAjaxCalls" type="boolean" description="RUM.xml"/>			
+		    <!--<param name="excludeBotRequests" type="boolean" description="RUM.xml"/>-->
+		    <param name="domainsToExclude" regex="String" max-len="255" description="RUM.xml"/>					
+		    <param name="userAgentsToExclude" regex="String" max-len="255" description="RUM.xml"/>					
+		    <!--<param name="ipsToExclude" regex="String" max-len="255" description="RUM.xml"/>-->					
+		    <param name="trackResourcePerformance" type="boolean" description="RUM.xml"/>				
+		    <param name="linkURL" regex="url" max-len="2083" description="WebpageDefacement.xml" />
+		    <param name="scriptPercent" type="int" range="0-100" description="WebpageDefacement.xml" />
+		    <param name="textPercent" type="int" range="0-100" description="WebpageDefacement.xml" />
+		    <param name="role" type="String" description="Redis.xml" />
+		    <param name="PortAdd" regex="am.oraclecoherence.portadd" description="OracleCoherence.xml ,Hazelcast.xml" />
+		    <param name="Lookup Address" regex="am.hostname" max-len="255" description="DNSMonitor.xml" />
+		    <param name="Record Type" regex="am.dns.recordtype" description="DNSMonitor.xml" />
+		    <param name="Search Field" regex="am.dns.searchfield" description="DNSMonitor.xml" />
+		    <param name="Search Value" max-len="-1" type="String" description="DNSMonitor.xml" />
+		    <param name="am.jconnect.param" name-regex="true" regex="boolean" description="SybaseASE.xml, SybaseReplication.xml" />
+		    <param name="snmpPort" regex="am.port" description="Novell.xml, Linux.xml, MacOS.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml" />
+		    <param name="snmpContextName" max-len="255" type="String" description="Novell.xml, Linux.xml, MacOS.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml" />
+		    <param name="SNMPCredentialDetails" regex="am.servermonitor.SNMPCredentialDetails" description="Novell.xml, Linux.xml, MacOS.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml" />
+		    <param name="snmpAuthProtocol" regex="am.servermonitor.snmpAuthProtocol" description="Novell.xml, Linux.xml, MacOS.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml" />
+		    <param name="cmSNMPValue" regex="-1andnumeric" description="Novell.xml, Linux.xml, MacOS.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml" />
+		    <param name="snmpAuthPassword" type="String" max-len="500" secret="true" description="Novell.xml, Linux.xml, MacOS.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml" />
+		    <param name="snmpSecurityLevel" regex="am.servermonitor.snmpSecurityLevel" description="Novell.xml, Linux.xml, MacOS.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml" />
+		    <param name="snmpUserName" regex="am.windows.username" description="Novell.xml, Linux.xml, MacOS.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml" />
+		    <param name="snmpPrivPassword" type="String" max-len="500" secret="true" description="Novell.xml, Linux.xml, MacOS.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml" />
+		    <param name="snmpVersionValue" regex="am.snmp.version" description="Novell.xml, Linux.xml, MacOS.xml, FreeBSD.xml, SNMP.xml, Windows.xml, SUNSolaris.xml" />
+		    <param name="jndiurl" regex="am.common.urlstartwithslash" max-len="2083" description="JMXApplications.xml, JavaRuntime.xml" />
+		    <param name="am.jmxEnabled.param" name-regex="true" regex="am.common.on_off.yes_no.tf.null.value" description="JMXApplications.xml, JavaRuntime.xml" />
+		    <param name="jmxurl" type="String" max-len="2083" description="JMXApplications.xml, JavaRuntime.xml" />
+		    <param name="cmSSHValue" regex="-1andnumeric" description="HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, HPTRU64Unix.xml, FreeBSD.xml, SUNSolaris.xml, Kubernetes.xml, OpenShift.xml" />
+		    <param name="SSHCredentialDetails" regex="am.servermonitor.SSHCredentialDetails" description="HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, HPTRU64Unix.xml, FreeBSD.xml, SUNSolaris.xml, Kubernetes.xml, OpenShift.xml" />
+		    <param name="TelnetCredentialDetails" regex="am.servermonitor.TelnetCredentialDetails" description="HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, HPTRU64Unix.xml, FreeBSD.xml, SUNSolaris.xml" />
+		    <param name="description" type="String" max-len="10000" description="HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, HPTRU64Unix.xml, FreeBSD.xml, SUNSolaris.xml, Kubernetes.xml, OpenShift.xml" />
+		    <param name="passphrase" max-len="-1" type="String" description="HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, HPTRU64Unix.xml, FreeBSD.xml, SUNSolaris.xml, Kubernetes.xml, OpenShift.xml" />
+		    <param name="cmTelnetValue" regex="-1andnumeric" description="HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, HPTRU64Unix.xml, FreeBSD.xml, SUNSolaris.xml" />
+		    <param name="snmptelnetport" regex="am.port" description="HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, HPTRU64Unix.xml, FreeBSD.xml, SUNSolaris.xml" />
+		    <param name="am.sshPKAuth.param" name-regex="true" regex="yesnotf" description="HP-UX.xml, Linux.xml, AIX.xml, MacOS.xml, HPTRU64Unix.xml, FreeBSD.xml, SUNSolaris.xml, Kubernetes.xml, OpenShift.xml" />
+		    <param name="WMICredentialDetails" regex="am.windows.CredentialDetails" description="Windows.xml" />
+		    <param name="cmWMIValue" regex="-1andnumeric" description="Windows.xml" />
+		    <param name="eventlog_status" type="boolean" description="Windows.xml" />
+		    <param name="kerberos_status" type="boolean" description="Windows.xml" />
+		    <param name="am.encryption.param" name-regex="true" type="boolean" description="MSSQLMonitor.xml, CitrixVirtualAppsAndDesktop.xml" />
+		    <param name="am.kerberos.param" name-regex="true" type="boolean" description="MSSQLMonitor.xml, ActiveDirectory.xml" />
+		    <param name="am.useSSL.param" name-regex="true" type="boolean" description="MySQLMonitor.xml, DB2Monitor.xml" />
+		    <param name="authType" regex="am.mssql.authtype" description="MSSQLMonitor.xml, CitrixVirtualAppsAndDesktop.xml" />
+		    <param name="apacheurl" regex="am.common.url.schemaandlength.validator.255" max-len="255" description="ApacheServer.xml" />
+		    <param name="IbmHttpServerUrl" regex="am.common.urlstartwithslash" max-len="255" description="IBMHTTPServer.xml" />
+		    <param name="OracleHttpServerUrl" regex="am.common.urlstartwithslash" max-len="255" description="OracleHTTPServer.xml" />
+		    <param name="am.serverstatusurl.param" name-regex="true" regex="yesnotf" description="ApacheServer.xml, IBMHTTPServer.xml, OracleHTTPServer.xml" />
+			<param name="select-AzureServices" regex="am.azure.select-services" min-occurrences="0" max-occurrences="31" description="MicrosoftAzure.xml" />
+		    <param name="DBServerID" regex="am.azure.resourceid" description="AzureSQLDatabase.xml" max-len="1000"/>
+		    <param name="TABLENAME" regex="am.hostname" max-len="255" description="DynamoDB.xml" />
+		    <param name="select-AmazonServices" regex="am.aws.select-services" min-occurrences="0" max-occurrences="12" description="Amazon.xml" />
+		    <param name="select-Roles" regex="am.lync.select-Roles" min-occurrences="0" max-occurrences="4" description="LyncServer.xml, NetworkPolicyServer.xml" />
+		    <param name="select-AXServices" regex="am.microsoft.select-ax.services" min-occurrences="0" max-occurrences="4" description="MSDynamicsAX.xml" />
+		    <param name="AwsAccountId" type="String" description="Amazon.xml" />
+		    <param name="monitorname" max-len="515" regex="am.displayname.common" description="WUE.xml" />
+		    <param name="userid" regex="email" max-len="320" description="WUE.xml" />
+		    <param name="select-MBXServices2019" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-EDGEServices2019" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-MBXServices2016" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-EDGEServices2016" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-MBXServices2013" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-CASServices2013" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-EDGEServices2013" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-MBXServices2010" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-CASServices2010" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-HUBServices2010" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-EDGEServices2010" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-UMServices2010" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-MBXServices2007" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-CASServices2007" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-HUBServices2007" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-EDGEServices2007" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-UMServices2007" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-Services2003" regex="am.alphanumeric.exchange" min-occurrences="0" max-occurrences="16" description="ExchangeServer.xml" />
+		    <param name="select-SP2016Services" regex="am.sharepoint.select-services.sp2016" min-occurrences="0" max-occurrences="10" description="SharePoint.xml" />
+		    <param name="select-Service" regex="am.sharepoint.select-services" min-occurrences="0" max-occurrences="10" description="SharePoint.xml" />
+		    <param name="select-Services" regex="am.sharepoint.select-feature" min-occurrences="0" max-occurrences="10" description="SharePoint.xml" />
+		    <param name="select-Office365Services" regex="am.office365.select-services" min-occurrences="0" max-occurrences="4" description="Office365.xml" />
+		    <param name="selectedChilds" type="boolean" min-occurrences="0" max-occurrences="100" description="WebsiteDefacement.xml" />
+		    <param name="WDM_Child_TextPercent" regex="am.wcm.percent" min-occurrences="0" max-occurrences="100" description="WebsiteDefacement.xml" />
+		    <param name="WDM_Child_Displayname" type="String" min-occurrences="0" max-occurrences="100" description="WebsiteDefacement.xml" />
+		    <param name="WDM_Child_LinkURL" regex="am.common.url.schemaandlength.validator" min-occurrences="0" max-occurrences="100" description="WebsiteDefacement.xml" max-len="10000" />
+		    <param name="WDM_Child_ScriptPercent" regex="am.wcm.percent" min-occurrences="0" max-occurrences="100" description="WebsiteDefacement.xml" />
+		    <param name="WDM_AutoOverwrite" regex="am.checkbox.values" description="WebsiteDefacement.xml" />
+		    <param name="WDM_Pollinterval" type="int" description="WebsiteDefacement.xml" />
+		    <param name="WDM_Displayname" regex="am.displayname.common" description="WebsiteDefacement.xml" max-len="515" />
+		    <param name="WDM_UserName" regex="am.windows.username" description="WebsiteDefacement.xml" />
+		    <param name="WDM_Password" type="String" max-len="500" secret="true" description="WebsiteDefacement.xml" />
+		    <param name="WDM_DomainURL" regex="am.common.url.schemaandlength.validator" description="WebsiteDefacement.xml" max-len="10000" />
+		    <param name="WDM_AutoOverwrite1" type="boolean" description="WebsiteDefacement.xml" />
+		    <param name="ntdsDirectory" type="String" description="Active directory" max-len="1000" />
+		    <param name="snmpPrivProtocol" regex="am.snmp.snmpPrivProtocol" description="SNMP.xml" />
+		    <param name="showCustomAttribute" type="boolean" description="JBoss.xml"/>
+		    <param name="OAuthVal" type="long" description="GoogleCloudPlatform.xml,RESTAPI.xml" />
+		    <param name="ConcurrentRequest" regex="am.ebs.con.req" description="OracleEBS.xml"/>
+		    <param name="select-ConcurrentRequest" max-occurrences="4" regex="am.ebs.con.req" description="OracleEBS.xml"/>
+		    <param name="OSUsername" regex="am.windows.username" description="OpenShift.xml" />
+		    <param name="OSPassword" type="String" max-len="500" secret="true" description="OpenShift.xml" />
+		    <param name="OSPort" regex="am.port" description="OpenShift.xml" />
+		    <param name="OSToken" type="String" max-len="2048" description="OpenShift.xml" secret="true"/>
+		    <param name="am.apiMode.param" name-regex="true" regex="yesnotf" description="OpenShift.xml" />
+		    <param name="ProjectName" type="String" max-len="-1" description="OpenShift.xml" />
+		    <param name="NamespaceName" type="String" max-len="-1" description="Kubernetes.xml" />
+		    <param name="PEMFilePath" type="String" description="OracleCloud.xml" max-len="1000" />
+		    <param name="OracleServices" regex="am.oraclecloud.servicestonotdiscover" description="OracleCloud.xml" max-len="100" />
+		    <param name="select-OracleServices" regex="am.oraclecloud.servicestonotdiscover" description="OracleCloud.xml" max-occurrences="5"/>
+		    <param name="TenancyOCID" regex="am.oraclecloud.tenancy" description="OracleCloud.xml"/>
+		    <param name="DatabaseOCID" regex="am.oraclecloud.autodbocid" description="OracleCloud.xml" max-len="255" />
+		    <param name="UserID" regex="am.oraclecloud.userid" description="OracleCloud.xml"/>
+		    <param name="CompartmentName" regex="am.oci.compartment.name" description="OracleCloudAutonomousDatabase.xml"/>
+		    <param name="Region" regex="am.oraclecloud.regionstomonitor" description="OracleCloud.xml" max-len="500"/>
+		    <param name="Fingerprint" regex="am.oraclecloud.fingerprint" description="OracleCloud.xml"/>
+		    <param name="CompartmentsToMonitor" regex="am.oraclecloud.compartment" description="OracleCloud.xml" max-len="1000"/>
+		    <param name="RegionsToMonitor" regex="am.oraclecloud.regionstomonitor" description="OracleCloud.xml" max-len="500"/>
+		    <param name="select-RegionsToMonitor" regex="am.oraclecloud.regionstomonitor" description="OracleCloud.xml" max-occurrences="34"/>
+		    <param name="am.StopDiscovery.param" name-regex="true" regex="yesnotf" description="OracleCloud.xml,GoogleCloudPlatform.xml,Amazon.xml"/>
+		    <param name="ActionOnTerminatedResources" regex="am.oraclecloud.actiononterminatedresources" description="OracleCloud.xml" />
+		    <param name="ServicesToNotDiscover" regex="am.oraclecloud.servicestonotdiscover" description="OracleCloud.xml" max-len="100" />
+		    <param name="select-ServicesToNotDiscover" regex="am.oraclecloud.servicestonotdiscover" description="OracleCloud.xml" max-occurrences="5"/>
+		    <param name="am.AdvancedSettings.param" name-regex="true" regex="yesnotf" description="OracleCloud.xml,GoogleCloudPlatform.xml, Docker.xml" />
+		    <param name="ObjectStorageNamespace" regex="String" description="OracleCloud.xml" max-len="200" />
+		    <param name="haproxystatusurl" regex="am.webserver.uri" max-len="2083" description="HAProxy.xml" />
+		    <param name="GCPServices" regex="am.gcp.services" description="GoogleCloudPlatform.xml"/>
+		    <param name="select-GCPServices" regex="am.gcp.services" max-occurrences="4" description="GoogleCloudPlatform.xml"/>
+		    <param name="ProjectID" regex="am.common.alphaNumeric.ext2" max-len="30" min-len="6" description="GoogleCloudPlatform.xml"/>
+		    <param name="DeletedResourceAction" regex="am.gcp.deletedResourceAction" description="GoogleCloudPlatform.xml, Docker.xml"/>
+		    <param name="DiscoveryFilterRegex" type="String" max-len="10000" description="Docker.xml,VMWareESX.xml,RabbitMQ.xml,MicrosoftAzure.xml"/>
+		    <param name="ServicesToStopDiscovery" regex="am.gcp.services" description="GoogleCloudPlatform.xml"/>
+		    <param name="select-ServicesToStopDiscovery" regex="am.gcp.services" max-occurrences="4" description="GoogleCloudPlatform.xml"/>
+		    <param name="WalletFilePath" type="String" description="OracleCloudAutonomousDatabase.xml" max-len="1000" />
+		    <param name="TNSAlias" regex="am.windows.username" description="OracleCloudAutonomousDatabase.xml" />
+		    <param name="RemoteSQL" type="boolean" description="MSDynamicsAX.xml" />
+		    <param name="SQLHostName" regex="am.hostname" max-len="255"  description="MSDynamicsAX.xml" />
+		    <param name="SQLCredentialDetails" regex="am.dynamicsAX.SQLCredentials" description="MSDynamicsAX.xml" />
+		    <param name="SQLUserName" regex="am.windows.username" description="MSDynamicsAX.xml" />
+		    <param name="SQLPassword" type="String" max-len="500" secret="true" description="MSDynamicsAX.xml" />
+		<!-- host_connect and host_timeused params used by China team for monitoring of Kingdee Apusic Application Server -->
+		    <param name="host_connect" type="String" max-len="-1" description="GoldenButterfly.xml" />
+		    <param name="host_timeused" type="String" max-len="-1" description="GoldenButterfly.xml" />
+		    <param name="discoverPDB" regex="yesno" description="OracleDBServer.xml, OracleRACMonitor.xml"/>
+		    <param name="isCDB" regex="yesno" description="OracleDBServer.xml, OracleRACMonitor.xml"/>
+		    <param name="commonDataContainerResID" type="long" description="OracleRACMonitor.xml"/>
+   		    <param name="discoverOracleRACNodes" type="boolean" description="OracleRACMonitor.xml"/>
+		    <param name="oracleSocketTimeout" regex="am.common.onlynumeric" description="OracleDBServer.xml,OraclePDB.xml,OracleRACMonitor.xml" />
+		    <param name="oracleQueryTimeout" regex="am.common.onlynumeric" description="OracleDBServer.xml,OraclePDB.xml,OracleRACMonitor.xml" />
+		    <param name="QueueName" regex="am.monitor.db.locale" description="AmazonSQS.xml"/>
+		    <param name="SQSRegion" regex="am.aws.region" description="AmazonSQS.xml"/>
+		    <param name="am.monitorLeafCertOnly.param" name-regex="true" type="boolean" description="SSLCertificateMonitor.xml,WebpageAnalyzer.xml"/>		
+		    <param name="FUNCTION" regex="am.hostname" max-len="255" description="AWSLambda.xml" />
+		    <param name="EnvironmentName" regex="am.amazon.elasticbeanstalk.envname" description="ElasticBeanstalk.xml"/>
+		    <param name="EnvironmentRegion" regex="am.aws.region" description="ElasticBeanstalk.xml"/>
+		    <param name="UsePowerShell" regex="yesnotf" description="Office365.xml" />
+		    <param name="IsPowerShellEnabled" regex="yesnotf" description="ExchangeOnline.xml,SharepointOnline.xml" />
+		    <param name="ClientSecret" type="String" max-len="500" secret="true" description="Office365.xml" />
+		    <param name="timezone" regex="am.ibm.mq.timezone" description="MQSeries.xml"/>	
+		    <param name="am.Kerberos.param" name-regex="true" type="boolean" description="HyperVHost.xml" />		
+		    <param name="ClusterName" regex="am.aws.clustername" description="AmazonECS.xml"/>
+		    <param name="EKSClusterName" regex="am.aws.eks.clustername" description="AmazonEKS.xml"/>
+		    <param name="manageTableRow" regex="manageTableRow" max-len="255"  description="QueryMonitor.xml" />
+		    <param name="NewTable" type="String" description="QueryMonitor.xml" />
+		    <param name="manageTablerowShow" regex="am.common.TFNull" max-len="255"  description="QueryMonitor.xml" />
+		    <param name="BRMUrls" type="JSONArray" template="am.wcm.childNodesForWDM" array-size="0-10" max-len="-1" />
+		    <param name="discoverOption" regex="am.weblogic.dicoveroption" description="Weblogic.xml" />
+		    <param name="driverType" regex="am.mssqlmonitor.driverType.value" description="MSSQLMonitor.xml, CitrixVirtualAppsAndDesktop.xml" />
+		    <param name="GlobalRegions" regex="am.aws.globalregions" description="Amazon.xml" max-len="500"/>
+		    <param name="select-GlobalRegions" regex="am.aws.select-globalregions" min-occurrences="0" max-occurrences="29" description="Amazon.xml" />
+		    <param name="ChinaRegions" regex="am.aws.chinaregions" description="Amazon.xml"/>
+		    <param name="select-ChinaRegions" regex="am.aws.select-chinaregions" min-occurrences="0" max-occurrences="2" description="Amazon.xml" />
+		    <param name="DiscoverChild" regex="am.addvms" description="Amazon.xml"/>
+		    <param name="AWSServicesToStopDiscovery" regex="am.aws.services" description="Amazon.xml"/>
+		    <param name="select-AWSServicesToStopDiscovery" regex="am.aws.services" max-occurrences="11" description="Amazon.xml"/>
+		    <param name="NameFilterRegex" regex="am.aws.name.filter.regex" description="Amazon.xml"/>
+		    <param name="WEBTOKENVAL" type="long" description="RESTAPI.xml" secret="true"/>
+		    <param name="sldadapters" regex="am.sapbusinessone.sldadapters" max-len="255" description="SAPBusinessOne.xml" />
+		    <param name="updateToAllChilds" type="boolean" description="Parent type monitors"/>
+		    <param name="updatedTime" type="long" description="RBM update monitor"/>
+		    <param name="acceptUntrustedCert" type="boolean" description="RBM update monitor"/>
+		    <param name="showPerformance" type="boolean" description="RBM update monitor"/>
+		    <param name="pageLoadTime" type="int" description="RBM update monitor"/>
+		    <param name="browserType" type="int" description="RBM update monitor"/>
+		    <param name="thinkTime" type="int" description="RBM update monitor"/>
+		    <param name="ScriptName" type="String" max-len="500" description="RBM update monitor"/>
+		    <param name="isScreenShot" type="boolean" description="RBM update monitor"/>
+		    <param name="AWSGovCloudRegions" regex="am.aws.govcloudregions" description="Amazon.xml"/>
+		    <param name="select-AWSGovCloudRegions" regex="am.aws.select-govcloudregions" min-occurrences="0" max-occurrences="2" description="Amazon.xml" />
+		    <param name="PrometheusSupported" regex="boolean" description="To handle Conf monitors(Tomcat-server) by prometheus."/>
+		    <param name="UsePublicIP" regex="yesnotf" description="AzureVirtualMachine.xml"/>
+		    <param name="UUIDMigration" type="boolean" description="To handle UUID Migration for VMs under a ESX host."/>			
+			<param name="AzureChildDiscovery" regex="am.azure.childdiscovery" description="MicrosoftAzure.xml" />
+			<param name="ChildDiscovery" regex="am.azure.childdiscovery" description="MicrosoftAzure.xml" />
+			<param name="AzureServicesToStopDiscovery" regex="am.azure.servicestostop" description="MicrosoftAzure.xml" max-len="1024"/>
+		    <param name="select-AzureServicesToStopDiscovery" regex="am.azure.servicestostop" min-occurrences="0" max-occurrences="30" description="MicrosoftAzure.xml"/>
+		    <param name="clusterid" type="String" description="SAPASJava.xml"/>
+		    <param name="mapExistingOracleInstances" regex="yesnotf" description="OracleRACMonitor.xml"/>
+		    <param name="Protocol" regex="am_prometheus_http_protocol_types" description="IISServer.xml"/>
+		    <param name="WinrmPort" regex="am.port" description="IISServer.xml"/>
+		</param-group>
+	</param-groups>
+
+	<urls throwallerrors="true" roles="am.role.ADMIN.EA" authentication="required" >
+		<url path="/manageConfMons.do" method="GET" operation-param="method" privilege-identifier="resourceid" operation-value="editMonitor,editPreConfMonitor" >
+			<param-group name="am.additional.extra.params" />
+			<param-group name="am.monitor.details.extra.params" />
+			<param name="exparam" regex="am.common.paramNames" max-occurrences="100" max-len="300" />
+			<param name="tabId" regex="am.common.longbooleanandnull" />
+			<param name="resourceid" type="long" />
+			<param name="type" regex="am.monitor.type" />
+			<param name="mode" regex="am.servermonitor.mode" />
+			<param name="resourcename" type="String" max-len="2000"/>
+			<param name="haid" regex="am.haid.grp.long.value" max-occurrences="100" />
+			<param name="componentName" type="String" />
+			<param name="displayname" regex="am.displayname.common" max-len="515"/>
+			<param name="displayName" regex="am.displayname.common" max-len="515"/>
+		</url>
+	</urls>	
+	<!-- CreateMonitor, updateMonitor, Testcredential STARTS -->
+	<urls throwallerrors="true" roles="am.role.ADMIN.EA" authentication="required" > 
+		<param-group name="am.monitor.addition.params"></param-group>	
+		<param-group name="am.additional.extra.params" />
+		<param-group name="am.monitor.details.extra.params" />
+		<url path="/testCredential.do"  method="POST" csrf="true" operation-param="method" operation-value="testCredentialForConfMonitors" >
+			<param name="query" regex="am.alphanumeric" />
+			<param name="cacheid" type="long" />
+			<param name="searchOptionValue" regex="am.alphanumeric" />
+			<param name="serializedData" regex="am.common.urlstartwithslash" />
+			<param name="brmChildDisplayname" type="String" max-len="2000" max-occurrences="1000"  />
+			<param name="brmChildLinkURL" regex="am.common.url.schemaandlength.validator" max-len="10000" max-occurrences="1000"  />
+			<param name="brmWebpageURL" regex="am.common.url.schemaandlength.validator" max-len="10000" />
+		</url>
+		<url path="/manageConfMons.do" method="POST" csrf="true" operation-param="method" operation-value="updateMonitor"  />
+		<url path="/manageConfMons.do" method="POST" csrf="true" operation-param="method" operation-value="createMonitor" privilege-identifier="haid" />
+	</urls>
+	<urls path="/manageConfMons.do" method="GET" operation-param="method" throwallerrors="true" roles="am.role.ADMIN.EA" authentication="required" > 
+		<param-group name="am.additional.extra.params" />
+		<param-group name="am.monitor.details.extra.params" />
+		<url operation-value="createMonitor" dynamic-redirect="true" privilege-identifier="haid" redirect-url-template="/adminAction.do?method=reloadHostDiscoveryForm&amp;type=$type$&amp;restype=$restype$&amp;haid=null" />
+		<url operation-value="updateMonitor" dynamic-redirect="true" redirect-url-template="/showresource.do?resourceid=$resourceid$&amp;method=showResourceForResourceID" />
+		<param name="exparam" regex="am.common.paramNames" max-occurrences="100" max-len="300" />
+		<param name="restype" regex="am.monitor.type" />
+		<param name="type" regex="am.monitor.type" />
+		<param name="haid" regex="am.common.longbooleanandnull" max-occurrences="2147483647" />
+		<param name="tabId" regex="am.common.longbooleanandnull" />
+		<param name="montype" regex="am.montype" />
+		<param name="resourceid" type="long" />
+	</urls>
+	<!-- CreateMonitor, updateMonitor, Testcredential ENDS -->
+	
+	<!-- Add Monitor API starts -->
+	<urls throwallerrors="true" method="POST" api="true" roles="am.role.ADMIN.EA" url-type="dynamic" authentication="required" > 
+		<url path="/AppManager/(xml|json)/AddMonitor" />
+		<param-group name="am.monitor.addition.params"></param-group>	
+		<param-group name="am.additional.extra.params" />
+		<param-group name="am.monitor.details.extra.params" />
+		<param name="apikey" regex="apikey" max-len="32" min-len="32" secret="true" />
+		<param name="SecretAccessKey" type="String" max-len="500" secret="true" description="Amazon.xml" />
+		<param name="discoverchild" regex="am.addvms" description="Amazon.xml"/>
+		<param name="deletedResourceAction" regex="am.gcp.deletedResourceAction" description="GoogleCloudPlatform.xml, Docker.xml"/>
+		<param name="servicestostopdiscovery" regex="am.gcp.services" description="GoogleCloudPlatform.xml"/>
+		<param name="stopdiscovery" type="boolean" description="Amazon.xml"/>
+		<param name="MonitorGroupID" type="long"></param>
+		<param name="addToGroup" type="boolean"></param>
+		<param name="advancedsettings" type="boolean" description="OracleCloud.xml" />
+		<param name="deletedresourceaction" regex="am.gcp.deletedResourceAction" description="GoogleCloudPlatform.xml" />
+		<param name="servicesToNotDiscover" regex="^(Compute|Database|Storage)$" description="OracleCloud.xml" />
+		<param name="provider" regex="am.windows.username" />
+		<param name="databasetype" regex="am.sapmaxdb.dbname" description="QueryMonitor.xml" />
+		<param name="databasename" regex="am.monitor.db.name" description="QueryMonitor.xml" />
+		<param name="showqueryoutput" regex="yesno" description="QueryMonitor.xml" />
+		<param name="queries" max-len="-1" type="String" description="QueryMonitor.xml" />
+		<param name="JDBCUrlOptional" type="String" max-len="2083" description="QueryMonitor.xml" />
+		<param name="filterFiles" type="String" max-len="1000" description="File/Directorty"  />
+		<param name="selectRuleType" regex="^(any|all)$" description="File/Directorty" />
+		<param name="clearAlerts" regex="am.report.on.off.empty" description="File/Directorty" /> 
+		<param name="ccontent" type="String" max-len="1000" description="File/Directorty" />
+		<param name="fileCheckType" regex="^(0|1)$" description="File/Directorty" />
+		<param name="contentChk" regex="am.report.on.off.empty" description="File/Directorty" /> 
+		<param name="serversite" regex="am.filemon.serversite" description="File/Directorty, ScriptMonitor" /> 
+		<param name="filepath" type="String" max-len="255" description="File/Directorty" />
+		<param name="fileDirAge" regex="am.report.on.off.empty" description="File/Directorty" />
+		<param name="selectMonStatus" regex="^(up|down|0|1)$" description="File/Directorty" />
+		<param name="selectChangeType" regex="^(0|1)$" description="File/Directorty" />
+		<param name="resolveHost" type="boolean" description="File/Directorty"/>
+		<param name="checkEmpty" regex="onlyon" description="File/Directorty" />
+		<param name="mtype" regex="am.filemon.mtype" description="Type"/>
+		<param name="clearConditionCountVal" regex="am.threshold.typeNumeric" description="File/Directorty" />
+		<param name="clearConditionRuleType" regex="am.filemon.clearconditionruletype.value" description="File/Directorty" />
+		<param name="subDirCntChk" regex="onlyon" description="File/Directorty"/>
+		<param name="regexChk" regex="onlyon" description="File/Directorty" />
+		<param name="affectSeverity" regex="am.common.ZeroOne" description="File/Directorty" />
+		<param name="checkFileAvailability" regex="onlyon" description="File/Directorty" />
+		<param name="timeval" type="int" description="File/Directory" />
+		<param name="timeUnit" regex="am.filemon.timeunit" description="File/Directory" />
+		<param name="checkAvailability" regex="am.common.on_off.yes_no.tf.null.value" description="File/Directory" />
+		<param name="choosehost" type="int" description="File/Directory, ScriptMonitor" />
+		<param name="monitoringmode" regex="am.report.server.monitoring.mode" description="File/Directory, ScriptMonitor" />
+		<param name="serverpath" type="String" max-len="500" description="ScriptMonitor"  />
+		<param name="workingdirectory" type="String" max-len="500" description="ScriptMonitor" />
+		<param name="isCommand" type="boolean" description="ScriptMonitor" />
+		<param name="globalseverity" type="boolean" description="ScriptMonitor" />
+		<param name="sshkey" regex="am.common.on_off.yes_no.tf.null.value" description="ScriptMonitor" />
+		<param name="opfile" regex="am.common.on_off.yes_no.tf.null.value" description="ScriptMonitor" />
+		<param name="outputfile" type="String" max-len="1000" description="ScriptMonitor" />
+		<param name="string_att" type="String" max-len="255" description="ScriptMonitor" />
+		<param name="numeric_att" type="String" max-len="255" description="ScriptMonitor" />
+		<param name="delimiter" type="String" max-len="1" description="ScriptMonitor" />
+		<param name="tablepresent" regex="onlyon" description="ScriptMonitor" />
+		<param name="table_row" type="int" description="ScriptMonitor" />
+		<param name="am.scriptmon.stringatt" regex="am.attribute.name" description="String Attribute of Table" max-len="10000" name-regex="true"/>
+		<param name="am.scriptmon.numericatt" regex="am.attribute.name" description="Numeric Attribute of Table" max-len="10000" name-regex="true"/>
+		<param name="am.scriptmon.table" regex="am.attribute.name" description="Table Name" max-len="10000" name-regex="true"/>
+		<param name="am.scriptmon.pcatt" regex="am.attribute.name" description="Unique Column" max-len="10000" name-regex="true"/>
+		<param name="am.scriptmon.cdl" type="String" description="Column Delimiter" name-regex="true" max-len="1"/>
+		<param name="message" type="String" max-len="500" description="ScriptMonitor" />
+		<param name="healthTableRow" regex="scriptHealthTableRow" description="am.scriptmonitor.healthtablerow"/>
+		<param name="tablespresent" regex="onlyon" description="am.webclient.newscript.tablesinoutput.text"/>
+		<param name="forceadd" regex="yesnotf" description="AIX" />
+		<param name="addgivenname" type="boolean" description="AIX" />
+		<param name="subnet" regex="am.hostname" description="AIX" />
+		<param name="pollInterval" type="int" description="FreeBSD" />
+		<param name="LookupAddress" regex="am.hostname" max-len="255" description="DNSMonitor" />
+		<param name="TargetAddress" regex="am.hostname" max-len="255" description="FTPMonitor.xml, DNSMonitor.xml" />
+		<param name="RecordType" regex="am.dns.recordtype" description="DNSMonitor.xml" />
+		<param name="SearchField" regex="am.dns.searchfield" description="DNSMonitor.xml" />
+		<param name="IsSecured" regex="yesno" description="FTPMonitor.xml, LDAPServer.xml" />
+		<param name="DownloadFile" regex="yesno" description="FTPMonitor.xml" />
+		<param name="RemoteSourceFileName" regex="am.ftp.file.path" description="FTPMonitor.xml" max-len="250"/>
+		<param name="LocalDestinationFileName" type="String" description="FTPMonitor.xml" max-len="250"/>
+		<param name="UploadFile" regex="yesno" description="FTPMonitor.xml" />
+		<param name="LocalSourceFileName" type="String" description="FTPMonitor.xml" max-len="250"/>
+		<param name="RemoteDestinationFileName" regex="am.ftp.file.path" description="FTPMonitor.xml" max-len="250"/>
+		<param name="credentialID" regex="-1andnumeric" />
+		<param name="CredentialID" regex="-1andnumeric" />
+		<param name="LDAPServer" regex="am.hostname" max-len="255" description="LDAPServer.xml" />
+		<param name="LDAPServerPort" regex="am.port" description="LDAPServer.xml" />
+		<param name="SearchBase" max-len="-1" type="String" description="LDAPServer.xml" />
+		<param name="SearchFilter" max-len="-1" type="String" description="LDAPServer.xml" />
+		<param name="MatchingAttribute" regex="am.ldap.matchingAttribute" description="LDAPServer.xml" />
+		<param name="FilterCondition" regex="am.ldap.filtercondition" description="LDAPServer.xml" />
+		<param name="SearchResult" max-len="-1" type="String" description="LDAPServer.xml" />
+		<param name="eumAgents" regex="am.hostnameWithComma" description="Telnet" />
+		<param name="SSL" regex="yesnotf" description="ApacheSpark.xml, OracleEBS.xml" />
+		<param name="namespace" regex="am.azure.servicebusnamespace" description="AzureARMServiceBus.xml" />
+		<param name="groupID" regex="am.common.longbooleanandnull" description="Nutanix" /><!-- haid -->
+		<param name="addtoGroup" regex="am.displayname.common" description="Nutanix" /> <!-- monitorgroupname -->
+		<param name="ManagedServerID" type="int" description="CommonParam" />	
+		<param name="label" type="String" max-len="255" />
+		<param name="resolvedns" type="boolean" description="CommonParam" />
+		<param name="ManagedServerGroupName" type="int" description="CommonParam" />
+		<param name="popHost"  regex="am.hostname" max-len="255"  description="MailServer.xml" />
+		<param name="popTLSEnabled" type="boolean" description="MailServer.xml" />
+		<param name="popPort" regex="am.port" description="MailServer.xml" />
+		<param name="popUserName" regex="am.windows.username" description="MailServer.xml" />
+		<param name="popPassword" type="String" max-len="500" secret="true" description="MailServer.xml" />
+		<param name="fetchEnabled" regex="am.common.on_off.yes_no.tf.null.value" description="MailServer.xml" />
+		<param name="popenabled" type="boolean" description="MailServer.xml" />
+		<param name="smtpauth" type="boolean" description="MailServer.xml" />
+		<param name="mailMsg" type="String" description="MailServer.xml" />
+		<param name="emailid" type="String" max-len="320" description="MailServer.xml" />
+		<param name="serverconnectionchannel" regex="am.hostname" max-len="255"  description="MQSeries.xml, MQBroker.xml" />
+		<param name="listenerport" regex="am.port" description="MQSeries.xml, MQBroker.xml" />
+		<param name="authentication" regex="^(SQL|Windows)$" description="MSSQL.xml" />
+		<param name="namedIntance" type="boolean" description="MSSQL.xml" />
+		<param name="language" regex="country_code" description="am.webclient.hostdiscovery.sap.language"/>
+		<param name="JobTrackerUserName" regex="am.windows.username" description="Hadoop.xml" />
+		<param name="logonClient" type="int" description="am.webclient.hostdiscovery.sap.logonclient"/>
+		<param name="routerString" type="String" description="am.webclient.hostdiscovery.sap.routerstring" max-len="4000"/>
+		<param name="systemnumber" regex="am.common.onlynumeric" description="am.webclient.hostdiscovery.sap.systemnumber"/>
+		<param name="monitorset" type="String" description="am.webclient.ccms.ccmsmonitorset"/>
+		<param name="eventlog" regex="yesnotf" description="WindowsCluster.xml, XenApp.xml, MSDynamicsCRM.xml" />
+		<param name="remoteSQL" type="boolean" description="MSDynamicsAX.xml" />
+		<param name="SQLhostname" regex="am.hostname" max-len="255"  description="MSDynamicsAX.xml" />
+		<param name="SQLcredentialdetails" regex="am.dynamicsAX.SQLCredentials" description="MSDynamicsAX.xml" />
+		<param name="SQLusername" regex="am.windows.username" description="MSDynamicsAX.xml" />
+		<param name="SQLpassword" type="String" max-len="500" secret="true" description="MSDynamicsAX.xml" />
+		<param name="monitorvms" regex="am.addvms.api"></param>
+		<param name="Kerberos" type="boolean"></param>
+		<param name="vcHost" regex="am.hostname" max-len="255"/>
+		<param name="vcPort" regex="am.port" />
+		<param name="isHostDCViaVC" regex="am.common.on_off.yes_no.tf.null.value" />
+		<param name="sslVersion" regex="am.vcenter.sslVersion" />
+		<param name="vCenterCredDetails" regex="am.credentialdetails" />
+		<param name="rbmagentID" regex="am.common.numberandcomma"></param>
+		<param name="DiscoveryFilterRegex" type="String" max-len="10000" />
+		<param name="discoverVM" regex="am.rhev.discoverVM" />
+		<param name="isAllContainerEnabled" type="boolean"></param>
+		<param name="isCertificateEnabled" type="boolean"></param>
+		<param name="AdvancedSettings" type="boolean"></param>
+		<param name="AddVM" regex="am.addvms"></param>
+		<param name="filterEnabled" type="boolean"></param>
+		<param name="apiMode" type="boolean"></param>
+		<param name="apacheauth" type="boolean" description="apache server"></param>
+		<param name="apacheUserName" regex="am.windows.username"></param>
+		<param name="apachepassword" type="String" max-len="500" secret="true"></param>
+		<param name="ssl" regex="am.common.on_off.yes_no.tf.null.value" ></param>
+		<param name="donotresolvens" type="boolean"></param>
+		<param name="responseheadercheck" type="boolean"></param>
+		<param name="nginxauth" regex="am.common.on_off.yes_no.tf.null.value" ></param>
+		<param name="url" regex="am.url.ext" max-len="10000"></param>
+		<param name="checkForContent" type="String" max-len="250"></param>
+		<param name="errorIfMatch" type="String" description="am.webclient.hostdiscovery.urlmon.matcherror" max-len="250"></param>
+		<param name="urlMethod" regex="am.urlmon.method"></param>
+		<param name="httpCondition" regex="am.urlmon.httpvalue"></param>
+		<param name="httpValue" type="int"></param>
+		<param name="requestParams" type="String" max-len="100000"></param>
+		<param name="verifyError" type="boolean"></param>
+		<param name="payload" regex="am.restapi.payloadType" ></param>
+		<param name="regex" regex="am.common.on_off.yes_no.tf.null.value"></param>
+		<param name="casesensitive" regex="am.common.on_off.yes_no.tf.null.value"></param>
+		<param name="userAgent" type="String" max-len="1000"></param>
+		<param name="WSDLUrl" regex="String" description="am.webclient.wsm.wsdlurl.text" max-len="10000"/>
+	    <param name="resFulWebservice" type="boolean" description="am.webservice.isrestful.text"/>
+		<param name="endPointUrl" regex="String" description="Endpoint Address" max-len="2083"/>
+		<param name="authToken" type="String" max-len="1000"/>
+		<param name="DuplicationCheckDone" type="boolean" />
+		<param name="eeSyncKey" regex="am.encodedauthkey" />
+		<param name="fromRESTAPI" type="boolean" />
+		<param name="method" regex="am.request.method" />
+		<param name="probeId" type="long" />
+		<param name="monitorType" regex="am.monitor.type" />
+		<param name="connectionTimeout" regex="-1andnumeric" description="URLSEQ" />
+		<param name="fromAdminServer" type="boolean" description="URLSEQ" />
+		<param name="multipleServers" type="int" max-occurrences="50" description="URLSEQ"/>
+		<param name="seqinfo" type="String" max-len="-1" description="URLSEQ" /> <!--File content  -->
+		<param name="transactionname" type="String" max-len="100" description="URLSEQ" />
+		<param name="addvms" regex="am.addvms.api" description="HyperVHost.xml" />
+		<param name="appmanageros" regex="am.iis.appmanageros" />
+		<param name="istestavailability" type="boolean" />
+		<param name="it360LicenseViolation" type="boolean" />
+		<param name="netmask" regex="ipaddress" description="am.webclient.hostdiscovery.subnetmask" max-len="255"/>
+		<param name="resolveDNS" regex="am.common.on_off.yes_no.tf.null.value" description="am.webclient.hostdiscovery.dnsname"/>
+		<param name="oldTypeToCheck" regex="am.iis.oldTypeToCheck" />
+		<param name="value" type="int" />
+		<param name="redirectto" regex="am.common.urlstartwithslash"  max-len="2083"/>
+		<param name="CredentialManager" regex="am.urlmon.credtype" description="am.webclient.SAP.isCredManager" />
+		<param name="credManagerVal" type="int" description="ScriptMonitor" />
+		<param name="isCredManager" type="boolean" />
+		<param name="isFile" type="boolean" description="ScriptMonitor"/>
+		<param name="checkSeverity" regex="onlyon" description="ScriptMonitor"/>
+		<param name="actionmethod" regex="^(createUrlMonitor)$" />
+		<param name="checkfor" type="String" description="am.webclient.hostdiscovery.urlmon.htmlcontent" max-len="250"/>
+		<param name="headerInput" type="String" description="urlcreation.customheaders" max-len="48000" max-occurrences="100"/>
+		<param name="clientCertPassword" type="String" description="am.webclient.url.client.certificate.password" max-len="250" secret="true"/>
+		<param name="errorcontent" type="String" description="am.webclient.hostdiscovery.urlmon.matcherror" max-len="250"/>
+		<param name="subgroupname" regex="am.displayname.common" max-len="515"/>
+		<param name="customHeaders" type="String" description="urlcreation.customheaders" max-len="48000"/>
+		<param name="payloadType" regex="am.urlmon.payLoadType" description="am.webclient.hostdiscovery.restapi.payload.type"/>
+		<param name="verifyerror" type="boolean" description="am.webclient.hostdiscovery.urlmon.errormessage"/>
+		<param name="regEx" regex="onlyon" description="am.webclient.filedir.regexp.text" max-len="20"/>
+		<param name="caseSensitive" regex="onlyon" description="am.webclient.hostdiscovery.urlmon.caseSensitive" max-len="20"/>
+		<param name="clientCertEnabled" type="boolean" description="am.webclient.url.client.certificate"/>
+		<param name="credType" regex="am.urlmon.credtype" description="am.webclient.hostdiscovery.urlmon.urlauthinfo"/>
+		<param name="usedRouterString" type="boolean" description="am.webclient.hostdiscovery.sap.connect.withrouterstring"/>
+		<param name="tokenAndOperation" type="String" description="am.webclient.wsm.authtoken.text" max-len="1000"/>
+		<param name="sslenable" regex="am.common.on_off.yes_no.tf.null.value" description="Nginx.xml" />
+		<param name="JobTrackerJNDIPath" regex="am.common.urlstartwithslash" max-len="2083" description="Hadoop.xml" />
+		<param name="JobTrackerPassWord" type="String" max-len="500" description="Hadoop.xml" />
+		<param name="apachesolrauth" regex="am.common.on_off.yes_no.tf.null.value" description="ApacheSolr.xml" />
+		<param name="ElasticSearchAuth" regex="am.common.on_off.yes_no.tf.null.value" description="ApacheZookeeper.xml" />
+		<param name="SearchValue" regex="String" description="DNSMonitor" />
+		<param name="databasedetail" max-len="400" regex="am.querymon.existingdbdetails" description="QueryMonitor.xml" />
+		<param name="HAProxy" regex="am.common.on_off.yes_no.tf.null.value" description="HAProxy.xml" />
+		<param name="DBpassword" type="String" max-len="500" secret="true" description="SDPMonitor.xml(RestAPI)" />
+		<param name="DBport" regex="am.port" description="SDPMonitor.xml(RestAPI)" />
+		<param name="DBusername" regex="am.windows.username" description="SDPMonitor.xml(RestAPI)" />
+		<param name="roles" regex="am.lync.roles" description="LyncServer.xml,NetworkPolicyServer.xml" />	
+		<param name="tenantname" regex="am.office365.tenantname" description="SharepointOnline.xml, SkypeForBusinessOnline.xml, ExchangeOnline.xml" />
+		<param name="useremail" regex="email" max-len="320" description="Office365.xml" />
+		<param name="haRESID" type="long" description="OracleVM" />
+		<param name="ovmCredDetails" regex="am.credentialdetails" description="OracleVM" />
+		<param name="isEdit" regex="am.common.TFNull" description="OracleVM" />
+		<param name="discoveryFilterRegex" type="String" max-len="10000"  description="VMWareVM" />
+		<param name="formFileName" type="String" max-len="-1" description="URL" />
+		<param name="userID" regex="email" max-len="320" description="WUE.xml" />
+		<param name="samlconfig" type="long"/>
+		<param name="sshPKAuthChecked" type="String" max-len="20" description="servers.xml" />
+		<param name="privateKey" type="String" max-len="10000" secret="true" description="ssh key" />
+	</urls>
+	<!-- Add Monitor API ends -->
+	
+	
+	<!-- Edit monitor API starts -->
+	<urls url-type="dynamic" method="POST" roles="am.role.ADMIN.EA" privilege-identifier="resourceid" throwallerrors="true" authentication="required" api="true" >
+		<url path="/AppManager/(xml|json)/EditMonitor"></url>
+		<param name="displayname" regex="am.displayname.common" max-len="515"></param>
+		<param name="newdisplayname" regex="am.displayname.common" max-len="515"></param>
+		<param name="apikey" regex="apikey" secret="true" max-len="32" min-len="32"/>
+		<param name="port" type="int"></param>
+		<param name="resourceid" type="long"></param>
+		<param name="pollInterval" type="int"></param>
+		<param name="host" regex="am.hostname"></param>
+		<param name="type" regex="am.editmonitor.api.type"></param>
+		<param name="LookupAddress" regex="am.hostname" max-len="255"></param>
+		<param name="TargetAddress" regex="am.hostname" max-len="255"></param>
+		<param name="RecordType" regex="am.dns.recordtype"></param>
+		<param name="SearchField" regex="am.dns.searchfield"></param>
+		<param name="SearchValue" regex="String"></param>
+		<param name="timeout" regex="-1andnumeric"></param>
+		<param name="domain" regex="am.hostname" max-len="255"></param>
+		<param name="isProxyNeeded" regex="yesno"></param>
+		<param name="monitorLeafCertOnly" type="boolean"></param>
+		<param name="hostNameError" regex="yesnotf"></param> 
+		<param name="command" max-len="255" type="String" ></param>
+		<param name="search" max-len="255" type="String" ></param>
+		<param name="url" regex="am.url.ext" max-len="10000"></param>
+		<param name="checkForContent" type="String" max-len="250"></param>
+		<param name="errorIfMatch" type="String" description="am.webclient.hostdiscovery.urlmon.matcherror" max-len="250"></param>
+		<param name="urlMethod" regex="am.urlmon.method"></param>
+		<param name="userName" regex="am.windows.username" max-len="255"></param>
+		<param name="httpCondition" regex="am.urlmon.httpvalue"></param>
+		<param name="httpValue" type="int"></param>
+		<param name="requestParams" type="String" max-len="100000"></param>
+		<param name="password" type="String" max-len="250" secret="true"></param>
+		<param name="verifyError" type="boolean"></param>
+		<param name="payload" regex="am.urlmon.payLoadType"></param>
+	</urls>
+	<!-- Edit monitor API ends -->
+	
+  	<urls path="/deleteMO.do" method="post" csrf="true" operation-param="method" throwallerrors="true" authentication="required" >
+	    <param-group name="am.additional.extra.params" />
+	    <param-group name="am.monitor.details.extra.params" />	
+		<param name="type" type="String" max-len="1000" max-occurrences="2" />
+		<param name="resourceid" type="long" />
+		<param name="baseid" type="long" />
+		<param name="select" type="long" max-occurrences="1000" /> <!-- Max occur of 1000 is assumption because customer may have 1000 monitors (delete Extra Monitor page and Listview)  -->
+		<param name="select-apminsight" type="long" max-occurrences="1000" />
+		<param name="group" regex="am.monitor.category.type.value" max-occurrences="2"/>
+		<param name="rbmagent" regex="yesnotf"/>
+		<param name="selectagent" type="long" max-occurrences="25" />
+		<param name="headercheckbox0" regex="am.mailserver.serverauth.types" />
+		<param name="headercheckbox1" regex="am.mailserver.serverauth.types" />
+		<param name="type1" regex="am.monitor.type" />
+		<param name="isFromEnterpriseSearch" type="boolean" />
+		<param name="oldtab" regex="am.threshold.polltotry" />
+		<param name="operation" regex="am.monitor.operation.value" />
+		<param name="listview" type="boolean" />
+		<param name="viewmontype" regex="am.monitor.type" />
+		<param name="showmanage" regex="am.monitor.showmanage.value" />
+		<param name="network" regex="am.monitor.type" />
+		<param name="isReset" regex="yesnotf" />
+		<param name="selectedPage" type="int" />
+		<param name="fromPopUpWindow" regex="yesnotf" />
+		<param name="fromConfDetails" regex="yesnotf" />
+		<param name="rowid" regex="am.webclient.resIds.commaSeparated" max-len="100000" />
+		<param name="showAllRows" regex="yesnotf" />
+		<param name="fromiconview" type="boolean" />
+		<param name="tabId" regex="am.common.longandnull" description="Amazon-Child Monitors delete action" />
+		<param name="searchword" type="String" max-len="10000" />
+		<url operation-value="unManageMonitors,manageMonitors" roles="ADMIN,ENTERPRISEADMIN,OPERATOR" />
+		<url operation-value="deleteMO"  roles="ADMIN,ENTERPRISEADMIN" />
+	</urls>
+	<urls path="/deleteMO.do" operation-param="method" throwallerrors="true" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<param name="select" regex="am.residswith.dollar.value" max-occurrences="2000" max-len="3000" />
+		<param name="operation" regex="am.monitor.operation.value" />
+		<param name="groupviewfilterby" regex="am.monitorgrp.grpfilterby.value" />
+		<param name="retaintree" regex="am.residswith.dollar.value" max-len="2000" />
+		<param name="unopengroups" regex="am.residswith.dollar.value" max-len="2000" />
+		<param name="selectFieldVal" regex="am.selectedFieldvalue.value" />
+		<param name="alteraction" regex="am.monitorgrp.alteraction.value" />
+		<param name="haid" regex="am.common.longandnull" />
+		<param name="mode" regex="am.monitorgrp.mode.value" />
+		<param name="headercheckbox1" regex="am.mailserver.serverauth.types" />
+		<param name="todelete" regex="am.monitorgrp.todelete.value" />
+		<param name="isReset" regex="yesnotf" />
+		<url method="get" operation-value="openDeleteMonitorGroupPage" roles="ADMIN,ENTERPRISEADMIN" />
+		<url method="post" csrf="true" operation-value="ManageMonitorGroups,unManageMonitorGroups,alterActionsforMG" roles="ADMIN,ENTERPRISEADMIN,OPERATOR" />
+		<url method="post" csrf="true" operation-value="deleteMonitorGroup" roles="ADMIN,ENTERPRISEADMIN" >
+			<param name="select" regex="am.residswith.dollar.value" max-occurrences="2000" max-len="5000" />
+		</url>
+	</urls>
+	<urls  path="/deleteMO.do" operation-param="method" throwallerrors="true" authentication="required"  > 
+		<param-group name="am.additional.extra.params" />
+		<url method="get" operation-value="fetchDataNowForResource" roles="ADMIN,ENTERPRISEADMIN,OPERATOR" >
+			<param name="redirectto" type="String" max-len="1000" />
+			<param name="resourceid" type="long" />
+		</url>
+		<url method="get" operation-value="showUnmanageMessage" roles="ADMIN,ENTERPRISEADMIN,OPERATOR" > 
+			<param name="resid" regex="am.residswith.dollar.value" />
+		</url>
+	</urls>
+	
+	<!-- Single Actions For Monitors  -->
+	<urls>
+		<param-group name="am.additional.extra.params" />
+	 	<url path="/editDisplaynames.do"  method="post" roles="ADMIN,ENTERPRISEADMIN,OPERATOR" throwallerrors="true" operation-param="method" operation-value="editDisplaynames" csrf="true" authentication="required">
+			<param name="resids" regex="am.common.numberandcomma" max-len="1000" />
+			<param name="am.resids_as_paramname" name-regex="true" type="String" max-len="515"/>
+	 	</url>
+	</urls>
+	<urls path="/manageConfMons.do" operation-param="method" throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<url method="get" operation-value="getDropDownValues" roles="am.role.ADMIN.EA.DE" authentication="required">
+			<param name="rowName" regex="am.addmon.rowname.value"/>
+			<param name="selectedOption" regex="am.selectedoption.value" />
+			<param name="cacheid" type="long"/>
+			<param name="type" regex="am.monitor.type" />
+			<param name="databaseName" regex="am.sqldatabasename"/>
+			<param name="hostType" regex="am.common.TFNull"/>
+		</url>
+		<url method="post" operation-value="modifyPassword" roles="ADMIN" csrf="true" authentication="required" >
+			<param name="existingdbvalue" regex="am.urlstartswith.slash.splchars" max-len="255" description="QueryMonitor.xml" />
+		</url>
+		<url method="post" roles="ADMIN,ENTERPRISEADMIN" csrf="true" authentication="required" operation-value="updateKey" >
+			<param name="resourceid" type="long" />
+			<param name="tableId" type="int" /> 
+			<param name="pkValue" regex="am.tablename.value" max-occurrences="100" /> <!-- DB Table columns -->		
+		</url>	
+	</urls>
+	
+	<urls throwallerrors="true" operation-param="method" roles="am.role.ADMIN.EA.OP.US" authentication="required"  >
+		<param-group name="am.additional.extra.params" />
+		<param-group name="am.monitor.details.extra.params" />
+		<param name="am.resourcetype.ignorecase" name-regex="true" regex="am.monitor.type" />
+		<param name="resourceid" type="long" />
+		<param name="baseid" type="long" />
+		<param name="tabId" type="int" />
+		<param name="screenWidth" type="int" />
+		<param name="ScreenWidth" type="int" />
+		<url path="/GlobalActions.do" method="get" privilege-identifier="resourceid" operation-value="pollNow" />
+	</urls>
+		
+	
+	<urls path="/showDCComponents.do" throwallerrors="true" operation-param="method" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<param name="selecteddcComponentName" regex="am.dccomponent.value" />
+		<param name="Monitortype" regex="am.monitor.type"/>
+		<param name="totalMonitors" regex="-1andnumeric"/>
+		<param name="dcComponentsSelect" regex="am.dccomponent.value" />
+		<param name="configureType" regex="am.configuretype.value"/>
+		<param name="pollingStatus" regex="am.dccomp.type.pollstatus.update"/>
+		<param name="customeFrequencyTemp" type="int"/>
+		<param name="selectedTimeUnit" regex="am.alphanumeric"/>
+		<param name="existingTimeUnit" regex="am.alphanumeric"/>
+		<param name="customeFrequency" type="int"/>
+		<param name="dcComponentName" regex="am.dccomponent.value" />
+		<param name="monitorType" regex="am.monitor.type"/>
+		<param name="pollingInterval" type="int"/>
+		<param name="resourceIds" regex="am.recorder.long.commaSeparated"/>
+		<param name="am.htmldata.jre.daystoretain" type="int" />
+		<param name="am.gcp.bucket.objects.count" type="int" />
+		<param name="am.oraclecloud.bucket.topobjects.count" type="int" />
+		<param name="am.webclient.eks.node.memory.presureval" type="boolean" />
+		<param name="am.webclient.eks.node.memory.presure" type="boolean" />
+		<param name="am.webclient.eks.node.disk.presureval" type="boolean" />
+		<param name="am.webclient.eks.node.disk.presure" type="boolean" />
+		<param name="am.webclient.eks.node.pid.presureval" type="boolean" />
+		<param name="am.webclient.eks.node.pid.presure" type="boolean" />
+		<param name="am.webclient.eks.node.out.of.diskval" type="boolean" />
+		<param name="am.webclient.eks.node.out.of.disk" type="boolean" />
+		<param name="am.webclient.eks.node.network.unavailableval" type="boolean" />
+		<param name="am.webclient.eks.node.network.unavailable" type="boolean" />
+		<param name="am.elasticbeanstalk.event.count" type="int" />
+		<param name="am.webclient.oraclecloud.enable.fasterdatacollectionval" type="boolean" />
+		<param name="am.webclient.oraclecloud.enable.fasterdatacollection" type="boolean" />
+		<param name="am.azurevm.configureLoggingDelay" type="int" />
+		<param name="am.nutanix.event.count" type="int" />
+		<param name="am.nutanix.alert.count" type="int" />
+		<param name="am.script.deleterowval" type="boolean" />
+		<param name="am.script.deleterow" type="boolean" />
+		<param name="am.scriptmonitor.threshold.enableval" type="boolean" />
+		<param name="am.scriptmonitor.threshold.enable" type="boolean" />
+		<param name="am.scriptmonitor.storedprocedures.enableval" type="boolean" />
+		<param name="am.scriptmonitor.storedprocedures.enable" type="boolean" />
+		<param name="enableHealthval" type="boolean" />
+		<param name="enableHealth" type="boolean" />
+		<param name="am.querymonitor.rowcount" type="int" />
+		<param name="am.query.timeout" type="int" />
+		<param name="am.sap.rfc.monitoring.enabledval" type="boolean" />
+		<param name="am.sap.rfc.monitoring.enabled" type="boolean" />
+		<param name="am.sap.alerts.last.n.hrs" type="int" range="0-17520" />
+		<param name="am.OracleEBS.application.count" type="int" />
+		<param name="am.OracleEBS.Form.count" type="int" />
+		<param name="am.mqdelrow.enabledval" type="boolean" />
+		<param name="am.mqdelrow.enabled" type="boolean" />
+		<param name="am.mqseries.ccsid" type="int" />
+		<param name="am.cam.mbeanslistsize" type="int" />
+		<param name="am.ftp.filesize" type="int" />
+		<param name="am.xen.resourcepool.discovery.enableval" type="boolean" />
+		<param name="am.xen.resourcepool.discovery.enable" type="boolean" />
+		<param name="am.webclient.OpenShift.node.memory.presureval" type="boolean" />
+		<param name="am.webclient.OpenShift.node.memory.presure" type="boolean" />
+		<param name="am.webclient.OpenShift.node.disk.presureval" type="boolean" />
+		<param name="am.webclient.OpenShift.node.disk.presure" type="boolean" />
+		<param name="am.webclient.OpenShift.node.pid.presureval" type="boolean" />
+		<param name="am.webclient.OpenShift.node.pid.presure" type="boolean" />
+		<param name="am.webclient.OpenShift.node.out.of.diskval" type="boolean" />
+		<param name="am.webclient.OpenShift.node.out.of.disk" type="boolean" />
+		<param name="am.webclient.OpenShift.node.network.unavailableval" type="boolean" />
+		<param name="am.webclient.OpenShift.node.network.unavailable" type="boolean" />
+		<param name="am.hyperv.cluster.discovery.enableval" type="boolean" />
+		<param name="am.hyperv.cluster.discovery.enable" type="boolean" />
+		<param name="am.vmware.esx.unconfigured.hardware.discoveryval" type="boolean" />
+		<param name="am.vmware.esx.unconfigured.hardware.discovery" type="boolean" />
+		<param name="am.vsphere.read.timeout" type="int" />
+		<param name="am.vsphere.connection.timeout" type="int" />
+		<param name="am.webclient.kubernetes.node.memory.presureval" type="boolean" />
+		<param name="am.webclient.kubernetes.node.memory.presure" type="boolean" />
+		<param name="am.webclient.kubernetes.node.disk.presureval" type="boolean" />
+		<param name="am.webclient.kubernetes.node.disk.presure" type="boolean" />
+		<param name="am.webclient.kubernetes.node.pid.presureval" type="boolean" />
+		<param name="am.webclient.kubernetes.node.pid.presure" type="boolean" />
+		<param name="am.webclient.kubernetes.node.out.of.diskval" type="boolean" />
+		<param name="am.webclient.kubernetes.node.out.of.disk" type="boolean" />
+		<param name="am.webclient.kubernetes.node.network.unavailableval" type="boolean" />
+		<param name="am.webclient.kubernetes.node.network.unavailable" type="boolean" />
+		<param name="am.webclient.aks.node.memory.presureval" type="boolean" />
+		<param name="am.webclient.aks.node.memory.presure" type="boolean" />
+		<param name="am.webclient.aks.node.disk.presureval" type="boolean" />
+		<param name="am.webclient.aks.node.disk.presure" type="boolean" />
+		<param name="am.webclient.aks.node.pid.presureval" type="boolean" />
+		<param name="am.webclient.aks.node.pid.presure" type="boolean" />
+		<param name="am.webclient.aks.node.out.of.diskval" type="boolean" />
+		<param name="am.webclient.aks.node.out.of.disk" type="boolean" />
+		<param name="am.webclient.aks.node.network.unavailableval" type="boolean" />
+		<param name="am.webclient.aks.node.network.unavailable" type="boolean" />
+		<param name="am.es.IndexRows" type="int" />
+		<param name="_" type="long"/>
+		<param name="selectExceptionsforCritical" type="String" max-occurrences="1000" />
+		<param name="selectExceptionsforClear" type="String" max-occurrences="1000"  />
+		<param name="selectExceptionsforWarning" type="String" max-occurrences="1000"  />
+		<param name="am.oraclepdb.tablespace.autoextensionval" type="boolean" />
+		<param name="am.oraclepdb.tablespace.autoextension" type="boolean" />
+		<param name="am.oracle.tablespace.autoextension" type="boolean" />
+		<param name="am.oracle.tablespace.autoextensionval" type="boolean" />
+		<param name="rbm.attach.html.files" type="boolean" />
+	 	<param name="rbm.attach.html.filesval" type="boolean" />
+		<param name="rbm.attach.img.files" type="boolean" />
+		<param name="rbm.attach.img.filesval" type="boolean" />
+		<param name="am.postgres.longrunningquery.time" type="long" />
+		<param name="am.webclient.azure.billing.region.statsval" type="boolean" />
+		<param name="am.webclient.azure.billing.region.stats" type="boolean" />
+		<param name="am.webclient.azure.billing.resrcgrp.statsval" type="boolean" />
+		<param name="am.webclient.azure.billing.resrcgrp.stats" type="boolean" />
+		<param name="am.mq.broker.app.messageflows.enabledval" type="boolean" />
+		<param name="am.mq.broker.app.messageflows.enabled" type="boolean" />
+		<param name="am.ibm.mb.connect.retry.timeout.value" type="long" />
+		<param name="am.ibm.mq.timeout.value" type="long" />
+		<param name="am.default.pollinterval" type="long" />
+	 	<url method="post" roles="ADMIN,ENTERPRISEADMIN" operation-value="updatePerfComponentStatus,updatePollingIntervalForId,updatedcComponentStatus" csrf="true" deny-del-admin="true">
+			<param name="limitedDays" regex="-1andnumeric"/>
+			<param name="FileRCAValue" regex="am.perf.file.rca.value"/>
+			<param name="am.file.updateRcaMessage" regex="am.perf.file.rca.value"/>
+			<param name="am.dirsize.unit" regex="am.file.units.value"/>
+			<param name="am.filesize.unit" regex="am.file.units.value"/>
+			<param name="am.file.contentcheckcount" regex="-1andnumeric"/>
+	 	</url>
+		<url method="get" operation-value="getlistOfDCComponentsForType,getCommonPerfProps" roles="ADMIN,ENTERPRISEADMIN,DEMO" deny-del-admin="true"/>
+	</urls>	
+	<urls throwallerrors="true" operation-param="method" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required"  >
+		<param name="am.resourcetype.ignorecase" name-regex="true" regex="am.monitor.type" />
+		<param name="haid" regex="am.haid.grp.long.value" />
+		<param name="resourceid" regex="am.common.longandnull" />
+		<param name="resourcename" type="String" max-len="2000" />
+		<param name="type" regex="am.monitor.type" max-len="200" />
+		<param name="serverName" regex="am.hostname" max-len="200" />
+		<param name="parentTableId" type="int" />			
+		<param name="monitorname" type="String" max-len="2000" /> <!-- For PPM cases monitor could have special chars eg virtual machines -->
+		<param name="screenWidth" type="int" />
+		<param name="moname" type="String" max-len="500" />  <!--For WSM it contains url  -->
+		<url path="/showCustom.do" method="get" operation-value="showMonthAndWeek,getMonitorInformation,getTableAndGraphCount,showDataforConfTables,showDataforConfs" >
+			<param-group name="am.additional.extra.params" />
+			<param-group name="am.monitor.details.extra.params" />
+			<param name="ScreenWidth" type="int" />
+			<param name="graphid" type="int" />
+			<param name="original_type" regex="am.monitor.type" />
+			<param name="tabId" type="int" />
+			<param name="scriptid" type="long" />
+			<param name="rowid" regex="am.common.numberandcomma" max-len="10000" />
+			<param name="creationTime" type="long" />
+			<param name="pollinterval" type="long" />
+			<param name="tableId" type="long" />
+			<param name="tableid" type="long" />
+			<param name="tabRequest" type="boolean" />
+			<param name="fromConfDetails" type="boolean" />
+			<param name="isParentMonitor" type="boolean" />
+			<param name="sqlmanid" type="long" />
+			<param name="tableName" regex="am.conf.tablename.value" />
+			<param name="baseid" type="long" />
+			<param name="collectionTime" type="long" />
+			<param name="showAllRows" regex="yesnotf" /> <!-- Sap Business server -> SLD tab  -->
+			<param name="selectedRowId" regex="am.common.longandnull" />
+		</url>    
+ 		<url path="/showresource.do" method="get"  operation-value="showdetails" >
+ 			<param-group name="am.additional.extra.params" />
+			<param name="datatype" type="int" description="JDK Monitor thread threshold configurations."/>
+			<param name="mtype" regex="am.monitor.type" max-len="200" />
+			<param name="sid" type="long" />
+			<param name="viewType" regex="am.viewtype.value" />
+			<param name="fromwhere" regex="am.fromwhere.value" />
+			<param name="name" regex="am.monitor.type" max-len="200" />
+			<param name="useHTTP" type="boolean" />
+			<param name="parentname" type="String" max-len="2000" /> <!--resourcename  param assigned to this -->
+			<param name="parentId" regex="am.common.longandnull" />
+			<param name="parentid" regex="am.common.longandnull" />
+			<param name="warName" type="String" max-len="1000"/>
+			<param name="webAppID" type="long" />
+			<param name="isConfigured" type="String" max-len="2000" />
+			<param name="message" type="String" max-len="1000" /> <!-- Error message and exception -->
+			<param name="isSuccess" type="boolean" />
+			<param name="noreload" type="boolean" />
+			<param name="isTestActionAllowed" type="boolean" />
+			<param name="actionID" type="long" />
+			<param name="errNames" type="String" max-len="1000"/>
+			<param name="err_ActionType" type="String" />
+			<param name="actionNameList_tracker" type="int" />
+			<param name="databasesId" type="long" description="DB2-Monitor - Select Database" />	
+		</url>
+	</urls>
+	<urls path="/showTile.do" operation-param="TileName" throwallerrors="true"  operation-value=".EmailActions,.SMSActions,.ThresholdConf,.PatternConf,.AmazonInstanceAction,.ExecProg,.NewManagedServer,.RestAPIAction,.SendTrap,.SlackAction,.SqlJobAction,New.Admin,Tile.AdminConf,Tile.AlarmsOne,Tile.AnalyticsPlus,Tile.NewMonitorList,Tile.usergroups.Conf,Tile.CloudTab" >	
+		<param-group name="am.additional.extra.params" />
+		<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		<param name="haid" regex="am.common.longandnull"/>
+		<param name="isanomaly" regex="yesnotf" />
+		<param name="isAdaptive" regex="yesnotf" />
+		<param name="anomalyType" regex="am.anomaly.customtype.addnew" />
+		<param name="redirectto" type="String" max-len="1000" />
+		<param name="global" type="boolean" />
+		<param name="from" type="int" />
+		<param name="displayname" regex="am.displayname.common" />
+		<param name="criticalthresholdvalue" type="int"/>
+		<param name="method" regex="am.alphanumeric" />		
+		<param name="popup" regex="yesnotf"/>
+		<param name="nexttab" regex="yesnotf"/>
+		<param name="reqForAdminLayout" type="boolean" />
+		<param name="service" regex="am.action.fromadminlayout.service" />
+		<param name="returnpath" type="String" max-len="1000" />
+		<param name="typeofformula" regex="am.anomaly.addnew.typeofformula"/>
+		<param name="select" regex="am.redirectto.value" />
+		<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		<param name="plugin_view" type="boolean" />
+		<param name="usergroup" type="boolean" />
+		<param name="domainconfig" type="boolean" />
+		<param name="listByOrder" type="boolean" />
+		<param name="monitorType" regex="am.monitor.type" />
+		<param name="ref" regex="IntroPageLinks" />
+		<url method="get" authentication="required" roles="ADMIN,ENTERPRISEADMIN,OPERATOR,USERS,DEMO" />
+		<url method="post" deny-operation="true" />		<!--Handled post deny operation for showTile.do also here due to duplication of operation-param -->
+	</urls> 
+	
+	<urls authentication="required" throwallerrors="true" method="get" >
+		<param-group name="am.additional.extra.params" />
+		<url path="/jsp/CopyMonitor.jsp" privilege-identifier="resourceid" roles="am.role.ADMIN.EA" method="get" >
+			<param name="resourceid" type="long" />
+		</url>
+		<url path="/jsp/DCComponentDetails.jsp" deny-del-admin="true" roles="am.role.ADMIN.EA.DE">
+			<param name="MonitorType" regex="am.custom.monitortype.type"></param>
+			<param name="dcComponentName" regex="am.alphanumeric.commaSpace"></param>
+		</url>
+		<url path="/jsp/DCComponentMonitorList.jsp" deny-del-admin="true" roles="am.role.ADMIN.EA.DE">
+			<param name="dcComponentName" regex="am.alphanumeric.commaSpace"></param>
+			<param name="monitorType" regex="am.custom.monitortype.type"></param>
+			<param name="configureType" regex="am.configuretype.value"></param>
+			<param name="totalMonitors" regex="-1andnumeric"></param>
+			<param name="showMsg" regex="am.dcc.showmsg"></param>
+			<param name="filterBy" regex="am.dcc.filterby"></param>
+		</url>
+	</urls>
+	
+
+	<!--DENY OPERATIONS FOR CONF FRAMEWORK -->
+	
+	<urls throwallerrors="true" method="get,post" deny-operation="true">
+		<url path="/showCustom.do" operation-param="method" operation-value="showData" />
+		<url path="/showTile.do" operation-param="TileName" operation-value=".TicketActions,.AdminEmailActions,Tile.DiscoveryStatus,.EumSummartReport,Tile.NewBusinessService,Tile.AuditLog,.ThreadDumpActions,.ActionProfiles,.WebToken,.VMActions,Tile.AddDependentMGGroups,Tile.SLA.Manager,Tile.SLA.Conf,Tile.SLA.Admin,.Newcreatetemplates,.Neweditprocess,.NoJMXNotifications,.NoMBeanOperationActions,.NoMBeanOperations,.Newshowalltemplates,.Newtemplatethresholdactionconfig,.MBeanOperationActions2,.MBeanOperationActions,.MBeanOperationActions3,.MBeanOperationActions4,.listOAuthProviders,.JMXNotifications2,.JMXNotifications3,.JMXNotifications4,Tile.DiscoveredDevices,.hostresource.editprocess,.EditManagedServer,.ShowCredentialTypeRelatedRows,.AddRulePage,.RuleManager" />
+		<url path="/adminAction.do" operation-param="method" operation-value="showMonitorTemplates" />
+	</urls>
+	
+	<urls throwallerrors="true" method="post" deny-operation="true">
+		<url path="/showresource.do" operation-param="method" operation-value="showdetails" />
+		<url path="/showCustom.do" operation-param="method" operation-value="showMonthAndWeek,getMonitorInformation,getTableAndGraphCount,showDataforConfTables,showDataforConfs" />
+		<url path="/showDCComponents.do" operation-param="method" operation-value="getCommonPerfProps,getlistOfDCComponentsForType" />	
+		<url path="/manageConfMons.do" operation-param="method" operation-value="getDropDownValues" />
+		<url path="/deleteMO.do" operation-param="method" operation-value="fetchDataNowForResource,showUnmanageMessage,openDeleteMonitorGroupPage" />
+		<url path="/GlobalActions.do" operation-param="method" operation-value="pollNow" />
+		<url path="/jsp/CopyMonitor.jsp" />
+	</urls>
+			
+	<urls throwallerrors="true" method="get" operation-param="method" deny-operation="true"  >
+		<url path="/showDCComponents.do" operation-value="updatePerfComponentStatus,updatePollingIntervalForId,updatedcComponentStatus" />
+		<url path="/manageConfMons.do" operation-value="modifyPassword,updateKey" />
+		<url path="/editDisplaynames.do" operation-value="editDisplaynames" />
+		<url path="/testCredential.do" operation-value="testCredentialForConfMonitors" />	
+		<url path="/deleteMO.do" operation-value="ManageMonitorGroups,unManageMonitorGroups,alterActionsforMG,deleteMonitorGroup" redirect-url="/showresource.do?method=showMonitorGroupView" />
+		<url path="/deleteMO.do" operation-value="unManageMonitors,deleteMO,manageMonitors" redirect-url="/showresource.do?method=showResourceTypesAll&amp;group=All" />
+	</urls>
+</security>

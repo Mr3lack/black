@@ -1,0 +1,7 @@
+[Feb 20, 2024 10:34:07 AM][Thread-35-72][WARNING]:APMInsight Cleanup :: Raw data :: Cleanup completed :: Time taken for cleanup :: 1ms
+[Feb 20, 2024 10:34:07 AM][Thread-35-72][WARNING]:APMInsight Cleanup :: Traces :: File list planning to delete are :: 
+[Feb 20, 2024 10:34:07 AM][Thread-35-72][WARNING]:APMInsight Cleanup :: Traces :: Cleanup completed. Deleted Traces older than :: 2024-02-10 10:34:07 :: Time taken for cleanup :: 1ms
+[Feb 20, 2024 10:34:07 AM][Thread-35-72][WARNING]:APMInsight Cleanup :: Thread Dump :: Cleanup initiated. Deleting Thread Dump files older than  :: 2024-02-10 10:34:07
+[Feb 20, 2024 10:34:07 AM][Thread-35-72][WARNING]:APMInsight Cleanup :: Thread Dump :: Cleanup completed. Deleted Thread Dump files older than :: 2024-02-10 10:34:07 :: Time taken for cleanup :: 22ms
+[Feb 20, 2024 10:34:49 AM][pool-8-thread-1-395][WARNING]:APMInsight Partition Task Started at 1708425289279
+[Feb 20, 2024 11:34:49 AM][pool-8-thread-1-395][WARNING]:APMInsight Partition Task Started at 1708428889279

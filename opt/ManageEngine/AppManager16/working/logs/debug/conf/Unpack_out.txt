@@ -1,0 +1,25 @@
+Error: Could not open input file: /opt/ManageEngine/AppManager16/./working/classes/classes12.pack.gz
+Failed to unpack jar file /opt/ManageEngine/AppManager16/./working/classes/classes12.jar
+Allocated shared space: 37871616 bytes at 0x0000000800000000
+Loading classes to share ...
+Preload Warning: Cannot find sun/misc/PostVMInitHook
+Preload Warning: Cannot find sun/usagetracker/UsageTrackerClient
+Preload Warning: Cannot find sun/usagetracker/UsageTrackerClient4
+Preload Warning: Cannot find sun/usagetracker/UsageTrackerClientCache
+Preload Warning: Cannot find java/net/InetAddressType
+Preload Warning: Cannot find java/net/InetAddress1
+Preload Warning: Cannot find javax/xml/parsers/SecuritySupportLegacyDSA
+Loading classes to share: done.
+Rewriting and linking classes ...
+Rewriting and linking classes: done
+Number of classes 2562
+    instance classes   =  2548
+    obj array classes  =     6
+    type array classes =     8
+Calculating fingerprints ... done. 
+Removing unshareable information ... done. 
+ro space:   7364184 [ 35.8% of total] out of  16777216 bytes [43.9% used] at 0x0000000800000000
+rw space:  11578304 [ 56.3% of total] out of  16777216 bytes [69.0% used] at 0x0000000801000000
+md space:   1589016 [  7.7% of total] out of   4194304 bytes [37.9% used] at 0x0000000802000000
+mc space:     34053 [  0.2% of total] out of    122880 bytes [27.7% used] at 0x0000000802400000
+total   :  20565557 [100.0% of total] out of  37871616 bytes [54.3% used]

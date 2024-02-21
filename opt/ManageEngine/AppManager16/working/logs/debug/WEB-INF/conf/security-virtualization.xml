@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+	
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url method="get" operation-param="method" operation-value="showVMStorageMapping" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required"
+			path="/StorageMapping.do" throwallerrors="true">
+			<param name="resourceid" type="long" />
+			<param name="moname" regex="am.hostname" max-len="255"/>
+			<param name="displayMode" regex="^(Map)$" />
+		</url>
+	</urls>
+	
+	<urls csrf="true" method="post" path="/admin/createapplication.do" operation-param="method" authentication="required" roles="am.role.ADMIN.EA" >
+		<param name="displayname" type="String" max-len="250"/>
+		<param name="username" regex="am.windows.username" />
+		<param name="password" type="String" max-len="255" secret="true"/>
+		<param name="haRESID" type="long" />
+		<param name="pollInterval" type="int" />
+		<param name="isEdit" regex="am.common.TFNull" />
+		<param name="masSelectType" regex="am.enterprise.masselecttype" description="EnterpriseSetup" />
+		<param name="masGroupName" type="String" max-len="515"/>
+		<param name="selectedServer" regex="am.enterprise.selectedserver" description="EnterpriseSetup" />
+		<param-group name="am.additional.extra.params" />
+		<url operation-value="configureVCenterDiscovery">
+			<param name="vcHost" regex="am.hostname" max-len="255"/>
+			<param name="vcPort" regex="am.port" />
+			<param name="type" regex="am.vcenter.name" />
+			<param name="isHostDCViaVC" regex="am.common.On" />
+			<param name="sslVersion" regex="am.vcenter.sslVersion" />
+			<param name="vCenterCredDetails" regex="am.credentialdetails" />
+			<param name="vCenterCredType" type="long" />
+			<param name="discoveryFilterRegex" type="String" max-len="10000" />
+			<param name="discoverVM" regex="am.rhev.discoverVM" />
+		</url>
+		<url operation-value="configureRHEVDiscovery">
+			<param name="rhevHost" regex="am.hostname" max-len="255"/>
+			<param name="rhevPort" regex="am.port" />
+			<param name="timeout" type="int" />
+			<param name="type" regex="am.rhev.name" />
+			<param name="discoverVM" regex="am.rhev.discoverVM" />
+		</url>
+		<url operation-value="configureOVMDiscovery">
+			<param name="ovmHost" regex="am.hostname" max-len="255"/>
+			<param name="ovmPort" regex="am.port" />
+			<param name="timeout" type="int" />
+			<param name="type" regex="am.ovm.name" />
+			<param name="ovmCredDetails" regex="am.credentialdetails" />
+			<param name="ovmCredType" regex="long" />
+			<param name="discoverVM" regex="am.rhev.discoverVM" />
+		</url>
+		<url operation-value="configureHorizonDiscovery">
+			<param name="vcHost" regex="am.hostname" max-len="255"/>
+			<param name="type" regex="am.horizon.name" />
+			<param name="version" regex="am.version" />
+		</url>
+	</urls>
+	
+	<urls csrf="true" method="post" path="/manageApplications.do" operation-param="method" authentication="required" roles="am.role.ADMIN.EA" >
+		<url operation-value="deleteOVM,deleteRHEV">
+			<param-group name="am.additional.extra.params" />
+			<param name="select" type="long"/>
+		</url>
+	</urls>
+	
+	<!-- Guest OS Configuration Starts-->
+	<urls>
+		<param-group name="am.additional.extra.params" />
+        <url path="/configureGuestOS.do" method="GET" operation-param="method" operation-value="configureOS" authentication="required" roles="ADMIN">
+            <param name="resourceid" type="long"/>
+            <param name="sid" type="long"/>
+        </url>
+        <url path="/configureGuestOS.do" csrf="true" method="post" operation-param="method" operation-value="updateConfigureOS" authentication="required" roles="ADMIN">
+            <param name="resourceID" type="long"/>
+            <param name="selectVMOStype" regex="am.vm.guestos.type"/>
+            <param name="fqdn" regex="am.hostname" max-len="255"/>
+            <param name="mode" regex="am.servermonitor.mode"/>
+            <param name="port" regex="am.port" />
+            <param name="isCredentialManager" regex="am.boolean"/>
+            <param name="credentialID" regex="-1andnumeric"/>
+            <param name="isEventLogEnabled" regex="onlyon"/>
+            <param name="isKerberos" regex="onlyon"/>
+            <param name="sshPKAuth" regex="am.common.On"/>
+            <param name="username" regex="am.windows.username"/>
+            <param name="password" type="String"  max-len="255" secret="true"/>
+            <param name="privateKey" type="String" max-len="5000" secret="true"/>
+            <param name="passPhrase" type="String" secret="true"/>
+            <param name="prompt" type="String"/>
+            <param name="timeOut" regex="-1andnumeric"/>
+        </url>
+    </urls>
+    <!-- Guest OS configuration Ends -->
+    
+    <urls path="/manageVMInstances.do" throwallerrors="true" roles="am.role.ADMIN.EA" authentication="required">
+    	<param-group name="am.additional.extra.params" />
+		<url method="get" operation-param="method" operation-value="getConfiguredVMwareEvents" roles="ADMIN">
+			<param name="resourceid" type="long" />
+		</url>
+		<url method="get" operation-param="method" operation-value="associateNewVMwareEvents,getLatestEvents">
+			<param name="resourceid" type="long" />
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="insertConfiguredEvents">
+			<param name="resourceid" type="long" />
+			<param name="configuredEvents" type="JSONArray" template="am.vmware.configureevent" array-size="0-100"  max-len="100000"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="modifyEventSeverity">
+			<param name="resourceid" type="long" />
+			<param name="eventName" regex="am.alphanumeric" />
+			<param name="severity" regex="scriptHealthTableRow" />
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="removeConfiguredEvents">
+			<param name="resourceid" type="long" />
+			<param name="eventName" regex="am.alphanumeric.comma" />
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="removeGuestOSConfiguration">
+			<param name="vmResId" type="long"/>
+		</url>
+	</urls>
+	
+	<urls path="/showOVMApplication.do" method="get" operation-param="method" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+		<param-group name="am.additional.extra.params" />
+		<url operation-value="showResourceSummary">
+			<param name="haid" type="long" />
+			<param name="selectedResource" regex="am.ovm.components" />
+		</url>
+		<url operation-value="showChildResourcesSummary">
+			<param name="haid" type="long" />
+			<param name="type" regex="am.ovm.components" />
+		</url>
+	</urls>
+	
+	<urls>
+		<url path="/businessHours.do" csrf="true" method="post" operation-param="method" throwallerrors="true" 
+			operation-value="updateGlobalSettingForAnomalyIntroTab" authentication="required" roles="am.role.ADMIN.EA.DE">
+			<param-group name="am.additional.extra.params" />
+		</url>
+	</urls>
+	
+	
+	
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url path="/manageVMInstances.do" method="post" api="true" systemadmin_enterprise="true" authentication="required" roles="am.role.ADMIN.EA" operation-param="method" operation-value="manageInstances,manageKVMInstances,manageRHEVInstances,manageOVMInstances,manageXenInstances">
+			<param name="action" regex="am.host.vmactions"/>
+			<param name="parentId" regex="am.common.longandnull"/>
+			<param name="resIds" regex="am.host.vmactions.resids" max-len="1000"/>
+			<param name="resourceType" regex="am.child.monitor.type"/>
+		</url>
+	</urls>  
+	
+	<!-- Nutanix VM Action URLS START-->		
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url path="/manageNutanixInstance.do" method="POST" api="true" systemadmin_enterprise="true" operation-param="method" operation-value="manageInstances" csrf="true" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN" privilege-identifier="resIds" priv-delim=",">
+			<param name="action" regex="am.child.monitor.action.type"/>
+			<param name="resIds" regex="am.common.numberandcomma" max-len="1000"/>
+		</url>
+	</urls>
+	<!-- Nutanix VM Action URLS END-->
+	
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url path="/dataTableAction.do" method="GET" operation-param="method" operation-value="getEventLogForXenApp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+			<param name="_" 				type="long"/>
+			<param name="resourceid" 		type="long"/>
+			<param name="draw" 				type="int" />
+			<param name="length" 			type="int" />
+			<param name="start" 			type="int" />
+			<param name="order[0][column]" 	type="int" />
+			<param name="order[0][dir]" 	regex="am.query.orderby.list" />
+			<param name="search[regex]" 	type="boolean" />
+			<param name="search[value]" 	type="String" max-len="1000000"/>
+			<param name="am.crm.datatable.param.data" 	name-regex="true" type="int" />
+			<param name="am.crm.datatable.param.name" 	name-regex="true" regex="am.common.TFNull" />
+			<param name="am.crm.datatable.param.search" name-regex="true" regex="am.common.TFNull" />
+	    </url>
+	</urls>
+
+	<urls path="/showAttributes.do" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url method="get" operation-param="method" operation-value="sendAttributeDetails" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required">
+			<param name="resourcetype" regex="am.anomaly.dash.restype" />
+			<param name="todaytime" type="long" />
+		</url>
+		<url method="get" operation-param="method" operation-value="showAlertTimes,showCustomGraph" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required"
+			privilege-identifier="EID" priv-split="_">
+			<param name="criticalmonitors" regex="am.anomaly.dash.critical.option" />
+			<param name="alerttimings" regex="am.anomaly.dash.long.select" />
+			<param name="sttime" type="long" />
+			<param name="EID" regex="am.generateAlert.entity" />
+			<param name="alerttime" regex="am.common.longandnull" />
+			<param name="aid" regex="am.common.longandnull" />
+			<param name="rtype" regex="am.anomaly.dash.restype" />
+			<param name="customgraph" regex="am.common.TFNull" />
+			<param name="customshowtime" regex="am.anomaly.dash.date" />
+			<param name="oldhaid" regex="am.generateAlert.entity" />
+			<param name="severityType" regex="scriptHealthTableRow" />
+			<param name="oldalertid" regex="am.generateAlert.entity" />
+			<param name="dropdownmonitors" regex="am.anomaly.dash.restype" />
+			<param name="dropdownattributes" regex="am.anomaly.dash.long.select" />
+			<param name="thisstart" regex="am.anomaly.dash.date" />
+		</url>
+		<url method="get" operation-param="method" operation-value="showArchivedDataValues" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required"
+			custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isResourceIDOwnedForUser">
+			<param name="toshow" regex="am.anomaly.dash.toshow" />
+			<param name="time" type="long" />
+			<param name="resid" type="long" />
+			<param name="attid" type="long" />
+			<param name="hour" type="long" />
+			<param name="sttime" type="long" />
+			<param name="edtime" type="long" />
+			<param name="isValue" regex="am.common.TFNull" />
+			<param name="isSecondlevel" regex="am.common.TFNull" />
+			<param name="anomalyid" regex="am.common.TFNull" />
+		</url>
+		<url method="get" operation-param="method" operation-value="showRawDataValues" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required"
+			privilege-identifier="resid">
+			<param name="monitorname" type="String" max-len="300" />
+			<param name="resid" type="long" />
+			<param name="attid" type="long" />
+			<param name="isValue" regex="am.common.TFNull" />
+			<param name="isSecondlevel" regex="am.common.TFNull" />
+			<param name="time" type="long" />
+			<param name="Adname" type="String" />
+		</url>
+	</urls>
+	
+	<urls path="/adminAction.do" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA.DE">
+		<param-group name="am.additional.extra.params" />
+		<url method="get" operation-param="method" operation-value="showAnomalyAction"
+		custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="anomalyID" type="long" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="isedit" regex="am.common.TFNull" />
+			<param name="isanomaly" regex="am.common.TFNull" />
+		</url>
+		<url method="get" operation-param="method" operation-value="showThresholdAction,showPatternAction" 
+		custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="thresholdID" type="long" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="type" regex="am.threshold.typeNumeric" />
+            <param name ="isAdaptive" regex="am.boolean"/>
+            <param name="ftype" regex="am.threshold.ftype" />
+		</url>
+		<url method="get" operation-param="method" operation-value="sendAnomalyDetails">
+			<param name="anomid" type="long" />
+			<param name="todaytime" regex="am.common.longandnull" />
+		</url>
+		<url method="get" operation-param="method" operation-value="showThresholds">
+			<param name="thresholdconfigid" type="long" />
+			<param name="Delete" type="int" />
+			<param name="isConfigured" regex="am.isconfigured.value" max-len="1000"/>
+		</url>
+	</urls>
+	
+	<urls>
+		<param-group name="am.additional.extra.params" />
+	 	<url path="/adminAction.do" method="POST" operation-param="method" operation-value="AddThresholdActionConfiguration,saveAnomalyDetails" csrf="true" 
+			throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN" skip-bad-input-encoding="true">
+			<param name="groupTemplate" regex="am.common.TFNull" />
+			<param name="haid" regex="am.common.longandnull" max-occurrences="2"/>
+			<param name="resourceid" regex="am.common.longandnull" max-occurrences="2"/>
+			<param name="requesttype" type="int" />
+			<param name="tabname" regex="am.configure.alarm.tabname" />
+			<param name="anomid" regex="am.configure.alarm.reset" />
+			<param name="appName" type="String" />
+			<param name="deleteConfigType" regex="am.configure.alarm.deleteTempConfig" />
+			<param name="redirectto" type="String" max-len="10000"/>
+			<param name="isredirect" regex="am.common.TFNull" />
+			<param name="thresholdactionparams" type="String" max-len="10000"/>
+			<param name="noreload" regex="am.common.TFNull" />
+			<param name="depDeviceId" type="String" max-len="100000"/>
+			<param name="selectedMonitors" regex="am.configure.alarm.monitorList" max-len="100000" />
+			<param name="attributeList" regex="am.common.numberandcomma" />
+			<param name="thresholdProfile" regex="am.configure.alarm.tabname" />
+			<param name="thresholdList" regex="am.configure.alarm.thresholdList" />
+			<param name="adaptiveList" regex="am.configure.alarm.thresholdList" />
+			<param name="anomalyProfiles" regex="am.configure.alarm.thresholdList" />
+			<param name="secondarycriticalexist" regex="am.common.TFNull" />
+			<param name="secondarywarningexist" regex="am.common.TFNull" />
+			<param name="secondaryinfoexist" regex="am.common.TFNull" />
+			<param name="thresName" type="String" max-len="10000" />
+			<param name="criticalthresholdcondition1" regex="am.threshold.condition" max-occurrences="3" />
+			<param name="criticalthresholdvalue1" regex="am.threshold.value" max-occurrences="3" max-len="1000"/>
+			<param name="criticalconditionjoiner" regex="am.common.Conjunction" />
+			<param name="secondarycriticalthresholdcondition" regex="am.threshold.condition" max-occurrences="3" />
+			<param name="secondarycriticalthresholdvalue" regex="am.threshold.value" />
+			<param name="warningconditionjoiner" regex="am.common.Conjunction" />
+			<param name="secondarywarningthresholdvalue" regex="am.threshold.value" />
+			<param name="infoconditionjoiner" regex="am.common.Conjunction" />
+			<param name="secondaryinfothresholdvalue" regex="am.threshold.value" />
+			<param name="checkbox1" regex="am.common.On" />
+			<param name="checkbox2" regex="am.common.On" max-occurrences="2"/>
+			<param name="checkbox1A" regex="am.common.On" />
+			<param name="selectedactions_critical" type="long" max-occurrences="10000" />
+			<param name="selectedactions_warning" type="long" max-occurrences="10000" />
+			<param name="selectedactions_clear" type="long" max-occurrences="10000" />
+			<param name="availableactions_critical" type="long" max-occurrences="10000"/>
+			<param name="availableactions_warning" type="long" max-occurrences="10000"/>
+			<param name="availableactions_clear" type="long" max-occurrences="10000"/>
+			<param name="all_dependencies" regex="am.common.numberandsemicolon" max-occurrences="1000"/>
+			<param name="selected_dependencies" regex="am.common.numberandsemicolon" max-occurrences="10000"/>
+			<param name="radiobutton" regex="zeroandminusone" />
+			<param name="any_count" type="int" />
+			<param name="criticalpollscount" type="int" />
+			<param name="clearpollscount" type="int" />
+			<param name="multimonitors" regex="am.usermanagement.userGroupMG" />
+			<param name="similarmonitors_selected" type="long" max-occurrences="10000" />
+			<param name="similarmonitors_available" type="long" max-occurrences="10000" />
+			<param name="overrideConfig" regex="am.configure.alarm.overrideThresholdConfig" />
+			<param name="description" type="String" max-len="250"/>
+			<param name="displayname" type="String"/>
+			<param name="criticalthresholdcondition" regex="am.threshold.condition" />
+			<param name="criticalthresholdvalue" regex="am.threshold.value" max-len="1000"/>
+			<param name="warningthresholdcondition" regex="am.threshold.condition" />
+			<param name="secondarywarningthresholdcondition" regex="am.threshold.condition" />
+			<param name="warningthresholdvalue" regex="am.threshold.value" max-len="1000"/>
+			<param name="infothresholdcondition" regex="am.threshold.condition" />
+			<param name="secondaryinfothresholdcondition" regex="am.threshold.condition" />
+			<param name="infothresholdvalue" regex="am.threshold.value" max-len="1000"/>
+			<param name="showOption" regex="am.common.On" />
+			<param name="confAttThresholdOption" regex="am.threshold.onchange" />
+			<param name="suppressAlert" type="int" />
+			<param name="editname" type="String" max-len="10000" />
+			<param name="thresholdconfigid" type="long" />
+		</url>  
+		
+		<url path="/manageApplications.do" method="POST" operation-param="method" operation-value="addThresholdConfiguration" csrf="true" 
+			throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="resourceid" type="long" />
+			<param name="attributeid" type="long" />
+			<param name="remConfiguration" regex="am.common.TFNull" />
+			<param name="returnPath" type="String" max-len="10000"/>
+			<param name="popup" regex="am.common.TFNull" />
+			<param name="selectedactions_critical" type="long" max-occurrences="10000" />
+			<param name="selectedactions_warning" type="long" max-occurrences="10000" />
+			<param name="selectedactions_clear" type="long" max-occurrences="10000" />
+			<param name="selectedactions_down" type="long" max-occurrences="10000" />
+			<param name="selectedactions_up" type="long" max-occurrences="10000" />
+			<param name="availableactions_critical" type="long" max-occurrences="10000"/>
+			<param name="availableactions_warning" type="long" max-occurrences="10000"/>
+			<param name="availableactions_clear" type="long" max-occurrences="10000"/>
+			<param name="availableactions_down" type="long" max-occurrences="10000"/>
+			<param name="availableactions_up" type="long" max-occurrences="10000"/>
+			<param name="totalRowCount1" type="int" />
+			<param name="totalRowCount4" type="int" />
+			<param name="rowId" regex="am.configure.alarm.mg.rowid" max-occurrences="100" />
+			<param name="am.configure.alarm.mg.rule.mocount" name-regex="true" type="int" range=">-10" max-occurrences="100" />
+			<param name="am.configure.alarm.mg.rule.selectMonType" name-regex="true" type="int" range=">-10" max-occurrences="100" />
+			<param name="am.configure.alarm.mg.rule.conditionAttribute" name-regex="true" type="int" max-occurrences="100" />
+			<param name="am.configure.alarm.mg.rule.conditionSeverity" name-regex="true" type="int" max-occurrences="100" />
+			<param name="am.configure.alarm.mg.rule.selectedMonitorType" name-regex="true" type="int" max-occurrences="100" />
+			<param name="am.configure.alarm.mg.rule.selectedMonitorCount" name-regex="true" type="int" range=">-10" max-occurrences="100" />
+			<param name="am.configure.alarm.mg.rule.selectedMonitors" name-regex="true" regex="am.common.longandnull" max-occurrences="100" />
+			<param name="am.configure.alarm.mg.rule.count" name-regex="true" type="int" max-occurrences="100" />
+			<param name="depDeviceId" type="String" max-len="100000" />
+			<param name="selectedMonitors" regex="am.configure.alarm.monitorList" max-len="100000" />
+			<param name="selectedDepMonGroups" regex="am.common.numberandcomma" max-len="1000"/>
+			<param name="suppressAlert" type="int" />
+			<param name="suppressAlertGrp" type="int" />
+			<param name="am.configure.alarm.mg.attributeSelected" name-regex="true" type="int" max-occurrences="2" />
+		</url>
+		
+		<url method="get" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required"
+			path="/showAllEventLogs.do" throwallerrors="true" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="sid" type="String" max-len="200" />
+		</url>
+	</urls>
+	
+	<jsontemplates>
+		<jsontemplate name="am.vmware.configureevent">
+			<key name="eventName" type="String" />
+			<key name="severity" regex="scriptHealthTableRow" />
+		</jsontemplate>
+	</jsontemplates>
+</security>

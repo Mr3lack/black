@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+
+    <!-- WAF handling for /newDiscoveryAction.do URL related Endpoints starts-->
+	<urls path="/newDiscoveryAction.do" method="post" csrf="true" operation-param="method" throwallerrors="true" roles="ADMIN,ENTERPRISEADMIN,DEMO" authentication="required">
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<url operation-value="deleteDiscoveryDetails" roles="ADMIN,ENTERPRISEADMIN" authentication="required" >
+			<param name="discoveryID" type="long" />
+			<param name="isMonitorsDeleted" type="boolean" />
+	    </url>
+	    <url operation-value="stopDiscoveryProcess,performRediscovery,rediscovery,updateDiscoveryInfo" roles="ADMIN,ENTERPRISEADMIN" authentication="required" >
+			<param name="discoveryID" type="long" />
+	    </url>
+	    <url operation-value="deleteMonitorsAssociatedWithDiscoveryId" roles="ADMIN,ENTERPRISEADMIN" authentication="required" >
+			<param name="discoveryID" type="long" />
+			<param name="monitorResIds[]" type="long" max-occurrences="1000"/>
+			<param name="type" regex="am.discovery.stringAll" max-len="3"/>
+			<param name="deleteDiscoveryDetails" type="boolean" />
+			<param name="isMonitorsDeleted" type="boolean" />
+			<param name="select" regex="am.discovery.digitsPipeSeperated" max-len="400000000"/>
+	    </url>
+	    <url operation-value="addSelectedDevices" roles="ADMIN,ENTERPRISEADMIN" authentication="required" >
+			<param name="discoveryID" type="long" />
+			<param name="selectedServers" regex="am.hostnameWithComma"  max-len="400000000"/>
+			<param name="selectedVMs" regex="am.hostnameWithComma" max-len="400000000"/>
+			<param name="selectedApplications" regex="am.hostnameWithComma" max-len="400000000"/>
+	    </url>
+	    <url operation-value="addServersToExistingMap"  >
+			<param name="monitorResIds[]" type="long"  max-occurrences="1000"/>
+			<param name="mapId" type="long" />
+	    </url>
+	    <url operation-value="createDependencyMapView"  >
+			<param name="monitorResIds[]" type="long"  max-occurrences="1000"/>
+			<param name="mapName" regex="am.displayname.common" max-len="30"/>
+	    </url>
+	    <url operation-value="deleteDependencyMap,resetDependencyMapPositions" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="mapId" type="long" />
+	    </url>
+	    <url operation-value="deleteServersFromExistingMap" roles="ADMIN,ENTERPRISEADMIN" authentication="required" >
+			<param name="monitorResIds[]" type="long"  max-occurrences="1000"/>
+			<param name="mapId" type="long" />
+	    </url>
+	    <url operation-value="saveScheduleDiscoveryDetails" roles="ADMIN,ENTERPRISEADMIN" authentication="required" >
+			<param name="hour" type="int" />
+			<param name="min" type="int" />
+			<param name="scheduleType" regex="am.discovery.scheduleType" max-len="8"/>
+			<param name="discoveryID" type="long" />
+			<param name="day" type="int" />
+			<param name="date" type="int" />
+	    </url>
+	    <url operation-value="setPositionForDependencyNodes"  >
+			<param name="fx" type="double" />
+			<param name="fy" type="double" />
+			<param name="resourceId" type="long" />
+			<param name="mapId" type="long" />
+	    </url>
+	    <url operation-value="getDiscoveryStatusMessage" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="discoveryID" type="long"  />
+			<param name="cacheid" type="long" />
+	    </url>
+	    <url operation-value="getDiscoveryParamsAndShowDiscoveryProcess" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="discoveryName" regex="am.displayname.common" />
+			<param name="discoveryType" regex="am.discovery.discoveryType" max-len="7"/>
+			<param name="isAllCred" type="boolean" />
+			<param name="selectedCredentials" regex="am.discovery.digits.commaseperated.orAll" max-len="20000"/>
+			<param name="portDetails" max-occurrences="28" split="#2," regex="am.discovery.portDetails"/>
+			<param name="discoveryCateg" regex="am.discovery.discoveryCateg" max-len="9"/>
+			<param name="deviceSelectionEnabled" type="boolean" />
+			<param name="netWorkAddress" regex="am.esx.hostname" max-len="15"/>
+			<param name="cidr" type="int" />
+			<param name="netMask" regex="am.esx.hostname" max-len="15"/>
+			<param name="rangeCount" type="int" />
+			<param name="am.discovery.fromAddress" name-regex="true" regex="am.esx.hostname" max-len="15" max-occurrences="1000"/>
+			<param name="am.discovery.toAddress" name-regex="true" regex="am.esx.hostname" max-len="15" max-occurrences="1000"/>
+			<param name="discoveryID" regex="am.common.longandnull" />
+			<param name="virtualHost" regex="am.hostname" />
+			<param name="virtualPort" type="int" />
+			<param name="virtualUserName" type="String"  max-len="255"/>
+			<param name="virtualPassword" type="String" secret = "true" max-len="255"/>
+			<param name="sslVersion" regex="am.urlmon.sslVersion" max-len="7"/>
+			<param name="createMGview" type="boolean" />
+			<param name="masID" type="int" />
+			<param name="masDisplayName" type="String" max-len="255" />
+	    </url>
+	</urls>	
+	<urls path="/newDiscoveryAction.do" method="GET" operation-param="method" throwallerrors="true" roles="ADMIN,ENTERPRISEADMIN,DEMO" authentication="required">
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<url operation-value="showDiscoveryPage,navigateToDependencyViewCreationPage"  />
+	    <url operation-value="discoveryStatusPage,getAddmDebugPageForDiscovery,getAddmFailedIps,generatePdfForDiscoveryProfile,getDeleteMonitorsPageForDiscoveryId,showEditDiscoveryPage"  >
+	    	<param name="discoveryID" type="long"  />
+	    </url>
+	    <url operation-value="getDefaultPorts"  >
+	    	<param name="discoveryID" type="long"  />
+	    	<param name="cacheid" type="long"  />
+	    </url>
+	    <url operation-value="getDependencyMapPage"  >
+	    	<param name="mapId" type="long"  />
+	    </url>
+	    <url operation-value="getMonitorsForDiscoveryIdOfTypes,getServersForDependencyView"  >
+	    	<param name="monitortypes" regex="am.discovery.stringAll" max-len="3"/>
+	    	<param name="discoveryID" regex="am.common.longandnull" />
+	    </url>
+	    <url operation-value="getMonitorsdiscoveredInServer"  >
+	    	<param name="discoveryId" type="long"  />
+	    	<param name="deviceName" regex="am.hostname"  max-len="300"/>
+	    </url>
+	    <url operation-value="getServersForAdditionInMapView,getServersForDeletionInMapView"  >
+	    	<param name="monitortypes" regex="am.discovery.stringAll" max-len="3"/>
+	    	<param name="mapId" type="long"  />
+	    </url>
+	    <url operation-value="getVMsdiscoveredInESXHost"  >
+	    	<param name="deviceName" regex="am.hostname" max-len="300" />
+	    	<param name="fromDiscoveryStatusPage" type="boolean"  />
+	    	<param name="discoveryID" regex="am.common.longandnull"  />
+	    </url>
+	    <url operation-value="navigateToDependencyMapEditPage"  >
+	    	<param name="mapName" regex="am.displayname.common" max-len="30" />
+	    	<param name="mapId" type="long"  />
+	    </url>
+	    <url operation-value="discoveredDevicesTableView"  >
+	    	<param name="discoveryID" type="long"  />
+	    	<param name="fromView" type="boolean"  />
+	    	<param name="devsAdded" type="int"  />
+	    	<param name="orderBy" regex="am.discovery.orderBy" max-len="4"/>
+	    </url>
+	    <url operation-value="getDiscoveryDetails"  >
+	    	<param name="service" regex="am.discovery.service" max-len="10"/>
+	    	<param name="reqForAdminLayout" type="boolean"  />
+	    	<param name="isDiscoveryStopped" type="boolean"  />
+	    	<param name="discId" type="long"  />
+	    </url>
+	    <url operation-value="getAppsDiscoveredInServer"  >
+	    	<param name="deviceName" regex="am.hostname" max-len="300" />
+	    	<param name="fromDiscoveryStatusPage" type="boolean"  />
+	    	<param name="discoveryID" regex="am.common.longandnull"  />
+	    	<param name="esxHostName" regex="am.hostname" />
+	    </url>
+	    <url operation-value="discoveryNameExistsCheck"  >
+			<param name="discoveryName" type="String"  />
+			<param name="cacheid" type="long" />
+	    </url>
+	    <url operation-value="getDependencyViewBeforeCreation"  >
+			<param name="monitorResIds[]" type="long"  max-occurrences="1000"/>
+	    </url>
+	    <url operation-value="getDependencyViewForMapId"  >
+			<param name="mapId" type="long" />
+	    </url>
+	    <url operation-value="getScheduleDetails"  >
+			<param name="discoveryID" type="long" />
+	    </url>
+		<url operation-value="getAutoDiscoveryStatus"  >
+	    </url>
+	</urls>	
+	<!-- WAF handling for /newDiscoveryAction.do URL related Endpoints Ends-->
+
+	<!-- WAF Handling for /sap.do (SAP-Server , SAP CCMS) Starts-->
+	<urls csrf="true" method="POST" operation-param="method" path="/sap.do" roles="ADMIN,ENTERPRISEADMIN" authentication="required" throwallerrors="true">
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<url operation-value="saveAlertsFilterOptions">
+			<param name="resourceid" type="long"/>
+			<param name="selectedfilters" regex="am.sap.alerts" max-len="100000" />
+		</url>
+		<url operation-value="createCCMSMonitors">
+			<param name="systemNumber" type="int" description="am.webclient.hostdiscovery.sap.systemnumber"/>
+			<param name="version" type="String" description="am.webclient.ccms.ccmsmonitorset"/>
+			<param name="CredentialManager" regex="am.ceph.CredentialDetails" description="am.webclient.SAP.isCredManager"/>
+			<param name="credManagerVal" type="int" description="am.webclient.SAP.credval.sapinfo" />
+			<param name="masSelectType" regex="am.enterprise.masselecttype" description="EnterpriseSetup-Type" />
+			<param name="masGroupName" type="String" description="EnterpriseSetup-GroupName"/>
+			<param name="selectedServer" regex="am.enterprise.selectedserver" description="EnterpriseSetup-SelectedServer" />
+			<param name="language" regex="country_code" description="am.webclient.hostdiscovery.sap.language"/>
+			<param name="type" regex="am.noconf.type" />
+			<param name="addtoha" regex="am.common.TFNull" />
+			<param name="username" type="String" description="am.webclient.hostdiscovery.username" max-len="255"/>
+			<param name="usedRouterString" type="boolean" description="am.webclient.hostdiscovery.sap.connect.withrouterstring"/>
+			<param name="routerString" type="String" description="am.webclient.hostdiscovery.sap.routerstring" max-len="500"/>
+			<param name="pollInterval" type="int" description="am.webclient.hostdiscovery.polling"/>
+			<param name="password" secret = "true" type="String" description="am.webclient.hostdiscovery.password" max-len="250"/>
+			<param name="logonClient" regex="am.common.onlynumeric" description="am.webclient.hostdiscovery.sap.logonclient"/>
+			<param name="host" regex="am.hostname" description="am.webclient.hostdiscovery.hostname" max-len="255"/>
+			<param name="groupname" regex="am.displayname.common"  max-len="100"/>
+			<param name="displayname" regex="am.displayname.common" description="am.webclient.common.displayname.text" max-len="100"/>
+			<param name="haid" regex="am.common.longandnull" max-occurrences="1000"/>
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+			<param name="hideFieldsForIT360" regex="am.common.TFNull" />
+		</url>
+		<url operation-value="addBackgroundJob" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+			<param name="bgjobtobeadded[]" type="String"  max-occurrences="1000"/> 
+		</url>
+		<url operation-value="deleteBackgroundJob" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+			<param name="bgjobtobedeleted" type="String"  max-occurrences="1000"/>
+		</url>
+		<url operation-value="completeAlert" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+			<param name="noredirect" type="boolean"/> 
+			<param name="date" type="String" max-len="200"/>
+			<param name="alertstobecompleted" type="String" max-occurrences="1000"/>
+		</url>
+		<url operation-value="editMonitor" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+			<param name="applicationname" regex="am.displayname.common"/>
+			<param name="CredentialManager" regex="am.urlmon.credtype" description="am.webclient.SAP.isCredManager" />
+			<param name="credManagerVal" type="int" description="am.webclient.SAP.credval.sapinfo" />
+			<param name="routerString" type="String" description="am.webclient.hostdiscovery.sap.routerstring" max-len="500"/>
+			<param name="usedRouterString" type="String" max-len="500"/>
+			<param name="pollInterval" type="int" description="am.webclient.hostdiscovery.polling"/>
+			<param name="password" secret = "true"  type="String" description="am.webclient.hostdiscovery.password" max-len="250"/>
+			<param name="displayname" regex="am.displayname.common" description="am.webclient.common.displayname.text" max-len="100"/>
+			<param name="type" type="String"/>
+			<param name="username" type="String" description="am.webclient.hostdiscovery.username" max-len="255"/>
+		</url>
+		<url operation-value="createCustomCCMSMonitors" privilege-identifier="resourceid">
+			<param name="haid" regex="am.common.longandnull"/>
+			<param name="resourceid" type="long"/>
+			<param name="screenid" type="long"/>
+			<param name="monitorelementscheckbox" type="String" max-len="100000" max-occurrences="100000000"/>
+			<param name="selectioncheckbox" type="String" max-len="100000" max-occurrences="100000000"/>
+		</url> 
+		<url operation-value="showCCMSMonitorSets">
+			<param name="logonClient" regex="am.common.onlynumeric" description="am.webclient.hostdiscovery.sap.logonclient"/>
+			<param name="host" regex="am.hostname" description="am.webclient.hostdiscovery.hostname" max-len="255"/>
+			<param name="CredentialManager" regex="am.urlmon.credtype" description="am.webclient.SAP.isCredManager" />
+			<param name="language" regex="country_code" description="am.webclient.hostdiscovery.sap.language"/>
+			<param name="logonclient" regex="am.common.onlynumeric" description="am.webclient.hostdiscovery.sap.logonclient"/>
+			<param name="password" secret = "true" type="String" description="am.webclient.hostdiscovery.password" max-len="100"/>
+			<param name="systemnumber" regex="am.common.onlynumeric" description="am.webclient.hostdiscovery.sap.systemnumber"/>
+			<param name="username" type="String" description="am.webclient.hostdiscovery.username" max-len="100"/>
+			<param name="routerString" type="String" description="am.webclient.hostdiscovery.sap.routerstring" max-len="500"/>
+			<param name="cmValue" type="int"/>
+		</url>
+		<url operation-value="showCCMSMonitors" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+			<param name="camid" type="long"/>
+			<param name="haid" regex="am.common.longandnull"/>
+			<param name="screenid" type="long"/>
+			<param name="isfromresourcepage" type="boolean"/>
+		</url>
+	</urls>
+	<urls method="GET" operation-param="method" path="/sap.do" throwallerrors="true" privilege-identifier="resourceid" roles="ADMIN,ENTERPRISEADMIN,USERS,OPERATOR,DEMO" authentication="required" >
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<url operation-value="loadAlertFilterOptions" roles="ADMIN,ENTERPRISEADMIN,DEMO" authentication="required">
+			<param name="resourceid" type="long"/>
+		</url>
+		<url operation-value="editMonitor" dynamic-redirect="true" redirect-url-template="/showresource.do?resourceid=$resourceid$&amp;method=showResourceForResourceID">
+			<param name="resourceid" type="long"/>
+		</url>
+		<url operation-value="backgroundDetails,alertDetails,spoolDetails,enqueueDetails,dialogDetails,getProcessesDetails,osDetails,bufferDetails,overviewDetails,updateDetails">
+			<param name="resourceid" type="long"/>
+			<param name="noredirect" type="boolean" />
+			<param name="date" type="String" max-len="200"/>
+		</url>
+		<url operation-value="backgroundjobDetails">
+			<param name="resourceid" type="long"/>
+			<param name="noredirect" type="boolean" />
+			<param name="resourcename" type="String" max-len="1000"/>
+			<param name="date" type="String" max-len="200"/>
+		</url>
+		<url operation-value="showCCMSMonitorTreeElements" privilege-identifier="resourceid" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="resourceid" type="long"/>
+			<param name="screenid" type="long"/>
+			<param name="set" type="String"/>
+			<param name="monitor" type="String"/>
+		</url>
+		<url operation-value="searchBackgroundJob" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="resourceid" type="long"/>
+			<param name="resourcename" type="String" max-len="1000"/>
+			<param name="username" type="String"/>
+			<param name="jobname" type="String" max-len="250"/>
+			<param name="sid" type="String"/>
+		</url>
+		<url operation-value="customSearchBgjob" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="resourceid" type="long"/>
+			<param name="username" type="String"/>
+			<param name="jobname" type="String" max-len="250"/>
+		</url>
+		<url operation-value="showQinData,showQinSchedular,showQoutData,showQoutSchedular,showRFCDetails">
+			<param name="resourceid" type="long"/>
+			<param name="_" type="long" description="appended_id_for_RFC"/>
+		</url>
+		<url operation-value="jobTraceAction" privilege-identifier="resId">
+			<param name="resId" type="long"/>
+			<param name="bgresourceid" type="long"/>
+			<param name="jobname" type="String" max-len="250"/>
+			<param name="jobcount" type="int"/>
+			<param name="noredirect" regex="am.common.TFNull"/>
+			<param name="more" regex="am.common.TFNull"/>
+			<param name="resourcename" type="String" max-len="1000"/>
+			<param name="sid" type="String"/>
+		</url>
+		
+	</urls>
+	<!-- WAF Handling for /sap.do Ends-->
+	<urls>
+		<url path="/credentialManager.do" method="post" csrf="true" roles="am.role.ADMIN.EA" authentication="required" operation-param="method" operation-value="saveCredentials" throwallerrors="true" json-error-response="true" >
+			<param-group name="am.additional.extra.params" />
+			<param name="credentialID" type="int"/>
+			<param name="credentialName" regex="am.displayname.common"/>
+            <param name="type" regex="am.credManager.monTypes" max-occurrences="2"/>
+			<param name="status" type="boolean"/>
+			<param name="fromDiscovery" type="boolean"/>
+			<param name="checkModifiyPassword" type="boolean"/>
+			<param name="modifiedPassRow" regex="am.credManager.password.params"/>
+			<param name="am.credManager.hidden.params" name-regex="true" regex="am.credManager.encoded.decoded"/>
+			
+			<param name="authEnabled" regex="onlyon"/>
+			<param name="authreq" regex="onlyon"/>
+			<param name="AuthReq" regex="onlyon"/>
+			<param name="authType" regex="am.mssql.authtype"/>
+			<param name="Database" regex="am.sapmaxdb.dbname"/>
+			<param name="DBname" regex="am.monitor.db.name"/>
+			<param name="dbPassword" type="String" max-len="10000" secret="true"/>
+			<param name="dbUser" regex="am.saphana.username"/>
+			<param name="description" type="String" max-len="10000"/>
+			<param name="DiscoverAllNodes" regex="onlyon"/>
+			<param name="driverType" regex="am.mssqlmonitor.driverType.value"/>
+			<param name="encryption" regex="onlyon"/>
+			<param name="failoverEnabled" regex="onlyon"/>
+			<param name="FailoverHostName" regex="am.hostname" max-len="255"/>
+			<param name="FailoverPort" regex="am.port"/>
+			<param name="instance" type="String"/>
+			<param name="isSSLEnabled" regex="onlyon"/>
+			<param name="jmxEnabled" regex="onlyon"/>
+			<param name="jmxurl" type="String" max-len="2083"/>
+			<param name="JNDIPath" regex="am.common.urlstartwithslash" max-len="2083"/>
+			<param name="jndiurl" regex="am.common.urlstartwithslash" max-len="2083"/>
+			<param name="kerberos" regex="onlyon"/>
+			<param name="Namespace" regex="am.azure.servicebusnamespace"/>
+			<param name="passphrase" type="String" max-len="10000" secret="true"/>
+			<param name="password" type="String" max-len="10000" secret="true"/>
+			<param name="Password" type="String" max-len="10000" secret="true"/>
+			<param name="prompt" type="String"/>
+			<param name="routerAuth" regex="onlyon"/>
+			<param name="routerstring" type="String" max-len="4000"/>
+			<param name="snmpAuthPassword" type="String" max-len="10000" secret="true"/>
+			<param name="snmpAuthProtocol" regex="am.servermonitor.snmpAuthProtocol"/>
+			<param name="snmpCommunityString" type="String" max-len="255" secret="true"/>
+			<param name="snmpContextName" type="String" max-len="255" secret="true"/>
+			<param name="snmpPrivPassword" type="String" max-len="10000" secret="true"/>
+			<param name="snmpPrivProtocol" regex="am.snmp.snmpPrivProtocol"/>
+			<param name="snmpSecurityLevel" regex="am.servermonitor.snmpSecurityLevel"/>
+			<param name="snmpUserName" regex="am.windows.username"/>
+			<param name="soapport" regex="am.port"/>
+			<param name="sshPKAuth" regex="onlyon"/>
+			<param name="ssl" regex="onlyon"/>
+			<param name="sslenabled" regex="onlyon"/>
+			<param name="timeout" type="int"/>
+			<param name="tomcatmanagerurl" regex="am.common.urlstartwithslash" max-len="2083"/>
+			<param name="User Name" regex="am.windows.username"/>
+			<param name="UserName" regex="am.windows.username"/>
+			<param name="username" regex="am.windows.username"/>
+			<param name="userName" regex="am.windows.username"/>
+			<param name="Username" regex="am.windows.username"/>
+			<param name="useSSL" regex="onlyon"/>
+			<param name="version" regex="am.version"/>
+	    </url>
+	</urls>
+    
+	<!-- WAF Handling for HAIDManagerAction Starts -->
+	<!-- /manageApplications.do -->
+	<urls method="POST" csrf="true" path="/manageApplications.do" operation-param="method" throwallerrors="true" roles="ADMIN,ENTERPRISEADMIN,DEMO" authentication="required">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url operation-value="insert">
+			<param name="addmonitors" type="int" />
+			<param name="description" type="String" max-len="500"/>
+			<param name="grouptype" regex="am.common.onlynumeric" />
+			<param name="allowners_list" type="long" max-occurrences="10000" />
+			<param name="locationid" type="long" />
+			<param name="name" regex="am.displayname.common" max-len="100"/>
+			<param name="selectedowners_list" type="long" max-occurrences="10000" />
+			<param name="createMV" regex="am.onlyalpha" />
+			<param name="mgtypes_1001" type="int" />
+			<param name="mgtypes_1002" type="int" />
+			<param name="mgtypes_1003" type="int" />
+			<param name="mgtypes_1004" type="int" />
+			<param name="mgtypes_1006" type="int" />
+			<param name="mgtypes_1007" type="int" />
+			<param name="mgtypes_1008" type="int" />
+			<param name="mgtypestatus#1001" regex="am.onlyalpha"/>
+			<param name="mgtypestatus#1002" regex="am.onlyalpha"/>
+			<param name="mgtypestatus#1003" regex="am.onlyalpha"/>
+			<param name="mgtypestatus#1004" regex="am.onlyalpha" />
+			<param name="mgtypestatus#1006" regex="am.onlyalpha"/>
+			<param name="mgtypestatus#1007" regex="am.onlyalpha" />
+			<param name="mgtypestatus#1008" regex="am.onlyalpha" />
+		</url>
+	</urls>
+	
+	<urls method="POST" csrf="true" path="/manageApplications.do" operation-param="method" throwallerrors="true" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url operation-value="AddSubGroup">
+			<param name="grouptype" regex="am.common.onlynumeric" />
+			<param name="allowners_list" type="long" max-occurrences="10000" />
+			<param name="haid" type="long" />
+			<param name="locationid" type="long" />
+			<param name="name" regex="am.displayname.common" max-len="100"/>
+			<param name="selectedowners_list" type="long" max-occurrences="10000" />
+			<param name="description" type="String" max-len="500"/>
+		</url>
+		<url operation-value="moveMonitorGroup">
+			<param name="haid" type="long"/>
+			<param name="tohaid" type="long"/>
+			<param name="fromUI" regex="am.common.TFNull"/>
+		</url>
+		<url operation-value="removeMonitors" privilege-identifier="haid">
+			<param name="MGListSelected_length" type="long" />
+			<param name="MonitorGroup" regex="am.alphanumeric-space" />
+			<param name="applicationname" type="String"/>
+			<param name="childrestypeteremove" regex="am.alphanumeric.exchange" />
+			<param name="am.haid.db.remove" name-regex="true" type="long" max-occurrences="1000000"/>
+			<param name="fromwhere" regex="am.alphanumeric.exchange" />
+			<param name="haid" type="long" />
+			<param name="message" type="String" />
+			<param name="monitors" type="long" max-occurrences="1000"/>
+			<param name="monitortype" regex="am.alphanumeric.exchange" />
+			<param name="resourcetype" regex="am.alphanumeric-space" />
+			<param name="savetype" type="int" />
+			<param name="type" regex="am.alphanumeric-space"/>
+			<param name="removefromhaid" type="long" />
+			<param name="redirecToMonitor" type="String" />
+			<param name="fromMGView" type="boolean"/>
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" max-occurrences="100"/>
+			<param name="creationdate" type="String"/>
+			<param name="description" type="String" max-len="500" />
+			<param name="lastmodified" type="String"/>
+			<param name="name" type="String"/>
+		</url>
+		<url operation-value="delete">
+			<param name="select" type="long"/>
+			<param name="type" type="String"/>
+		</url>
+		<url operation-value="refreshNow">
+			<param name="haid" type="long"/>
+		</url>
+	</urls>
+	
+	<urls method="GET" path="/manageApplications.do" operation-param="method" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url operation-value="getMoveGroupOptions" privilege-identifier="haid">
+			<param name="haid" type="long"/>
+			<param name="sid" type="long"/>
+			<param name="name" type="String"/>
+			<param name="grouptype" regex="am.common.onlynumeric" />
+		</url>
+	</urls>
+
+	<!-- /removeMonitors.do -->
+	<urls path="/removeMonitors.do" method="POST" operation-param="method" csrf="true" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url operation-value="removeMonitors" privilege-identifier="haid">
+			<param name="MGListSelected_length" type="int" />
+			<param name="MonitorGroup" regex="am.alphanumeric-space" />
+			<param name="applicationname" type="String"/>
+			<param name="childrestypeteremove" regex="am.alphanumeric.exchange"/>
+			<param name="am.haid.db.remove" name-regex="true" type="long" max-occurrences="1000000"/>
+			<param name="fromwhere" regex="am.alphanumeric.exchange" />
+			<param name="haid" type="long" />
+			<param name="message" regex="am.alphanumeric-space" />
+			<param name="monitors" type="long" max-occurrences="1000"/>
+			<param name="monitortype" regex="am.alphanumeric.exchange" />
+			<param name="resourcetype" regex="am.alphanumeric-space" />
+			<param name="savetype" type="int" />
+			<param name="type" regex="am.alphanumeric-space"/>
+			<param name="removefromhaid" type="long" />
+			<param name="redirecToMonitor" regex="am.alphanumeric-space" />
+			<param name="fromMGView" type="boolean"/>
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" max-occurrences="100"/>
+			<param name="creationdate" type="String"/>
+			<param name="description" type="String" max-len="500" />
+			<param name="lastmodified" type="String"/>
+			<param name="owner" regex="am.alphanumeric-space" max-occurrences="100" />
+			<param name="name" type="String"/>
+		</url>
+	</urls>
+	<!-- /admin/createapplication.do-->
+
+	<urls path="/admin/createapplication.do" method="GET" operation-param="method" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN,DEMO">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url operation-value="createapp" privilege-identifier="haid">
+			<param name="grouptype" regex="am.common.onlynumeric" />
+			<param name="isEdit" regex="am.common.TFNull" />
+			<param name="haid" type="long" />
+			<param name="haName" type="String" max-len="100"/>
+			<param name="plugin_view" type="boolean"/>
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+			<param name="exparam" regex="am.common.paramNames"/>
+		</url>
+	</urls>
+	<!-- WAF Handling for HAIDManagerAction Ends -->
+
+	<!-- WAF Handling for showapplication.do Starts-->
+
+	<urls method="GET" path="/showapplication.do" operation-param="method" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN,OPERATOR,USERS,DEMO">
+		<param-group name="am.additional.extra.params" />
+		<url operation-value="recentdownTimes" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+		</url>
+		<url operation-value="recentEvents" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+		</url>
+		<url operation-value="showSubGroupTree" privilege-identifier="haid">
+			<param name="haid" type="long"/>
+			<param name="sid" type="String" description="date_string"/>
+		</url>
+		<url operation-value="showChildApplicationDetail" privilege-identifier="haid">
+			<param name="resId" type="long"/>
+			<param name="haid" type="long"/>
+		</url>
+		<url operation-value="editApplication" privilege-identifier="haid" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="haid" type="long"/>
+			<param name="fromwhere" regex="am.alphanumeric.exchange"/>
+			<param name="exparam" regex="am.common.paramNames"/>
+		</url>
+		<url operation-value="showApplication" privilege-identifier="haid">
+			<param name="pageid" type="long" />
+			<param name="haid" regex="am.discovery.longandhyphen" />
+			<param name="selectedResId" type="long"/>
+			<param name="vcenterAuthErrMsg" type="String" max-len="2000"/>
+			<param name="sid" type="long"/>
+			<param name="selectedType" regex="am.ovm.mgview.selectedtype"/>
+			<param name="isEdit" regex="am.common.TFNull" />
+			<param name="status" regex="am.rhev.addition.status" />
+			<param name="alreadyexists" regex="am.common.TFNull" />
+			<param name="selectM" regex="am.rhev.manager.businessView" />
+			<param name="selectedscheme" regex="am.common.selectedscheme" />
+			<param name="selectedSkin" regex="am.common.selectedSkin" />
+			<param name="createNew" regex="am.common.TFNull" />
+			<param name="messagetoshow" regex="am.common.mg.subgroup.response" />
+			<param name="viewid" type="long" />
+			<param name="name" type="String" max-len="100"/>
+			<param name="applicationName" type="String" max-len="100"/>
+			<param name="consoleHome" regex="am.common.TFNull" />
+			<param name="popup" regex="am.common.TFNull" />
+			<param name="type" regex="am.common.mg.type" />
+			<param name="fromwhere" regex="am.alphanumeric-space"/>
+			<param name="technician" regex="am.alphanumeric-space" />
+			<param name="exparam" regex="am.common.paramNames"/>
+			<param name="isConfigured"	regex="am.isconfigured.value"  max-len="1000"/>
+		</url>
+	</urls>
+	
+	<urls method="GET" path="/showapplication.do" operation-param="method" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN,OPERATOR,USERS">
+		<url operation-value="getUserDetails">
+			<param name="username" regex="am.hostname"/>
+			<param name="restApi" type="boolean"/>
+			<param name="adminServer" type="boolean"/>
+			<param name="domain" regex="am.ssl.domainname"/>
+		</url>
+		<url operation-value="showApplications">
+			<param name="selectTab" regex="am.common.paramNames"/>
+		</url>
+	</urls>
+	
+	<urls method="POST" path="/showapplication.do" operation-param="method" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN" csrf="true">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url operation-value="update" privilege-identifier="haid">
+			<param name="description" type="String" max-len="500" />
+			<param name="fromwhere" regex="am.alphanumeric.exchange" />
+			<param name="grouptype" type="int" />
+			<param name="haid" type="long" />
+			<param name="locationid" type="long" />
+			<param name="name" type="String"/>
+			<param name="selectedowners_list" type="long" max-occurrences="10000" /> 
+			<param name="allowners_list" type="long" max-occurrences="10000" />
+			<param name="createMV" regex="am.onlyalpha" />
+		</url>
+	</urls>
+	<!-- WAF Handling for showapplication.do Ends-->
+
+	<!-- WAF Handling for showResource.do Starts -->
+	<urls method="GET" path="/showresource.do" operation-param="method" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN,OPERATOR,USERS,DEMO">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url operation-value="showMonitorGroupView" privilege-identifier="haid">
+			<param name="apimessage" type="String" max-len="100000"/>
+			<param name="fromwhere" regex="am.alphanumeric.exchange" />
+			<param name="haid" type="long" />
+			<param name="retaintree" regex="am.multiple.haid.ids" max-len="100000"/>
+			<param name="group" regex="am.alphanumeric.exchange" />
+			<param name="uncategorize" regex="am.common.TFNull"/>
+			<param name="notallowed" regex="am.alphanumeric.exchange" />
+			<param name="widget" regex="am.alphanumeric.exchange" />
+			<param name="parents" regex="am.multiple.haid.ids"/>
+			<param name="customValue" type="String"/>
+			<param name="viewtype" regex="am.alphanumeric.exchange" />
+			<param name="plugin_view" type="boolean"/>
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		</url>
+		<url operation-value="showMonitorGroupViewIndividual" >
+			<param name="checked" type="boolean" max-occurrences="1000"/>
+			<param name="lindx" type="int" />
+			<param name="pageno" type="int" />
+			<param name="parents" regex="am.multiple.haid.ids" />
+			<param name="forMaintenance" type="boolean"/>
+			<param name="alllevels" type="boolean"/>
+			<param name="fromWidget" type="boolean"/>
+			<param name="widgetid" type="long"/>
+			<param name="_" type="long" description="appended_id_for_HAID"/>
+		</url>
+		<url operation-value="getMonitorForm" roles="ADMIN,ENTERPRISEADMIN,DEMO">
+			<param name="haid" type="long"/>
+			<param name="type" regex="am.alphanumeric-space"/>
+			<param name="fromwhere" regex="am.alphanumeric.exchange"/>
+			<param name="typeSelectedFromCombo" type="boolean"/>
+		</url>
+	</urls>
+	<urls method="POST" csrf="true" path="/showresource.do" operation-param="method" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" max-occurrences="5"/>
+		<url operation-value="addResource">
+			<param name="am.haid.db.child" name-regex="true" type="long" max-occurrences="1000000"/>
+			<param name="am.haid.db.type.length" name-regex="true" type="long"/>
+			<param name="MGList_length" type="long" />
+			<param name="MonitorGroup" regex="am.alphanumeric-space" />
+			<param name="applicationname" type="String"/>
+			<param name="childrestypeselected" regex="am.alphanumeric-space" />
+			<param name="fromwhere" regex="am.alphanumeric-space"  />
+			<param name="goback" type="boolean" />
+			<param name="haid" type="long" />
+			<param name="monitortype" regex="am.alphanumeric-space" />
+			<param name="resourcetype" regex="am.alphanumeric-space" />
+			<param name="savetype" type="int" />
+			<param name="selectedresource" type="long" max-occurrences="10000"/>
+			<param name="type" regex="am.alphanumeric-space"/>
+		</url>
+	</urls>
+	<!-- WAF Handling for showResource.do Ends -->
+
+	<!-- WAF handling for /credentialManager.do starts -->
+	<urls path="/credentialManager.do" method="post" csrf="true" operation-param="method" throwallerrors="true" roles="ADMIN,ENTERPRISEADMIN,DEMO" authentication="required">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url operation-value="credentialNameExistsCheck" >
+			<param name="enteredName" type="String" max-len="200"/>
+			<param name="cacheid" type="long" />
+		</url>
+		<!-- <url operation-value="removeAssociationFromMonitors" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="cacheid" type="long" />
+			<param name="credentialID" type="int" />
+			<param name="monitorsInArray" regex="am.recorder.long.commaSeparated"  max-len="400000000"/>
+		</url>
+		<url operation-value="associateCredentialToManyResources" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="cacheid" type="long" />
+			<param name="credentialID" type="int" />
+			<param name="monitorsInArray" regex="am.recorder.long.commaSeparated"  max-len="400000000"/>
+		</url>
+		<url operation-value="removeAssociationToCredentialID" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="cacheid" type="long" />
+			<param name="resourceID" type="long" />
+		</url>
+		<url operation-value="associateCredentialToResource" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="cacheid" type="long" />
+			<param name="resourceID" type="long" />
+			<param name="credentialID" type="int" />
+		</url> -->
+		
+	</urls>
+
+	<urls path="/credentialManager.do" method="get" operation-param="method" throwallerrors="true" roles="ADMIN,ENTERPRISEADMIN,DEMO" authentication="required">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<!-- <url operation-value="showCredentialManager" >
+			<param name="service" regex="am.discovery.service" max-len="10" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+		<url operation-value="showMonitorsForCredential" >
+			<param name="credentialID" type="int" />
+		</url> -->
+		<url operation-value="showCredentialByTypeToEdit" >
+			<param name="credentialID" type="int" />
+			<param name="credentialType" regex="am.monitor.type" max-len="515"/>
+		</url>
+		<url operation-value="showCredentialByTypeName" >
+			<param name="type" regex="am.monitor.type" max-len="515"/>
+			<param name="fromDiscovery" type="boolean" />
+			<param name="operation" regex="am.credentialManager.operation" max-len="3" />
+		</url>
+		<!-- <url operation-value="showAllMonitors" >
+			<param name="allMonitors" type="boolean" />
+			<param name="cacheid" type="long" />
+			<param name="credentialID" type="int" />
+		</url>
+		<url operation-value="showMonitorsForSelectedCredential" >
+			<param name="cacheid" type="long" />
+			<param name="credentialID" type="int" />
+		</url> -->
+	</urls>		 
+	<!-- WAF handling for /credentialManager.do Ends -->
+
+	<!-- WAF handling for /adminAction.do Starts -->
+	<urls path="/adminAction.do" method="post" csrf="true" operation-param="method" throwallerrors="true" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url operation-value="createMonitorGroup" >
+			<param name="groupname" regex="am.displayname.common" />
+		</url>
+	</urls>	
+		
+	<!-- WAF handling for /monitorGrpRule.do Starts -->
+	<urls path="/monitorGrpRule.do" method="get" operation-param="method" throwallerrors="true" roles="ENTERPRISEADMIN,DEMO" authentication="required">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url operation-value="createRule" >
+			<param name="ruleId" type="int" />
+			<param name="saved" type="boolean" />
+		</url>
+		<url operation-value="showMonitorGroupRules" >
+			<param name="reqForAdminLayout" type="boolean" />
+			<param name="service" regex="am.discovery.service" max-len="10"/>
+		</url>
+	</urls>
+	<urls throwallerrors="true" path="/monitorGrpRule.do" method="POST" csrf="true" operation-param="method" roles="ENTERPRISEADMIN" authentication="required">
+		<param name="selectedscheme" regex="am.common.selectedscheme" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" />
+		<param name="proxy" type="boolean"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" />
+		<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+		<url operation-value="saveRule" >
+			<param name="NameField" regex="am.monitorGrpRule.NameField" max-occurrences="100" max-len="4"/>
+			<param name="OverallCondition" regex="am.monitorGrpRule.OverallCondition" max-occurrences="100" max-len="2"/>
+			<param name="condition" type="String" max-len="4000" />
+			<param name="conditionField" type="int" max-occurrences="100"/>
+			<param name="description" type="String" max-len="200"/>
+			<param name="monitorGroupHaid" type="int" />
+			<param name="ruleId" type="int" />
+			<param name="ruleName" regex="am.displayname.common" max-len="200"/>
+			<param name="valueTextField" type="String" max-occurrences="100"/>
+			<param name="valueTypeField" type="String" max-occurrences="100"/>
+		</url>
+		<url operation-value="deleteRule" >
+			<param name="ruleId" type="int" />
+		</url>
+	</urls>
+	<!-- WAF handling for /monitorGrpRule.do Ends -->
+
+	<!-- WAF handling for /AppManager/Discovery/* Starts -->
+	<urls throwallerrors="true" method="POST" api="true" roles="ENTERPRISEADMIN" authentication="required" >
+	<param name="PRINTER_FRIENDLY" type="boolean" />
+	<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+	<param name="eeSyncKey" regex="am.encodedauthkey" secret="true" />
+	<param name="apikey" regex="apikey" secret="true" />
+	<param name="method" regex="am.request.method" />
+	<param name="networkDetails" type="String" max-len="400000000"/>
+	<param name="probeId" type="int" />
+	<url path="/AppManager/Discovery/deleteDiscoveryDetails" />
+	<url path="/AppManager/Discovery/startDiscovery" />
+	<url path="/AppManager/Discovery/scheduleRediscovery"  />
+	<url path="/AppManager/Discovery/stopDiscovery"  />
+	<url path="/AppManager/Discovery/addSelectedServers"  />
+	<url path="/AppManager/Discovery/addSelectedServersForVMDiscovery" />
+	<url path="/AppManager/Discovery/startRediscovery"  />
+	<url path="/AppManager/Discovery/disableScheduleRediscovery"  />
+	</urls>
+
+	<urls throwallerrors="true" method="GET"  roles="ENTERPRISEADMIN" authentication="required" >
+	<param name="PRINTER_FRIENDLY" type="boolean" />
+	<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+	<param name="eeSyncKey" regex="am.encodedauthkey" secret="true" />
+	<param name="apikey" regex="apikey" secret="true" />
+	<param name="method" regex="am.request.method" />
+	<param name="networkDetails" type="String" max-len="400000000"/>
+	<param name="probeId" type="int" />
+	<url path="/AppManager/Discovery/getDevicesJSON"  />
+	<url path="/AppManager/Discovery/getAppsInServer"  />
+	<url path="/AppManager/Discovery/getVMsInESXHost"   />
+	<url path="/AppManager/Discovery/getDiscoveryStatusDetails"  />
+	</urls>
+	<!-- WAF handling for /AppManager/Discovery/* Ends -->
+	
+	<urls throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<url path="/servlet/SyncMonitorInAdminMG" method="POST" api="true">
+			<param name="checkDependency" type="boolean" />
+			<param name="eeSyncKey" regex="am.encodedauthkey" secret="true" />
+			<param name="method" regex="am.request.method.post" />
+			<param name="mgResourceID" type="long" />
+			<param name="operation" type="int" />
+			<param name="probeId" type="int" />
+			<param name="resourceList" type="String" max-len="400000000" />
+		</url>
+	</urls>
+
+	
+	
+	
+	<!-- WAF handling for REST API starts -->
+	<urls method="GET" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA.OP.US" api="true">
+		<param-group name="am.additional.extra.params" />
+		<param name="apikey" regex="apikey" secret="true" />
+		<param name="IncludeSubGroup" type="boolean" />
+		<param name="CustomTime" type="boolean" />
+		<param name="StartTime" type="long" />
+		<param name="EndTime" type="long" />
+		<param name="ReportPeriod" type="int" range="0-3,5-9,11-12"/>
+		<param name="HAID" type="long" />
+		<param name="ServiceAvailability" type="boolean" />
+		<url path="/AppManager/json/getMonitorGroupAvailability" />
+		<url path="/AppManager/(xml|json)/getMonitorGroupAvailabilityInfo" />
+	</urls>
+	<urls prefix="/AppManager/(xml|json)" url-type="dynamic" method="GET" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" api="true">
+		<param name="apikey" regex="apikey" secret="true" />
+		<url path="/ListMGDetails" user-scope="AppManager.MonitorGroups.READ">
+			<param name="groupName" type="String"/>
+			<param name="groupId" type="long"/>
+		</url>
+	</urls>
+	
+	<urls prefix="/AppManager/json/ApmAdminServices" method="POST" api="true">
+		<param-group name="am.additional.extra.params" />
+		<param name="eeSyncKey" regex="am.encodedauthkey" secret="true" />
+		<param name="masId" type="int"/>
+		<url path="/adminMonitorGroup">
+			<param name="haid" type="long"/>
+			<param name="resId" type="long"/>
+		</url>
+		<url path="/checkDependentDevice">
+			<param name="resourceid" type="long"/>
+			<param name="attributeid" type="int"/>
+		</url>
+		<url path="/checkResourceID">
+			<param name="resourceIds" regex="am.common.comma.longandnull" max-len="100000" />
+		</url>
+	</urls>
+	
+	<urls prefix="/AppManager/(xml|json)" url-type="dynamic" throwallerrors="true" authentication="required"  api="true">
+		<param-group name="am.additional.extra.params" />
+		<param name="apikey" regex="apikey" secret="true" />
+		<param name="groupName" type="String"/>
+		<param name="groupId" type="long"/>
+		<param name="type" regex="all" />
+		<param name="outageReports" type="boolean"/>
+		<param name="severityDetails" type="boolean"/>
+		<param name="listOnlyParentGroups" type="boolean"/>
+		<param name="treeview" regex="am.mg.treeview"/>	
+		<url path="/ListMonitorGroups" method = "POST" roles="am.role.ADMIN.EA" user-scope="AppManager.MonitorGroups.READ"/>
+		<url path="/ListMonitorGroups" method = "GET" roles="am.role.ADMIN.EA.OP.US.DE" user-scope="AppManager.MonitorGroups.READ"/>
+	</urls>
+
+	<urls prefix="/AppManager/(xml|json)" url-type="dynamic" method="POST" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" api="true">
+		<param-group name="am.additional.extra.params" />
+		<param name="apikey" regex="apikey" secret="true" />
+		<url path="/AddMonitorGroup">
+			<param name="grouptype" regex="am.mg.add.name" />
+			<param name="name" regex="am.displayname.common" max-len="100"/>
+			<param name="am.mg.subgroup.name" name-regex="true" regex="am.mg.subgroup.enable" />
+		</url>
+		<url path="/AddSubGroup">
+			<param name="haid" type="long" />
+			<param name="name" regex="am.displayname.common" max-len="100"/>
+			<param name="grouptype" regex="am.sub.mg.add.name"/>
+			<param name="mgname" regex="am.displayname.common" max-len="100"/>
+		</url>
+		<url path="/AssociateMonitortoMG">
+			<param name="resourceid" regex="am.digits.commaseperated" max-len="10000"/>
+			<param name="haid" regex="am.digits.commaseperated" max-len="10000"/>
+			<param name="mgname" type="String" max-len="100"/>
+			<param name="allowCreateMG" type="boolean" />
+		</url>
+		<url path="/group/delete">
+			<param name="haid" type="long" />
+			<param name="name" type="String" max-len="100"/>
+		</url>
+		<url path="/group/edit">
+			<param name="haid" type="long" />
+			<param name="groupname" regex="am.displayname.common" max-len="100"/>
+			<param name="owners" regex="am.alphanumeric-space" max-occurrences="100" />
+			<param name="location" regex="am.displayname.common" max-len="100"/>
+			<param name="description" type="String" max-len="500"/>
+		</url>
+		<url path="/group/move">
+			<param name="haid" type="long"/>
+			<param name="tohaid" type="long"/>
+		</url>
+		<url path="/removemonitor/group">
+			<param name="resourceid" regex="am.digits.commaseperated" max-len="10000"/>
+			<param name="haid" type="long"/>
+			<param name="mgname" type="String"/>
+		</url>
+		<url path="/subgroup/delete">
+			<param name="haid" regex="am.digits.commaseperated" max-len="10000"/>
+			<param name="name" type="String"/>
+		</url>
+	</urls>
+	
+	<urls method="POST" api="true" authentication="required" roles="am.role.ADMIN.EA">
+		<param-group name="am.additional.extra.params" />
+		<param-group name="am.restapi.additional.extra.params" />
+		<param name="apikey" regex="apikey" secret="true" />
+		<param name="probeID" type="long" />
+		<param name="Content-Type" regex="^(text/plain)$"/>
+		<url path="/AppManager/json/GetRemoteHost">
+			<param name="resourceid" type="long"/>
+		</url>
+	</urls>
+	
+	<urls prefix="/AppManager/(xml|json)" url-type="dynamic" throwallerrors="true" authentication="required" api="true">
+		<param-group name="am.additional.extra.params" />
+		<param name="apikey" regex="apikey" secret="true" />
+		<param name="type" regex="am.credManager.monTypes"/>
+		<url path="/credential" method="POST" roles="am.role.ADMIN.EA" >
+			<param name="apicallfrom" regex="am.emailaction.create.server"/>
+			<param name="credentialID" type="int"/>
+			<param name="credentialDescr" type="String" max-len="500"/>
+			<param name="credentialName" regex="am.displayname.common"/>
+	        <param name="status" type="boolean"/>
+			<param name="modifiedPassRow" regex="am.credManager.password.params"/>
+			<param name="am.credManager.hidden.params" name-regex="true" regex="am.credManager.encoded.decoded"/>
+			
+			<param name="authEnabled" regex="am.mailserver.serverauth.types"/>
+			<param name="authreq" regex="am.mailserver.serverauth.types"/>
+			<param name="AuthReq" regex="am.mailserver.serverauth.types"/>
+			<param name="authType" regex="am.mssql.authtype"/>
+			<param name="DBname" regex="am.monitor.db.name"/>
+			<param name="description" type="String" max-len="10000" secret="true"/>
+			<param name="instance" type="String"/>
+			<param name="JNDIPath" regex="am.common.urlstartwithslash" max-len="2083"/>
+			<param name="jndiurl" regex="am.common.urlstartwithslash" max-len="2083"/>
+			<param name="passphrase" type="String" max-len="10000" secret="true"/>
+			<param name="password" type="String" max-len="10000" secret="true"/>
+			<param name="Password" type="String" max-len="10000" secret="true"/>
+			<param name="prompt" type="String"/>
+			<param name="snmpAuthPassword" type="String" max-len="10000" secret="true"/>
+			<param name="snmpAuthProtocol" regex="am.servermonitor.snmpAuthProtocol"/>
+			<param name="snmpCommunityString" type="String" max-len="255" secret="true"/>
+			<param name="snmpContextName" type="String" max-len="255" secret="true"/>
+			<param name="snmpPrivPassword" type="String" max-len="10000" secret="true"/>
+			<param name="snmpSecurityLevel" regex="am.servermonitor.snmpSecurityLevel"/>
+			<param name="snmpUserName" regex="am.windows.username"/>
+			<param name="soapport" regex="am.port"/>
+			<param name="sshPKAuth" regex="am.mailserver.serverauth.types"/>
+			<param name="sslenabled" regex="am.mailserver.serverauth.types"/>
+			<param name="timeout" type="int"/>
+			<param name="tomcatmanagerurl" regex="am.common.urlstartwithslash" max-len="2083"/>
+			<param name="User Name" regex="am.windows.username"/>
+			<param name="UserName" regex="am.windows.username"/>
+			<param name="username" regex="am.windows.username"/>
+			<param name="Username" regex="am.windows.username"/>
+			<param name="userName" regex="am.windows.username"/>
+			<param name="version" regex="am.version"/>
+			<param name="namedInstance" regex="am.mailserver.serverauth.types"/>
+			<param name="SMTP UserName" regex="am.windows.username"/>
+			<param name="SMTP Password" type="String" max-len="10000" secret="true"/>
+			<param name="useSSL" regex="am.mailserver.serverauth.types"/>
+			<param name="TO_DELETE" regex="am.common.TFNull"/>
+			<param name="Database" regex="am.sapmaxdb.dbname"/>
+			<param name="DiscoverAllNodes" regex="am.mailserver.serverauth.types"/>
+			<param name="FailoverHostName" regex="am.hostname" max-len="255"/>
+			<param name="FailoverPort" regex="am.port"/>
+			<param name="Namespace" regex="am.azure.servicebusnamespace"/>
+			<param name="checkModifiyPassword" type="boolean"/>
+			<param name="dbPassword" type="String" max-len="10000" secret="true"/>
+			<param name="dbUser" regex="am.saphana.username"/>
+			<param name="driverType" regex="am.mssqlmonitor.driverType.value"/>
+			<param name="encryption" regex="am.mailserver.serverauth.types"/>
+			<param name="failoverEnabled" regex="am.mailserver.serverauth.types"/>
+			<param name="fromDiscovery" type="boolean"/>
+			<param name="isSSLEnabled" regex="am.mailserver.serverauth.types"/>
+			<param name="jmxEnabled" regex="am.mailserver.serverauth.types"/>
+			<param name="jmxurl" type="String" max-len="2083"/>
+			<param name="kerberos" regex="am.mailserver.serverauth.types"/>
+			<param name="routerAuth" regex="am.mailserver.serverauth.types"/>
+			<param name="routerstring" type="String" max-len="4000"/>
+			<param name="snmpPrivProtocol" regex="am.snmp.snmpPrivProtocol"/>
+			<param name="ssl" regex="am.mailserver.serverauth.types"/>
+			<param name="operationdonefrom" regex="am.credentialmanager.operationdonefrom"/>
+		</url>
+		<url path="/credential/list" method="GET" roles="am.role.ADMIN.EA.DE" />
+	</urls>
+	
+	<urls prefix="/AppManager/json" method="POST" throwallerrors="true" api="true">
+		<url path="/StartPluginDiscovery" skip-bad-input-encoding="true">
+			<param name="DiscoveredDevices" type="JSONObject" template="discovered_devices_jsonobject" max-len="2060000"/>
+		</url>
+	</urls>
+	<jsontemplates>
+		<jsontemplate name="discovered_devices_jsonobject">
+			<key name="applicationsDetails" array-size="0-1500" max-len="318288000" template="applications_details_jsonarray" type="JSONArray"/>
+			<key name="devWithNoCredList" array-size="0-1500" max-len="1560000" template="dev_with_no_credlist_jsonarray" type="JSONArray"/>
+		</jsontemplate>
+		<jsontemplate name="applications_details_jsonarray">
+			<key name="ProcesssList" array-size="0-200" max-len="208000" template="process_list_jsonarray" type="JSONArray"/>
+			<key name="IPAddress" regex="am.hostname" max-len="1024" />
+			<key name="HostName" regex="am.hostname" max-len="1024"/>
+			<key name="isAD" type="boolean"/>
+			<key name="isExchange" type="boolean"/>
+			<key name="username" regex="am.windows.username.empty" secret="true"/>
+			<key name="password" regex="am.alphanumeric" max-len="1000" secret="true"/>
+		</jsontemplate>
+		<jsontemplate name="dev_with_no_credlist_jsonarray">
+				<value regex="am.hostname" max-len="1024"/>
+		</jsontemplate>
+		<jsontemplate name="process_list_jsonarray">
+				<value type="String" max-len="1024"/>
+		</jsontemplate>
+	</jsontemplates>
+	<!-- WAF handling for REST API Ends -->  
+	
+	<!-- WAF handling for JSPs -->
+	<urls method="GET" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<url path="/jsp/sap/RFC.jsp" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="resourceid" type="long"/>
+			<param name="noredirect" type="boolean"/>
+		</url>
+		<url path="/jsp/ScriptHostDetails.jsp" roles="am.role.ADMIN.EA">
+			<param name="toclose" type="boolean"/>
+			<param name="updated" regex="am.common.successorfailure"/>
+			<param name="am.avoidfilter.name.regex" name-regex="true" type="boolean"/>
+		</url>
+		<url path="/jsp/ChooseSAPB1Adapters.jsp" roles="am.role.ADMIN.DE">
+			<param name="resourceId" type="long" max-len="10"/>
+			<param name="action" regex="^(chooseAdapter)$"/>
+		</url>
+		<url path="/jsp/sap/alertsFilter.jsp" roles="am.role.ADMIN.DE">
+			<param name="resourceid" type="long"/>
+		</url>
+		<url path="/jsp/SiebleErrorTaskList.jsp" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="count" type="int"/>
+			<param name="resourceid" type="long"/>
+			<param name="hidePopUpLink" type="boolean"/>
+		</url>
+		<url path="/jsp/sap/listccmsmonitorsets.jsp" roles="am.role.ADMIN.DE"/>
+		<url path="/jsp/CredentialManager.jsp" method="get" roles="am.role.ADMIN.EA.DE">
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+	</urls>
+
+	<!-- Deny Operations -->
+	<urls throwallerrors="true" method="get" deny-operation="true" >
+	    <url path="/sap.do" operation-param="method" operation-value="addBackgroundJob,deleteBackgroundJob,completeAlert,createCCMSMonitors,createCustomCCMSMonitors,showCCMSMonitorSets,showCCMSMonitors,saveAlertsFilterOptions"/>
+		<url path="/newDiscoveryAction.do" operation-param="method" operation-value="deleteDiscoveryDetails,stopDiscoveryProcess,deleteMonitorsAssociatedWithDiscoveryId,addSelectedDevices,addServersToExistingMap,createDependencyMapView,deleteDependencyMap,deleteServersFromExistingMap,performRediscovery,rediscovery,saveScheduleDiscoveryDetails,resetDependencyMapPositions,setPositionForDependencyNodes,updateDiscoveryInfo,getDiscoveryStatusMessage,getDiscoveryParamsAndShowDiscoveryProcess"/>
+		<url path="/credentialManager.do" operation-param="method" operation-value="credentialNameExistsCheck,saveCredentials"/>
+		<url path="/confActions.do" operation-param="method" operation-value="saveadapters"/>
+		<url path="/updateScript.do" operation-param="method" operation-value="updateFile"/>
+		<url path="/manageApplications.do" operation-param="method" operation-value="delete" redirect-url="/applications.do"/>
+		<url path="/manageApplications.do" operation-param="method" operation-value="removeMonitors" redirect-url="/applications.do"/>
+		<url path="/manageApplications.do" operation-param="method" operation-value="AddSubGroup,moveMonitorGroup,insert,refreshNow"/>
+		<url path="/removeMonitors.do" redirect-url="/applications.do"/>
+		<url path="/removeMonitors.do" operation-param="method" operation-value="removeMonitors"/>
+		<url path="/showapplication.do" operation-param="method" operation-value="update"/>
+		<url path="/showresource.do" operation-param="method" operation-value="addResource"/>
+		<url path="/monitorGrpRule.do" operation-param="method" operation-value="deleteRule,saveRule"/>
+		<url path="/AppManager/Discovery/deleteDiscoveryDetails" />
+		<url path="/AppManager/Discovery/startDiscovery" />
+		<url path="/AppManager/Discovery/scheduleRediscovery"  />
+		<url path="/AppManager/Discovery/stopDiscovery"  />
+		<url path="/AppManager/Discovery/addSelectedServers"  />
+		<url path="/AppManager/Discovery/addSelectedServersForVMDiscovery" />
+		<url path="/AppManager/Discovery/startRediscovery" />
+		<url path="/AppManager/Discovery/disableScheduleRediscovery" />
+		<url path="/servlet/SyncMonitorInAdminMG" />
+		<url path="/AppManager/(xml|json)/group/move"/>
+		<url path="/AppManager/(xml|json)/removemonitor/group"/>
+		<url path="/AppManager/(xml|json)/subgroup/delete"/>
+		<url path="/AppManager/(xml|json)/AddMonitorGroup" />
+		<url path="/AppManager/(xml|json)/AddSubGroup" />
+		<url path="/AppManager/(xml|json)/AssociateMonitortoMG" />
+		<url path="/AppManager/(xml|json)/group/delete" />
+		<url path="/AppManager/(xml|json)/group/edit" />
+		<url path="/AppManager/(xml|json)/credential"/>
+		<url path="/AppManager/xml/getMonitorGroupAvailability" />
+		<url path="/AppManager/json/ApmAdminServices/adminMonitorGroup"/>
+		<url path="/AppManager/json/ApmAdminServices/checkDependentDevice"/>
+		<url path="/AppManager/json/ApmAdminServices/checkResourceID"/>
+		<url path="/AppManager/json/StartPluginDiscovery"/>
+		<url path="/AppManager/json/GetRemoteHost"/>
+	</urls>
+	
+	<urls throwallerrors="true" method="post" deny-operation="true" >
+		<url path="/sap.do" operation-param="method" operation-value="loadAlertFilterOptions,alertDetails,backgroundjobDetails,spoolDetails,enqueueDetails,dialogDetails,backgroundDetails,getProcessesDetails,osDetails,bufferDetails,overviewDetails,showCCMSMonitorTreeElements,searchBackgroundJob,customSearchBgjob,showQinData,showQinSchedular,showQoutData,showQoutSchedular,showRFCDetails,updateDetails,jobTraceAction"/>
+		<url path="/newDiscoveryAction.do" operation-param="method" operation-value="getAutoDiscoveryStatus,showDiscoveryPage,discoveryStatusPage,getAddmDebugPageForDiscovery,getAddmFailedIps,generatePdfForDiscoveryProfile,getDefaultPorts,getDeleteMonitorsPageForDiscoveryId,getDependencyMapPage,getMonitorsForDiscoveryIdOfTypes,getMonitorsdiscoveredInServer,getServersForAdditionInMapView,getServersForDeletionInMapView,getServersForDependencyView,getVMsdiscoveredInESXHost,navigateToDependencyMapEditPage,navigateToDependencyViewCreationPage,showEditDiscoveryPage,discoveredDevicesTableView,getDiscoveryDetails,getAppsDiscoveredInServer,discoveryNameExistsCheck,getDependencyViewBeforeCreation,getDependencyViewForMapId,getScheduleDetails"/>
+		<url path="/admin/createapplication.do" operation-param="method" operation-value="createapp"/>
+		<url path="/credentialManager.do" operation-param="method" operation-value="showCredentialByTypeToEdit,showCredentialByTypeName"/>
+		<url path="/confActions.do" operation-param="method" operation-value="loadSAPB1adapters"/>
+		<url path="/manageApplications.do" operation-param="method" operation-value="getMoveGroupOptions"/>
+		<url path="/showapplication.do" operation-param="method" operation-value="showApplication,showSubGroupTree,showApplications,showChildApplicationDetail,editApplication,recentEvents,recentdownTimes,getUserDetails"/>
+		<url path="/showresource.do" operation-param="method" operation-value="showMonitorGroupView,showMonitorGroupViewIndividual,getMonitorForm"/>
+		<url path="/monitorGrpRule.do" operation-param="method" operation-value="createRule,showMonitorGroupRules"/>
+		<url path="/AppManager/Discovery/getDevicesJSON"  />
+		<url path="/AppManager/Discovery/getAppsInServer"  />
+		<url path="/AppManager/Discovery/getVMsInESXHost"  />
+		<url path="/AppManager/Discovery/getDiscoveryStatusDetails"  />
+		<url path="/AppManager/(xml|json)/ListMGDetails"/>
+		<url path="/AppManager/xml/getMonitorGroupAvailability" />
+		<url path="/AppManager/json/getMonitorGroupAvailability" />
+		<url path="/AppManager/(xml|json)/getMonitorGroupAvailabilityInfo" />
+		<url path="/AppManager/(xml|json)/credential/list"/>
+		<url path="/jsp/sap/RFC.jsp"/>
+		<url path="/jsp/ScriptHostDetails.jsp"/>
+		<url path="/jsp/ChooseSAPB1Adapters.jsp"/>
+		<url path="/jsp/sap/listccmsmonitorsets.jsp"/>
+		<url path="/jsp/sap/alertsFilter.jsp"/>
+		<url path="/jsp/SiebleErrorTaskList.jsp"/>
+	</urls>
+	<urls throwallerrors="true" method="get,post" deny-operation="true" >
+			<url path="/sap.do" operation-param="method" operation-value="showCCMSDetails,showdetails"/>
+			<url path="/adminAction.do" operation-param="method" operation-value="configureNetworkDiscovery,deleteNetwork,saveMonitorGroupSettings,createSubGroup,showNetworkDiscoveryForm" />
+			<url path="/alertEscalation.do" operation-param="method" operation-value="updateAttributesinMGView" />
+			<url path="/common/executeAction.do" operation-param="method" operation-value="updateAttributesinMGView" />
+			<url path="/common/executeSMS.do" operation-param="method" operation-value="updateAttributesinMGView" />
+			<url path="/common/executeTicket.do" operation-param="method" operation-value="updateAttributesinMGView" />
+			<url path="/common/executeScript.do" operation-param="method" operation-value="updateAttributesinMGView" />
+			<url path="/common/executeTrap.do" operation-param="method" operation-value="updateAttributesinMGView" />
+			<url path="/common/executeMBeanOperation.do" operation-param="method" operation-value="updateAttributesinMGView" />
+			<url path="/GlobalActions.do" operation-param="method" operation-value="updateAttributesinMGView" />
+			<url path="/manageAzureServices.do" operation-param="method" operation-value="loadSAPB1adapters" />
+			<url path="/manageAzureServices.do" operation-param="method" operation-value="saveadapters" />
+			<url path="/showresource.do" operation-param="method" operation-value="associateMonitors,editMonitor"/>
+			<url operation-param="method" path="/manageApplications.do" operation-value="createapp,refreshAll,showCreateApplicationForm"  />
+			<url path="/removeMonitors.do" operation-param="method" operation-value="AddSubGroup,moveMonitorGroup,insert,getMoveGroupOptions,createapp,refreshAll,refreshNow,showCreateApplicationForm,delete" />
+			<url path="/admin/createapplication.do" operation-param="method" operation-value="AddSubGroup,moveMonitorGroup,insert,getMoveGroupOptions,refreshAll,refreshNow,showCreateApplicationForm,delete,removeMonitors" />
+			<url operation-param="method" path="/showapplication.do" operation-value="getGroupDataAsJSONObject,showDetailView,showRelationshipView,showWebApplication,showMonitorGroups,showRecentAlerts,showRecentTenAlerts"/>
+			<url path="/AppManager/(xml|json)/checkResourceID"/>
+			<url path="/AppManager/(xml|json)/checkDependentDevice"/>
+			<url path="/AppManager/(xml|json)/adminMonitorGroup"/>
+			<url path="/AppManager/xml/ApmAdminServices/adminMonitorGroup"/>
+			<url path="/AppManager/xml/ApmAdminServices/checkDependentDevice"/>
+			<url path="/AppManager/xml/ApmAdminServices/checkResourceID"/>
+			<url path="/AppManager/xml/GetRemoteHost"/>
+			<url path="/AppManager/xml/StartPluginDiscovery"/>
+	</urls>
+	
+</security>

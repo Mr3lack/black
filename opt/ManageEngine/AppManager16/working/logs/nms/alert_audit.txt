@@ -1,0 +1,71 @@
+[10:31:09:221]|[02-20-2024]|[HEADER]|[ERROR]|[18]: Logging Started|
+[10:33:53:078]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: 	  ******************* Logging Started *******************
+	  -------General Information------
+	  Product = Applications Manager 16(Build 16841)
+	  OS Name = Linux
+	  OS Version = 6.2.0-1017-aws
+	  OS Architecture = amd64
+	  Tomcat version = 9.0.70
+	  Java Version = 1.8.0_352
+	  Java Vendor = Azul Systems, Inc.
+	  Java Specification = Java Platform API Specification
+	  Java Specification Version = 1.8
+	  Java VM Name = OpenJDK 64-Bit Server VM
+	  Java VM Information = mixed mode
+	  Java Compiler = null
+	  ********************************************************
+	  -------RDBMS Related Information------
+	  Database Product Name = PostgreSQL
+	  Database Product Version = 11.16
+	  Database Driver Name = PostgreSQL JDBC Driver
+	  Database Driver Version = 42.4.0
+	  Database User Name = dbuser
+	  Database URL = jdbc:postgresql://localhost:15432/amdb?ApplicationName=ApplicationsManager&dontTrackOpenResources=true&useUnicode=true&characterEncoding=UTF-8
+	  ********************************************************|
+[10:33:53:078]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000195_15 added to batch : Tue Feb 20 10:33:53 UTC 2024 Critical. Alert: 10000195_15 : Resource down. <br>The resource 43.205.195.84_Tomcat-server is not available.|
+[10:33:53:078]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000191_17 added to batch : Tue Feb 20 10:33:53 UTC 2024 Critical. Alert: 10000191_17 : Resource Applications Manager is down. <br>Root Cause : <br><ol><li>Resource down. <br>The resource 43.205.195.84_Tomcat-server is not available.</li></ol>|
+[10:33:53:078]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000195_16 added to batch : Tue Feb 20 10:33:53 UTC 2024 Critical. Alert: 10000195_16 : Resource 43.205.195.84_Tomcat-server is down. <br>Health is critical as the resource is not available|
+[10:33:53:084]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: addEventVectorToDB : Total Number of Events :3 and totalSize of queries executed:6|
+[10:33:53:241]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000191_18 generated : Tue Feb 20 10:33:53 UTC 2024 Critical. Alert: 10000191_18 : Health of Applications Manager (Monitor Group) is Critical. <br>Root Cause : <br><ol><li>Resource 43.205.195.84_Tomcat-server is down. <br>Health is critical as the resource is not available</li></ol>|
+[10:33:56:844]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000193_750 added to batch : Tue Feb 20 10:33:56 UTC 2024 Critical. Alert: 10000193_750 : Resource down. <br>The resource 43.205.195.84 is not available.<br><br> Response for ping command :/bin/ping -c 1 -w 1 43.205.195.84<br><b>Ping</b> at 20 Feb 2024 10:33:54 <br>PING 43.205.195.84 (43.205.195.84) 56(84) bytes of data.
+
+--- 43.205.195.84 ping statistics ---
+1 packets transmitted, 0 received, 100% packet loss, time 0ms
+
+<br><b>Retry 1</b> at 20 Feb 2024 10:33:55 <br>PING 43.205.195.84 (43.205.195.84) 56(84) bytes of data.
+
+--- 43.205.195.84 ping statistics ---
+1 packets transmitted, 0 received, 100% packet loss, time 0ms
+
+<br>|
+[10:33:56:844]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000193_751 added to batch : Tue Feb 20 10:33:56 UTC 2024 Critical. Alert: 10000193_751 : Health of 43.205.195.84 (Node) is critical. <br>Root Cause : <br>1. 43.205.195.84 (Node) is down<br>|
+[10:33:56:850]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: addEventVectorToDB : Total Number of Events :2 and totalSize of queries executed:4|
+[10:34:37:068]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[49]: New Alert with entity 10000197_152 added to batch : Tue Feb 20 10:34:37 UTC 2024 Clear. Alert: 10000197_152 : Resource up. <br>The resource 43.205.195.84 is available.|
+[10:34:37:068]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[49]: New Alert with entity 10000197_153 added to batch : Tue Feb 20 10:34:37 UTC 2024 Clear. Alert: 10000197_153 : Health of 43.205.195.84 is clear as all the dependent attributes are clear.|
+[10:34:37:071]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[49]: addEventVectorToDB : Total Number of Events :2 and totalSize of queries executed:4|
+[10:34:37:484]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000198_400 added to batch : Tue Feb 20 10:34:37 UTC 2024 Clear. Alert: 10000198_400 : Resource up. <br>The resource AppManager Home Page is available.<span></span>ResponseCode - 200|
+[10:34:37:484]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000198_401 added to batch : Tue Feb 20 10:34:37 UTC 2024 Clear. Alert: 10000198_401 : Health of AppManager Home Page is clear as all the dependent attributes are clear.|
+[10:34:37:487]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: addEventVectorToDB : Total Number of Events :2 and totalSize of queries executed:4|
+[10:34:38:707]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000199_9325 added to batch : Tue Feb 20 10:34:38 UTC 2024 Clear. Alert: 10000199_9325 : Resource up. <br>The resource pg_default is available.|
+[10:34:38:707]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000200_9325 added to batch : Tue Feb 20 10:34:38 UTC 2024 Clear. Alert: 10000200_9325 : Resource up. <br>The resource pg_global is available.|
+[10:34:38:710]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: addEventVectorToDB : Total Number of Events :2 and totalSize of queries executed:4|
+[10:34:38:819]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000201_9350 added to batch : Tue Feb 20 10:34:38 UTC 2024 Clear. Alert: 10000201_9350 : Resource up. <br>The resource postgres is available.|
+[10:34:38:819]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000202_9350 added to batch : Tue Feb 20 10:34:38 UTC 2024 Clear. Alert: 10000202_9350 : Resource up. <br>The resource template1 is available.|
+[10:34:38:819]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000203_9350 added to batch : Tue Feb 20 10:34:38 UTC 2024 Clear. Alert: 10000203_9350 : Resource up. <br>The resource template0 is available.|
+[10:34:38:820]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000204_9350 added to batch : Tue Feb 20 10:34:38 UTC 2024 Clear. Alert: 10000204_9350 : Resource up. <br>The resource amdb is available.|
+[10:34:38:825]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: addEventVectorToDB : Total Number of Events :4 and totalSize of queries executed:8|
+[10:34:39:845]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[48]: New Alert with entity 10000196_9300 added to batch : Tue Feb 20 10:34:39 UTC 2024 Clear. Alert: 10000196_9300 : Resource up. <br>The resource 43.205.195.84_PGSQL is available.|
+[10:34:39:845]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[48]: New Alert with entity 10000204_9351 added to batch : Tue Feb 20 10:34:39 UTC 2024 Clear. Alert: 10000204_9351 : Health of amdb is clear as all the dependent attributes are clear.|
+[10:34:39:845]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[48]: New Alert with entity 10000199_9326 added to batch : Tue Feb 20 10:34:39 UTC 2024 Clear. Alert: 10000199_9326 : Health of pg_default is clear as all the dependent attributes are clear.|
+[10:34:39:845]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[48]: New Alert with entity 10000200_9326 added to batch : Tue Feb 20 10:34:39 UTC 2024 Clear. Alert: 10000200_9326 : Health of pg_global is clear as all the dependent attributes are clear.|
+[10:34:39:845]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[48]: New Alert with entity 10000201_9351 added to batch : Tue Feb 20 10:34:39 UTC 2024 Clear. Alert: 10000201_9351 : Health of postgres is clear as all the dependent attributes are clear.|
+[10:34:39:845]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[48]: New Alert with entity 10000203_9351 added to batch : Tue Feb 20 10:34:39 UTC 2024 Clear. Alert: 10000203_9351 : Health of template0 is clear as all the dependent attributes are clear.|
+[10:34:39:845]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[48]: New Alert with entity 10000202_9351 added to batch : Tue Feb 20 10:34:39 UTC 2024 Clear. Alert: 10000202_9351 : Health of template1 is clear as all the dependent attributes are clear.|
+[10:34:39:845]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[48]: New Alert with entity 10000196_9301 added to batch : Tue Feb 20 10:34:39 UTC 2024 Clear. Alert: 10000196_9301 : Health of 43.205.195.84_PGSQL is clear as all the dependent attributes are clear.|
+[10:34:39:850]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[48]: addEventVectorToDB : Total Number of Events :8 and totalSize of queries executed:16|
+[10:35:48:518]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000206_20005 added to batch : Tue Feb 20 10:35:48 UTC 2024 Clear. Alert: 10000206_20005 : Resource up. <br>The resource 43.205.195.84:8443 (App Name: APM Default Monitor) is available.|
+[10:35:48:518]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000206_20006 added to batch : Tue Feb 20 10:35:48 UTC 2024 Clear. Alert: 10000206_20006 : Health of 43.205.195.84:8443 (App Name: APM Default Monitor) is clear as all the dependent attributes are clear.|
+[10:35:48:518]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000205_20002 added to batch : Tue Feb 20 10:35:48 UTC 2024 Clear. Alert: 10000205_20002 : Health of APM Default Monitor is clear as all the dependent attributes are clear.|
+[10:35:48:518]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: New Alert with entity 10000205_20001 added to batch : Tue Feb 20 10:35:48 UTC 2024 Clear. Alert: 10000205_20001 : Resource up. <br>The resource APM Default Monitor is available.|
+[10:35:48:521]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[47]: addEventVectorToDB : Total Number of Events :4 and totalSize of queries executed:8|
+[11:19:53:459]|[02-20-2024]|[ALERT_AUDITUSER]|[FATAL]|[49]: New Alert with entity 10000196_9339 generated : Tue Feb 20 11:19:53 UTC 2024 Clear. Alert: 10000196_9339 : Row Inserts/Min of 43.205.195.84_PGSQL is clear. <br>|

@@ -1,0 +1,468 @@
+<!-- $Id : $ -->
+<RequestMapper>
+    <Request uri="(/apminsight/(app|ins)/(\d+)/monitor-info)" bean="com.manageengine.apminsight.apm.client.struts.actions.APMInsightAction" method = "getMonitorInformation" entity = "apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+	</Request>
+	<Request uri="(/apminsight/app/((info)|((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?)))" bean="com.manageengine.apminsight.apm.client.struts.actions.APMInsightAction" method="getAllApplicationsData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+	</Request>
+
+	<Request uri="(/apminsight/app/(\d+)/((info)|((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?)))" bean="com.manageengine.apminsight.apm.client.struts.actions.APMInsightAction" method="fetchUserAssociatedInstancesByApp" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/app/(\d+)/splitup/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.ApplicationAPI" method="getInstanceWiseSplitUp" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/ins/((info)|((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?)))" bean="com.me.apminsight.client.api.InstanceAPI" method="getAllInstancesData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+	</Request>
+	
+	<Request uri="(/apminsight/ins/(\d+)/((info)|((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?)))" bean="com.manageengine.apminsight.apm.client.struts.actions.APMInsightAction" method="fetchUserAssociatedInstancesByIns" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/(txn|bgtxn|keytxn|errtxn)/(list|table)(/\d+)?(/apdex|/avgrt|/throughput|/totalrt|/errors|/fatal|/cpu|/avgbytesin|/avgbytesout|/bytesin|/bytesout|/totalbytesin|/totalbytesout)?/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.TxnAPI" method="getTxnsDataList" entity="apminsight" ignoreEntityXMLFormat="true">
+        <Parameter name="url" source="regex" type="String" value="1" label=""/>
+        <Parameter name="pattern" source="request" type="String" value="pattern"/>
+        <Parameter name="trace" source="request" type="INTEGER" value="trace" />
+        <Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+    </Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/(txn|bgtxn)/(\d+)/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.TxnAPI" method="getTxnData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/(txn|bgtxn)/(\d+)/raw/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.TxnAPI" method="getTxnRawData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/db/(list|table)(/\d+)?(/avgrt|/throughput|/totalrt|/errors)?/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.DBOperationsAPI" method="getDBOperationsDataList" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="pattern" source="request" type="String" value="pattern"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/db/(\d+)/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.DBOperationsAPI" method="getDBOperationData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/db/(\d+)/raw/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.DBOperationsAPI" method="getDBOperationRawData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/db/(\d+)/traces/(\d+)/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.TracesAPI" method="getTracesByOpn" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="txninfo" source="request" type="BOOLEAN" value="txninfo"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/tr/list(/\d+)?(/avgrt|/throughput|/cpu|/ext|/exc|/sql|/bytesout|/bytesin|/mem)?(/\d+)?/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.TracesAPI" method="getSlowTxnTraces" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="pattern" source="request" type="String" value="pattern"/>
+		<Parameter name="sort_by" source="request" type="String" value="sort_by"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/threads/table(/\d+)?(/cpu)?(/\d+)?/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.ThreadProfileAPI" method="getThreadProfileDetails" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/(txn|bgtxn)/(\d+)/traces/(\d+)?(/avgrt|/throughput)?(/\d+)?/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.TracesAPI" method="getOtherSlowTraces" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sort_by" source="request" type="String" value="sort_by"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/error/list(/\d+)?(/avgrt|/throughput|/cpu|/ext|/exc|/sql|/bytesout|/bytesin|/mem)?(/\d+)?/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.TracesAPI" method="getErrorTxnTraces" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="pattern" source="request" type="String" value="pattern"/>
+		<Parameter name="sort_by" source="request" type="String" value="sort_by"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	<Request uri="(/apminsight/(app|ins)/(\d+)/dttrace/list(/\d+)?(/avgrt|/throughput|/cpu|/ext|/exc|/sql|/bytesout|/bytesin|/mem)?(/\d+)?/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.TracesAPI" method="getDistributedTraces" entity="apminsight" ignoreEntityXMLFormat="true">
+        <Parameter name="url" source="regex" type="String" value="1" label=""/>
+        <Parameter name="pattern" source="request" type="String" value="pattern"/>
+        <Parameter name="sort_by" source="request" type="String" value="sort_by"/>
+        <Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+    </Request>
+	<Request uri="(/apminsight/(app|ins)/(\d+)/(txn|bgtxn)/(\d+)/errors/(\d+)?(/avgrt)?(/\d+)?/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.TracesAPI" method="getOtherErrorTraces" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sort_by" source="request" type="String" value="sort_by"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/tr/(\d+\_\d+\_\d+))" bean="com.me.apminsight.client.api.TracesAPI" method="getTraceDetails" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/threads/(\d+\_\d+\_\d+))" bean="com.me.apminsight.client.api.ThreadProfileAPI" method="getThreadDump" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/txn/(\d+))?/graph/apdex/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getApdexGraphData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/txn/(\d+))?/graph/avgrt/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getResponseTimeGraphData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="compare" source="request" type="BOOLEAN" value="compare"/>
+		<Parameter name="compareWith" source="request" type="INTEGER" value="compareWith"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/rtbycomponents/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getResTimeBrokenByTierGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+		<Parameter name="isBgn" value="isBgn" source="request" type="BOOLEAN"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/rtbyextcomp/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getExtCompResTimeBrokenByTierGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/tpbyextcomp/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getExtCompThroughputBrokenByTierGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/rcbyextcomp/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getExtCompReqCountBrokenByTierGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/trtbyextcomp/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getExtCompTotalResTimeBrokenByTierGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/fcbyextcomp/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getExtCompFailCountBrokenByTierGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/(txn|bgtxn|comp)(/\d+)?)?/graph/frbyextcomp/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getExtCompFailRateBrokenByTierGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/(txn|bgtxn)/(\d+))?/graph/components/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getComponentsSplitupGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/txn/(\d+))?/graph/throughput/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getThroughputGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="compare" source="request" type="BOOLEAN" value="compare"/>
+		<Parameter name="compareWith" source="request" type="INTEGER" value="compareWith"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/(txn|bgtxn)/(\d+))?/graph/rtandthroughput/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getRTandThroughputGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/db(/\d+)?/graph/rtandthroughput/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getDBRTandThroughputGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/db/graph/avgrt/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getDBRespTimebyOperationGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/db/(\d+)/graph/avgrt/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getDBOpnResponseTimeGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="compare" source="request" type="BOOLEAN" value="compare"/>
+		<Parameter name="compareWith" source="request" type="INTEGER" value="compareWith"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/db/graph/throughput/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getDBThroughputbyOperationGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/db/(\d+)/graph/throughput/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getDBOpnThroughputGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="compare" source="request" type="BOOLEAN" value="compare"/>
+		<Parameter name="compareWith" source="request" type="INTEGER" value="compareWith"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/db/(\d+)/graph/throughputbycaller/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getDBOpnThroughputByCaller" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/jvm/summary/((graph|raw)/)?((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.JvmAPI" method="getSummaryData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/jvm/gc/(raw/)?((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.JvmAPI" method="getGCData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/jvm/threads/(raw/)?((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.JvmAPI" method="getThreadsData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/jvm/threads/(\d+))" bean="com.me.apminsight.client.api.JvmAPI" method="getTraceForDeadLockThread" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/jvm/config)" bean="com.me.apminsight.client.api.JvmAPI" method="getJVMConfigInfo" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+	</Request>
+
+	<Request uri="(/apminsight/ins/(\d+)/config)" bean="com.me.apminsight.client.api.ActionsAPI" method="getAgentConfig" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/iis/details/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.IisAPI" method="getIisDetails" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<!-- <Parameter name="sub_resources" value="sub_resources" source="request" type="String"/> -->
+	</Request>	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/exc/list/(\d+)(/count/\d+)?/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.ExceptionAPI" method="getExceptionsDataList" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="pattern" source="request" type="String" value="pattern"/>
+		<Parameter name="trace" source="request" type="INTEGER" value="trace"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/txn(/\d+)?/graph/excsplit/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getExceptionSplitupGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/exc(/\d+)?/graph/txnsplit/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getTransactionSplitupGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/(exc|http)(/\d+)?/graph/info/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getExceptionLineChart" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="compare" source="request" type="BOOLEAN" value="compare"/>
+		<Parameter name="compareDay" source="request" type="INTEGER" value="compareDay"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	<Request uri="(/apminsight/(app|ins)/(\d+)/(exc|http)(/\d+)?/graph/rate/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getExceptionRateLineChart" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="compare" source="request" type="BOOLEAN" value="compare"/>
+		<Parameter name="compareDay" source="request" type="INTEGER" value="compareDay"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	<Request uri="(/apminsight/(app|ins)/(\d+)/graph/excinfo/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getExceptionInfoChart" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/(exc|http)/(\d+)/raw/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.ExceptionAPI" method="getExceptionsRawData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/(exc|http)/(\d+)/traces/(\d+)/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.TracesAPI" method="getExceptionTraces" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="txninfo" source="request" type="BOOLEAN" value="txninfo"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/http/list/(\d+)(/count/\d+)?/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.ExceptionAPI" method="getErrorsList" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/txn(/\d+)?/graph/httpsplit/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getErrorsSplitupGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/http(/\d+)?/graph/txnsplit/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getTransactionSplitupGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/notifications)" bean="com.me.apminsight.client.api.ActionsAPI" method="getNotifications" entity="apminsight" ignoreEntityXMLFormat="true"/>
+
+	<Request uri="(/apminsight/app/(\d+)/(txn|bgtxn|db|exc))" bean="com.me.apminsight.client.api.ActionsAPI" method="getResourceUsage" entity="apminsight" ignoreEntityXMLFormat="true">
+	    <Parameter name="url" source="regex" type="String" value="1" label=""/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/service_map/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.ServiceMapAPI" method="getServiceMap" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/comp/table/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.ServiceMapAPI" method="getComponentsList" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+		<Parameter name="is_server" source="request" type="BOOLEAN" value="is_server" label=""/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/comp(/\d+)?/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.ServiceMapAPI" method="getComponentData" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_id" value="comp_id" source="request" type="BIGINT"/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/comp(/\d+)?/txns/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.ServiceMapAPI" method="getTxnsSpecificToComponent" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_id" value="comp_id" source="request" type="BIGINT"/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/comp(/\d+)?/graph/avgrt/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getComponentResponseTimeGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_id" value="comp_id" source="request" type="BIGINT"/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/comp(/\d+)?/graph/throughput/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getComponentThroughputGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_id" value="comp_id" source="request" type="BIGINT"/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/comp(/\d+)?/graph/totalrt/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getComponentTotalResponseTimeGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_id" value="comp_id" source="request" type="BIGINT"/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/comp(/\d+)?/graph/failcount/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getComponentFailedCountGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_id" value="comp_id" source="request" type="BIGINT"/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/comp(/\d+)?/graph/failrate/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getComponentFailedRateGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_id" value="comp_id" source="request" type="BIGINT"/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/comp(/\d+)?/graph/totalrc/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getComponentTotalRequestCountGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="comp_id" value="comp_id" source="request" type="BIGINT"/>
+		<Parameter name="comp_type" value="comp_type" source="request" type="String"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="/apminsight/host" bean="com.me.apminsight.client.api.LicenseAPI" method="getHostList" entity="apminsight" ignoreEntityXMLFormat="true"/>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/appparam/list?/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.AppParamAPI" method="getAppParamDataList" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label="" />
+		<Parameter name="pattern" source="request" type="String" value="pattern"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/appparamview/list)" bean="com.me.apminsight.client.api.AppParamViewAPI" method="getAppParamViewList" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label="" />
+		<Parameter name="pattern" source="request" type="String" value="pattern"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/appparam(/\d+)?/graph/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getParamValueGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label="" />
+		<Parameter name="type" source="request" type="INTEGER" value="type" />
+		<Parameter name="compare" source="request" type="BOOLEAN" value="compare"/>
+		<Parameter name="compareWith" source="request" type="INTEGER" value="compareWith"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)/appparamview(/\d+)?/graph/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getParamViewGraph" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label="" />
+		<Parameter name="compare" source="request" type="BOOLEAN" value="compare"/>
+		<Parameter name="compareWith" source="request" type="INTEGER" value="compareWith"/>
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/appparamview/(\d+))" bean="com.me.apminsight.client.api.AppParamViewAPI" method="getAppParamViewInfo" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label="" />
+	</Request>
+	
+	<Request uri="(/apminsight/appparamslist)" bean="com.me.apminsight.client.api.AppParamAPI" method="getAllAppParameters" entity="apminsight">
+		<Parameter name="url" source="regex" type="String" value="1" label="" />
+		<Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/availability/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.MonitorDataAvailabilityAPI" method="getMonitorDataAvailability" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label="" />
+	</Request>
+	
+	 <Request uri="(/apminsight/(app|ins)/(\d+)/txn/list)" bean="com.me.apminsight.client.api.TxnAPI" method="getAllTxnList" entity="apminsight" ignoreEntityXMLFormat="true">
+        <Parameter name="url" source="regex" type="String" value="1" label=""/>
+    </Request>
+
+	<Request uri="(/apminsight/(app|ins)/(\d+)(/txn/(\d+))?/graph/datathroughput/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.GraphsAPI" method="getDataThroughPutChart" entity="apminsight" ignoreEntityXMLFormat="true">
+        <Parameter name="url" source="regex" type="String" value="1" label=""/>
+        <Parameter name="sub_resources" value="sub_resources" source="request" type="String"/>
+    </Request>
+
+    <!-- APM Insight Agent Config Profile API Start -->
+	<Request uri="/apminsight/default_agent_config_profile/(\S+)" bean="com.manageengine.apminsight.apm.server.api.APMInsightAPI" method="getDefaultConfigProfile" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="agent_type" source="regex" type="String" value="1" />
+	</Request>
+
+	<Request uri="/apminsight/agent_config_profiles" bean="com.manageengine.apminsight.apm.server.api.APMInsightAPI" method="getApmAgentConfigProfileList" entity="apminsight" ignoreEntityXMLFormat="true" />
+
+	<Request uri="/apminsight/agent_config_profiles/(\S+)" bean="com.manageengine.apminsight.apm.server.api.APMInsightAPI" method="getApmAgentConfigProfileList" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="agent_type" source="regex" type="String" value="1" />
+	</Request>
+
+	<Request uri="/apminsight/agent_config_profile/(\d+)" bean="com.manageengine.apminsight.apm.server.api.APMInsightAPI" method="getApmAgentConfigProfile" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="profile_id" source="regex" type="BIGINT" value="1"/>
+	</Request>
+
+	<Request uri="/apminsight/short/agent_config_profiles" bean="com.manageengine.apminsight.apm.server.api.APMInsightAPI" method="getApmAgentConfigProfileListShort" entity="apminsight" ignoreEntityXMLFormat="true" />
+	
+	<Request uri="/apminsight/short/agent_config_profiles/(\S+)" bean="com.manageengine.apminsight.apm.server.api.APMInsightAPI" method="getApmAgentConfigProfileListShort" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="agent_type" source="regex" type="String" value="1" />
+	</Request>
+	<!-- APM Insight Agent Config Profile API End -->
+	<Request uri="(/apminsight/(app|ins)/(\d+)/thread_dump/table/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.me.apminsight.client.api.ThreadProfileAPI" method="getThreadDumpList" entity="apminsight" ignoreEntityXMLFormat="true">
+        <Parameter name="url" source="regex" type="String" value="1" label=""/>
+    </Request>
+    
+    <Request uri="(/apminsight/ins/(\d+)/thread_dump)" bean="com.me.apminsight.client.api.ThreadProfileAPI" method="getThreadDumpFile" entity="apminsight" ignoreEntityXMLFormat="true">
+        <Parameter name="url" source="regex" type="String" value="1" label=""/>
+        <Parameter name="ct" source="request" value="ct" type="BIGINT"/>
+    </Request>
+
+	 <Request uri="/apminsight/custom_instrument/(\d+)" bean="com.manageengine.apminsight.apm.util.ApmInsightCustomInstrumentUtil" method="getInstrumentationDetailsfromFile" entity="apminsight" ignoreEntityXMLFormat="true">
+	    <Parameter name="applicationId" source="regex" type="BIGINT" value="1"/>
+	</Request>
+	
+	<Request uri="(/apminsight/(app|ins)/(\d+)/comp/details/graph/rtbycomponents/((H3|H6|hD|D|H|hH|lD|W|M)|(SD|CR)(?:/)?(\d{2}\.\d{2}\.\d{4})(?:/)?(\d{2}\.\d{2})?(?:/)?(\d{2}\.\d{2}\.\d{4})?(?:/)?(\d{2}\.\d{2})?))" bean="com.manageengine.apminsight.apm.client.struts.actions.APMInsightAction" method="homePageGraphs" entity="apminsight" ignoreEntityXMLFormat="true">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+	</Request>
+
+</RequestMapper>

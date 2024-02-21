@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+	
+	<jsontemplates>
+		<jsontemplate name="am.oraclepdb.jsonArray">
+			 <key index="0-4096" type="JSONObject" template="am.oraclepdb.jsonObject" max-len="10000000"/>
+		</jsontemplate>
+		<jsontemplate name="am.oraclepdb.jsonObject">
+			<key name="PDBName" type="String" max-len="2000"></key>			 
+			<key name="PDBInstanceName" regex="am.hostname" max-len="255"></key>	
+			<key name="Port" regex="am.port" /> 
+			<key name="oracleSocketTimeout" regex="am.onlynumeric" />
+			<key name="oracleQueryTimeout" regex="am.onlynumeric" />
+		</jsontemplate>
+	</jsontemplates>
+	<!-- DB2 security starts -->
+	<urls operation-param="method" path="/DB2.do" throwallerrors="true" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<param name="resourceid" type="long" />
+		<url method="get" operation-value="overviewDetails" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+			<param name="datatype" type="int" />
+			<param name="noredirect" type="boolean" />
+		</url>	
+		<url method="get" operation-value="db2SessionAjaxLoadJSON" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+			<param name="_" type="long" />
+		</url>
+		<url method="get" operation-value="performanceDetails,sessionDetails" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+			<param name="datatype" type="int" />
+			<param name="haid" regex="am.common.longandnull" />
+		</url>
+		<url method="post" operation-value="deletedDB2Database" roles="am.role.ADMIN.EA" privilege-identifier="resID" api="true" systemadmin_enterprise="true">
+			<param name="resID" type="long" />
+			<param name="dbID" type="long" />
+		</url>	
+	</urls>
+	<!-- DB2 security ends -->
+	<!-- MYSQL security starts -->
+	<urls method="get" operation-param="method" path="/MySql.do" throwallerrors="true" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required" privilege-identifier="resourceid">
+		<param-group name="am.additional.extra.params" />
+		<param name="resourceid" type="long" />
+		
+		<url operation-value="databaseDetails,replicationDetails,configurationDetails" >
+			<param name="datatype" type="int" />
+			<param name="noredirect" type="boolean" />
+			<param name="date" type="String" max-occurrences="1" max-len="200"/>
+		</url>
+		
+		<url operation-value="overviewDetails,sessionDetails,performanceDetails">
+			<param name="datatype" type="int" />
+			<param name="noredirect" type="boolean" />
+			<param name="date" type="String" max-occurrences="1" max-len="200"/>
+			<param name="haid" regex="am.common.longandnull" />
+		</url>
+		<url operation-value="mysqlSessionAjaxLoadJSON" >
+			<param name="_" type="long" />
+		</url>
+		<url operation-value="triggerprocesslist" >
+		</url>
+	</urls>
+	<!-- MYSQL security ends -->
+	<!-- SybaseReplication security starts -->
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url method="get" operation-param="method" operation-value="getRelatedThreadMetrics" path="/viewThreadDetails.do" throwallerrors="true" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required" privilege-identifier="ResourceID">
+			<param name="ResourceID" type="long" />
+			<param name="spid" type="long" />
+		</url>
+	</urls>
+	<!-- SybaseReplication security ends -->
+	
+	<!-- Oracle DB WAF starts -->
+	<urls path="/OracleDispatch.do" operation-param="method" method="GET" authentication="required" throwallerrors="true" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+		<param-group name="am.additional.extra.params" />
+		<param name="resourceid" type="long" />
+		<param name="reportType" regex="^(csv)$" />
+		
+		<url operation-value="allJobsHistory" />
+		
+		<url operation-value="alertLogHistory" />
+	</urls>
+	<!-- Oracle DB WAF ends -->
+	
+	<!-- OraclePDB security starts -->
+	<urls path="/confActions.do" throwallerrors="true" operation-param="method" roles="am.role.ADMIN.EA" privilege-identifier="resourceid" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<param name="resourceId" type="long" />
+		
+		<url method="get" operation-value="getOraclePDBInstances" >
+			<param name="action" regex="am.oracle.getpdblist.action" />
+		</url>	
+	
+		<url csrf="true" method="post" operation-value="addOraclePDBInstances">
+			<param name="configurePDBs" type="JSONArray" template="am.oraclepdb.jsonArray" array-size="0-4096" max-len="10000000" />
+		</url>	
+	</urls>
+	<!-- OraclePDB security ends -->
+	
+	<urls path="/confActions.do" throwallerrors="true" operation-param="method" roles="am.role.ADMIN.EA" privilege-identifier="parentId" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<url method="GET" operation-value="clearLastRunStatusAlert">
+			<param name="rowIds" 		regex="am.host.vmactions.resids" max-len="100000"/>
+			<param name="action" 		regex="am.oracle.clearaction.value"/>
+			<param name="parentId" 		regex="am.common.longandnull"/>
+		</url>
+	</urls>
+	
+	<!-- OptimizeDataCollectionAction security starts -->
+	<urls operation-param="method" path="/showDCComponentsNonConf.do" throwallerrors="true" roles="am.role.ADMIN.EA.DE" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		
+		<url method="get" operation-value="getDcComponentDetails">
+			<param name="resourceID" type="long" />
+			<param name="type" regex="^(dcComponentDetails|dcComponentDatabaseList)$" />
+			<param name="dcComponentName" regex="am.mssql.dcComponent.name" />
+			<param name="resourceType" regex="am.monitor.type" />
+			<param name="totalDatabases" type="long" />
+			<param name="noOfRows" type="long" />
+			<param name="selectedPage" type="int" />
+			<param name="configureType" regex="am.configuretype.value" />
+			<param name="showMsgNonConf" regex="am.common.booleanandundefined" />
+			<param name="filterBy" type="String" max-len="515" />
+			<param name="isSearch" type="boolean" />
+		</url>
+		<url method="get" operation-value="getDependentNoteMessage">
+			<param name="_" type="long" />
+			<param name="dcComponentName" type="String" max-occurrences="1" max-len="200"/>
+		</url>
+		<url method="get" operation-value="getLevelOfComponent">
+			<param name="_" type="long" />
+			<param name="dcComponentName" type="String" max-occurrences="1" max-len="200"/>
+		</url>
+		<url method="get" operation-value="getConfigureTypeAndTotalDBs" privilege-identifier="resourceID">
+			<param name="_" type="long" />
+			<param name="dcComponentName" type="String" max-occurrences="1" max-len="200"/>
+			<param name="getCount" type="boolean" />
+			<param name="resourceID" type="long" />
+		</url>
+		<url csrf="true" method="post" operation-value="updatedcComponentStatus" privilege-identifier="resourceID">
+			<param name="dcComponentsSelect" type="String" max-occurrences="1" max-len="200"/>
+			<param name="deleteBackups" type="boolean" />
+			<param name="allowToManageSQLJob" type="boolean" />
+			<param name="allowAdminServerToManageSQLJob" type="boolean" />
+			<param name="deleteJobs" type="boolean" />
+			<param name="resourceID" type="long" />
+			<param name="replAgentHistoryMaintenancePeriod" type="int" />
+			<param name="sqlJobsHistoryMaintenancePeriod" type="int" />
+			<param name="totalDatabases" type="int" />
+			<param name="pollingStatus" type="int" />
+			<param name="backupCollectionPeriod" type="int" />
+			<param name="configureTypeNonConf" regex="am.db.monitor.or.monitortype"/>
+			<param name="isMsSqlDatabaseOldUIEnabled" type="boolean" />
+			<param name="alertJobSkip" type="boolean" />
+			<param name="clearScheduleJobsAlert" type="boolean" />
+		</url>
+		<url csrf="true" method="post" operation-value="updatePollingIntervalForId" privilege-identifier="resourceID" roles="am.role.ADMIN.EA">
+			<param name="resourceID" type="long" />
+			<param name="dcComponentName" regex="am.mssql.dcComponent.name" />
+			<param name="noOfDatabasesSelected" type="int" />
+			<param name="pollingInterval" type="int" />
+			<param name="resourceIds" regex="am.common.numberandcomma" max-len="327670"/>
+		</url>
+	</urls>
+	<!-- OptimizeDataCollectionAction security ends -->
+	
+	<!-- MSSQL security starts -->
+	<urls method="get" operation-param="method" path="/MSSqlDispatch.do" throwallerrors="true" privilege-identifier="resourceid" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+		 <param-group name="am.additional.extra.params" />
+		 <url operation-value="availabilityReplicas">
+			<param name="resourceid" type="long" />
+			<param name="agid" type="long" />
+			<param name="agname" type="String" max-len="128"/>
+		</url>
+		<url operation-value="availabilityDatabase">
+			<param name="resourceid" type="long" />
+			<param name="agid" type="long" />
+			<param name="dbid" type="long" />
+			<param name="agname" type="String" max-len="128"/>
+		</url>
+		
+		<url operation-value="alwaysOnAvailabilityGroup,databaseMainDetails,backupDetails,configureSQLParameters,getSQLClusterDetails,jobsDetails,overviewDetails,replicationDetails,sessionsDetails">
+			<param name="resourceid" type="long" />
+			<param name="datatype" type="int" />
+			<param name="noredirect" type="boolean" />
+			<param name="date" type="String" max-occurrences="1" max-len="200"/>
+		</url>
+		<url operation-value="userslistAjaxLoad">
+			<param name="resourceid" type="long" />
+			<param name="datatype" type="int" />
+			<param name="noredirect" type="boolean" />
+			<param name="date" type="String" max-occurrences="1" max-len="200"/>
+			<param name="_" type="long" />
+		</url>
+		
+		<url operation-value="fragmentdetails,indexdetails,indexnotused,indexused,systables,tablerelation,usertables,viewsdetails">
+			<param name="resourceid" type="long" />
+			<param name="sid" type="String" max-occurrences="1" max-len="200"/>
+			<param name="dbname" type="String" max-len="515" />
+			<param name="reportType" regex="am.mssql.reporttype" />
+		</url>
+		<url operation-value="vlfdetails">
+			<param name="resourceid" type="long" />
+			<param name="sid" type="String" max-occurrences="1" max-len="200"/>
+			<param name="dbname" type="String" max-len="515" />
+		</url>	
+		<url operation-value="getFailedJobsHistoryForLast24Hours">
+			<param name="resourceid" type="long" />
+			<param name="jobid" regex="am.mssql.longAll" />
+			<param name="jobname" type="String" max-len="515" />
+			<param name="_" type="long" />
+		</url>
+		<url operation-value="jobsHistory">
+			<param name="resourceid" type="long" />
+			<param name="jobid" type="long" />
+			<param name="jobname" type="String" max-len="515" />
+			<param name="sid" type="String" max-occurrences="1" max-len="200" />
+		</url>		
+		
+		<url operation-value="replAgentHistory">
+			<param name="resourceid" type="long" />
+			<param name="agentid" type="long" />
+			<param name="agentname" type="String" max-len="255" />
+			<param name="sid" type="String" max-occurrences="1" max-len="200" />
+		</url>
+		<url operation-value="waitStatsQueries">
+			<param name="resourceid" type="long" />
+			<param name="waittype" type="String" max-len="128"/>
+			<param name="sid" type="long"/>
+		</url>	
+		<url operation-value="sessionAjaxLoadJSON">
+		    <param name="_" type="long" />
+		    <param name-regex="true" name="am.datatables_boolean_value" type="boolean" />
+			<param name-regex="true" name="am.datatables_search_value" regex="am.emptystring" />
+			<param name-regex="true" name="am.datatables_data_value" regex="am.mssql.session.columnname" />
+			<param name-regex="true" name="am.datatables_name_value" regex="am.emptystring" />
+			<param name-regex="true" name="am.datatables_int_value" type="int" />
+			<param name-regex="true" name="am.datables_order_dir" regex="am.query.orderby.list" />
+			<param name-regex="true" name="am.mssql.datatable.param.search_regex" type="boolean" />
+			<param name-regex="true" name="am.mssql.datatable.param.search_string_value" type="String" max-len="150" />
+		    <param name="datatype" type="int" max-occurrences="2" />
+		    <param name="dbname" type="String" max-len="515" />
+		    <param name="draw" type="int" />
+		    <param name="from" regex="am.mssql.sessionfrom" />
+		    <param name="length" type="int" />
+		    <param name="redirectto" regex="am.common.urlstartwithslash" />
+		    <param name="resourceid" type="long" max-occurrences="2" />
+		    <param name="sessiontype" regex="am.mssql.session.type" />
+		     <param name="reporttype" regex="am.mssql.session.reporttype" />
+		    <param name="start" type="int" />
+		</url>
+		<url operation-value="getSessionsI18NKeyForColumns"></url>
+		<url operation-value="logshipping">
+			<param name="resourceid" type="long" />
+			<param name="dbname" type="String" max-len="128"/>
+			<param name="role" regex="am.mssql.logshipping.role"/>
+			<param name="secondaryServer" type="String" max-len="128"/>
+		</url>	
+		<url operation-value="performanceDetails">
+			<param name="resourceid" type="long" />
+			<param name="noredirect" type="boolean" />
+			<param name="datatype" type="int" />
+			<param name="date" regex="String" max-occurrences="1" max-len="200" />
+			<param name="period" regex="am.mssql.performance.period" />
+			<param name="hrefname" regex="am.mssql.performance.hrefname"  />
+			<param name="fromDate" regex="apminsight_datetime" />
+			<param name="toDate" regex="apminsight_datetime" />
+			<param name="database" type="String" max-len="515"/>
+			<param name="topqrycnt" regex="am.mssql.performance.topqrycount"/>
+		</url>	
+		<url operation-value="updateDataFileSize" roles="am.role.ADMIN">
+			<param name="resourceid" type="long" />
+			<param name="dbid" type="long" />
+			<param name="dbname" type="String" max-len="515" />
+			<param name="noreload" type="boolean" />
+		</url>
+		<url operation-value="getActiveDatabaseList" roles="am.role.ADMIN.EA.OP" skip-bad-input-encoding="true">
+			<param name="resourceid" type="long" />
+			<param name="selecteddbs" type="String" max-len="4300000"/>
+		</url>
+		
+	</urls>	
+	<urls method="post" operation-param="method" path="/MSSqlDispatch.do" throwallerrors="true" roles="am.role.ADMIN.EA" authentication="required" >
+		<url operation-value="manageJobs" api="true" systemadmin_enterprise="true" privilege-identifier="resourceid" >
+			<param-group name="am.additional.extra.params" />
+			<param name="resourceid" type="long" />
+			<param name="noredirect" type="boolean" />
+			<param name="jobaction" regex="am.mssql.jobs.management.actions" />
+			<param name="jobs" regex="am.mssql.jobids" max-len="1000000"/>
+		</url>
+	</urls>
+	<urls csrf="true" method="post" operation-param="method" path="/MSSqlDispatch.do" throwallerrors="true" authentication="required" privilege-identifier="resourceid">
+		<param-group name="am.additional.extra.params" />
+		<url operation-value="databaseManagementActions"  roles="am.role.ADMIN.OP">
+			<param name="resourceid" type="long" />
+			<param name="noredirect" type="boolean" />
+			<param name="dbaction" regex="am.mssql.database.management.actions" />
+			<param name="selecteddbs" regex="am.common.numberandcomma" max-len="1000000" />
+			<param name="waitTime" type="long" />
+			<param name="date" type="String" max-occurrences="1" max-len="200" />
+		</url>
+		<url operation-value="backupManagementActions" roles="am.role.ADMIN">
+			<param name="resourceid" type="long" />
+			<param name="ids" regex="am.common.numberandcomma" max-len="1000000" />
+			<param name="operation" regex="am.mssql.backup.management.actions" />
+		</url>	
+		<url operation-value="killSqlProcess"  roles="am.role.ADMIN">
+			<param name="resourceid" type="long" />
+			<param name="pid" type="long" />
+			<param name="sessionType" regex="am.mssql.session.type" />
+		</url>	
+		
+		<url operation-value="sqlDatabaseManagementAction" roles="am.role.ADMIN.OP">
+			<param name="resourceid" type="long" />
+			<param name="sqldatabasecheckbox" type="long" max-occurrences="32767" />
+			<param name="sqldbActions" regex="am.trap.status"/>
+			<param name="sqldatabase" regex="onlyon"/>
+			<param name="sqldbmanagement" type="boolean" />
+		</url>
+		<url operation-value="mirroringActions" roles="am.role.ADMIN.OP">
+			<param name="resourceid" type="long" />
+			<param name="dbid" type="long" />
+			<param name="dbname" type="String" max-len="515"/>
+			<param name="dbaction" regex="am.mssql.database.mirroring.actions"/>
+			<param name="mirroringpartnerinstance" type="String" max-len="515" />
+			<param name="noredirect" type="boolean" />
+		</url>
+	</urls>
+	<urls method="get" operation-param="method" path="/usermgmt.do" throwallerrors="true" privilege-identifier="resourceid" authentication="required" roles="am.role.ADMIN.EA">
+		<param-group name="am.additional.extra.params" />
+		<url operation-value="usermanagementactions" >
+			<param name="resourceid" type="long" />
+			<param name="selectedusers" type="String" max-len="3801000"/>
+			<param name="sqlVersion" regex="am.mssql.sql.version" />
+			<param name="useraction" regex="am.state.value" />
+			<param name="noredirect" type="boolean" />
+			<param name="date" type="String" max-occurrences="1" max-len="200"/>
+		</url>
+	</urls>
+	<urls operation-param="method" path="/updateSQLconfig.do" throwallerrors="true" privilege-identifier="resourceid" authentication="required" roles="am.role.ADMIN.EA.OP">
+		<param-group name="am.additional.extra.params" />
+		<url  method="get" operation-value="enableAdvancedOptions" >
+			<param name="resourceid" type="long" />
+			<param name="configID" type="long" />
+			<param name="action" regex="am.trap.status" />
+		</url>
+		<url  method="get" operation-value="EditSQLConfig" >
+			<param name="resourceid" type="long" />
+			<param name="config_id" type="int" />
+			<param name="old_value" type="int" />
+			<param name="type" regex="^(editSQLConfig)$" />
+			<param name="redirectTo" type="boolean" />
+			<param name="sid" type="String" max-occurrences="1" max-len="200"/>
+		</url>
+		<url  csrf="true" method="POST" operation-value="UpdateConfigOption" >
+			<param name="resourceid" type="long" />
+			<param name="configID" type="long" />
+			<param name="isDynamic" type="long" />
+			<param name="configOption" type="long" />
+			<param name="configName" type="String" />
+			<param name="submitbutton1" regex="^(Update)$" />
+			<param name="host" regex="am.hostname.ipaddress" />
+		</url>
+	</urls>
+		
+	<urls prefix="/AppManager/(xml|json)" throwallerrors="true" url-type="dynamic" authentication="required" privilege-identifier="resourceid" api="true"  roles="am.role.ADMIN.EA">
+		<param name="apikey" regex="am.encodedauthkey" secret="true" />
+		<param name="probeID" type="int" />
+		<param name="resourceid" type="long" />
+		<param name="eeSyncKey" regex="am.encodedauthkey" secret="true"/>
+		<param name="probeId" type="int" />
+		<param name="Content-Type" regex="^(text/plain)$"/>
+		<param name="method" regex="am.request.method" />
+
+		<url path="/GetOracleDBbackupJobs" method="POST" >
+		</url>
+
+		<url path="/GetOracleDBalertLogs" method="POST" >
+		</url>
+	</urls>
+
+	<urls prefix="/AppManager/(xml|json)" throwallerrors="true" >
+		<url path="/GetOracleDBbackupJobs" method="GET" deny-operation="true">
+		</url>
+
+		<url path="/GetOracleDBalertLogs" method="GET" deny-operation="true">
+		</url>
+	</urls>
+	
+	<!-- MSSQL security ends -->
+	<!-- MSSQL Jobs and action security -->
+	<urls method="get" operation-param="method" path="/sqljob.do" throwallerrors="true" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		<url operation-value="checkJobName" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="name" type="String" max-len="515" />
+		</url>
+		<url operation-value="loadProxy" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="type" regex="am.mssql.jobs.steptype"/>
+			<param name="scount" type="int" />
+			<param name="_" type="long" />
+		</url>
+		<url operation-value="newOperator" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="name" type="String"/>
+			<param name="email" regex="am.sqljobaction.newEmailAction" max-len="255"/>
+		</url>
+		<url operation-value="newjobform" roles="am.role.ADMIN.EA">
+			<param name="count" type="int" />
+			<param name="jobform" regex="am.mssql.jobs.form"/>
+		</url>
+		<url operation-value="newJob" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="jobresid" type="long" />
+			<param name="message" type="String" max-len="1000" />
+			<param name="jobname" type="String" max-len="515" />
+			<param name="edit" type="boolean" />
+		</url>
+		<!-- SQL Job Action security -->
+		<url operation-value="getJobList" roles="am.role.ADMIN.EA" privilege-identifier="resid">
+			<param name="resid" type="long" />
+			<param name="_" type="long" />
+		</url>
+		<url operation-value="jobChooser" roles="am.role.ADMIN.EA" >
+			<param name="sid" type="long" />
+		</url>
+		<url operation-value="showSqlJobActDetails" roles="am.role.ADMIN.EA.OP">
+			<param name="actionid" type="long" />
+			<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		</url>
+		
+		<!-- SQL Job Action security ends -->
+	</urls>
+	<!-- SQL Job Action -->
+	<urls>
+		<param name="businessHourAssociatedToAction" regex="am.threshold.businessHourAssociatedToThreshold.value" />
+		<param name="businessType" regex="am.common.ZeroOne" />
+		<param name="selectedBusinessHourID" type="long"/>
+		<param name="actualBussinessID" type="long"/>
+		<param name="plugin_view" type="boolean"/>
+		<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="3"/>
+		<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		<url path="/sqljob.do" method="get" operation-param="method" operation-value="sqlJobAction" skip-bad-input-encoding="true">
+			<param name="haid" max-occurrences="1000" regex="am.sqljobaction.haid" />
+			<param name="actionid" type="long" />
+			<param name="global" type="boolean" />
+			<param name="returnpath" max-len="2000" regex="am.sqljobaction.returnpath" />
+		</url>
+		<url path="/sqljob.do" method="post" csrf="true" operation-param="method" operation-value="UpdateSqlJobAction" roles="ADMIN,ENTERPRISEADMIN" authentication="required"  ignore-extraparam ="true" skip-bad-input-encoding="true"
+		 custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkActionEditableForDA">
+			<param name="am.sqljobaction.jobname" name-regex="true" type="String" max-len="515"/>
+			<param name="sqlJobActionName" regex="am.displayname.common" />
+			<param name="sqlJobActionTask" regex="am.sqljobaction.sqlJobActionTask"/>
+			<param name="selJobCheckbox" max-occurrences="1000" type="int" />
+			<param name="sqlJobActionApplyTo" regex="am.sqljobaction.sqlJobActionApplyTo" />
+			<param name="sql_selected" max-occurrences="1000" type="long" />
+			<param name="sqlJobMail" type="long" />
+			<param name="mgName" max-occurrences="1000" regex="String" />
+			<param name="select" max-occurrences="1000" regex="String" />
+			<param name="selServerType" regex="am.sqljobaction.blank" />
+			<param name="allJobCheckbox" regex="am.sqljobaction.blank" />
+			<param name="newEmailAction" regex="am.sqljobaction.newEmailAction" max-len="255"/>
+			<param name="actions" max-len="1000" regex="am.sqljobaction.returnpath" />
+			<param name="haid" max-occurrences="1000" regex="am.sqljobaction.haid" />
+			<param name="actionid" type="long" />
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+			<param name="returnpath" regex="am.common.urlstartwithslash" max-len="2000" />
+			<param name-regex="true" name="^((monday|tuesday|wednesday|thursday|friday|saturday|sunday)(Start|End)(Hour|Minute))$" type="int" />
+			<param name="workingdays" regex="am.businesshours.workingdays" max-occurrences="7" />
+			<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		</url>
+	</urls>
+	
+	<urls csrf="true" method="post" operation-param="method" path="/sqljob.do" throwallerrors="true" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		<url operation-value="manualExecution" roles="am.role.ADMIN.EA.OP" ignore-extraparam ="true">
+			<param name="actionid" type="long" />
+			<param name="actionname" type="String" max-len="300"/>
+			<param name="execSqlJobAction" regex="zeroandone" />
+			<param name="haid" regex="am.common.longandnull"/>
+	    </url>
+		<url operation-value="sendActionDetails" roles="am.role.ADMIN.EA">
+	    	<param name="emailid" regex="am.sqljobaction.newEmailAction" max-len="255"/>
+			<param name="emailname" type="String" />
+	    </url>
+		<url  operation-value="addjob" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="jobresourceid" type="long" />
+			<param name="jobName" type="String" max-len="515" />
+			<param name="oldJob" type="String" max-len="515" />
+			<param name="jobOwner" type="String" max-len="128" />
+			<param name="jobCategory" type="String" max-len="128" />
+			<param name="jobStatus" regex="am.common.ZeroOne" />
+			<param name="oldstatus" regex="am.common.ZeroOne" />
+			<param name="jobDescription" type="String" max-len="512" />
+			<param name="logcheck" regex="am.mssql.jobs.logcheck" />
+			<param name="logaction" regex="am.sqljobaction.sqlJobActionApplyTo" />
+			<param name="emailcheck" regex="am.mssql.jobs.emailcheck" />
+			<param name="emailoperator" type="String" max-len="128" />
+			<param name="operatoraction" regex="am.sqljobaction.sqlJobActionApplyTo" />
+			<param name="oldemailcheck" regex="am.common.ZeroOne" />
+			<param name="update_job_id" regex="am.mssql.jobs.uid" />
+			<param name="schededitid" regex="am.mssql.jobs.schededitid"/>
+			<param name="stepcount" type="int"/>
+			<param name="stepeditcount" type="int"/>
+			<param name="shedcount" type="int"/>
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric" />
+			<param name-regex="true" name="am.mssql.jobs.stepname" type="String" max-len="128"/>
+			<param name-regex="true" name="am.mssql.jobs.stepsuccess" regex="am.sqljobaction.sqlJobActionApplyTo"/>
+			<param name-regex="true" name="am.mssql.jobs.stepfail" regex="am.sqljobaction.sqlJobActionApplyTo"/>
+			<param name-regex="true" name="am.mssql.jobs.stepretry_attemp" type="int" />
+			<param name-regex="true" name="am.mssql.jobs.stepretry" type="int"/>
+			<param name-regex="true" name="am.mssql.jobs.steptype_nameregex" regex="am.mssql.jobs.steptype"/>
+			<param name-regex="true" name="am.mssql.jobs.stepcommand" type="String" max-len="4000"/>
+			<param name-regex="true" name="am.mssql.jobs.stepdb" type="String" max-len="128"/>
+			<param name-regex="true" name="am.mssql.jobs.proxy" regex="am.common.null.value"/>
+			<param name-regex="true" name="am.mssql.jobs.language_nameregex" regex="am.mssql.jobs.language"/>
+			<param name-regex="true" name="am.mssql.jobs.newlanguage" type="String" />
+			<param name-regex="true" name="am.mssql.jobs.osexitcode" type="int"/>
+			<param name-regex="true" name="am.mssql.jobs.stepid" type="int" />
+			<param name-regex="true" name="am.mssql.jobs.schedid" type="int" />
+			<param name-regex="true" name="am.mssql.jobs.schedname" type="String" max-len="128"/>
+			<param name-regex="true" name="am.mssql.jobs.schedenable" type="int"/>
+			<param name-regex="true" name="am.mssql.jobs.schedtype" regex="am.threshold.typeNumeric"/>
+			<param name-regex="true" name="am.mssql.jobs.rperiod_nameregex" regex="am.mssql.jobs.rperiod" />
+			<param name-regex="true" name="am.mssql.jobs.schedMfrequency" type="int"/>
+			<param name-regex="true" name="am.mssql.jobs.schedOccurence" regex="am.common.ZeroOne"/>
+			<param name-regex="true" name="am.mssql.jobs.schedDdays" type="int"/>
+			<param name-regex="true" name="am.mssql.jobs.schedWDays_nameregex" type="int" range="1,2,4,8,16,32,64"/>
+			<param name-regex="true" name="am.mssql.jobs.schedWWeek" type="int"/>
+			<param name-regex="true" name="am.mssql.jobs.schedMdayday" type="int"/>
+			<param name-regex="true" name="am.mssql.jobs.SchedMdaymonth" type="int"/>
+			<param name-regex="true" name="am.mssql.jobs.schedMmonthonthe" type="int"/>
+			<param name-regex="true" name="am.mssql.jobs.SchedMselectonthe" type="int" range="1,2,4,8,16,32"/>
+			<param name-regex="true" name="am.mssql.jobs.SchedMselectdayonthe" type="int"/>
+			<param name-regex="true" name="am.mssql.jobs.schedFOnceT" regex="am.alarms.eventlogs.startendtime.format.24hrs.hhmm"/>
+			<param name-regex="true" name="am.mssql.jobs.schedFMultipleStart" regex="am.alarms.eventlogs.startendtime.format.24hrs.hhmm"/>
+			<param name-regex="true" name="am.mssql.jobs.schedFMultpleHM" type="int" range="8,4"/>
+			<param name-regex="true" name="am.mssql.jobs.schedFMultipleT" type="int"/>
+			<param name-regex="true" name="am.mssql.jobs.schedFMultipleEnd" regex="am.alarms.eventlogs.startendtime.format.24hrs.hhmm"/>
+			<param name-regex="true" name="am.mssql.jobs.schedDstart" regex="apminsight_datetime" />
+			<param name-regex="true" name="am.mssql.jobs.schedDnoenddate" regex="apminsight_datetime" />
+			<param name-regex="true" name="am.mssql.jobs.dateOnetime" regex="apminsight_datetime"/>
+			<param name-regex="true" name="am.mssql.jobs.tOnetime" regex="am.alarms.eventlogs.startendtime.format.24hrs.hhmm"/>
+			<param name-regex="true" name="am.mssql.jobs.schedDend" regex="apminsight_datetime"/>
+		</url>
+	</urls>
+	<!-- MSSQL Jobs and action security end-->
+	<!-- MSSQL Reports security -->
+	<urls method="get" operation-param="actionMethod" path="/showMSSQLReports.do" throwallerrors="true"  authentication="required"  roles="am.role.ADMIN.EA.OP.DE.REP" privilege-identifier="resourceid">
+		<param-group name="am.additional.extra.params" />
+		<param name="_" type="long" />
+		<url  operation-value="generateIndividualMSSQLJobsReport">
+			<param name="resourceid" type="long" />
+			<param name="resid" type="long" />
+			<param name="jobid" regex="am.mssql.longAll" />
+			<param name="resourceType" regex="am.mssql.jobs.resourcetype"  />
+			<param name="jobname" type="String" max-len="515" />
+			<param name="reportType" regex="am.mssql.jobs.report" />
+			<param name="fromReport" regex="am.mssql.jobs.fromreport" />
+			<param name="Report" type="boolean" />
+			<param name="getpdf" type="boolean" />
+			<param name="period" regex="am.mssql.report.period"/>
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="hid" regex="am.common.longandnull" />
+			<param name="report" regex="am.common.TFNull" />
+		</url>
+		<url  operation-value="generateMSSQLDatabasesReport,generateMSSQLUsersReport" >
+			<param name="resourceid" type="long" />
+			<param name="resid" type="long" />
+			<param name="selectedPeriod" regex="am.mssql.report.period" />
+			<param name="period" regex="am.mssql.report.period"/>
+			<param name="reportType" regex="am.mssql.jobs.report" />
+			<param name="Report" type="boolean" />
+			<param name="getpdf" type="boolean" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="hid" regex="am.common.longandnull" />
+			<param name="report" regex="am.common.TFNull" />
+			<param name="sid" type="String"/>
+			<param name="_" type="long"/>
+		</url>
+		<url  operation-value="generateMSSQLPerformanceReport">
+			<param name="resourceid" type="long" />
+			<param name="resourceType" regex="am.mssql.jobs.resourcetype"  />
+			<param name="interval" regex="am.downtimescheduler.dateorweekwise" />
+			<param name="period" regex="am.mssql.performance.period" />
+			<param name="reportType" regex="am.mssql.reportformat" />
+			<param name="hrefname" regex="am.mssql.performance.hrefname"  />
+			<param name="fromDate" regex="apminsight_datetime" />
+			<param name="toDate" regex="apminsight_datetime" />
+			<param name="database" type="String" max-len="515"/>
+			<param name="topqrycnt" regex="am.mssql.performance.topqrycount"/>
+			<param name="getpdf" type="boolean" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="hid" regex="am.common.longandnull" />
+			<param name="report" regex="am.common.TFNull" />
+			<param name="Report" type="boolean" />
+			<param name="isSchedule" type="boolean" />
+		</url>
+		<url  operation-value="generateMirroringHistoryReport" privilege-identifier="sqlresid" >
+			<param name="resourceid" type="long" />
+			<param name="sqlresid" type="long" />
+			<param name="resourceType" regex="am.mssql.jobs.resourcetype"  />
+			<param name="resourcename" type="String" max-len="515"/>
+			<param name="workingdays" type="boolean"/>
+			<param name="period" type="int" range="1-6" />
+			<param name="reportType" regex="am.mssql.reportformat" />
+			<param name="Report" type="boolean" />
+			<param name="sid" type="String"/>
+			<param name="getpdf" type="boolean" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="hid" regex="am.common.longandnull" />
+			<param name="report" regex="am.common.TFNull" />
+		</url>
+	</urls>
+	<urls path="/adminActivities.do" operation-param="method" throwallerrors="true" authentication="required" >
+	    <param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2" />
+	    <param name="monitorType" regex="am.database.servers.tab.monitortype" />
+	    <param name="resourceid" type="long" />
+	    <param name="metricName" regex="am.database.servers.tab.metricname" />
+	    <url operation-value="saveDatabaseGlobalSettingsConfiguration" roles="am.role.ADMIN.EA" deny-del-admin="true" method="post" csrf="true">
+	    	<param name="am.htmldata.mysql.daystoretain" type="int" />
+	    	<param name="mysqlTableData" regex="am.database.servers.tab.pollingfrequency" />
+	    	<param name="am.nosql.rediscover.interval" type="int" />
+	    	<param name="am.oracle.ignorealerts" regex="am.alphanumeric.commaSpaceHyphen" max-len="250"/>
+	    	<param name="clearLastRunStatus" type="boolean" />
+	    	<param name="db2AvailabilityCheck" type="boolean" />
+	    	<param name="allowAllRACNodestoEscalateAlarmForCommonChildMOs" type="boolean" />
+	    </url>
+	    <url operation-value="showDatabaseGlobalSettingsConfiguration" roles="am.role.ADMIN.EA.DE" deny-del-admin="true" method="get">
+	    </url>
+	</urls>	
+	<!-- MSSQL Reports security end-->
+	<!-- ********************************************* Deny operations **************************************************************** -->
+	<urls throwallerrors="true" operation-param="method" deny-operation="true" >
+		<url path="/DB2.do" method="get" operation-value="deletedDB2Database" />
+		<url path="/DB2.do" method="post" operation-value="overviewDetails,performanceDetails,sessionDetails,db2SessionAjaxLoadJSON" />
+		<url path="/DB2.do" method="get,post" operation-value="showdetails" />
+		<url path="/MySql.do" method="post" operation-value="overviewDetails,databaseDetails,replicationDetails,configurationDetails,sessionDetails,performanceDetails,mysqlSessionAjaxLoadJSON,triggerprocesslist" />
+		<url path="/MySql.do" method="get,post" operation-value="showdetails" />
+		<url path="/viewThreadDetails.do" method="post" operation-value="getRelatedThreadMetrics" />
+		<url path="/OracleDispatch.do" method="post" operation-value="allJobsHistory,alertLogHistory,showdetails" />
+		<url path="/confActions.do" method="get" operation-value="addOraclePDBInstances" />
+		<url path="/confActions.do" method="post" operation-value="getOraclePDBInstances" />
+		<url path="/manageAzureServices.do" method="get,post" operation-value="getOraclePDBInstances,addOraclePDBInstances" />
+		<url path="/showDCComponentsNonConf.do" method="post" operation-value="getDependentNoteMessage,getLevelOfComponent,getConfigureTypeAndTotalDBs,getDcComponentDetails" />
+		<url path="/showDCComponentsNonConf.do" method="get" operation-value="updatedcComponentStatus,updatePollingIntervalForId" />
+		<url path="/showDCComponentsNonConf.do" method="get,post" operation-value="execute" />
+		<url path="/MSSqlDispatch.do" method="post" operation-value="alwaysOnAvailabilityGroup,availabilityReplicas,availabilityDatabase,databaseMainDetails,backupDetails,configureSQLParameters,fragmentdetails,getFailedJobsHistoryForLast24Hours,indexdetails,getSQLClusterDetails,indexnotused,indexused,jobsDetails,jobsHistory,overviewDetails,replAgentHistory,replicationDetails,sessionsDetails,systables,tablerelation,usertables,viewsdetails,vlfdetails,waitStatsQueries,userslistAjaxLoad,sessionAjaxLoadJSON,getSessionsI18NKeyForColumns,logshipping,performanceDetails,updateDataFileSize,getActiveDatabaseList" />
+		<url path="/MSSqlDispatch.do" method="get"  operation-value="databaseManagementActions,backupManagementActions,killSqlProcess,manageJobs,sqlDatabaseManagementAction,mirroringActions" />
+		<url path="/MSSqlDispatch.do" method="get,post" operation-value="showdetails" />
+		<url path="/usermgmt.do" method="post" operation-value="usermanagementactions" />
+		<url path="/updateSQLconfig.do" method="post" operation-value="enableAdvancedOptions,EditSQLConfig" />
+		<url path="/updateSQLconfig.do" method="get" operation-value="UpdateConfigOption" />
+		<url path="/sqljob.do" method="post" operation-value="checkJobName,loadProxy,newOperator,newjobform,newJob,getJobList,jobChooser,showSqlJobActDetails,sqlJobAction" />
+		<url path="/sqljob.do" method="get" operation-value="delSqlJobAction,manualExecution,sendActionDetails,addjob,UpdateSqlJobAction" />
+		<url path="/adminActivities.do" method="get" operation-value="saveDatabaseGlobalSettingsConfiguration" />
+		<url path="/adminActivities.do" method="post" operation-value="showDatabaseGlobalSettingsConfiguration" />
+	</urls>
+		
+	<urls throwallerrors="true" operation-param="actionMethod" deny-operation="true" >
+		<url path="/showMSSQLReports.do" method="post" operation-value="generateIndividualMSSQLJobsReport,generateMSSQLDatabasesReport,generateMSSQLUsersReport,generateMSSQLPerformanceReport,generateMirroringHistoryReport" />
+	</urls>
+	
+</security>
+

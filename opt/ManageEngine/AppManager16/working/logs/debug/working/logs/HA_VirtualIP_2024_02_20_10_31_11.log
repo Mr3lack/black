@@ -1,0 +1,26 @@
+[10:31:11:018]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: AddVIP::updateHAConfigFromDBtoFile() started |
+[10:31:11:081]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: AddVIP::updateHAConfigFromDBtoFile() Completed |
+[11:47:13:311]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: ***IPHandler : removeVIPFromNetworkAdapter called ***|
+[11:47:13:314]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: removeVIP()::VIP enabled : false Removing VIP : from network adapter / interface :starttime=1708429633314|
+[11:47:13:315]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: 
+************VIP CONFIGURATION************
+pollInterval	:[0] 
+pollFailureRetryCount	:[0] 
+publicIPEnabled :[false] 
+publicIP :[] 
+publicIPIfName :[] 
+publicIPNetMask :[255.255.255.0] 
+ipCheckIntervalInSecs :[30] 
+ipCheckRetryCount :[3] 
+previousPublicIP :[null] 
+previousPublicIPIfName :[null] 
+|
+[11:47:13:315]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: Inside isIPPresent : ipAddr :|
+[11:47:13:315]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: Inside isIPPresent : ipAddr : Adapters :java.net.NetworkInterface$2@ac0cd94|
+[11:47:13:316]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: fe80:0:0:0:af:5dff:fe6f:2db7%eth0 fe80:0:0:0:af:5dff:fe6f:2db7%eth0|
+[11:47:13:322]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: ip-172-31-42-249.ap-south-1.compute.internal 172.31.42.249|
+[11:47:13:322]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: ip6-localhost 0:0:0:0:0:0:0:1%lo|
+[11:47:13:322]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: localhost 127.0.0.1|
+[11:47:13:322]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: VIP is not present|
+[11:47:13:322]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: confFilePath/opt/ManageEngine/AppManager16/working/../conf/AMServer.properties|
+[11:47:13:323]|[02-20-2024]|[com.adventnet.appmanager.util.IPHandler]|[INFO]: removeVIP()::removed the VIP : from network adapter / interface -  completed | Endtime=1708429633323|

@@ -1,0 +1,41 @@
+[10:31:09:265]|[02-20-2024]|[HEADER]|[ERROR]|[18]: Logging Started|
+[10:31:10:711]|[02-20-2024]|[APPLNERR]|[FATAL]|[71]: 	  ******************* Logging Started *******************
+	  -------General Information------
+	  Product = Applications Manager 16(Build 16841)
+	  OS Name = Linux
+	  OS Version = 6.2.0-1017-aws
+	  OS Architecture = amd64
+	  Tomcat version = 9.0.70
+	  Java Version = 1.8.0_352
+	  Java Vendor = Azul Systems, Inc.
+	  Java Specification = Java Platform API Specification
+	  Java Specification Version = 1.8
+	  Java VM Name = OpenJDK 64-Bit Server VM
+	  Java VM Information = mixed mode
+	  Java Compiler = null
+	  ********************************************************
+	  -------RDBMS Related Information------
+	  Database Product Name = PostgreSQL
+	  Database Product Version = 11.16
+	  Database Driver Name = PostgreSQL JDBC Driver
+	  Database Driver Version = 42.4.0
+	  Database User Name = dbuser
+	  Database URL = jdbc:postgresql://localhost:15432/amdb?ApplicationName=ApplicationsManager&dontTrackOpenResources=true&useUnicode=true&characterEncoding=UTF-8
+	  ********************************************************|
+[10:31:10:711]|[02-20-2024]|[APPLNERR]|[FATAL]|[71]: ********************		LOGGING STARTED FOR STANDALONE SERVER		******************|
+[10:34:31:539]|[02-20-2024]|[APPLNERR]|[FATAL]|[73]: CLITelnetHandler : getSession() : Connect Failure for host :43.205.195.84 Error Message :Unable to connect: Connection refused (Connection refused) at:|
+[10:34:31:540]|[02-20-2024]|[APPLNERR]|[FATAL]|[73]: Unable to connect: Connection refused (Connection refused)| com.adventnet.cli.transport.ConnectException: Unable to connect: Connection refused (Connection refused)
+	at com.adventnet.cli.transport.TelnetTransportImpl.open(TelnetTransportImpl.java:92)
+	at com.adventnet.cli.CLIResourceManager.getProviderInstance(CLIResourceManager.java:228)
+	at com.adventnet.cli.CLIResourceManager.updateResourceManager(CLIResourceManager.java:156)
+	at com.adventnet.cli.CLISession.open(CLISession.java:445)
+	at com.adventnet.appmanager.util.CLITelnetHandler.getSession(CLITelnetHandler.java:185)
+	at com.adventnet.appmanager.util.CLITelnetHandler.getNewSession(CLITelnetHandler.java:254)
+	at com.adventnet.appmanager.server.hostresources.datacollection.ScheduleHostDataCollection.checkAuthenticationForCLI(ScheduleHostDataCollection.java:505)
+	at com.adventnet.appmanager.server.hostresources.datacollection.ScheduleHostDataCollection.CheckAuthentication(ScheduleHostDataCollection.java:438)
+	at com.adventnet.appmanager.server.startup.AMDefaultBACreator.addLocalHostMonitoring(AMDefaultBACreator.java:1346)
+	at com.adventnet.appmanager.server.startup.AMDefaultBACreator.addBAandMonitors(AMDefaultBACreator.java:406)
+	at com.adventnet.appmanager.server.startup.AMServerStartUp.callMain(AMServerStartUp.java:82)
+	at com.adventnet.nms.util.RunProcessSmall.runCommand(RunProcessSmall.java:96)
+	at com.adventnet.nms.util.RunCmd.run(RunCmd.java:100)
+

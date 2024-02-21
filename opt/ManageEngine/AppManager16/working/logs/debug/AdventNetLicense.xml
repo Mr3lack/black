@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<License>
+   <!--Please do not edit this license file. Editing this file will make the license invalid.-->
+   <Users>
+      <UserInfo Name="Evaluation User" CompanyName="ZOHO Corp" EmailID="appmanager-support@manageengine.com" ACNTRL="NO" NoOfDays="30" LicenseType="Evaluation" Key="f1PVQTxllAaDQaSnGAP71TazJc9Ga7xnlcyXfySVndpyQSDKKuaGxbKzJPfGSNT7JPyTQTT7Jpf7yblVJNy9e1aQdJJ9QNSpdRQ7xNlJnRXGeVJAfVPX9fDc">
+         <ID>111</ID>
+      </UserInfo>
+   </Users>
+   <LicenseeDetails ID="111">
+      <Product Name="AdventNet ManageEngine Applications Manager" Version="8.0.0" Type="Professional" Category="Enterprise"/>
+      <Component Name="Topo">
+         <Properties Name="NumberOfMO" Value="unlimited"/>
+      </Component>
+      <Component Name="ServerFramework">
+         <Properties Name="NumberOfClients" Value="unlimited"/>
+         <Properties Name="BEFailOver" Value="true"/>
+      </Component>
+      <Component Name="ApplicationManagement"/>
+      <Component Name="AppServerManagement"/>
+      <Component Name="WLServers">
+         <Properties Name="NumberOfWLS" Value="5"/>
+      </Component>
+      <Component Name="ApplicationMonitoring"/>
+      <Component Name="Syslog"/>
+   </LicenseeDetails>
+   <LicenseKey>ijLskoiN8Rj48NjMNj84XY8LHHA5olaFORvQmKnsRv3Rvola4NvmviXNXMRv3RvoHHA4NvmviXNXMNj84XY8LHHAvKR4Rv3OL8XfgbGv48m8LNKs4Nv8LPFORvQmKnyRjvvmXRfRv3RvoGv48m8LNKOMFORvQmKnjHjtvs8RHRv4NgLXNj8ssvFjRp0I0IERviXNXMssNj84XY8LHHAsvN8iNgviXNXMs4vn4Nv3GA111111</LicenseKey>
+</License>
+

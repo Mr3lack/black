@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<properties>
+<property name="ProductName" value="AdventNet ManageEngine Applications Manager"/>
+<property name="SubProductName" value="BE"/>
+<property name="ProductVersion" value="16.0"/>
+<property name="HelpXmlFilePath" value="working/conf/updatehelp.xml"/>
+<property name="HelpHtmlFilePath" value="help/installation/update-manager.html"/>
+<property name="EnableDeploymentTool" value="false"/>
+</properties>
+<!-- $Id$ -->

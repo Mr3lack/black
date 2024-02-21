@@ -1,0 +1,55 @@
+<!-- $Id : $ -->
+<RequestMapper>
+	<Request uri="(/apminsight/(app|ins)/(\d+)/create/paramview)" bean="com.me.apminsight.client.api.AppParamViewAPI" method="createAppParamView" entity="apminsight">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="JSONString" value="JSONString" source="context" type="String"/>
+    </Request>
+    
+    <Request uri="(/apminsight/(app|ins)/(\d+)/update/paramview)" bean="com.me.apminsight.client.api.AppParamViewAPI" method="updateAppParamView" entity="apminsight">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+		<Parameter name="JSONString" value="JSONString" source="context" type="String"/>
+    </Request>
+    
+	<Request uri="(/apminsight/(app|ins)/(\d+)/profiler)" bean="com.me.apminsight.client.api.ThreadProfileAPI" method="sendProfilerRequest" entity="apminsight">
+        <Parameter name="url" source="regex" type="String" value="1" label=""/>
+        <Parameter name="JSONString" value="JSONString" source="context" type="String"/>
+    </Request>
+    
+    <Request uri="(/apminsight/(app|ins)/(\d+)/updatetxn)" bean="com.me.apminsight.client.api.TxnAPI" method="updateTxn" entity="apminsight">
+        <Parameter name="url" source="regex" type="String" value="1" label=""/>
+        <Parameter name="JSONString" value="JSONString" source="context" type="String"/>
+    </Request>
+
+    <Request uri="/apminsight/agent_config_profile" bean="com.manageengine.apminsight.apm.server.api.APMInsightAPI" method="createAgentConfigProfile" entity="apminsight">
+        <Parameter name="JSONString" value="JSONString" source="context" type="String"/>
+    </Request>
+
+    <Request uri="/apminsight/agent_config_profile/(\d+)" bean="com.manageengine.apminsight.apm.server.api.APMInsightAPI" method="updateAgentConfigProfile" entity="apminsight">
+        <Parameter name="profile_id" source="regex" type="BIGINT" value="1" />
+        <Parameter name="JSONString" value="JSONString" source="context" type="String"/>
+    </Request>
+    
+    <Request uri="/apminsight/agent_config_profile/delete/(\d+)" bean="com.manageengine.apminsight.apm.server.api.APMInsightAPI" method="deleteApmAgentConfigProfile" entity="apminsight">
+		<Parameter name="profile_id" source="regex" type="BIGINT" value="1" label="profile_id"/>
+	</Request>
+    
+     <Request uri="/apminsight/update/application_configuration/(\d+)/(\d+)/(0|1|2)" bean="com.manageengine.apminsight.apm.server.api.APMInsightAPI" method="associateConfigWithApp" entity="apminsight">
+		<Parameter name="appId" source="regex" type="BIGINT" value="1" />
+		<Parameter name="profileId" source="regex" type="BIGINT" value="2" />
+		<Parameter name="JSONString" value="JSONString" source="context" type="String"/>
+		<Parameter name="type" source="regex" type="INTEGER" value="3"/>
+    </Request>
+
+    <Request uri="(/apminsight/ins/(\d+)/update)" bean="com.me.apminsight.client.api.ActionsAPI" method="updateAgent" entity="apminsight">
+        <Parameter name="url" source="regex" type="String" value="1" label=""/>
+        <Parameter name="JSONString" value="JSONString" source="context" type="String"/>
+    </Request>
+
+    <Request uri="(/apminsight/ins/(\d+)/cancel)" bean="com.me.apminsight.client.api.ActionsAPI" method="cancelScheduledUpdate" entity="apminsight">
+        <Parameter name="url" source="regex" type="String" value="1" label=""/>
+    </Request>
+
+    <Request uri="(/apminsight/(app|ins)/(\d+)/tr/(\d+\_\d+\_\d+))" bean="com.me.apminsight.client.api.TracesAPI" method="deleteTrace" entity="apminsight">
+		<Parameter name="url" source="regex" type="String" value="1" label=""/>
+	</Request>
+</RequestMapper>

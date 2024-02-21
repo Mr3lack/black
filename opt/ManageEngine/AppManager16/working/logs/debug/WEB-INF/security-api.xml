@@ -1,0 +1,1384 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./conf/security-apm.xsd">
+	
+	<regexes><!-- Regexes for api/v3 Jersey APIs -->
+		<regex name="am_jersey_rest_api_id" value="[0-9]{1,20}" />
+		<regex name="am_jersey_rest_api_alpha_numberic" value="[A-Za-z0-9\_\-\.]*" />
+		<regex name="am_jersey_rest_api_displayname.common" value="^[\p{L}\p{N}\.\-\_\ ]+$" />
+		<regex name="am_jersey_rest_api_json_accept_header" value="application\/json" />
+		<regex name="am.admin.serverSettings.mgConfig.values" value="^(Process|Service|DataBase|WebsphereMQ_Queue Monitoring_ROW|,)+$" />
+		<regex name="am.admin.privacy.piiType.value" value="^(EMAIL|HOST|LOCATION|COMPANY_NAME|MOBILE|URL|REGISTERED_HOST|CUSTOMFIELD|DESCRIPTION)$"/>
+		<regex name="am_backup_status" value="^(enable|disable)$"/>
+		<regex name="am_backup_interval" value="^(monthly|weekly)$"/>
+		<regex name="am_backup_cleanup_type" value="^(days|files)$"/>
+		<regex name="am_backup_types" value="[1-4]"/>
+		<regex name="am_backup_directory_option" value="^(defaultDirectory|customDirectory)$" />
+		<regex name="am_backup_folder_path" value="^[a-zA-Z0-9\\/\-_:\(\) ]+$"/>
+		<regex name="am_backup_schedule_types" value="^(all|configtables|exclude-raw)$"/>
+		<regex name="am.admin.addon.delete.prodName.value" value="^(alarmsone|slack|Site24x7|SDPOD|OpManager|ServiceNow|ServiceDeskPlus|ServiceDeskPlusMSP|LAMA|PMP|PAM360|CyberArk)$"/>
+		<regex name="am.admin.addon.sync.prodName.value" value="^(alarmsone|Site24x7|OpManager|PMP|PAM360|CyberArk)$"/>
+		<regex name="am.admin.addon.resync.prodName.value" value="^(Site24x7|SDPOD|OpManager|ServiceDeskPlus|PROMETHEUS|PMP|PAM360|CyberArk|ServiceNow)$"/>
+		<regex name="am.admin.addon.audit.operations" value="^(closedMigrationWarningMessage|closedUpgradeWarningMessage)$"/>
+		<regex name="am.alarm.datatable.param.data" value="^columns\[[0-3]\]\[data\]$"/>
+		<regex name="am.alarm.datatable.param" value="^columns\[[0-3]\]\[(name|searchable|orderable)\]$"/>
+		<regex name="am.alarm.datatable.param.search" value="^columns\[[0-3]\]\[search\]\[(value|regex)\]$"/>
+		<regex name="am.alarm.datatable.col.headers" value="^(SEVERITY|TTIME|TEXT)$"/>
+		<regex name="am.api.TFNull" value="^(?i)(true|false|null)$" />
+		<regex name="am.long.value" value="[0-9]{1,12}" />
+		<regex name="am.webclient.rebranding.bg.option" value="^(customImage|customColor)$"/>
+		<regex name="am.webclient.rebranding.bg.img.option" value="^(default|dark|light|upload)$"/>
+		<regex name="am.webclient.rebranding.bg.color.value" value="^(gradient_[0-9]+)$"/>
+		<regex name="am.reports.categories" value="^(SERVERS|APPLICATION_SERVERS|DATABASE_SERVERS|WEB_SERVERS|URL_WEB_APPS|SERVICES|VIRTUALIZATION|CLOUD_APPS|CONVERGED_INFRASTRUCTURE|MAIL_SERVERS|MIDDLEWARE_PORTAL|ERP|WEB_SERVICES|MONITOR_GROUP|TREND_ANALYSIS|EUM|FORECAST|CAPACITY_PLANNING|CUSTOM_TYPES|INVENTORY)$" />
+		<regex name="apminsight.app.or.instance" value="(app|ins)" />
+		<regex name="apminsight.view" value="(table|graph|grid|map)" />
+		<regex name="apminsight.resourceid" value="([0-9]{5,21})"/> <!-- Minimum and Maximum digit allowed for Resource Id is 7 and 19.For safer side , configured it as 5 and 21  -->
+		<regex name="apminsight.servicemap.regex" value="[a-zA-Z0-9 _]*" />
+		<regex name="apminsight.servicemap.limit" value="^([5-9]|1[0-9]|2[0-5])$" />
+		<regex name="timePeriod" value="^(custom|Today|onehour|twohours|fourhours|sixhours|eighthours|twelvehours|twfourhours|Last_7_Days|WEEK|Last_30_Days|MONTH|Last_60_Days|Last_90_Days|Yesterday|thisweek|lastweek|thismonth|Last_Month|Last 12 hours|Last 24 hours|Last 7 days|This week|Last week|This month|Last month|Last 30 days|last_7_days|last_30_days|last_90_days|Last_12_hours|Last_24_hours|This_Week|This_Month|Last_Week)$"/>
+		<regex name="businessRuleTimeWindow" value="^((\d|1[0-9]|2[0-3])-(\d|1[0-9]|2[0-4]))$"/>
+		<regex name="date" value="(([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]))"/>
+		<regex name="hours" value="^([0-1]\d|[2][0-3])$" />
+		<regex name="opmee_columnName" value="^[\p{L}\p{N}\_\s\.\#]+$" />
+		<regex name="opmee_parentId" value="^[\p{L}\p{N}\_\-\,\s\.\/()]+$" />
+		<regex name="orderBy" value="^(asc|desc)$"/>
+		<regex name="excludedDaysRegex" value="^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)(?:,(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday))*$"/>
+		<regex name="apminsight.txn.or.trace" value="(txn|tr)" />
+		<regex name="apminsight.dataid" value="(all|(-\d+)|(\d+)|(\d+\_\d+\_\d+))" />
+		<regex name="apminsight.txn.type" value="(txn|bgtxn|errtxn|keytxn)" />
+		<regex name="apminsight.txn.sort.attr" value="(apdex|avgrt|throughput|totalrt|errors|fatal|cpu|avgbytesin|avgbytesout|bytesin|bytesout|totalbytesin|totalbytesout)" />
+		<regex name="apminsight.mail.regex" value="^[a-zA-Z0-9@.,]+$" />
+		<regex name="am.jersey.prometheus.auth.mode.regex" value="(none|basic|saToken)" />
+		<regex name="apminsight.tp.type" value="(profile|dump)" />
+		<regex name="oraclerac.resourceID" value="([0-9]{5,21})"/> <!-- Minimum and Maximum digit allowed for Resource Id is 7 and 19.For safer side , configured it as 5 and 21  -->
+		<regex name="am.pam.integration.sync" value="^(enable|disable)$"/>
+	    <regex name="action.type" value="(email)" />
+	    <regex name="action.types" value="(email|sms|execute-program|trap|mbean|ticket|java-thread|java-heap|java-perform-gc|virtual-machine|cloud|windows|container|sql|webhook|slack)" />
+	</regexes>
+
+	<jsontemplates>
+		
+		<!--Tools Template STARTS -->
+		<jsontemplate name="am.tools.config.diagnosticConfigData">
+			<key name="diagnosticsName" regex="am.onlyalpha" description="The name of the diagnostics metric."/>
+			<key name="pollingInterval" regex="am.onlynumeric" description="The time interval for polling."/>
+			<key name="consecutivePollCount" regex="am.onlynumeric" description="The number of consecutive polls to check before generating alert."/>
+			<key name="criticalValue" type="int" range="0-10000" description="The threshold value for the diagnostics."/>
+			<key name="managed" regex="am.boolean" description="The param to enable or disable this diagnostic monitoring."/>
+		</jsontemplate>
+		
+		<jsontemplate name="am.tools.config.diagnosticConfigData.updateall">
+			 <key index="0-16" type="JSONObject" template="am.tools.config.diagnosticConfigData" max-len="-1"/>
+		</jsontemplate>
+		<!--Tools Template ENDS -->
+		
+		<!--Maps Template STARTS -->
+	    <jsontemplate name="am.maps.osmap.locationData">
+			<key name="name" regex="am_jersey_rest_api_displayname.common"/>
+			<key name="xCoord" type="float"/>
+			<key name="yCoord" type="float"/>
+		</jsontemplate>
+		<jsontemplate name="am.maps.osmap.dimensionData">
+			<key name="width" regex="am.onlynumeric"/>
+			<key name="height" regex="am.onlynumeric"/>
+		</jsontemplate>
+		<jsontemplate name="am.security.settings">
+			<key name="name" regex="am.security.settings.cases"/>
+			<key name="status" type="boolean"/>
+			<key name="value" regex="am.hostname.ext.2" max-len="250"/>
+		</jsontemplate>
+		<!--Maps Template ENDS -->
+		
+		<!-- Backup Schedule template starts -->
+		<jsontemplate name="am.backup.schedule.data">
+			<key name="status" regex="am_backup_status"/>
+			<key name="scheduletype" regex="am_backup_schedule_types"/>
+			<key name="schedulehour" type="int" range="0-24"/>
+			<key name="scheduleinterval" regex="am_backup_interval"/>
+			<key name="periodvalue" type="int" range="1-31"/>
+			<key name="cleanuptype" regex="am_backup_cleanup_type"/>
+			<key name="cleanupvalue" type="int"/>
+			<key name="backupFolder" regex="am_backup_folder_path" max-len="2000"/>
+			<key name="directoryChosen" regex="am_backup_directory_option"/>
+			<key name="actionID" regex="long"/>
+			<key name="enableFailureAlert" regex="boolean"/>
+		</jsontemplate>
+		
+		<!-- Unmanage starts -->
+		<jsontemplate name="am.unmanage.data">
+			<key name="type" type="int" />
+			<key name="timestamp" type="long" />
+			<key name="isReset" regex="yesnotf" />
+			<key name="unopengroups" regex="am.recorder.long.pipeSeparated" max-len="10000000" />
+		</jsontemplate>
+		
+		<jsontemplate name="am.unmanageBulkData.data">
+			<key name="type" type="int" />
+			<key name="timestamp" type="long" />
+			<key name="resIds" regex="am.webclient.resIds.commaSeparated" max-len="10000"/>
+			<key name="isReset" regex="yesnotf" />
+			<key name="unopengroups" regex="am.recorder.long.pipeSeparated" max-len="10000000" />
+		</jsontemplate>
+		
+<!--Global Settings Template STARTS -->
+		<jsontemplate name="selectedMASIdsJson">
+             <key index="0-999" type="int"/>
+		</jsontemplate>
+		<jsontemplate name="IDsJSON">
+            <key name="masID" type="int"/>
+			<key name="managedServerName" type="String"/>
+			<key name="isMASSelected" type="boolean"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.globalSettings.configData">
+			<key name="showgettingstarted" type="boolean"/>
+			<key name="showRememberMe" type="boolean"/>
+			<key name="loginFeatures" type="boolean"/>
+			<key name="loginSlider" type="boolean"/>
+			<key name="doNotGoToLogoutPage" type="boolean"/>
+			<key name="addHostToHolisticApplication" type="boolean"/>
+			<key name="discoverHostAlso" type="boolean"/>
+			<key name="auto_restart" type="boolean"/>
+			<key name="presales_emails" type="boolean"/>
+			<key name="showSalesForce" type="boolean"/>
+			<key name="showProductAssistMessages" type="boolean"/>
+			<key name="enableRediscoveryOnStartup" type="boolean"/>
+			<key name="enablePowershellForADDMDiscovery" type="boolean"/>
+			<key name="enableDiscoveryOfUnknownDevices" type="boolean"/>
+			<key name="enableADDMDependencyView" type="boolean"/>
+			<key name="showServerInApplicationDependencyMapping" type="boolean"/>
+			<key name="easyUpgrade" type="boolean"/>
+			<key name="selfMonitoring" type="boolean"/>
+			<key name="advancedAnalytics" type="boolean"/>
+			<key name="windowsEventAlertContent" type="boolean"/>
+			<key name="displaynamelength" type="int"/>
+			<key name="emailMessageSize" type="int"/>
+			<key name="usagestatistics" type="boolean"/>
+			<key name="enableWeakAlgo" type="boolean"/>
+			<key name="showUsageStatistics" type="boolean"/>
+			<key name="advancedUser" type="boolean"/>
+			<key name="reopenProductAssistMessages" type="boolean"/>
+			<key name="addHostToMonitorGroup" type="boolean"/>
+			<key name="isAdvancedUser" type="boolean"/>
+			<key name="cloudUsageStatistics" type="boolean"/>
+            <key name="rumUsageStatistics" type="boolean"/>
+			<key name="eumUsageStatistics" type="boolean"/>
+		</jsontemplate>
+		<!--Global Settings Template ENDS -->
+		
+		<!--Server Settings Template STARTS -->
+		<jsontemplate name="am.admin.serverSettings.configDataInt">
+			<key name="serverkey" type="String"/>
+			<key name="serverValue" type="int"/>
+			<key name="keysRequireRestart" type="boolean"/>
+			<key name="type" type="int"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.serverSettings.configDataBoolean">
+			<key name="serverkey" type="String"/>
+			<key name="serverValue" type="boolean"/>
+			<key name="keysRequireRestart" type="boolean"/>
+			<key name="type" type="int"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.serverSettings.configDataMultipleInt">
+			<key name="serverkey" type="String"/>
+			<key name="serverValue" regex="am.digits.commaseperated" max-len="400"/>
+			<key name="keysRequireRestart" type="boolean"/>
+			<key name="type" type="int"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.serverSettings.configDataMG">
+			<key name="serverkey" type="String"/>
+			<key name="serverValue" regex="am.admin.serverSettings.mgConfig.values"/>
+			<key name="keysRequireRestart" type="boolean"/>
+			<key name="template" type="String" />
+			<key name="type" type="int"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.serverSettings.generalConfig">
+			<key index="0-16" type="JSONObject" max-len="5000" template="am.admin.serverSettings.configDataInt"/>
+			<key index="17-26" type="JSONObject" max-len="5000" template="am.admin.serverSettings.configDataBoolean"/>
+		</jsontemplate>
+		
+		<jsontemplate name="am.admin.serverSettings.generalConfigForCorsPolicy">
+			<key name="serverkey" type="String"/>
+			<key name="serverValue" regex="am.server.config.cross.domain.origin"/>
+			<key name="keysRequireRestart" type="boolean"/>
+			<key name="type" type="int"/>	
+		</jsontemplate>
+		
+		<jsontemplate name="am.admin.serverSettings.availabilityConfig">
+			<key index="0-2" type="JSONObject" max-len="500" template="am.admin.serverSettings.configDataBoolean"/>
+			<key index="3" type="JSONObject" max-len="500" template="am.admin.serverSettings.configDataMultipleInt"/>
+			<key index="4-6" type="JSONObject" max-len="500" template="am.admin.serverSettings.configDataInt"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.serverSettings.threadsConfig">
+			<key index="0-7" type="JSONObject" max-len="500" template="am.admin.serverSettings.configDataInt"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.serverSettings.dbConfig">
+			<key index="0" type="JSONObject" max-len="500" template="am.admin.serverSettings.configDataInt"/>
+			<key index="1" type="JSONObject" max-len="500" template="am.admin.serverSettings.configDataBoolean"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.serverSettings.jvmConfig">
+			<key index="0-1" type="JSONObject" max-len="500" template="am.admin.serverSettings.configDataInt"/>
+		</jsontemplate>
+		<!--Server Settings Template ENDS -->
+		
+		<!--Logging Settings Template STARTS -->
+		<jsontemplate name="am.admin.logSettings.configData">
+			<key name="displayName" type="String"/>
+			<key name="logConfigVal" type="int"/>
+			<key name="selectedLogConfig" type="boolean"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.loggingSettings.list">
+			<key index="0" type="JSONObject" max-len="500" template="am.admin.logSettings.configData"/>
+		</jsontemplate>		
+		<!--Logging Settings Template ENDS -->
+		
+		<!--Personalize Settings Template STARTS -->
+		<jsontemplate name="am.admin.personalize.tabConfig">
+			<key name="tabId" type="int"/>
+			<key name="tabType" type="int"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.personalize.tabOrder">
+			<key index="0-12" type="JSONObject" max-len="1000" template="am.admin.personalize.tabConfig"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.personalize.configData">
+			<key name="selectedskin" regex="am.common.selectedSkin"/>
+			<key name="selectedlanguage" regex="am.common.selectedLanguages"/>
+			<key name="applyLangToAllUsers" type="boolean"/>
+			<key name="autoRefreshInterval" type="int"/>
+			<key name="switchToOldGUI" type="boolean"/>
+		</jsontemplate>		
+		<!--Personalize Settings Template ENDS -->
+		
+		<!-- Global Trap Action STARTS -->
+		
+		<jsontemplate name="am.admin.global.trap.action.trapConfig">
+			<key name="trapId" type="long"/>
+			<key name="version" regex="am.trap.version.ui.msg"/>
+			<key name="status" type="boolean"/>
+			<key name="destinationAddress" type="String"/>
+			<key name="destinationPort" type="int"/>
+			<key name="community" type="String"/>
+			<key name="securityLevel" regex="am.snmp.trap.action.v3.security.level"/>
+			<key name="authProtocol" regex="am.servermonitor.snmpAuthProtocol"/>
+			<key name="privProtocol" regex="am.snmp.trap.action.v3.privprotocol"/>
+			<key name="authPassword" type="String"/>
+			<key name="privPassword" type="String"/>
+			<key name="mibName" type="String"/>
+			<key name="genericType" type="int"/>
+			<key name="specificType" type="int"/>
+			<key name="enterprise" type="String"/>
+			<key name="snmpTrapOID" regex="am.trap.oid"/>
+			<key name="varbinds" type="String"/>
+			<key name="objectId" regex="am.trap.oid"/>
+			<key name="messagFormat" type="int"/>
+			<key name="username" type="String"/>
+			<key name="engineId" type="String"/>
+			<key name="context" type="String"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.global.trap.action.severity">
+			<key name="critical" type="boolean"/>
+			<key name="warning" type="boolean"/>
+			<key name="clear" type="boolean"/>
+			<key name="unknown" type="boolean"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.global.trap.action.attributes">
+			<key name="health" type="boolean"/>
+			<key name="availability" type="boolean"/>
+			<key name="others" type="boolean"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.global.trap.action.monitorTypes">
+			<key name="displayName" type="String"/>
+			<key name="resourceType" type="String"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.global.trap.action.monitors">
+			<key name="displayName" type="String"/>
+			<key name="resourceId" type="long"/>
+			<key name="monitorType" type="JSONObject" max-len="10000" template="am.admin.global.trap.action.monitorTypes"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.global.trap.action.monitorGroups">
+			<key name="groupName" type="String"/>
+			<key name="groupId" type="long"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.global.trap.action.filter">
+			<key name="global" type="boolean" />
+			<key name="severity" type="JSONObject"  max-len="1000" template="am.admin.global.trap.action.severity"/>
+			<key name="attributes" type="JSONObject"  max-len="1000" template="am.admin.global.trap.action.attributes"/>
+			<key name="monitors" type="JSONArray"  max-len="-1" template="am.admin.global.trap.action.monitors"/>
+			<key name="monitorGroups" type="JSONArray"  max-len="-1" template="am.admin.global.trap.action.monitorGroups"/>
+			<key name="monitorTypes" type="JSONArray"  max-len="-1" template="am.admin.global.trap.action.monitorGroups"/>
+			<key name="selectedMonitors"  max-len="100000" array-size="0-500" type="JSONArray" template="arrayLongjson"/>
+			<key name="selectedMonitorGroups"  max-len="100000" array-size="0-500" type="JSONArray" template="arrayLongjson"/>
+			<key name="selectedMonitorTypes"  max-len="100000" array-size="0-500" type="JSONArray" template="arrayjson"/>
+		</jsontemplate>
+		<jsontemplate name="am.admin.global.trap.action.configData">
+			<key name="trapConfig" type="JSONArray" array-size="3" max-len="10000" template="am.admin.global.trap.action.trapConfig"/>
+			<key name="filter" type="JSONObject" max-len="-1" template="am.admin.global.trap.action.filter"/>
+		</jsontemplate>
+		<!-- Global Trap Action ENDS -->
+				
+		<jsontemplate name="am.admin.enterpriseSettings.configData">
+			<key name="masDetailsList" type="JSONArray" template="IDsJSON" array-size="0-999" max-len="10000"/>
+			<key name="selectedMASIds" type="JSONArray" template="selectedMASIdsJson" array-size="0-999" max-len="5000"/>
+			<key name="masReportSyncWithadmin" type="boolean"/>
+			<key name="enableMasDownMailNotification" type="boolean"/>
+			<key name="deleteSqlFileAAM" type="boolean"/>
+			<key name="managedServerDownAlertPollCount" type="int"/>
+			<key name="useProxyForMASImage" type="boolean"/>
+			<key name="adminServerStatus" type="boolean"/>
+			<key name="probekeyTimer" type="int"/>
+		</jsontemplate>
+		<!--Enterprise Settings Template ENDS -->
+		
+		<!--VIP Settings Template STARTS -->
+		<jsontemplate name="am.admin.vipSettings.configData">
+			<key name="vip" regex="am.common.ipaddress" max-len="16"/>
+			<key name="vipHostname" regex="am.hostname.ext.3" max-len="253"/>
+			<key name="vipCheckRetryCount" type="int"/>
+			<key name="vipCheckIntervalInSecs" type="int"/>
+			<key name="vipEnable" type="boolean"/>
+		</jsontemplate>
+		<!--VIP Settings Template ENDS -->
+		
+		<!-- Prometheus RestAPI template STARTS -->
+		<jsontemplate name="am.prometheus.config.params">
+			<key name="prometheusId" regex="am_jersey_rest_api_id"/>
+			<!-- General Prometheus specifications -->
+			<key name="displayName" regex="am.displayname.common"/>
+			<key name="pollInterval" type="int"/>
+			<key name="dcMode" regex="am_prometheus_dc_types"/>
+			<!--Prometheus Server and dcMode specifications -->
+			<key name="apiParams" type="JSONObject" max-len="5000" template="PrometheusAPIParameters"/>	
+			<key name="sshParams" type="JSONObject" max-len="7000" template="PrometheusSSHParameters"/>	
+			<!-- Prometheus Discovery specifications -->
+			<key name="filter" type="String" max-len="250"/>
+			<key name="discoveryType" regex="am_prometheus_discovery_types"/>
+			<key name="selectedTypes" type="JSONArray" template="PrometheusSupportedTypes" array-size="1-200" max-len="5000"/>
+			<key name="monitorDownAction" regex="am_prometheus_monitordown_actions"/>
+			<key name="selectedMonitors" type="JSONArray" template="PrometheusMonitors" array-size="0-200" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="PrometheusSupportedTypes">
+			<key index="0-199" type="String" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="PrometheusAPIParameters">
+			<key name="host" regex="am_jersey_rest_api_alpha_numberic"/>
+			<key name="port" type="int"/>
+			<key name="protocol" regex="am_prometheus_http_protocol_types"/>
+			<key name="url" type="String"  max-len="250"/>
+			<key name="authMode" regex="am.jersey.prometheus.auth.mode.regex" max-len="20"/>
+			<key name="saToken" regex="cleartextpattern" max-len="2048" secret="true"/>
+			<key name="username" type="String"  max-len="250"/>
+			<key name="password" type="String" max-len="250" secret="true"/>
+		</jsontemplate>
+		<jsontemplate name="PrometheusSSHParameters">
+			<key name="sshHost" regex="am_jersey_rest_api_alpha_numberic"/>
+			<key name="sshUsername" type="String" max-len="250"/>
+			<key name="sshPassword" type="String" max-len="250" secret="true"/>
+			<key name="prompt" type="String" max-len="250"/>
+			<key name="sshPort" type="int"/>
+			<key name="sshConnectionTimeout" type="int"/>
+			<key name="publicKeyAuth" type="boolean"/>
+			<key name="privateKey" type="String" max-len="5000" secret="true"/>
+			<key name="passphrase" type="String" max-len="250" secret="true"/>
+		</jsontemplate>
+		<jsontemplate name="PrometheusMonitors">
+			<key name="prometheusId" regex="am_jersey_rest_api_id"/>
+			<key name="resourceId" type="int"/>
+			<key name="instance" type="String" max-len="250"/>
+<key name="endpoint" type="String" max-len="500"/>
+			<key name="job" type="String" max-len="250"/>
+			<key name="type" type="String"/>
+			<key name="status" regex="am_prometheus_discovered_status"/>
+		</jsontemplate>
+		<!-- Prometheus RestAPI template ENDS -->
+		<jsontemplate name="am.tfa.config.params">
+			<key name="authenticationType" regex="^(TOTP_AUTHENTICATOR|EMAIL)$"/>
+			<key name="tfaEnabled" type="boolean"/>
+			<key name="trustedDays" type="int" range="0-91"/>
+		</jsontemplate>
+				
+		<jsontemplate name="am.saml.config.data">
+			<key name="acsUrl" regex="am.common.url.schemaandlength.validator" max-len="10000"/>
+			<key name="displayName" regex="am.displayname.common" max-len="100"/>
+			<key name="formName" type="String" max-len="250"/>
+			<key name="headers" type="JSONArray" template="am.saml.headers" max-len="40000" secret="true"/>
+			<key name="formRedirect" type="boolean"/>
+			<key name="method" regex="^(G|P)$" max-len="1"/>
+			<key name="password" type="String" max-len="250" secret="true"/>
+			<key name="passwordAttr" type="String" max-len="250"/>
+			<key name="payloadType" regex="^(F|T|X|J)$" max-len="1"/>
+			<key name="queryString" type="String" max-len="10000" secret="true"/>
+			<key name="redirectUrl" regex="am.common.url.schemaandlength.validator" max-len="10000"/>
+			<key name="requestBinding" regex="^(R|P)$" max-len="1"/>
+			<key name="responseBinding" regex="^(R|P)$" max-len="1"/>
+			<key name="signinUrl" regex="am.common.url.schemaandlength.validator" max-len="10000"/>
+			<key name="ssl" regex="am.sslCertificateMonitor.protocol" max-len="8"/>
+			<key name="username" type="String" max-len="250"/>
+			<key name="usernameAttr" type="String" max-len="250"/>
+			<key name="configId" type="long"/>
+		</jsontemplate>
+		
+		<jsontemplate name="am.saml.config.delete">
+			<key name="configIds" type="JSONArray" template="am.saml.config.delete.arr" max-len="200"/>
+		</jsontemplate>
+		
+		<jsontemplate name="am.saml.config.delete.arr">
+			<key index="0-11" regex="-1andnumeric" max-len="12"/>
+		</jsontemplate>
+		
+		<jsontemplate name="am.saml.headers">
+			<key index="0-21" type="JSONObject" template="am.saml.headers.data" max-len="40000" secret="true"/>
+		</jsontemplate>
+		
+		<jsontemplate name="am.saml.headers.data">
+			<key name="header" type="String" max-len="250" secret="true"/>
+			<key name="value" type="String" max-len="10000" secret="true"/>
+		</jsontemplate>
+		
+		<!-- Slack Action Template starts -->
+		<jsontemplate name="am.action.slack">
+			<key name="actionId" type="long"/>
+			<key name="displayName" type="String"/>
+			<key name="titleMessage" type="String" max-len="250"/>
+			<key name="detailMessage" type="String" max-len="5000"/>
+			<key name="sendTo" regex="am.slackaction.sendto.types.text" />
+			<key name="sendAs" regex="am.slackaction.sendas.types.text" />
+			<key name="channelDetail" regex="am.slack.channel.name"/>
+			<key name="memberDetail" type="String"/>
+		</jsontemplate>
+		
+		<jsontemplate name="selectedSlackActionIds">
+             <key index="0-999" type="long"/>
+		</jsontemplate>
+		
+		<jsontemplate name="am.action.slack.selected">
+			<key name="actionIds" type="JSONArray" template="selectedSlackActionIds" array-size="0-999" max-len="8000"/>
+		</jsontemplate>
+		
+		<jsontemplate name="am.integration.lama">
+			<key name="id" type="long"/>
+			<key name="displayName" type="String"/>
+			<key name="pollingInterval" type="int"/>
+			<key name="memberId" type="String"  max-len="100" />
+			<key name="userName" type="String" max-len="100" />
+			<key name="secretKey" type="String" max-len="255" secret="true"/>
+			<key name="password" type="String" max-len="255" secret="true"/>
+			<key name="businessId" type="long"/>
+			<key name="tradingApi" type="String" max-len="1100"/>
+			<key name="clientAuthenticationApi" type="String" max-len="1100"/>
+			<key name="retry" type="int" />
+			<key name="mailTo" type="String" max-len="500"/>
+			<key name="notifyEmptyPush" type="boolean"/>
+			<key name="mailEnabled" type="boolean"/>
+			<key name="mailOnAllPolls" type="boolean"/>
+		</jsontemplate>
+		
+		
+		<!-- Slack Action Template ends -->
+		
+		<!-- SMS Gateway Template starts -->
+        <jsontemplate name="am.sms.gateway">
+            <key name="accType" regex="am.sms.gateway.accType" />
+            <key name="clickatellAPIKey" secret="true" type="String" />
+            <key name="clickatellUserName" type="String" />
+            <key name="clickatellPassword" secret="true" type="String" max-len="250" />
+            <key name="clickatellAPIId" secret="true" type="String" />
+            <key name="twilioAccID" secret="true" type="String" max-len="250" />
+            <key name="twilioAuthToken" secret="true" type="String" max-len="250" />
+            <key name="twilioPhNo" regex="am.sms.gateway.twilio.number" />
+            <key name="eagleIp" regex="am.hostname" />
+            <key name="eagleUserName" type="String" />
+            <key name="eaglePassword" secret="true" type="String" max-len="250" />
+            <key name="httpUrl" type="String" max-len="10000" />
+            <key name="httpMethod" regex="am.request.method" />
+            <key name="payLoadType" regex="am.sms.gateway.payload" />
+            <key name="httpParameters" type="String" max-len="100000"/>
+            <key name="isEncode" regex="am.sms.gateway.encodevalue" />
+            <key name="isMultipleAPICall" regex="am.mailserver.serverauth.types" />
+            <key name="userName" type="String" />
+            <key name="passWord" secret="true" type="String" max-len="250" />
+            <key name="requestHeaders" type="String" max-len="10000" />
+            <key name="headerInput" type="String" max-occurrences="100" max-len="100000" />
+            <key name="succesResponse" type="String" max-len="1000" />
+            <key name="failureResponse" type="String" max-len="1000" />
+            <key name="smstimeout" type="int" />
+            <key name="authType" regex="am.sms.gateway.authtype" />
+            <key name="oauthID" type="long" />
+            <key name="smsProvider" regex="am.sms.gateway.provider" />
+            <key name="sslEnabled" type="boolean" />
+        </jsontemplate>
+        
+        <jsontemplate name="am.sms.gateway.all">
+			 <key index="0-3" type="JSONObject" template="am.sms.gateway" max-len="1000000"/>
+		</jsontemplate>
+        <!-- SMS Gateway Template ends -->
+	</jsontemplates>
+	
+	<!--  REST API Backup Schedule Starts -->
+	<urls threshold="300" duration="1" lock-period="3" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+		<param name="PRINTER_FRIENDLY" type="boolean"/><!--Requried For Plugin Build (OPM) -->
+		<param name="_" type="long" description="Current millisecond value is passed in this param for Ajax call"/>	
+		<url path="/api/v3/schedule/details" method="GET" roles="am.role.ADMIN.EA.DE" restapi-scope="internal" restapi-title="Get Backup Schedule Details" restapi-module="Backup Schedule" description="Retrieves all the Backup related configuration."></url>
+		<url path="/api/v3/schedule/config" method="POST" api="true" authentication="required" restapi-scope="internal" restapi-title="Add Backup Schedule" restapi-module="Backup Schedule" description="This API is used to add a backup scedule.">
+			<inputstream template="am.backup.schedule.data" type="JSONObject" max-len="3000"/>
+		</url>
+		<url path="/api/v3/schedule/now/${am_backup_types}" method="POST" api="true" restapi-scope="internal" restapi-title="Initiate Schedule Now" restapi-module="Backup Schedule" description="The system executes backups dynamically based on the provided execution type immediately."></url>
+		<url path="/api/v3/schedule/terminate" method="POST" api="true" restapi-scope="internal" restapi-title="Terminate Backup Schedule" restapi-module="Backup Schedule" description="Used to terminate the current running Backup Schedule."></url>
+		<url path="/api/v3/schedule/list" method="GET" restapi-scope="internal" restapi-title="Backup Schedule List" restapi-module="Backup Schedule" description="Restrieves the list of Backup schedules done."></url>
+		<url path="/api/v3/schedule/status" method="GET" restapi-scope="internal" restapi-title="Backup Schedule Status" restapi-module="Backup Schedule" description="The API provides the status of the current running backup schedule."></url>
+	</urls>
+	<!--  REST API Backup Schedule Ends -->
+
+	<urls threshold="300" duration="1" lock-period="3" throwallerrors="true">
+	
+		<param name="PRINTER_FRIENDLY" type="boolean"/><!--Requried For Plugin Build (OPM) -->
+		<param name="_" type="long" description="Current millisecond value is passed in this param for Ajax call"/>
+		
+		<url path="/apm/apminsight/home" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+		<url
+			path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/overview"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+
+		<!-- this config if used txn tab is opened in new tab -->
+		<url
+			path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/transactions"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+		
+		<url
+			path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/transactions/${apminsight.view}/${apminsight.txn.type}/${apminsight.txn.sort.attr}/${apminsight.dataid}"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+		
+		<!-- this config if used if database tab is opened in new tab -->
+		<url
+			path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/database"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+
+		<url path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/database/${apminsight.view}/${apminsight.dataid}"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+
+		<!-- this config if used if traces tab is opened in new tab -->
+		<url
+			path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/traces"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+		
+		<url
+            path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/traces/${apminsight.view}/${apminsight.dataid}"
+            url-type="dynamic" method="get">
+            <param name="timePeriod" regex="apminsight.duration" />
+        </url>
+
+		<!-- this config if used if JVM tab is opened in new tab -->
+		<url
+			path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/jvm"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+        
+		<url
+            path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/jvm/summary"
+            url-type="dynamic" method="get">
+            <param name="timePeriod" regex="apminsight.duration" />
+        </url>
+
+
+		<!-- this config if used if Service map tab is opened in new tab -->
+		<url
+			path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/service-map"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+
+        <url
+            path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/service-map/${apminsight.view}/${apminsight.servicemap.regex}"
+            url-type="dynamic" method="get">
+            <param name="timePeriod" regex="apminsight.duration" />
+        </url>
+        
+        <url
+            path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/app-parameters"
+            url-type="dynamic" method="get">
+            <param name="timePeriod" regex="apminsight.duration" />
+        </url>
+
+		<!-- this config if used if thread profile tab is opened in new tab -->
+		<url
+			path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/thread-profile"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+        
+		<url
+			path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/thread-profile/${apminsight.view}/${apminsight.tp.type}/${apminsight.dataid}"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+				
+		<url path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/exceptions"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+		
+		<url path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/exceptions/(http|exc)/${apminsight.dataid}"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+		
+		<url
+			path="/apm/apminsight/appdata/${apminsight.resourceid}/${apminsight.app.or.instance}/monitor-info"
+			url-type="dynamic" method="get">
+			<param name="timePeriod" regex="apminsight.duration" />
+		</url>
+		
+		<url path="/apm/admin/personalize" method="get" authentication="required" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkIfPersonalizeAllowedForUser" >
+			<param name="view" regex="^(popup)$" />
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+
+		<url path="/apm/admin/personalize/tabs" method="get" authentication="required" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkIfPersonalizeAllowedForUser" >
+			<param name="view" regex="^(popup)$" />
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+		
+		<url path="/apm/[a-zA-Z0-9\-\.\_\/]+$" url-type="dynamic" method="get,post" api="true" authentication="required" >
+			<param name="view" regex="^(popup)$" />
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+	<!--REST API Common URL STARTS-->
+		<url path="/api/v3/productMeta" restapi-scope="internal" method="GET" restapi-title="Get Product Meta Information" restapi-module="Common" description="Retrieve Meta information about Applications Manager product."/>
+		<url path="/api/v3/userMeta" method="GET" restapi-scope="internal" restapi-title="Get User Meta Information" restapi-module="Common" description="Retrieve Meta information about Applications Manager authorized User."/>
+		<url path="/api/v3/oemMeta" method="GET" restapi-scope="internal" authentication="required" api="true" roles="am.role.ADMIN.EA.OP.US.DE.MA" restapi-title="Get OEM Meta Information" restapi-module="Common" description="Retrieve Meta information about Applications Manager's OEM Information."/>
+		<url path="/api/v3/json-feed/publishKey" method="GET" restapi-scope="internal" authentication="required" roles="am.role.ADMIN.EA.DE" deny-del-admin="true" restapi-module="JSON Feed" description="Fetch the Publish key that has to be used for receiving information via JSON Feed." restapi-title="View Publish Key"/>
+		<url path="/api/v3/json-feed/publishKey/regenerate" method="POST" restapi-scope="internal" api="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true" restapi-title="Regenerate Publish Key" restapi-module="JSON Feed" description="Regenerate the Publish Key that's used for JSON Feed.">
+			<param name="key" max-len="32" regex="am.alphanumeric" description="Old Publish Key to validate whether  the request is legit."/>
+			<param name="reason" max-len="500" type="String" description="Reason to Regenerate the JSON Feed publish key. Will be logged in Audit logs."/>
+		</url>
+		<url path="/api/v3/globalConfig/${am_jersey_rest_api_alpha_numberic}" method="GET" restapi-scope="internal" restapi-title="Get Global Config" restapi-module="Common" description="Fetch AM_GLOBALCONFIG value for given Key."/>
+		<url path="/api/v3/serverConfig/${am_jersey_rest_api_alpha_numberic}" method="GET" restapi-scope="internal" restapi-title="Get Server Config" restapi-module="Common" description="Fetch AM_SERVERCONFIG value for given Key."/>
+	<!--REST API Common URL ENDS-->
+	
+	<!-- Credential Manager URL STARTS -->
+		<url path="/api/v3/credential/list" method="GET" restapi-scope="internal" authentication="required" api="true" roles="am.role.ADMIN.EA.DE" restapi-title="List Credentials" restapi-module="Credential Manager" description="List of all credential Profiles."/>
+		<url path="/api/v3/credential/bulkdelete" method="DELETE" restapi-scope="internal" authentication="required" api="true" roles="am.role.ADMIN.EA" restapi-title="Delete Credential Profile(s)" restapi-module="Credential Manager" description="Bulk delete the requested Credentials Profiles.">
+			<param name="credentialID" regex="am.common.numberandcomma" max-len="10000"/>
+		</url>
+		<url path="/api/v3/credential/associate-dissociate" method="POST" restapi-scope="internal" authentication="required" api="true" roles="am.role.ADMIN" restapi-title="Associate/Dissociate Credential Profile(s)" restapi-module="Credential Manager" description="Associate or Dissociate the Credential Profile to requested monitors.">
+			<param name="action" regex="^(associate|dissociate)$" />
+			<param name="monitorList" regex="am.common.numberandcomma" max-len="10000"/>
+			<param name="credentialID" regex="am.common.numberandcomma" />
+		</url>
+		<url path="/api/v3/credential/${am_jersey_rest_api_id}/monitors" method="GET" restapi-scope="internal" authentication="required" api="true" roles="am.role.ADMIN.DE" restapi-title="Get Associated Monitors by Credential" restapi-module="Credential Manager" description="Retrieves the monitors list associated with requested Credential."/>
+		<url path="/api/v3/credential/${am_jersey_rest_api_id}/all-monitors" method="GET" restapi-scope="internal" authentication="required" api="true" roles="am.role.ADMIN.DE" restapi-title="Get Associated Monitors by Credential Type" restapi-module="Credential Manager" description="Retrieves the monitors list associated with requested Credential Type."/>
+	<!-- Credential Manager URL ENDS -->
+
+	<!--REST API Tools URL STARTS-->
+		<url path="/api/v3/tools/self-monitoring/config" method="GET" restapi-scope="internal" restapi-title="Get Self Monitoring Config Details" restapi-module="Tools" description="Retrieves the available configuration under Self Monitoring in Applications Manager."/>
+		<url path="/api/v3/tools/self-monitoring/config/${am_jersey_rest_api_id}" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Self Monitoring Config Details" restapi-module="Tools" description="Updates requested Self Monitoring config details.">
+			<inputstream template="am.tools.config.diagnosticConfigData" max-len="500" type="JSONObject"/>
+        </url>
+        <url path="/api/v3/tools/self-monitoring/config" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update All Self Monitoring Config Details" restapi-module="Tools" description="Updates all Self Monitoring config details.">
+			<inputstream template="am.tools.config.diagnosticConfigData.updateall" max-len="-1" type="JSONArray" array-size="1-17"/>
+        </url>
+	<!--REST API Tools URL ENDS -->
+	
+	<!--REST API User Management URL STARTS-->
+		<url path="/api/v3/users/${am_jersey_rest_api_id}/apiKey" method="GET" restapi-scope="internal" restapi-title="Get User's REST API Key" restapi-module="User Management" description="Fetches the REST API Key of Requested User."/>
+		<url path="/api/v3/users/${am_jersey_rest_api_id}/apiKey/regenerate" method="POST" restapi-scope="internal" api="true" authentication="required" restapi-title="Regenerate User's REST API Key" restapi-module="User Management" description="Regenerate the REST API Key of Requested User.">
+			<param name="apiKey" max-len="32" regex="apikey" description="The API key that is previously used."/>
+			<param name="reason" max-len="500" type="String" description="Reason for regenrating the API key."/>
+		</url>
+	<!--REST API User Management URL ENDS -->
+	
+	<!--REST API Maps URL STARTS-->
+		<url path="/api/v3/maps/osmap/global/locations" method="POST" restapi-scope="internal" api="true" authentication="required" restapi-title="Add Location" restapi-module="Maps" description="Add a new location to the Map.">
+			<inputstream template="am.maps.osmap.locationData" max-len="1000" type="JSONObject"/>
+		</url>
+		<url path="/api/v3/maps/osmap/global/locations/${am_jersey_rest_api_id}" method="DELETE" restapi-scope="internal" api="true" authentication="required" restapi-title="Delete Location" restapi-module="Maps" description="Delete the requested location from the Map."/>
+		<url path="/api/v3/maps/osmap/global/locations" method="GET" restapi-scope="internal" restapi-title="Get Locations" restapi-module="Maps" description="Retrieves the locations list available in Applications Manager Map."/>
+		<url path="/api/v3/maps/osmap/global/locations/view" method="GET" restapi-scope="internal" restapi-title="Get Monitor group locations" restapi-module="Maps" description="Retrieves the list of Monitor groups along with it's location details."/>
+		<url path="/api/v3/maps/osmap/global/dimensions" method="GET" restapi-scope="internal" restapi-title="Fetch Map Dimensions" restapi-module="Maps" description="Retrieves the height and width for displaying World Map view."/>
+		<url path="/api/v3/maps/osmap/global/dimensions" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Map Dimension" restapi-module="Maps" description="Update the height and width of the World Map.">
+			<inputstream template="am.maps.osmap.dimensionData" max-len="100" type="JSONObject"/>
+		</url>
+		<url path="/api/v3/maps/osmap/global/status" method="GET" restapi-scope="internal" restapi-module="Maps" restapi-title="Get Map View status"/>
+		<url path="/api/v3/maps/osmap/global/location/${am_jersey_rest_api_id}" method="GET" restapi-scope="internal" restapi-module="Maps" restapi-title="Get requested Location Coordinates"/>
+		<url path="/api/v3/maps/osmap/global/location/${am_jersey_rest_api_id}" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-module="Maps" restapi-title="Update Coordinates for requested Location">
+			<inputstream template="am.maps.osmap.locationData" max-len="1000" type="JSONObject"/>
+		</url>
+	<!--REST API Maps URL ENDS -->
+	
+	<!-- Global Trap URL starts -->
+		<url path="/api/v3/actions/trap/global" method="GET" restapi-scope="internal" deny-del-admin="true" restapi-title="Get Global Trap Config" restapi-module="Actions" description="Retrieves Global Trap Action Configuration."/>
+		<url path="/api/v3/actions/trap/global" method="PUT" restapi-scope="internal" api="true" authentication="required" deny-del-admin="true" restapi-title="Update Global Trap Config" restapi-module="Actions" description="Update Global Trap Action Configuration.">
+			<inputstream template="am.admin.global.trap.action.configData" max-len="-1" type="JSONObject"/>
+		</url>
+	<!-- Global Trap URL Ends -->
+	
+	<!-- Monitor list URL starts -->
+		<url path="/api/v3/monitors" method="GET" restapi-scope="internal" restapi-title="Fetch Monitors" restapi-module="am.webclient.monitorstab.text" description="Fetch monitors information.">
+			<param name="view" regex="^(basic)$" description="The basic view is only available in the monitor types." />
+		</url>
+
+		<url path="/api/v3/monitors/inventory/tableview" method="GET" restapi-scope="external" authentication="required" api="true" roles="am.role.ADMIN.EA.OP.US.DE" user-scope="AppManager.Monitors.READ" restapi-title="apm.apidoc.title.tableview" restapi-module="am.webclient.monitorstab.text" description="apm.restapi.v3.monitors.monitorsinventorytableview">
+			<param name="sortByColumn" regex="am.monitorstableview.sortbycolumn" description="apm.apidoc.tableview.sortbycolumn"/>
+			<param name="sortByType" regex="am.query.orderby.list" max-len="4" description="apm.apidoc.tableview.sortbytype"/>
+			<param name="types" regex="am.monitor.type.withcomma" max-len="100000" description="apm.apidoc.tableview.types"/>
+			<param name="category" regex="am.monitorstableview.category" max-len="1000" description="apm.apidoc.tableview.category"/>
+			<param name="page"  type="int" max-len="8"  description="apm.apidoc.tableview.page"/>
+			<param name="rows"  type="int" max-len="8"  description="Param to specify a page's maximum row count."/>
+			<param name="severity" regex="am.common.numberandcomma" max-len="10"  description="apm.apidoc.tableview.severity"/>
+		</url>
+		<url path="/api/v3/monitors/inventory/treeview" restapi-scope="external" method="GET" authentication="required" api="true" roles="am.role.ADMIN.EA.OP.US.DE" user-scope="AppManager.Monitors.READ" restapi-title="apm.apidoc.title.treeview" restapi-module="am.webclient.monitorstab.text" description="apm.restapi.v3.monitors.monitorsinventorytreeview">
+			<param name="sortBy" regex="am.query.orderby.list" max-len="4" description="apm.apidoc.treeview.sortby"/>
+			<param name="groupBy" regex="^(category|monitorType)$" description="apm.apidoc.treeview.groupby"/>
+		</url>
+		<url path="/api/v3/monitors/inventory/donutview" restapi-scope="external" method="GET" authentication="required" api="true" roles="am.role.ADMIN.EA.OP.US.DE" user-scope="AppManager.Monitors.READ" restapi-title="apm.apidoc.title.donutview" restapi-module="am.webclient.monitorstab.text" description="apm.restapi.v3.monitors.monitorsinventorydonutview">
+			<param name="types" regex="am.monitor.type.withcomma" max-len="100000" description="apm.apidoc.donutview.types"/>
+		</url>
+		<url path="/api/v3/monitorgroups" restapi-scope="internal" method="GET" restapi-title="Get Monitor groups" restapi-module="Monitor groups" description="Retrieve the Monitor groups list.">
+			<param name="view" regex="^(basic)$" />
+			<param name="parentOnly" type="boolean" />
+		</url>
+		<url path="/api/v3/monitortypes" restapi-scope="external" method="GET" roles="am.role.ADMIN.EA.DE" authentication="required" restapi-title="apm.apidoc.title.getMonitortypes" restapi-module="am.webclient.monitorstab.text" description="apm.restapi.v3.monitors.getmonitortypes">
+			<param name="view" regex="^(basic|newmonitor)$" description="apm.apidoc.monitortypes.view"/>
+			<param name="sortBy" regex="^(category|alphabets)$" description="apm.apidoc.monitortypes.sortby"/>
+		</url>
+		
+		<url path="/api/v3/monitors/${am.long.value}/unmanage" api="true" method="PUT" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.DE" authentication="required" restapi-title="Unmanage Monitor" restapi-module="am.webclient.monitorstab.text" description="Unmanage the requested monitor.">
+				<inputstream template="am.unmanage.data" max-len="1000" type="JSONObject"/>			
+		</url>
+		
+		<url path="/api/v3/monitors/bulkunmanage" api="true" method="PUT" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.DE" authentication="required" restapi-title="Bulk Unmanage Monitors" restapi-module="am.webclient.monitorstab.text" description="Bulk Unmanage the requested monitors." custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPrivilegeForResId">
+				<inputstream template="am.unmanageBulkData.data" max-len="10000000" type="JSONObject"/>			
+		</url>
+		
+		<url path="/api/v3/monitorgroups/${am.long.value}/unmanage" api="true" method="PUT" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.DE" authentication="required" restapi-title="Unmanage Monitors in Monitor group" restapi-module="Monitor groups" description="Unmanage the monitors in requested monitor group.">
+				<inputstream template="am.unmanage.data" max-len="1000" type="JSONObject"/>			
+		</url>
+		
+		<url path="/api/v3/monitorgroups/bulkunmanage" api="true" method="PUT" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.DE" authentication="required" restapi-title="Bulk Unmanage Monitors in Monitor group" restapi-module="Monitor groups" description="Bulk Unmanage the monitors in requested monitor groups." custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPrivilegeForResId">
+				<inputstream template="am.unmanageBulkData.data" max-len="10000000" type="JSONObject"/>			
+		</url>
+		<url path="/api/v3/monitors/${am.long.value}/pollnow" api="true" method="GET" roles="am.role.ADMIN.EA" authentication="required" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkIfOperationAllowedForDA" disable-get-api-csrf="true">
+			<param name="eeSyncKey" type="String" secret="true" />
+			<param name="probeId" type="long" />
+        	<param name="probeID" type="long" />
+		</url>
+		<url path="/api/v3/monitors/${am.long.value}" api="true" method="DELETE" roles="am.role.ADMIN.EA" authentication="required" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkIfOperationAllowedForDA" />
+		
+	<!-- Monitor list URL Ends -->
+	
+	<!-- Admin -> Global Settings API starts -->
+		<url path="/api/v3/settings/global/config" method="GET" restapi-scope="internal" restapi-title="Get Global Config" restapi-module="Global Settings" description="To get the global configurations with admin credentials."/>
+		<url path="/api/v3/settings/global/config" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Add Global Configurations" restapi-module="Global Settings" description="To add the global configurations in the settings.">
+			<inputstream template="am.admin.globalSettings.configData" max-len="9999" type="JSONObject"/>
+        </url>
+	<!-- Admin -> Global Settings API ends -->
+	
+	<!--End User Monitor-->
+	<url path="/api/v3/eum/apikey" method="GET" restapi-title="Get EUM API Key" restapi-scope="internal" restapi-module="End User Monitor" description="Retrieves the EUM API Key that's used for APM-EUM communication."/>
+    <url path="/api/v3/eum/apikey" method="POST" restapi-scope="internal" api="true" authentication="required" restapi-title="Regenerate EUM API Key" restapi-module="End User Monitor" description="Regenerate the EUM API Key that's used for APM-EUM communication.">
+        <param name="apiKey" max-len="40" regex="am.alphanumeric" description="The old API key used for EUM-APM Communication."/>
+    </url>
+    
+    <!-- Real User Monitor -->
+	<url path="/api/v3/rum/apikey" method="GET" restapi-scope="internal" restapi-title="Get RUM API Key" restapi-module="Real User Monitor" description="Retrieves the RUM API Key that's used for APM-RUM communication."/>
+    <url path="/api/v3/rum/apikey" method="POST" restapi-scope="internal" api="true" authentication="required" restapi-title="Regenerate RUM API Key" restapi-module="Real User Monitor" description="Regenerate the RUM API Key that's used for APM-RUM communication.">
+		<param name="apiKey" max-len="40" regex="am.alphanumeric" description="The old api key that is used for RUM-APM Communication."/>
+	</url>
+	
+	<!-- Admin -> Server Settings API starts -->
+		<url path="/api/v3/settings/general/config" method="GET" restapi-scope="internal" restapi-title="Get Server Settings - General Config" restapi-module="Server Settings" description="Retrieves general configurations of Server Settings."/>
+		<url path="/api/v3/settings/general/config" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Server Settings - General Config" restapi-module="Server Settings" description="Updates general configurations of Server Settings.">
+			<inputstream template="${template}am.admin.serverSettings.generalConfig" max-len="5000" type="JSONArray" array-size="0-31"/>
+        </url>
+		<url path="/api/v3/settings/availability/config" method="GET" restapi-scope="internal" restapi-title="Get Server Settings - Availability Config" restapi-module="Server Settings" description="Retrieves availability configuration of Server settings."/>
+		<url path="/api/v3/settings/availability/config" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Server Settings - Availability Config" restapi-module="Server Settings" description="Updates availability configuration of Server settings.">
+			<inputstream template="am.admin.serverSettings.availabilityConfig" max-len="5000" type="JSONArray" array-size="0-7"/>
+        </url>
+		<url path="/api/v3/settings/threads/config" method="GET" restapi-scope="internal" restapi-title="Get Server Settings - Threads Config" restapi-module="Server Settings" description="Retrieves Threads Configuration of Server settings."/>
+		<url path="/api/v3/settings/threads/config" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Server Settings - Threads Config" restapi-module="Server Settings" description="Updates Threads Configuration of Server settings.">
+			<inputstream template="am.admin.serverSettings.threadsConfig" max-len="1000" type="JSONArray" array-size="0-8"/>
+        </url>
+		<url path="/api/v3/settings/database/config" method="GET" restapi-scope="internal" restapi-title="Get Server Settings - Database Config" restapi-module="Server Settings" description="Retrieves Database Configuration of Server settings."/>
+		<url path="/api/v3/settings/database/config" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Server Settings - Database Config" restapi-module="Server Settings" description="Updates Database Configuration of Server settings">
+			<inputstream template="am.admin.serverSettings.dbConfig" max-len="500" type="JSONArray" array-size="0-2"/>
+        </url>
+		<url path="/api/v3/settings/jvm/config" method="GET" restapi-scope="internal" restapi-title="Get Server Settings - JVM Config" restapi-module="Server Settings" description="Retrieves JVM Configurations of Server settings."/>
+		<url path="/api/v3/settings/jvm/config" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Server Settings - JVM Config" restapi-module="Server Settings" description="Updates JVM Configurations of Server settings.">
+			<inputstream template="am.admin.serverSettings.jvmConfig" max-len="500" type="JSONArray" array-size="0-2"/>
+        </url>
+        <url path="/api/v3/settings/monitor-group/config" method="GET" restapi-scope="internal" restapi-title="Get Server Settings - Monitor group Config" restapi-module="Server Settings" description="Retrieves Monitor Group configuration of Server settings."/>
+		<url path="/api/v3/settings/monitor-group/config" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Server Settings - Monitor group Config" restapi-module="Server Settings" description="Updates Monitor Group configuration of Server settings.">
+			<inputstream template="am.admin.serverSettings.configDataMG" max-len="500" type="JSONObject"/>
+        </url>
+	<!-- Admin -> Server Settings API ends -->
+	
+	<!-- Admin -> Logging Settings API starts -->
+		<url path="/api/v3/settings/logging/config" method="GET" restapi-scope="internal" restapi-title="Get Logging Config" restapi-module="Logging Settings" description="Retrieves the logging configuration of the product."/>
+		<url path="/api/v3/settings/logging/config" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Logging Config" restapi-module="Logging Settings" description="Updates the logging configuration of the product.">
+			<inputstream template="am.admin.logSettings.configData" max-len="500" type="JSONObject"/>
+        </url>
+	<!-- Admin -> Logging Settings API ends -->
+	
+	<!-- Admin -> Personalize Webclient API starts -->
+		<url path="/api/v3/personalize/tabs" method="GET" restapi-scope="internal" restapi-title="Get Personalized Tabs" restapi-module="Personalize Webclient" description="Retrieves the tab configuration that has displayed in navigation bar." authentication="required" roles="am.role.ADMIN.EA.OP.US.DE.MA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkIfPersonalizeAllowedForUser"/>
+		<url path="/api/v3/personalize/tabs" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Personalized Tabs" restapi-module="Personalize Webclient" description="Updates the tab configuration that has to be displayed in navigation bar." roles="am.role.ADMIN.EA.OP.US.MA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkIfPersonalizeAllowedForUser">
+			<inputstream template="am.admin.personalize.tabOrder" max-len="9999" type="JSONArray" array-size="0-12"/>
+        </url>
+		<url path="/api/v3/personalize/tabs-options" method="GET" restapi-scope="internal" restapi-title="Get Tabs Options" restapi-module="Personalize Webclient" description="Retrieves the list of available tab options in product navigation bar." authentication="required" roles="am.role.ADMIN.EA.OP.US.DE.MA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkIfPersonalizeAllowedForUser"/>
+		<url path="/api/v3/personalize/config" method="GET" restapi-scope="internal" restapi-title="Get Personalization Config Details" restapi-module="Personalize Webclient" description="Retrieves the Personalization config details for requested User." authentication="required" roles="am.role.ADMIN.EA.OP.US.DE.MA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkIfPersonalizeAllowedForUser"/>
+		<url path="/api/v3/personalize/config" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Personalization Config Details" restapi-module="Personalize Webclient" description="Updates the Personalization config details for requested User." roles="am.role.ADMIN.EA.OP.US.MA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkIfPersonalizeAllowedForUser">
+			<inputstream template="am.admin.personalize.configData" max-len="5000" type="JSONObject"/>
+		</url>
+	<!-- Admin -> Personalize Webclient API ends -->
+	
+	<!-- Admin -> Enterprise Settings API starts -->
+		<url path="/api/v3/settings/enterprise/config" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.DE" authentication="required" restapi-title="Get Enterprise Config Details" restapi-module="Enterprise Settings" description="Retrieve the Enterprise settings configuration."></url>
+		<url path="/api/v3/settings/enterprise/config" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Enterprise Config Details" restapi-module="Enterprise Settings" description="Updates the Enterprise settings configuration.">
+			<inputstream template="am.admin.enterpriseSettings.configData" max-len="5000" type="JSONObject"/>
+        </url>
+	<!-- Admin -> Enterprise Settings API ends -->
+	
+	<!-- Admin -> VIP Settings API starts -->
+		<url path="/api/v3/settings/vip/config" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.DE" authentication="required" restapi-title="Get Server Settings - Virtual IP Configuration" restapi-module="Server Settings" description="Retrieves the Virtual IP settings configured for the product."></url>
+		<url path="/api/v3/settings/vip/config" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Server Settings - Virtual IP Configuration" restapi-module="Server Settings" description="Updates the Virtual IP settings configured for the product.">
+			<inputstream template="am.admin.vipSettings.configData" max-len="5000" type="JSONObject"/>
+        </url>
+	<!-- Admin -> VIP Settings API ends -->
+	
+	<!-- Admin -> Privacy Settings API starts -->
+		<!--<url path="/api/v3/privacy/consent" method="GET" />
+		<url path="/api/v3/privacy/pii/types" method="GET" />
+		<url path="/api/v3/privacy/pii/search" method="POST" api="true" authentication="required">
+			<param name="piiType" max-len="15" regex="am.admin.privacy.piiType.value"/>
+			<param name="piiSearchStr" max-len="500" type="String"/>
+        </url>-->
+	<!-- Admin -> Privacy Settings API ends -->
+	
+	<!-- Message and Quick Links framework API starts -->
+		<url path="/api/v3/message/reopen" method="PUT" restapi-scope="internal" api="true" authentication="required"/>
+	<!-- Message and Quick Links framework API ends -->
+			<url path="/api/v3/settings/security" method="GET" restapi-scope="internal" restapi-title="Get Security Settings Status" restapi-module="Security Settings" description="Retrieves the existing security settings values."/>
+		<url path="/api/v3/settings/security" method="POST" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Security Settings" restapi-module="Security Settings" description="Update value for an individual security setting">
+			<inputstream template="am.security.settings" max-len="1000" type="JSONObject"/>
+		</url>
+	
+
+	
+	<!-- Add-On Settings API starts -->
+		<url path="/api/v3/integrations" method="GET" restapi-scope="internal" restapi-title="Get Integration Details" restapi-module="Add On" description="The API offers integrated product details."/>
+		<url path="/api/v3/integrations/status" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Integration Status" restapi-module="Add On" description="Updates the integration status.">
+			<param name="id" type="long"/>
+			<param name="prodName" regex="am.admin.addon.sync.prodName.value" />
+			<param name="syncstatus" regex="am.boolean"/>
+        </url>
+        <url path="/api/v3/integrations" method="DELETE" restapi-scope="internal" api="true" authentication="required" restapi-title="Delete Integrated Products" restapi-module="Add On" description="Deletes the integrated product.">
+			<param name="id" type="long"/>
+			<param name="prodName" regex="am.admin.addon.delete.prodName.value" />
+			<param name="deleteTickets" regex="am.boolean"/>
+        </url>
+        <url path="/api/v3/integrations/resync" method="POST" restapi-scope="internal" api="true" authentication="required" restapi-title="Resync Integration" restapi-module="Add On" description="The API facilitates the process of resynchronizing the integrated product.">
+			<param name="id" type="long"/>
+			<param name="prodName" regex="am.admin.addon.resync.prodName.value" />
+        </url>
+		<url path="/api/v3/integrations/audit" method="POST" restapi-scope="internal" api="true" authentication="required" restapi-title="Audit Integration" restapi-module="Add On" description="Used to audit the integrated products.">
+			<param name="productName" regex="am.admin.addon.delete.prodName.value" />
+			<param name="action" regex="am.admin.addon.audit.operations"/>
+		</url>
+	<!-- Add-On Settings API ends -->
+	
+	<!-- Slack Integration API starts -->
+		<url path="/api/v3/integrations/slack" method="POST" restapi-scope="internal" api="true" authentication="required" roles="am.role.ADMIN.EA" restapi-title="Integrate Slack" restapi-module="Slack Integration" description="This API is used to integrate the slack with Application Manager.">
+			<param name="authToken" regex="cleartextpattern" secret="true"/>
+		</url>
+		<url path="/api/v3/integrations/slack" method="PUT" api="true" authentication="required" roles="am.role.ADMIN.EA" restapi-title="Update Slack Integration" restapi-module="Slack Integration" description="Update the slack integration.">
+			<param name="authToken" regex="cleartextpattern" secret="true"/>
+		</url>
+	<!-- Slack Integration API ends -->
+	
+	<!-- Slack Action API starts -->
+		<url path="/api/v3/notifications/slack" method="POST" restapi-scope="internal" api="true" authentication="required" roles="am.role.ADMIN.EA" restapi-title="Send Slack Notifications" restapi-module="Slack Actions" description="This API allows you to send notifications and messages to Slack channels or users programmatically.">
+			<inputstream template="am.action.slack" type="JSONObject" max-len="9000"/>
+		</url>
+		<url path="/api/v3/notifications/slack" method="GET" restapi-scope="internal" api="true" authentication="required" roles="am.role.ADMIN.EA" privilege-identifier="actionId" restapi-title="Get Slack Notifications" restapi-module="Slack Actions" description="Used to get a slack notificarions.">
+			<param name="actionId" type="int"/>
+		</url>
+		<url path="/api/v3/notifications/slack" method="PUT" restapi-scope="internal" api="true" authentication="required" roles="am.role.ADMIN.EA" restapi-title="Update Slack Notification" restapi-module="Slack Actions" description="Updates the slack notifications.">
+			<inputstream template="am.action.slack" type="JSONObject" max-len="9000"/>
+		</url>
+		<url path="/api/v3/notifications/slack" method="DELETE" restapi-scope="internal" api="true" authentication="required" roles="am.role.ADMIN.EA" restapi-title="Delete Slack Notification" restapi-module="Slack Actions" description="Deletes the slack notification.">
+			<inputstream template="am.action.slack.selected" type="JSONObject" max-len="9000"/>
+		</url>
+		<url path="/api/v3/notifications/slack/execute" method="POST" restapi-scope="internal" api="true" authentication="required" roles="am.role.ADMIN.EA.OP" privilege-identifier="actionId" restapi-title="Execute Slack Action" restapi-module="Slack Actions" description="Helps in Executing the slack actions.">
+			<param name="actionId" type="int"/>
+		</url>
+		<url path="/api/v3/notifications/slack/channelsandmembers" method="GET" restapi-scope="internal" authentication="required" roles="am.role.ADMIN.EA" restapi-title="Get Slack Channels and Members" restapi-module="Slack Actions" description="List the Slack Channels and Members."/>
+	<!-- Slack Action API ends -->
+	
+	<!-- Lama integration starts -->
+	
+		<url path="/api/v3/integrations/lama" method="POST" api="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<inputstream template="am.integration.lama" type="JSONObject" max-len="1000000" />
+		</url>
+		<url path="/api/v3/integrations/lama/${am.long.value}" method="PUT" api="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true" >
+			<inputstream template="am.integration.lama" type="JSONObject" max-len="1000000" />
+		</url>
+		<url path="/api/v3/integrations/lama/${am.long.value}" method="GET" api="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+		</url>
+		<url path="/api/v3/integrations/lama" method="GET" api="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+		</url>
+		<url path="/api/v3/integrations/businesshours" method="GET" api="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+		</url>
+		<url path="/api/v3/integrations/lama/reload" method="POST" api="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			
+		</url>
+		<url path="/api/v3/integrations/lama/togglePlay/${am.long.value}" method="POST" api="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true" >
+			<param name="toggleStatus"  regex="zeroandone"/>
+		</url>
+		<url path="/api/v3/integrations/lamaMeta" method="GET" api="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+		</url>
+	
+	<!-- Lama integration ends -->
+	<!-- Password Manager integration starts -->
+		<url path="/api/v3/integrations/password-manager/config"  method="GET" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true" />
+
+		<url path="/api/v3/integrations/password-manager/schedule/${am.long.value}" method="GET" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true">	
+			<param name="cpID" type="long"/>
+		</url>
+	    <url path="/api/v3/integrations/password-manager/${am.long.value}" method="GET" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true"/>
+		<url path="/api/v3/integrations/password-manager" method="POST" api="true" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true">
+			<inputstream template="am.password.manager.configure" max-len="50000" type="JSONObject"/>
+	    </url> 
+	    <url path="/api/v3/integrations/password-manager/test-connection" method="POST" api="true" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true">
+			<inputstream template="am.password.manager.configure" max-len="50000" type="JSONObject"/>
+	    </url>
+		<url path="/api/v3/integrations/password-manager/reports" method="GET" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true"/>
+		<url path="/api/v3/integrations/password-manager/shared-resources" method="GET" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true"/>
+		<url path="/api/v3/integrations/password-manager/shared-resources/${am.long.value}/accounts" method="GET" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true"/>
+		
+		<url path="/api/v3/integrations/password-manager/cyberark/safe-names" method="GET" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true">
+			<inputstream template="am.password.manager.configure" max-len="50000" type="JSONObject"/>
+	    </url>
+		<url path="/api/v3/integrations/password-manager/reports/${am.long.value}/resources"   method="GET" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true"/>
+	    <url path="/api/v3/integrations/password-manager/sync/${am.long.value}" method="POST" api="true" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true"/>
+	    <url path="/api/v3/integrations/password-manager/generate-token" method="POST" api="true" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true"/>
+	    <url path="/api/v3/integrations/password-manager/password-sync" method="PUT" api="true" roles="am.role.ADMIN" throwallerrors="true" authentication="required" deny-del-admin="true">
+	    	<param name="sync" regex="am.pam.integration.sync"/>
+	    </url> 		
+    
+		
+	<!-- Password Manager integration  -->
+	
+	<!-- Actions Enable and Disable starts -->
+	
+	<url path="/api/v3/notifications/${action.types}/bulkEnableDisable" method ="POST" api="true" authentication="required" roles="am.role.ADMIN.EA" restapi-scope="internal"
+	custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPrivilegeForActionId">
+		<param name="actionIDs" regex="am.webclient.resIds.commaSeparated" max-len="1000"/>
+		<param name="operationType" regex="am.actions.enabledisable"/>
+	</url>
+	
+	<!-- Actions Enable and Disable ends -->
+	
+	<!--REST API Alarm URL STARTS-->
+		<url path="/api/v3/alarm/modetails/${am_jersey_rest_api_id}" method="GET" restapi-scope="internal" restapi-title="Get Alarm Details" restapi-module="Alarm" description="Retrieves the alarm details."/>
+		<url path="/api/v3/alarm/attribute/${am_jersey_rest_api_id}/${am_jersey_rest_api_id}" method="GET" restapi-scope="internal" restapi-title="Get Alarm Attributes" restapi-module="Alarm" description="Retrieves events from specific alarms for effective monitoring and response.">
+			<param name="motype" max-len="500" type="String"/>
+		</url>
+		<url path="/api/v3/alarm/eventhistory/${am_jersey_rest_api_id}/${am_jersey_rest_api_alpha_numberic}" method="GET" restapi-scope="internal" restapi-title="Get Event History" restapi-module="Alarm" description="Retrieves events from specific alarms for effective monitoring and response.">
+			<param name="draw" type="int"/>
+			<param name="am.alarm.datatable.param.data" name-regex="true" regex="am.alarm.datatable.col.headers"/>
+			<param name="am.alarm.datatable.param" name-regex="true" regex="am.api.TFNull"/>
+			<param name="am.alarm.datatable.param.search" name-regex="true" regex="am.api.TFNull"/>
+			<param name="start" type="int"/>
+			<param name="length" type="int"/>
+			<param name="search[value]" regex="am.api.TFNull"/>
+			<param name="search[regex]" regex="am.api.TFNull"/>
+			<param name="_" type="long"/>
+		</url>
+		<url path="/api/v3/alarm/exportPdf/${am_jersey_rest_api_id}/${am_jersey_rest_api_alpha_numberic}/${am_jersey_rest_api_alpha_numberic}" method="GET" restapi-scope="internal" restapi-title="Export PDF" restapi-module="Alarm" description="Provides the alarm event in the form of PDF file."/>
+		<url path="/api/v3/alarm/exportExcel/${am_jersey_rest_api_id}/${am_jersey_rest_api_alpha_numberic}/${am_jersey_rest_api_alpha_numberic}" method="GET" restapi-scope="internal" restapi-title="Export Excel" restapi-module="Alarm" description="Provides the alarm event in the form of Excel file."/>
+	<!--REST API Alarm URL ENDS -->
+		
+	<!-- Add-On Prometheus API STARTS -->
+		<url path="/api/v3/integrations/prometheus/${am_jersey_rest_api_id}" method="GET" restapi-scope="internal" restapi-title="Prometheus Details" restapi-module="Prometheus" description="Fetches all the details about the prometheus integration."/>
+		<url path="/api/v3/integrations/prometheus" method="POST" restapi-scope="internal" api="true" authentication="required" restapi-title="Add Prometheus" restapi-module="Prometheus" description="This API used to integrate prometheus.">
+			<inputstream template="am.prometheus.config.params" type="JSONObject" max-len="30000"/>
+		</url>
+		<url path="/api/v3/integrations/prometheus/${am_jersey_rest_api_id}" method="PUT" restapi-scope="internal" api="true" authentication="required" restapi-title="Update Prometheus" restapi-module="Prometheus" description="Used to update Prometheus Configurations.">
+			<inputstream template="am.prometheus.config.params" type="JSONObject" max-len="30000"/>
+		</url>
+		<url path="/api/v3/integrations/prometheus/${am_jersey_rest_api_id}/monitors" method="GET" restapi-scope="internal">
+			<param name="status" regex="am_prometheus_discovered_status"/>
+			<param name="masId" type="int"/>
+		</url>
+		<url path="/api/v3/integrations/prometheus/discovery" method="POST" restapi-scope="internal" api="true" authentication="required">
+			<inputstream template="am.prometheus.config.params" type="JSONObject" max-len="5000"/>
+		</url>
+		<url path="/api/v3/integrations/prometheus/${am_jersey_rest_api_id}/discovery" method="POST" restapi-scope="internal" api="true" authentication="required"/>
+	<!-- Add-On Prometheus API ENDS -->
+	
+	<!-- Admin -> Rebranding Settings API starts -->
+	<url path="/api/v3/settings/rebranding/config" method="GET" restapi-scope="internal" authentication="required" roles="am.role.ADMIN.EA.DE" restapi-title="Obtaining Rebranding Settings" restapi-module="Rebranding" description="The API is responsible for fetching configuration information related to rebranding."/>
+    <url path="/api/v3/settings/rebranding/config" method="PUT" restapi-scope="internal" api="true" authentication="required" roles="am.role.ADMIN.EA" restapi-title="Adding Rebranding Settings" restapi-module="Rebranding" description="This API is utilized to save Rebranding configurations.">
+        <param name="isLoginBgCustomEnabled" type="boolean" description="The flag that indicates whether the login page is customized or not. Default value is true"/>
+        <param name="loginBgSelected" regex="am.webclient.rebranding.bg.option" description="The value indicates the type of background selected to be loaded on the login page. It can have two possible values: customColor and customImage."/>
+        <param name="loginBgColor" regex="am.webclient.rebranding.bg.color.value" description="Specifies the chosen background value for the login page. It can be set to values like gradient_01, gradient_02, and so on."/>
+        <param name="loginSlider" type="boolean" description="The flag controls the visibility of Quick links at the bottom of the login page. Default value is set to true, indicating that the Quick links are shown."/>
+        <param name="loginFeatures" type="boolean" description="The flag controls the visibility of Build related details on login page. Default value is set to true, indicating that the Build related details are shown."/>
+        <param name="showRememberMe" type="boolean" description="The flag controls the visibility of Remember password on login page. Default value is set to true, indicating that the Remember password are shown."/>
+		<param name="showCustomBanner" type="boolean" description="The flag determines whether the custom banner image is displayed on the login page."/>
+        <param name="loginBgImgOption" regex="am.webclient.rebranding.bg.img.option" description="The value represents the selected background type for the login page. There are two options: default and upload."/>
+        <param name="hasLoginBgImage" type="boolean" description="The flag that indicates whether the request includes a login background image."/>
+		<param name="hasLoginBannerImage" type="boolean" description="The flag that indicates whether the request includes a login banner image."/>
+		<param name="loginDefaultADSelected" type="boolean" description="The flag indicates whether the default AD is selected or not."/>
+		<param name="loginDefaultAD" regex="am.webclient.domainname" description="Value of the Active Directory (AD) that is pre-selected by default on the login page."/>
+		<param name="showCustomMessage" type="boolean" description="The flag controls the visibility of Custom Message on login page. Default value is set to false, indicating that the Custom Message are not shown."/>
+		<param name="loginCustomMessage" type="String" max-len="200" description="Custom message to be displayed on the login page."/>
+		<param name="loginMobileAppHide" type="boolean" description="The flag controls the visibility of Mobile App Promotion Icons on login page. By default Mobile App Promotion Icons are shown."/>
+		<file allowed-extensions="jpg,png,jpeg" content-type-name="image" max-size="3072" name="loginBgImage" >
+			<filename regex="am.common.extended.filename" max-len="250"/>
+		</file>
+		<file allowed-extensions="jpg,png,jpeg" content-type-name="image" max-size="3072" name="loginBannerImage" >
+			<filename regex="am.common.extended.filename" max-len="250"/>
+		</file>
+    </url>
+	<url path="/api/v3/settings/rebranding/reset" method="PUT" restapi-scope="internal" api="true" authentication="required" roles="am.role.ADMIN.EA" restapi-title="Resetting Rebranding Settings" restapi-module="Rebranding" description="This API is utilized to restore the rebranding settings to their default configurations."/>
+	<!-- Admin -> Rebranding Settings API ends -->
+	
+	<!-- Report API Starts -->
+		<url path="/api/v3/reports/list" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.US.DE" user-scope="AppManager.Reports.READ" api="true" authentication="required" restapi-title="Get Reports" restapi-module="Reports" description="Provides the availabe reports.">
+			<param name="reportCategory" regex="am.reports.categories"/>
+		</url>
+	<!-- Report API Ends -->
+	
+	<!-- SMS Gateway API starts -->
+		<url path="/api/v3/config/smsgateway" method="POST" api="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true" user-scope="AppManager.SMSGateway.WRITE" authToken-authentication="required">
+			<inputstream template="am.sms.gateway.all" max-len="1000000" type="JSONArray" array-size="1-4"/>
+		</url>
+		<url path="/api/v3/config/smsgateway" method="DELETE" api="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true" user-scope="AppManager.SMSGateway.WRITE" authToken-authentication="required">
+			<param name="smsProvider" regex="am.sms.gateway.provider"/>		
+		</url>
+	<!-- SMS Gateway API ends -->
+	
+	</urls>
+	
+	<urls threshold="300" duration="1" lock-period="3" throwallerrors="true">
+		<param name="PRINTER_FRIENDLY" type="boolean"/>
+		<param name="_" type="long" description="Current millisecond value is passed in this param for Ajax call"/>
+		<param name="scheduleID" type="long"/>	 
+		<param name="repeatFrequency" regex="^(never|daily|weekly|monthly)"/>	
+		<param name="dayOfWeek" regex="[1-7]"/>
+		<param name="dayOfMonth" regex="([1-9]|[12][0-9]|3[01])"/> 
+		<param name="timeInHrs" type="int"/>
+		<param name="timeInMins" type="int"/> 
+		<url path="/api/v3/integrations/password-manager/schedule" method="POST" api="true" authentication="required" roles="am.role.ADMIN" deny-del-admin="true"/>
+		<url path="/api/v3/integrations/password-manager/schedule" method="PUT" api="true" authentication="required" roles="am.role.ADMIN" deny-del-admin="true"/>
+	</urls>
+	
+	<urls api="true" authentication="required">
+		<url path="/api/v3/settings/tfaConfig" method="GET" roles="am.role.ADMIN.EA.DE" deny-del-admin="true" disable-get-api-csrf="true" restapi-scope="internal" restapi-title="Get TFA Configurations" restapi-module="Two Factor Authentication" description="Fetches the Two Factor Authentication Configurations.">
+			<param-group name="am.additional.extra.params" />
+		</url>
+		<url path="/api/v3/settings/tfaConfig" method="POST" roles="am.role.ADMIN.EA" allow-only-superadmin="true" restapi-scope="internal" restapi-title="Add TFA Configuirations" restapi-module="Two Factor Authentication" description="Used to add the Two Factor Authentication.">
+			<inputstream template="am.tfa.config.params" type="JSONObject" max-len="200"/>
+		</url>
+	</urls>
+	
+	
+	<urls api="true" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<url path="/api/v3/settings/saml-config/list" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.DE" deny-del-admin="true" restapi-title="Get SAML Authenticator List" restapi-module="Data Collection" description="To provide the list of authenticators configured.">
+		</url>
+		<url path="/api/v3/settings/saml-config/details/${am.long.value}" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA" deny-del-admin="true" restapi-title="Get SAML Authenticator Data" restapi-module="Data Collection" description="To get the data of the authenticator.">
+		</url>
+		<url path="/api/v3/settings/saml-config" method="DELETE" roles="am.role.ADMIN.EA" deny-del-admin="true" restapi-scope="internal" restapi-title="Delete SAML Authenticator" restapi-module="Data Collection" description="Delete the configured authenticators.">
+			<inputstream template="am.saml.config.delete" type="JSONObject" max-len="500" description=""/>
+		</url>
+		<url path="/api/v3/settings/saml-config" method="POST" roles="am.role.ADMIN.EA" deny-del-admin="true" restapi-scope="internal" restapi-title="Add SAML Authenticator" restapi-module="Data Collection" description="To add a new authenticator.">
+			<inputstream template="am.saml.config.data" type="JSONObject" max-len="150000"/>
+		</url>
+		<url path="/api/v3/settings/saml-config/${am.long.value}" method="PUT" restapi-scope="internal" roles="am.role.ADMIN.EA" deny-del-admin="true" restapi-title="Update SAML Authenticator" restapi-module="Data Collection" description="To update the existing authenticator.">
+			<inputstream template="am.saml.config.data" type="JSONObject" max-len="150000"/>
+		</url>
+	</urls>
+	
+	<urls api="true" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<url path="/api/v3/reports/advanced/moduledata" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.DE" deny-del-admin="true" user-scope="AppManager.reports.READ" restapi-title="Get APM Monitor Metrics " restapi-module="Advanced Reports" description="To get the monitor metrics of the APM server.">
+			<param name="id" type="long" range="1-10"/>
+		</url>
+		<url path="/api/v3/reports/advanced/list" method="GET" roles="am.role.ADMIN.EA.DE" deny-del-admin="true">
+		</url>
+<url path="/api/v3/reports/advanced" method="POST" roles="am.role.ADMIN.EA.DE" deny-del-admin="true">
+	<param name="name" regex="am.displayname.common" max-len="200"/>
+<param name="reportid" type="long" />
+<param name="description" type="String" max-len="200"/>
+<param name="selectedColumns" type="JSONObject" template="selectedColumnsTemplate" min-occurrences="1"  max-len="-1"/>
+<param name="headerSequence" type="JSONArray" template="headerSeqTemplate" min-occurrences="1" max-len="-1" array-size="1-10000"/>
+<param name="groupBy" type="JSONArray" template="groupByTemplate" max-len="-1" array-size="1-10000"/>
+			<param name="filtersData" type="JSONObject" template="filtersDataTemplate" max-len="-1"/>
+		</url>
+<url path="/api/v3/reports/advanced/${am.long.value}/copy" method="GET" roles="am.role.ADMIN.EA.DE" deny-del-admin="true">
+		</url>
+<url path="/api/v3/reports/advanced/savecopy" method="POST" roles="am.role.ADMIN.EA.DE" deny-del-admin="true">
+<param name="reportid" type="long" min-occurrences="1"/>
+<param name="name" regex="am.displayname.common"  max-len="200" min-occurrences="1"/>
+<param name="description" type="String"  max-len="200" />
+		</url>
+
+<url path="/api/v3/reports/advanced" method="DELETE" roles="am.role.ADMIN.EA.DE" deny-del-admin="true">
+
+<param name="reportids" regex="am.common.numberandcomma"/>
+		</url>
+
+<url path="/api/v3/reports/advanced/${am.long.value}/generate-report" method="GET" roles="am.role.ADMIN.EA.DE" deny-del-admin="true">
+		</url>
+		<url path="/api/v3/reports/advanced/exportreport/(pdf|excel)/${am.long.value}" method="GET" roles="am.role.ADMIN.EA.DE" deny-del-admin="true">
+		</url>
+<url path="/api/v3/reports/advanced/${am.long.value}/edit" method="GET" roles="am.role.ADMIN.EA.DE" deny-del-admin="true">	
+		</url>
+		<url path="/api/v3/reports/advanced/generate" method="POST" restapi-scope="internal" roles="am.role.ADMIN.EA.DE" user-scope="AppManager.reports.READ" deny-del-admin="true" restapi-title="Preview Advanced Report" restapi-module="Advanced Reports" description="This API is used to preview advanced reports.">
+			<param name="getColumnDetails" type="boolean"/>
+			<param name="fetchFromRowNumber" type="int" range="1-100000"/>
+			<param name="rowsToFetch" type="int" range="1-1000"/>
+			<param name="moduleId" type="int" min-occurrences="1" max-occurrences="1"/>
+			<param name="selectedColumns" type="JSONObject" template="selectedColumnsTemplate" min-occurrences="1" max-occurrences="1" max-len="-1"/>
+			<param name="filtersData" type="JSONObject" template="filtersDataTemplate" max-occurrences="1" max-len="-1"/>
+			<param name="criteria" type="JSONObject" template="filtersDataTemplate" max-occurrences="1" max-len="-1"/>
+			<param name="groupBy" type="JSONArray" template="groupByTemplate" max-occurrences="1" max-len="-1" array-size="1-10000"/>
+			<param name="headerSequence" type="JSONArray" template="headerSeqTemplate" min-occurrences="1" max-occurrences="1" max-len="-1" array-size="1-10000"/>
+			<param name="isPreview" type="String" max-len="1000000"/>
+			<param name="isView" type="String" max-len="1000000"/>
+		</url>
+		<url path="/api/v3/reports/advanced/edit" method="POST" restapi-scope="internal" roles="am.role.ADMIN.EA.DE" user-scope="AppManager.reports.READ" deny-del-admin="true" restapi-title="Advanced Report Edit" restapi-module="Advanced Reports" description="Used to edit the Advanced Report.">
+			<param name="moduleId" type="int" min-occurrences="1" max-occurrences="1"/>
+			<param name="selectedColumns" type="JSONObject" template="selectedColumnsTemplate" min-occurrences="1" max-occurrences="1" max-len="-1"/>
+			<param name="filtersData" type="JSONObject" template="filtersDataTemplate" max-occurrences="1" max-len="-1"/>
+			<param name="criteria" type="JSONObject" template="filtersDataTemplate" max-occurrences="1" max-len="-1"/>
+			<param name="groupBy" type="JSONArray" template="groupByTemplate" max-occurrences="1" max-len="-1" array-size="1-10000"/>
+			<param name="headerSequence" type="JSONArray" template="headerSeqTemplate" min-occurrences="1" max-occurrences="1" max-len="-1" array-size="1-10000"/>
+			<param name="isPreview" type="String" max-len="1000000"/>
+			<param name="isView" type="String" max-len="1000000"/>
+		</url> 
+	</urls>
+
+	<jsontemplates>
+		<jsontemplate name="selectedColumnsTemplate">
+			<key name="^([0-9]+)$" name-regex="true" max-len="-1" type="JSONArray" template="advReportSelColsTemp" max-occurrences="1000" array-size="1-10000"/>
+		</jsontemplate>
+		<jsontemplate name="advReportSelColsTemp">
+			<key index="0-1000" type="String"  max-len="-1" array-size="1-10000"/>
+		</jsontemplate>
+		<jsontemplate name="filtersDataTemplate">
+			<key name="filterCount" type="int" max-occurrences="1"/>
+			<key name="filters" type="JSONObject" template="advReportFilterTemp" max-len="1000"/>
+			<key name="filtersPattern" type="String" max-occurrences="1" max-len="100"/>
+			<key name="timePeriod" regex="timePeriod" max-occurrences="1"/>
+			<key name="timeWindow" regex="businessRuleTimeWindow" max-occurrences="1"/>
+			<key name="startDate" regex="date" max-occurrences="1"/>
+			<key name="endDate" regex="date" max-occurrences="1"/>
+			<key name="startHour" regex="hours" max-occurrences="1"/>
+			<key name="endHour" regex="hours" max-occurrences="1"/>
+			<key name="excludedDays" regex="excludedDaysRegex" max-len="56" max-occurrences="1"/>
+			<key name="businessRuleID" type="long" max-occurrences="1"/>
+			<key name="businessRuleData" type="String" max-occurrences="1" max-len="10000"/>
+			<key name="hasAvailability" type="boolean" max-occurrences="1"/>
+		</jsontemplate>
+		<jsontemplate name="advReportFilterTemp">
+			<key name="^([0-9]+)$" name-regex="true" type="JSONArray" template="filterArrayTemp" max-occurrences="100" max-len="-1" array-size="1-10000"/>
+		</jsontemplate>
+
+		<jsontemplate name="filterArrayTemp">
+			<key index="0-100" type="JSONObject" template="filterObjectTemp" array-size="1-10000" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="filterObjectTemp">
+			<key name="operator" type="String" max-len="15"/>
+			<key name="value" type="String" max-len="500"/>
+			<key name="columnName" type="String" max-len="500"/>
+			<key name="filterId" type="int"/>
+		</jsontemplate>
+		<jsontemplate name="groupByTemplate">
+			<key index="0-2" type="JSONObject" template="advReportgroupByTemp" array-size="1-10000" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="advReportgroupByTemp">
+			<key name="id" type="int" min-occurrences="1" max-occurrences="1"/>
+			<key name="orderBy" regex="orderBy" min-occurrences="1" max-occurrences="1"/>
+			<key name="columnName" regex="opmee_columnName" min-occurrences="1" max-occurrences="1"/>
+		</jsontemplate>
+		<jsontemplate name="headerSeqTemplate">
+			<key index="0-1000" type="JSONObject" template="advReportHeaderSeqTemp" max-len="-1" array-size="1-10000"/>
+		</jsontemplate>
+		<jsontemplate name="advReportHeaderSeqTemp">
+			<key name="tableId" type="int" min-occurrences="1" max-occurrences="1"/>
+			<key name="parentId" regex="opmee_parentId" min-occurrences="1" max-occurrences="1" max-len="1000"/>
+			<key name="value" type="String"  min-occurrences="1" max-occurrences="1" max-len="1000"/>
+		</jsontemplate>
+		<jsontemplate name="am.password.manager.configure">
+			<key name="cpId" type="long"/>
+	        <key name="protocol" regex="^(http|https)$"/>
+	        <key name="serviceName" regex="^(PMP|PAM360|CyberArk)$"/>
+	        <key name="serverPort" type="int"/>
+            <key name="serverName" type="String" max-len="255" />
+            <key name="enabled" type="boolean" />
+			<key name="username" type="String" max-len="255"/>
+			<key name="password" type="String" secret="true" max-len="255"/>
+			<key name="auth_token" type="String" secret="true" max-len="1000"/>
+			<key name="app_server_name" type="String" max-len="255"/>
+			<key name="safe_name" type="String" max-len="500"/>
+		 	<key name="scheduleSettings" template="scheduleSettings" type="JSONObject" max-len="10000"/>
+   		</jsontemplate>
+   		<jsontemplate name="scheduleSettings">
+			<key name="scheduleID" type="long"/>
+ 			<key name="repeatFrequency" regex="^(never|daily|weekly|monthly)"/>
+			<key name="dayOfWeek" regex="[1-7]"/>
+			<key name="dayOfMonth" regex="([1-9]|[12][0-9]|3[01])"/>
+			<key name="timeInHrs" type="int"/>
+			<key name="timeInMins" type="int"/>
+   		</jsontemplate>
+	</jsontemplates>
+	
+	<!-- JUNIT URL CONFIG STARTS -->
+	<!-- <urls>
+		<url path="/api/v3/jtest/module-data" method="GET" />
+		<url path="/api/v3/jtest/start" method="POST" api="true" authentication="required">
+			<inputstream template="am.test.bootree.array" max-len="-1" type="JSONArray"/>
+		</url>
+	</urls> -->
+	<!--Junit Template STARTS -->
+	<!-- <jsontemplates>
+		<jsontemplate name="am.test.bootree.array">
+			 <key index="0-200" type="String" template="am.test.bootree.object" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="am.test.bootree.object">
+			<key name="id" type="String" max-len="-1"></key>			 
+			<key name="text" type="String" max-len="-1"></key>
+			<key name="checked" type="String" max-len="-1"></key>
+			<key name="children" type="JSONArray" template="am.test.bootree.array" max-len="-1"></key>			 
+		</jsontemplate>
+	</jsontemplates> -->
+	<!--Junit Template ENDS -->
+	<!-- JUNIT URL CONFIG ENDS -->
+	
+	<!-- APMInsight Urls -->
+     <urls api="true" throwallerrors="true" authentication="required" url-type="dynamic">
+        <param name="resourceId" type="long" />
+        <param-group name="am.additional.extra.params" />
+        <param name="eeSyncKey" type="String" secret="true" />
+        <param name="probeId" type="long" />
+        <param name="probeID" type="long" />
+        <url path="/api/v3/apminsight/licensekey" method="GET" restapi-scope="internal" roles="am.role.ADMIN" deny-del-admin="true" restapi-title="Licensekey" restapi-module="APMInsight" description="Used to fetch the licenseKey for APMInsights."/>
+		<url path="/api/v3/apminsight/checkLicense" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.US.DE" restapi-title="CheckLicense" restapi-module="APMInsight" description="To check the license of the Add ons."/>
+		<url path="/api/v3/apminsight/info/(applications|instances)" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.US.DE" restapi-title="Applications Info" restapi-module="APMInsight" description="To get the info of the applications in the APMInsight."/>
+		<url path="/api/v3/apminsight/view" method="PUT" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="view" regex="^(applications|instances)$" description="Param which has the updated view for APMInsight home page"/>
+    	</url>
+   		 <url path="/api/v3/apminsight/config" method="PUT" restapi-scope="internal" roles="am.role.ADMIN.EA.DE" restapi-title="Add APMInsights Settings" restapi-module="APMInsight" description="This API is used to add APMInsights Settings.">
+    		<param name="configName" type="String" description="This params contains the config name which needs to be updated."></param> <!--this param will contains the config name  -->
+    	</url>
+		<url path="/api/v3/apminsight/list/${apminsight.app.or.instance}/${apminsight.duration}" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.US.DE" restapi-title="Get Managed Server Monitors Data" restapi-module="APMInsight" description="Retrives the monitors data from managed server."/>	
+        <url path="/api/v3/apminsight/${apminsight.app.or.instance}/${apminsight.resourceid}/manage" method="POST" restapi-scope="internal" roles="am.role.ADMIN.OP" restapi-title="Manage Monitors" restapi-module="APMInsight" description="This API is used to manage the unmanaged monitor."/>
+		<url path="/api/v3/apminsight/${apminsight.app.or.instance}/${apminsight.resourceid}/unmanage" method="POST" restapi-scope="internal" roles="am.role.ADMIN.OP" restapi-title="Unmanage Monitors" restapi-module="APMInsight" description="This API is used to Unmanage the monitors."/>
+		<url path="/api/v3/apminsight/${apminsight.app.or.instance}/${apminsight.resourceid}" method="DELETE" restapi-scope="internal" roles="am.role.ADMIN" restapi-title="Delete Monitors" restapi-module="APMInsight" description="This API is used to delete the monitors in the APM Insight."/>
+		<url path="/api/v3/apminsight/${apminsight.app.or.instance}/${apminsight.resourceid}/info" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.US.DE" restapi-title="Get Monitor Info" restapi-module="APMInsight" description="Fetches Specif Monitors info from the APM Insight."/>
+		<url path="/api/v3/apminsight/${apminsight.app.or.instance}/${apminsight.resourceid}/actions" method="GET" restapi-scope="internal" roles="am.role.ADMIN.OP" restapi-title="Monitor Actions" restapi-module="APMInsight" description="To Show Monitor Actions based on the user role."/>
+		<url path="/api/v3/apminsight/${apminsight.app.or.instance}/${apminsight.resourceid}/agent/dismiss-alert" method="PUT" restapi-scope="internal" roles="am.role.ADMIN" restapi-title="Dismiss Alert" restapi-module="APMInsight" description="To dismiss the agent config profile alert shown in home tab."/>
+		<url path="/api/v3/apminsight/home/cache" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.US.DE" restapi-title="Monitors Count" restapi-module="APMInsight" description="Fetches the Monitors count in the APM Insight."/>
+        <url path="/api/v3/apminsight/${apminsight.txn.or.trace}/table/columns" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.US.DE" restapi-title="Column Details" restapi-module="APMInsight" description="Fetches the columns to be shown in transaction tab."/>
+        <url path="/api/v3/apminsight/${apminsight.txn.or.trace}/table/columns" method="PUT" restapi-scope="internal" roles="am.role.ADMIN.EA" deny-del-admin="true" restapi-module="APMInsight" description="To add the column details in the transaction tab.">
+			<param name="^apminsight\.txn\.(apdex|count|error|avgrt|minrt|maxrt|totrt|avgcputime|fatal|avgbytesin|minbytesin|maxbytesin|totbytesin|avgbytesout|minbytesout|maxbytesout|totbytesout)$" name-regex="true" regex="apminsight.onlyon.or.boolean" />
+			<param name="^apminsight\.trace\.(respTime|cpuTime|externalcalls|exceptionCount|sqlTime|traceAvgrt|bytesIn|bytesout|memoryUsed|dtcalls|methodcalls|instanceName)$" name-regex="true" regex="apminsight.onlyon.or.boolean" />
+			<param name="apminsight.apply.all.mas" regex="apminsight.onlyon.or.boolean" />	
+		</url>
+		<url path="/api/v3/apminsight/service-map/config/limit" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.US.DE" restapi-title="Grouping Limit" restapi-module="APMInsight" description="To fetch the grouping limits in the service map."/>
+		<url path="/api/v3/apminsight/service-map/config/limit" method="PUT" restapi-scope="internal" roles="am.role.ADMIN.EA" deny-del-admin="true" restapi-title="Add Grouping Limit" restapi-module="APMInsight" description="To set the grouping limits in the service map.">
+		     <param name="limit" regex="apminsight.servicemap.limit" description="Param Contains the new service map limit which needs to be updated in service map view."/>
+		</url>	
+		<url path="/api/v3/apminsight/${apminsight.resourceid}/poll-time" method="GET" restapi-scope="internal" roles="am.role.ADMIN.EA.OP.US.DE" restapi-title="Last Communication Time" restapi-module="APMInsight" description="To fetch the last communication time of the particular monitor."/>
+		
+		<!-- Delete Actions API -->
+		<url path="/api/v3/notifications" method="DELETE" restapi-scope="internal" api="true" authentication="required" roles="am.role.ADMIN.EA" user-scope="AppManager.Actions.WRITE">
+			<param name="actionIDs" regex="am.webclient.resIds.commaSeparated" max-len="1000"/>
+        </url>
+        <url path="/api/v3/apminsight/snapshot" method="POST" file-upload-max-size="51200" custom-scope-validator="com.manageengine.apminsight.apm.client.util.ApmInsightProxyUtil:validateResIdInRequest">
+	        <throttles window="ROLLING" scope="APPSERVER" key="url.path">
+				<throttle duration="10M" threshold="30" lock-period="10M"/>
+			</throttles>
+			<param name="toAddress" regex="apminsight.mail.regex" max-len="2000"/>
+			<param name="ccAddress" regex="apminsight.mail.regex" max-len="2000"/>
+			<param name="emailSubject" type="String" max-len="256"/>
+			<param name="emailDescription" type="String" max-len="10000"/>
+			<param name="uploadedFileCount" type="int"/>
+			<param name="ssCount" type="int"/>
+			<param name="resourceId" type="long"/>
+			<file name="am.common.extended.filename" content-type-name="apminsight_export" name-regex="true" allowed-extensions="png,pdf,xlsx,csv" max-size="51200">
+				<filename type="String" max-len="500"/>
+			</file>
+		</url>
+    </urls>
+
+    <!-- Execute Query API Starts -->
+    <urls throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" allow-only-superadmin="true" auth-keytype="SyncKey">
+		<param-group name="am.additional.extra.params" />
+		<param name="eeSyncKey" regex="am.alphanumeric" max-len="32" secret="true" />
+        <param name="query" type="String" max-len="100000"/>
+        <param name="masId" type="long"/>
+        <url path="/api/v3/executeQuery" method="GET" />
+		<url path="/api/v3/executeQuery" method="POST,PUT,DELETE" api="true" />
+	</urls>
+	<!-- Execute Query API Ends -->
+
+    <!-- Oracle RAC monitor details API Starts -->
+    <urls api="true" throwallerrors="true" authentication="required" url-type="dynamic">
+		<param-group name="am.additional.extra.params" />
+		<param name="eeSyncKey" type="String" secret="true" />
+    	<param name="apikey" max-len="40" regex="am.alphanumeric"/>
+    	<param name="probeId" type="long" />
+        <param name="probeID" type="long" />
+        <url path="/api/v3/monitordetails/oraclerac/${oraclerac.resourceID}" method="GET" privilege-identifier="url:5" roles="am.role.ADMIN.EA.OP.US.DE" disable-get-api-csrf="true" />
+		<url path="/api/v3/monitordetails/oraclerac/${oraclerac.resourceID}/clusterdetails" method="GET" privilege-identifier="url:5" roles="am.role.ADMIN.EA.OP.US.DE" disable-get-api-csrf="true" />
+		<url path="/api/v3/monitordetails/oraclerac/${oraclerac.resourceID}/nodes" method="GET" privilege-identifier="url:5" roles="am.role.ADMIN.EA.OP.US.DE" disable-get-api-csrf="true" />
+		<url path="/api/v3/monitordetails/oraclerac/${oraclerac.resourceID}/shareddisks" method="GET" privilege-identifier="url:5" roles="am.role.ADMIN.EA.OP.US.DE" disable-get-api-csrf="true" />
+		<url path="/api/v3/monitordetails/oraclerac/${oraclerac.resourceID}/pluggabledatabases" method="GET" privilege-identifier="url:5" roles="am.role.ADMIN.EA.OP.US.DE" disable-get-api-csrf="true" />
+	</urls>
+	<!-- Oracle RAC monitor details API Ends -->
+
+	<!--  New Action API Starts -->
+	<urls api="true" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA">
+		<param-group name="am.additional.extra.params" />
+		<param name="displayName" regex="am.displayname.common"/>
+		<url path="/api/v3/notifications/email" method="POST" restapi-scope="internal" restapi-title="Add Email Action" restapi-module="Actions" description="To add a new Email Action.">
+			<param name="fromAddress" type="String" max-len="250"/>
+			<param name="toAddress" type="String" max-len="10000"/>
+	    	<param name="subject" type="String" />
+	    	<param name="message" type="String" max-len="10000" />
+	    	<param name="mailFormat" type="int" range="0,1,2" />
+	    	<param name="appendMessage" type="int" range="1" />
+	    	<param name="smtpServer" regex="am.hostname" max-len="255" />
+	    	<param name="smtpport" type="int" />
+		</url>				
+	</urls>	
+	<!--  New Action API Ends -->
+	
+	<!-- List Action API Ends -->
+	<urls api="true" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA.DE" url-type="dynamic">
+		<param-group name="am.additional.extra.params" />
+		<url path="/api/v3/notifications/${action.type}/list" method="GET" restapi-scope="internal" disable-get-api-csrf="true" restapi-title="Get Actions List" restapi-module="Actions" description="Retrieves the list of Actions. Currently it is supported only for Email Actions."/>
+	</urls>
+	<!-- List Action API Ends  -->
+	
+</security>

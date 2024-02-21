@@ -1,0 +1,330 @@
+[10:31:09:212]|[02-20-2024]|[HEADER]|[ERROR]|[18]: Logging Started|
+[10:31:10:233]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: 	  ******************* Logging Started *******************
+	  -------General Information------
+	  Product = Applications Manager 16(Build 16841)
+	  OS Name = Linux
+	  OS Version = 6.2.0-1017-aws
+	  OS Architecture = amd64
+	  Tomcat version = 9.0.70
+	  Java Version = 1.8.0_352
+	  Java Vendor = Azul Systems, Inc.
+	  Java Specification = Java Platform API Specification
+	  Java Specification Version = 1.8
+	  Java VM Name = OpenJDK 64-Bit Server VM
+	  Java VM Information = mixed mode
+	  Java Compiler = null
+	  ********************************************************
+	  -------RDBMS Related Information------
+	  Database Product Name = PostgreSQL
+	  Database Product Version = 11.16
+	  Database Driver Name = PostgreSQL JDBC Driver
+	  Database Driver Version = 42.4.0
+	  Database User Name = dbuser
+	  Database URL = jdbc:postgresql://localhost:15432/amdb?ApplicationName=ApplicationsManager&dontTrackOpenResources=true&useUnicode=true&characterEncoding=UTF-8
+	  ********************************************************|
+[10:31:10:233]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Initializing WebNMS BackEnd server socket = TCP|
+[10:31:10:241]|[02-20-2024]|[MISCUSER]|[FATAL]|[52]: Starting WebNMS Server (BackEnd) on port 12000|
+[10:31:10:242]|[02-20-2024]|[MISCUSER]|[FATAL]|[52]: NMSBEServer Started on port: 12000|
+[10:31:10:246]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.utils.StartRelatedServices|
+[10:31:10:246]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.util.RunJSPModule|
+[10:31:10:250]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.topodb.DBServer|
+[10:31:10:251]|[02-20-2024]|[MISCUSER]|[FATAL]|[54]: Main called : RunJSPModule|
+[10:31:10:254]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.sas.NMSSAServer|
+[10:31:10:256]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.ms.NMSMServer|
+[10:31:10:260]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.security.authorization.NmsAuthManager|
+[10:31:10:262]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.security.authentication.NmsAuthenticationManager|
+[10:31:10:262]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.mapdb.MapServerBE|
+[10:31:10:263]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.poll.Collector|
+[10:31:10:263]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.fault.AMEventProcess|
+[10:31:10:264]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.management.policydb.NmsPolicyMgr|
+[10:31:10:266]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.startnms.NmsMainFE|
+[10:31:10:270]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.management.authorization.AuthMgr|
+[10:31:10:272]|[02-20-2024]|[MISCUSER]|[INFO]|[59]: Main called : NmsAuthManager|
+[10:31:10:279]|[02-20-2024]|[TOPOUSER]|[INFO]|[55]: Main called : DBServer|
+[10:31:10:287]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.config.NmsConfigurationServer|
+[10:31:10:287]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.store.DBUserStorageServer|
+[10:31:10:288]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.appln.operations.ApplnStandaloneBE|
+[10:31:10:289]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.nms.applnfw.operations.StandaloneApplnProcess|
+[10:31:10:289]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.framework.AMServerFramework|
+[10:31:10:290]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.startup.AMServerStartUp|
+[10:31:10:291]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.fault.AMFaultProcess|
+[10:31:10:291]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.framework.AMUrlMonitorProcess|
+[10:31:10:292]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.framework.AMRBMProcess|
+[10:31:10:292]|[02-20-2024]|[MAPUSER]|[INFO]|[61]: Main called : MapServer|
+[10:31:10:293]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.framework.AMScriptProcess|
+[10:31:10:294]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.wsm.datacollection.WSMProcess|
+[10:31:10:295]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.archiver.AMDataArchiverProcess|
+[10:31:10:295]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.cam.AMCAMProcess|
+[10:31:10:295]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.framework.comm.AMDistributionProcess|
+[10:31:10:296]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.cleanup.AMDataCleanupProcess|
+[10:31:10:296]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.framework.extprod.AMExtProdIntegrationProcess|
+[10:31:10:296]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.framework.MonitorsAdder|
+[10:31:10:297]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.manageengine.metrack.util.APMTracker|
+[10:31:10:297]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.framework.extprod.Site24x7IntegrationProcess|
+[10:31:10:297]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.manageengine.appmanager.server.discovery.DiscoveryProcess|
+[10:31:10:298]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.framework.extprod.OAuthRefreshAccessToken|
+[10:31:10:348]|[02-20-2024]|[POLICYUSER]|[FATAL]|[64]: Main called:NmsPolicyMgr|
+[10:31:10:349]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.server.framework.extprod.WebTokenRefreshOnStartup|
+[10:31:10:361]|[02-20-2024]|[MISCUSER]|[INFO]|[18]: Process Started :com.adventnet.appmanager.dbprocesses.schedule.ScheduledBackupProcess|
+[10:31:10:362]|[02-20-2024]|[MISCUSER]|[INFO]|[60]: Main called : NmsAuthenticationManager|
+[10:31:10:402]|[02-20-2024]|[POLLUSER]|[INFO]|[62]: Main called : Collector|
+[10:31:10:402]|[02-20-2024]|[POLLUSER]|[INFO]|[62]: Maximum oids per poll assigned as 15|
+[10:31:10:479]|[02-20-2024]|[MISCUSER]|[FATAL]|[54]: Module Initialized : RunJSPModule|
+[10:31:10:641]|[02-20-2024]|[CONFIGUSER]|[FATAL]|[68]: CLEAN_AUDIT_INTERVAL is 1|
+[10:31:10:641]|[02-20-2024]|[CONFIGUSER]|[FATAL]|[68]: AuthorizationInterface class name is: com.adventnet.management.config.AuthorizationInterfaceImpl|
+[10:31:10:656]|[02-20-2024]|[MISCUSER]|[FATAL]|[69]: DBUserStorageServer Module Initialized|
+[10:31:10:745]|[02-20-2024]|[CONFIGUSER]|[FATAL]|[68]: com.adventnet.management.config.ConfigRelationalAPI successfully initialized|
+[10:31:10:764]|[02-20-2024]|[CONFIGUSER]|[FATAL]|[68]: com.adventnet.management.config.RelationalAuditAPI successfully initialized|
+[10:31:11:090]|[02-20-2024]|[MAPUSER]|[INFO]|[61]: Number of MapObjects in Memory is set to 50 and Using RelationalDB|
+[10:31:11:090]|[02-20-2024]|[MAPUSER]|[INFO]|[61]: DBVector for table CUSTOMMAPS
+For DBVector CUSTOMMAPS, Column Name not given. Assuming with the value of VALUESTRING and table opened in read-write mode
+|
+[10:31:11:113]|[02-20-2024]|[MAPUSER]|[INFO]|[61]: DBVector for table DEFAULTMAPS
+For DBVector DEFAULTMAPS, Column Name not given. Assuming with the value of VALUESTRING and table opened in read-write mode
+|
+[10:31:11:134]|[02-20-2024]|[MAPUSER]|[INFO]|[61]: DBPropertytable Name CUSTOMPROPS
+For DBPropertytable CUSTOMPROPS, Column Names are not given. Assuming with the default values. Table opened in read-write mode
+|
+[10:31:11:392]|[02-20-2024]|[POLICYUSER]|[INFO]|[64]: Number of PolicyObjects in Memory is set to 25 and Using RelationalDB|
+[10:31:11:425]|[02-20-2024]|[POLICYUSER]|[INFO]|[64]: NmsPolicyMgr module Initialized|
+[10:31:11:476]|[02-20-2024]|[MAPUSER]|[INFO]|[61]:  DBVectortable Name OBJECTSTOLINK
+|
+[10:31:11:849]|[02-20-2024]|[TOPOUSER]|[INFO]|[55]: Number of ManagedObjects in Memory is set to 50 and Using RelationalDB|
+[10:31:11:919]|[02-20-2024]|[POLICYUSER]|[INFO]|[64]: TableCleanupPolicy1 - Policy added successfully|
+[10:31:11:919]|[02-20-2024]|[POLICYUSER]|[FATAL]|[64]: Starting all Enabled Policies|
+[10:31:11:948]|[02-20-2024]|[CONFIGUSER]|[FATAL]|[68]: No Tasks are Pending|
+[10:31:11:966]|[02-20-2024]|[CONFIGUSER]|[FATAL]|[68]: Authorization Model is  com.adventnet.management.config.AuthorizationInterfaceImpl|
+[10:31:12:093]|[02-20-2024]|[TOPOUSER]|[INFO]|[55]: DBVector for table ManagedObject
+|
+[10:31:12:097]|[02-20-2024]|[TOPOUSER]|[WARN]|[55]: This ManagedObject based License allows unlimited ManagedObjects to be managed|
+[10:31:12:098]|[02-20-2024]|[TOPOUSER]|[INFO]|[55]: DBVector for table DBINTERFACES
+For DBVector DBINTERFACES, Column Name not given. Assuming with the value of VALUESTRING and table opened in read-write mode
+|
+[10:31:12:102]|[02-20-2024]|[TOPOUSER]|[INFO]|[55]: DBVector for table Node
+|
+[10:31:12:105]|[02-20-2024]|[TOPOUSER]|[INFO]|[55]: DBVector for table Network
+|
+[10:31:12:108]|[02-20-2024]|[TOPOUSER]|[INFO]|[55]:  DBHashtable Name CHILDRENSTATUS
+|
+[10:31:12:311]|[02-20-2024]|[TOPOUSER]|[INFO]|[55]:  DBHashtable Name TOPODBSPECIALKEY
+|
+[10:31:12:625]|[02-20-2024]|[TOPOUSER]|[INFO]|[55]: Successfully added SwitchTopoListener for bulk delete notifications|
+[10:31:12:650]|[02-20-2024]|[TOPOUSER]|[INFO]|[55]: Successfully registered SwitchDiscoveryFilter as TopoObserver|
+[10:31:14:623]|[02-20-2024]|[MAPUSER]|[INFO]|[61]:  MapManager connected to topoapi and default maps instantiated |
+[10:31:18:337]|[02-20-2024]|[TOPOUSER]|[WARN]|[55]: Problem communicating Manager Host IP address|
+[10:31:18:341]|[02-20-2024]|[TOPOUSER]|[INFO]|[55]: Module TOPO (BE) Initialised.|
+[10:31:19:281]|[02-20-2024]|[MAPUSER]|[INFO]|[61]: Map Module Initialized Successfully|
+[10:31:19:283]|[02-20-2024]|[MISCUSER]|[INFO]|[62]: DBSchedulerVector Name ObjectSchedulerRUNNABLE|
+[10:31:19:285]|[02-20-2024]|[POLLUSER]|[INFO]|[62]: Poll registers with Topodb|
+[10:31:19:286]|[02-20-2024]|[POLLUSER]|[INFO]|[62]: Instantiated the topo listener of Poll Module |
+[10:31:19:286]|[02-20-2024]|[POLLUSER]|[INFO]|[62]: Poll Module Initialized Successfully |
+[10:31:19:292]|[02-20-2024]|[POLLUSER]|[INFO]|[62]: Data Collector (Poller) Started.|
+[10:31:21:549]|[02-20-2024]|[EVENTUSER]|[FATAL]|[63]: Main called:EventMgr|
+[10:31:21:559]|[02-20-2024]|[EVENTUSER]|[WARN]|[63]: Number of Events in Memory is set to 0 and Using RelationalDB|
+[10:31:21:712]|[02-20-2024]|[ALERTUSER]|[WARN]|[63]: Number of Alerts in Memory is set to 250 and Using RelationalDB|
+[10:31:21:747]|[02-20-2024]|[ALERTUSER]|[WARN]|[63]: Setting BATCH_UPDATE to false|
+[10:31:21:798]|[02-20-2024]|[ALERTUSER]|[WARN]|[63]: Event Correlator class name com.adventnet.nms.alertdb.DefaultEventToAlertCorrelator|
+[10:31:21:899]|[02-20-2024]|[ALERTUSER]|[WARN]|[63]: Alert To Topo Implementation : FaultToTopoImpl.init() called. |
+[10:31:21:899]|[02-20-2024]|[ALERTUSER]|[WARN]|[63]: FaultToTopoImpl : Registered as TopoObserver and TopoListener.|
+[10:31:21:918]|[02-20-2024]|[ALERTUSER]|[WARN]|[63]: Fault Manager scheduler invoked.|
+[10:31:21:920]|[02-20-2024]|[EVENTUSER]|[WARN]|[63]: Event To Topo Implementation : EventToTopoImpl.init() called.|
+[10:31:22:438]|[02-20-2024]|[EVENTUSER]|[WARN]|[63]: Fault Module Initialized. |
+[10:32:13:138]|[02-20-2024]|[POLLUSER]|[FATAL]|[48]: totalNumber of objects to be scheduled is 0|
+[10:32:13:148]|[02-20-2024]|[POLLUSER]|[FATAL]|[48]: Status Polling scheduler started successfully|
+[10:32:13:159]|[02-20-2024]|[EVENTUSER]|[INFO]|[49]: CLEAN EVENT LOGS ::: LOG_INTERVAL::2592000000	isProcessed:false|
+[10:32:49:656]|[02-20-2024]|[org.jasig.cas.client.configuration.JndiConfigurationStrategyImpl]|[ERROR]|[57]: Unable to create InitialContext. No properties can be loaded via JNDI.| javax.naming.NoInitialContextException: Cannot instantiate class: weblogic.jndi.WLInitialContextFactory [Root exception is java.lang.ClassNotFoundException: weblogic.jndi.WLInitialContextFactory]
+	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:685)
+	at javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:313)
+	at javax.naming.InitialContext.init(InitialContext.java:244)
+	at javax.naming.InitialContext.<init>(InitialContext.java:192)
+	at org.jasig.cas.client.configuration.JndiConfigurationStrategyImpl.init(JndiConfigurationStrategyImpl.java:89)
+	at org.jasig.cas.client.configuration.LegacyConfigurationStrategyImpl.init(LegacyConfigurationStrategyImpl.java:42)
+	at org.jasig.cas.client.util.AbstractConfigurationFilter.init(AbstractConfigurationFilter.java:84)
+	at org.jasig.cas.client.session.SingleSignOutFilter.init(SingleSignOutFilter.java:46)
+	at org.apache.catalina.core.ApplicationFilterConfig.initFilter(ApplicationFilterConfig.java:272)
+	at org.apache.catalina.core.ApplicationFilterConfig.getFilter(ApplicationFilterConfig.java:253)
+	at org.apache.catalina.core.ApplicationFilterConfig.<init>(ApplicationFilterConfig.java:102)
+	at org.apache.catalina.core.StandardContext.filterStart(StandardContext.java:4609)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5248)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1393)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1383)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:916)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:835)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1393)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1383)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:916)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:265)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:430)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:930)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:772)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:347)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:478)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.adventnet.nms.util.RunJSPModule.startJSPModule(RunJSPModule.java:83)
+	at com.adventnet.nms.util.RunJSPModule$1.run(RunJSPModule.java:135)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.ClassNotFoundException: weblogic.jndi.WLInitialContextFactory
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1412)
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1220)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:348)
+	at com.sun.naming.internal.VersionHelper12.loadClass(VersionHelper12.java:95)
+	at com.sun.naming.internal.VersionHelper12.loadClass(VersionHelper12.java:101)
+	at com.sun.naming.internal.VersionHelper12.loadClass(VersionHelper12.java:61)
+	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:683)
+	... 47 more
+
+[10:32:51:757]|[02-20-2024]|[MISCUSER]|[INFO]|[57]: WebClient Encoding filter has been inited.|
+[10:32:52:455]|[02-20-2024]|[MISCUSER]|[INFO]|[57]: Applications Manager Web Client framework is initialized.|
+[10:32:52:456]|[02-20-2024]|[MISCUSER]|[INFO]|[57]: LocalizationContext is stored in ServletContext|
+[10:32:52:456]|[02-20-2024]|[MISCUSER]|[INFO]|[57]: NmsMessageResources is stored in ServletContext : org.apache.struts.action.MESSAGE|
+[10:32:52:456]|[02-20-2024]|[MISCUSER]|[INFO]|[57]: NmsMessageResources is stored in ServletContext : org.apache.struts.action.MESSAGE/map|
+[10:32:52:456]|[02-20-2024]|[MISCUSER]|[INFO]|[57]: NmsMessageResources is stored in ServletContext : org.apache.struts.action.MESSAGE/admin|
+[10:32:52:456]|[02-20-2024]|[MISCUSER]|[INFO]|[57]: NmsMessageResources is stored in ServletContext : org.apache.struts.action.MESSAGE/tablet|
+[10:32:52:456]|[02-20-2024]|[MISCUSER]|[INFO]|[57]: NmsMessageResources is stored in ServletContext : org.apache.struts.action.MESSAGE/topo|
+[10:32:52:456]|[02-20-2024]|[MISCUSER]|[INFO]|[57]: NmsMessageResources is stored in ServletContext : org.apache.struts.action.MESSAGE/fault|
+[10:32:52:456]|[02-20-2024]|[MISCUSER]|[INFO]|[57]: NmsMessageResources is stored in ServletContext : org.apache.struts.action.MESSAGE/perf|
+[10:32:52:456]|[02-20-2024]|[MISCUSER]|[INFO]|[57]: NmsMessageResources is stored in ServletContext : org.apache.struts.action.MESSAGE/mobile|
+[10:33:45:972]|[02-20-2024]|[MAPUSER]|[FATAL]|[73]: Created a map for network 43.205.195.0.netmap|
+[10:33:46:055]|[02-20-2024]|[MAPUSER]|[FATAL]|[73]: Created the map 43.205.195.0Failed_Objects_Map|
+[10:33:48:147]|[02-20-2024]|[MAPUSER]|[FATAL]|[73]: In IpnetMapFilter .ipnet.netmap created successfully |
+[10:33:48:156]|[02-20-2024]|[TOPOUSER]|[INFO]|[73]:  Network is Unmanaged. Creating NetWatch without initiating discovery43.205.195.84|
+[10:33:53:078]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000195_15 and id 10000001 added to batch :Tue Feb 20 10:33:53 UTC 2024 Critical. Event: Resource down. <br>The resource 43.205.195.84_Tomcat-server is not available.|
+[10:33:53:078]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000191_17 and id 10000002 added to batch :Tue Feb 20 10:33:53 UTC 2024 Critical. Event: Resource Applications Manager is down. <br>Root Cause : <br><ol><li>Resource down. <br>The resource 43.205.195.84_Tomcat-server is not available.</li></ol>|
+[10:33:53:078]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000195_16 and id 10000003 added to batch :Tue Feb 20 10:33:53 UTC 2024 Critical. Event: Resource 43.205.195.84_Tomcat-server is down. <br>Health is critical as the resource is not available|
+[10:33:53:082]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: addEventVectorToDB : Events added successfully :3 and totalSize of queries executed:3|
+[10:33:53:084]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: addEventVectorToDB : Alert added successfully :3 and totalSize of queries executed:3|
+[10:33:53:084]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000195_15 and severity:1 and previousSeverity:-1|
+[10:33:53:088]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000191_17 and severity:1 and previousSeverity:-1|
+[10:33:53:089]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000195_16 and severity:1 and previousSeverity:-1|
+[10:33:53:089]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Triggering notifier for Alert listeners.|
+[10:33:53:130]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: End of triggering notifier for Alert listeners.|
+[10:33:53:237]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: AMEventRelationHandler:: Event props:{source=10000191, id=10000004, category=18, time=1708425233097, node=, entity=10000191_18, stringseverity=Critical, text=Health of Applications Manager (Monitor Group) is Critical. <br>Root Cause : <br><ol><li>Resource 43.205.195.84_Tomcat-server is down. <br>Health is critical as the resource is not available</li></ol>, groupName=AppManager, severity=1}|
+[10:33:53:241]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000191_18 and id 10000004 generated :Tue Feb 20 10:33:53 UTC 2024 Critical. Event: Health of Applications Manager (Monitor Group) is Critical. <br>Root Cause : <br><ol><li>Resource 43.205.195.84_Tomcat-server is down. <br>Health is critical as the resource is not available</li></ol>|
+[10:33:53:241]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000191_18 and severity:1 and previousSeverity:-1|
+[10:33:53:241]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Triggering notifier for Alert listeners.|
+[10:33:53:242]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: End of triggering notifier for Alert listeners.|
+[10:33:53:853]|[02-20-2024]|[MISCUSER]|[INFO]|[66]: Currently connected FE Information :  {NMS_FE_SECONDARY_PORT_DIR=html, HOSTNAME=43.205.195.84, FE_SERVER_TYPE=PRIMARY, WEBSERVER_PORT=9090, MAX_RETRY_PERIOD=300000, RMI_REG_PORT=1099, NMS_FE_SECONDARY_PORT=0, CLIENT_SERVER=TCP}|
+[10:33:53:870]|[02-20-2024]|[MISCUSER]|[INFO]|[375]: Server Started on port: 36265|
+[10:33:53:875]|[02-20-2024]|[MISCUSER]|[INFO]|[66]: Process Already Running :com.adventnet.nms.util.RunJSPModule|
+[10:33:53:876]|[02-20-2024]|[MISCUSER]|[INFO]|[376]: Server Started on port: 35919|
+[10:33:53:895]|[02-20-2024]|[MISCUSER]|[INFO]|[66]: Process Started :com.adventnet.nms.fe.event.EventFE|
+[10:33:53:904]|[02-20-2024]|[MISCUSER]|[INFO]|[66]: Process Started :com.adventnet.nms.fe.alert.AlertFE|
+[10:33:54:006]|[02-20-2024]|[MISCUSER]|[FATAL]|[66]: NmsMainFE module Initialized|
+[10:33:54:172]|[02-20-2024]|[EVENTUSER]|[WARN]|[377]: Event Module FE Initialized. |
+[10:33:54:479]|[02-20-2024]|[MISCUSER]|[INFO]|[163]: All the modules have been successfully initialized|
+[10:33:55:660]|[02-20-2024]|[TOPOUSER]|[FATAL]|[55]: Starting netwatch for the networks in database Tue Feb 20 10:33:55 UTC 2024|
+[10:33:55:661]|[02-20-2024]|[TOPOUSER]|[INFO]|[55]: Discovery of localnet disabled in Seed file |
+[10:33:56:844]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000193_750 and id 10000005 added to batch :Tue Feb 20 10:33:56 UTC 2024 Critical. Event: Resource down. <br>The resource 43.205.195.84 is not available.<br><br> Response for ping command :/bin/ping -c 1 -w 1 43.205.195.84<br><b>Ping</b> at 20 Feb 2024 10:33:54 <br>PING 43.205.195.84 (43.205.195.84) 56(84) bytes of data.
+
+--- 43.205.195.84 ping statistics ---
+1 packets transmitted, 0 received, 100% packet loss, time 0ms
+
+<br><b>Retry 1</b> at 20 Feb 2024 10:33:55 <br>PING 43.205.195.84 (43.205.195.84) 56(84) bytes of data.
+
+--- 43.205.195.84 ping statistics ---
+1 packets transmitted, 0 received, 100% packet loss, time 0ms
+
+<br>|
+[10:33:56:844]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000193_751 and id 10000006 added to batch :Tue Feb 20 10:33:56 UTC 2024 Critical. Event: Health of 43.205.195.84 (Node) is critical. <br>Root Cause : <br>1. 43.205.195.84 (Node) is down<br>|
+[10:33:56:849]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: addEventVectorToDB : Events added successfully :2 and totalSize of queries executed:2|
+[10:33:56:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: addEventVectorToDB : Alert added successfully :2 and totalSize of queries executed:2|
+[10:33:56:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000193_750 and severity:1 and previousSeverity:-1|
+[10:33:56:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000193_751 and severity:1 and previousSeverity:-1|
+[10:33:56:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Triggering notifier for Alert listeners.|
+[10:33:56:854]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: End of triggering notifier for Alert listeners.|
+[10:34:37:068]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: New Event with entity 10000197_152 and id 10000007 added to batch :Tue Feb 20 10:34:37 UTC 2024 Clear. Event: Resource up. <br>The resource 43.205.195.84 is available.|
+[10:34:37:068]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: New Event with entity 10000197_153 and id 10000008 added to batch :Tue Feb 20 10:34:37 UTC 2024 Clear. Event: Health of 43.205.195.84 is clear as all the dependent attributes are clear.|
+[10:34:37:070]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: addEventVectorToDB : Events added successfully :2 and totalSize of queries executed:2|
+[10:34:37:071]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: addEventVectorToDB : Alert added successfully :2 and totalSize of queries executed:2|
+[10:34:37:071]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: Updating Alert Cache with entity:10000197_152 and severity:5 and previousSeverity:-1|
+[10:34:37:071]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: Updating Alert Cache with entity:10000197_153 and severity:5 and previousSeverity:-1|
+[10:34:37:071]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: Triggering notifier for Alert listeners.|
+[10:34:37:072]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: End of triggering notifier for Alert listeners.|
+[10:34:37:484]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000198_400 and id 10000009 added to batch :Tue Feb 20 10:34:37 UTC 2024 Clear. Event: Resource up. <br>The resource AppManager Home Page is available.<span></span>ResponseCode - 200|
+[10:34:37:484]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000198_401 and id 10000010 added to batch :Tue Feb 20 10:34:37 UTC 2024 Clear. Event: Health of AppManager Home Page is clear as all the dependent attributes are clear.|
+[10:34:37:486]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: addEventVectorToDB : Events added successfully :2 and totalSize of queries executed:2|
+[10:34:37:487]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: addEventVectorToDB : Alert added successfully :2 and totalSize of queries executed:2|
+[10:34:37:487]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000198_400 and severity:5 and previousSeverity:-1|
+[10:34:37:487]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000198_401 and severity:5 and previousSeverity:-1|
+[10:34:37:487]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Triggering notifier for Alert listeners.|
+[10:34:37:487]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: End of triggering notifier for Alert listeners.|
+[10:34:38:707]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000199_9325 and id 10000011 added to batch :Tue Feb 20 10:34:38 UTC 2024 Clear. Event: Resource up. <br>The resource pg_default is available.|
+[10:34:38:707]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000200_9325 and id 10000012 added to batch :Tue Feb 20 10:34:38 UTC 2024 Clear. Event: Resource up. <br>The resource pg_global is available.|
+[10:34:38:708]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: addEventVectorToDB : Events added successfully :2 and totalSize of queries executed:2|
+[10:34:38:710]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: addEventVectorToDB : Alert added successfully :2 and totalSize of queries executed:2|
+[10:34:38:710]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000199_9325 and severity:5 and previousSeverity:-1|
+[10:34:38:710]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000200_9325 and severity:5 and previousSeverity:-1|
+[10:34:38:710]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Triggering notifier for Alert listeners.|
+[10:34:38:710]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: End of triggering notifier for Alert listeners.|
+[10:34:38:819]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000201_9350 and id 10000013 added to batch :Tue Feb 20 10:34:38 UTC 2024 Clear. Event: Resource up. <br>The resource postgres is available.|
+[10:34:38:819]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000202_9350 and id 10000014 added to batch :Tue Feb 20 10:34:38 UTC 2024 Clear. Event: Resource up. <br>The resource template1 is available.|
+[10:34:38:819]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000203_9350 and id 10000015 added to batch :Tue Feb 20 10:34:38 UTC 2024 Clear. Event: Resource up. <br>The resource template0 is available.|
+[10:34:38:820]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000204_9350 and id 10000016 added to batch :Tue Feb 20 10:34:38 UTC 2024 Clear. Event: Resource up. <br>The resource amdb is available.|
+[10:34:38:824]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: addEventVectorToDB : Events added successfully :4 and totalSize of queries executed:4|
+[10:34:38:825]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: addEventVectorToDB : Alert added successfully :4 and totalSize of queries executed:4|
+[10:34:38:825]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000201_9350 and severity:5 and previousSeverity:-1|
+[10:34:38:825]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000202_9350 and severity:5 and previousSeverity:-1|
+[10:34:38:825]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000203_9350 and severity:5 and previousSeverity:-1|
+[10:34:38:825]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000204_9350 and severity:5 and previousSeverity:-1|
+[10:34:38:825]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Triggering notifier for Alert listeners.|
+[10:34:38:826]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: End of triggering notifier for Alert listeners.|
+[10:34:39:845]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: New Event with entity 10000196_9300 and id 10000017 added to batch :Tue Feb 20 10:34:39 UTC 2024 Clear. Event: Resource up. <br>The resource 43.205.195.84_PGSQL is available.|
+[10:34:39:845]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: New Event with entity 10000204_9351 and id 10000018 added to batch :Tue Feb 20 10:34:39 UTC 2024 Clear. Event: Health of amdb is clear as all the dependent attributes are clear.|
+[10:34:39:845]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: New Event with entity 10000199_9326 and id 10000019 added to batch :Tue Feb 20 10:34:39 UTC 2024 Clear. Event: Health of pg_default is clear as all the dependent attributes are clear.|
+[10:34:39:845]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: New Event with entity 10000200_9326 and id 10000020 added to batch :Tue Feb 20 10:34:39 UTC 2024 Clear. Event: Health of pg_global is clear as all the dependent attributes are clear.|
+[10:34:39:845]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: New Event with entity 10000201_9351 and id 10000021 added to batch :Tue Feb 20 10:34:39 UTC 2024 Clear. Event: Health of postgres is clear as all the dependent attributes are clear.|
+[10:34:39:845]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: New Event with entity 10000203_9351 and id 10000022 added to batch :Tue Feb 20 10:34:39 UTC 2024 Clear. Event: Health of template0 is clear as all the dependent attributes are clear.|
+[10:34:39:845]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: New Event with entity 10000202_9351 and id 10000023 added to batch :Tue Feb 20 10:34:39 UTC 2024 Clear. Event: Health of template1 is clear as all the dependent attributes are clear.|
+[10:34:39:845]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: New Event with entity 10000196_9301 and id 10000024 added to batch :Tue Feb 20 10:34:39 UTC 2024 Clear. Event: Health of 43.205.195.84_PGSQL is clear as all the dependent attributes are clear.|
+[10:34:39:848]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: addEventVectorToDB : Events added successfully :8 and totalSize of queries executed:8|
+[10:34:39:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: addEventVectorToDB : Alert added successfully :8 and totalSize of queries executed:8|
+[10:34:39:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: Updating Alert Cache with entity:10000196_9300 and severity:5 and previousSeverity:-1|
+[10:34:39:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: Updating Alert Cache with entity:10000204_9351 and severity:5 and previousSeverity:-1|
+[10:34:39:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: Updating Alert Cache with entity:10000199_9326 and severity:5 and previousSeverity:-1|
+[10:34:39:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: Updating Alert Cache with entity:10000200_9326 and severity:5 and previousSeverity:-1|
+[10:34:39:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: Updating Alert Cache with entity:10000201_9351 and severity:5 and previousSeverity:-1|
+[10:34:39:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: Updating Alert Cache with entity:10000203_9351 and severity:5 and previousSeverity:-1|
+[10:34:39:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: Updating Alert Cache with entity:10000202_9351 and severity:5 and previousSeverity:-1|
+[10:34:39:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: Updating Alert Cache with entity:10000196_9301 and severity:5 and previousSeverity:-1|
+[10:34:39:850]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: Triggering notifier for Alert listeners.|
+[10:34:39:851]|[02-20-2024]|[EVENTUSER]|[FATAL]|[48]: End of triggering notifier for Alert listeners.|
+[10:35:48:518]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000206_20005 and id 10000025 added to batch :Tue Feb 20 10:35:48 UTC 2024 Clear. Event: Resource up. <br>The resource 43.205.195.84:8443 (App Name: APM Default Monitor) is available.|
+[10:35:48:518]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000206_20006 and id 10000026 added to batch :Tue Feb 20 10:35:48 UTC 2024 Clear. Event: Health of 43.205.195.84:8443 (App Name: APM Default Monitor) is clear as all the dependent attributes are clear.|
+[10:35:48:518]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000205_20002 and id 10000027 added to batch :Tue Feb 20 10:35:48 UTC 2024 Clear. Event: Health of APM Default Monitor is clear as all the dependent attributes are clear.|
+[10:35:48:518]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: New Event with entity 10000205_20001 and id 10000028 added to batch :Tue Feb 20 10:35:48 UTC 2024 Clear. Event: Resource up. <br>The resource APM Default Monitor is available.|
+[10:35:48:520]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: addEventVectorToDB : Events added successfully :4 and totalSize of queries executed:4|
+[10:35:48:521]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: addEventVectorToDB : Alert added successfully :4 and totalSize of queries executed:4|
+[10:35:48:521]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000206_20005 and severity:5 and previousSeverity:-1|
+[10:35:48:521]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000206_20006 and severity:5 and previousSeverity:-1|
+[10:35:48:521]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000205_20002 and severity:5 and previousSeverity:-1|
+[10:35:48:522]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Updating Alert Cache with entity:10000205_20001 and severity:5 and previousSeverity:-1|
+[10:35:48:522]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: Triggering notifier for Alert listeners.|
+[10:35:48:522]|[02-20-2024]|[EVENTUSER]|[FATAL]|[47]: End of triggering notifier for Alert listeners.|
+[11:19:53:456]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: AMEventRelationHandler:: Event props:{source=10000196, id=10000029, category=9339, time=1708427993372, node=, entity=10000196_9339, stringseverity=Clear, text=Row Inserts/Min of 43.205.195.84_PGSQL is clear. <br>, groupName=AppManager_Component, severity=5}|
+[11:19:53:459]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: New Event with entity 10000196_9339 and id 10000029 generated :Tue Feb 20 11:19:53 UTC 2024 Clear. Event: Row Inserts/Min of 43.205.195.84_PGSQL is clear. <br>|
+[11:19:53:459]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: Updating Alert Cache with entity:10000196_9339 and severity:5 and previousSeverity:-1|
+[11:19:53:459]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: Triggering notifier for Alert listeners.|
+[11:19:53:459]|[02-20-2024]|[EVENTUSER]|[FATAL]|[49]: End of triggering notifier for Alert listeners.|
+[11:32:13:234]|[02-20-2024]|[EVENTUSER]|[INFO]|[48]: CLEAN EVENT LOGS ::: LOG_INTERVAL::2592000000	isProcessed:false|
+[11:47:14:181]|[02-20-2024]|[MISCUSER]|[FATAL]|[245]: Recreation of Database Connections in Web NMS is started. All the schedulers would be suspende during this operation.|
+[11:47:29:159]|[02-20-2024]|[MISCUSER]|[INFO]|[386]: Closing the ServerSocket started in BE|
+[11:47:29:160]|[02-20-2024]|[MISCUSER]|[WARN]|[52]: NmsBEServer IO Error - java.net.SocketException: Socket closed|

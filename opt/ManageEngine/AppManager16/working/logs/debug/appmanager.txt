@@ -1,0 +1,10 @@
+Module=APPMANAGER
+SourceCoLabel=APPMANAGER_16840_HOTFIX_BRANCH
+BuildDate=Feb_15_2024
+BuildTime=11:05:58
+BuildLabel=APPMANAGER_16840_HOTFIX_BRANCH_Feb_15_2024_1
+build-timestamp= 1707975414
+StaticVersion=
+Current_Build_Url=https://build.zohocorp.com/me/appmanager/webhost/APPMANAGER_16840_HOTFIX_BRANCH/Feb_15_2024_1
+Source_Changeset=b9c827e151dbe6cbd4d381e59895c04f0c6f93f4
+Build_Comment=Release v16841

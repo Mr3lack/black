@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:redefine schemaLocation="security.xsd">
+		<xs:attributeGroup name="commonUrlGroup">
+			<xs:attributeGroup ref="commonUrlGroup"/>
+			<xs:attribute name="status-on-sso">
+				 <xs:simpleType>
+		         	<xs:restriction base="xs:string">
+		            	<xs:pattern value="enable|disable|only_synch_req"/>
+		         	</xs:restriction>
+		        </xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="sync-admin">
+				<xs:simpleType>
+		         	<xs:restriction base="xs:string">
+		            	<xs:pattern value="only|apicallfrom"/>
+		         	</xs:restriction>
+		        </xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="deny-operation" type="xs:boolean" />
+			<xs:attribute name="deny-del-admin" type="xs:boolean" />
+			<xs:attribute name="deny-plugin-edition" type="xs:boolean" />
+			<xs:attribute name="privilege-identifier" type="xs:string" />
+			<xs:attribute name="priv-delim" type="xs:string" />
+			<xs:attribute name="priv-split" type="xs:string" />
+			<xs:attribute name="redirect-url" type="xs:string" />
+			<xs:attribute name="user-scope" type="xs:string" />
+			<xs:attribute name="systemadmin_enterprise" type="xs:boolean" />
+			<xs:attribute name="reportadmin" type="xs:boolean" />
+			<xs:attribute name="allow-only-superadmin" type="xs:boolean"/>
+			<xs:attribute name="json-error-response" type="xs:boolean" />
+			<xs:attribute name="restapi-title" type="xs:string" />
+			<xs:attribute name="restapi-scope" type="xs:string" />
+			<xs:attribute name="restapi-module" type="xs:string" />
+			<xs:attribute name="authToken-authentication">
+				 <xs:simpleType>
+		         	<xs:restriction base="xs:string">
+		            	<xs:pattern value="required"/>
+		         	</xs:restriction>
+		        </xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="auth-keytype">
+				 <xs:simpleType>
+		         	<xs:restriction base="xs:string">
+		            	<xs:pattern value="(JSONFeed|Dashboard|BusinessView|SyncKey|,)+"/>
+		         	</xs:restriction>
+		        </xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="skip-bad-input-encoding" type="xs:boolean"/>
+			<xs:attribute name="redirect-url-template" type="xs:string" />
+			<xs:attribute name="custom-scope-validator" type="xs:string" />
+		</xs:attributeGroup>
+	</xs:redefine>
+</xs:schema>

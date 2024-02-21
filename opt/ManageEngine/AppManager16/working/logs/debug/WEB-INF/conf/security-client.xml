@@ -1,0 +1,1814 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+
+	<jsontemplates>
+		<jsontemplate name="am.webclient.graph.jsonObject">
+			<key name="orientation" regex="am.alphanumeric"/>
+			<key name="noOfColumns" type="long"/>
+			<key name="haid" regex="am.common.longandnull"/>
+			<key name="showOnlyMGs" type="boolean"/>
+			<key name="displayName" type="String" max-len="1000"/>
+			<key name="lineThickness" type="double"/>
+			<key name="description" type="String" max-len="100000"/>
+			<key name="textColorVal" regex="am.common.hexadecimal.color"/>
+			<key name="lineTransparency" type="double"/>
+			<key name="showLabel" type="boolean"/>
+			<key name="backgroundColorVal" regex="am.common.hexadecimal.color"/>
+			<key name="nodeSize" type="double"/>
+			<key name="showOnlyCritical" type="boolean"/>
+			<key name="showOnlyTopMGs" type="boolean"/>
+			<key name="showOnlyMGStatus" type="boolean"/>
+			<key name="lineColorVal" regex="am.common.hexadecimal.color"/>
+			<key name="xCanvas" type="double"/>
+			<key name="yCanvas" type="double"/>
+			<key name="zoomLevel" type="int" />
+			<key name="zoomlevel" type="int" />
+		</jsontemplate>
+
+		<jsontemplate name="am.businessview.graph.createSubGroupTreeToBVAction">
+			<key name="$description" type="String" max-len="10000" />
+			<key name="$nodeType" regex="am.displayname.common" />
+			<key name="$groupType" regex="am.displayname.common" />
+			<key name="$displayName" type="String" max-len="2000"/>
+			<key name="$parentNodeID" regex="am.common.alphaNumeric.ext1" />
+			<key name="$message" type="String" max-len="1000000" />
+			<key name="$owners" regex="am.webclient.resIds.commaSeparated" max-len="30000"/>
+			<key name="$locationid" type="long" />
+			<key name="$nodeX" type="String" max-len="10000" />
+			<key name="$nodeY" type="String" max-len="10000" />
+			<key name="$parentNodeX" type="String" max-len="10000" />
+			<key name="$parentNodeY" type="String" max-len="10000" />
+			<key name="$isAutoMapped" type="boolean" />
+			<key name="$resourceID" type="long" />
+			<key name="$alpha" regex="am.common.longandnull" />
+		</jsontemplate>
+
+		<jsontemplate name="am.businessview.graph.save.nodesForSaveObj">
+			<key name="am.businessview.saveState.nodesForSave.posititon.jsonkey" name-regex="true" regex="am.businessview.coordinates" max-occurrences="1000000"/>
+			<key name="totalNumberOfNodes" type="int" />
+			<key name="xcanvas" type="double" />
+			<key name="ycanvas" type="double" />
+			<key name="nodeIdList" type="JSONArray" template="arrayjson.len100000" array-size="0-100000" max-len="2000000" />
+		</jsontemplate>
+
+		<jsontemplate name="arrayListLongjson">
+            <key index="0-10000000" regex="am.common.longandnull"/>
+       </jsontemplate>
+
+		<jsontemplate name="am.webclient.businessview.graph.saveBusinessViewPropsForADDM.nodeIdVsResourceId">
+			<key name="am.businessview.saveBusinessViewPropsForADDM.nodeIdVsResourceId.jsonkey" name-regex="true" regex="am.threshold.polltotry" max-occurrences="1000000"/>
+		</jsontemplate>
+
+		  <jsontemplate name="am.webclient.businessview.graph.saveBusinessViewPropsForADDM.viewProps">
+			<key name="displayProps" template="am.webclient.graph.jsonObject" type="JSONObject" max-len="10000000"/>
+			<key name="coordinates" type="String" max-len="10000000"/>
+		</jsontemplate>
+
+		<jsontemplate name="am.webclient.businessview.graph.createGroupFromGraph.graphobj">
+			<key name="id" regex="am.common.alphaNumeric.ext1" />
+			<key name="name" type="String" max-len="10000000" />
+			<key name="data" template="am.businessview.graph.createSubGroupTreeToBVAction" type="JSONObject" max-len="10000000" />
+			<key name="children" template="am.webclient.businessview.graph.createGroupFromGraph.graphobj.children" type="JSONArray" array-size="0-10000" max-len="10000000" />
+		</jsontemplate>
+
+		<jsontemplate name="am.webclient.businessview.graph.createGroupFromGraph.graphobj.children">
+			<key index="0-10000000" type="JSONObject" template="am.webclient.businessview.graph.createGroupFromGraph.graphobj" max-len="10000000"/>
+		</jsontemplate>
+
+		<jsontemplate name="am.webclient.topomap.saveMapView.dataObj">
+			<key name="MAPVIEW" type="JSONObject" template="am.webclient.topomap.saveMapView.dataObj.mapview" max-len="10000000" />
+			<key name="MAPVIEWDEVICE" type="String" max-len="10000000" />
+			<key name="MAPVIEWLINK" type="String" max-len="10000000" />
+			<key name="MAPVIEWSHORTCUT" type="String" max-len="10000000" />
+		</jsontemplate>
+
+		<jsontemplate name="am.webclient.topomap.saveMapView.dataObj.mapview">
+			<key name="bgImage" type="String" max-len="10000" />
+			<key name="mapViewName" type="String" max-len="1000" />
+			<key name="widgetid" regex="am.common.longandnull" />
+			<key name="fromWhere" regex="am.displayname.common" max-len="10000" />
+		</jsontemplate>
+
+		<jsontemplate name="am.webclient.businessview.apmSBVdata.jsonobj">
+			<key name="resourceid" regex="am.common.longandnull"/>
+			<key name="parentid" regex="am.common.longandnull"/>
+			<key name="posx" regex="am.common.doubleandhyphen"/>
+			<key name="posy" regex="am.common.doubleandhyphen"/>
+		</jsontemplate>
+
+	</jsontemplates>
+
+	<!-- Custom Fields starts -->
+	<urls path="/myFields.do" operation-param="method" authentication="required" throwallerrors="true">
+
+		<param-group name="am.additional.extra.params" />
+		
+		<url operation-value="EditFieldsMetaData" method="GET" roles="am.role.ADMIN.EA.DE" privilege-identifier="resourceid" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="resourceid" type="long" />
+			<param name="displaymessage" regex="am.alphanumeric" max-len="255" />
+			<param name="messagefieldid" type="int" />
+		</url>
+		<url operation-value="getUserAssociation" method="GET" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="entity" type="boolean" />
+			<param name="randomnumber" type="double" />
+		</url>
+		<url operation-value="getSelectedEntity" method="GET" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="selectedEntityId" type="long" />
+			<param name="dataTable" regex="am.common.tablename" />
+			<param name="isConfMonitor" type="boolean" />
+		</url>
+		<url operation-value="getScheduledReportFilter" method="GET" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="reportname" regex="am.common.alphaNumeric.ext1" max-len="255"/>
+			<param name="resourcetype" regex="am.monitor.type.withsinglequote" max-len="100000" />
+			<param name="resourcegroup" regex="am.monitor.type.withsinglequote" max-len="100000" />
+			<param name="attribute" type="String" />
+			<param name="isCustom" type="boolean" />
+			<param name="customFieldId" regex="am.common.alphaNumeric.ext1.withDollar" max-len="1000" />
+			<param name="customFieldValue" regex="am.common.alphaNumeric.ext1.withDollar" max-len="1000"/>
+			<param name="aliasname" regex="am.common.alphaNumeric.ext1" />
+			<param name="valueid" regex="am.common.longandnull"/>
+			<param name="edit" regex="am.alphanumeric"/>
+		</url>
+		<url operation-value="addUsersEntity" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="usercheckbox" regex="am.recorder.long.commaSeparated" max-len="1000000" />
+			<param name="addUserApi" type="boolean" />
+		</url>
+		<url operation-value="assignCustomFields" method="GET" roles="am.role.ADMIN.EA.DE" privilege-identifier="resids" priv-delim="," custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="resids" regex="am.recorder.long.commaSeparated" max-len="10000000" />
+			<param name="unopengroups" regex="am.recorder.long.pipeSeparated" max-len="10000000" />
+		</url>
+		<url operation-value="associateLabels" method="GET" roles="am.role.ADMIN.EA.DE" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+		</url>
+		<url operation-value="bulkAssign" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resids" priv-delim="," custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="resids" regex="am.recorder.long.commaSeparated" max-len="10000000" />
+			<param name="fieldValbulkassign" regex="am.common.alphaNumeric.ext1.withDollar" max-len="10000" />
+			<param name="bulkassign" regex="am.common.alphaNumeric.ext1.withDollar" max-len="10000"/>
+			<param name="GoBack" regex="am.alphanumeric.alllanguages" max-len="50" />
+		</url>
+		<url operation-value="bulkAssignSeparateMonitors" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resids" priv-delim="," custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="resids" regex="am.recorder.long.commaSeparated" max-len="10000000" />
+			<param name="am.common.long" name-regex="true" regex="am.common.alphaNumeric.ext1.withDollar" max-occurrences="1000" />
+			<param name="am.customfields.bulkassign.seperatemonitors.fieldvalue" name-regex="true" regex="am.common.alphaNumeric.ext1.withDollar" max-occurrences="1000"/>
+			<param name="GoBack" regex="am.alphanumeric" />
+		</url>
+		<url operation-value="checkDuplicateField" method="GET" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="fieldname" type="String" max-len="255" />
+			<param name="fieldType" regex="am.common.alphaNumeric.ext1.withBraces" />
+			<param name="listvalues" type="String" max-len="1000000" />
+			<param name="randomnumber" type="double" />
+		</url>
+		<url operation-value="deleteUser" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="userid" type="long" />
+			<param name="randomnumber" type="double" />
+		</url>
+		<url operation-value="duplicateEnum" method="GET" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="fieldid" type="long" />
+			<param name="value" type="String" max-len="1000000"/>
+		</url>
+		<url operation-value="getAdminUserAssociation" method="GET" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="resourceid" type="long" />
+			<param name="entity" regex="am.alphanumeric" />
+			<param name="randomnumber" type="double" />
+		</url>
+		<url operation-value="getEnumeration" method="GET" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="fieldid" type="long" />
+			<param name="valueid" type="long" />
+			<param name="message" regex="am.displayname.common" />
+			<param name="randomnumber" type="double" />
+			<param name="fromadd" regex="am.common.TFNull" />
+			<param name="addnewvalue" regex="am.common.TFNull" />
+		</url>
+		<url operation-value="getMyFields" method="GET" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="randomnumber" type="double" />
+			<param name="entity" regex="am.alphanumeric" />
+			<param name="mgview" type="boolean" />
+			<param name="isConfMonitor" type="boolean" />
+			<param name="userassociation" type="boolean" />
+		</url>
+		<url operation-value="getFieldValues" method="GET" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="aliasName" regex="am.common.alphaNumeric.ext1.withDollar" />
+			<param name="forBulkAssign" regex="am.common.booleanandundefined" />
+			<param name="monitortype" regex="am.monitor.type.withsinglequote" max-len="1000000" />
+			<param name="selectboxname" type="String" />
+			<param name="reportspage" regex="am.alphanumeric" />
+			<param name="reportname" regex="am.common.alphaNumeric.ext1" max-len="255"/>
+			<param name="resgroup" type="String" />
+			<param name="attribute" type="String" />
+			<param name="customFieldValue" regex="am.common.alphaNumeric.ext1.withDollar" max-len="100000" />
+			<param name="customFieldId" regex="am.common.alphaNumeric.ext1.withDollar" max-len="1000" />
+			<param name="resourceid" regex="am.customfields.bulkassign.resourceid" />
+			<param name="optionSel" regex="am.common.alphaNumeric.ext1" />
+			<param name="iscustom" type="boolean" />
+			<param name="isValueID" type="boolean" />
+		</url>
+		<url operation-value="markUnmarkFieldAsPii" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="isPii" type="boolean" />
+			<param name="fieldid" type="int" />
+		</url>
+		<url operation-value="saveEntityTemplateValues" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resourceid" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfLocationIsOwned">
+			<param name="resourceid" type="long" />
+			<param name="entityValueId" type="long" />
+			<param name="dataTable" regex="am.common.tablename" />
+			<param name="isNewEntity" type="boolean" />
+			<param name="isConfMonitor" type="boolean" />
+			<param name="operatinguser" regex="am.common.alphaNumeric.ext1" />
+			<param name="formname" regex="am.common.alphaNumeric.ext1" />
+			<param name="entityfield_221" type="String" max-len="255" secret="true"/>
+			<param name="entitynewfield_221" type="String" max-len="255" secret="true"/>
+			<param name="am.customfields.location.myfield.paramname" name-regex="true" type="String" max-occurrences="10000" max-len="1000000" secret="true"/>
+			<param name="am.customfields.bulkassign.entityfield.paramname" name-regex="true" type="String" max-occurrences="10000" max-len="1000" secret="true"/>
+			<param name="am.customfields.bulkassign.entitynewfield.paramname" name-regex="true" type="String" max-occurrences="10000" max-len="1000" secret="true"/>
+		</url>
+		<url operation-value="saveMyFields" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="entityValueId" type="long" />
+			<param name="dataTable" regex="am.common.tablename" />
+			<param name="isNewEntity" type="boolean" />
+			<param name="isConfMonitor" type="boolean" />
+			<param name="operatinguser" regex="am.common.alphaNumeric.ext1" />
+			<param name="formname" regex="am.common.alphaNumeric.ext1" />
+			<param name="entityfield_221" type="String" max-len="255" secret="true"/>
+			<param name="entitynewfield_221" type="String" max-len="255" secret="true"/>
+			<param name="am.customfields.location.myfield.paramname" name-regex="true" type="String" max-occurrences="10000" max-len="1000000" secret="true"/>
+			<param name="am.customfields.bulkassign.entityfield.paramname" name-regex="true" type="String" max-occurrences="10000" max-len="1000" secret="true"/>
+			<param name="am.customfields.bulkassign.entitynewfield.paramname" name-regex="true" type="String" max-occurrences="10000" max-len="1000" secret="true"/>
+		</url>
+		<url operation-value="saveMySingleField" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="randomnumber" type="double" />
+			<param name="fieldid" type="long" />
+			<param name="fieldvalue" type="String" max-len="100000" />
+		</url>
+		<url operation-value="updateEntryToEnumeration" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resourceid" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="resourceid" type="long" />
+			<param name="randomnumber" type="double" />
+			<param name="fieldid" type="long" />
+			<param name="valueid" type="long" />
+			<param name="value" type="String" max-len="255" />
+		</url>
+		<url operation-value="deleteEntity" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resourceid" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfLocationIsOwned">
+			<param name="resourceid" type="long" />
+			<param name="entityValueId" type="long" />
+			<param name="dataTable" regex="am.common.tablename" />
+			<param name="isConfMonitor" type="boolean" />
+		</url>
+		<url operation-value="deleteEnumeration,deleteField" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="fieldid" type="long" />
+			<param name="valueid" type="long" />
+		</url>
+		<url operation-value="editSaveFieldsMetaData" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="fieldid" type="long" />
+			<param name="value" type="String" max-len="10000" />
+			<param name="columnname" regex="am.common.tablename" />
+		</url>
+		<url operation-value="enableDisableField" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="fieldid" type="long" />
+			<param name="enablevalue" type="int" />
+		</url>
+		<url operation-value="addLabelField" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+			<param name="labelcheckbox" type="long" max-occurrences="1000"/>
+		</url>
+		<url operation-value="addEntryToEnumeration" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="fieldid" type="long" />
+			<param name="value" type="String" max-len="1000000" />
+		</url>
+		 <url operation-value="addNewField" roles="am.role.ADMIN.EA" method="POST" csrf="true" custom-scope-validator="com.adventnet.appmanager.utils.client.CustomFieldsPrivilegeHandler:checkIfCustomFieldIsOwned">
+			<param name="fieldid" type="long" />
+		 	<param name="formname" regex="am.common.alphaNumeric.ext1" />
+			<param name="newfieldformbottom_displayname" type="String" max-len="255"/>
+			<param name="newfieldformbottom_columntype" regex="am.common.paramNames" />
+			<param name="newfieldformbottom_comboValuebottom" type="String" max-len="1000000" />
+			<param name="newfieldformbottom_description" type="String" max-len="255"/>
+			<param name="newfieldformbottom_markaspii" regex="am.alphanumeric" />
+			<param name="newfieldformtop_displayname" type="String" max-len="255" />
+			<param name="newfieldformtop_columntype" regex="am.common.paramNames" />
+			<param name="newfieldformtop_comboValuebottom" type="String" max-len="1000000" />
+			<param name="newfieldformtop_description" type="String" max-len="255" />
+			<param name="newfieldformtop_markaspii" regex="am.alphanumeric" />
+		</url>
+	</urls>
+	<!-- Custom Fields ends -->
+
+	<urls path="/inAppNotification.do" operation-param="method" authentication="required" throwallerrors="true">
+
+		<param-group name="am.additional.extra.params" />
+		<param name="_" type="long" />
+		<url operation-value="getNotifications" method="GET" roles="am.role.ADMIN.EA.OP.US.DE.MA" >
+		</url>
+		<url operation-value="updateMarkAsRead" method="POST" csrf="true" roles="am.role.ADMIN.EA.OP.US.DE.MA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:validateInAppNotificationID">
+			<param name="notificationId" type="long" />
+			<param name="isRead" type="int" />
+		</url>
+
+		<url operation-value="removeNotification" method="POST" csrf="true" roles="am.role.ADMIN.EA.OP.US.DE.MA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:validateInAppNotificationID">
+			<param name="notificationId" type="long" />
+			<param name="isDeleted" type="int" />
+		</url>
+
+		<url operation-value="checkForNewNotifications" method="GET" roles="am.role.ADMIN.EA.OP.US.DE.MA" >
+		</url>
+	</urls>
+
+	<!-- Business View endpoints starts here -->
+	<urls path="/BusinessView.do" operation-param="method" authentication="required" throwallerrors="true">
+
+		<param-group name="am.additional.extra.params" />
+		<param name="pageid" regex="am.common.longandnull"/>
+
+		<url operation-value="ListSPsAsPerRequirement" method="POST" csrf="true" roles="am.role.ADMIN.EA.DE">
+			<param name="monitosToShow" regex="am.alphanumeric"/>
+		</url>
+
+		<url operation-value="updateNodesAndItsChildren" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="viewid" regex="am.common.longandnull"/>
+			<param name="haid" regex="am.common.longandnull"/>
+			<param name="apmSBVdata" type="JSONArray" template="am.webclient.businessview.apmSBVdata.jsonobj" array-size="0-10000" max-len="10000000" />
+			<param name="displayProps_JSONObject" type="JSONObject" template="am.webclient.graph.jsonObject" max-len="2000" />
+		</url>
+
+		<url operation-value="associateMonitorToBVAction" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="monList" priv-delim="," custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long" />
+			<param name="monList" regex="am.webclient.resIds.commaSeparated" max-len="10000000"/>
+			<param name="healthKeySet" regex="am.webclient.resIds.commaSeparated" max-len="10000000"/>
+			<param name="typeList" type="String" max-len="100000"/>
+			<param name="displayNameList" type="String" max-len="10000000"/>
+			<param name="imagePathList" regex="am.common.imagelist.commaSeparated" max-len="10000000"/>
+			<param name="nodeId" regex="am.common.alphaNumeric.ext1" />
+			<param name="nextNodeId" type="long" />
+			<param name="nodeIdentifier" regex="am.common.alphaNumeric.ext1" />
+		</url>
+
+		<url operation-value="checkBusinessServiceName" method="POST" csrf="true" roles="am.role.ADMIN.EA.DE">
+			<param name="bsName" type="String" max-len="2000" />
+		</url>
+
+		<url operation-value="createBusinessService" method="GET" roles="am.role.ADMIN.EA.DE">
+			<param name="fromDiscovery" type="boolean"/>
+		</url>
+
+		<url operation-value="createDependentGroupBVAction" method="POST" csrf="true" roles="am.role.ADMIN.EA"  privilege-identifier="dependentList" priv-delim="," custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long" />
+			<param name="dependentList" regex="am.webclient.resIds.commaSeparated"/>
+			<param name="nodeId" regex="am.common.longandnull" />
+			<param name="nextNodeId" type="int" />
+			<param name="nodeIdentifier" regex="am.common.alphaNumeric.ext1" />
+			<param name="haidDispNameList" regex="am.common.displayname.commaSeparated" max-len="10000000"/>
+		</url>
+
+		<url operation-value="createNewView" method="GET" roles="am.role.ADMIN.EA.DE">
+			<param name="fromWhere" regex="am.alphanumeric"/>
+			<param name="viewid" regex="am.common.longnullfalse"/>
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="widgetid" regex="am.common.longandnull" />
+			<param name="sid" regex="am.common.longandnull" />
+			<param name="isPopUp" type="boolean"/>
+		</url>
+
+		<url operation-value="createSubGroupTreeToBVAction" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="haid">
+			<param name="haid" type="long" />
+			<param name="bv_createSubGroupTreeToBVAction_subgroupdataobj" template="am.businessview.graph.createSubGroupTreeToBVAction" type="JSONObject" max-len="10000000"/>
+			<param name="type" regex="am.common.alphaNumeric.ext1" />
+			<param name="nodeId" regex="am.common.alphaNumeric.ext1" />
+		</url>
+
+		<url operation-value="drawGraphWithADDM" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resourceList">
+			<param name="serviceName" type="String" max-len="5000"/>
+			<param name="resourceList" type="JSONArray" template="arrayLongjson" array-size="0-1000" max-len="20000" />
+		</url>
+
+		<url operation-value="editGroupForBV" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="haid">
+			<param name="haid" type="long" />
+		</url>
+
+		<url operation-value="getDisplayPropsForGraph" method="POST" csrf="true" roles="am.role.ADMIN.EA.DE" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long" />
+			<param name="viewid" regex="am.common.longnullfalse" />
+		</url>
+
+		<url operation-value="getGraphAccordingToType" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long" />
+			<param name="viewid" regex="am.common.longnullfalse" />
+			<param name="currentime" type="long" />
+			<param name="isHtml" type="boolean" />
+			<param name="showTopOnly" type="boolean" />
+			<param name="showGroups" type="boolean" />
+			<param name="all" type="boolean" />
+			<param name="showCritical" type="boolean" />
+			<param name="onChangeViewProps" type="boolean" />
+			<param name="displayProps_JSONObject" type="JSONObject" template="am.webclient.graph.jsonObject" max-len="2000" />
+		</url>
+
+		<url operation-value="removeGroupInBV" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="haid">
+			<param name="haid" type="long" />
+		</url>
+
+		<url operation-value="removeMonitorsInBV" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resourceId" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long" />
+			<param name="resourceId" type="long" />
+		</url>
+
+		<url operation-value="getLocations" method="POST" csrf="true" roles="am.role.ADMIN.EA">
+		</url>
+
+		<url operation-value="resetDesign" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long" />
+			<param name="viewid" regex="am.common.longnullfalse" />
+			<param name="isHtml" type="boolean" />
+		</url>
+
+		<url operation-value="updateZoomLevel" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long" />
+			<param name="zoomLevel" type="int" />
+			<param name="translateOffsetX" type="double" />
+			<param name="translateOffsetY" type="double" />
+			<param name="viewid" regex="am.common.longnullfalse" />
+			<param name="currentime" type="long" />
+		</url>
+
+		<url operation-value="updateGroupInfoForBVGraphNode" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long" />
+			<param name="groupName" type="String" max-len="2000"/>
+			<param name="description" type="String" max-len="100000"/>
+			<param name="locId" type="long" />
+			<param name="owners" regex="am.webclient.resIds.commaSeparatedWithNegative" />
+		</url>
+
+		<url operation-value="showEditGroupPopForGraph" method="POST" csrf="true" roles="am.role.ADMIN.EA">
+			<param name="type" regex="am.alphanumeric" />
+			<param name="filterList" regex="am.webclient.resIds.commaSeparated" max-len="10000000"/>
+		</url>
+
+		<url operation-value="setAsDefaultInBusinessView" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="viewid" regex="am.common.longnullfalse" />
+			<param name="widgetid" regex="am.threshold.polltotry"/>
+		</url>
+
+		<url operation-value="deleteView" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long" />
+			<param name="viewid" regex="am.common.longnullfalse" />
+			<param name="isHtml" type="boolean" />
+			<param name="customizetab" type="boolean" />
+			<param name="fromWhere" regex="am.alphanumeric" />
+		</url>
+
+		<url operation-value="saveState" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="haid">
+			<param name="haid" type="long" />
+			<param name="currentime" type="long" />
+			<param name="displayName" regex="am.displayname.common" max-len="1000" />
+			<param name="viewid" regex="am.common.longnullfalse" />
+			<param name="bv_nodesForSave" template="am.businessview.graph.save.nodesForSaveObj" type="JSONObject" max-len="10000000"/>
+			<param name="isHtml" type="boolean" />
+			<param name="toSave" type="boolean" />
+			<param name="xcanvas" type="double" />
+			<param name="ycanvas" type="double" />
+		</url>
+
+		<url operation-value="getDisplayPropsForGlobalGraph" method="POST" csrf="true" roles="am.role.ADMIN.EA.DE" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long" />
+			<param name="viewid" regex="am.common.longnullfalse" />
+		</url>
+
+		<url operation-value="updateMonitorGroupsToFilterList" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="monitorIdsList" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long" />
+			<param name="viewid" regex="am.common.longnullfalse" />
+			<param name="monitorIdsList" type="JSONArray" template="arrayListLongjson" array-size="0-1000" max-len="35000" />
+			<param name="noOfColumns" type="long" />
+		</url>
+
+		<url operation-value="updateShowTopLevelFlag" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long" />
+			<param name="viewid" regex="am.common.longnullfalse" />
+			<param name="showTopLevelFlag" type="boolean" />
+		</url>
+
+		<url operation-value="createGroupFromGraph" method="POST" csrf="true" roles="am.role.ADMIN.EA">
+			<param name="bv_createGroupFormGraph_graphobj" type="JSONObject" template="am.webclient.businessview.graph.createGroupFromGraph.graphobj" max-len="10000000"/>
+			<param name="useADDM" type="boolean" />
+		</url>
+
+		<url operation-value="saveBusinessViewPropsForADDM" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="haid" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:checkIfNodesAreAssociated">
+			<param name="viewProps_bvAddm" type="JSONObject" template="am.webclient.businessview.graph.saveBusinessViewPropsForADDM.viewProps" max-len="10000000"/>
+			<param name="haid" type="long" />
+			<param name="nodeIdVsResourceId_bvAddm" type="JSONObject" template="am.webclient.businessview.graph.saveBusinessViewPropsForADDM.nodeIdVsResourceId" max-len="50000"/>
+		</url>
+
+		<url operation-value="updateCanvasPosOnDrag" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long"/>
+			<param name="viewid" regex="am.common.longnullfalse" />
+			<param name="translateOffsetX" type="double"/>
+			<param name="translateOffsetY" type="double"/>
+			<param name="displayProps_JSONObject" type="JSONObject" template="am.webclient.graph.jsonObject" max-len="2000" />
+			<param name="currentime" type="long"/>
+		</url>
+
+		<url operation-value="showEditView" method="GET" roles="am.role.ADMIN.EA.DE" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="fromWhere" regex="am.alphanumeric"/>
+			<param name="viewid" regex="am.common.longnullfalse"/>
+			<param name="haid" type="long"/>
+			<param name="sid" type="long"/>
+			<param name="widgetid" regex="am.common.longandnull"/>
+		</url>
+
+		<url operation-value="saveEditView" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="monitorGroups" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="haid" type="long"/>
+			<param name="viewid" regex="am.common.longnullfalse"/>
+			<param name="widgetid" regex="am.common.longandnull"/>
+			<param name="customizetab" type="boolean"/>
+			<param name="fromMonitorTab" type="boolean"/>
+			<param name="fromWhere" regex="am.alphanumeric"/>
+			<param name="popUp" type="boolean"/>
+			<param name="createnewview" type="boolean"/>
+			<param name="displayName" regex="am.displayname.common" max-len="1000"/>
+			<param name="bgColor" regex="am.common.hexadecimal.color"/>
+			<param name="lineColor" regex="am.common.hexadecimal.color"/>
+			<param name="labelColor" regex="am.common.hexadecimal.color"/>
+			<param name="linethickness" type="double"/>
+			<param name="lineTransparency" type="double"/>
+			<param name="description" type="String" max-len="100000"/>
+			<param name="monitorGroups" type="long" max-occurrences="10000"/>
+			<param name="org.apache.struts.taglib.html.TOKEN" regex="am.alphanumeric"/>
+			<param name="headercheckbox" regex="onlyon"/>
+		</url>
+		<url operation-value="addToBusinessServiceGraph" method="GET" roles="am.role.ADMIN.EA">
+			<param name="editAction" regex="am.common.TFNull"/>
+			<param name="isBusinessView" regex="am.common.TFNull"/>
+			<param name="nodeId" regex="am.common.alphaNumeric.ext1"/>
+			<param name="resId" regex="am.common.longandnull"/>
+		</url>
+	</urls>
+	<!-- Business View endpoints end here -->
+
+	<!-- Topology Map view endpoints starts here.Handling for mapViewAction.do. Alias URL endpoints blocked for FileUpload.do,ImageUpload.do, -->
+	<urls path="/mapViewAction.do" throwallerrors="true" operation-param="method" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<param name="sid" type="long" />
+
+		<url operation-value="showMap" method="GET" roles="am.role.ADMIN.EA.OP.US.DE" skip-bad-input-encoding="true">
+			<param name="mapViewName" type="String" max-len="100" />
+			<param name="admin" type="boolean" />
+			<param name="oldtab" type="int" />
+			<param name="type" regex="am.webclient.mapview.type" />
+			<param name="isPopUp" type="boolean" />
+			<param name="isSubMap" type="boolean" />
+			<param name="widgetid" type="long"/>
+			<param name="isEditable" type="boolean" />
+		</url>
+
+		<url operation-value="getResIDAndDispName" method="GET" roles="am.role.ADMIN.EA" privilege-identifier="resIds" priv-delim="," >
+			<param name="resIds" regex="am.webclient.resIds.commaSeparated" max-len="10000000" />
+		</url>
+
+		<url operation-value="saveMapView" method="POST" csrf="true" roles="am.role.ADMIN.EA">
+			<param name="mv_saveMapView_data" type="JSONObject" template="am.webclient.topomap.saveMapView.dataObj" max-len="10000000"/>
+		</url>
+
+		<url operation-value="showMapViewEditor" method="GET" roles="am.role.ADMIN.EA" skip-bad-input-encoding="true">
+			<param name="mapViewName" type="String" max-len="255"/>
+			<param name="admin" type="boolean" />
+			<param name="oldtab" type="int" />
+			<param name="type" regex="am.webclient.mapview.type" />
+			<param name="isPopUp" type="boolean" />
+			<param name="isSubMap" regex="am.common.booleanandnull" />
+			<param name="widgetid" type="long"/>
+			<param name="fromEditTopoWidget" type="boolean" />
+		</url>
+
+		<url operation-value="getAllDevices" method="POST" csrf="true" roles="am.role.ADMIN.EA">
+			<param name="mapName" type="String" max-len="255" />
+			<param name="category" type="String" max-len="255" />
+		</url>
+
+		<url operation-value="getListOfMapViewsForSC" method="GET" roles="am.role.ADMIN.EA">
+			<param name="mapViewName" type="String" max-len="100" />
+			<param name="myDate" type="String"  max-len="255" />
+		</url>
+
+		<url operation-value="getIFSnapshotLink" method="POST" csrf="true" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="ifName" type="String" />
+		</url>
+
+		<url operation-value="getSnapshotLink" method="POST" csrf="true" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="deviceName" type="String" max-len="255" />
+		</url>
+
+		<url operation-value="getImagesForResources" method="POST" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resIds" priv-delim="," >
+			<param name="resIds" regex="am.webclient.resIds.commaSeparated" max-len="10000000" />
+		</url>
+
+		<url operation-value="verifyMapName" method="POST" csrf="true" roles="am.role.ADMIN.EA">
+			<param name="mapViewName" type="String" max-len="100" />
+		</url>
+
+		<url operation-value="getListOfMapViews" method="GET" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="myDate" type="String" max-len="1000"/>
+		</url>
+
+		<url operation-value="getListOfInterfaces" method="GET" roles="am.role.ADMIN.EA">
+			<param name="deviceName" type="long" />
+		</url>
+
+		<url operation-value="isSubGroup" method="POST" csrf="true" roles="am.role.ADMIN.EA">
+			<param name="mapViewName" type="String" max-len="100" />
+		</url>
+
+		<url operation-value="deleteMapView" method="POST" csrf="true" roles="am.role.ADMIN.EA" skip-bad-input-encoding="true">
+			<param name="mapViewName" type="String" max-len="100" />
+			<param name="bgToBeDeleted" type="boolean" />
+			<param name="widgetid" type="long" />
+		</url>
+
+	</urls>
+	<!-- Topology Map view endpoints ends here -->
+
+	<!-- WAF configuration for endpoints authenticated via publish key starts -->
+	<urls throwallerrors="true" authentication="required">
+		<param-group name="am.additional.extra.params" />
+
+		<url path="/jsonfeed.do" method="GET" auth-keytype="JSONFeed">
+			<param name="method" regex="am.jsonfeed.methods"/>
+			<param name="haid" type="long" />
+			<param name="mgId" type="long" />
+			<param name="monType" regex="am.monitor.type"/>
+			<param name="toReturn" regex="am.jsonfeed.toReturn.type"/>
+			<param name="publishkey" regex="cleartextpattern" max-occurrences="1" secret="true"/>
+		</url>
+
+		<url path="/publishPage.do" method="GET" auth-keytype="Dashboard" >
+			<param name="method" regex="am.publish.dashboard.methods"/>
+			<param name="pageid" type="long" min-occurrences="1" />
+			<param name="widgetid" type="long" />
+			<param name="columns" type="int" />
+			<param name="randomnumber" type="double" />
+			<param name="mapId" type="int" />
+			<param name="template_resid" type="long" />
+			<param name="widgetproperties" type="boolean" />
+			<param name="publishkey" regex="cleartextpattern" max-occurrences="1" secret="true"/>
+			<param name="urlupdated" type="boolean" />
+
+			<!-- Alarm Summary Widget param starts here -->
+			<param name="draw" type="int" />
+			<param name="start" type="int" />
+			<param name="length" type="int" />
+			<param name="_" type="long" />
+			<param name="am.alarmsummary.datatable.param1" name-regex="true" type="int" max-occurrences="10" />
+			<param name="am.alarmsummary.datatable.param2" name-regex="true" type="boolean" max-occurrences="20" />
+			<param name="am.alarmsummary.datatable.param3" name-regex="true" type="boolean" max-occurrences="10" />
+			<param name="am.alarmsummary.datatable.param4" name-regex="true" regex="am.emptystring" max-occurrences="10" />
+			<param name="am.alarmsummary.datatable.param5" name-regex="true" regex="am.emptystring" max-occurrences="10" />
+			<param name="search[value]" regex="am.emptystring" />
+			<param name="search[regex]" type="boolean" />
+			<!-- Alarm Summary Widget param ends here -->
+
+		</url>
+
+	</urls>
+
+	<urls path="/GraphicalView.do" throwallerrors="true" authentication="required" api="true" operation-param="method">
+		<param-group name="am.additional.extra.params" />
+		<param name="haid" type="long"/>
+		<param name="viewid" regex="am.common.longnullfalse" />
+		<param name="widgetid" regex="am.common.longandnull" />
+		<param name="pageid" regex="am.common.longandnull"/>
+		<param name="isEditable" type="boolean" />
+		<param name="publishkey" regex="cleartextpattern" max-occurrences="1" secret="true"/>
+
+		<url operation-value="popUp" method="GET" disable-get-api-csrf="true" auth-keytype="BusinessView" roles="am.role.ADMIN.EA.OP.US.DE" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="isPopUp" type="boolean" />
+			<param name="customizetab" type="boolean" />
+			<param name="publishview" type="boolean" />
+			<param name="fromhomepage" type="boolean" />
+			<param name="typeId" type="long"/>
+			<param name="dashboardPublishkey" regex="cleartextpattern" max-occurrences="1" secret="true"/>
+		</url>
+
+		<url operation-value="homeTab" method="GET" disable-get-api-csrf="true" roles="am.role.ADMIN.EA.OP.US.DE" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+		</url>
+
+		<url operation-value="getMGXML" method="POST" roles="am.role.ADMIN.EA.OP.US.DE" auth-keytype="BusinessView" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="isHtml" type="boolean" />
+			<param name="publishview" type="boolean" />
+			<param name="currentime" type="long" />
+			<param name="cacheid" type="long"/>
+			<param name="dashboardPublishkey" regex="cleartextpattern" max-occurrences="1" secret="true"/>
+		</url>
+
+		<url operation-value="getLatestStatusForJIT" method="POST" csrf="true" roles="am.role.ADMIN.EA.OP.US.DE" auth-keytype="BusinessView" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="publishview" type="boolean" />
+			<param name="currentime" regex="long" />
+			<param name="resourceIDs" regex="am.common.long.commaseparatedWithBrackets" max-len="1000000"/>
+			<param name="dashboardPublishkey" regex="cleartextpattern" max-occurrences="1" secret="true"/>
+		</url>
+
+		<url operation-value="getDataForGlobalView" method="POST" roles="am.role.ADMIN.EA.OP.US.DE" auth-keytype="BusinessView" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="isHtml" type="boolean" />
+			<param name="publishview" type="boolean" />
+			<param name="currentime" type="long" />
+			<param name="dashboardPublishkey" regex="cleartextpattern" max-occurrences="1" secret="true"/>
+		</url>
+
+		<url operation-value="getAvailableViews" method="POST" csrf="true" roles="ADMIN,ENTERPRISEADMIN,USERS,DEMO">
+			<param name="viewid" regex="am.threshold.polltotry" />
+			<param name="haid" regex="am.common.longandnull" />
+		</url>
+
+		<url operation-param="method" operation-value="getBusinessServiceGraphTemplate,getBusinessServiceGlobalView" method="GET" roles="am.role.ADMIN.EA.OP.US.DE" auth-keytype="BusinessView" disable-get-api-csrf="true" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:isbusinessViewAssociatedToUser">
+			<param name="widgetid" regex="am.common.longandnull" />
+			<param name="displayAvailableViews" type="boolean" />
+			<param name="selectedViewId" regex="am.common.longandnull" />
+			<param name="viewid" regex="am.threshold.polltotry" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="publishview" type="boolean" />
+			<param name="BVName" type="String" max-len="1000"/>
+			<param name="dashboardPublishkey" regex="cleartextpattern" max-occurrences="1" secret="true"/>
+		</url>
+
+		<url operation-value="getBusinessServiceGraph" method="GET" disable-get-api-csrf="true" roles="am.role.ADMIN.EA.DE">
+		</url>
+	</urls>
+
+
+	<!-- adminAction endpoints starts -->
+
+  <urls>
+
+  </urls>
+  <!-- adminAction endpoints end -->
+
+	<!-- WAF configuration for endpoints authenticated via publish key ends -->
+
+	<!-- MyPage endpoints start here-->
+	<urls operation-param="method" authentication="required" throwallerrors="true">
+	    <param-group name="am.additional.extra.params" />
+			<param name="sid" regex="am.common.decimals" max-occurrences="2" />
+
+		<url path="/MyPage.do" method="POST" csrf="true" operation-value="addWidgets" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDEditableForUser">
+			<param name="pageid" type="long" min-occurrences="1" />
+			<param name="selectedWidgetsToAdd" regex="am.common.numberandcomma" max-len="150" />
+			<param name="randomnumber" type="double" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getMonitorGroupsInfo" roles="am.role.ADMIN.EA.DE" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDAssociatedForUser">
+			<param name="pageid" type="long" />
+			<param name="template_resid" type="long" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getDashboardActionDetails" roles="am.role.ADMIN.EA.OP.US.DE" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDAssociatedForUser">
+			<param name="pageid" type="long" />
+			<param name="template_resid" type="long" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="deleteBookMark" roles="am.role.ADMIN.EA.OP" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDEditableForUser">
+			<param name="widgetid" type="long" />
+			<param name="bookmarkid" type="long" />
+			<param name="pageid" type="long" min-occurrences="1" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="deleteembedurl" roles="am.role.ADMIN.EA">
+			<param name="widgetid" type="long" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="editMyPage" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDEditableForUser">
+			<param name="pagetype" regex="am.mypage.dashboardtypes" />
+			<param name="pageid" type="long" min-occurrences="1" />
+			<param name="template_resid" type="long" />
+			<param name="selectedTab" type="int" />
+			<param name="forpage" type="int" />
+		</url>
+
+		<url path="/MyPage.do" method="POST" csrf="true" operation-value="createDashboard" roles="am.role.ADMIN.EA">
+			<param name="pageType" regex="am.mypage.dashboardtypes" />
+			<param name="pageid" type="long" />
+			<param name="selectedTab" type="int" />
+			<param name="mgtemplatepage" regex="am.mypage.dashboardtypes" />
+			<param name="selectedMultiMonitors" regex="am.common.numberandcomma" max-occurrences="50000" />
+			<param name="selectedUsers" regex="am.common.numberandcomma" max-occurrences="1000" />
+			<param name="fromMg" type="boolean" />
+			<param name="templateResid" type="long" />
+			<param name="action" regex="am.mypage.dashboardactions" />
+			<param name="displayName" type="String" max-len="1000" />
+			<param name="numberOfColumns" type="int" />
+			<param name="description" type="String" max-len="10000" />
+			<param name="columnWidth1" type="int" />
+			<param name="columnWidth2" type="int" />
+			<param name="columnWidth3" type="int" />
+			<param name="columnWidth4" type="int" />
+			<param name="allMGsSelectedForTemplatePage" regex="am.sms.gateway.encodevalue" />
+			<param name="userSelectionType" type="int" />
+			<param name="selectedUserRoles" regex="am.mypage.dashboard.usertypes" max-occurrences="1000" />
+			<param name="selectedWidgets" regex="am.common.numberandcomma" max-occurrences="100"/>
+			<param name="selectedWidgetsCheckbox" type="int" max-occurrences="10" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="editTabs" roles="am.role.ADMIN.EA.OP.US">
+			<param name="forpage" type="int" />
+		</url>
+
+		<url path="/MyPage.do" method="POST" csrf="true" operation-value="generatePdfForWidget" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDAssociatedForUser">
+			<param name="businessViewWidgets" regex="am.common.numberswithunderscores.commaseparated" />
+			<param name="divToConvert" type="String" max-len="10000000"/>
+			<param name="pageid" type="long" min-occurrences="1" />
+		</url>
+
+		<url path="/MyPage.do" method="POST" csrf="true" operation-value="generatePdfForThreadSummary" roles="am.role.ADMIN.EA" deny-del-admin="true" >
+			<param name="divToConvert" type="String" max-len="10000000"/>
+			<param name="reportName" type="String" max-len="100"/>
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getBookMarkForm" roles="am.role.ADMIN.EA.OP.US.DE" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDEditableForUser">
+			<param name="widgetid" type="long" />
+			<param name="bookmarkid" type="long" />
+			<param name="pageid" type="long" min-occurrences="1" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getBusinessView" roles="am.role.ADMIN.EA.OP.US.DE">
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="setAsDefault" roles="am.role.ADMIN.EA.OP.US" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDAssociatedForUser">
+			<param name="resourceid" type="long" />
+			<param name="dashboardtype" type="int" />
+			<param name="forpage" type="int" />
+			<param name="pageid" type="long" min-occurrences="1" />
+			<param name="selectedTab" type="int" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="saveMyPageLayout" roles="am.role.ADMIN.EA.OP.US" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDAssociatedForUser">
+			<param name="pageid" type="long" min-occurrences="1" />
+			<param name="positionArray" regex="am.common.numberswithunderscores.commaseparated" max-len="10000000" />
+		</url>
+
+		<url path="/MyPage.do" method="POST" operation-value="saveBookMark" roles="am.role.ADMIN.EA.OP.US.DE" csrf="true" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDEditableForUser">
+			<param name="widgetid" type="long" />
+			<param name="pageid" type="long" min-occurrences="1" />
+			<param name="bookmarkid" type="long" />
+			<param name="url" regex="urlipv6" max-len="255" />
+			<param name="displayname" type="String" max-len="500" />
+			<param name="description" type="String" max-len="10000" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="newWidgets" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDEditableForUser">
+			<param name="isPopup" type="boolean" />
+			<param name="pageid" type="long" min-occurrences="1" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="listMonitorGroups" roles="am.role.ADMIN.EA"  custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDAssociatedForUser">
+			<param name="widgetid" type="long" />
+			<param name="pageid" type="long" min-occurrences="1" />
+			<param name="customfield" regex="am.common.alphaNumeric.ext1" />
+			<param name="searchtext" type="int" />
+			<param name="widgetType" type="int" />
+			<param name="subgroup" type="boolean" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="listMGDashBoards" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="haid" type="long" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="listDashBoards" roles="am.role.ADMIN.EA.OP.US.DE">
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getWidgetProperties" roles="am.role.ADMIN.EA.OP.US.DE" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:validateWidgetIDAndPageID">
+			<param name="widgetid" type="long" />
+			<param name="pageid" type="long" min-occurrences="1" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getCustomfieldMonitors" roles="am.role.ADMIN.EA">
+			<param name="widgetid" type="long" />
+			<param name="customfield" regex="am.common.alphaNumeric.ext1" />
+			<param name="searchtext" type="int" />
+			<param name="monitorType" regex="am.webclient.monitor.types" />
+			<param name="attributeid" type="long" />
+			<param name="widgetType" type="int" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getDependencyViewForMapId" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="mapId" type="long" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getRelatedAttributes" roles="am.role.ADMIN.EA">
+			<param name="selectedAttribute" type="long" />
+			<param name="selectedMonitorType" regex="am.webclient.monitor.type" />
+			<param name="widgetType" type="int" />
+			<param name="editscriptwidget" type="boolean" />
+			<param name="selectedMonitor" type="long" />
+			<param name="randomnumber" type="double" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getResourceForSelectionType" roles="am.role.ADMIN.EA">
+			<param name="widgetid" type="long" />
+			<param name="widgetType" type="int" />
+			<param name="selectedMonitorType" regex="am.webclient.monitor.type" />
+			<param name="selecttionType" regex="am.widgets.selectiontype" />
+			<param name="selectedAttribute" type="long" />
+			<param name="pageType" regex="am.mypage.dashboardtypes" />
+			<param name="randomnumber" type="double" />
+			<param name="subgroup" type="boolean" />
+			<param name="editscriptwidget" type="boolean" />
+			<param name="selectedMonitor" type="long" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getSelectedCustomField" roles="am.role.ADMIN.EA" >
+			<param name="widgetid" type="long" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getAttributesForResourceType" roles="am.role.ADMIN.EA" >
+			<param name="resourceType" regex="am.webclient.monitor.type" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getWidget" roles="am.role.ADMIN.EA.OP.US.DE.REP" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:validateWidgetIDAndPageID">
+			<param name="widgetid" regex="am.common.longandnull" />
+			<param name="pageid" regex="am.common.longandnull" min-occurrences="1" />
+			<param name="columns" type="int" />
+			<param name="attributeId" type="long" />
+			<param name="resourceId" type="long" />
+			<param name="period" type="int" />
+			<param name="ispopup" type="boolean" />
+			<param name="fromDeleteMap" type="boolean" />
+			<param name="randomnumber" type="double" />
+			<param name="template_resid" type="long" />
+			<param name="type" regex="am.common.onlystring" />
+			<param name="isPopUp" type="boolean"/>
+			<param name="noOfRows" type="long" />
+			<param name="date" regex="am.common.javascriptDate"/>
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="newMyPage" roles="am.role.ADMIN.EA.DE">
+			<param name="pagetype" regex="am.alphanumeric" />
+			<param name="displayName" type="String" max-len="1000" />
+			<param name="forpage" type="int" />
+			<param name="template_resid" type="long" />
+			<param name="reqForAdminLayout" type="boolean" />
+			<param name="service" regex="am.threshold.admin.view" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="popOut" roles="am.role.ADMIN.EA.OP.US.DE" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDAssociatedForUser">
+			<param name="pageid" type="long" min-occurrences="1" />
+			<param name="template_resid" type="long" />
+		</url>
+
+		<url path="/MyPage.do" method="POST" operation-value="saveTabOrder" roles="am.role.ADMIN.EA.OP.US" csrf="true">
+			<param name="selectedPage0" type="long" />
+			<param name="selectedPage1" type="long" />
+			<param name="selectedPage2" type="long" />
+			<param name="selectedPage3" type="long" />
+			<param name="selectedPage4" type="long" />
+			<param name="selectedPage5" type="long" />
+			<param name="selectedPage6" type="long" />
+			<param name="selectedPage7" type="long" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="viewMyPageForMG" roles="am.role.ADMIN.EA.OP.US.DE" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDAssociatedForUser">
+			<param name="pageid" type="long" />
+			<param name="template_resid" type="long" />
+			<param name="screenwidth" type="int" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="viewDashBoard" roles="am.role.ADMIN.EA.OP.US.DE" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDAssociatedForUser">
+			<param name="toredirect" type="boolean" />
+			<param name="forpage" type="int" />
+			<param name="addNewTab" type="boolean" />
+			<param name="fromtab" type="boolean" />
+			<param name="selectedpageid" type="long" />
+			<param name="selectedTab" type="int" />
+			<param name="plugin_view" type="boolean" />
+			<param name="from_singlesignon" type="boolean" />
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+			<param name="targetClient" regex="mobile.targetClient" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="editWidget" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDEditableForUser">
+			<param name="widgetid" type="long" />
+			<param name="pageid" type="long" max-occurrences="2" min-occurrences="1" />
+			<param name="selectedMonitorType" regex="am.webclient.monitor.type" />
+			<param name="displayName" type="String" max-len="1000" />
+			<param name="description" type="String" max-len="10000" />
+			<param name="clearScriptMonitor" type="boolean" />
+			<param name="selectedMonitors" regex="am.common.numberandcomma" max-len="10000000"/>
+			<param name="monitorSelectionType" type="int" />
+			<param name="editscriptwidget" type="boolean" />
+			<param name="multiMonitor" type="long" max-occurrences="50000"/>
+			<param name="period" type="int" />
+			<param name="sortBy" type="int" />
+			<param name="businessPeriod" regex="am.widgets.businessperiod" />
+			<param name="topnOrder" regex="am.common.orderby.uppercase" />
+			<param name="selectedAttribute" regex="am.common.numberandcomma" />
+			<param name="scriptResourceID" type="long" />
+			<param name="attributeName" type="long" />
+			<param name="attributename" type="String" max-len="10000" />
+			<param name="selectedGraphType" regex="am.widgets.graphtypes" />
+			<param name="pollDataPeriod" type="int" />
+			<param name="customScaleOption" regex="am.widgets.customscaleoptions" />
+			<param name="minimumScale" type="int" />
+			<param name="maximumScale" type="int" />
+			<param name="selecttionType" regex="am.webclient.monitor.type" />
+			<param name="widgetType" type="int" />
+			<param name="multiAttributes" regex="am.widgets.montypewithattribid" max-occurrences="50000"/>
+			<param name="alertStatusForMetrics" regex="am.sms.gateway.encodevalue" />
+			<param name="graphforAdditionalMetric" regex="am.sms.gateway.encodevalue" />
+			<param name="selectedMonitor" type="long" />
+		</url>
+
+		<url path="/MyPage.do" method="POST" operation-value="editWidget" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDEditableForUser">
+			<param name="widgetid" type="long" />
+			<param name="pageid" type="long" max-occurrences="2" min-occurrences="1" />
+			<param name="selectedMonitorType" regex="am.webclient.monitor.type" />
+			<param name="displayName" type="String" max-len="1000" />
+			<param name="description" type="String" max-len="10000" />
+			<param name="clearScriptMonitor" type="boolean" />
+			<param name="selectedMonitors" regex="am.common.numberandcomma" max-len="10000000"/>
+			<param name="monitorSelectionType" type="int" />
+			<param name="editscriptwidget" type="boolean" />
+			<param name="multiMonitor" type="long" max-occurrences="50000"/>
+			<param name="period" type="int" />
+			<param name="sortBy" type="int" />
+			<param name="businessPeriod" regex="am.widgets.businessperiod" />
+			<param name="topnOrder" regex="am.common.orderby.uppercase" />
+			<param name="selectedAttribute" regex="am.common.numberandcomma" />
+			<param name="scriptResourceID" type="long" />
+			<param name="attributeName" type="long" />
+			<param name="attributename" type="String" max-len="10000" />
+			<param name="selectedGraphType" regex="am.widgets.graphtypes" />
+			<param name="pollDataPeriod" type="int" />
+			<param name="customScaleOption" regex="am.widgets.customscaleoptions" />
+			<param name="minimumScale" type="int" />
+			<param name="maximumScale" type="int" />
+			<param name="selecttionType" regex="am.webclient.monitor.type" />
+			<param name="widgetType" type="int" />
+			<param name="multiAttributes" regex="am.widgets.montypewithattribid" max-occurrences="50000"/>
+			<param name="alertStatusForMetrics" regex="am.sms.gateway.encodevalue" />
+			<param name="graphforAdditionalMetric" regex="am.sms.gateway.encodevalue" />
+			<param name="selectedMonitor" type="long" />
+		</url>
+
+		<url path="/MyPage.do" method="GET" operation-value="getAlarmSummaryData" roles="am.role.ADMIN.EA.OP.US.DE" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDAssociatedForUser">
+			<param name="widgetid" type="long" />
+			<param name="pageid" type="long" min-occurrences="1" />
+			<param name="draw" type="int" />
+			<param name="start" type="int" />
+			<param name="length" type="int" />
+			<param name="_" type="long" />
+			<param name="am.alarmsummary.datatable.param1" name-regex="true" type="int" max-occurrences="10" />
+			<param name="am.alarmsummary.datatable.param2" name-regex="true" type="boolean" max-occurrences="20" />
+			<param name="am.alarmsummary.datatable.param3" name-regex="true" type="boolean" max-occurrences="10" />
+			<param name="am.alarmsummary.datatable.param4" name-regex="true" regex="am.emptystring" max-occurrences="10" />
+			<param name="am.alarmsummary.datatable.param5" name-regex="true" regex="am.emptystring" max-occurrences="10" />
+			<param name="search[value]" regex="am.emptystring" />
+			<param name="search[regex]" type="boolean" />
+		</url>
+
+		<url path="/MyPage.do" method="post" csrf="true" operation-param="method" operation-value="updateDashboard" authentication="required" roles="am.role.ADMIN.EA" throwallerrors="true" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDEditableForUser" >
+			<param name="pageType" regex="am.mypage.dashboardtypes" />
+			<param name="pageid" type="long" />
+			<param name="selectedTab" type="int" />
+			<param name="mgtemplatepage" regex="am.mypage.dashboardtypes" />
+			<param name="selectedMultiMonitors" regex="am.common.numberandcomma" max-occurrences="50000" />
+			<param name="selectedUsers" regex="am.common.numberandcomma" max-occurrences="1000" />
+			<param name="fromMg" type="boolean" />
+			<param name="templateResid" type="long" />
+			<param name="action" regex="am.mypage.dashboardactions" />
+			<param name="displayName" type="String" max-len="1000" />
+			<param name="numberOfColumns" type="int" />
+			<param name="description" type="String" max-len="10000" />
+			<param name="columnWidth1" type="int" />
+			<param name="columnWidth2" type="int" />
+			<param name="columnWidth3" type="int" />
+			<param name="columnWidth4" type="int" />
+			<param name="allMGsSelectedForTemplatePage" regex="am.sms.gateway.encodevalue" />
+			<param name="userSelectionType" type="int" />
+			<param name="selectedUserRoles" regex="am.mypage.dashboard.usertypes" max-occurrences="1000" />
+			<param name="selectedWidgets" regex="am.common.numberandcomma" />
+			<param name="selectedWidgetsCheckbox" type="int" max-occurrences="10" />
+	     </url>
+
+	     <url path="/MyPage.do" method="post" csrf="true" operation-param="method" operation-value="deleteMyPage" authentication="required" roles="am.role.ADMIN.EA" throwallerrors="true" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDEditableForUser" >
+		    <param name="pageid" type="long" min-occurrences="1" />
+		    <param name="template_resid" type="long" />
+			<param name="PRINTER_FRIENDLY" type="boolean"/>
+	     </url>
+	    	    <!-- ZVE-2021-0324 -->
+	  	 <url path="/MyPage.do" method="post" csrf="true" operation-param="method" operation-value="saveWidget" authentication="required" roles="am.role.ADMIN.EA" throwallerrors="true" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDEditableForUser" >
+			<param name="pageid" regex="am.common.longandnull" min-occurrences="1" />
+			<param name="widgetid" type="long" />
+			<param name="inputDownTime" type="long" />
+			<param name="selectedTimeUnit" type="int" />
+			<param name="alertMessageLimit" type="int" />
+			<param name="attributename" type="String" max-len="10000" />
+			<param name="businessPeriod" regex="am.widgets.businessperiod" />
+			<param name="childMonitorAttribute" regex="am.common.longbooleanandnull" />
+			<param name="childParentid" type="long" />
+			<param name="customScaleOption" regex="am.widgets.customscaleoptions" />
+			<param name="description" type="String" max-len="10000000" />
+			<param name="displayName" type="String" max-len="255" />
+			<param name="maximumScale" type="int" />
+			<param name="minimumScale" type="int" />
+			<param name="monitorSelectionType" type="int" />
+			<param name="monitorname" type="String" max-len="1000" />
+			<param name="period" type="int" />
+			<param name="pollDataPeriod" type="int" />
+			<param name="scriptResourceID" type="long" />
+			<param name="relatedAttributes" regex="am.common.numberandcomma" max-len="100000000" max-occurrences="50000" />
+			<param name="selectedMonitorTypes" regex="am.webclient.monitor.type" max-occurrences="200" />
+			<param name="selectedAttribute" type="int" />
+			<param name="selectedGraphType" regex="am.widgets.graphtypes" />
+			<param name="selectedMonitor" type="long" />
+			<param name="selectedMonitors" regex="am.emptystring" />
+			<param name="selectedMonitorType" regex="am.webclient.monitor.type" />
+			<param name="selecttionType" regex="am.widgets.selectiontype" />
+			<param name="transposeTable" type="int" />
+			<param name="widgetType" type="int" />
+			<param name="multiAttributes" regex="am.widgets.montypewithattribid" max-occurrences="50000"/>
+			<param name="multiMonitor" type="long" max-occurrences="50000" />
+			<param name="sortBy" type="int" />
+			<param name="topnOrder" regex="am.common.orderby.uppercase" />
+			<param name="filterByName" type="String" max-len="255" />
+			<param name="limitn" type="int" />
+			<param name="secondThreshodCondnExist" type="boolean" />
+			<param name="thresholdCondn1" regex="am.widgets.topn.filterconditions" />
+			<param name="thresholdCondn2" regex="am.widgets.topn.filterconditions" />
+			<param name="thresholdEnabled" regex="am.sms.gateway.encodevalue" />
+			<param name="thresholdJoinCondn" regex="am.trap.condition" />
+			<param name="thresholdValue1" type="int" />
+			<param name="thresholdValue2" type="int" />
+			<param name="selectedMG" type="long" />
+			<param name="selectedMGs" type="long" max-occurrences="1000" />
+			<param name="selectedMultiMonitors" type="long" max-occurrences="50000" />
+			<param name="alertStatusForMetrics" regex="am.sms.gateway.encodevalue" />
+			<param name="includeWarningAsError" regex="am.sms.gateway.encodevalue" />
+			<param name="excludeUnmanaged" regex="am.sms.gateway.encodevalue" />
+			<param name="excludeHealth" regex="am.sms.gateway.encodevalue" />
+			<param name="excludeAvail" regex="am.sms.gateway.encodevalue" />
+			<param name="selectAllresGrp" regex="am.sms.gateway.encodevalue" />
+			<param name="selectedItems" regex="am.widgets.monitors.category" max-occurrences="20"/>
+			<param name="attribForSeverityStatus" type="int" />
+			<param name="multiSeverity" type="int" max-occurrences="10" />
+			<param name="healthSeverity" type="int" max-occurrences="10" />
+			<param name="availSeverity" type="int" max-occurrences="10" />
+			<param name="downtimeScheduleCheckAttr" regex="am.sms.gateway.encodevalue" />
+			<param name="filterAlertMessageCase" regex="am.widgets.matchcase.conditions" />
+			<param name="filterAlertMessageCondition" regex="am.widgets.alertmsg.filterconditions" />
+			<param name="filterAlertMessagevalue" type="String" max-len="255" />
+			<param name="timeInEquality" type="int" />
+			<param name="monitorTypesAndCustomFields" regex="am.widgets.montypewithcustomfields" max-occurrences="10000"/>
+			<param name="selectedMonitorGroup" regex="am.widgets.selectmongrp.options" />
+			 <param name="selectedTime" regex="am.webclient.widgets.selectedtime" />
+			<param name="todaysavailability" regex="am.sms.gateway.encodevalue" />
+			<param name="selectedBusinessView" type="int" />
+			<param name="selectedTopologyMapView" type="String" max-len="1000" />
+			<param name="url" regex="urlipv6" max-len="255" />
+			<param name="widgetHeight" type="int" />
+			<param name="selectFieldVal" regex="am.webclient.monitor.type" />
+			<param name="includeSummaryChart" regex="am.sms.gateway.encodevalue" />
+			<param name="graphforAdditionalMetric" regex="am.sms.gateway.encodevalue" />
+			<param name="persistAlertDuration" regex="am.sms.gateway.encodevalue" />
+			<param name="unManagedCheckAttr" regex="am.sms.gateway.encodevalue" />
+			<param name="displaySubGroups" regex="am.sms.gateway.encodevalue" />
+			<param name="monitorsStatus" regex="am.sms.gateway.encodevalue" />
+			<param name="mapValue" type="long" />
+			<param name="serverUptimeDuration" type="int" max-len="8" />
+			<param name="serverUptimeEquality" type="int" max-len="2" />
+			<param name="messageType" regex="am.widgets.errors.type" max-len="50" />
+			<param name="dcDuration" type="long" />
+	     </url>
+	    <url path="/MyPage.do" method="post" csrf="true" operation-param="method" operation-value="deleteWidget" authentication="required" roles="am.role.ADMIN.EA" throwallerrors="true" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkPageIDEditableForUser">
+	    	<param name="widgetid" type="long" />
+	    	<param name="pageid" type="long" min-occurrences="1" />
+	    </url>
+	    <url path="/MyPage.do" method="GET" operation-value="disablePluginGQPopUp" roles="am.role.ADMIN.EA.OP.US"></url>
+	</urls>
+	<!-- MyPage endpoints end here-->
+
+	<!-- Dashboard View endpoints starts here -->
+	<urls operation-param="method" authentication="required" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+    <param name="sid" regex="am.common.decimals" />
+
+		<url path="/dashboard.do" method="GET" operation-value="generateAvailabilityHistory" roles="am.role.ADMIN.EA.OP.US.DE">
+	    	<param name="type" regex="am.webclient.monitor.type"/>
+	    	<param name="resourceid" type="long"/>
+			<param name="resourceId" type="long"/>
+	    	<param name="period" type="int"/>
+	    	<param name="isConfMonitor" type="boolean"/>
+	    	<param name="isPopUp" type="boolean"/>
+			<param name="includeInWidget" type="boolean"/>
+	    	<param name="haid" type="long"/>
+			<param name="date" regex="String" max-len="200" />
+			<param name="oldtab" regex="am.common.longandnull"/>
+			<param name="noOfRows" type="int"/>
+			<param name="selectedPage" type="int"/>
+			<param name="widgetid" regex="am.common.longandnull" />
+	    </url>
+
+		<url path="/dashboard.do" method="GET" operation-value="generateHealthHistory" roles="am.role.ADMIN.EA.OP.US.DE">
+	    	<param name="type" regex="am.webclient.monitor.type"/>
+	    	<param name="resourceid" type="long"/>
+			<param name="resourceId" type="long"/>
+			<param name="severName" regex="am.hostname" max-len="255"/>
+	    	<param name="period" type="int"/>
+	    	<param name="isConfMonitor" type="boolean"/>
+	    	<param name="isPopUp" type="boolean"/>
+			<param name="includeInWidget" type="boolean"/>
+	    	<param name="haid" type="long"/>
+			<param name="date" regex="String" max-len="200" />
+			<param name="oldtab" regex="am.common.longandnull"/>
+			<param name="view" regex="am.only.category"/>
+			<param name="noOfRows" type="int"/>
+			<param name="selectedPage" type="int"/>
+			<param name="widgetid" regex="am.common.longandnull" />
+	    </url>
+
+		<url path="/dashboard.do" method="GET" operation-value="generateEC2Table,generateVirtualMachineTable" roles="am.role.ADMIN.EA.OP.US.DE">
+	    	<param name="group" regex="am.common.Null"/>
+	    	<param name="network" regex="am.amazon.ec2.os.names"/>
+	    	<param name="selectedPage" type="int"/>
+	    	<param name="noOfRows" type="int"/>
+	    	<param name="oldtab" regex="am.common.longandnull"/>
+	    </url>
+
+		<url path="/dashboard.do" operation-value="generateContainerDashboard,generateHyperVDashboard,generateVIDashboard" method="GET" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="screenwidth" type="int"/>
+			<param name="type" regex="am.dashboard.generate.types"/>
+			<param name="date" regex="String" max-len="200" />
+		</url>
+
+		<url path="/dashboard.do" operation-value="getProductInfo" method="GET" roles="am.role.ADMIN.EA.OP.US.DE.MA">
+			<param name="_" type="long"/>
+		</url>
+
+		<url path="/dashboard.do" operation-value="getPublishKeyForUser" method="GET" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:checkPublishPermissionForUser">
+			<param name="publishtype" regex="am.publishkey.types"/>
+			<param name="typeId" regex="int"/>
+			<param name="haid" regex="long"/>
+			<param name="viewid" regex="int"/>
+		</url>
+
+		<url path="/dashboard.do" operation-value="hideGDPRAnnouncement" method="POST" csrf="true" roles="am.role.ADMIN.EA.OP.US">
+		</url>
+
+		<url path="/dashboard.do" operation-value="hideInProdAnnouncement" method="POST" csrf="true" roles="am.role.ADMIN.EA.OP.US.DE.MA">
+			<param name="creatorId" type="long"/>
+			<param name="userId" type="long"/>
+		</url>
+
+		<url path="/dashboard.do" operation-value="regeneratePublishKey" method="POST" csrf="true" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.BusinessViewPrivilegeHandler:checkPublishPermissionForUser">
+			<param name="publishtype" regex="am.publishkey.types"/>
+			<param name="publishkey" regex="cleartextpattern" max-occurrences="1" secret="true"/>
+			<param name="typeId" regex="int"/>
+			<param name="haid" regex="long"/>
+			<param name="viewid" regex="int"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="submitScreenshot" path="/dashboard.do" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="apmScreengrabberObjects" type="JSONArray" template="am.screengrabber.jsonArray" array-size="0-5" max-len="10000000" />
+			<param name="screenshotSubject" type="String" max-len="100"/>
+			<param name="screenshotMessage" type="String" max-len="1500"/>
+		</url>
+		<url csrf="true" method="POST" operation-param="method" operation-value="convertBase64ToImage" path="/dashboard.do" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="bv_pdf_objects" type="JSONArray" template="am.businessview.pdf.jsonArray" array-size="0-200" max-len="10000000" />
+		</url>
+	</urls>
+	<!-- Dashboard View endpoints ends here -->
+	<urls throwallerrors="true" authentication="required">
+		 <param-group name="am.additional.extra.params" />
+		
+		<url path="/adminLayout.do" method="GET" roles="am.role.ADMIN.EA.DE" custom-scope-validator="com.adventnet.appmanager.struts.beans.ClientDBUtil:checkIfAdminMenusAreOwned">
+			<param name="config_id" type="int"/>
+			<param name="config_name" regex="am.adminlayout.configname" />
+			<param name="menu_type" regex="am.adminlayout.menutype" />
+			<param name="onDemand_Id" type="int" />
+			<param name="tabtoselect" type="int" />
+			<param name="load_flow" type="boolean" />
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+			<param name="plugin_view" type="boolean" />
+			<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+		</url>
+	</urls>
+	<!-- Admin Action endpoints starts here-->
+	<urls operation-param="method" authentication="required" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+
+		<url path="/adminAction.do" operation-value="bulkUpdate" method="POST" csrf="true" privilege-identifier="haid" roles="am.role.ADMIN.EA.DE">
+			<param name="methodName" regex="am.setdefaultmonview.methods" />
+			<param name="networkName" regex="am.custom.monitortype.type" />
+			<param name="groupName" regex="am.custom.monitortype.type" />
+			<param name="polling" regex="am.bulkupdate.updatepolling" />
+			<param name="values" regex="am.common.numberandcomma" max-len="10000000" />
+			<param name="viewmontype" regex="am.custom.monitortype.type" />
+			<param name="showmanage" regex="am.bulkupdate.showmanage" />
+			<param name="retaintree" regex="am.common.longandnull" />
+			<param name="isFromEnterpriseSearch" regex="am.common.TFNull" />
+			<param name="haid" type="long" />
+			<param name="timeout" type="int" max-len="6"/>
+			<param name="username" regex="am.windows.username" max-len="255" secret="true" />
+			<param name="password" type="String" max-len="250" secret="true" />
+			<param name="smtpauth" regex="am.common.TFNull" />
+		</url>
+		<url path="/adminAction.do" operation-value="copyPasteMonitor"  method="POST" csrf="true" privilege-identifier="resourceid"  roles="am.role.ADMIN.EA.DE">
+			<param name="networkAddress" regex="am.hostname" max-len="100"/>
+			<param name="netmask" regex="ipaddress" max-len="50"/>
+			<param name="name" regex="am.displayname.common"/>
+			<param name="group" regex="am.custom.monitortype.type"/>
+			<param name="mode" regex="am.copypastemonitor.mode"/>
+			<param name="resourceid" type="long"/>
+			<param name="submit" regex="am.alphanumeric.alllanguages" max-len="50" />
+		</url>
+		<url path="/adminAction.do" operation-value="customMapView" method="GET" csrf="false" roles="am.role.ADMIN.EA.DE">
+			<param name="selectedNetwork" regex="am.alphanumeric" />
+		</url>
+		<url path="/adminAction.do" operation-value="setDefaultMonitorsView"  method="POST" csrf="true" roles="am.role.ADMIN.EA.DE">
+			<param name="defaultmonitorsview" regex="am.setdefaultmonview.methods"/>
+			<param name="zoomlevel" regex="am.emptystring"/>
+			<param name="zoomlocation" regex="am.emptystring"/>
+		</url>
+		<url path="/adminAction.do" operation-value="showPrerequisitesConfiguration" method="GET" csrf="false" roles="am.role.ADMIN.EA.DE">
+			<param name="isAjax" type="boolean" />
+		</url>
+
+      <url path="/adminAction.do" operation-value="preRequisitesConfiguration"  method="POST" csrf="true" roles="am.role.ADMIN.EA" authentication="required" allow-only-superadmin="true">
+          <param name="preference" regex="am.alphanumeric"/>
+          <param name="proxyUserName" regex="am.windows.username" max-len="515"/>
+          <param name="proxyPassword" type="String" secret="true" max-len="515"/>
+          <param name="useproxy" regex="am.sms.gateway.encodevalue"/>
+          <param name="bypassproxy" regex="am.mailserver.serverauth.types"/>
+          <param name="proxyHost"  regex="am.hostname" max-len="100"/>
+          <param name="proxyPort" type="int" max-len="10"/>
+          <param name="updateCredentials" type="boolean"/>
+          <param name="dontProxyList" regex="am.hostname.ext.3" max-len="20000"/>
+          <param name="smtpServer" regex="am.hostname" max-len="255" />
+          <param name="smtpPort" type="int" max-len="10"/>
+          <param name="smtpUserName" regex="am.windows.username" max-len="515"/>
+          <param name="smtpPassword" type="String" secret="true" max-len="515"/>
+          <param name="prmTlsAuth" type="boolean"/>
+          <param name="prmSslAuth" type="boolean"/>
+          <param name="smtpEmail" regex="am.sqljobaction.newEmailAction" max-len="255"/>
+          <param name="secSmtpPort" type="int" max-len="10"/>
+          <param name="secSmtpUserName" regex="am.windows.username" max-len="515"/>
+          <param name="secSmtpPassword" type="String" secret="true" max-len="515"/>
+          <param name="secTlsAuth" type="boolean"/>
+          <param name="secSslAuth" type="boolean"/>
+          <param name="secSmtpServer" regex="am.hostname" max-len="255"/>
+          <param name="secSmtpEmail" regex="am.sqljobaction.newEmailAction" max-len="255"/>
+          <param name="adminEmailId" regex="am.sqljobaction.newEmailAction" max-len="255"/>
+
+      </url>
+      <url path="/adminAction.do" operation-value="showGlobalSettingsConfiguration" authentication="required" method="GET" csrf="false" roles="am.role.ADMIN.EA.DE">
+            <param name="typetoshow" regex="am.globalconfig.typetoshow" max-occurrences="2" />
+            <param name="showServerMonitor" type="boolean"/>
+            <param name="showMssqlLink" type="boolean"/>
+            <param name="frommondetails" type="boolean"/>
+            <param name="resourceid" type="long"/>
+            <param name="showconfigureMSSQL" type="boolean"/>
+            <param name="showconfigureDC" type="boolean"/>
+            <param name="MonitorType" regex="am.montype"/>
+            <param name="resourceID" type="long"/>
+            <param name="dcComponentName" regex="am.globalconfig.dcComponentName"/>
+            <param name="showAmazonLink" type="boolean"/>
+            <param name="addSuccessMessage" type="boolean"/>
+            <param name="reloadParent" type="boolean"/>
+            <param name="fromwhere" regex="am.common.onlystring"/>
+            <param name="showMsgNonConf" type="boolean"/>
+            <param name="reqForAdminLayout" type="boolean" />
+            <param name="isSuccess" type="boolean" />
+            <param name="showDBLink" type="boolean" />
+            <param name="service" regex="am.certificate.service" />
+            <param name="sid" regex="am.common.longandnull" />
+            <param name="resourceIDMySQL" type="long"/>
+
+      </url>
+      <url path="/adminAction.do" operation-value="saveGlobalSettingsConfiguration" skip-bad-input-encoding="true" ignore-extraparam ="true" authentication="required"  method="POST" csrf="true" roles="am.role.ADMIN.EA" deny-del-admin="true">
+          <param name="listALLProcess" regex="onlyon" />
+          <param name="windowsNLBDatacollection" regex="onlyon" />
+          <param name="windowsPrintQueueDatacollection" regex="onlyon" />
+          <param name="resourceID" type="long"/>
+          <param name="resourceIDMySQL" type="long"/>
+          <param name="settings" regex="am.globalconfig.settings" />
+          <param name="enableupload" type="boolean" />
+          <param name="gmapheight" type="int" />
+          <param name="gmapwidth" type="int" />
+          <param name="useWebServerPort" type="boolean" />
+          <param name="adminserverStatus" type="boolean" />
+          <param name="actionsEnabled" type="boolean" />
+          <param name="pluginActionEnabled" type="boolean" />
+          <param name="enableCompleteInfoForSMS" type="boolean" />
+          <param name="repeatAvailabilityActions" type="boolean" />
+          <param name="db2AvailabilityCheck" type="boolean" />
+          <param name="repeatHealthActions" regex="am.globalconfig.repeatHealthActions" />
+          <param name="repeatAttributeActions" type="boolean" />
+          <param name="enableRCA" type="boolean" />
+          <param name="transferEncoding" regex="am.globalconfig.transferEncoding" />
+          <param name="enableServerSnapshot" type="boolean" />
+          <param name="enableConsolidatedMail" type="boolean" />
+          <param name="dateformat" regex="am.globalconfig.dateformat" />
+          <param name="dailyPerfReportCollection" type="boolean" />
+          <param name="alertJobSkip" type="boolean" />
+          <param name="showDataCollectionTab" type="boolean" />
+          <param name="showDiskIoTab" type="boolean" />
+          <param name="diskIOAix"  regex="am.sms.gateway.encodevalue" />
+          <param name="diskIOFreeBsd"  regex="am.sms.gateway.encodevalue" />
+          <param name="diskIOMacOS"  regex="am.sms.gateway.encodevalue"/>
+          <param name="diskIOHPUX" regex="am.sms.gateway.encodevalue" />
+          <param name="diskIOLinux"  regex="am.sms.gateway.encodevalue" />
+          <param name="diskInodeLinux"  regex="am.sms.gateway.encodevalue" />
+          <param name="diskInodeAIX"  regex="am.sms.gateway.encodevalue" />
+          <param name="diskIOSun"  regex="am.sms.gateway.encodevalue" />
+          <param name="diskIOWindows" regex="am.sms.gateway.encodevalue" />
+          <param name="am.host.specifichosts" type="String" max-len="1000" />
+          <param name="am.telnet.loginTimeOut" type="int" />
+          <param name="am.cli.bulkcmd.exec.responsetimeout" type="int" />
+          <param name="am.server.command.responsetimeout" type="int" />
+          <param name="am.server.cli.match.category.index" type="int" />
+          <param name="am.cliSession.caching" type="boolean" />
+          <param name="am.cli.loginprefix" type="boolean" />
+          <param name="am.cli.command.bulk.execute" type="boolean" />
+          <param name="am.server.windows.resend.vbscripts" type="boolean" />
+          <param name="am.rawdata.enabled" type="boolean" />
+          <param name="am.wmi.encoding" regex="am.globalconfig.wmi.encoding.extended" />
+          <param name="am.processinstance.equals" type="boolean" />
+          <param name="am.mg.processAndService.associate" type="boolean" />
+          <param name="am.disks.ignore" type="String" max-len="5000" />
+          <param name="am.networks.ignore" type="String" max-len="5000" />
+          <param name="am.errpt.hardware.ignore" type="String" max-len="5000" />
+          <param name="am.host.deleteDisk" type="boolean" />
+          <param name="am.host.disk.delete.consecutivePollingCount" type="int" />
+          <param name="preferredSSHKex" regex="am.globalconfig.preferredSSHKex" />
+          <param name="am.host.nlb.deleteNode" type="boolean" />
+          <param name="am.host.nlb.delete.consecutivePollingCount" type="int" />
+          <param name="showDatabaseTab" type="boolean" />
+          <param name="mysqlTableData" regex="am.globalconfig.mysqlTableData" />
+          <param name="am.htmldata.mysql.daystoretain" type="int" />
+          <param name="sybaseDBDetails" regex="am.globalconfig.TableData" />
+          <param name="failedScheduledBackupJobs" type="boolean" />
+          <param name="am.oracle.ignorealerts" regex="am.alphanumeric.commaSpaceHyphen" max-len="250"/>
+          <param name="clearLastRunStatus" type="boolean" />
+          <param name="showAmazonTab" type="boolean" />
+          <param name="amazonS3BucketTableData" regex="am.globalconfig.TableData" />
+          <param name="amazonEC2PrimaryKey" regex="am.globalconfig.amazonEC2PrimaryKey" />
+          <param name="awsS3BucketsCloudWatchAPIOption" type="boolean" />
+          <param name="awsEnableAutoscalingAlertEC2" regex="am.sms.gateway.encodevalue" />
+          <param name="awsAutoscalingAlert" regex="am.globalconfig.awsAutoscalingAlert" />
+          <param name="awsMonitorError" type="int" />
+          <param name="showUrlTab" regex="am.sms.gateway.encodevalue" />
+          <param name="urlDebug" regex="am.sms.gateway.encodevalue" />
+          <param name="urlResponses" regex="am.sms.gateway.encodevalue" />
+          <param name="encodeUrlResponses" regex="am.sms.gateway.encodevalue" />
+          <param name="am.repoll.interval" type="int" />
+          <param name="showSnmpTab" type="boolean" />
+          <param name="snmpVersion" regex="am.alphanumeric" />
+          <param name="trapCountForAllTrapListeners" type="long" />
+          <param name="disableAllTrapListenersDuration" type="long" />
+          <param name="trapCountForTrapListener" type="long" />
+          <param name="disableTrapListenerDuration" type="long" />
+          <param name="showWeblogicTab" type="boolean" />
+          <param name="dbAvailabilityCheck" type="boolean" />
+          <param name="fromaddress" regex="am.sqljobaction.newEmailAction" />
+          <param name="frommondetails" regex="am.common.booleanandnull" />
+          <param name="showWebservicesTab" type="boolean" />
+          <param name="showPingTab" type="boolean" />
+          <param name="am.pingtest.command" type="String" max-len="250"/>
+          <param name="showConfigureHAProxyTab" type="boolean" />
+          <param name="alertOnRestart" type="boolean" />
+          <param name="showAPMInsightTab" type="boolean" />
+          <param name="apminsightrawdataretention" type="int" />
+          <param name="apminsighttracesretention" type="int" />
+          <param name="apminsightwebtxnlimit" type="int" />
+          <param name="apminsightbgtxnlimit" type="int" />
+          <param name="apminsightexcslimit" type="int" />
+          <param name="apminsightdbopslimit" type="int" />
+          <param name="apminsightcompslimit" type="int" />
+          <param name="apminsightappparamslimit" type="int" />
+          <param name="reuseresourceId" regex="am.sms.gateway.encodevalue" />
+          <param name="apminsightautoscaleretention" type="int" />
+          <param name="agentUpgradealert" regex="am.sms.gateway.encodevalue" />
+          <param name="showWPATab" type="boolean" />
+          <param name="noOfDaysToRetain" type="int" />
+          <param name="availabilityUpUnderMaintenance" type="boolean" />
+          <param name="healthClearUnderMaintenance" type="boolean" />
+		  <param name="clearAllAlertsUnderMaintenance" type="boolean" />
+		  <param name="processMonsEnablingStatusInDS" type="boolean" />
+          <param name="unmanageMonitorAfterMaintenance" type="boolean" />
+          <param name="downtimeCleanupIntervalEnabled" type="boolean" />
+          <param name="downtimeCleanUpPeriod" type="int" />
+          <param name="EUMAgentAvailabilityDependency" type="boolean" />
+          <param name="EUMAgentDownAlert" type="boolean" />
+          <param name="RUMAgentDownAlert" type="boolean" />
+          <param name="RUMIdleTime" type="int" />
+          <param name="gatewayCheckStatus" type="boolean" />
+          <param name="gatewayName" regex="am.hostname" />
+          <param name="rulefrom" type="boolean" />
+          <param name="reqForAdminLayout" type="boolean" />
+          <param name="consentModule" regex="am.globalconfig.consentModule" />
+          <param name="alertSchTaskinEveryPoll" regex="am.sms.gateway.encodevalue"  />
+          <param name="allowBlackListedCommands" type="boolean" />
+          <param name="array" regex="am.sms.gateway.encodevalue" />
+          <param name="battery" regex="am.sms.gateway.encodevalue"  />
+          <param name="chassis" regex="am.sms.gateway.encodevalue" />
+          <param name="clearAfterBusinessHours" type="boolean" />
+          <param name="clearpollscount" type="int" />
+          <param name="criticalpollscount" type="int" />
+          <param name="disableAllTrapListeners" regex="am.sms.gateway.encodevalue" />
+          <param name="disableIndividualTrapListener" regex="am.sms.gateway.encodevalue"/>
+          <param name="disk" regex="am.sms.gateway.encodevalue" />
+          <param name="enableErrorMail" type="boolean" />
+          <param name="enableNetAdapterMonitor" regex="am.sms.gateway.encodevalue" />
+          <param name="enableAixNetAdapterMonitor" regex="am.sms.gateway.encodevalue" />
+          <param name="errMailToAddr" type="String" max-len="5000"/>
+          <param name="errorAlertDisk" regex="am.sms.gateway.encodevalue" />
+          <param name="errorAlertNwAdapter" regex="am.sms.gateway.encodevalue" />
+          <param name="errorAlertNwInter" regex="am.sms.gateway.encodevalue"/>
+          <param name="errorAlertProcessRestart" regex="am.sms.gateway.encodevalue" />
+          <param name="errorAlertRestart" regex="am.sms.gateway.encodevalue" />
+          <param name="errorAlertScheduledTask" regex="am.sms.gateway.encodevalue"/>
+          <param name="errorpollCount" type="int" />
+          <param name="fan" regex="am.sms.gateway.encodevalue"/>
+          <param name="healthActionCount" type="int" />
+          <param name="hostHwMonitoring" regex="am.mssql.database.apmmanagement.actions" />
+          <param name="hostProcDown"  regex="am.sms.gateway.encodevalue" />
+          <param name="memoryLinux"  regex="am.sms.gateway.encodevalue" />
+          <param name="memorydevice" regex="am.sms.gateway.encodevalue" />
+          <param name="min_clearpollscount" type="int" />
+          <param name="min_criticalpollscount" type="int" />
+          <param name="min_warningpollscount" type="int" />
+          <param name="pingPackToSend" type="int" />
+          <param name="pollInterval" type="int" />
+          <param name="power" regex="am.sms.gateway.encodevalue"/>
+          <param name="processor" regex="am.sms.gateway.encodevalue" />
+          <param name="rcaLimitEnabled" type="boolean" />
+          <param name="rcaLimitValue" type="int" />
+          <param name="temperature" regex="am.sms.gateway.encodevalue" />
+          <param name="voltage" regex="am.sms.gateway.encodevalue"/>
+          <param name="warningpollscount" type="int" />
+          <param name="webServicesOperationTime" type="int" />
+          <param name="winDiskMount"  regex="am.sms.gateway.encodevalue" />
+          <param name="winDiskNetwork" regex="am.sms.gateway.encodevalue" />
+          <param name="winServDown" regex="am.sms.gateway.encodevalue"/>
+          <param name="gatewayUrlName" regex="am.url.ext" />
+          <param name="gatewayUrlStatus" type="boolean" />
+          <param name="isAdminServer" regex="am.sms.gateway.encodevalue" />
+          <param name="timeout" type="int" />
+          <param name="sendmail" regex="am.sqljobaction.newEmailAction" />
+          <param name="hwCriticalStatusMessage" regex="am.alphanumeric.commaSpace" max-len="5000"/>
+          <param name="hwWarningStatusMessage" regex="am.alphanumeric.commaSpace" max-len="5000"/>
+          <param name="hwClearStatusMessage" regex="am.alphanumeric.commaSpace" max-len="5000"/>
+          <param name="showConfigureDCTab" type="boolean" />
+          <param name="showMsSqlTab" type="boolean" />
+          <param name="showMySqlTab" type="boolean" />
+          <param name="showOracleTab" type="boolean" />
+          <param name="showConfigureMSSQLTab" type="boolean" />
+          <param name="resourceid" regex="am.common.longandnull" />
+          <param name="wlswebapp" regex="am.weblogic.operation.value" />
+		  <param name="wlsejb" regex="am.weblogic.operation.value" />
+		  <param name="wlsservlet" regex="am.weblogic.operation.value" />
+		  <param name="wlswebapp_enable" type="long" max-occurrences="2000"/>
+		  <param name="wlswebapp_disable" type="long" max-occurrences="2000"/>
+		  <param name="wlsejb_enable" type="long" max-occurrences="2000"/>
+		  <param name="wlsejb_disable" type="long" max-occurrences="2000"/>
+		  <param name="wlsservlet_enable" type="long" max-occurrences="2000"/>
+		  <param name="wlsservlet_disable" type="long" max-occurrences="2000"/>
+		  <param name="ntpAix" regex="am.sms.gateway.encodevalue" max-len="10"/>
+          <param name="ntpLinux" regex="am.sms.gateway.encodevalue" max-len="10"/>
+          <param name="netInterfaceAix" regex="am.sms.gateway.encodevalue" max-len="10"/>
+          <param name="netInterfaceLinux" regex="am.sms.gateway.encodevalue" max-len="10"/>
+          <param name="netInterfaceWindows" regex="am.sms.gateway.encodevalue" max-len="10"/>
+          <param name="lPARCPUStatAix" regex="am.sms.gateway.encodevalue" max-len="10"/>
+          <param name="errptHardwareAix" regex="am.sms.gateway.encodevalue" max-len="10"/>
+      </url>
+
+	</urls>
+	<!-- Admin Action endpoints end here-->
+
+	<!-- Rest API endpoints starts here -->
+	<urls prefix="/AppManager/(xml|json)" api="true" throwallerrors="true" authentication="required" >
+		<param name="apikey" regex="apikey" secret="true"/>
+		<url path="/ListDashboards" method="GET" roles="am.role.ADMIN.EA.OP.US.DE" >
+		</url>
+	</urls>
+
+	<!-- Deny operations -->
+    <urls prefix="/AppManager/(xml|json)" >
+        <url path="/ListDashboards" method="POST" deny-operation="true"  />
+    </urls>
+	<!-- Rest API endpoints ends here -->
+
+	<!-- JSP endpoints starts here -->
+	<urls authentication="required" throwallerrors="true">
+	<param-group name="am.additional.extra.params" />
+		<url path="/jsp/ChangeBulkAuthentication.jsp" method="get" roles="am.role.ADMIN.EA.DE" >
+			<param name="values" regex="am.common.numberandcomma" max-len="10000000" />
+			<param name="isFromEnterpriseSearch" regex="am.common.TFNull" />
+			<param name="methodName" regex="am.setdefaultmonview.methods" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="networkName" regex="am.custom.monitortype.type" />
+			<param name="groupName" regex="am.custom.monitortype.type" />
+			<param name="retaintree" regex="am.residswith.dollar.value" max-len="2000" />
+			<param name="unopengroups" regex="am.recorder.long.pipeSeparated" max-len="10000000" />
+			<param name="polling" regex="am.bulkupdate.updatepolling" />
+			<param name="showmanage" regex="am.bulkupdate.showmanage" />
+			<param name="viewmontype" regex="am.custom.monitortype.type" />
+			<param name="sid" type="double" />
+		</url>
+		<url path="/jsp/queryEdit.jsp" method="get" roles="am.role.ADMIN.EA" >
+			<param name="tableId" regex="am.common.longandnull" />
+			<param name="resourceid" regex="am.common.longandnull" />
+		</url>
+		<url path="/jsp/MyField_Alarms.jsp" method="get" roles="am.role.ADMIN.EA.OP.US.DE" >
+			<param name="resourceid" regex="am.common.longandnull" />
+			<param name="mgview" regex="am.common.TFNull" />
+			<param name="sid" regex="am.common.longandnull" />
+		</url>
+		<url path="/jsp/HeatChart.jsp" method="get" roles="am.role.ADMIN.EA.OP.US.DE" >
+			<param name="period" regex="am.common.longandnull" />
+			<param name="divname" regex="am.only.dashHeat" />
+			<param name="attributes" regex="am.recorder.long.pipeSeparated" />
+			<param name="date" regex="am.common.longandnull" />
+			<param name="userThresh" regex="am.common.longandnull" />
+			<param name="isThresh" regex="am.common.TFNull" />
+			<param name="threshC1" regex="am.widgets.topn.filterconditions" />
+			<param name="threshV1" regex="am.common.longandnull" />
+			<param name="threshC2" regex="am.widgets.topn.filterconditions" />
+			<param name="threshV2" regex="am.common.longandnull" />
+			<param name="threshC3" regex="am.widgets.topn.filterconditions" />
+			<param name="threshV3" regex="am.common.longandnull" />
+			<param name="sid" regex="am.common.longandnull" />
+		</url>
+		<url path="/jsp/customizePlasmaView.jsp" method="get" roles="am.role.ADMIN.EA.OP.US.DE" >
+			<param name="SUBREQUEST" type="boolean" />
+		</url>
+		<url path="/jsp/UpdateGlobalSettings.jsp" method="get" roles="am.role.ADMIN.EA.OP.US.DE" >
+			<param name="key" regex="am.globalconfig.updateGlobalSettings.key" />
+			<param name="value" regex="am.globalconfig.updateGlobalSettings.value" />
+			<param name="redirect" regex="am.globalconfig.updateGlobalSettings.redirect" />
+			<param name="page" regex="am.globalconfig.updateGlobalSettings.page" />
+		</url>
+		<url path="/jsp/Console_HealthEventsPop.jsp" method="get" roles="am.role.ADMIN.EA.OP.US.DE" >
+			<param name="time" regex="am.common.longandnull" />
+			<param name="resid" regex="am.common.longandnull" />
+			<param name="span" regex="am.common.longandnull" />
+			<param name="resourceid" regex="am.common.longandnull" />
+			<param name="montype" regex="am.custom.monitortype.type" />
+		</url>
+		<url path="/jsp/businessServiceGraph.jsp" method="get" roles="am.role.ADMIN.EA" >
+		</url>
+
+		<url path="/jsp/gmap_severity.jsp" method="get" roles="am.role.ADMIN.EA.OP.US.DE" >
+			<param name="portletRequest" regex="am.boolean" />
+		</url>
+
+	</urls>
+
+	<urls throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url path="/webclient/common/jsp/home.jsp" method="get" >
+			<param name="showPreLogin" regex="am.common.TFNull" />
+		</url>
+	</urls>
+
+	<!-- Deny operations -->
+	<urls throwallerrors="true" method="POST" deny-operation="true" >
+		<url path="/jsp/businessServiceGraph.jsp" />
+		<url path="/jsp/HeatChart.jsp" />
+		<url path="/jsp/queryEdit.jsp" />
+		<url path="/jsp/MyField_Alarms.jsp" />
+		<url path="/jsp/ChangeBulkAuthentication.jsp" />
+		<url path="/jsp/customizePlasmaView.jsp" />
+		<url path="/jsp/UpdateGlobalSettings.jsp" />
+		<url path="/webclient/common/jsp/home.jsp" />
+		<url path="/jsp/Console_HealthEventsPop.jsp" />
+		<url path="/jsp/gmap_severity.jsp" />
+	</urls>
+	<!-- JSP endpoints ends here -->
+
+	<!-- Servlet endpoints starts here -->
+	<urls prefix="/servlet" throwallerrors="true" authentication="required" api="true" >
+	<param-group name="am.additional.extra.params" />
+		<url path="/MenuHandlerServlet" method="GET,POST" >
+			<param name="config_id" type="long"/>
+			<param name="action" regex="am.admin.menuhandler.actions"/>
+			<param name="vertical_id" type="long"/>
+			<param name="h_id" type="long"/>
+			<param name="fromQCWizard" regex="am.common.TFNull"/>
+			<param name="menuType" type="int"/>
+		</url>
+	</urls>
+	<!-- Servlet endpoints ends here -->
+
+	<!-- Show resource endpoints starts here -->
+	<urls operation-param="method" authentication="required" throwallerrors="true">
+	 	<param-group name="am.additional.extra.params" />
+
+		<url path="/showresource.do" operation-value="checkforQueryMonitorUpdate" method="POST" csrf="true" privilege-identifier="haid" roles="am.role.ADMIN.EA.OP">
+			<param name="queryMonitorcheck" regex="am.recorder.long.commaSeparated" />
+			<param name="haid" type="long" />
+		</url>
+		<url path="/showresource.do" operation-value="getTotalCount" method="GET" csrf="false" roles="am.role.ADMIN.EA.OP.US.DE">
+		</url>
+		<url path="/showresource.do" operation-value="showDetailsView" method="GET" csrf="false" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="selectedNetwork" regex="am.custom.monitortype.type" />
+			<param name="selectedPage" type="int"/>
+			<param name="noOfRows" type="int" />
+			<param name="type" regex="am.alphanumeric" />
+			<param name="group" regex="am.common.all" />
+			<param name="mas_host" regex="am.hostname.ipaddress"/>
+			<param name="mas_port" type="int" />
+			<param name="serverId" type="int" />
+		</url>
+		<url path="/showresource.do" operation-value="showGMapView" method="GET" csrf="false" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="group" regex="am.common.all" />
+		</url>
+		<url path="/showresource.do" operation-value="showIconsView" method="GET" csrf="false" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="selectedNetwork" regex="ipaddress" />
+			<param name="selectedPage" type="int" />
+			<param name="noOfRows" type="int" />
+			<param name="group" regex="am.common.all" />
+			<param name="fromwhere" regex="am.alphanumeric" />
+		</url>
+		<url path="/showresource.do" operation-value="showPlasmaView" method="GET" csrf="false" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="customizetab" type="boolean"/>
+		</url>
+		<url path="/showresource.do" operation-value="showResourceTypesAll" method="GET" csrf="false"  roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="customValue" regex="am.common.alphaNumeric.ext1.withDollar"/>
+			<param name="searchnextpage" type="boolean"/>
+			<param name="searchString" type="String" max-len="200"/>
+			<param name="searchOption" type="String" max-len="200"/>
+			<param name="moname" type="String" max-len="10000" />
+			<param name="forbulkAssign" regex="am.bulkupdate.bulkassign"/>
+			<param name="group" regex="am.widgets.monitors.category"/>
+			<param name="network" regex="am.custom.monitortype.type"/>
+			<param name="fromwhere" regex="am.common.onlystring"/>
+			<param name="showmanage" regex="am.bulkupdate.showmanage"/>
+			<param name="viewmontype" regex="am.custom.monitortype.type"/>
+			<param name="oldtab" regex="am.common.longandnull" max-occurrences="2"/>
+			<param name="detailspage" type="boolean"/>
+			<param name="listview" type="boolean"/>
+			<param name="selectedNetwork" regex="am.hostname.ipaddress"/>
+			<param name="selectedPage" type="int"/>
+			<param name="noOfRows" type="int"/>
+			<param name="mas_host" regex="am.hostname.ipaddress"/>
+			<param name="mas_port" type="int"/>
+			<param name="serverId" type="int"/>
+			<param name="resourceid" type="long" />
+			<param name="resourcename" 	type="String" max-len="10000"/>
+			<param name="type" regex="am.monitor.type"/>
+			<param name="viewType" regex="am.viewtype.value" />
+			<param name="screenWidth" type="int" />
+			<param name="selectedscheme" regex="am.common.selectedscheme" />
+			<param name="selectedSkin" regex="am.common.selectedSkin" />
+			<param name="cloudtab" type="boolean"/>
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+			<param name="plugin_view" type="boolean" />
+			<param name="widgetId" type="long" />
+			<param name="severity" regex="am.template.numberCommaNull" />
+		</url>
+
+	</urls>
+	<!-- Show resource endpoints end here  -->
+
+	<!-- Deny operations start here -->
+	<urls throwallerrors="true" method="get" deny-operation="true" >
+		<url path="/MyPage.do" operation-param="method" operation-value="updateDashboard,createDashboard,deleteMyPage,saveWidget,deleteWidget,saveTabOrder,saveBookMark,generatePdfForWidget,addWidgets,generatePdfForThreadSummary" />
+		<url path="/dashboard.do" operation-param="method" operation-value="submitScreenshot,convertBase64ToImage,regeneratePublishKey,hideInProdAnnouncement,hideGDPRAnnouncement"/>
+		<url path="/AMMsgQlinkAction.do" operation-param="method" operation-value="hideMsgForUser,showQlinksForUser,hideQlinksForUser,reShowAllMessages" />
+		<url path="/adminAction.do" operation-param="method" operation-value="bulkUpdate,copyPasteMonitor,preRequisitesConfiguration,setDefaultMonitorsView" />
+		<url path="/BulkAddMonitors.do" operation-param="method" operation-value="uploadFile" />
+		<url path="/showresource.do" operation-param="method" operation-value="checkforQueryMonitorUpdate" />
+
+	</urls>
+	<urls throwallerrors="true" method="get" deny-operation="true" >
+		<url path="/myFields.do" operation-param="method" operation-value="addNewField,deleteField,editSaveFieldsMetaData,enableDisableField,addEntryToEnumeration,updateEntryToEnumeration,deleteEnumeration,saveMySingleField,saveMyFields,addLabelField,deleteEntity,saveEntityTemplateValues,markUnmarkFieldAsPii,addUsersEntity,bulkAssign,bulkAssignSeparateMonitors,deleteUser"  />
+		<url path="/BusinessView.do" operation-param="method" operation-value="ListSPsAsPerRequirement,associateMonitorToBVAction,checkBusinessServiceName,createDependentGroupBVAction,createGroupFromGraph,createSubGroupTreeToBVAction,deleteView,drawGraphWithADDM,editGroupForBV,getDisplayPropsForGlobalGraph,getDisplayPropsForGraph,getGraphAccordingToType,getLocations,removeGroupInBV,removeMonitorsInBV,resetDesign,saveBusinessViewPropsForADDM,saveEditView,saveState,setAsDefaultInBusinessView,showEditGroupPopForGraph,updateCanvasPosOnDrag,updateGroupInfoForBVGraphNode,updateMonitorGroupsToFilterList,updateShowTopLevelFlag,updateZoomLevel,updateNodesAndItsChildren" />
+		<url path="/mapViewAction.do" operation-param="method" operation-value="saveBGMap,saveDeviceImage,saveMapView,getAllDevices,getIFSnapshotLink,getSnapshotLink,getImagesForResources,verifyMapName,isSubGroup,deleteMapView" />
+		<url path="/GraphicalView.do" operation-param="method" operation-value="getMGXML,getLatestStatusForJIT,getDataForGlobalView,getAvailableViews" />
+		<url path="/inAppNotification.do" operation-param="method" operation-value="updateMarkAsRead,removeNotification" />
+	</urls>
+
+	<urls throwallerrors="true" method="post" deny-operation="true" >
+		<url path="/BusinessView.do" operation-param="method" operation-value="createBusinessService,createNewView,showEditView,addToBusinessServiceGraph" />
+		<url path="/mapViewAction.do" operation-param="method" operation-value="showMap,getResIDAndDispName,showMapViewEditor,getListOfMapViewsForSC,getListOfMapViews,getListOfInterfaces" />
+		<url path="/myFields.do" operation-param="method" operation-value="EditFieldsMetaData,getUserAssociation,getSelectedEntity,getScheduledReportFilter,assignCustomFields,associateLabels,checkDuplicateField,duplicateEnum,getAdminUserAssociation,getEnumeration,getMyFields,getFieldValues" />
+		<url path="/jsonfeed.do" />
+		<url path="/publishPage.do" />
+		<url path="/GraphicalView.do" operation-param="method" operation-value="popUp,homeTab,getBusinessServiceGraphTemplate,getBusinessServiceGlobalView" />
+		<url path="/inAppNotification.do" operation-param="method" operation-value="getNotifications,checkForNewNotifications" />
+	</urls>
+
+
+	<urls throwallerrors="true" method="post" deny-operation="true" >
+		<url path="/dashboard.do" operation-param="method" operation-value="getPublishKeyForUser,generateAvailabilityHistory,generateContainerDashboard,generateEC2Table,generateHealthHistory,generateHyperVDashboard,generateVIDashboard,generateVirtualMachineTable,getProductInfo" />
+		<url path="/MyPage.do" operation-param="method" operation-value="disablePluginGQPopUp,getDependencyViewForMapId,deleteBookMark,deleteembedurl,editMyPage,editTabs,getBookMarkForm,getBusinessView,setAsDefault,listMonitorGroups,newWidgets,listDashBoards,listMGDashBoards,getWidgetProperties,getCustomfieldMonitors,getRelatedAttributes,getResourceForSelectionType,getSelectedCustomField,getWidget,newMyPage,popOut,viewMyPageForMG,viewDashBoard,getAlarmSummaryData,saveMyPageLayout,,getMonitorGroupsInfo,getDashboardActionDetails" />
+		<url path="/adminAction.do" operation-param="method" operation-value="customMapView,showPrerequisitesConfiguration,showGlobalSettingsConfiguration" />
+		<url path="/showresource.do" operation-param="method" operation-value="getTotalCount,showDetailsView,showGMapView,showPlasmaView,showResourceTypesAll,showIconsView" />
+		<url path="/AMMsgQlinkAction.do" operation-param="method" operation-value="getMsgDetailsForGroup,getQuickLinksForGroup" />
+		<url path="/BulkAddMonitors.do" operation-param="method" operation-value="showBulkImportForm,getConfMonitorHeader" />
+		<url path="/adminLayout.do" />
+	</urls>
+	<urls throwallerrors="true" method="get,post" deny-operation="true" >
+		<url operation-param="method" path="/MyPage.do" operation-value="getAlertDetails,getBussinessViews,getBusinessViewWidget,getRecentAlerts,showTopologyMapViewsInEditWidget,viewPublishedPage" />
+		<url operation-param="method" path="/showresource.do" operation-value="addResourceFromMapView,showAvailabilityDetails" />
+	</urls>
+	<!-- Deny operations end here -->
+
+</security>

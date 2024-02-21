@@ -1,0 +1,700 @@
+[ 2024-02-20 16:00:56.315 IST ]:LOG:  database system was shut down at 2024-02-20 16:00:17 IST
+[ 2024-02-20 16:00:56.319 IST ]:LOG:  database system is ready to accept connections
+Archive Script Not Found
+Archive Script Not Found
+[ 2024-02-20 16:00:56.506 IST ]:LOG:  incomplete startup packet
+[ 2024-02-20 16:00:57.076 IST ]:ERROR:  function pgp_sym_encrypt(unknown, unknown, unknown) does not exist at character 8
+[ 2024-02-20 16:00:57.076 IST ]:HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+[ 2024-02-20 16:00:57.076 IST ]:STATEMENT:  select pgp_sym_encrypt('password','applicationsmanager','cipher-algo=aes256')
+[ 2024-02-20 16:01:01.068 IST ]:ERROR:  relation "am_usergrouptable" already exists
+[ 2024-02-20 16:01:01.068 IST ]:STATEMENT:  CREATE TABLE AM_UserGroupTable (  USERNAME  varchar (50) NOT NULL ,  GROUPNAME  varchar (50) NOT NULL , PRIMARY KEY ( USERNAME ,  GROUPNAME ) )
+[ 2024-02-20 16:01:06.419 IST ]:ERROR:  relation "hostdatacollected2_ndx" already exists
+[ 2024-02-20 16:01:06.419 IST ]:STATEMENT:  CREATE INDEX HostDataCollected2_ndx ON HostDataCollected  ( RESOURCENAME ,COMPONENTNAME ,CATEGORY ,COLLECTIONTIME )
+[ 2024-02-20 16:01:06.551 IST ]:ERROR:  relation "am_usergrouptable0_ndx" already exists
+[ 2024-02-20 16:01:06.551 IST ]:STATEMENT:  CREATE INDEX AM_UserGroupTable0_ndx on AM_UserGroupTable( USERNAME , GROUPNAME )
+[ 2024-02-20 16:01:06.552 IST ]:ERROR:  relation "am_usergrouptable1_ndx" already exists
+[ 2024-02-20 16:01:06.552 IST ]:STATEMENT:  CREATE INDEX AM_UserGroupTable1_ndx on AM_UserGroupTable( USERNAME )
+[ 2024-02-20 16:01:06.656 IST ]:ERROR:  relation "oraclediskreads0_ndx" already exists
+[ 2024-02-20 16:01:06.656 IST ]:STATEMENT:  CREATE INDEX OracleDiskReads0_ndx on OracleDiskReads( COLLECTIONTIME )
+[ 2024-02-20 16:01:06.849 IST ]:ERROR:  column "apikey" of relation "am_userpasswordtable" already exists
+[ 2024-02-20 16:01:06.849 IST ]:STATEMENT:  alter table AM_UserPasswordTable add APIKEY varchar(200)
+Archive Script Not Found
+[ 2024-02-20 16:01:08.381 IST ]:LOG:  incomplete startup packet
+[ 2024-02-20 16:01:08.396 IST ]:ERROR:  database "amdb" already exists
+[ 2024-02-20 16:01:08.396 IST ]:STATEMENT:  create database "amdb"
+[ 2024-02-20 16:01:08.503 IST ]:ERROR:  column "apikey" of relation "am_userpasswordtable" already exists
+[ 2024-02-20 16:01:08.503 IST ]:STATEMENT:  alter table AM_UserPasswordTable add APIKEY varchar(200)
+[ 2024-02-20 16:01:09.588 IST ]:ERROR:  relation "vacmcontexttable" does not exist at character 15
+[ 2024-02-20 16:01:09.588 IST ]:STATEMENT:  SELECT * FROM VACMCONTEXTTABLE
+[ 2024-02-20 16:01:09.599 IST ]:ERROR:  relation "vacmsecuritytogrouptable" does not exist at character 15
+[ 2024-02-20 16:01:09.599 IST ]:STATEMENT:  SELECT * FROM VACMSECURITYTOGROUPTABLE
+[ 2024-02-20 16:01:09.606 IST ]:ERROR:  relation "vacmaccesstable" does not exist at character 15
+[ 2024-02-20 16:01:09.606 IST ]:STATEMENT:  SELECT * FROM VACMACCESSTABLE
+[ 2024-02-20 16:01:09.612 IST ]:ERROR:  relation "vacmviewtreefamilytable" does not exist at character 15
+[ 2024-02-20 16:01:09.612 IST ]:STATEMENT:  SELECT * FROM VACMVIEWTREEFAMILYTABLE
+[ 2024-02-20 16:01:16.355 IST ]:ERROR:  constraint "am_custommaintenance_pkey" of relation "am_custommaintenance" does not exist
+[ 2024-02-20 16:01:16.355 IST ]:STATEMENT:  ALTER TABLE AM_CUSTOMMAINTENANCE DROP CONSTRAINT am_custommaintenance_pkey
+[ 2024-02-20 16:01:17.545 IST ]:ERROR:  column "runningbgwp" of relation "am_sap_backgroundinfo" already exists
+[ 2024-02-20 16:01:17.545 IST ]:STATEMENT:  ALTER TABLE AM_SAP_BackgroundInfo ADD COLUMN RUNNINGBGWP INTEGER DEFAULT 0,ADD COLUMN WAITINGBGWP INTEGER DEFAULT 0,ADD COLUMN STOPPEDBGWP INTEGER DEFAULT 0
+[ 2024-02-20 16:01:17.548 IST ]:ERROR:  column "runningbgwp" of relation "am_sap_backgroundinfo" already exists
+[ 2024-02-20 16:01:17.548 IST ]:STATEMENT:  ALTER TABLE AM_SAP_BackgroundInfo ADD COLUMN RUNNINGBGWP INTEGER DEFAULT 0,ADD COLUMN WAITINGBGWP INTEGER DEFAULT 0,ADD COLUMN STOPPEDBGWP INTEGER DEFAULT 0
+[ 2024-02-20 16:01:17.549 IST ]:ERROR:  column "totaldiawp" of relation "am_sap_dialoginfo" already exists
+[ 2024-02-20 16:01:17.549 IST ]:STATEMENT:  ALTER TABLE AM_SAP_DialogInfo ADD COLUMN TOTALDIAWP INTEGER DEFAULT 0,ADD COLUMN RUNNINGDIAWP INTEGER DEFAULT 0,ADD COLUMN WAITINGDIAWP INTEGER DEFAULT 0,ADD COLUMN STOPPEDDIAWP INTEGER DEFAULT 0
+[ 2024-02-20 16:01:17.549 IST ]:ERROR:  column "totalenqwp" of relation "am_sap_enqueueinfo" already exists
+[ 2024-02-20 16:01:17.549 IST ]:STATEMENT:  ALTER TABLE AM_SAP_EnqueueInfo ADD COLUMN TOTALENQWP INTEGER DEFAULT 0,ADD COLUMN RUNNINGENQWP INTEGER DEFAULT 0,ADD COLUMN WAITINGENQWP INTEGER DEFAULT 0,ADD COLUMN STOPPEDENQWP INTEGER DEFAULT 0
+[ 2024-02-20 16:01:17.549 IST ]:ERROR:  column "runningspwp" of relation "am_sap_spoolinfo" already exists
+[ 2024-02-20 16:01:17.549 IST ]:STATEMENT:  ALTER TABLE AM_SAP_SpoolInfo ADD COLUMN RUNNINGSPWP INTEGER DEFAULT 0,ADD COLUMN WAITINGSPWP INTEGER DEFAULT 0
+[ 2024-02-20 16:01:17.997 IST ]:ERROR:  column am_capacity_planning_reports.timethreshold does not exist at character 56
+[ 2024-02-20 16:01:17.997 IST ]:STATEMENT:  UPDATE AM_CAPACITY_PLANNING_RULES  SET TIMETHRESHOLD = AM_CAPACITY_PLANNING_REPORTS.TIMETHRESHOLD,TIMECONDITION = AM_CAPACITY_PLANNING_REPORTS.TIMECONDITION FROM AM_CAPACITY_PLANNING_REPORTS WHERE AM_CAPACITY_PLANNING_REPORTS.REPORTID = AM_CAPACITY_PLANNING_RULES.RULEID 
+[ 2024-02-20 16:01:18.057 IST ]:ERROR:  syntax error at or near ")" at character 65
+[ 2024-02-20 16:01:18.057 IST ]:STATEMENT:  SELECT RESOURCENAME FROM AM_ManagedObject WHERE RESOURCEID  IN () 
+[ 2024-02-20 16:01:18.639 IST ]:ERROR:  table "am_vmwareview_eventsdbetails_minmaxavgdata" does not exist
+[ 2024-02-20 16:01:18.639 IST ]:STATEMENT:  DROP TABLE AM_VMWAREVIEW_EVENTSDBETAILS_MinMaxAvgData
+[ 2024-02-20 16:01:20.256 IST ]:ERROR:  syntax error at or near "null" at character 40
+[ 2024-02-20 16:01:20.256 IST ]:STATEMENT:  SELECT resourceid,"Database Name" from null where "Database"='MsSQL'
+[ 2024-02-20 16:01:25.137 IST ]:ERROR:  duplicate key value violates unique constraint "am_audit_operations_pkey"
+[ 2024-02-20 16:01:25.137 IST ]:DETAIL:  Key (operation)=(145) already exists.
+[ 2024-02-20 16:01:25.137 IST ]:STATEMENT:  INSERT INTO AM_AUDIT_OPERATIONS (OPERATION,DETAILS,MODULE) VALUES (145, 'am.auditlog.description.mailserverconfiguration', 'am.auditlog.module.connectivity')
+[ 2024-02-20 16:01:25.139 IST ]:ERROR:  duplicate key value violates unique constraint "am_audit_operations_pkey"
+[ 2024-02-20 16:01:25.139 IST ]:DETAIL:  Key (operation)=(145) already exists.
+[ 2024-02-20 16:01:25.139 IST ]:STATEMENT:  INSERT INTO AM_AUDIT_OPERATIONS (OPERATION,DETAILS,MODULE) VALUES (145, 'am.auditlog.description.mailserverconfiguration', 'am.auditlog.module.connectivity')
+[ 2024-02-20 16:01:32.713 IST ]:ERROR:  relation "am_azure_loadbalancer_ipstatistics_minmaxavgdata" already exists
+[ 2024-02-20 16:01:32.713 IST ]:STATEMENT:  create table AM_Azure_LOADBALANCER_IPSTATISTICS_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:01:32.928 IST ]:ERROR:  relation "am_azure_loadbalancer_ipstatistics_minmaxavgdata" already exists
+[ 2024-02-20 16:01:32.928 IST ]:STATEMENT:  create table AM_Azure_LOADBALANCER_IPSTATISTICS_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:01:32.972 IST ]:ERROR:  relation "am_azure_loadbalancer_ipstatistics_minmaxavgdata" already exists
+[ 2024-02-20 16:01:32.972 IST ]:STATEMENT:  create table AM_Azure_LOADBALANCER_IPSTATISTICS_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:01:32.999 IST ]:ERROR:  relation "am_azure_loadbalancer_ipstatistics_minmaxavgdata" already exists
+[ 2024-02-20 16:01:32.999 IST ]:STATEMENT:  create table AM_Azure_LOADBALANCER_IPSTATISTICS_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:01:33.032 IST ]:ERROR:  relation "am_azure_loadbalancer_ipstatistics_minmaxavgdata" already exists
+[ 2024-02-20 16:01:33.032 IST ]:STATEMENT:  create table AM_Azure_LOADBALANCER_IPSTATISTICS_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:01:33.038 IST ]:ERROR:  relation "am_azure_loadbalancer_ipstatistics_minmaxavgdata" already exists
+[ 2024-02-20 16:01:33.038 IST ]:STATEMENT:  create table AM_Azure_LOADBALANCER_IPSTATISTICS_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+Archive Script Not Found
+[ 2024-02-20 16:01:33.855 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_pkey"
+[ 2024-02-20 16:01:33.855 IST ]:DETAIL:  Key (attributeid)=(308) already exists.
+[ 2024-02-20 16:01:33.855 IST ]:STATEMENT:  insert into AM_ATTRIBUTES (ATTRIBUTEID,RESOURCETYPE,ATTRIBUTE,TYPE,DISPLAYNAME) values ($1,$2,$3,$4,$5)
+[ 2024-02-20 16:01:37.895 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:37.895 IST ]:DETAIL:  Key (attributeid)=(151) already exists.
+[ 2024-02-20 16:01:37.895 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ISARCHIVEING,REPORTS_ENABLED,ARCHIVEDDATA_TABLENAME,ATTRIBUTE_SHORTNAME,CONDITIONS, ENABLE_THRESHOLD) VALUES (151,'AM_ManagedObjectData','RESID','-1','RESPONSETIME','COLLECTIONTIME','1','',1,1,'AM_RESPONSETIME_MinMaxAvgData','ResponseTime','',1)
+[ 2024-02-20 16:01:37.896 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:37.896 IST ]:DETAIL:  Key (attributeid)=(151) already exists.
+[ 2024-02-20 16:01:37.896 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ISARCHIVEING,REPORTS_ENABLED,ARCHIVEDDATA_TABLENAME,ATTRIBUTE_SHORTNAME,CONDITIONS, ENABLE_THRESHOLD) VALUES (151,'AM_ManagedObjectData','RESID','-1','RESPONSETIME','COLLECTIONTIME','1','',1,1,'AM_RESPONSETIME_MinMaxAvgData','ResponseTime','',1)
+[ 2024-02-20 16:01:37.899 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:37.899 IST ]:DETAIL:  Key (attributeid)=(152) already exists.
+[ 2024-02-20 16:01:37.899 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (152,'AM_ManagedObjectData','RESID','-1','AVAILABILITY','COLLECTIONTIME','1','','Availability','')
+[ 2024-02-20 16:01:37.899 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:37.899 IST ]:DETAIL:  Key (attributeid)=(153) already exists.
+[ 2024-02-20 16:01:37.899 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (153,'AM_ManagedObjectData','RESID','-1','HEALTH','COLLECTIONTIME','1','','Health','')
+[ 2024-02-20 16:01:37.900 IST ]:ERROR:  duplicate key value violates unique constraint "am_mgview_pkey"
+[ 2024-02-20 16:01:37.900 IST ]:DETAIL:  Key (attributeid)=(152) already exists.
+[ 2024-02-20 16:01:37.900 IST ]:STATEMENT:  INSERT INTO AM_MGVIEW VALUES(152,'NO','0','RAW')
+[ 2024-02-20 16:01:37.900 IST ]:ERROR:  duplicate key value violates unique constraint "am_mgview_pkey"
+[ 2024-02-20 16:01:37.900 IST ]:DETAIL:  Key (attributeid)=(153) already exists.
+[ 2024-02-20 16:01:37.900 IST ]:STATEMENT:  INSERT INTO AM_MGVIEW VALUES(153,'NO','0','RAW')
+[ 2024-02-20 16:01:37.902 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributesdependency_pkey"
+[ 2024-02-20 16:01:37.902 IST ]:DETAIL:  Key (parentid, childid)=(7030, 152) already exists.
+[ 2024-02-20 16:01:37.902 IST ]:STATEMENT:  insert into AM_ATTRIBUTESDEPENDENCY (PARENTID,CHILDID) values(7030,152)
+[ 2024-02-20 16:01:37.902 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributesdependency_pkey"
+[ 2024-02-20 16:01:37.902 IST ]:DETAIL:  Key (parentid, childid)=(7031, 153) already exists.
+[ 2024-02-20 16:01:37.902 IST ]:STATEMENT:  insert into AM_ATTRIBUTESDEPENDENCY (PARENTID,CHILDID) values(7031,153)
+[ 2024-02-20 16:01:37.907 IST ]:ERROR:  duplicate key value violates unique constraint "am_archiverconfig_pkey"
+[ 2024-02-20 16:01:37.907 IST ]:DETAIL:  Key (attributeid, tablename)=(151, AM_ManagedObjectData) already exists.
+[ 2024-02-20 16:01:37.907 IST ]:STATEMENT:  insert into AM_ArchiverConfig values ('AM_ManagedObjectData','RESPONSETIME','RESID',151)
+[ 2024-02-20 16:01:44.053 IST ]:ERROR:  syntax error at or near "AM_QM_MinMaxAvgData" at character 1
+[ 2024-02-20 16:01:44.053 IST ]:STATEMENT:  AM_QM_MinMaxAvgData
+[ 2024-02-20 16:01:44.054 IST ]:ERROR:  syntax error at or near "AM_QM_MinMaxAvgData" at character 1
+[ 2024-02-20 16:01:44.054 IST ]:STATEMENT:  AM_QM_MinMaxAvgData
+Archive Script Not Found
+[ 2024-02-20 16:01:46.660 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_pkey"
+[ 2024-02-20 16:01:46.660 IST ]:DETAIL:  Key (attributeid)=(8500) already exists.
+[ 2024-02-20 16:01:46.660 IST ]:STATEMENT:  insert into AM_ATTRIBUTES (ATTRIBUTEID,RESOURCETYPE,ATTRIBUTE,TYPE,DISPLAYNAME) values ($1,$2,$3,$4,$5)
+[ 2024-02-20 16:01:46.742 IST ]:ERROR:  relation "am_script_string_data_10000061" does not exist at character 13
+[ 2024-02-20 16:01:46.742 IST ]:STATEMENT:  delete from AM_Script_String_Data_10000061 WHERE ATTRIBUTEID=8512
+[ 2024-02-20 16:01:46.750 IST ]:ERROR:  relation "am_script_string_data_10000061" does not exist at character 13
+[ 2024-02-20 16:01:46.750 IST ]:STATEMENT:  delete from AM_Script_String_Data_10000061 WHERE ATTRIBUTEID=8512
+[ 2024-02-20 16:01:46.750 IST ]:ERROR:  relation "am_script_numeric_data_10000061" does not exist at character 13
+[ 2024-02-20 16:01:46.750 IST ]:STATEMENT:  delete from AM_Script_Numeric_Data_10000061 WHERE ATTRIBUTEID=8512
+[ 2024-02-20 16:01:46.750 IST ]:ERROR:  relation "am_sybase_minmaxavgdata" does not exist at character 13
+[ 2024-02-20 16:01:46.750 IST ]:STATEMENT:  delete from AM_SYBASE_MinMaxAvgData WHERE ATTRIBUTEID=8512
+[ 2024-02-20 16:01:50.802 IST ]:ERROR:  duplicate key value violates unique constraint "am_datacleanupinfo_pkey"
+[ 2024-02-20 16:01:50.802 IST ]:DETAIL:  Key (id)=(708) already exists.
+[ 2024-02-20 16:01:50.802 IST ]:STATEMENT:  insert into AM_DataCleanupInfo (ID,TABLENAME, COLUMNNAME, VALUE, MESSAGE, STATUS, SCHEDULE, SCHEDULE_INTERVAL,CONDITIONS) values (708,'AM_ORACLE_USERSTATS_MinMaxAvgData','ARCHIVEDTIME','0','NotExecuted','3','1','2160','DURATION=1')
+[ 2024-02-20 16:01:51.007 IST ]:ERROR:  duplicate key value violates unique constraint "am_datacleanupinfo_pkey"
+[ 2024-02-20 16:01:51.007 IST ]:DETAIL:  Key (id)=(708) already exists.
+[ 2024-02-20 16:01:51.007 IST ]:STATEMENT:  insert into AM_DataCleanupInfo (ID,TABLENAME, COLUMNNAME, VALUE, MESSAGE, STATUS, SCHEDULE, SCHEDULE_INTERVAL,CONDITIONS) values (708,'AM_ORACLE_USERSTATS_MinMaxAvgData','ARCHIVEDTIME','0','NotExecuted','3','1','2160','DURATION=1')
+[ 2024-02-20 16:01:51.007 IST ]:ERROR:  duplicate key value violates unique constraint "am_datacleanupinfo_pkey"
+[ 2024-02-20 16:01:51.007 IST ]:DETAIL:  Key (id)=(709) already exists.
+[ 2024-02-20 16:01:51.007 IST ]:STATEMENT:  insert into AM_DataCleanupInfo (ID,TABLENAME, COLUMNNAME, VALUE, MESSAGE, STATUS, SCHEDULE, SCHEDULE_INTERVAL,CONDITIONS) values (709,'AM_ORACLE_USERSTATS_MinMaxAvgData','ARCHIVEDTIME','0','NotExecuted','3','1','8760','DURATION=2')
+[ 2024-02-20 16:01:51.033 IST ]:ERROR:  duplicate key value violates unique constraint "am_datacleanupinfo_pkey"
+[ 2024-02-20 16:01:51.033 IST ]:DETAIL:  Key (id)=(710) already exists.
+[ 2024-02-20 16:01:51.033 IST ]:STATEMENT:  insert into AM_DataCleanupInfo (ID,TABLENAME, COLUMNNAME, VALUE, MESSAGE, STATUS, SCHEDULE, SCHEDULE_INTERVAL,CONDITIONS) values (710,'AM_BUFFERHIT_MinMaxAvgData','ARCHIVEDTIME','0','NotExecuted','3','1','2160','DURATION=1')
+[ 2024-02-20 16:01:51.034 IST ]:ERROR:  duplicate key value violates unique constraint "am_datacleanupinfo_pkey"
+[ 2024-02-20 16:01:51.034 IST ]:DETAIL:  Key (id)=(711) already exists.
+[ 2024-02-20 16:01:51.034 IST ]:STATEMENT:  insert into AM_DataCleanupInfo (ID,TABLENAME, COLUMNNAME, VALUE, MESSAGE, STATUS, SCHEDULE, SCHEDULE_INTERVAL,CONDITIONS) values (711,'AM_BUFFERHIT_MinMaxAvgData','ARCHIVEDTIME','0','NotExecuted','3','1','8760','DURATION=2')
+[ 2024-02-20 16:01:53.108 IST ]:ERROR:  relation "am_oracle_recoveryareausage_minmaxavgdata" already exists
+[ 2024-02-20 16:01:53.108 IST ]:STATEMENT:  create table AM_ORACLE_RecoveryAreaUsage_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:01:53.113 IST ]:ERROR:  relation "am_oracle_recoveryareausage_minmaxavgdata" already exists
+[ 2024-02-20 16:01:53.113 IST ]:STATEMENT:  create table AM_ORACLE_RecoveryAreaUsage_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+Archive Script Not Found
+[ 2024-02-20 16:01:57.948 IST ]:ERROR:  duplicate key value violates unique constraint "am_table_attributes_pkey"
+[ 2024-02-20 16:01:57.948 IST ]:DETAIL:  Key (attributeid)=(8741) already exists.
+[ 2024-02-20 16:01:57.948 IST ]:STATEMENT:  insert into AM_TABLE_ATTRIBUTES values(10000078,294,8741)
+[ 2024-02-20 16:01:57.949 IST ]:ERROR:  duplicate key value violates unique constraint "am_table_attributes_pkey"
+[ 2024-02-20 16:01:57.949 IST ]:DETAIL:  Key (attributeid)=(8741) already exists.
+[ 2024-02-20 16:01:57.949 IST ]:STATEMENT:  insert into AM_TABLE_ATTRIBUTES values(10000078,294,8741)
+[ 2024-02-20 16:01:57.950 IST ]:ERROR:  duplicate key value violates unique constraint "am_table_attributes_pkey"
+[ 2024-02-20 16:01:57.950 IST ]:DETAIL:  Key (attributeid)=(8740) already exists.
+[ 2024-02-20 16:01:57.950 IST ]:STATEMENT:  insert into AM_TABLE_ATTRIBUTES values(10000078,294,8740)
+[ 2024-02-20 16:01:57.951 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributesdependency_pkey"
+[ 2024-02-20 16:01:57.951 IST ]:DETAIL:  Key (parentid, childid)=(8741, 8740) already exists.
+[ 2024-02-20 16:01:57.951 IST ]:STATEMENT:  insert into AM_ATTRIBUTESDEPENDENCY VALUES (8741,8740)
+[ 2024-02-20 16:01:57.952 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributesdependency_pkey"
+[ 2024-02-20 16:01:57.952 IST ]:DETAIL:  Key (parentid, childid)=(8601, 8741) already exists.
+[ 2024-02-20 16:01:57.952 IST ]:STATEMENT:  insert into AM_ATTRIBUTESDEPENDENCY VALUES(8601,8741)
+[ 2024-02-20 16:01:57.952 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_pkey"
+[ 2024-02-20 16:01:57.952 IST ]:DETAIL:  Key (attributeid)=(8740) already exists.
+[ 2024-02-20 16:01:57.952 IST ]:STATEMENT:  insert into AM_ATTRIBUTES(ATTRIBUTEID,RESOURCETYPE,ATTRIBUTE,TYPE,DISPLAYNAME) VALUES(8740,'ViewConnectionBroker_ViewComposerServers_ROW','Availability',1,'Availability')
+[ 2024-02-20 16:01:57.953 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:57.953 IST ]:DETAIL:  Key (attributeid)=(8740) already exists.
+[ 2024-02-20 16:01:57.953 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (8740,'AM_ManagedObjectData','RESID','-1','AVAILABILITY','COLLECTIONTIME','1','','Availability','')
+[ 2024-02-20 16:01:57.954 IST ]:ERROR:  duplicate key value violates unique constraint "am_cam_dc_attributes_pkey"
+[ 2024-02-20 16:01:57.954 IST ]:DETAIL:  Key (attributeid)=(8740) already exists.
+[ 2024-02-20 16:01:57.954 IST ]:STATEMENT:  insert into AM_CAM_DC_ATTRIBUTES(ATTRIBUTEID,ATTRIBUTENAME,DISPLAYNAME,TYPE,GROUPID,DISPLAYTYPE,EXPRESSION,GRAPHTYPE) values(8740,'Availability','Availability',1,294,-1,'-1',-1)
+[ 2024-02-20 16:01:57.956 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_pkey"
+[ 2024-02-20 16:01:57.956 IST ]:DETAIL:  Key (attributeid)=(8741) already exists.
+[ 2024-02-20 16:01:57.956 IST ]:STATEMENT:  insert into AM_ATTRIBUTES(ATTRIBUTEID,RESOURCETYPE,ATTRIBUTE,TYPE,DISPLAYNAME) VALUES(8741,'ViewConnectionBroker_ViewComposerServers_ROW','Health',2,'Health')
+[ 2024-02-20 16:01:57.957 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:57.957 IST ]:DETAIL:  Key (attributeid)=(8741) already exists.
+[ 2024-02-20 16:01:57.957 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (8741,'AM_ManagedObjectData','RESID','-1','HEALTH','COLLECTIONTIME','1','','Health','')
+[ 2024-02-20 16:01:57.957 IST ]:ERROR:  duplicate key value violates unique constraint "am_cam_dc_attributes_pkey"
+[ 2024-02-20 16:01:57.957 IST ]:DETAIL:  Key (attributeid)=(8741) already exists.
+[ 2024-02-20 16:01:57.957 IST ]:STATEMENT:  insert into AM_CAM_DC_ATTRIBUTES(ATTRIBUTEID,ATTRIBUTENAME,DISPLAYNAME,TYPE,GROUPID,DISPLAYTYPE,EXPRESSION,GRAPHTYPE) values(8741,'Health','Health',2,294,-1,'-1',-1)
+[ 2024-02-20 16:01:58.923 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:58.923 IST ]:DETAIL:  Key (attributeid)=(2002) already exists.
+[ 2024-02-20 16:01:58.923 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ISARCHIVEING,REPORTS_ENABLED,ARCHIVEDDATA_TABLENAME,ATTRIBUTE_SHORTNAME,CONDITIONS, ENABLE_THRESHOLD) VALUES (2002,'AM_ManagedObjectData','RESID','-1','RESPONSETIME','COLLECTIONTIME','1','',1,1,'AM_WEBSERVICES_RESPONSETIME_MinMaxAvgData','ResponseTime','',1)
+[ 2024-02-20 16:01:58.925 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:58.925 IST ]:DETAIL:  Key (attributeid)=(2002) already exists.
+[ 2024-02-20 16:01:58.925 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ISARCHIVEING,REPORTS_ENABLED,ARCHIVEDDATA_TABLENAME,ATTRIBUTE_SHORTNAME,CONDITIONS, ENABLE_THRESHOLD) VALUES (2002,'AM_ManagedObjectData','RESID','-1','RESPONSETIME','COLLECTIONTIME','1','',1,1,'AM_WEBSERVICES_RESPONSETIME_MinMaxAvgData','ResponseTime','',1)
+[ 2024-02-20 16:01:58.931 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:58.931 IST ]:DETAIL:  Key (attributeid)=(2000) already exists.
+[ 2024-02-20 16:01:58.931 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (2000,'AM_ManagedObjectData','RESID','-1','AVAILABILITY','COLLECTIONTIME','1','','Availability','')
+[ 2024-02-20 16:01:58.931 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:58.931 IST ]:DETAIL:  Key (attributeid)=(2001) already exists.
+[ 2024-02-20 16:01:58.931 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (2001,'AM_ManagedObjectData','RESID','-1','HEALTH','COLLECTIONTIME','1','','Health','')
+[ 2024-02-20 16:01:58.932 IST ]:ERROR:  duplicate key value violates unique constraint "am_mgview_pkey"
+[ 2024-02-20 16:01:58.932 IST ]:DETAIL:  Key (attributeid)=(2000) already exists.
+[ 2024-02-20 16:01:58.932 IST ]:STATEMENT:  INSERT INTO AM_MGVIEW VALUES(2000,'NO','0','RAW')
+[ 2024-02-20 16:01:58.934 IST ]:ERROR:  duplicate key value violates unique constraint "am_mgview_pkey"
+[ 2024-02-20 16:01:58.934 IST ]:DETAIL:  Key (attributeid)=(2001) already exists.
+[ 2024-02-20 16:01:58.934 IST ]:STATEMENT:  INSERT INTO AM_MGVIEW VALUES(2001,'NO','0','RAW')
+[ 2024-02-20 16:01:59.009 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:59.009 IST ]:DETAIL:  Key (attributeid)=(2015) already exists.
+[ 2024-02-20 16:01:59.009 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (2015,'AM_ManagedObjectData','RESID','-1','AVAILABILITY','COLLECTIONTIME','1','','Availability','')
+[ 2024-02-20 16:01:59.027 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:59.027 IST ]:DETAIL:  Key (attributeid)=(2015) already exists.
+[ 2024-02-20 16:01:59.027 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (2015,'AM_ManagedObjectData','RESID','-1','AVAILABILITY','COLLECTIONTIME','1','','Availability','')
+[ 2024-02-20 16:01:59.030 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:59.030 IST ]:DETAIL:  Key (attributeid)=(2014) already exists.
+[ 2024-02-20 16:01:59.030 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (2014,'AM_ManagedObjectData','RESID','-1','HEALTH','COLLECTIONTIME','1','','Health','')
+[ 2024-02-20 16:01:59.465 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:59.465 IST ]:DETAIL:  Key (attributeid)=(2017) already exists.
+[ 2024-02-20 16:01:59.465 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (2017,'AM_ManagedObjectData','RESID','-1','AVAILABILITY','COLLECTIONTIME','1','','Availability','')
+[ 2024-02-20 16:01:59.472 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:59.472 IST ]:DETAIL:  Key (attributeid)=(2017) already exists.
+[ 2024-02-20 16:01:59.472 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (2017,'AM_ManagedObjectData','RESID','-1','AVAILABILITY','COLLECTIONTIME','1','','Availability','')
+[ 2024-02-20 16:01:59.475 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:01:59.475 IST ]:DETAIL:  Key (attributeid)=(2016) already exists.
+[ 2024-02-20 16:01:59.475 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (2016,'AM_ManagedObjectData','RESID','-1','HEALTH','COLLECTIONTIME','1','','Health','')
+[ 2024-02-20 16:02:03.391 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributesdependency_pkey"
+[ 2024-02-20 16:02:03.391 IST ]:DETAIL:  Key (parentid, childid)=(18, 4101) already exists.
+[ 2024-02-20 16:02:03.391 IST ]:STATEMENT:  insert into AM_ATTRIBUTESDEPENDENCY (PARENTID,CHILDID) values(18,4101)
+[ 2024-02-20 16:02:03.405 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributesdependency_pkey"
+[ 2024-02-20 16:02:03.405 IST ]:DETAIL:  Key (parentid, childid)=(18, 4101) already exists.
+[ 2024-02-20 16:02:03.405 IST ]:STATEMENT:  insert into AM_ATTRIBUTESDEPENDENCY (PARENTID,CHILDID) values(18,4101)
+Archive Script Not Found
+[ 2024-02-20 16:02:15.286 IST ]:ERROR:  operator does not exist: bigint = character varying at character 1302
+[ 2024-02-20 16:02:15.286 IST ]:HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+[ 2024-02-20 16:02:15.286 IST ]:STATEMENT:  select AM_ManagedResourceType.SUBGROUP as monitortype, count(AM_ManagedResourceType.SUBGROUP) as count from AM_ManagedObject,AM_ManagedResourceType where AM_ManagedObject.type=AM_ManagedResourceType.resourcetype and AM_ManagedObject.RESOURCEID not in (select CHILDID from AM_EUM_PARENTCHILD_MAPPING) and AM_ManagedResourceType.SUBGROUP not in (select TYPENAME from AM_MONITOR_TYPES where AMCREATED='NO') and AM_ManagedResourceType.RESOURCEGROUP != 'NWD' and AM_ManagedObject.RESOURCEID NOT IN (select RESOURCEID from AM_ManagedObject where AM_ManagedObject.RESOURCEID IN (SELECT COALESCE(cast(value as int), NULL) FROM AM_GLOBALCONFIG WHERE NAME like '%am.diagnostics%' AND NAME not like 'am.diagnostics.mas%')) and AM_ManagedObject.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) group by SUBGROUP union all select 'Users',count(*) as Users from AM_UserPasswordTable where USERNAME not in ('reportadmin','systemadmin_enterprise') union all select 'Dashboard', count(*) as Dashboard from AM_MYPAGES WHERE PAGENAME NOT IN ('Default Dashboard','Business View','Availability','QoS Worldwide(sample)') union all select 'MemoryUtilization' as monitortype,PHYMEMUTIL as count from HostCpuMemDataCollected where COLLECTIONTIME=(select MAX(COLLECTIONTIME) from HostCpuMemDataCollected where RESOURCEID=(select value from AM_GLOBALCONFIG where name = 'am.diagnostics.localhost')) and RESOURCEID=(select value from AM_GLOBALCONFIG where name = 'am.diagnostics.localhost') union all select 'CPUUtilization' as monitortype ,CPUUTIL as count from HostCpuMemDataCollected where COLLECTIONTIME=(select MAX(COLLECTIONTIME) from HostCpuMemDataCollected where RESOURCEID=(select value from AM_GLOBALCONFIG where name = 'am.diagnostics.localhost')) and RESOURCEID=(select value from AM_GLOBALCONFIG where name = 'am.diagnostics.localhost') union all select 'MySQLRequestRate' as monitortype, REQUESTRATE as count from AM_MYSQLPERFORMANCE where COLLECTIONTIME = (select MAX(COLLECTIONTIME) from AM_MYSQLPERFORMANCE where RESOURCEID=(select value from AM_GLOBALCONFIG WHERE NAME ='am.diagnostics.mysql')) and RESOURCEID = (select value from AM_GLOBALCONFIG WHERE NAME ='am.diagnostics.mysql') union all select 'TabCustomized' as monitortype, COUNT(distinct USERID) as count from AM_TABUSERMAPPING union all select 'customMonitorCount' as monitortype, count(*) as count from AM_ManagedObject,AM_ManagedResourceType where AM_ManagedObject.type=AM_ManagedResourceType.resourcetype and AM_ManagedResourceType.SUBGROUP in (select TYPENAME from AM_MONITOR_TYPES where AMCREATED='NO') UNION ALL SELECT 'TotalMonitorCount' AS monitortype, count(*) AS count FROM AM_ManagedObject, AM_ManagedResourceType WHERE AM_ManagedObject.TYPE=AM_ManagedResourceType.RESOURCETYPE AND AM_ManagedResourceType.RESOURCEGROUP NOT IN ('HAI','NWD','SAN','EMO','NET') AND AM_ManagedObject.RESOURCEID NOT IN (SELECT CHILDID FROM AM_EUM_PARENTCHILD_MAPPING) AND AM_ManagedObject.RESOURCEID NOT IN (SELECT COALESCE(cast(value as int), NULL) FROM AM_GLOBALCONFIG WHERE NAME like '%am.diagnostics%' AND NAME not like 'am.diagnostics.mas%') AND AM_ManagedObject.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'ValidTotalMonitorCount' AS monitortype, count(*) AS count FROM AM_ManagedObject, AM_ManagedResourceType WHERE AM_ManagedObject.TYPE=AM_ManagedResourceType.RESOURCETYPE AND AM_ManagedResourceType.RESOURCEGROUP NOT IN ('HAI','NWD','SAN','EMO','NET') AND AM_ManagedObject.RESOURCEID NOT IN (SELECT CHILDID FROM AM_EUM_PARENTCHILD_MAPPING) AND AM_ManagedObject.RESOURCEID NOT IN (SELECT COALESCE(cast(value as int), NULL) FROM AM_GLOBALCONFIG WHERE NAME like '%am.diagnostics%' AND NAME not like 'am.diagnostics.mas%') AND AM_ManagedObject.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) AND (AM_ManagedObject.DCSTARTED=2 OR AM_ManagedObject.TYPE='APM-Insight-Instance') union all select 'Business View' as monitortype, count(*) as count from AM_MONITORGROUP_FLASHVIEWCONFIG union all select 'SubGroup' as monitortype, count(*) as count from AM_HOLISTICAPPLICATION where type = 1 union all select 'NetInterfaceThreshold' as monitortype, count(*) as count from AM_ATTRIBUTETHRESHOLDMAPPER,AM_ATTRIBUTES where ID in (select RESOURCEID from AM_ManagedObject where TYPE='NetInterface') and AM_ATTRIBUTES .ATTRIBUTEID=AM_ATTRIBUTETHRESHOLDMAPPER.ATTRIBUTE union all select 'NetInterfaceReport' as monitortype, count(*) as count from AM_ATTRIBUTES_EXT where ATTRIBUTEID IN (select ATTRIBUTEID from AM_ATTRIBUTES where RESOURCETYPE='NetInterface') and ISARCHIVEING=1 and REPORTS_ENABLED=1 UNION ALL select 'APMInsightJava' AS monitortype, count(RESOURCEID) AS count FROM apm_instances WHERE TYPE='JAVA' AND apm_instances.RESOURCEID NOT IN (SELECT COALESCE(cast(value as int), NULL) FROM AM_GLOBALCONFIG WHERE NAME = 'am.diagnostics.apminsight') AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes)  UNION ALL SELECT 'APMInsightDotNet' AS monitortype, count(RESOURCEID) AS count FROM apm_instances where TYPE IN ('DOTNET','DOTNET_SERVICE','DOTNET_DESKTOP','DOTNET_CORE') AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'APMInsightRuby' AS monitortype,count(RESOURCEID) AS count FROM apm_instances where TYPE='RUBY' AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'APMInsightNodeJS' AS monitortype,count(RESOURCEID) AS count FROM apm_instances where TYPE='NODEJS' AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'APMInsightPHP' AS monitortype,count(RESOURCEID) AS count FROM apm_instances where TYPE IN ('PHP','PHP_WINDOWS') AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'APMInsightPython' AS monitortype, count(RESOURCEID) AS count FROM apm_instances WHERE TYPE='PYTHON' AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) union all select 'MSSQLTransactionspermin' as monitortype, cast (TRANSACTIONSPERMIN as bigint) as count from AM_MSSQL_DATABASEDETAILS where COLLECTIONTIME = (select MAX(COLLECTIONTIME) from AM_MSSQL_DATABASEDETAILS where RESOURCEID in (select RESOURCEID from AM_ManagedObject, AM_PARENTCHILDMAPPER where DISPLAYNAME='AMDB' and PARENTID=(select value from AM_GLOBALCONFIG WHERE NAME ='am.diagnostics.mssql')) ) and RESOURCEID in (select RESOURCEID from AM_ManagedObject, AM_PARENTCHILDMAPPER where DISPLAYNAME='AMDB' and PARENTID=(select value from AM_GLOBALCONFIG WHERE NAME ='am.diagnostics.mssql'))
+[ 2024-02-20 16:02:19.471 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributesdependency_pkey"
+[ 2024-02-20 16:02:19.471 IST ]:DETAIL:  Key (parentid, childid)=(18, 5502) already exists.
+[ 2024-02-20 16:02:19.471 IST ]:STATEMENT:  insert into AM_ATTRIBUTESDEPENDENCY (PARENTID,CHILDID) values(18,5502)
+[ 2024-02-20 16:02:19.491 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributesdependency_pkey"
+[ 2024-02-20 16:02:19.491 IST ]:DETAIL:  Key (parentid, childid)=(18, 5502) already exists.
+[ 2024-02-20 16:02:19.491 IST ]:STATEMENT:  insert into AM_ATTRIBUTESDEPENDENCY (PARENTID,CHILDID) values(18,5502)
+Archive Script Not Found
+[ 2024-02-20 16:02:25.432 IST ]:ERROR:  relation "am_jvm_minmaxavgdata" already exists
+[ 2024-02-20 16:02:25.432 IST ]:STATEMENT:  create table AM_JVM_MinMaxAvgData (ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:02:25.780 IST ]:ERROR:  duplicate key value violates unique constraint "am_datacleanupinfo_pkey"
+[ 2024-02-20 16:02:25.780 IST ]:DETAIL:  Key (id)=(1262) already exists.
+[ 2024-02-20 16:02:25.780 IST ]:STATEMENT:  insert into AM_DataCleanupInfo (ID,TABLENAME, COLUMNNAME, VALUE, MESSAGE, STATUS, SCHEDULE, SCHEDULE_INTERVAL,CONDITIONS) values (1262,'AM_RESPONSETIME_MinMaxAvgData','ARCHIVEDTIME','0','NotExecuted','3','1','2160','DURATION=1')
+[ 2024-02-20 16:02:25.781 IST ]:ERROR:  duplicate key value violates unique constraint "am_datacleanupinfo_pkey"
+[ 2024-02-20 16:02:25.781 IST ]:DETAIL:  Key (id)=(1263) already exists.
+[ 2024-02-20 16:02:25.781 IST ]:STATEMENT:  insert into AM_DataCleanupInfo (ID,TABLENAME, COLUMNNAME, VALUE, MESSAGE, STATUS, SCHEDULE, SCHEDULE_INTERVAL,CONDITIONS) values (1263,'AM_RESPONSETIME_MinMaxAvgData','ARCHIVEDTIME','0','NotExecuted','3','1','8760','DURATION=2')
+[ 2024-02-20 16:02:25.815 IST ]:ERROR:  relation "am_jvm_minmaxavgdata" already exists
+[ 2024-02-20 16:02:25.815 IST ]:STATEMENT:  create table AM_JVM_MinMaxAvgData (ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:02:26.047 IST ]:ERROR:  relation "am_jvm_minmaxavgdata" already exists
+[ 2024-02-20 16:02:26.047 IST ]:STATEMENT:  create table AM_JVM_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:02:26.051 IST ]:ERROR:  relation "am_jvm_minmaxavgdata" already exists
+[ 2024-02-20 16:02:26.051 IST ]:STATEMENT:  create table AM_JVM_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:02:30.504 IST ]:ERROR:  duplicate key value violates unique constraint "am_datacleanupinfo_pkey"
+[ 2024-02-20 16:02:30.504 IST ]:DETAIL:  Key (id)=(1355) already exists.
+[ 2024-02-20 16:02:30.504 IST ]:STATEMENT:  insert into AM_DataCleanupInfo (ID,TABLENAME, COLUMNNAME, VALUE, MESSAGE, STATUS, SCHEDULE, SCHEDULE_INTERVAL,CONDITIONS) values (1355,'AM_MSMQ_Queue_MinMaxAvgData','ARCHIVEDTIME','0','NotExecuted','3','1','2160','DURATION=1')
+[ 2024-02-20 16:02:30.520 IST ]:ERROR:  duplicate key value violates unique constraint "am_datacleanupinfo_pkey"
+[ 2024-02-20 16:02:30.520 IST ]:DETAIL:  Key (id)=(1355) already exists.
+[ 2024-02-20 16:02:30.520 IST ]:STATEMENT:  insert into AM_DataCleanupInfo (ID,TABLENAME, COLUMNNAME, VALUE, MESSAGE, STATUS, SCHEDULE, SCHEDULE_INTERVAL,CONDITIONS) values (1355,'AM_MSMQ_Queue_MinMaxAvgData','ARCHIVEDTIME','0','NotExecuted','3','1','2160','DURATION=1')
+[ 2024-02-20 16:02:31.242 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:02:31.242 IST ]:DETAIL:  Key (attributeid)=(161) already exists.
+[ 2024-02-20 16:02:31.242 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ISARCHIVEING,REPORTS_ENABLED,ARCHIVEDDATA_TABLENAME,ATTRIBUTE_SHORTNAME,CONDITIONS, ENABLE_THRESHOLD) VALUES (161,'AM_ManagedObjectData','RESID','-1','RESPONSETIME','COLLECTIONTIME','1','',1,1,'AM_RESPONSETIME_MinMaxAvgData','ResponseTime','',1)
+[ 2024-02-20 16:02:31.243 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:02:31.243 IST ]:DETAIL:  Key (attributeid)=(161) already exists.
+[ 2024-02-20 16:02:31.243 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ISARCHIVEING,REPORTS_ENABLED,ARCHIVEDDATA_TABLENAME,ATTRIBUTE_SHORTNAME,CONDITIONS, ENABLE_THRESHOLD) VALUES (161,'AM_ManagedObjectData','RESID','-1','RESPONSETIME','COLLECTIONTIME','1','',1,1,'AM_RESPONSETIME_MinMaxAvgData','ResponseTime','',1)
+[ 2024-02-20 16:02:31.249 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:02:31.249 IST ]:DETAIL:  Key (attributeid)=(162) already exists.
+[ 2024-02-20 16:02:31.249 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (162,'AM_ManagedObjectData','RESID','-1','AVAILABILITY','COLLECTIONTIME','1','','Availability','')
+[ 2024-02-20 16:02:31.249 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:02:31.249 IST ]:DETAIL:  Key (attributeid)=(163) already exists.
+[ 2024-02-20 16:02:31.249 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (163,'AM_ManagedObjectData','RESID','-1','HEALTH','COLLECTIONTIME','1','','Health','')
+[ 2024-02-20 16:02:31.250 IST ]:ERROR:  duplicate key value violates unique constraint "am_mgview_pkey"
+[ 2024-02-20 16:02:31.250 IST ]:DETAIL:  Key (attributeid)=(162) already exists.
+[ 2024-02-20 16:02:31.250 IST ]:STATEMENT:  INSERT INTO AM_MGVIEW VALUES(162,'NO','0','RAW')
+[ 2024-02-20 16:02:31.250 IST ]:ERROR:  duplicate key value violates unique constraint "am_mgview_pkey"
+[ 2024-02-20 16:02:31.250 IST ]:DETAIL:  Key (attributeid)=(163) already exists.
+[ 2024-02-20 16:02:31.250 IST ]:STATEMENT:  INSERT INTO AM_MGVIEW VALUES(163,'NO','0','RAW')
+[ 2024-02-20 16:02:31.274 IST ]:ERROR:  duplicate key value violates unique constraint "am_archiverconfig_pkey"
+[ 2024-02-20 16:02:31.274 IST ]:DETAIL:  Key (attributeid, tablename)=(161, AM_ManagedObjectData) already exists.
+[ 2024-02-20 16:02:31.274 IST ]:STATEMENT:  insert into AM_ArchiverConfig values ('AM_ManagedObjectData','RESPONSETIME','RESID',161)
+Archive Script Not Found
+[ 2024-02-20 16:02:36.732 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:02:36.732 IST ]:DETAIL:  Key (attributeid)=(3201) already exists.
+[ 2024-02-20 16:02:36.732 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (3201,'AM_ManagedObjectData','RESID','-1','AVAILABILITY','COLLECTIONTIME','1','','Availability','')
+[ 2024-02-20 16:02:36.736 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:02:36.736 IST ]:DETAIL:  Key (attributeid)=(3201) already exists.
+[ 2024-02-20 16:02:36.736 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (3201,'AM_ManagedObjectData','RESID','-1','AVAILABILITY','COLLECTIONTIME','1','','Availability','')
+[ 2024-02-20 16:02:36.736 IST ]:ERROR:  duplicate key value violates unique constraint "am_attributes_ext_pkey"
+[ 2024-02-20 16:02:36.736 IST ]:DETAIL:  Key (attributeid)=(3202) already exists.
+[ 2024-02-20 16:02:36.736 IST ]:STATEMENT:  INSERT INTO AM_ATTRIBUTES_EXT(ATTRIBUTEID,DATATABLE,RESID_COL,ATTID_COL,VALUE_COL,COLTIME_VAL,ATTRIBUTE_LEVEL,EXPRESSION,ATTRIBUTE_SHORTNAME,CONDITIONS) VALUES (3202,'AM_ManagedObjectData','RESID','-1','HEALTH','COLLECTIONTIME','1','','Health','')
+[ 2024-02-20 16:02:36.737 IST ]:ERROR:  duplicate key value violates unique constraint "am_mgview_pkey"
+[ 2024-02-20 16:02:36.737 IST ]:DETAIL:  Key (attributeid)=(3201) already exists.
+[ 2024-02-20 16:02:36.737 IST ]:STATEMENT:  INSERT INTO AM_MGVIEW VALUES(3201,'NO','0','RAW')
+[ 2024-02-20 16:02:36.737 IST ]:ERROR:  duplicate key value violates unique constraint "am_mgview_pkey"
+[ 2024-02-20 16:02:36.737 IST ]:DETAIL:  Key (attributeid)=(3202) already exists.
+[ 2024-02-20 16:02:36.737 IST ]:STATEMENT:  INSERT INTO AM_MGVIEW VALUES(3202,'NO','0','RAW')
+[ 2024-02-20 16:02:37.293 IST ]:ERROR:  relation "am_biztalk_sftpreceiveadapter_minmaxavgdata" already exists
+[ 2024-02-20 16:02:37.293 IST ]:STATEMENT:  create table AM_BizTalk_SFTPReceiveAdapter_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:02:37.299 IST ]:ERROR:  relation "am_biztalk_sftpreceiveadapter_minmaxavgdata" already exists
+[ 2024-02-20 16:02:37.299 IST ]:STATEMENT:  create table AM_BizTalk_SFTPReceiveAdapter_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:02:38.420 IST ]:ERROR:  relation "am_exchangestats_minmaxavgdata" already exists
+[ 2024-02-20 16:02:38.420 IST ]:STATEMENT:  create table AM_EXCHANGESTATS_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:02:38.446 IST ]:ERROR:  relation "am_exchangestats_minmaxavgdata" already exists
+[ 2024-02-20 16:02:38.446 IST ]:STATEMENT:  create table AM_EXCHANGESTATS_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:02:38.491 IST ]:ERROR:  relation "am_exchangestats_minmaxavgdata" already exists
+[ 2024-02-20 16:02:38.491 IST ]:STATEMENT:  create table AM_EXCHANGESTATS_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:02:38.499 IST ]:ERROR:  relation "am_exchangestats_minmaxavgdata" already exists
+[ 2024-02-20 16:02:38.499 IST ]:STATEMENT:  create table AM_EXCHANGESTATS_MinMaxAvgData(ARCHIVEDTIME BIGINT,RESID integer not null,DURATION integer not null,ATTRIBUTEID integer not null,MINVALUE BIGINT,MAXVALUE BIGINT,TOTAL BIGINT,TOTALCOUNT BIGINT,FIFTHMINUTE BIGINT DEFAULT -1,TENTHMINUTE BIGINT DEFAULT -1,FIFTEENTHMINUTE BIGINT DEFAULT -1,TWENTYTHMINUTE BIGINT DEFAULT -1,TWENTYFIFTHMINUTE BIGINT DEFAULT -1,THIRTYTHMINUTE BIGINT DEFAULT -1,THIRTYFIFTHMINUTE BIGINT DEFAULT -1,FORTYTHMINUTE BIGINT DEFAULT -1,FORTYFIFTHMINUTE BIGINT DEFAULT -1,FIFTYTHMINUTE BIGINT DEFAULT -1,FIFTYFIFTHMINUTE BIGINT DEFAULT -1,SIXTYTHMINUTE BIGINT DEFAULT -1,PRIMARY KEY (ARCHIVEDTIME,RESID,DURATION,ATTRIBUTEID))
+[ 2024-02-20 16:02:43.507 IST ]:ERROR:  duplicate key value violates unique constraint "am_globalconfig_pkey"
+[ 2024-02-20 16:02:43.507 IST ]:DETAIL:  Key (name)=(CONFTABLEMIGRATION) already exists.
+[ 2024-02-20 16:02:43.507 IST ]:STATEMENT:  insert into AM_GLOBALCONFIG  VALUES ($1,$2)
+[ 2024-02-20 16:03:45.323 IST ]:LOG:  duration: 61799.829 ms  execute <unnamed>: select SCHEMATABLES.TABLE_NAME,AM_ATTRIBUTES_ARCHIVAL.PERIODICITY from (SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA='public' and lower(TABLE_CATALOG)='amdb')  SCHEMATABLES  join AM_ATTRIBUTES_ARCHIVAL on UPPER(SCHEMATABLES.TABLE_NAME)  like CONCAT('%', AM_ATTRIBUTES_ARCHIVAL.ARCHIVETABLE_PREFIX ,'%') and SCHEMATABLES.TABLE_NAME not like '%minmaxavgdata' and SCHEMATABLES.TABLE_NAME not in ('am_amazon_ec2instanceosmapping','am_rbmdata','am_rbmagentdata','am_rbmagentschedule','am_rum_user_session_data_raw','am_rum_transaction_data_raw','am_rum_errortrace_data','am_rum_resource_data','am_rum_ajacxalls_data','am_rum_monitor_details','am_rum_mas_details','am_rum_server_details','am_rumagentdata') group by SCHEMATABLES.TABLE_NAME,AM_ATTRIBUTES_ARCHIVAL.PERIODICITY order by SCHEMATABLES.TABLE_NAME
+Archive Script Not Found
+[ 2024-02-20 16:03:49.753 IST ]:ERROR:  relation "am_audit_changes_0" does not exist at character 13
+[ 2024-02-20 16:03:49.753 IST ]:STATEMENT:  insert into AM_AUDIT_CHANGES_0(AUDITID,USERNAME,ACCESSSEDHOST,OPERATIONID,ID,MESSAGE,PARAMS,MODIFIEDTIME)  values ($1,$2,$3,$4,$5,$6,$7,$8)
+[ 2024-02-20 16:04:07.446 IST ]:ERROR:  duplicate key value violates unique constraint "am_globalconfig_pkey"
+[ 2024-02-20 16:04:07.446 IST ]:DETAIL:  Key (name)=(am.apminsight.rawdata.retentionperiod) already exists.
+[ 2024-02-20 16:04:07.446 IST ]:STATEMENT:  insert into AM_GLOBALCONFIG  VALUES ($1,$2)
+[ 2024-02-20 16:04:07.448 IST ]:ERROR:  duplicate key value violates unique constraint "am_globalconfig_pkey"
+[ 2024-02-20 16:04:07.448 IST ]:DETAIL:  Key (name)=(am.apminsight.traces.retentionperiod) already exists.
+[ 2024-02-20 16:04:07.448 IST ]:STATEMENT:  insert into AM_GLOBALCONFIG  VALUES ($1,$2)
+[ 2024-02-20 16:07:19.897 IST ]:ERROR:  operator does not exist: bigint = character varying at character 1302
+[ 2024-02-20 16:07:19.897 IST ]:HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+[ 2024-02-20 16:07:19.897 IST ]:STATEMENT:  select AM_ManagedResourceType.SUBGROUP as monitortype, count(AM_ManagedResourceType.SUBGROUP) as count from AM_ManagedObject,AM_ManagedResourceType where AM_ManagedObject.type=AM_ManagedResourceType.resourcetype and AM_ManagedObject.RESOURCEID not in (select CHILDID from AM_EUM_PARENTCHILD_MAPPING) and AM_ManagedResourceType.SUBGROUP not in (select TYPENAME from AM_MONITOR_TYPES where AMCREATED='NO') and AM_ManagedResourceType.RESOURCEGROUP != 'NWD' and AM_ManagedObject.RESOURCEID NOT IN (select RESOURCEID from AM_ManagedObject where AM_ManagedObject.RESOURCEID IN (SELECT COALESCE(cast(value as int), NULL) FROM AM_GLOBALCONFIG WHERE NAME like '%am.diagnostics%' AND NAME not like 'am.diagnostics.mas%')) and AM_ManagedObject.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) group by SUBGROUP union all select 'Users',count(*) as Users from AM_UserPasswordTable where USERNAME not in ('reportadmin','systemadmin_enterprise') union all select 'Dashboard', count(*) as Dashboard from AM_MYPAGES WHERE PAGENAME NOT IN ('Default Dashboard','Business View','Availability','QoS Worldwide(sample)') union all select 'MemoryUtilization' as monitortype,PHYMEMUTIL as count from HostCpuMemDataCollected where COLLECTIONTIME=(select MAX(COLLECTIONTIME) from HostCpuMemDataCollected where RESOURCEID=(select value from AM_GLOBALCONFIG where name = 'am.diagnostics.localhost')) and RESOURCEID=(select value from AM_GLOBALCONFIG where name = 'am.diagnostics.localhost') union all select 'CPUUtilization' as monitortype ,CPUUTIL as count from HostCpuMemDataCollected where COLLECTIONTIME=(select MAX(COLLECTIONTIME) from HostCpuMemDataCollected where RESOURCEID=(select value from AM_GLOBALCONFIG where name = 'am.diagnostics.localhost')) and RESOURCEID=(select value from AM_GLOBALCONFIG where name = 'am.diagnostics.localhost') union all select 'MySQLRequestRate' as monitortype, REQUESTRATE as count from AM_MYSQLPERFORMANCE where COLLECTIONTIME = (select MAX(COLLECTIONTIME) from AM_MYSQLPERFORMANCE where RESOURCEID=(select value from AM_GLOBALCONFIG WHERE NAME ='am.diagnostics.mysql')) and RESOURCEID = (select value from AM_GLOBALCONFIG WHERE NAME ='am.diagnostics.mysql') union all select 'TabCustomized' as monitortype, COUNT(distinct USERID) as count from AM_TABUSERMAPPING union all select 'customMonitorCount' as monitortype, count(*) as count from AM_ManagedObject,AM_ManagedResourceType where AM_ManagedObject.type=AM_ManagedResourceType.resourcetype and AM_ManagedResourceType.SUBGROUP in (select TYPENAME from AM_MONITOR_TYPES where AMCREATED='NO') UNION ALL SELECT 'TotalMonitorCount' AS monitortype, count(*) AS count FROM AM_ManagedObject, AM_ManagedResourceType WHERE AM_ManagedObject.TYPE=AM_ManagedResourceType.RESOURCETYPE AND AM_ManagedResourceType.RESOURCEGROUP NOT IN ('HAI','NWD','SAN','EMO','NET') AND AM_ManagedObject.RESOURCEID NOT IN (SELECT CHILDID FROM AM_EUM_PARENTCHILD_MAPPING) AND AM_ManagedObject.RESOURCEID NOT IN (SELECT COALESCE(cast(value as int), NULL) FROM AM_GLOBALCONFIG WHERE NAME like '%am.diagnostics%' AND NAME not like 'am.diagnostics.mas%') AND AM_ManagedObject.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'ValidTotalMonitorCount' AS monitortype, count(*) AS count FROM AM_ManagedObject, AM_ManagedResourceType WHERE AM_ManagedObject.TYPE=AM_ManagedResourceType.RESOURCETYPE AND AM_ManagedResourceType.RESOURCEGROUP NOT IN ('HAI','NWD','SAN','EMO','NET') AND AM_ManagedObject.RESOURCEID NOT IN (SELECT CHILDID FROM AM_EUM_PARENTCHILD_MAPPING) AND AM_ManagedObject.RESOURCEID NOT IN (SELECT COALESCE(cast(value as int), NULL) FROM AM_GLOBALCONFIG WHERE NAME like '%am.diagnostics%' AND NAME not like 'am.diagnostics.mas%') AND AM_ManagedObject.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) AND (AM_ManagedObject.DCSTARTED=2 OR AM_ManagedObject.TYPE='APM-Insight-Instance') union all select 'Business View' as monitortype, count(*) as count from AM_MONITORGROUP_FLASHVIEWCONFIG union all select 'SubGroup' as monitortype, count(*) as count from AM_HOLISTICAPPLICATION where type = 1 union all select 'NetInterfaceThreshold' as monitortype, count(*) as count from AM_ATTRIBUTETHRESHOLDMAPPER,AM_ATTRIBUTES where ID in (select RESOURCEID from AM_ManagedObject where TYPE='NetInterface') and AM_ATTRIBUTES .ATTRIBUTEID=AM_ATTRIBUTETHRESHOLDMAPPER.ATTRIBUTE union all select 'NetInterfaceReport' as monitortype, count(*) as count from AM_ATTRIBUTES_EXT where ATTRIBUTEID IN (select ATTRIBUTEID from AM_ATTRIBUTES where RESOURCETYPE='NetInterface') and ISARCHIVEING=1 and REPORTS_ENABLED=1 UNION ALL select 'APMInsightJava' AS monitortype, count(RESOURCEID) AS count FROM apm_instances WHERE TYPE='JAVA' AND apm_instances.RESOURCEID NOT IN (SELECT COALESCE(cast(value as int), NULL) FROM AM_GLOBALCONFIG WHERE NAME = 'am.diagnostics.apminsight') AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes)  UNION ALL SELECT 'APMInsightDotNet' AS monitortype, count(RESOURCEID) AS count FROM apm_instances where TYPE IN ('DOTNET','DOTNET_SERVICE','DOTNET_DESKTOP','DOTNET_CORE') AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'APMInsightRuby' AS monitortype,count(RESOURCEID) AS count FROM apm_instances where TYPE='RUBY' AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'APMInsightNodeJS' AS monitortype,count(RESOURCEID) AS count FROM apm_instances where TYPE='NODEJS' AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'APMInsightPHP' AS monitortype,count(RESOURCEID) AS count FROM apm_instances where TYPE IN ('PHP','PHP_WINDOWS') AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'APMInsightPython' AS monitortype, count(RESOURCEID) AS count FROM apm_instances WHERE TYPE='PYTHON' AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) union all select 'MSSQLTransactionspermin' as monitortype, cast (TRANSACTIONSPERMIN as bigint) as count from AM_MSSQL_DATABASEDETAILS where COLLECTIONTIME = (select MAX(COLLECTIONTIME) from AM_MSSQL_DATABASEDETAILS where RESOURCEID in (select RESOURCEID from AM_ManagedObject, AM_PARENTCHILDMAPPER where DISPLAYNAME='AMDB' and PARENTID=(select value from AM_GLOBALCONFIG WHERE NAME ='am.diagnostics.mssql')) ) and RESOURCEID in (select RESOURCEID from AM_ManagedObject, AM_PARENTCHILDMAPPER where DISPLAYNAME='AMDB' and PARENTID=(select value from AM_GLOBALCONFIG WHERE NAME ='am.diagnostics.mssql'))
+[ 2024-02-20 16:16:11.538 IST ]:ERROR:  relation "am_10000013_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.538 IST ]:STATEMENT:  select count(RESID) from AM_10000013_MinMaxAvgData
+[ 2024-02-20 16:16:11.542 IST ]:ERROR:  relation "am_10000012_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.542 IST ]:STATEMENT:  select count(RESID) from AM_10000012_MinMaxAvgData
+[ 2024-02-20 16:16:11.545 IST ]:ERROR:  relation "am_10000014_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.545 IST ]:STATEMENT:  select count(RESID) from AM_10000014_MinMaxAvgData
+[ 2024-02-20 16:16:11.548 IST ]:ERROR:  relation "am_10000015_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.548 IST ]:STATEMENT:  select count(RESID) from AM_10000015_MinMaxAvgData
+[ 2024-02-20 16:16:11.555 IST ]:ERROR:  relation "am_10000016_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.555 IST ]:STATEMENT:  select count(RESID) from AM_10000016_MinMaxAvgData
+[ 2024-02-20 16:16:11.559 IST ]:ERROR:  relation "am_10000017_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.559 IST ]:STATEMENT:  select count(RESID) from AM_10000017_MinMaxAvgData
+[ 2024-02-20 16:16:11.562 IST ]:ERROR:  relation "am_10000018_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.562 IST ]:STATEMENT:  select count(RESID) from AM_10000018_MinMaxAvgData
+[ 2024-02-20 16:16:11.565 IST ]:ERROR:  relation "am_10000019_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.565 IST ]:STATEMENT:  select count(RESID) from AM_10000019_MinMaxAvgData
+[ 2024-02-20 16:16:11.568 IST ]:ERROR:  relation "am_10000020_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.568 IST ]:STATEMENT:  select count(RESID) from AM_10000020_MinMaxAvgData
+[ 2024-02-20 16:16:11.571 IST ]:ERROR:  relation "am_10000021_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.571 IST ]:STATEMENT:  select count(RESID) from AM_10000021_MinMaxAvgData
+[ 2024-02-20 16:16:11.574 IST ]:ERROR:  relation "am_10000022_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.574 IST ]:STATEMENT:  select count(RESID) from AM_10000022_MinMaxAvgData
+[ 2024-02-20 16:16:11.577 IST ]:ERROR:  relation "am_10000023_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.577 IST ]:STATEMENT:  select count(RESID) from AM_10000023_MinMaxAvgData
+[ 2024-02-20 16:16:11.580 IST ]:ERROR:  relation "am_10000024_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.580 IST ]:STATEMENT:  select count(RESID) from AM_10000024_MinMaxAvgData
+[ 2024-02-20 16:16:11.584 IST ]:ERROR:  relation "am_10000025_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.584 IST ]:STATEMENT:  select count(RESID) from AM_10000025_MinMaxAvgData
+[ 2024-02-20 16:16:11.587 IST ]:ERROR:  relation "am_10000026_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.587 IST ]:STATEMENT:  select count(RESID) from AM_10000026_MinMaxAvgData
+[ 2024-02-20 16:16:11.590 IST ]:ERROR:  relation "am_10000027_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.590 IST ]:STATEMENT:  select count(RESID) from AM_10000027_MinMaxAvgData
+[ 2024-02-20 16:16:11.594 IST ]:ERROR:  relation "am_10000028_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.594 IST ]:STATEMENT:  select count(RESID) from AM_10000028_MinMaxAvgData
+[ 2024-02-20 16:16:11.597 IST ]:ERROR:  relation "am_10000029_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.597 IST ]:STATEMENT:  select count(RESID) from AM_10000029_MinMaxAvgData
+[ 2024-02-20 16:16:11.602 IST ]:ERROR:  relation "am_10000030_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.602 IST ]:STATEMENT:  select count(RESID) from AM_10000030_MinMaxAvgData
+[ 2024-02-20 16:16:11.605 IST ]:ERROR:  relation "am_10000031_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.605 IST ]:STATEMENT:  select count(RESID) from AM_10000031_MinMaxAvgData
+[ 2024-02-20 16:16:11.608 IST ]:ERROR:  relation "am_10000033_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.608 IST ]:STATEMENT:  select count(RESID) from AM_10000033_MinMaxAvgData
+[ 2024-02-20 16:16:11.611 IST ]:ERROR:  relation "am_10000034_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.611 IST ]:STATEMENT:  select count(RESID) from AM_10000034_MinMaxAvgData
+[ 2024-02-20 16:16:11.615 IST ]:ERROR:  relation "am_10000035_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.615 IST ]:STATEMENT:  select count(RESID) from AM_10000035_MinMaxAvgData
+[ 2024-02-20 16:16:11.618 IST ]:ERROR:  relation "am_10000036_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.618 IST ]:STATEMENT:  select count(RESID) from AM_10000036_MinMaxAvgData
+[ 2024-02-20 16:16:11.623 IST ]:ERROR:  relation "am_10000038_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.623 IST ]:STATEMENT:  select count(RESID) from AM_10000038_MinMaxAvgData
+[ 2024-02-20 16:16:11.626 IST ]:ERROR:  relation "am_10000037_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.626 IST ]:STATEMENT:  select count(RESID) from AM_10000037_MinMaxAvgData
+[ 2024-02-20 16:16:11.629 IST ]:ERROR:  relation "am_10000039_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.629 IST ]:STATEMENT:  select count(RESID) from AM_10000039_MinMaxAvgData
+[ 2024-02-20 16:16:11.632 IST ]:ERROR:  relation "am_10000040_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.632 IST ]:STATEMENT:  select count(RESID) from AM_10000040_MinMaxAvgData
+[ 2024-02-20 16:16:11.636 IST ]:ERROR:  relation "am_10000041_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.636 IST ]:STATEMENT:  select count(RESID) from AM_10000041_MinMaxAvgData
+[ 2024-02-20 16:16:11.639 IST ]:ERROR:  relation "am_10000042_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.639 IST ]:STATEMENT:  select count(RESID) from AM_10000042_MinMaxAvgData
+[ 2024-02-20 16:16:11.642 IST ]:ERROR:  relation "am_10000043_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.642 IST ]:STATEMENT:  select count(RESID) from AM_10000043_MinMaxAvgData
+[ 2024-02-20 16:16:11.645 IST ]:ERROR:  relation "am_10000044_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.645 IST ]:STATEMENT:  select count(RESID) from AM_10000044_MinMaxAvgData
+[ 2024-02-20 16:16:11.648 IST ]:ERROR:  relation "am_10000045_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.648 IST ]:STATEMENT:  select count(RESID) from AM_10000045_MinMaxAvgData
+[ 2024-02-20 16:16:11.651 IST ]:ERROR:  relation "am_10000046_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.651 IST ]:STATEMENT:  select count(RESID) from AM_10000046_MinMaxAvgData
+[ 2024-02-20 16:16:11.654 IST ]:ERROR:  relation "am_10000047_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.654 IST ]:STATEMENT:  select count(RESID) from AM_10000047_MinMaxAvgData
+[ 2024-02-20 16:16:11.658 IST ]:ERROR:  relation "am_10000048_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.658 IST ]:STATEMENT:  select count(RESID) from AM_10000048_MinMaxAvgData
+[ 2024-02-20 16:16:11.661 IST ]:ERROR:  relation "am_10000049_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.661 IST ]:STATEMENT:  select count(RESID) from AM_10000049_MinMaxAvgData
+[ 2024-02-20 16:16:11.664 IST ]:ERROR:  relation "am_10000050_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.664 IST ]:STATEMENT:  select count(RESID) from AM_10000050_MinMaxAvgData
+[ 2024-02-20 16:16:11.667 IST ]:ERROR:  relation "am_10000051_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.667 IST ]:STATEMENT:  select count(RESID) from AM_10000051_MinMaxAvgData
+[ 2024-02-20 16:16:11.670 IST ]:ERROR:  relation "am_10000052_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.670 IST ]:STATEMENT:  select count(RESID) from AM_10000052_MinMaxAvgData
+[ 2024-02-20 16:16:11.673 IST ]:ERROR:  relation "am_10000053_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.673 IST ]:STATEMENT:  select count(RESID) from AM_10000053_MinMaxAvgData
+[ 2024-02-20 16:16:11.676 IST ]:ERROR:  relation "am_10000054_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.676 IST ]:STATEMENT:  select count(RESID) from AM_10000054_MinMaxAvgData
+[ 2024-02-20 16:16:11.680 IST ]:ERROR:  relation "am_10000055_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.680 IST ]:STATEMENT:  select count(RESID) from AM_10000055_MinMaxAvgData
+[ 2024-02-20 16:16:11.683 IST ]:ERROR:  relation "am_10000057_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.683 IST ]:STATEMENT:  select count(RESID) from AM_10000057_MinMaxAvgData
+[ 2024-02-20 16:16:11.686 IST ]:ERROR:  relation "am_10000058_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.686 IST ]:STATEMENT:  select count(RESID) from AM_10000058_MinMaxAvgData
+[ 2024-02-20 16:16:11.689 IST ]:ERROR:  relation "am_10000059_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.689 IST ]:STATEMENT:  select count(RESID) from AM_10000059_MinMaxAvgData
+[ 2024-02-20 16:16:11.692 IST ]:ERROR:  relation "am_10000060_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.692 IST ]:STATEMENT:  select count(RESID) from AM_10000060_MinMaxAvgData
+[ 2024-02-20 16:16:11.697 IST ]:ERROR:  relation "am_10000062_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.697 IST ]:STATEMENT:  select count(RESID) from AM_10000062_MinMaxAvgData
+[ 2024-02-20 16:16:11.700 IST ]:ERROR:  relation "am_10000063_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.700 IST ]:STATEMENT:  select count(RESID) from AM_10000063_MinMaxAvgData
+[ 2024-02-20 16:16:11.705 IST ]:ERROR:  relation "am_10000064_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.705 IST ]:STATEMENT:  select count(RESID) from AM_10000064_MinMaxAvgData
+[ 2024-02-20 16:16:11.708 IST ]:ERROR:  relation "am_10000068_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.708 IST ]:STATEMENT:  select count(RESID) from AM_10000068_MinMaxAvgData
+[ 2024-02-20 16:16:11.711 IST ]:ERROR:  relation "am_10000073_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.711 IST ]:STATEMENT:  select count(RESID) from AM_10000073_MinMaxAvgData
+[ 2024-02-20 16:16:11.714 IST ]:ERROR:  relation "am_10000074_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.714 IST ]:STATEMENT:  select count(RESID) from AM_10000074_MinMaxAvgData
+[ 2024-02-20 16:16:11.720 IST ]:ERROR:  relation "am_10000078_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.720 IST ]:STATEMENT:  select count(RESID) from AM_10000078_MinMaxAvgData
+[ 2024-02-20 16:16:11.724 IST ]:ERROR:  relation "am_10000082_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.724 IST ]:STATEMENT:  select count(RESID) from AM_10000082_MinMaxAvgData
+[ 2024-02-20 16:16:11.728 IST ]:ERROR:  relation "am_10000088_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.728 IST ]:STATEMENT:  select count(RESID) from AM_10000088_MinMaxAvgData
+[ 2024-02-20 16:16:11.733 IST ]:ERROR:  relation "am_10000090_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.733 IST ]:STATEMENT:  select count(RESID) from AM_10000090_MinMaxAvgData
+[ 2024-02-20 16:16:11.737 IST ]:ERROR:  relation "am_10000096_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.737 IST ]:STATEMENT:  select count(RESID) from AM_10000096_MinMaxAvgData
+[ 2024-02-20 16:16:11.740 IST ]:ERROR:  relation "am_10000097_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.740 IST ]:STATEMENT:  select count(RESID) from AM_10000097_MinMaxAvgData
+[ 2024-02-20 16:16:11.743 IST ]:ERROR:  relation "am_10000102_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.743 IST ]:STATEMENT:  select count(RESID) from AM_10000102_MinMaxAvgData
+[ 2024-02-20 16:16:11.746 IST ]:ERROR:  relation "am_10000104_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.746 IST ]:STATEMENT:  select count(RESID) from AM_10000104_MinMaxAvgData
+[ 2024-02-20 16:16:11.749 IST ]:ERROR:  relation "am_10000105_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.749 IST ]:STATEMENT:  select count(RESID) from AM_10000105_MinMaxAvgData
+[ 2024-02-20 16:16:11.752 IST ]:ERROR:  relation "am_10000110_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.752 IST ]:STATEMENT:  select count(RESID) from AM_10000110_MinMaxAvgData
+[ 2024-02-20 16:16:11.756 IST ]:ERROR:  relation "am_10000112_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.756 IST ]:STATEMENT:  select count(RESID) from AM_10000112_MinMaxAvgData
+[ 2024-02-20 16:16:11.759 IST ]:ERROR:  relation "am_10000111_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.759 IST ]:STATEMENT:  select count(RESID) from AM_10000111_MinMaxAvgData
+[ 2024-02-20 16:16:11.762 IST ]:ERROR:  relation "am_10000117_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.762 IST ]:STATEMENT:  select count(RESID) from AM_10000117_MinMaxAvgData
+[ 2024-02-20 16:16:11.765 IST ]:ERROR:  relation "am_10000118_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.765 IST ]:STATEMENT:  select count(RESID) from AM_10000118_MinMaxAvgData
+[ 2024-02-20 16:16:11.768 IST ]:ERROR:  relation "am_10000121_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.768 IST ]:STATEMENT:  select count(RESID) from AM_10000121_MinMaxAvgData
+[ 2024-02-20 16:16:11.771 IST ]:ERROR:  relation "am_10000125_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.771 IST ]:STATEMENT:  select count(RESID) from AM_10000125_MinMaxAvgData
+[ 2024-02-20 16:16:11.774 IST ]:ERROR:  relation "am_10000128_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.774 IST ]:STATEMENT:  select count(RESID) from AM_10000128_MinMaxAvgData
+[ 2024-02-20 16:16:11.777 IST ]:ERROR:  relation "am_10000127_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.777 IST ]:STATEMENT:  select count(RESID) from AM_10000127_MinMaxAvgData
+[ 2024-02-20 16:16:11.780 IST ]:ERROR:  relation "am_10000130_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.780 IST ]:STATEMENT:  select count(RESID) from AM_10000130_MinMaxAvgData
+[ 2024-02-20 16:16:11.783 IST ]:ERROR:  relation "am_10000132_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.783 IST ]:STATEMENT:  select count(RESID) from AM_10000132_MinMaxAvgData
+[ 2024-02-20 16:16:11.787 IST ]:ERROR:  relation "am_10000135_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.787 IST ]:STATEMENT:  select count(RESID) from AM_10000135_MinMaxAvgData
+[ 2024-02-20 16:16:11.790 IST ]:ERROR:  relation "am_10000139_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.790 IST ]:STATEMENT:  select count(RESID) from AM_10000139_MinMaxAvgData
+[ 2024-02-20 16:16:11.794 IST ]:ERROR:  relation "am_10000140_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.794 IST ]:STATEMENT:  select count(RESID) from AM_10000140_MinMaxAvgData
+[ 2024-02-20 16:16:11.797 IST ]:ERROR:  relation "am_10000141_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.797 IST ]:STATEMENT:  select count(RESID) from AM_10000141_MinMaxAvgData
+[ 2024-02-20 16:16:11.802 IST ]:ERROR:  relation "am_10000143_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.802 IST ]:STATEMENT:  select count(RESID) from AM_10000143_MinMaxAvgData
+[ 2024-02-20 16:16:11.806 IST ]:ERROR:  relation "am_10000155_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.806 IST ]:STATEMENT:  select count(RESID) from AM_10000155_MinMaxAvgData
+[ 2024-02-20 16:16:11.809 IST ]:ERROR:  relation "am_10000156_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.809 IST ]:STATEMENT:  select count(RESID) from AM_10000156_MinMaxAvgData
+[ 2024-02-20 16:16:11.813 IST ]:ERROR:  relation "am_10000158_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.813 IST ]:STATEMENT:  select count(RESID) from AM_10000158_MinMaxAvgData
+[ 2024-02-20 16:16:11.816 IST ]:ERROR:  relation "am_10000163_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.816 IST ]:STATEMENT:  select count(RESID) from AM_10000163_MinMaxAvgData
+[ 2024-02-20 16:16:11.819 IST ]:ERROR:  relation "am_10000164_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.819 IST ]:STATEMENT:  select count(RESID) from AM_10000164_MinMaxAvgData
+[ 2024-02-20 16:16:11.822 IST ]:ERROR:  relation "am_10000168_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.822 IST ]:STATEMENT:  select count(RESID) from AM_10000168_MinMaxAvgData
+[ 2024-02-20 16:16:11.825 IST ]:ERROR:  relation "am_10000065_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.825 IST ]:STATEMENT:  select count(RESID) from AM_10000065_MinMaxAvgData
+[ 2024-02-20 16:16:11.829 IST ]:ERROR:  relation "am_10000066_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.829 IST ]:STATEMENT:  select count(RESID) from AM_10000066_MinMaxAvgData
+[ 2024-02-20 16:16:11.832 IST ]:ERROR:  relation "am_10000067_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.832 IST ]:STATEMENT:  select count(RESID) from AM_10000067_MinMaxAvgData
+[ 2024-02-20 16:16:11.835 IST ]:ERROR:  relation "am_10000077_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.835 IST ]:STATEMENT:  select count(RESID) from AM_10000077_MinMaxAvgData
+[ 2024-02-20 16:16:11.838 IST ]:ERROR:  relation "am_10000083_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.838 IST ]:STATEMENT:  select count(RESID) from AM_10000083_MinMaxAvgData
+[ 2024-02-20 16:16:11.842 IST ]:ERROR:  relation "am_10000085_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.842 IST ]:STATEMENT:  select count(RESID) from AM_10000085_MinMaxAvgData
+[ 2024-02-20 16:16:11.845 IST ]:ERROR:  relation "am_10000089_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.845 IST ]:STATEMENT:  select count(RESID) from AM_10000089_MinMaxAvgData
+[ 2024-02-20 16:16:11.848 IST ]:ERROR:  relation "am_10000092_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.848 IST ]:STATEMENT:  select count(RESID) from AM_10000092_MinMaxAvgData
+[ 2024-02-20 16:16:11.852 IST ]:ERROR:  relation "am_10000093_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.852 IST ]:STATEMENT:  select count(RESID) from AM_10000093_MinMaxAvgData
+[ 2024-02-20 16:16:11.855 IST ]:ERROR:  relation "am_10000094_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.855 IST ]:STATEMENT:  select count(RESID) from AM_10000094_MinMaxAvgData
+[ 2024-02-20 16:16:11.859 IST ]:ERROR:  relation "am_10000098_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.859 IST ]:STATEMENT:  select count(RESID) from AM_10000098_MinMaxAvgData
+[ 2024-02-20 16:16:11.862 IST ]:ERROR:  relation "am_10000106_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.862 IST ]:STATEMENT:  select count(RESID) from AM_10000106_MinMaxAvgData
+[ 2024-02-20 16:16:11.869 IST ]:ERROR:  relation "am_10000109_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.869 IST ]:STATEMENT:  select count(RESID) from AM_10000109_MinMaxAvgData
+[ 2024-02-20 16:16:11.872 IST ]:ERROR:  relation "am_10000114_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.872 IST ]:STATEMENT:  select count(RESID) from AM_10000114_MinMaxAvgData
+[ 2024-02-20 16:16:11.876 IST ]:ERROR:  relation "am_10000126_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.876 IST ]:STATEMENT:  select count(RESID) from AM_10000126_MinMaxAvgData
+[ 2024-02-20 16:16:11.879 IST ]:ERROR:  relation "am_10000136_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.879 IST ]:STATEMENT:  select count(RESID) from AM_10000136_MinMaxAvgData
+[ 2024-02-20 16:16:11.882 IST ]:ERROR:  relation "am_10000142_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.882 IST ]:STATEMENT:  select count(RESID) from AM_10000142_MinMaxAvgData
+[ 2024-02-20 16:16:11.885 IST ]:ERROR:  relation "am_10000144_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.885 IST ]:STATEMENT:  select count(RESID) from AM_10000144_MinMaxAvgData
+[ 2024-02-20 16:16:11.889 IST ]:ERROR:  relation "am_10000149_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.889 IST ]:STATEMENT:  select count(RESID) from AM_10000149_MinMaxAvgData
+[ 2024-02-20 16:16:11.892 IST ]:ERROR:  relation "am_10000159_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.892 IST ]:STATEMENT:  select count(RESID) from AM_10000159_MinMaxAvgData
+[ 2024-02-20 16:16:11.895 IST ]:ERROR:  relation "am_10000160_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.895 IST ]:STATEMENT:  select count(RESID) from AM_10000160_MinMaxAvgData
+[ 2024-02-20 16:16:11.898 IST ]:ERROR:  relation "am_10000166_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.898 IST ]:STATEMENT:  select count(RESID) from AM_10000166_MinMaxAvgData
+[ 2024-02-20 16:16:11.901 IST ]:ERROR:  relation "am_10000069_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.901 IST ]:STATEMENT:  select count(RESID) from AM_10000069_MinMaxAvgData
+[ 2024-02-20 16:16:11.904 IST ]:ERROR:  relation "am_10000070_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.904 IST ]:STATEMENT:  select count(RESID) from AM_10000070_MinMaxAvgData
+[ 2024-02-20 16:16:11.907 IST ]:ERROR:  relation "am_10000071_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.907 IST ]:STATEMENT:  select count(RESID) from AM_10000071_MinMaxAvgData
+[ 2024-02-20 16:16:11.911 IST ]:ERROR:  relation "am_10000072_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.911 IST ]:STATEMENT:  select count(RESID) from AM_10000072_MinMaxAvgData
+[ 2024-02-20 16:16:11.914 IST ]:ERROR:  relation "am_10000075_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.914 IST ]:STATEMENT:  select count(RESID) from AM_10000075_MinMaxAvgData
+[ 2024-02-20 16:16:11.917 IST ]:ERROR:  relation "am_10000076_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.917 IST ]:STATEMENT:  select count(RESID) from AM_10000076_MinMaxAvgData
+[ 2024-02-20 16:16:11.920 IST ]:ERROR:  relation "am_10000079_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.920 IST ]:STATEMENT:  select count(RESID) from AM_10000079_MinMaxAvgData
+[ 2024-02-20 16:16:11.923 IST ]:ERROR:  relation "am_10000081_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.923 IST ]:STATEMENT:  select count(RESID) from AM_10000081_MinMaxAvgData
+[ 2024-02-20 16:16:11.926 IST ]:ERROR:  relation "am_10000087_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.926 IST ]:STATEMENT:  select count(RESID) from AM_10000087_MinMaxAvgData
+[ 2024-02-20 16:16:11.929 IST ]:ERROR:  relation "am_10000095_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.929 IST ]:STATEMENT:  select count(RESID) from AM_10000095_MinMaxAvgData
+[ 2024-02-20 16:16:11.933 IST ]:ERROR:  relation "am_10000100_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.933 IST ]:STATEMENT:  select count(RESID) from AM_10000100_MinMaxAvgData
+[ 2024-02-20 16:16:11.936 IST ]:ERROR:  relation "am_10000103_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.936 IST ]:STATEMENT:  select count(RESID) from AM_10000103_MinMaxAvgData
+[ 2024-02-20 16:16:11.939 IST ]:ERROR:  relation "am_10000107_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.939 IST ]:STATEMENT:  select count(RESID) from AM_10000107_MinMaxAvgData
+[ 2024-02-20 16:16:11.943 IST ]:ERROR:  relation "am_10000115_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.943 IST ]:STATEMENT:  select count(RESID) from AM_10000115_MinMaxAvgData
+[ 2024-02-20 16:16:11.946 IST ]:ERROR:  relation "am_10000120_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.946 IST ]:STATEMENT:  select count(RESID) from AM_10000120_MinMaxAvgData
+[ 2024-02-20 16:16:11.949 IST ]:ERROR:  relation "am_10000122_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.949 IST ]:STATEMENT:  select count(RESID) from AM_10000122_MinMaxAvgData
+[ 2024-02-20 16:16:11.953 IST ]:ERROR:  relation "am_10000147_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.953 IST ]:STATEMENT:  select count(RESID) from AM_10000147_MinMaxAvgData
+[ 2024-02-20 16:16:11.956 IST ]:ERROR:  relation "am_10000152_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.956 IST ]:STATEMENT:  select count(RESID) from AM_10000152_MinMaxAvgData
+[ 2024-02-20 16:16:11.959 IST ]:ERROR:  relation "am_10000153_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.959 IST ]:STATEMENT:  select count(RESID) from AM_10000153_MinMaxAvgData
+[ 2024-02-20 16:16:11.963 IST ]:ERROR:  relation "am_10000080_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.963 IST ]:STATEMENT:  select count(RESID) from AM_10000080_MinMaxAvgData
+[ 2024-02-20 16:16:11.966 IST ]:ERROR:  relation "am_10000084_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.966 IST ]:STATEMENT:  select count(RESID) from AM_10000084_MinMaxAvgData
+[ 2024-02-20 16:16:11.969 IST ]:ERROR:  relation "am_10000086_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.969 IST ]:STATEMENT:  select count(RESID) from AM_10000086_MinMaxAvgData
+[ 2024-02-20 16:16:11.972 IST ]:ERROR:  relation "am_10000091_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.972 IST ]:STATEMENT:  select count(RESID) from AM_10000091_MinMaxAvgData
+[ 2024-02-20 16:16:11.975 IST ]:ERROR:  relation "am_10000108_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.975 IST ]:STATEMENT:  select count(RESID) from AM_10000108_MinMaxAvgData
+[ 2024-02-20 16:16:11.979 IST ]:ERROR:  relation "am_10000113_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.979 IST ]:STATEMENT:  select count(RESID) from AM_10000113_MinMaxAvgData
+[ 2024-02-20 16:16:11.982 IST ]:ERROR:  relation "am_10000116_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.982 IST ]:STATEMENT:  select count(RESID) from AM_10000116_MinMaxAvgData
+[ 2024-02-20 16:16:11.985 IST ]:ERROR:  relation "am_10000119_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.985 IST ]:STATEMENT:  select count(RESID) from AM_10000119_MinMaxAvgData
+[ 2024-02-20 16:16:11.988 IST ]:ERROR:  relation "am_10000123_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.988 IST ]:STATEMENT:  select count(RESID) from AM_10000123_MinMaxAvgData
+[ 2024-02-20 16:16:11.991 IST ]:ERROR:  relation "am_10000124_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.991 IST ]:STATEMENT:  select count(RESID) from AM_10000124_MinMaxAvgData
+[ 2024-02-20 16:16:11.995 IST ]:ERROR:  relation "am_10000129_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.995 IST ]:STATEMENT:  select count(RESID) from AM_10000129_MinMaxAvgData
+[ 2024-02-20 16:16:11.998 IST ]:ERROR:  relation "am_10000133_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:11.998 IST ]:STATEMENT:  select count(RESID) from AM_10000133_MinMaxAvgData
+[ 2024-02-20 16:16:12.001 IST ]:ERROR:  relation "am_10000134_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.001 IST ]:STATEMENT:  select count(RESID) from AM_10000134_MinMaxAvgData
+[ 2024-02-20 16:16:12.004 IST ]:ERROR:  relation "am_10000150_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.004 IST ]:STATEMENT:  select count(RESID) from AM_10000150_MinMaxAvgData
+[ 2024-02-20 16:16:12.007 IST ]:ERROR:  relation "am_10000151_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.007 IST ]:STATEMENT:  select count(RESID) from AM_10000151_MinMaxAvgData
+[ 2024-02-20 16:16:12.010 IST ]:ERROR:  relation "am_10000165_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.010 IST ]:STATEMENT:  select count(RESID) from AM_10000165_MinMaxAvgData
+[ 2024-02-20 16:16:12.013 IST ]:ERROR:  relation "am_10000178_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.013 IST ]:STATEMENT:  select count(RESID) from AM_10000178_MinMaxAvgData
+[ 2024-02-20 16:16:12.018 IST ]:ERROR:  relation "am_10000180_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.018 IST ]:STATEMENT:  select count(RESID) from AM_10000180_MinMaxAvgData
+[ 2024-02-20 16:16:12.021 IST ]:ERROR:  relation "am_10000099_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.021 IST ]:STATEMENT:  select count(RESID) from AM_10000099_MinMaxAvgData
+[ 2024-02-20 16:16:12.025 IST ]:ERROR:  relation "am_10000101_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.025 IST ]:STATEMENT:  select count(RESID) from AM_10000101_MinMaxAvgData
+[ 2024-02-20 16:16:12.028 IST ]:ERROR:  relation "am_10000131_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.028 IST ]:STATEMENT:  select count(RESID) from AM_10000131_MinMaxAvgData
+[ 2024-02-20 16:16:12.031 IST ]:ERROR:  relation "am_10000145_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.031 IST ]:STATEMENT:  select count(RESID) from AM_10000145_MinMaxAvgData
+[ 2024-02-20 16:16:12.034 IST ]:ERROR:  relation "am_10000146_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.034 IST ]:STATEMENT:  select count(RESID) from AM_10000146_MinMaxAvgData
+[ 2024-02-20 16:16:12.037 IST ]:ERROR:  relation "am_10000148_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.037 IST ]:STATEMENT:  select count(RESID) from AM_10000148_MinMaxAvgData
+[ 2024-02-20 16:16:12.041 IST ]:ERROR:  relation "am_10000161_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.041 IST ]:STATEMENT:  select count(RESID) from AM_10000161_MinMaxAvgData
+[ 2024-02-20 16:16:12.044 IST ]:ERROR:  relation "am_10000167_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.044 IST ]:STATEMENT:  select count(RESID) from AM_10000167_MinMaxAvgData
+[ 2024-02-20 16:16:12.047 IST ]:ERROR:  relation "am_10000170_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.047 IST ]:STATEMENT:  select count(RESID) from AM_10000170_MinMaxAvgData
+[ 2024-02-20 16:16:12.050 IST ]:ERROR:  relation "am_10000175_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.050 IST ]:STATEMENT:  select count(RESID) from AM_10000175_MinMaxAvgData
+[ 2024-02-20 16:16:12.071 IST ]:ERROR:  relation "am_10000137_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.071 IST ]:STATEMENT:  select count(RESID) from AM_10000137_MinMaxAvgData
+[ 2024-02-20 16:16:12.076 IST ]:ERROR:  relation "am_10000138_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.076 IST ]:STATEMENT:  select count(RESID) from AM_10000138_MinMaxAvgData
+[ 2024-02-20 16:16:12.081 IST ]:ERROR:  relation "am_10000154_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.081 IST ]:STATEMENT:  select count(RESID) from AM_10000154_MinMaxAvgData
+[ 2024-02-20 16:16:12.085 IST ]:ERROR:  relation "am_10000157_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.085 IST ]:STATEMENT:  select count(RESID) from AM_10000157_MinMaxAvgData
+[ 2024-02-20 16:16:12.088 IST ]:ERROR:  relation "am_10000171_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.088 IST ]:STATEMENT:  select count(RESID) from AM_10000171_MinMaxAvgData
+[ 2024-02-20 16:16:12.091 IST ]:ERROR:  relation "am_10000172_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.091 IST ]:STATEMENT:  select count(RESID) from AM_10000172_MinMaxAvgData
+[ 2024-02-20 16:16:12.094 IST ]:ERROR:  relation "am_10000177_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.094 IST ]:STATEMENT:  select count(RESID) from AM_10000177_MinMaxAvgData
+[ 2024-02-20 16:16:12.097 IST ]:ERROR:  relation "am_10000176_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.097 IST ]:STATEMENT:  select count(RESID) from AM_10000176_MinMaxAvgData
+[ 2024-02-20 16:16:12.100 IST ]:ERROR:  relation "am_10000169_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.100 IST ]:STATEMENT:  select count(RESID) from AM_10000169_MinMaxAvgData
+[ 2024-02-20 16:16:12.103 IST ]:ERROR:  relation "am_10000173_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.103 IST ]:STATEMENT:  select count(RESID) from AM_10000173_MinMaxAvgData
+[ 2024-02-20 16:16:12.106 IST ]:ERROR:  relation "am_10000174_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.106 IST ]:STATEMENT:  select count(RESID) from AM_10000174_MinMaxAvgData
+[ 2024-02-20 16:16:12.109 IST ]:ERROR:  relation "am_10000179_minmaxavgdata" does not exist at character 26
+[ 2024-02-20 16:16:12.109 IST ]:STATEMENT:  select count(RESID) from AM_10000179_MinMaxAvgData
+Archive Script Not Found
+[ 2024-02-20 16:31:13.023 IST ]:ERROR:  operator does not exist: bigint = character varying at character 1302
+[ 2024-02-20 16:31:13.023 IST ]:HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+[ 2024-02-20 16:31:13.023 IST ]:STATEMENT:  select AM_ManagedResourceType.SUBGROUP as monitortype, count(AM_ManagedResourceType.SUBGROUP) as count from AM_ManagedObject,AM_ManagedResourceType where AM_ManagedObject.type=AM_ManagedResourceType.resourcetype and AM_ManagedObject.RESOURCEID not in (select CHILDID from AM_EUM_PARENTCHILD_MAPPING) and AM_ManagedResourceType.SUBGROUP not in (select TYPENAME from AM_MONITOR_TYPES where AMCREATED='NO') and AM_ManagedResourceType.RESOURCEGROUP != 'NWD' and AM_ManagedObject.RESOURCEID NOT IN (select RESOURCEID from AM_ManagedObject where AM_ManagedObject.RESOURCEID IN (SELECT COALESCE(cast(value as int), NULL) FROM AM_GLOBALCONFIG WHERE NAME like '%am.diagnostics%' AND NAME not like 'am.diagnostics.mas%')) and AM_ManagedObject.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) group by SUBGROUP union all select 'Users',count(*) as Users from AM_UserPasswordTable where USERNAME not in ('reportadmin','systemadmin_enterprise') union all select 'Dashboard', count(*) as Dashboard from AM_MYPAGES WHERE PAGENAME NOT IN ('Default Dashboard','Business View','Availability','QoS Worldwide(sample)') union all select 'MemoryUtilization' as monitortype,PHYMEMUTIL as count from HostCpuMemDataCollected where COLLECTIONTIME=(select MAX(COLLECTIONTIME) from HostCpuMemDataCollected where RESOURCEID=(select value from AM_GLOBALCONFIG where name = 'am.diagnostics.localhost')) and RESOURCEID=(select value from AM_GLOBALCONFIG where name = 'am.diagnostics.localhost') union all select 'CPUUtilization' as monitortype ,CPUUTIL as count from HostCpuMemDataCollected where COLLECTIONTIME=(select MAX(COLLECTIONTIME) from HostCpuMemDataCollected where RESOURCEID=(select value from AM_GLOBALCONFIG where name = 'am.diagnostics.localhost')) and RESOURCEID=(select value from AM_GLOBALCONFIG where name = 'am.diagnostics.localhost') union all select 'MySQLRequestRate' as monitortype, REQUESTRATE as count from AM_MYSQLPERFORMANCE where COLLECTIONTIME = (select MAX(COLLECTIONTIME) from AM_MYSQLPERFORMANCE where RESOURCEID=(select value from AM_GLOBALCONFIG WHERE NAME ='am.diagnostics.mysql')) and RESOURCEID = (select value from AM_GLOBALCONFIG WHERE NAME ='am.diagnostics.mysql') union all select 'TabCustomized' as monitortype, COUNT(distinct USERID) as count from AM_TABUSERMAPPING union all select 'customMonitorCount' as monitortype, count(*) as count from AM_ManagedObject,AM_ManagedResourceType where AM_ManagedObject.type=AM_ManagedResourceType.resourcetype and AM_ManagedResourceType.SUBGROUP in (select TYPENAME from AM_MONITOR_TYPES where AMCREATED='NO') UNION ALL SELECT 'TotalMonitorCount' AS monitortype, count(*) AS count FROM AM_ManagedObject, AM_ManagedResourceType WHERE AM_ManagedObject.TYPE=AM_ManagedResourceType.RESOURCETYPE AND AM_ManagedResourceType.RESOURCEGROUP NOT IN ('HAI','NWD','SAN','EMO','NET') AND AM_ManagedObject.RESOURCEID NOT IN (SELECT CHILDID FROM AM_EUM_PARENTCHILD_MAPPING) AND AM_ManagedObject.RESOURCEID NOT IN (SELECT COALESCE(cast(value as int), NULL) FROM AM_GLOBALCONFIG WHERE NAME like '%am.diagnostics%' AND NAME not like 'am.diagnostics.mas%') AND AM_ManagedObject.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'ValidTotalMonitorCount' AS monitortype, count(*) AS count FROM AM_ManagedObject, AM_ManagedResourceType WHERE AM_ManagedObject.TYPE=AM_ManagedResourceType.RESOURCETYPE AND AM_ManagedResourceType.RESOURCEGROUP NOT IN ('HAI','NWD','SAN','EMO','NET') AND AM_ManagedObject.RESOURCEID NOT IN (SELECT CHILDID FROM AM_EUM_PARENTCHILD_MAPPING) AND AM_ManagedObject.RESOURCEID NOT IN (SELECT COALESCE(cast(value as int), NULL) FROM AM_GLOBALCONFIG WHERE NAME like '%am.diagnostics%' AND NAME not like 'am.diagnostics.mas%') AND AM_ManagedObject.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) AND (AM_ManagedObject.DCSTARTED=2 OR AM_ManagedObject.TYPE='APM-Insight-Instance') union all select 'Business View' as monitortype, count(*) as count from AM_MONITORGROUP_FLASHVIEWCONFIG union all select 'SubGroup' as monitortype, count(*) as count from AM_HOLISTICAPPLICATION where type = 1 union all select 'NetInterfaceThreshold' as monitortype, count(*) as count from AM_ATTRIBUTETHRESHOLDMAPPER,AM_ATTRIBUTES where ID in (select RESOURCEID from AM_ManagedObject where TYPE='NetInterface') and AM_ATTRIBUTES .ATTRIBUTEID=AM_ATTRIBUTETHRESHOLDMAPPER.ATTRIBUTE union all select 'NetInterfaceReport' as monitortype, count(*) as count from AM_ATTRIBUTES_EXT where ATTRIBUTEID IN (select ATTRIBUTEID from AM_ATTRIBUTES where RESOURCETYPE='NetInterface') and ISARCHIVEING=1 and REPORTS_ENABLED=1 UNION ALL select 'APMInsightJava' AS monitortype, count(RESOURCEID) AS count FROM apm_instances WHERE TYPE='JAVA' AND apm_instances.RESOURCEID NOT IN (SELECT COALESCE(cast(value as int), NULL) FROM AM_GLOBALCONFIG WHERE NAME = 'am.diagnostics.apminsight') AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes)  UNION ALL SELECT 'APMInsightDotNet' AS monitortype, count(RESOURCEID) AS count FROM apm_instances where TYPE IN ('DOTNET','DOTNET_SERVICE','DOTNET_DESKTOP','DOTNET_CORE') AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'APMInsightRuby' AS monitortype,count(RESOURCEID) AS count FROM apm_instances where TYPE='RUBY' AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'APMInsightNodeJS' AS monitortype,count(RESOURCEID) AS count FROM apm_instances where TYPE='NODEJS' AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'APMInsightPHP' AS monitortype,count(RESOURCEID) AS count FROM apm_instances where TYPE IN ('PHP','PHP_WINDOWS') AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) UNION ALL SELECT 'APMInsightPython' AS monitortype, count(RESOURCEID) AS count FROM apm_instances WHERE TYPE='PYTHON' AND apm_instances.RESOURCEID NOT IN (SELECT resid FROM AM_UnManagedNodes) union all select 'MSSQLTransactionspermin' as monitortype, cast (TRANSACTIONSPERMIN as bigint) as count from AM_MSSQL_DATABASEDETAILS where COLLECTIONTIME = (select MAX(COLLECTIONTIME) from AM_MSSQL_DATABASEDETAILS where RESOURCEID in (select RESOURCEID from AM_ManagedObject, AM_PARENTCHILDMAPPER where DISPLAYNAME='AMDB' and PARENTID=(select value from AM_GLOBALCONFIG WHERE NAME ='am.diagnostics.mssql')) ) and RESOURCEID in (select RESOURCEID from AM_ManagedObject, AM_PARENTCHILDMAPPER where DISPLAYNAME='AMDB' and PARENTID=(select value from AM_GLOBALCONFIG WHERE NAME ='am.diagnostics.mssql'))
+[ 2024-02-20 17:17:11.469 IST ]:LOG:  received smart shutdown request
+[ 2024-02-20 17:17:11.471 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.472 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.473 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.482 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.483 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.484 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.486 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.488 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.490 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.494 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.498 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.498 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.498 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.499 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.499 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.499 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.500 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.502 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.502 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.506 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.542 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.543 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.544 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.545 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.546 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.547 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.548 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.549 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.550 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.551 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.551 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.552 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.553 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.553 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.554 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.554 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.555 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.555 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.558 IST ]:LOG:  received SIGHUP, reloading configuration files
+[ 2024-02-20 17:17:11.559 IST ]:LOG:  background worker "logical replication launcher" (PID 11672) exited with exit code 1
+[ 2024-02-20 17:17:11.565 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.498 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.571 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.573 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.575 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.578 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.580 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.582 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.584 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.585 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.586 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.587 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.614 IST ]:FATAL:  terminating connection due to administrator command
+[ 2024-02-20 17:17:11.620 IST ]:LOG:  shutting down
+[ 2024-02-20 17:17:11.895 IST ]:LOG:  database system is shut down

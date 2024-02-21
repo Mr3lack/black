@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+<tlibversion>1.0</tlibversion>
+<jspversion>1.1</jspversion>
+<shortname>util</shortname>
+<uri>http://www.adventnet.com/awolf</uri>
+<tag>
+	<name>multipiechart</name>
+	<tagclass>com.adventnet.awolf.tags.MultiPieChart</tagclass>
+	<attribute>
+		<name>dataSetProducer</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>height</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>width</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>legend</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>legendanchor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>url</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>circular</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>decimal</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>units</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>nodatamessage</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>font</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+<name>piechart</name>
+<tagclass>com.adventnet.awolf.tags.AMWolf</tagclass>
+<attribute>
+<name>dataSetProducer</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>height</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>width</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>legend</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>legendanchor</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>url</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>circular</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>decimal</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+	<name>chartTitle</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>subTitle</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>units</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>nodatamessage</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>font</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>piecolors</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+</tag>
+
+<tag>
+<name>map</name>
+<tagclass>com.adventnet.awolf.tags.Property</tagclass>
+<bodycontent>JSP</bodycontent>
+<attribute>
+<name>id</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+
+
+<tag>
+<name>param</name>
+<tagclass>com.adventnet.awolf.tags.AMParam</tagclass>
+<attribute>
+<name>name</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>value</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+
+
+<tag>
+<name>barchart2D</name>
+<tagclass>com.adventnet.awolf.tags.BarChart2D</tagclass>
+<attribute>
+		<name>dataSetProducer</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>height</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>width</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>legend</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>xaxisLabel</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>yaxisLabel</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>barcolors</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>gridLineColor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>backGroundColor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>barWidth</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>nodatamessage</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>title</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+<attribute>
+<name>url</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+
+
+
+
+
+<tag>
+<name>barchart</name>
+<tagclass>com.adventnet.awolf.tags.BarChart</tagclass>
+<attribute>
+<name>dataSetProducer</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+	<name>publishKey</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+    <name>pageId</name>
+    <required>false</required>
+    <rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>height</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>width</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>legend</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>xaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>yaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+
+<attribute>
+<name>graphscale</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>minscale</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>maxscale</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+
+<attribute>
+<name>url</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>nodatamessage</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>font</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>zoomLevel</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>zoomName</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>maxBarWidth</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>barcolor</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>labelRotation</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>skipLabelRotation</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>baseItemLabel</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>chartTitle</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>twoDimensionBar</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+</tag>
+<!-- Tag for showing link for Zoomed image -->
+<tag>
+<name>zoom</name>
+<tagclass>com.adventnet.awolf.tags.ZoomImage</tagclass>
+<attribute>
+<name>name</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+<tag>
+<name>stackbarchart</name>
+<tagclass>com.adventnet.awolf.tags.StackBarChart</tagclass>
+<attribute>
+<name>dataSetProducer</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>height</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>width</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>legend</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>legendanchor</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>xaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>yaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>url</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>font</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>nodatamessage</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>barcolors</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>zoomLevel</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>zoomName</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>labelRotation</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>baseItemLabel</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>chartTitle</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>twoDimensionBar</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>maxBarWidth</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+
+
+<tag>
+<name>timechart</name>
+<tagclass>com.adventnet.awolf.tags.TimeChart</tagclass>
+<attribute>
+<name>dataSetProducer</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+	<name>publishKey</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+    <name>pageId</name>
+    <required>false</required>
+    <rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>height</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>sortgraph</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>graphscale</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>minscale</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>maxscale</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>width</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>legend</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>xaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>yaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>font</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>nodatamessage</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>customDateAxis</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>customAngle</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>dateFormat</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>movingAverage</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>movingAverageName</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+	<name>shape</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+	<name>bgImage</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+	<name>yaxisUnit</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+	<name>chartTitle</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>subTitle</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+
+<tag>
+<name>dialchart</name>
+<tagclass>com.adventnet.awolf.tags.DialChart</tagclass>
+<attribute>
+<name>dataSetProducer</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+	<name>publishKey</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+    <name>pageId</name>
+    <required>false</required>
+    <rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>height</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>width</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>legend</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>xaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>yaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>font</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>link</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>nodatamessage</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>customDateAxis</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>customAngle</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>dateFormat</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>eumDial</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>resourceId</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>attributeId</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>units</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+
+<tag>
+<name>sparkline</name>
+<tagclass>com.adventnet.awolf.tags.SparkLine</tagclass>
+<attribute>
+        <name>height</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+        <name>plots</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+        <name>listName</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+        <name>image</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>lineColor</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+<tag>
+	<name>sparkseries</name>
+	<tagclass>com.adventnet.awolf.tags.SparkSeries</tagclass>
+<attribute>
+        <name>height</name>
+	<required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+	<name>width</name>
+	<required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+        <name>listName</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+        <name>image</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>seriesColor</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+<tag>
+<name>areachart</name>
+<tagclass>com.adventnet.awolf.tags.AreaChart</tagclass>
+<attribute>
+<name>dataSetProducer</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>height</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>width</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>legend</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>xaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>yaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>font</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>nodatamessage</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+
+<tag>
+<name>xyareachart</name>
+<tagclass>com.adventnet.awolf.tags.XYAreaChart</tagclass>
+<attribute>
+<name>dataSetProducer</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>height</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>width</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>legend</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>xaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>yaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>font</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>nodatamessage</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>seriesPaintColor</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>link</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>chartTitle</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>subTitle</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>dataSetType</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+<tag>
+<name>stackedxyareachart</name>
+<tagclass>com.adventnet.awolf.tags.StackedXYAreaChart</tagclass>
+<attribute>
+<name>dataSetProducer</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>height</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>width</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>legend</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>xaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>yaxisLabel</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>font</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>nodatamessage</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>seriesPaintColor</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>link</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>chartTitle</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>subTitle</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>dataSetType</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+</taglib>

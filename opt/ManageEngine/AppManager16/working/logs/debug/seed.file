@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE SEED SYSTEM "seed.file.dtd">
+<SEED>
+<!--
+    Syntax for Seed file
+** 
+** Please look into the example_seed.file in the <WEBNMS_HOME>/conf/examples
+** directory for more detailed examples.
+** 
+** DISCOVER            - a value of false will result in no discovery i.e., Autodiscovery would
+**                       be disabled completely.
+** 
+** DISCOVER_LOCALNET   - a value of false will prevent the discovery of local network.
+** 
+** ENABLE_SNMP_DISCOVERY - Enable discovery of SNMP devices. A value of false will prevent
+**                       the discovery engine from using SNMP for discovery.
+** 
+** ENABLE_ICMP_DISCOVERY - Enable discovery using ICMP-Ping. A value of false will prevent
+**                       the discovery engine from using ICMP-Ping for discovery.
+** 
+** ENABLE_SNMPV3_DISCOVERY - Enable discovery of SNMPv3 devices. A value of false will disable
+**                       the initial query for SNMPv3 for all the objects. But still the SNMPv3
+**                       devices will be discovered when the username & contextname are specified
+**                       in the <TO_DISCOVERIP> tag.
+** 
+** DISCOVERY_INTERVAL  - wait between discovering nodes, in seconds.
+**                       Takes values greater than or equal to zero.
+**                       If it is given a value less than zero replaces it by 10.
+** 
+** REDISCOVER_INTERVAL - The time interval between two complete discovery of networks, in 
+**                       hours:min:sec format. eg: 5:30:20
+**                       If a single value (without colon seperation) is given, the given value
+**                       would be considered in hours.
+**                       If given a negative value ( other than -1), it is replaced by 24.
+**                       If instead of REDISCOVER_INTERVAL, DAY_OF_THE_WEEK or DAY_OF_THE_MONTH 
+**                       is preferred, then give -1 for REDISCOVER_INTERVAL. If the discovery is
+**                       to be done based on day of week give -1 for day of the month
+** 
+** HOUR                - as a list(min=1,max 24)-"*" stands for discovery every hour
+** 
+**                       eg1: 1,5,10
+**                       eg2: *
+** 
+** DAY_ OF_THE_ MONTH  - as a range(starting from 1 to a maximum of 31, )
+**                       or -1 if you want to disable it
+**                       "*" stands for all the days in a month
+** 
+**                       eg: 10-15
+** 
+** DAY_OF_THE_WEEK     - write the first three letters of the day of the week in capital
+** 
+**                       ("*" stands for all the days)
+**                       eg1: MON,WED,FRI       eg2:*
+** 
+** REDISCOVER_ALREADY_DISCOVER - true/false.
+**                       When networks are rediscovered either on rediscovery interval / based on
+**                       user direction this variable controls whether the nodes in that network
+**                       that are already discovered, need to be rediscovered or not.
+**                       If set to false, if a node is already discovered it will not be rediscovered.
+**                       if set to true, if a node is already discovered then the the object in the
+**                       storage corresponding to that node will be updated with new information.
+**                       Please note that this variable does not control the behaviour for DHCP
+**                       nodes. DHCP nodes will be rediscovered every time and the objects in the
+**                       storage will be updated with new information
+** 
+** 
+** PING_RETRIES        - No of ICMP ping retries (status polling)
+** 
+** SNMP_TIMEOUT        - Timeout in seconds for all snmp requests.
+**                       The timeout is the time to wait for the first response in seconds,
+**                       before attempting a retransmission. The default value of timeout is 5 seconds.
+** 
+** SNMP_RETRIES        - Snmp Retries for discovery, status polling and data collection.
+**                       The default value of retries is 0. The timeout value grows exponentially 
+**                       for each retries. Timeout value is doubled for each retry. For example,
+**                       if the timeout is set to 5 secs and retries is set to 2, the first
+**                       retransmission will happen after 5 seconds, the second after 15 seconds and so on.
+** 
+** SNMP_PORTS			- Ports to try for communicating to the SNMP Agents on each node. The ports are tried in the order specified. A set of space seperated values can be given. Range of values can also be specified. This specification of ports is overridden by the SNMPAGENTPORT entry in the TO_DICOVER_IP specification. If not specified, the default value of 161 or the SNMPAGENTPORT value will be taken.
+For ex. SNMP_PORTS="165 170-175 180" will result in ports numbered 165, 170, 171, 172, 173, 174, 175 and 180 queried in that order for communicating to SNMP agents in each node. Once there is communication on a port, the others ports are not tried.
+** 
+** SNMPV3_USERNAMES    - The list of comma seperated userNames for SNMPv3 device discovery can be given.
+**                       This specification of userNames is overriden by the USERNAME entry in the
+**                       <TO_DISCOVERIP> specification. Once there is a communication on a userName
+**                       for the Agent, the other userNames are not tried
+** 
+** SNMPV3_CONTEXTNAME  - The common contextNames for SNMPv3 device discovery can be specified.
+**                       This specification of contextName is overriden by the CONTEXT_NAME entry
+**                       in the <TO_DISCOVERIP> specification.
+** 
+** READ_COMMUNITY      - The list of space separated communities while doing SNMP requests.
+** 
+** ENABLE_LOG			- a value of true will log detailed debug messages related to discovery in a seperate log file
+** 
+** NOTE: All the above mentioned fields should come under the <DISCOVERY .../>
+** 
+** To discover a network, a syntax as below should be entered.
+** <TO_DISCOVER>
+**    <net NETWORK_ID="X.X.X.X" NETMASK="Y.Y.Y.Y" />
+** </TO_DISCOVER>
+** 
+** Example 1:-
+**    <TO_DISCOVER>
+**        <net
+**           NETWORK_ID="192.168.1.0"
+**           NETMASK="255.255.255.0" />
+**    </TO_DISCOVER>
+** 
+** To configure multiple networks for discovery, a syntax as below should be used.
+** Example 2:-
+**    <TO_DISCOVER>
+**        <net
+**           NETWORK_ID="192.168.1.0"
+**           NETMASK="255.255.255.0" />
+**        <net
+**           NETWORK_ID="192.168.2.0"
+**           NETMASK="255.255.255.0" />
+**    </TO_DISCOVER>
+** 
+** To discover only a range of ipaddresses in a network, using the following syntax.
+** <TO_DISCOVER>
+**    <net NETWORK_ID="X.X.X.X" NETMASK="Y.Y.Y.Y" START_IP="Z.Z.Z.Z" END_IP="W.W.W.W" />
+** </TO_DISCOVER>
+** This will result in network X.X.X.X with netmask Y.Y.Y.Y being discovered.
+** START_IP and END_IP entries allows discovery for a Range from START_IP to END_IP
+** for the network X.X.X.X with netmask Y.Y.Y.Y
+** 
+** Example 1 :-
+**    <TO_DISCOVER>
+**        <net
+**           NETWORK_ID="192.168.1.0"
+**           NETMASK="255.255.255.0"
+**           START_IP="192.168.1.10"
+**           END_IP="192.168.1.20" />
+**    </TO_DISCOVER>
+** means discovers from 192.168.1.10 till 192.168.1.20
+** 
+** Example 2 :-
+**    <TO_DISCOVER>
+**        <net
+**           NETWORK_ID="192.168.1.0"
+**           NETMASK="255.255.255.0"
+**           START_IP="192.168.1.10"
+**           END_IP="192.168.1.20" />
+**        <net
+**           NETWORK_ID="192.168.1.0"
+**           NETMASK="255.255.255.0"
+**           START_IP="192.168.1.30"
+**           END_IP="192.168.1.50" />
+**    </TO_DISCOVER>
+** discovers only the nodes in the range from 192.168.1.10 to 192.168.1.20
+** and 192.168.1.30 till 192.168.1.50 in the network 192.168.1.0
+** 
+** A syntax of:
+**    <TO_DISCOVER>
+**        <net
+**           NETWORK_ID="X.X.X.X"
+**           NETMASK="Y.Y.Y.Y"
+**           START_IP="Z.Z.Z.Z"
+**           END_IP="W.W.W.W"
+**           DHCP="true" />
+**    </TO_DISCOVER>
+** will marks the nodes in the  Range from START_IP to END_IP in the network X.X.X.X with
+** netmask Y.Y.Y.Y as DHCP nodes
+** 
+** To prevent discovering a network, follow the syntax as below
+**    <NOT_TO_DISCOVER>
+**        <net
+**           NETWORK_ID="X.X.X.X"
+**           NETMASK="Y.Y.Y.Y" />
+**    </NOT_TO_DISCOVER>
+** will result in network X.X.X.X with netmask Y.Y.Y.Y not being discovered, even if directly attached to manager node.
+** 
+** To prevent dicovering multiple networks, follow the syntax as below
+**    <NOT_TO_DISCOVER>
+**        <net
+**           NETWORK_ID="X.X.X.X"
+**           NETMASK="Y.Y.Y.Y" />
+**        <net
+**           NETWORK_ID="Z.Z.Z.Z"
+**           NETMASK="W.W.W.W" />
+**    </NOT_TO_DISCOVER>
+** will result in networks X.X.X.X with netmask Y.Y.Y.Y and Z.Z.Z.Z with netmask W.W.W.W not being discovered, even if directly attached to manager node.
+** 
+** A syntax of:
+**    <TO_DISCOVERIP>
+**        <ip
+**           NODE_ID="X.X.X.X" 
+**           NETMASK="Y.Y.Y.Y" />
+**    </TO_DISCOVERIP>
+** will result in interface X.X.X.X being discovered with netmask Y.Y.Y.Y
+** 
+** Multiple devices can be discovered with the syntax below
+**    <TO_DISCOVERIP>
+**        <ip
+**           NODE_ID="192.168.1.25" 
+**           NETMASK="255.255.255.0" />
+**        <ip
+**           NODE_ID="128.18.11.10 "
+**           NETMASK="255.255.0.0" />
+**    </TO_DISCOVERIP>
+** 
+** will result in interface  192.168.1.25 with netmask 255.255.255.0 and
+** 128.18.11.10 with netmask 255.255.0.0 being discovered before starting 
+** autodiscovery on the networks 192.168.1.0 and 128.18.11.0
+** 
+** A syntax of:
+**    <TO_DISCOVERIP>
+**        <ip
+**           NODE_ID="X.X.X.X"
+**           NETMASK="Y.Y.Y.Y"
+**           COMMUNITY="mycommunity"
+**           SNMPAGENTPORT="myport" />
+**    </TO_DISCOVERIP>
+** will result in interface X.X.X.X being discovered with netmask Y.Y.Y.Y,
+** mycommunity and myport.
+** NOTE: Here the COMMUNITY and SNMPAGENTPORT fields are optional
+** 
+** A syntax of:
+**    <TO_DISCOVERIP>
+**        <ip
+**           NODE_ID="X.X.X.X"
+**           NETMASK="Y.Y.Y.Y"
+**           USERNAME="myUserName"
+**           CONTEXT_NAME="myContextName"
+**           SNMPAGENTPORT="myport"
+**           SNMP_VERSION="myversion" />
+**    </TO_DISCOVERIP>
+** will result in interface X.X.X.X being discovered with netmask Y.Y.Y.Y, using SNMPv3 discovery if the object is SNMPv3 enabled.
+** NOTE: Here the USERNAME, CONTEXT_NAME, SNMPAGENTPORT and SNMP_VERSION fields are optional
+** 
+** A syntax of:
+**    <NOT_TO_DISCOVERIP>
+**        <ip
+**           NODE_ID="X.X.X.X"
+**           NETMASK="Y.Y.Y.Y" />
+**    </NOT_TO_DISCOVERIP>
+** 
+**    will result in interface X.X.X.X with netmask Y.Y.Y.Y not being discovered, even if directly attached to manager node.
+** 
+** Example 1:-
+**    <NOT_TO_DISCOVERIP>
+**        <ip
+**           NODE_ID="192.168.1.25"
+**           NETMASK="255.255.255.0" />
+**    </NOT_TO_DISCOVERIP>
+** The above will prevent the device with ipaddress 192.168.1.25 with netmask 255.255.255.0 from being discovered
+** 
+** Example 2:-
+**    <NOT_TO_DISCOVERIP>
+**        <ip
+**           NODE_ID="192.168.1.25"
+**           NETMASK="255.255.255.0" />
+**        <ip
+**           NODE_ID="192.168.1.30"
+**           NETMASK="255.255.255.0" />
+**    </NOT_TO_DISCOVERIP>
+** The above will prevent the devices with ipaddress 192.168.1.25 with netmask 255.255.255.0 and 192.168.1.30 with netmask 255.255.255.0 from being discovered
+** 
+** A syntax of:
+**     <ALLOW_CRITERIA
+**         MOPropName1="value"
+**         MOPropName2="value1 value2" />
+** 
+** will result in node and interface objects being filtered and added only if they meet the specified criteria. MOPropName can be any of the ManagedObject's and it's derivatives' property names
+** The values can be multiple space separated values.
+** 
+** Example 1:-
+**     <ALLOW_CRITERIA
+**         name="yogesh"
+**         sysOID=".1.3.6.1.4.1.311.1.1.3.2" />
+** 
+** The above will add only objects whose name is yogesh and sysOID property
+** is .1.3.6.1.4.1.311.1.1.3.2. All other objects will be filtered out,
+** i.e., All other objects will not be added to the database.
+** 
+** A syntax of:
+**     <DISALLOW_CRITERIA
+**         MOPropName1="value"
+**         MOPropName2="value1 value2" />
+** will result in node and interface objects being filtered out and *not* added to the database if they meet the specified criteria. MOPropName can be any of the ManagedObject's and it's derivatives' property names
+** 
+**     <DISALLOW_CRITERIA
+**         sysOID=".1.3.6.1.4.1.311.1.1.3.2"
+**         name="ranga srinivas" />
+** The above lines will prevent discovery of objects, whose sysOID property
+** is .1.3.6.1.4.1.311.1.1.3.2 and whose name startsWith either "ranga" or "srinivas"
+** from being added to the Topology Database.
+** 
+** Wild character "*" can be used in the MOProperty value as below.
+**     <DISALLOW_CRITERIA
+**         type="SUN"
+**         name="A*" />
+** The above lines will prevent discovery of objects, whose type property
+** is "SUN" and the name of the object starts with letter "A"
+** 
+** NOTE: Only the 'name', 'type', 'ipAddress', 'sysOID' and the 'isSNMP' attributes of the ManagedObject (and it's derivatives) can be used with the ALLOW_CRITERIA and DISALLOW_CRITERIA specifications. Though others can be used, the behaviour is not tested and not guaranteed
+** 
+** Native Ping Related Parameters 
+** 
+** ICMP_RETRIES - Number of retries for Native ICMP Ping
+** 
+** ICMP_TIMEOUT - Timeout value for Native ICMP Ping
+** 
+** ICMP_DEBUG_LEVEL - Debug Level for Native ICMP Ping
+** 
+** ICMP_SWEEP_PACKETS - Number of packets for Native ICMP Ping
+** 
+** ICMP_SWEEP_SLEEP_INTERVAL - Time interval between two Native ICMP Pings
+** 
+** PING_SWEEP - A value of true will enable Native ICMP Ping sweep
+** 
+** NOTE: All the above mentioned fields should come under the <NATIVE_PING .../>
+** 
+**  To specify initial discovery parameters for the first discovery process of WebNMS,
+** the following syntax can be made use of.
+**     <INITIAL_PARAMETERS
+**         DISCOVERY_INTERVAL="0"
+**         REDISCOVER_INTERVAL="1"
+**         PING_RETRIES="0"
+**         SNMP_TIMEOUT="1"
+**         SNMP_RETRIES="0"
+**         ICMP_TIMEOUT="1"
+**         ICMP_RETRIES="1" />
+**  When this tag is included, WebNMS considers the entries under this tag during the first
+** start of the WebNMS server (either a cold or a warm start). During the successive re-discovery
+** processes, the entries that are provided under the <DISCOVERY> and <NATIVE_PING> tags for the
+** corresponding discovery parameters are taken into consideration. 
+** 
+** Please look into the example_seed.file in the <WEBNMS_HOME>/conf/examples
+** directory for a live example.
+** 
+** 
+** 
+-->
+<DISCOVERY DAY_OF_THE_MONTH="-1" DAY_OF_THE_WEEK="SUN" DISCOVER="true" DISCOVERY_INTERVAL="20" DISCOVER_LOCALNET="false" ENABLE_ICMP_DISCOVERY="true" ENABLE_LOG="true" ENABLE_SNMPV3_DISCOVERY="true" ENABLE_SNMP_DISCOVERY="false" HOUR="-1" PING_RETRIES="0" READ_COMMUNITY="public" REDISCOVER_ALREADY_DISCOVERED="false" REDISCOVER_INTERVAL="24" SNMP_RETRIES="0" SNMP_TIMEOUT="2" WRITE_COMMUNITY="public"/>
+<NATIVE_PING ICMP_DEBUG_LEVEL="1" ICMP_RETRIES="2" ICMP_SWEEP_PACKETS="10" ICMP_SWEEP_SLEEP_INTERVAL="2" ICMP_TIMEOUT="2" PING_SWEEP="false"/>
+</SEED>

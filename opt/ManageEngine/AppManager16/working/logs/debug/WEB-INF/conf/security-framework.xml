@@ -1,0 +1,1000 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+
+	<!-- DB Performance Action URLS START-->
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url path="/jsp/MonitorSummary.jsp" method="GET" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true"/>
+		<url path="/jsp/MonitorTypeSummary.jsp" method="GET" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true"/>
+		<url path="/jsp/MonitorCountSummary.jsp" method="GET" throwallerrors="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true"/>
+		<url path="/jsp/LoginValues.jsp" method="POST" throwallerrors="true">
+			<param name="s1" type="String" max-len="255"/>
+		</url>
+		<url path="/jsp/GetValues.jsp" method="POST" throwallerrors="true">
+			<param name="s2" type="String" max-len="255"/>
+		</url>
+		<url path="/jsp/UserError.jsp" method="GET" throwallerrors="true">
+			<param name="errType" regex="^(accountlock|duplicatesession)$"/>
+			<param name="username" type="String"/>
+			<param name="uname" type="String"/>
+			<param name="timeOut" type="long"/>
+			<param name="remotehost" regex="am.hostname"/>
+		</url>
+	</urls>
+	<urls path="/performanceActions.do" method="GET" operation-param="method" throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<url operation-value="getDatabaseSummary" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="type" regex="am.monitor.DB.summary.type"/>
+		</url>
+		<url operation-value="getManagedServerDetails" authentication="required" allow-only-superadmin="true"/>
+	</urls>
+	<urls path="/performanceActions.do" method="POST" operation-param="method" csrf="true" throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<url operation-value="getTableDetails" authentication="required" roles="ADMIN,ENTERPRISEADMIN"/>
+		<url operation-value="getLongRunningQuery" authentication="required" roles="ADMIN,ENTERPRISEADMIN"/>
+		<url operation-value="getMissingSchemaInfo" authentication="required" roles="ADMIN,ENTERPRISEADMIN"/>
+		<url operation-value="getMonitorDetails" authentication="required" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true">
+			<param name="selectedType" regex="am.monitor.summary.type"/>
+		</url>
+		<url operation-value="getChildMonitorDetails" authentication="required" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true">
+			<param name="selectedType" regex="am.monitor.summary.type"/>
+			<param name="resourceId" type="long" />
+			<param name="monitorType" regex="am.monitor.type" max-len="200" />
+		</url>
+		<url operation-value="logMissingIdRange" authentication="required" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true">
+			<param name="tableId" regex="am.table.summary.details" max-occurrences="10000"/>
+		</url>
+		<url operation-value="killLongRunningQuery" authentication="required" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true">
+			<param name="processId" type="long"/>
+		</url>
+		<url operation-value="getTabularSummaryDetails" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="Type" regex="am.table.summary.type"/>
+			<param name="TableName" regex="am.table.summary.details"/>
+		</url>
+		<url operation-value="performTableOpeartion" authentication="required" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true">
+			<param name="operation" regex="am.db.table.operations"/>
+			<param name="tableId" type="String" max-occurrences="10000"/>
+		</url>
+	</urls>
+	<!-- DB Performance Action URLS END-->
+
+	<!-- Audit Logs URLS START-->		
+	<urls path="/auditLogAction.do" operation-param="method" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url method="GET" operation-value="viewAuditLog" authentication="required" roles="am.role.ADMIN.EA.DE" deny-del-admin="true">
+			<param name="reqForAdminLayout" type="boolean" />
+			<param name="service" regex="am.action.fromadminlayout.service" />
+		</url>
+		<url method="GET" operation-value="getAuditDetailsForMonitorGroup" authentication="required" roles="ADMIN,ENTERPRISEADMIN" privilege-identifier="haid">
+			<param name="haid" type="long"/>
+		</url>
+		<url method="POST" operation-value="loadAuditLog" csrf="true" authentication="required" roles="am.role.ADMIN.EA.OP.DE" privilege-identifier="resourceid">
+			<param name="limit" type="long"/>
+			<param name="timeline" type="long"/>
+			<param name="module" regex="am.oraclecloud.compartment" max-len="1000"/>
+			<param name="username" type="String" max-len="100000"/>
+			<param name="lastAuditId" type="long"/>
+			<param name="startIndex"  type="long"/>
+			<param name="category" regex="am.audit.category"/>
+			<param name="operationid" regex="am.number.withcomma.separated" max-len="100000"/>
+			<param name="resourceid"  regex="am.number.withcomma.separated" max-len="100000"/>
+			<param name="id"  type="long"/>
+			<param name="isManagedServer" type="boolean" />
+			<param name="managedServerList" regex="am.number.withcomma.separated" />
+		</url>
+	</urls>
+	
+	<!-- SIF URLS START-->
+	<urls path="/showresource.do" operation-param="method" throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<url method="GET" operation-value="sendSupport" authentication="required" roles="am.role.ADMIN.EA.OP"/>
+		<url method="POST" operation-value="sendSupport1" csrf="true" authentication="required" roles="am.role.ADMIN.EA.OP">
+			<param name="ticketid" type="long"/>
+			<param name="subject" type="String"/>
+			<param name="mailMsg" type="String" max-len="100000"/>
+			<param name="customername" regex="am.windows.username"/>
+			<param name="customermail" type="String" max-len="250" />
+			<param name="customerno" regex="am.number.withcomma.separated"/>
+			<param name="supporttype" regex="am.sif.support.type"/>
+		</url>
+	</urls>
+	<urls path="/viewSIF.do" operation-param="method" throwallerrors="true" deny-del-admin="true">
+		<param-group name="am.additional.extra.params" />
+		<url method="GET" operation-value="manageSIFDetails" authentication="required" roles="ADMIN,ENTERPRISEADMIN"/>
+		<url method="POST" operation-value="getSIFDetails" csrf="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN"/>
+		<url method="POST" operation-value="auditForSIFDownload" csrf="true" authentication="required" roles="am.role.ADMIN.EA">
+			<param name="fileId" regex="am.alphanumeric.alllanguages.ext1" max-len="300" max-occurrences="10000"/>
+		</url>
+		<url method="POST" operation-value="deleteSIFDetails" csrf="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="fileId" regex="am.alphanumeric.alllanguages.ext1" max-len="300" max-occurrences="10000"/>
+		</url>
+		<url method="POST" operation-value="uploadSIF" csrf="true" authentication="required" roles="ADMIN,ENTERPRISEADMIN">
+			<param name="fileId" regex="am.alphanumeric.alllanguages.ext1" max-len="300" max-occurrences="10000"/>
+			<param name="ticketid" type="long"/>
+			<param name="subject" type="String"/>
+			<param name="mailMsg" type="String" max-len="100000"/>
+			<param name="customername" regex="am.windows.username"/>
+			<param name="customermail" type="String" max-len="250" />
+			<param name="customerno" regex="am.number.withcomma.separated"/>
+		</url>
+	</urls>
+	<!-- SIF URLS END-->
+	
+	<urls throwallerrors="true" path="/JavaRuntime.do" operation-param="method" privilege-identifier="resourceid">
+		<param-group name="am.additional.extra.params" />
+		<param name="date" type="String" max-len="200" />
+		<param name="noredirect" type="boolean" />
+		<param name="resourceid" type="long" />
+		<url operation-value="actionDetails,configurationDetails,overviewDetails,garbageDetails,threadsDetails" method="get" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required"/>
+		<url operation-value="deletethreadURL" method="post" csrf="true" roles="ADMIN,ENTERPRISEADMIN" authentication="required">
+			<param name="tab" regex="am.common.numberandundefined"/>
+			<param name="url" type="String" max-len="2000"/>
+		</url>
+		<url operation-value="deleteheapURL" method="post" csrf="true" roles="ADMIN,ENTERPRISEADMIN" authentication="required" >
+			<param name="url" type="String" max-len="2000"/>
+		</url>
+	</urls>
+	<urls throwallerrors="true"  path="/JavaRuntime.do" method="GET" operation-param="method" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<url operation-value="getThreadInfo" privilege-identifier="resourceid" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="first" type="boolean" />
+			<param name="key" type="long" secret="true" />
+			<param name="resourceid" type="long" />
+		</url>
+		<url operation-value="gcViewImpact" privilege-identifier="resourceid" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="gcresourceid" type="long" />
+			<param name="resourceid" type="long" />
+			<param name="sid" type="String" max-len="200"/>
+		</url>
+		<url operation-value="showThreadDumpAction" roles="am.role.ADMIN.DE" custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkUserCanViewExecuteAction">
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="returnpath" type="String" max-len="2000"/>
+			<param name="global" type="boolean" />
+			<param name="actionID" type="long" />
+			<param name="type" type="int" />
+			<param name="monitorType" regex="am.javathreaddump.monitortype" />
+			<param name="isPluginNotification" regex="am.common.booleanandnull" />
+			<param name="plugin_view" type="boolean"/>
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		</url>
+	</urls>
+
+	<urls throwallerrors="true" path="/JavaRuntime.do" operation-param="method" privilege-identifier="resourceid"  authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<param name="date" type="String" max-len="200" />
+		<param name="noredirect" type="boolean" />
+		<param name="resourceid" type="long" />
+		<url operation-value="triggerGC" systemadmin_enterprise="true" api="true" roles="am.role.ADMIN.EA.OP.US" method="POST" description="Perform GC" />
+		<url operation-value="getHeapDump" roles="ADMIN,ENTERPRISEADMIN" method="POST" csrf="true" description="Generate heap dump"/>
+		<url operation-value="getHeapdumpdata" method="GET" roles="am.role.ADMIN.EA.OP.US.DE" description="Get more heap dump if more than 5"/>
+		<url operation-value="getThreadDump" method="GET" roles="am.role.ADMIN.EA.OP.US.DE" description="Get more thread dump if more than 5">
+			<param name="tabval" type="int" />
+		</url>
+	</urls>	
+
+	<urls path="/JavaRuntime.do" method="post" csrf="true" operation-param="method" roles="ADMIN,ENTERPRISEADMIN" throwallerrors="true" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<param name="haid" regex="am.common.longandnull" />
+		<param name="actions" type="String" max-len="2000"/>
+		<param name="ec2taskMethod" regex="am.child.monitor.action.type" />
+		<param name="azuretaskMethod" regex="am.child.monitor.action.type" />
+		<param name="businessHourAssociatedToAction" regex="am.threshold.businessHourAssociatedToThreshold.value" max-len="10"/>
+		<param name="businessType" regex="am.common.ZeroOne" max-len="1"/>
+		<param name="displayname" regex="am.displayname.common" max-len="50" />
+		<param name="hostType" type="int" />
+		<param name="id" type="long" />
+		<param name="jtaskMethod" regex="am.java.action.methods" />
+		<param name="logConfig" type="int" />
+		<param name="monitorType" regex="am.javathreaddump.monitortype" />
+		<param name="priority" type="String" max-len="500" />
+		<param name="selectedAmazonHost" type="long" />
+		<param name="selectedAzureHost" type="long" />
+		<param name="selectedAzureVM" type="long" />
+		<param name="amazonHost" type="int" />
+		<param name="azureHost" type="int" />
+		<param name="actualBussinessID" type="int" />
+		<param name="selectedBusinessHourID" type="int" />
+		<param name="selectedMG" type="long" />
+		<param name="selectedhost" type="long" />
+		<param name="selectedjre" type="long" />
+		<param name="sendmail" type="long" />
+		<param name="tdcount" type="int" />
+		<param name="tddelay" type="int" />
+		<param name="workingdays" regex="am.weekdays.list" max-occurrences="7" max-len="15"/>
+		<param name="returnpath" type="String" max-len="2000" />
+		<param name="popup" type="boolean" />
+		<param name="resourceid" regex="am.common.longandnull" />
+		<param name="attributeid" regex="am.common.longandnull" />
+		<param name="severity" regex="am.common.longandnull" />
+		<param name="wiz" type="boolean" />
+		<param name-regex="true" name="^((monday|tuesday|wednesday|thursday|friday|saturday|sunday)(Start|End)(Hour|Minute))$" type="int" />
+		<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		<url operation-value="createThreadDumpAction" custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkIfUserCanViewMBeanAction"/>
+		<url operation-value="editThreadDumpAction" custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkActionEditableForDA" />
+	</urls>
+
+	<urls path="/JavaRuntime.do" method="post" csrf="true" operation-param="method" roles="ADMIN,ENTERPRISEADMIN" throwallerrors="true" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<url operation-value="sendActionDetails" >
+			<param name="emailid" type="String" max-len="500"/>
+			<param name="emailname" type="String" max-len="51" />
+			<param name="message" type="String" />
+		</url>
+	</urls>
+
+<!-- /MBeanOperationAction.do starts -->
+
+	<urls throwallerrors="true" path="/MBeanOperationAction.do" method="GET" operation-param="method" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		<param name="plugin_view" type="boolean"/>
+		<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		<url operation-value="showInitialScreen" roles="ADMIN,DEMO" custom-scope-validator="com.adventnet.appmanager.utils.client.ThresholdActionsAPIUtil:checkIfUserCanViewMBeanAction">
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="redirectto" type="String" max-len="1000"/>
+			<param name="resourceid" type="long" />
+			<param name="popup" type="boolean" />
+			<param name="global" type="boolean" />
+			<param name="returnpath" type="String" max-len="1000" />
+		</url>
+		<url operation-value="showDomainsForJMXNotifications" roles="am.role.ADMIN.EA" privilege-identifier="actionresourceid" >
+			<param name="actionresourceid" type="long" />
+		</url>
+		<url operation-value="executeMBeanOperationActionWithUserIntervention" roles="ADMIN,OPERATOR" privilege-identifier="previlegeResID" >
+			<param name="actionID" type="long" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="previlegeResID" regex="am.common.longandnull" />
+		</url>
+	</urls>
+	
+	<urls throwallerrors="true" path="/MBeanOperationAction.do" method="POST" csrf="true" operation-param="method" authentication="required" privilege-identifier="actionresourceid" >
+		<param-group name="am.additional.extra.params" />
+		<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		<param name="redirectto" type="String" max-len="1000" />
+		<param name="resourceid" type="long" />
+		<param name="actionname" regex="am.displayname.common" />
+		<param name="actionresourceid" type="long" />
+		<param name="popup" type="boolean" />
+		<url operation-value="showDomains" roles="ADMIN,DEMO" >			
+			<param name="actions" regex="am.common.urlstartwithslash" max-len="2000" />
+			<param name="priority" type="String" />
+			<param name="sendmail" type="long" />
+			<param name="global" type="boolean" />
+			<param name="returnpath" type="String" max-len="1000" />
+			<param name="attributeid" regex="am.common.longandnull" />
+			<param name="severity" type="int" />
+			<param name="wiz" type="boolean" />
+		</url>
+		<url operation-value="showMBeans" roles="ADMIN,DEMO" >
+			<param name="actions" regex="am.common.urlstartwithslash" max-len="2000" />
+			<param name="domain" type="String" />
+			<param name="domainfilter" type="String" />
+			<param name="hostname" regex="am.hostname" />
+			<param name="portnumber" type="int" />
+			<param name="resourcetype" type="String" />
+			<param name="sendmail" type="long" />
+			<param name="global" type="boolean" />
+			<param name="returnpath" type="String" max-len="1000" />
+			<param name="attributeid" regex="am.common.longandnull" />
+			<param name="severity" type="int" />
+			<param name="wiz" type="boolean" />
+		</url>
+		<url operation-value="showUserInputOperationValuesGetterScreen" roles="ADMIN,DEMO" >
+			<param name="actions" regex="am.common.urlstartwithslash" max-len="2000" />
+			<param name="domain" type="String" />
+			<param name="hostname" regex="am.hostname" />
+			<param name="mbeanname" type="String" max-len="1000"/>
+			<param name="portnumber" type="int" />
+			<param name="resourcetype" type="String" />
+			<param name="sendmail" type="long" />
+			<param name="global" type="boolean" />
+			<param name="returnpath" type="String" max-len="1000" />
+			<param name="attributeid" regex="am.common.longandnull" />
+			<param name="severity" type="int" />
+			<param name="wiz" type="boolean" />
+		</url>
+		<url operation-value="showMBeansForJMXNotifcation" roles="am.role.ADMIN.EA" >
+			<param name="domain" type="String" />
+			<param name="domainfilter" type="String" />
+			<param name="hostname" regex="am.hostname" />
+			<param name="portnumber" type="int" />
+			<param name="resourcetype" type="String" />
+		</url>
+		<url operation-value="showJMXNotificationProfileCreateScreen" roles="am.role.ADMIN.EA" >
+			<param name="domain" type="String" />
+			<param name="hostname" regex="am.hostname" />
+			<param name="mbeanname" type="String" max-len="1000"/>
+			<param name="portnumber" type="int" />
+			<param name="resourcetype" type="String" />
+			<param name="attributeid" regex="am.common.longandnull" />
+			<param name="severity" type="int" />
+			<param name="wiz" type="boolean" />
+		</url>
+	</urls>
+
+<!-- /MBeanOperationAction.do ends -->
+
+	<urls throwallerrors="true" method="GET" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<url path="/viewLogs.do" deny-del-admin="true" roles="ADMIN,ENTERPRISEADMIN" >
+			<param name="colName" regex="am.logs.columnnames" />
+			<param name="folderName" regex="am.logs.foldernames" />
+		</url>
+		<url path="/jsp/viewlogs/ViewLogFile.jsp" deny-del-admin="true" roles="ADMIN,ENTERPRISEADMIN" >
+			<param name="fileName" regex="am.common.cert.filename" />
+		</url>
+		<url path="/adminAction.do" operation-param="method" operation-value="showMBeanOperationAction" roles="am.role.ADMIN.EA" privilege-identifier="previlegeResID" >
+			<param name="actionID" type="long" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="redirectto" type="String" max-len="1000" />
+			<param name="previlegeResID" regex="am.common.longandnull" />
+			<param name="isPluginNotification" regex="am.common.booleanandnull" />
+			<param name="plugin_view" type="boolean"/>
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		</url>
+	</urls>
+	
+	<urls throwallerrors="true" method="POST" csrf="true" operation-param="method" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<url path="/adminAction.do" operation-value="updateJMXNotificationProfile" roles="am.role.ADMIN.EA" privilege-identifier="previlegeResID" >
+			<param name="actionresourceid" type="long" />
+			<param name="hostname" regex="am.hostname" />
+			<param name="mbeanname" type="String" max-len="1000" />
+			<param name="selectall1" regex="am.jmx.actions.selected" />
+			<param name="selectall2" regex="am.jmx.actions.selected" />
+			<param name="severity" type="int" />
+			<param name="trapActionsCombo1" type="long" max-occurrences="1000" />
+			<param name="trapActionsCombo2" type="long" max-occurrences="1000" />
+			<param name="trapName" regex="am.displayname.common" />
+			<param name="trapStatus" regex="am.trap.status" />
+			<param name="trapid" type="int" />
+			<param name="previlegeResID" regex="am.common.longandnull" />
+		</url>
+		<url path="/GlobalActions.do" operation-value="executeMBeanOperationWithChoosableParams" roles="ADMIN,OPERATOR" privilege-identifier="previlegeResID" >
+			<param name="actionID" type="long" />
+			<param name="select" type="String" max-occurrences="1000" />
+			<param name="previlegeResID" regex="am.common.longandnull" />
+		</url>
+		<url path="/DebugInfo.do" operation-value="triggerHeapDump" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true" />
+	</urls>
+	
+	<urls path="/weblogicApps.do" operation-param="method" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+		<param-group name="am.additional.extra.params" />
+		<url method="get" operation-value="getWebAppServletsData" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid" authentication="required" >
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="resourceid" type="long" />
+			<param name="resourcename" type="String" max-len="515"/>
+			<param name="type" type="String" />
+			<param name="warName" type="String" max-len="1000"/>
+			<param name="webAppID" type="long" />
+			<param name="isConfigured" regex="am.isconfigured.value" max-len="1000" />
+		</url>
+		<url method="get" operation-value="getGCImpactData" privilege-identifier="resourceid" >
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="sid" regex="long" />
+			<param name="resourceid" type="long" />
+			<param name="childResId" type="long" />
+		</url>
+	</urls>
+	
+	<!-- Cam Actions Starts-->
+	
+	<urls path="/camJMXActions.do"  operation-param="method" roles="am.role.ADMIN.EA" privilege-identifier="camid" throwallerrors="true" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<param name="camid" regex="am.common.longandnull" />
+		<param name="screenid" regex="am.common.longandnull" />
+		<param name="haid" regex="am.common.longandnull" />
+		<param name="hostname" regex="am.hostname" max-len="255" />
+		<param name="portnumber" regex="am.port.undefined" />
+		<param name="resourcetype" regex="am.monitor.type" max-len="515" />
+		<param name="resourceid" regex="am.common.longandnull" />
+		<param name="isfromresourcepage" regex="am.common.TF.NA.Null" />
+		<param name="displayname" regex="am.displayname.common" max-len="255" />
+		<param name="type" type="int" />
+		<param name="multipleselectioncheckbox" type="String" max-occurrences="500" max-len="500" />
+		<param name="attributeType" type="int" />
+		<param name="attributenames" regex="am.cam.oid.displayname.comma.value" max-len="1000" />
+		<param name="groupName" type="String" max-len="500" />
+		<param name="domainfilter" type="String" max-len="500" />
+		<param name="domain" type="String" max-len="500" />
+		<param name="modeOfSubmission" type="int" />
+		<url operation-value="chooseDomains,showMBeansOfDomain" method="get" />
+		<url operation-value="updateScreenAttributes" method="post" csrf="true" >
+			<param name="hostname" regex="am.displayname.common" max-len="515" />
+			<param name="attributes" type="String" max-occurrences="1000" max-len="500" />
+			<param name="multimonitors" regex="^(applyselected|null)$" />
+			<param name="attributeid" regex="am.common.longandnull" />
+			<param name="isfromeditpage" regex="am.common.TFNull" />
+			<param name="resourcename" type="String" max-len="1000" />
+			<param name="similarmonitorsselected" type="long" max-occurrences="200" />
+		</url>
+		<url path="/camJMXActions.do" method="post" csrf="true" operation-value="addMBeanAttributesDirectly" />
+	</urls>	
+	<urls path="/camSNMPActions.do" operation-param="method" roles="am.role.ADMIN.EA" privilege-identifier="camid" throwallerrors="true" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<url operation-value="addSNMPObjects" method="post" csrf="true" >
+			<param name="mibname" regex="String" max-len="100" />
+			<param name="snmpoid" regex="am.cam.snmp.id.value" max-len="1000000" />
+			<param name="oiddisplayname" regex="am.cam.oid.displayname.comma.value" max-len="1000000" />
+			<param name="selectedMib" regex="String" max-len="100" />
+			<param name="resourceid" regex="am.common.longandnull" />
+			<param name="hostname" regex="am.hostname" max-len="255" />
+			<param name="portnumber" regex="am.port.undefined" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="screenid" regex="am.common.longandnull" />
+			<param name="camid" regex="am.common.longandnull" />
+			<param name="resourcetype" regex="am.monitor.type" max-len="515" />
+			<param name="isfromresourcepage" regex="am.common.TF.NA.Null" />
+		  	<param name="am.displayname.common" name-regex="true" regex="am.cam.snmp.attr.value" max-occurrences="1000000" /> <!--Allow unknown params with small restrictions -->
+		</url>
+	</urls>
+	<urls throwallerrors="true" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<param name="oid" regex="am.cam.oid.displayname.comma.value" max-len="1000000" />
+		<param name="pressName" regex="am.displayname.common" max-len="1000000" />		
+		<param name="pressType" type="String" max-len="1000000" />		
+		<param name="selectedMib" regex="String" max-len="100" />		
+		<param name="prevselectedMib" regex="String" max-len="100" />		
+		<param name="nodesToOpen" regex="am.displayname.common" max-len="1000000" />		
+		<param name="prevnodeToOpen" regex="am.displayname.common" max-len="1000000" />		
+		<param name="resultstr" type="String" max-len="1000000" />		
+		<param name="treeStyle" type="String" max-len="1000000" />		
+		<param name="type" type="String" max-len="1000000" />		
+		<param name="syntax" type="String" max-len="1000000" />		
+		<param name="access" type="String" max-len="1000000" />		
+		<param name="status" type="String" max-len="1000000" />		
+		<param name="index" type="String" max-len="1000000" />		
+		<param name="desc" type="String" max-len="1000000" />		
+		<url method="GET" path="/MibBrowser.do" roles="am.role.ADMIN.EA.DE" />
+		<url method="POST" csrf="true" path="/MibBrowser.do" roles="am.role.ADMIN.EA.DE">
+			<param name="nodeToOpen" regex="am.displayname.common" max-len="1000000" />		
+			<param name="unLoadMib" regex="String" max-len="100" />		
+			<param name="displayName" regex="am.displayname.common" max-len="1000000" />
+			<param name="OverWrite" regex="am.displayname.common" max-len="1000000" />
+		</url>
+		<url method="GET" path="/jsp/MibBrowser.jsp" roles="am.role.ADMIN.EA.DE" />
+		<url method="POST" csrf="true" path="/jsp/MibBrowser.jsp" roles="am.role.ADMIN.EA.DE">
+			<param name="nodeToOpen" regex="am.displayname.common" max-len="1000000" />		
+			<param name="unLoadMib" regex="String" max-len="100" />		
+			<param name="displayName" regex="am.displayname.common" max-len="1000000" />
+			<param name="OverWrite" regex="am.displayname.common" max-len="1000000" />
+		</url>
+		<url method="GET" path="/jsp/Mibinterdiv.jsp" roles="ADMIN">
+			<param name="selmib" regex="String" max-len="100" />
+		</url>
+	</urls>
+	<!-- Cam Actions ends -->
+	<!-- Manage certificates starts -->
+	<urls throwallerrors="true" path="/adminAction.do" operation-param="method" roles="ADMIN,ENTERPRISEADMIN" authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<url  method="POST" csrf="true" operation-value="createCSR" allow-only-superadmin="true" skip-bad-input-encoding="true">
+			<param name="CN" type="String" max-len="255"/>
+			<param name="subjectAlternateNames" type="String" max-len="255" />
+			<param name="organizationUnit" type="String" max-len="255" />
+			<param name="organization" type="String" max-len="255" />
+			<param name="city" type="String" max-len="255" />
+			<param name="state" type="String" max-len="255" />
+			<param name="country" regex="am.common.onlystring" max-len="2" />
+			<param name="keySize" type="int" range="2048,4096" />
+		</url>
+		<url csrf="true" method="POST" operation-value="regenerateKeyStorePassword" deny-del-admin="true" />
+		<url csrf="true" method="POST" operation-value="removeCertificateFromKeyStore" deny-del-admin="true">
+			<param name="alias" type="String" max-len="255"/>
+		</url>
+		<url csrf="true" method="POST" operation-value="importTrustedCertificates" roles="ADMIN,ENTERPRISEADMIN" >
+			<param name="keystorePass" type="String" max-len="1000" secret="true"/>
+			<param name="uploadType" regex="am.certificate.UploadType"/>
+			<param name="keyEntryOnly" type="boolean"/>
+			<param name="overwriteCerts" type="boolean"/>
+			<param name="importAlias" type="JSONArray" template="arrayjson.len255" array-size="0-1000" max-len="255000" />
+			<param name="selectedStore" regex="am.certificate.selectedStore"/>
+			<param name="aliasListTable_length" type="int"/>
+			<file allowed-extensions="crt,cer,der,pfx,jks,keystore,truststore" content-type-name="cert" max-size="5000" name="theFile" limit="&lt;10" />		
+		</url>
+		<url csrf="true" method="POST" operation-value="getAliasesFromKeystore">	 
+			<param name="importAlias" type="JSONArray" template="arrayjson.len255" array-size="0-1000" max-len="255000"/>
+			<param name="alias" type="String" max-len="255"/>
+			<param name="keystorePass" type="String" max-len="1000" secret="true"/>
+			<param name="keyEntryOnly" type="boolean"/>
+			<param name="confirmImport" type="boolean"/>
+			<param name="overwriteCerts" type="boolean"/>
+			<param name="uploadType" regex="am.certificate.UploadType"/>
+			<param name="selectedStore" regex="am.certificate.selectedStore"/>
+			<param name="aliasList_length" type="int"/> 
+			<param name="aliasListTable_length" type="int"/>
+			<file allowed-extensions="pfx,jks,keystore,truststore" content-type-name="cert" max-size="5000" name="theFile" />
+			<file allowed-extensions="key" content-type-name="cert" max-size="5000" name="serverKey" /> 
+			<file allowed-extensions="crt,cer,der" content-type-name="cert" max-size="5000" name="intermediateCerts" limit="&lt;10" />
+		</url>
+		<url csrf="true" method="POST" operation-value="importSSLCertificate" deny-del-admin="true">	 
+			<param name="keystorePass" type="String" max-len="1000" secret="true"/>
+			<param name="keyEntryOnly" type="boolean"/>
+			<param name="keyAlias" type="String" max-len="255"/>
+			<param name="confirmImport" type="boolean"/>
+			<param name="alias" type="String" max-len="255"/>
+			<param name="aliasList_length" type="int"/>
+			<file allowed-extensions="der,crt,cer,pfx,jks,keystore,truststore" content-type-name="cert" max-size="5000" name="theFile" />
+			<file allowed-extensions="key" content-type-name="cert" max-size="5000" name="serverKey" /> 
+			<file allowed-extensions="crt,cer,der" content-type-name="cert" max-size="5000" name="intermediateCerts" limit="&lt;10" />
+		</url>
+		<url method="get" operation-value="showSecurityOperations" roles="ADMIN,ENTERPRISEADMIN,DEMO">
+			<param name="selectedTab" regex="am.certificate.selectedTab" />
+			<param name="service" regex="am.certificate.service"/>
+			<param name="reqForAdminLayout" type="boolean"/>
+		</url>
+		<url method="POST" operation-value="importCertificateFromUrl" csrf="true" skip-bad-input-encoding="true">
+			<param name="importCert" type="boolean"/>
+			<param name="trustURL" type="String" max-len="2083" />
+			<param name="selectedTruststore" regex="am.certificate.selectedStore"/>
+			<param name="overwriteCerts" type="boolean"/>
+			<param name="sslProtocol" regex="am.sslCertificateMonitor.protocol"/>
+		</url>
+		<url csrf="true" method="POST" operation-value="getAPMKeystorePassword" deny-del-admin="true"></url>
+		<url path="/adminAction.do" operation-value="updateLicense" method="POST" csrf="true" deny-del-admin="true" />
+	</urls>
+	<urls path="/ShowCAM.do" operation-param="method"  authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<!-- privilege-identifier="camids" priv-delim=","  -->
+		<url method="POST" operation-value="enableReports,disableReports" csrf="true" roles="ADMIN,ENTERPRISEADMIN" custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:checkIfResourcesEditableByDA" >
+			<param name="selectallckb" regex="onlyon" />
+			<param name="choosenattributeid" type="long" max-occurrences="10000" />
+			<param name="camids" split="," trim="true" max-occurrences="1000" type="long" />
+		</url>
+		<url method="POST" operation-value="bulkEdit" csrf="true" roles="ADMIN,ENTERPRISEADMIN" privilege-identifier="camid" >
+			<param name="selectedids" regex="am.common.long.commaseparatedWithSpaces" max-len="100000" />
+			<param name="screenid" type="long" />
+			<param name="type" type="int" range="0,1" />
+			<param name="camid" type="long" min-occurrences="1" />
+		</url>
+		<url method="GET" operation-value="configureScreen" privilege-identifier="camid" roles="ADMIN,ENTERPRISEADMIN" >
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="resourceid" regex="am.common.longandnull" />
+			<param name="camid" type="long" />
+			<param name="screenid" type="long" />
+			<param name="isfromresourcepage" regex="am.common.TF.NA.Null" />
+			<param name="sid" type="long" />
+		</url>
+		<url method="POST" operation-value="enableReportsForScreen,disableReportsForScreen,deleteAttributeConfigureForScreen" csrf="true" privilege-identifier="camid" roles="ADMIN,ENTERPRISEADMIN" >
+			<param name="camid" type="long" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="screenid" type="long" />
+			<param name="isfromresourcepage" regex="am.common.TF.NA.Null" />
+			<param name="choosenattributeid" type="long" max-occurrences="10000" />
+			<param name="tableids" type="long" max-occurrences="10000" split="," />
+			<param name="selectallckb" regex="onlyon" />
+		</url>
+		<url method="GET" operation-value="showSingleGraphScreen" privilege-identifier="camid" roles="am.role.ADMIN.EA.OP.US.DE" >
+			<param name="attributeid" type="long" />
+			<param name="mbean" type="String" max-len="250"/> 
+			<param name="camid" type="long" min-occurrences="1" />
+		</url>
+		<url method="GET" operation-value="showCAMApplication" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="camid">
+			<param name="camid" type="long" />
+			<param name="haid" regex="am.common.longandnull" />
+		</url>
+	</urls>
+	<urls path="/ShowCAM.do" operation-param="method"  authentication="required" >
+		<param-group name="am.additional.extra.params" />
+		<param name="haid" regex="am.common.longandnull" />
+		<param name="camid" type="long" />
+		<param name="haidI" regex="am.common.longandnull" />
+		<param name="camIDI" type="long" />
+		<param name="screenIDI" type="long" />
+		<param name="to" regex="^(configureCAMReports|bulkEditCAMPage|camGraphsPage)$" />	
+		<param name="tableids" type="long" max-occurrences="10000" split="," />	
+		<param name="choosenattributeid" type="long" max-occurrences="1000" />	
+		<param name="selectallckb" regex="onlyon" />
+		<param name="values" type="long" max-occurrences="1000" split="," />
+		<param name="screenid" type="long" />
+		<param name="sid" type="String" max-len="200" />
+		<param name="isfromresourcepage" regex="am.common.TF.NA.Null" />
+		<param name="isConfigured" type="String" max-len="2000" />
+		<param name="message" type="boolean" />
+		<url method="GET" operation-value="showScreen" privilege-identifier="camid" roles="am.role.ADMIN.EA.OP.US.DE" />
+		<url method="POST" csrf="true" operation-value="showScreen" privilege-identifier="camid" roles="am.role.ADMIN.EA.OP.US.DE" />
+	</urls>
+<!-- Manage certificates ends -->
+	
+	<urls deny-operation="true" throwallerrors="true" >
+		<url path="/weblogicApps.do" operation-param="method" method="get" operation-value="getWebAppData,getBusinessProcessData,getJMSData,getEJBData,getApplnIntegrationData,getThreadPoolData,getSAFData,getMessageBrokerData,getJDBCPoolData,getGCData,getMemPoolData" />
+		<url path="/weblogicApps.do" operation-param="method" method="post" operation-value="getWebAppData,getBusinessProcessData,getJMSData,getEJBData,getApplnIntegrationData,getThreadPoolData,getSAFData,getMessageBrokerData,getJDBCPoolData,getGCData,getMemPoolData" />
+		<url path="/weblogicApps.do" operation-param="method" method="post" operation-value="getWebAppServletsData" />
+		<url path="/weblogicApps.do" operation-param="method" method="post" operation-value="getGCImpactData" />
+		<url path="/JavaRuntime.do" operation-param="method" method="get" operation-value="triggerGC,getHeapDump,deletethreadURL,deleteheapURL" />
+		<url path="/JavaRuntime.do" operation-param="method" method="get" operation-value="deleteCloudActions,deleteHeapDumpAction,deleteThreadDumpAction" redirect-url="/adminAction.do?method=showActionProfiles" />
+		<url path="/JavaRuntime.do" operation-param="method" method="post" operation-value="overviewDetails,garbageDetails,threadsDetails,configurationDetails,actionDetails,getThreadInfo,gcViewImpact,showThreadDumpAction,getHeapdumpdata,getThreadDump"/>
+		<url path="/JavaRuntime.do" operation-param="method" method="get,post"  operation-value="showdetails"/>
+		<url path="/DebugInfo.do" operation-param="method" method="get"  operation-value="triggerHeapDump"/>
+		<url path="/GlobalActions.do" operation-param="method" method="get" operation-value="executeMBeanOperationWithChoosableParams" />
+		<url path="/adminAction.do" method="post" operation-param="method" operation-value="showMBeanOperationAction" />
+		<url path="/adminAction.do" method="POST" operation-param="method" operation-value="showSecurityOperations" />
+		<url path="/adminAction.do" method="GET" operation-param="method" operation-value="getAPMKeystorePassword,getAliasesFromKeystore,importSSLCertificate,importTrustedCertificates,regenerateKeyStorePassword,removeCertificateFromKeyStore,importCertificateFromUrl" />
+		<!-- url path="/MBeanOperationAction.do" operation-value="showInitialScreen,showDomainsForJMXNotifications,executeMBeanOperationActionWithUserIntervention"/ -->	
+		<!-- url path="/MBeanOperationAction.do" operation-param="method" method="GET" operation-value="showDomains,showMBeans,showUserInputOperationValuesGetterScreen,showMBeansForJMXNotifcation,showJMXNotificationProfileCreateScreen"/ -->
+		<url path="/ShowCAM.do" operation-param="method" method="GET" operation-value="enableReports,disableReports" redirect-url="/showReports.do?actionMethod=getReportIndex" />
+		<url path="/ShowCAM.do" operation-param="method" method="GET" operation-value="enableReportsForScreen,disableReportsForScreen,deleteAttributeConfigureForScreen,bulkEdit" />
+		<url path="/ShowCAM.do" operation-param="method" method="POST" operation-value="configureScreen,showSingleGraphScreen,showCAMApplication" />
+		<url path="/camSNMPActions.do" operation-param="method" method="get" operation-value="addSNMPObjects" />
+		<url path="/camJMXActions.do" operation-param="method" method="post" operation-value="showMBeansOfDomain,chooseDomains" />
+		<url path="/camJMXActions.do" operation-param="method" method="get" operation-value="updateScreenAttributes,addMBeanAttributesDirectly" />
+		<url path="/jsp/attribute_edit.jsp" method="post" />
+	</urls>
+	
+	
+	<urls path="/adminAction.do" operation-param="method" authentication="required" throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<url method="post" operation-value="addJMXNotificationProfile" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="actionresourceid" >
+			<param name="actionresourceid" type="long" />
+			<param name="mbeanname" type="String" max-len="1000" />
+			<param name="hostname" regex="am.hostname" />
+			<param name="trapName" regex="am.displayname.common" />
+			<param name="trapStatus" regex="am.trapstatus.value" />
+			<param name="severity" type="int" />
+			<param name="am.trapactioncombo.param" name-regex="true" type="long" />
+			<param name="selectall1" regex="am.jmx.actions.selected" />
+			<param name="selectall2" regex="am.jmx.actions.selected" />
+		</url>		
+		<url method="post" operation-value="configureJMX" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resourceid" > 
+			<param name="applicationname" type="String" max-len="255" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="resourcetype" regex="am.monitor.type" />
+			<param name="type" regex="am.monitor.type" max-len="115" />
+			<param name="resourceid" regex="am.common.longandnull" />
+			<param name="resourcename" type="String" max-len="1000" />
+			<param name="moname" type="String" max-len="1000" />
+			<param name="camname" regex="am.displayname.common" max-len="515" />
+			<param name="camdesc" type="String" max-len="2000" />
+		</url>
+		<url method="post" operation-value="deleteJMXNotificationListener" roles="am.role.ADMIN.EA" csrf="true" privilege-identifier="resourceid" >
+			<param name="resourceid" regex="am.common.longandnull" /> <!-- For delegate admin -->
+			<param name="checkbox" type="int" max-occurrences="500" />
+			<param name="headercheckbox" regex="onlyon"/>
+		</url>
+		<url method="get" operation-value="editJMXNotificationListener" roles="am.role.ADMIN.EA" privilege-identifier="previlegeResID" >
+			<param name="notificationid" type="int" />
+			<param name="edit" type="boolean" />
+			<param name="resourceid" regex="am.common.longandnull" />
+			<param name="previlegeResID" regex="am.common.longandnull" />
+		</url>
+		<url method="post" operation-value="configureOracleAS" roles="am.role.ADMIN.EA" csrf="true" privilege-identifier="resourceid" >
+			<param name="applicationname" regex="am.displayname.common" />
+			<param name="type" regex="am.monitor.type" />
+			<param name="resourceid" regex="am.common.longandnull" />
+			<param name="resourcename" regex="am.displayname.common" />
+			<param name="moname" type="String" max-len="1000" />
+			<param name="displayname" regex="am.displayname.common" />
+			<param name="pollInterval" type="int" />	
+		</url>
+	</urls>
+	<urls authentication="required" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url path="/common/serverinfo.do" method="get" roles="am.role.ADMIN.EA.OP.US.DE.MA" >
+			<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+			<param name="plugin_view" type="boolean"/>
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+			<param name="reqForAdminLayout" regex="yesnotf" />
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="pageViews" type="boolean" />
+			<param name="message" type="boolean" />
+		</url>
+		<url path="/AMJavaRuntime.do" operation-param="method" method="get" operation-value="showThreadDump" roles="ADMIN,ENTERPRISEADMIN" deny-del-admin="true" >
+			<param name="first" type="boolean" />
+			<param name="key" regex="am.common.longandnull" />	
+		</url>
+		<url path="/oracleas.do" operation-param="method" method="post" operation-value="changeOracleAsStatus" csrf="true" roles="am.role.ADMIN.EA" privilege-identifier="resourceid" >
+			<param name="state" regex="am.state.value" />
+			<param name="opmnid" type="long" />
+			<param name="resourceid" regex="am.common.longandnull" />
+		</url>
+		<url path="/oracleas.do" operation-param="method" method="get" operation-value="showdetails" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid" >
+			<param name="name" regex="am.displayname.common" max-len="255" />
+			<param name="webappid" regex="am.common.longandnull" />
+			<param name="webappname" regex="am.displayname.common" max-len="255" />
+			<param name="resourceid" regex="am.common.longandnull" />
+		</url>
+		<url path="/jsp/attribute_edit.jsp" method="get" >
+			<param name="resourceid" regex="am.common.longandnull" />
+			<param name="attributeid" regex="am.common.longandnull" />
+			<param name="camid" regex="am.common.longandnull" />
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="screenid" regex="am.common.longandnull" />
+			<param name="dispType" regex="am.common.longandnull" />
+			<param name="resourcename" type="String" max-len="500" />
+			<param name="hostname" type="String" max-len="500" />
+			<param name="resourcetype" regex="am.monitor.type" max-len="515" />
+			<param name="portno" regex="am.common.longandnull" />
+			<param name="attributes" type="String" max-len="10000" />
+			<param name="displayname" type="String" max-len="10000" />
+			<param name="isfromeditpage" regex="am.common.TFNull" />
+		</url>
+	</urls>
+	<urls path="/showresource.do" operation-param="method" authentication="required" method="get" throwallerrors="true" roles="am.role.ADMIN.EA.OP.US.DE" >
+		<param-group name="am.additional.extra.params" />
+		<param name="screenWidth" regex="am.common.longandnull" />
+		<param name="fromwhere" regex="am.monitor.showres.fromwhere.value" />
+		<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		<param name="plugin_view" type="boolean" />	
+		<url operation-value="showResourceForResourceID" privilege-identifier="resourceid">
+			<param name="resourceid" regex="am.common.longandnull" min-occurrences="1"/>
+			<param name="datatype" regex="am.common.longandnull" />
+			<param name="Datatype" regex="am.common.longandnull" />
+			<param name="parentId" type="long" />
+			<param name="appName" type="String" max-len="200" />
+			<param name="dbid" regex="am.common.longandnull" />
+			<param name="dbname" regex="am.monitor.db.name" max-len="515" />
+			<param name="details" regex="^(DB)$" />
+			<param name="name" type="String" max-len="2000" />
+			<param name="resourcename" type="String" max-len="2000" />
+			<param name="pollnow" type="boolean" />
+			<param name="viewType" regex="am.viewtype.value" />
+			<param name="haid" regex="am.haid.grp.long.value" />
+			<param name="view" regex="^(icons)$" />
+			<param name="isConfigured" type="String" max-len="2000" />
+			<param name="databasesId" regex="am.common.longandnull" />
+			<param name="message" type="String" max-len="1000" /> <!-- Error message and exception -->
+			<param name="moname" type="String" max-len="500" /> 
+			<param name="type" regex="am.monitor.type" max-len="200" />
+			<param name="replicaid" regex="am.common.longandnull" />
+			<param name="agid" type="long" />
+			<param name="agname" type="String" max-len="128"/>
+			<param name="reportMessage" type="int" />
+			<param name="messageneeded" type="boolean" />
+			<param name="selectM" regex="am.rhev.manager.businessView" />
+			<param name="alert" type="boolean" />
+			<param name="reports" type="boolean" />
+			<param name="isSuccess" type="boolean" />
+			<param name="noreload" type="boolean" />
+			<param name="isTestActionAllowed" type="boolean" />
+			<param name="actionID" type="long" />
+			<param name="errNames" type="String" max-len="1000"/>
+			<param name="err_ActionType" type="String" />
+			<param name="actionNameList_tracker" type="int" />
+			<param name="errorMessage" regex="^(AlreadyRunning)$" />
+		</url>
+		<url operation-value="showResourceTypes" >
+			<param name="monitor_viewtype" regex="am.monitor.viewtype.value" />
+			<param name="oldtab" regex="am.common.longandnull" max-occurrences="2"/>
+			<param name="group" regex="am.monitor.type" max-len="200" />
+			<param name="detailspage" regex="yesnotf" />
+			<param name="direct" regex="yesnotf" />
+			<param name="network" regex="am.monitor.type" max-len="200" />
+			<param name="viewmontype" regex="am.monitor.type" max-len="200" />
+			<param name="viewHiddenMonitors" type="boolean" />
+			<param name="selectedNetwork" regex="am.hostname" max-len="255" />
+			<param name="defaultview1" regex="yesnotf" />
+			<param name="listview" type="boolean" />
+			<param name="showmanage" regex="am.monitor.showmanage.value" /> <!-- Revere merge with latest will work for this regex -->
+			<param name="isCustomMonitor" type="boolean" />
+			<param name="noOfRows" type="int" />
+			<param name="selectedPage" type="int" />
+		</url>
+	</urls>
+	<urls authentication="required" throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<url path="/register.do" method="post" csrf="true" deny-del-admin="true" roles="ADMIN,ENTERPRISEADMIN"  >
+			<file allowed-extensions="xml" content-type-name="p12" max-size="51200" name="theFile" >
+				<filename type="String" max-len="100" />
+			</file>
+			<param name="extra" regex="am.common.TFNull" />
+		</url>
+		<url path="/showapplication.do" method="post" operation-param="method" roles="am.role.ADMIN.EA" operation-value="configureServiceParams" csrf="true" privilege-identifier="resourceid" >
+			<param name="resourceid" type="long" />
+			<param name="type" regex="am.monitor.type" />
+			<param name="jndipath" regex="am.common.urlstartwithslash" />
+			<param name="resourcename" type="String" max-len="2000" />
+			<param name="snmpTargetName" regex="am.hostname" />
+			<param name="displayname" regex="am.displayname.common" />
+			<param name="username" regex="am.windows.username" />
+			<param name="password" type="String" max-len="250" secret="true" />
+			<param name="port" regex="am.port" />
+			<param name="pollinterval" type="int" />
+			<param name="jmxurl" type="String" max-len="2083" />
+			<param name="snmpCommunityString" max-len="255" type="String" />
+			<param name="snmpSecurityLevel" regex="am.servermonitor.snmpSecurityLevel" />
+			<param name="snmpUserName" regex="am.windows.username" />
+			<param name="snmpContextName" max-len="255" type="String" />
+			<param name="snmpAuthPassword" type="String" max-len="250" secret="true" />
+			<param name="snmpAuthProtocol" regex="am.servermonitor.snmpAuthProtocol" />
+			<param name="snmpPrivPassword" type="String" max-len="250" secret="true" />
+			<param name="jmxEnabled" regex="am.report.on.off.empty" />
+			<param name="authEnabled" regex="am.report.on.off.empty" />
+		</url>
+		<!-- Restart Action URLS START-->		
+		<url path="/adminActivities.do" method="POST"  csrf="true" deny-del-admin="true" operation-param="method" operation-value="restartServer" roles="ADMIN,ENTERPRISEADMIN" >
+			<param name="renameLogs" type="boolean" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+		<!-- Restart Action URLS END-->
+	</urls>
+	<urls path="/GlobalActions.do" deny-del-admin="true"  operation-param="method" roles="ADMIN,ENTERPRISEADMIN" authentication="required" throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<url method="get" operation-value="restartCheck,servercheck" />
+	</urls>
+	<urls>
+		<param-group name="am.additional.extra.params" />
+		<url path="/unauthenticatedservlets/com.adventnet.nms.servlets.ConnectionCheckServlet" method="get" />
+		<url path="/jsp/About.jsp" method="get" />
+	</urls>
+	<urls method="get" authentication="required" deny-del-admin="true" roles="ADMIN,ENTERPRISEADMIN,DEMO" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<param name="cach" type="String" />
+		<url path="/jsp/includes/WLSDisableServlet.jsp" />
+		<url path="/jsp/includes/WLSDisableWebapp.jsp" />
+		<url path="/jsp/includes/WLSDisableEjb.jsp" />
+	</urls>
+	<urls method="get" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url path="/jsp/PopUp_Graph.jsp" privilege-identifier="monID" >
+			<param name="restype" regex="am.monitor.type" />
+			<param name="monID" type="long" />
+			<param name="TableName" regex="am.common.tablename.withSpaceandHyphen"/>
+			<param name="tableName" regex="am.common.tablename.withSpaceandHyphen"/>
+			<param name="toappend" type="long" />
+			<param name="resids" regex="am.recorder.long.commaSeparated" max-len="10000"/>
+			<param name="baseid" type="long" />
+			<param name="attids" type="long" />
+			<param name="listsize" type="int" />
+			<param name="attName" regex="am.attribute.name" />
+			<param name="modeOfMon" type="String" />
+			<param name="summarygraphfor" regex="cpucore" />
+		</url>
+		<url path="/jsp/OASEJBData.jsp" privilege-identifier="resourceid" >
+			<param name="resourceid" type="long" />
+		</url>
+	</urls>
+	<urls method="get" authentication="required" deny-del-admin="true" roles="am.role.ADMIN.EA.DE" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url path="/webclient/common/jsp/registerLicence.jsp">
+			<param name="extra" regex="am.common.TFNull" />
+			<param name="reqForAdminLayout" type="boolean" />
+			<param name="service" regex="am.action.fromadminlayout.service" />
+		</url>
+		<url path="/jsp/threaddump.jsp">
+		    <param name="param" regex="am.common.paramNames" max-occurrences="100" max-len="300" />
+		</url>
+	</urls>
+	<urls method="get" authentication="required" roles="ADMIN,ENTERPRISEADMIN,DEMO" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url path="/jsp/HostDiscoveryForm.jsp">
+			<param name="hideFieldsForIT360" regex="am.common.TFNull" />
+			<param name="addtoha" regex="am.common.TFNull" />
+			<param name="istestavailability" type="boolean" />
+			<param name="it360LicenseViolation" type="boolean" />
+			<param name="method" regex="am.request.method" />
+			<param name="redirectto" regex="am.common.urlstartwithslash"  max-len="2083"/>
+		</url>
+	</urls>
+	
+	<urls  authentication="required" roles="am.role.ADMIN.EA.DE" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url path="/jsp/HostServiceDiscovery.jsp" method="get" >
+			<param name="hostName" regex="am.hostname" />
+			<param name="portNumber" type="int" />
+			<param name="typeToSend" type="String" />
+			<param name="version" type="String"/>
+			
+		</url>
+	</urls>
+	
+	<urls  authentication="required" csrf="true" roles="am.role.ADMIN.EA.DE" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url path="/jsp/HostServiceDiscovery.jsp" method="post" >
+			<param name="hostName" regex="am.hostname" />
+			<param name="portNumber" type="int" />
+			<param name="typeToSend" type="String" />
+			<param name="version" type="String"/>
+			<param name="logonClient" type="int"/>
+			<param name="language" regex="country_code"/>
+			<param name="username" type="String"/>
+			<param name="password" type="String" max-len="250" secret="true"/>														
+			<param name="credentialType" regex="credManager" />
+			<param name="cmValue" type="String"/>
+		</url>
+	</urls>
+	
+	<!-- Deny Operations -Starts -->
+	<urls deny-operation="true" operation-param="method" throwallerrors="true" >
+		<url path="/adminAction.do" method="get" operation-value="addJMXNotificationProfile,configureJMX,deleteJMXNotificationListener,configureOracleAS" />
+		<url path="/adminAction.do"  method="get,post" operation-value="showAMServerStatus" />
+		<url path="/adminActivities.do" method="get" operation-value="restartServer" />
+		<url path="/oracleas.do" method="get" operation-value="changeOracleAsStatus" />
+		<url path="/oracleas.do" method="post" operation-value="showdetails" />
+		<url path="/AMJavaRuntime.do" method="post" operation-value="showThreadDump" />
+		<url path="/adminAction.do" method="post" operation-value="editJMXNotificationListener" />
+		<url path="/showapplication.do" method="get" operation-value="configureServiceParams" />
+		<url path="/showresource.do" method="post" operation-value="showResourceTypes,showResourceForResourceID" />
+		<url path="/GlobalActions.do" method="post" operation-value="restartCheck,servercheck" />
+		<url path="/adminAction.do" operation-value="updateLicense" method="GET" />
+	</urls>
+	<urls deny-operation="true" throwallerrors="true" >
+		<url path="/common/serverinfo.do" method="post" />
+		<url path="/register.do" method="get" />
+		<url path="/unauthenticatedservlets/com.adventnet.nms.servlets.ConnectionCheckServlet" method="post" />
+		<url path="/jsp/About.jsp" method="post" />
+		<url path="/jsp/includes/WLSDisableEjb.jsp" method="post" />
+		<url path="/jsp/includes/WLSDisableServlet.jsp" method="post" />
+		<url path="/jsp/includes/WLSDisableWebapp.jsp" method="post" />
+		<url path="/webclient/common/jsp/registerLicence.jsp" method="post" />
+		<url path="/jsp/threaddump.jsp" method="post" />
+		<url path="/jsp/HostDiscoveryForm.jsp" method="post" />
+		<url path="/jsp/PopUp_Graph.jsp" method="post" />
+		<url path="/jsp/OASEJBData.jsp" method="post" />
+		<url path="/jsp/Mibinterdiv.jsp" method="post" />
+	</urls>
+	<!-- Deny Operations - ENDS -->
+
+
+	<!-- REST API - SelfDiagnostics  -->
+	<urls prefix="/AppManager/(xml|json)" api="true" url-type="dynamic" authentication="required" method="post" roles="am.role.ADMIN.EA" deny-del-admin="true" throwallerrors="true">
+			<url path="/clearDiagnosticAlert">
+				<param name="resourceid" type="long" min-occurrences="1"/>
+				<param name="apikey" regex="apikey" secret="true" min-occurrences="1" />
+			</url>
+	</urls>
+	
+	<urls prefix="/AppManager/(xml|json)" url-type="dynamic" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true" throwallerrors="true">
+		<param name="apikey" regex="apikey" secret="true" min-occurrences="1" />
+		<url path="/diagnosticinfo" method="get"/>
+		<url path="/diagnosticinfo" api="true" method="post">
+			<param name="diagnosticid" type="long" />
+			<param name="diagnosticname" type="String" max-len="100" />
+			<param name="pollinterval" type="int" />
+			<param name="pollcount" type="int" />
+			<param name="criticalvalue" type="int" />
+			<param name="ismanaged" type="boolean" />
+		</url>
+	</urls>
+
+	<!-- deny-operation -->
+	<urls prefix="/AppManager/(xml|json)">
+		<url path="/clearDiagnosticAlert" method="get" deny-operation="true" />
+	</urls>
+
+	<urls prefix="/AppManager/json/ApmAdminServices" url-type="dynamic" throwallerrors="true" method="POST" api="true">
+		<param-group name="am.additional.extra.params" />
+		<param name="eeSyncKey" regex="am.encodedauthkey" secret="true" />
+		<param name="masId" type="int"/>
+		<url path="/syncMETrackerDetails">
+			<param name="NewMonitorAddSucceed" type="long"/>
+		</url>
+		<url path="/syncMETrackerErrorDetails">
+			<param name="errorMessage" type="String" max-len="2000" />
+			<param name="moduleName" regex="^(Security|MonitorError|ADDM|CustomFields|SAPMonitorInfo|SAPMonitorError)$"/>		
+		</url>
+	</urls>
+
+	<urls path="/manageMQ.do" operation-param="method" authentication="required" method="get" throwallerrors="true" roles="am.role.ADMIN.EA.OP.US.DE">
+		<param-group name="am.additional.extra.params" />
+		<param name="resourceid" regex="am.common.longandnull" />
+		<url operation-value="getEvents">
+			<param name="queueName" regex="am.hostname" />
+			<param name="fromDate" regex="apminsight_datetime" />
+			<param name="toDate" regex="apminsight_datetime" />
+			<param name="searchString" regex="am.hostname" />
+			<param name="reasonCodes" regex="am.number.withcomma.separated" />
+		</url>
+		<url operation-value="exportEvents">
+			<param name="moname" regex="am.displayname.common" />
+			<param name="queueName" regex="am.hostname" />
+			<param name="fromDate" regex="apminsight_datetime" />
+			<param name="toDate" regex="apminsight_datetime" />
+			<param name="searchString" regex="am.hostname" />
+			<param name="reasonCodes" regex="am.number.withcomma.separated" />
+		</url>
+		<url operation-value="getEventStatus" />
+	</urls>
+
+	<urls path="/manageMQ.do" operation-param="method" authentication="required" method="get" throwallerrors="true" roles="am.role.ADMIN.EA">
+		<param-group name="am.additional.extra.params" />
+		<param name="resourceId" regex="am.common.longandnull" />
+		<url operation-value="startService">
+			<param name="serviceName" regex="am.displayname.common" />
+			<param name="rowId" regex="am.common.longandnull" />
+		</url>
+		<url operation-value="stopService">
+			<param name="serviceName" regex="am.displayname.common" />
+			<param name="rowId" regex="am.common.longandnull" />
+		</url>
+	</urls>
+</security>

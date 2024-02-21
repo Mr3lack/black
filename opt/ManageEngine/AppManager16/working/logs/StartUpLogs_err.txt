@@ -1,0 +1,218 @@
+[10:30:54:445]|[02-20-2024]|[STARTUP_ERR]|[DEBUG]|[18]:  System details starts|
+	java.vendor = Azul Systems, Inc.
+	sun.java.launcher = SUN_STANDARD
+	javax.net.ssl.trustStorePassword = changeit
+	sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+	product.started.time = 1708425053372
+	os.name = Linux
+	sun.boot.class.path = /opt/ManageEngine/AppManager16/working/jre/lib/resources.jar:/opt/ManageEngine/AppManager16/working/jre/lib/rt.jar:/opt/ManageEngine/AppManager16/working/jre/lib/sunrsasign.jar:/opt/ManageEngine/AppManager16/working/jre/lib/jsse.jar:/opt/ManageEngine/AppManager16/working/jre/lib/jce.jar:/opt/ManageEngine/AppManager16/working/jre/lib/charsets.jar:/opt/ManageEngine/AppManager16/working/jre/lib/jfr.jar:/opt/ManageEngine/AppManager16/working/jre/lib/cat.jar:/opt/ManageEngine/AppManager16/working/jre/classes
+	java.util.logging.config.file = apache/tomcat/conf/logging.properties
+	java.vm.specification.vendor = Oracle Corporation
+	java.runtime.version = 1.8.0_352-b08
+	wrapper.native_library = wrapper
+	https.protocols = TLSv1.3,TLSv1.2,TLSv1.1,TLSv1
+	wrapper.key = yNrOr-uOKBYjzWxItmhQE-H7M_NAJiK5
+	user.name = root
+	javax.net.ssl.trustStoreType = JKS
+	logger.class = com.adventnet.appmanager.logging.AMLog
+	wrapper.jvm.port.min = 31000
+	user.language = en
+	java.naming.factory.initial = weblogic.jndi.WLInitialContextFactory
+	sun.boot.library.path = /opt/ManageEngine/AppManager16/working/jre/lib/amd64
+	java.version = 1.8.0_352
+	java.util.logging.manager = org.apache.juli.ClassLoaderLogManager
+	user.timezone = Etc/UTC
+	apminsight.home = /opt/ManageEngine/AppManager16/working/apminsight/self-monitor
+	sun.arch.data.model = 64
+	org.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER = true
+	java.endorsed.dirs = /opt/ManageEngine/AppManager16/working/jre/lib/endorsed
+	sun.cpu.isalist = 
+	product.name = Applications Manager
+	sun.jnu.encoding = UTF-8
+	file.encoding.pkg = sun.io
+	file.separator = /
+	java.specification.name = Java Platform API Specification
+	java.class.version = 52.0
+	java.home = /opt/ManageEngine/AppManager16/working/jre
+	java.vm.info = mixed mode
+	wrapper.version = 3.5.46-pro
+	os.version = 6.2.0-1017-aws
+	path.separator = :
+	java.vm.version = 25.352-b08
+	wrapper.pid = 11480
+	wrapper.jvm.port.max = 31999
+	wrapper.lang.folder = ../lang
+	am.server.wrapper = true
+	wrapper.java.pid = 11598
+	java.awt.printerjob = sun.print.PSPrinterJob
+	sun.io.unicode.encoding = UnicodeLittle
+	java.specification.maintenance.version = 4
+	awt.toolkit = sun.awt.X11.XToolkit
+	webserver.rootdir = /opt/ManageEngine/AppManager16/working/apache/tomcat
+	user.home = /root
+	log4j2.configurationFile = ./classes/log4j_conf.xml
+	java.specification.vendor = Oracle Corporation
+	java.library.path = ./lib/
+	java.vendor.url = http://www.azul.com/
+	javax.net.ssl.keyStoreType = JKS
+	java.vm.vendor = Azul Systems, Inc.
+	wrapper.jvmid = 1
+	java.runtime.name = OpenJDK Runtime Environment
+	sun.java.command = org.tanukisoftware.wrapper.WrapperSimpleApp com.adventnet.appmanager.server.startup.StartServer ../working
+	java.class.path = ../:../lib/ext/classes12.zip:../logs:apache:apache/tomcat:apache/tomcat/bin/bootstrap.jar:apache/tomcat/bin/commons-logging-1.1.3.jar:apache/tomcat/bin/tomcat-juli.jar:apache/tomcat/lib/el-api.jar:apache/tomcat/lib/jasper-el.jar:apache/tomcat/lib/jasper.jar:apache/tomcat/lib/jsp-api.jar:apache/tomcat/lib/servlet-api.jar:apache/tomcat/lib/tomcat-api.jar:appln_mon/classes:appln_mon/classes/ApplnMonitorCommon.jar:appln_mon/classes/ApplnMonitorServer.jar:classes:classes/AdventNetAppManager.jar:classes/AdventNetNPrevalent.jar:classes/AdventNetOPExtn.jar:classes/ApiUtils.jar:classes/CommonUtils.jar:classes/commons-net-2.0.jar:classes/dnsjava-2.0.6.jar:classes/jcommon.jar:classes/jfreechart.jar:classes/json.jar:classes/jt400.jar:classes/postgresql-42.2.19.jar:classes/stax-1.2.0.jar:classes/stax-api-1.0.1.jar:classes/wrapper.jar:apminsight/self-monitor/apminsight-javaagent.jar
+	wrapper.lang.domain = wrapper
+	java.vm.specification.name = Java Virtual Machine Specification
+	java.vm.specification.version = 1.8
+	catalina.home = apache/tomcat
+	sun.cpu.endian = little
+	sun.os.patch.level = unknown
+	java.awt.headless = true
+	jdk.serialFilter = *;maxbytes=209715200;maxarray=209715200
+	wrapper.cpu.timeout = 10
+	java.io.tmpdir = ./tmp
+	java.vendor.url.bug = http://www.azul.com/support/
+	java.awt.graphicsenv = sun.awt.X11GraphicsEnvironment
+	os.arch = amd64
+	java.ext.dirs = /opt/ManageEngine/AppManager16/working/jre/lib/ext:/usr/java/packages/lib/ext
+	user.dir = /opt/ManageEngine/AppManager16/working
+	logsDir = ../logs/
+	line.separator = 
+
+	java.vm.name = OpenJDK 64-Bit Server VM
+	webnms.rootdir = /opt/ManageEngine/AppManager16/working
+	jdk.vendor.version = Zulu 8.66.0.15-CA-linux64
+	cmd.os.arch = 64
+	file.encoding = UTF-8
+	isConsole = false
+	java.specification.version = 1.8
+	com.sun.jndi.ldap.object.disableEndpointIdentification = true
+	wrapper.port = 32000
+	wrapper.arch = x86
+
+[10:30:54:455]|[02-20-2024]|[STARTUP_ERR]|[DEBUG]|[18]:  System details ends|
+java.io.IOException: Cannot run program "xdg-open": error=2, No such file or directory
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1048)
+	at com.adventnet.appmanager.util.ProcessBuilderUtil.runProcess(ProcessBuilderUtil.java:275)
+	at com.adventnet.appmanager.server.framework.APMStartupStatusNotifier.openWebClientHtml(APMStartupStatusNotifier.java:234)
+	at com.adventnet.appmanager.server.framework.APMStartupStatusNotifier.initWebclient(APMStartupStatusNotifier.java:165)
+	at com.adventnet.appmanager.server.startup.StartServer.main(StartServer.java:1551)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.io.IOException: error=2, No such file or directory
+	at java.lang.UNIXProcess.forkAndExec(Native Method)
+	at java.lang.UNIXProcess.<init>(UNIXProcess.java:247)
+	at java.lang.ProcessImpl.start(ProcessImpl.java:134)
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1029)
+	... 10 more
+java.lang.NullPointerException
+	at com.adventnet.appmanager.db.AMConnectionPool.getInstance(AMConnectionPool.java:150)
+	at com.adventnet.appmanager.db.AMConnectionPool.<clinit>(AMConnectionPool.java:61)
+	at com.adventnet.appmanager.db.AMPreparedStatementHandler.getPSId(AMPreparedStatementHandler.java:39)
+	at com.adventnet.appmanager.util.DBUtil.<clinit>(DBUtil.java:135)
+	at com.adventnet.appmanager.util.UserCreationUtil.migrateUserPassword(UserCreationUtil.java:196)
+	at com.adventnet.appmanager.server.startup.StartServer.updatePassforAWS(StartServer.java:4805)
+	at com.adventnet.appmanager.server.startup.StartServer.main(StartServer.java:1871)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+	at java.lang.Thread.run(Thread.java:750)
+java.lang.NullPointerException
+	at com.adventnet.appmanager.db.AMConnectionPool.getPreparedStatement(AMConnectionPool.java:447)
+	at com.adventnet.appmanager.util.DBUtil.getGlobalConfigValue(DBUtil.java:763)
+	at com.adventnet.appmanager.logging.AMLogController.init(AMLogController.java:36)
+	at com.adventnet.appmanager.logging.AMLog.<clinit>(AMLog.java:75)
+	at com.adventnet.appmanager.db.AMPreparedStatementHandler.getPSId(AMPreparedStatementHandler.java:47)
+	at com.adventnet.appmanager.util.DBUtil.<clinit>(DBUtil.java:135)
+	at com.adventnet.appmanager.util.UserCreationUtil.migrateUserPassword(UserCreationUtil.java:196)
+	at com.adventnet.appmanager.server.startup.StartServer.updatePassforAWS(StartServer.java:4805)
+	at com.adventnet.appmanager.server.startup.StartServer.main(StartServer.java:1871)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+	at java.lang.Thread.run(Thread.java:750)
+java.lang.NullPointerException
+	at com.adventnet.appmanager.db.AMConnectionPool.executeQueryStmt(AMConnectionPool.java:262)
+	at com.adventnet.appmanager.db.AMConnectionPool.executeQueryStmt(AMConnectionPool.java:176)
+	at com.adventnet.appmanager.util.DBUtil.<clinit>(DBUtil.java:145)
+	at com.adventnet.appmanager.util.UserCreationUtil.migrateUserPassword(UserCreationUtil.java:196)
+	at com.adventnet.appmanager.server.startup.StartServer.updatePassforAWS(StartServer.java:4805)
+	at com.adventnet.appmanager.server.startup.StartServer.main(StartServer.java:1871)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+	at java.lang.Thread.run(Thread.java:750)
+java.lang.NullPointerException
+	at com.adventnet.appmanager.db.AMConnectionPool.executeQueryStmt(AMConnectionPool.java:262)
+	at com.adventnet.appmanager.db.AMConnectionPool.executeQueryStmt(AMConnectionPool.java:176)
+	at com.adventnet.appmanager.util.DBUtil.hasServerConfigValue(DBUtil.java:7941)
+	at com.adventnet.appmanager.util.DBUtil.<clinit>(DBUtil.java:158)
+	at com.adventnet.appmanager.util.UserCreationUtil.migrateUserPassword(UserCreationUtil.java:196)
+	at com.adventnet.appmanager.server.startup.StartServer.updatePassforAWS(StartServer.java:4805)
+	at com.adventnet.appmanager.server.startup.StartServer.main(StartServer.java:1871)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+	at java.lang.Thread.run(Thread.java:750)
+java.lang.NullPointerException
+	at com.adventnet.appmanager.db.AMConnectionPool.executeQueryStmt(AMConnectionPool.java:262)
+	at com.adventnet.appmanager.db.AMConnectionPool.executeQueryStmt(AMConnectionPool.java:176)
+	at com.adventnet.appmanager.util.DBUtil.loadVMGuestOSMapping(DBUtil.java:3260)
+	at com.adventnet.appmanager.util.DBUtil.<clinit>(DBUtil.java:168)
+	at com.adventnet.appmanager.util.UserCreationUtil.migrateUserPassword(UserCreationUtil.java:196)
+	at com.adventnet.appmanager.server.startup.StartServer.updatePassforAWS(StartServer.java:4805)
+	at com.adventnet.appmanager.server.startup.StartServer.main(StartServer.java:1871)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+	at java.lang.Thread.run(Thread.java:750)
+java.lang.NullPointerException
+	at com.adventnet.appmanager.db.AMConnectionPool.executeQueryStmt(AMConnectionPool.java:262)
+	at com.adventnet.appmanager.db.AMConnectionPool.executeQueryStmt(AMConnectionPool.java:176)
+	at com.adventnet.appmanager.util.DBUtil.loadEC2InstanceOSMapping(DBUtil.java:3284)
+	at com.adventnet.appmanager.util.DBUtil.<clinit>(DBUtil.java:169)
+	at com.adventnet.appmanager.util.UserCreationUtil.migrateUserPassword(UserCreationUtil.java:196)
+	at com.adventnet.appmanager.server.startup.StartServer.updatePassforAWS(StartServer.java:4805)
+	at com.adventnet.appmanager.server.startup.StartServer.main(StartServer.java:1871)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+	at java.lang.Thread.run(Thread.java:750)
+java.lang.NullPointerException
+	at com.adventnet.appmanager.db.AMConnectionPool.getPreparedStatement(AMConnectionPool.java:447)
+	at com.adventnet.appmanager.util.DBUtil.getUserInfo(DBUtil.java:4321)
+	at com.adventnet.appmanager.util.DBUtil.getUserRole(DBUtil.java:4227)
+	at com.adventnet.appmanager.util.DBUtil.isSuperAdmin(DBUtil.java:4173)
+	at com.adventnet.appmanager.util.UserCreationUtil.migrateUserPassword(UserCreationUtil.java:196)
+	at com.adventnet.appmanager.server.startup.StartServer.updatePassforAWS(StartServer.java:4805)
+	at com.adventnet.appmanager.server.startup.StartServer.main(StartServer.java:1871)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+	at java.lang.Thread.run(Thread.java:750)
+java.lang.NullPointerException
+	at com.adventnet.appmanager.util.IdMigrationUtil.checkAndMigrateID(IdMigrationUtil.java:53)
+	at com.adventnet.appmanager.server.startup.StartServer.main(StartServer.java:1990)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+	at java.lang.Thread.run(Thread.java:750)

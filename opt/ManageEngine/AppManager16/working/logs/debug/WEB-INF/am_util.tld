@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+<tlibversion>1.0</tlibversion>
+<jspversion>1.1</jspversion>
+<shortname>util</shortname>
+<uri>http://www.adventnet.com/am-util</uri>
+<tag>
+<name>Truncate</name>
+<tagclass>com.adventnet.appmanager.tags.Truncate</tagclass>
+<bodycontent>JSP</bodycontent>
+<attribute>
+<name>tooltip</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>length</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+
+<tag>
+<name>adminlink</name>
+<tagclass>com.adventnet.appmanager.tags.AdminLink</tagclass>
+<bodycontent>JSP</bodycontent>
+<attribute>
+<name>href</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>enableClass</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>disableClass</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>access</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+<tag>
+<name>Format</name>
+<tagclass>com.adventnet.appmanager.tags.FormatTag</tagclass>
+<bodycontent>JSP</bodycontent>
+<attribute>
+<name>type</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+<tag>
+<name>timestamp</name>
+<tagclass>com.adventnet.appmanager.tags.LoadTime</tagclass>
+<bodycontent>JSP</bodycontent>
+</tag>
+<tag>
+<name>hiddenparam</name>
+<tagclass>com.adventnet.appmanager.tags.HiddenParam</tagclass>
+<bodycontent>JSP</bodycontent>
+<attribute>
+<name>name</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+<tag>
+	<name>eeadminlink</name>
+	<tagclass>com.adventnet.appmanager.tags.EnterpriseAdminLink</tagclass>
+	<bodycontent>JSP</bodycontent>
+	<attribute>
+		<name>href</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>enableClass</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>disableClass</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>access</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+<tag>
+<name>link</name>
+<tagclass>com.adventnet.appmanager.tags.CommonLinks</tagclass>
+<attribute>
+<name>linkType</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>resourceid</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>nameToTrim</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+<attribute>
+<name>trimLength</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>styleClass</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+
+</tag>
+
+
+</taglib>

@@ -1,0 +1,21 @@
+<StatusConfiguration>
+<!-- $Id: StatusConfig.xml,v 1.3 2009/07/16 13:32:01 sabarinathan Exp $ -->
+	<Status name="PASSED">
+		<range min="0" max="0"/>
+	</Status>
+	<Status name="COMPLETED">
+		<range min="1000" max="1999"/>
+	</Status>
+	<Status name="FAILED">
+		<range min="5000" max="5999"/>
+	</Status>
+	<Status name="INCOMPLETE">
+		<range min="6000" max="6999"/>
+	</Status>
+	<Status name="DATA_ERROR">
+		<range min="7000" max="7999"/>
+	</Status>
+ 	<Status name="ENVIRONMENT_ERROR">
+		<range min="8000" max="8999"/>
+	</Status>
+</StatusConfiguration>

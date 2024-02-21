@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+	<!-- EUM Agent URL configuration starts -->
+	<xml-schemas>
+		<xml-schema name="reportxmlschema" schema-file="schema-eumreport.xsd"/>
+	</xml-schemas>
+	<urls method="POST" throwallerrors="true" api="true">
+	 	<param name="apiKey" max-len="35" regex="am.alphanumeric" secret="true"/>
+		<param name="agentid" regex="-1andnumeric"/>
+		<param name="agentname" max-len="250" regex="am.eum.agentname"/>				
+		<param name="method" max-len="20" regex="^(isValidAPIKey|checkforupdate|getconfig|updatereport|shutdownagent|downloadAgent|getSeleniumScript|imgFileUpload|updateagent|metrackDataPush)$"/>
+		<param name="agentip" max-len="25" regex="ipaddress"/>
+	 	<param name="agentport" type="int" range="0-65353"/>
+	 	<param name="ppmcheck" type="boolean"/>
+		<param name="reportxml" type="xml" xml-schema="reportxmlschema" max-len="2147483646"/>
+	 	<param name="resids" regex="am.common.numberandcomma" max-len="5000000" />
+	 	<param name="mid" type="long"/>
+	 	<param name="isTestPlay" type="boolean"/>
+	 	<param name="status" max-len="10" regex="am.common.longandnull"/>	 
+	 	<param name="toolbarversion" regex="am.common.build.version"/>
+	 	<param name="agentversion" regex="am.common.build.version"/>
+	 	<param name="agentbuildnumber" regex="int"/>
+	 	<param name="agentdescription" max-len="250" type="String"/>
+	 	<param name="mailid" max-len="250" type="String"/>
+	 	<param name="pollinterval" type="long"/>
+	 	<param name="isEdgeSupported" type="boolean"/>
+	 	<param name="isFirefoxSupported" type="boolean"/>
+	 	<param name="isChromeSupported" type="boolean"/>
+	 	<param name="test" max-len="5" regex="^(test)$"/>
+		<url path="/Agent" operation-param="method" operation-value="isValidAPIKey,checkforupdate,getconfig,updatereport,shutdownagent,downloadAgent,getSeleniumScript,updateagent"/>
+		<url path="/Agent" operation-param="method" operation-value="imgFileUpload" parse-request-body="false">
+			<param name="collectionTime" type="long"/>
+		</url>
+        <url path="/Agent" operation-param="method" operation-value="metrackDataPush">
+			<param name="CollectionTime" type="long"/>
+			<param name="InstallationStartTime" type="long"/>
+		 	<param name="InstallationEndTime" type="long"/>
+		 	<param name="AgentFirstStartedTime" type="long"/>
+		 	<param name="AgentFirstSuccessfullyStartedTime" type="long"/>
+		 	<param name="AgentStartedTime" type="long"/>
+		 	<param name="AgentSuccessfullyStartedTime" type="long"/>
+		 	<param name="APMFirstConnectivityTime" type="long"/>
+		 	<param name="APMConnectivityTime" type="long"/>
+		 	<param name="MemoryConsumption" type="long"/>
+		 	<param name="OSType" regex="am.common.alphaNumeric.ext4" max-len="50"/>
+        </url>
+	</urls>
+	<!-- EUM Agent URL configuration ends -->
+	<!-- Real User Monitor URL configuration starts -->
+	 <urls>
+		<param name="errorId" type="String" max-len="5000"/>
+	    <param name="sessionId" type="String" max-len="10000" />
+	    <param name="resourceid" type="long" />
+	 	<param name="collectionTime" type="long" />
+	 	<param name="STARTTIME" type="long" />
+		<param name="ENDTIME" type="long" />
+		<param name="Periodicity" type="int" />	 
+		<param name="resourceId" type="long" />
+	   	<param name="rowId" type="long" />
+		<param name="tableId" regex="^(COUNTRYSUMMARY|AJAXCALL|BROWSERSUMMARY|DEVICESUMMARY|ISPSUMMARY|TRANSACTION)$"  max-len="20"/>		
+		<param name="_" type="long"/>
+		<param name="PRINTER_FRIENDLY" type="boolean"/>
+		<param name="getTableData" type="boolean" />
+		<param name="selectedSkin" regex="am.common.selectedSkin" max-len="100"/>
+		<param name="selectedscheme" regex="am.common.selectedscheme" max-len="100"/>
+		<url path="/RUMActions.do" method="POST" api="true" systemadmin_enterprise="true" operation-param="method" operation-value="testScript" authentication="required" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+		    <param name="websiteURL" regex="am.common.url.schemaandlength.validator" max-len="10000" />
+			<param name="appKey" max-len="50" regex="am.alphanumeric" secret="true"/>
+			<param name="agentProtocol" regex="am_prometheus_http_protocol_types" max-len="10"/>
+		</url>
+		<url path="/RUMActions.do" method="GET" operation-param="method" operation-value="getMapData" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid"></url>
+		<url path="/RUMActions.do" method="GET" operation-param="method" operation-value="getSessionDetails" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceId">
+			<param name="getResponseTimeDetails" type="boolean" />
+		</url>
+		<url path="/RUMActions.do" method="GET" operation-param="method" operation-value="getDomainInsight" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+			<param name="domain" regex="am.ssl.domainname" max-len="1000"/>
+			<param name="domainType" regex="am.rum.domainType" max-len="10"/>
+		</url>
+		<url path="/RUMActions.do" method="GET" operation-param="method" operation-value="getJSErrorTableData" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+			<param name="errorSessionId" type="String" max-len="10000" />		
+			<param name="getSessionDetails" type="boolean" />
+			<param name="getTraceDetails" type="boolean" />
+			<param name="errorType" regex="String" max-len="150"/>
+			<param name="columnId" regex="^(DOMAIN|USERID|BROWSER|PAGE|FILENAME|ERRORTYPE)$" max-len="15"/>
+			<param name="trace" regex="String" max-len="250"/>
+		</url>
+		<url path="/RUMActions.do" method="GET" operation-param="method" operation-value="getTxnInsightsData" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceId">
+			<param name="fromWebTxnInsights" type="boolean" />
+			<param name="fromAjaxTab" type="boolean" />
+			<param name="tabName" regex="^(ajaxCalls)$" max-len="15"/>
+			<param name="txnName" regex="String" max-len="1000"/>
+			<param name="responseTime" regex="am.common.decimals" />
+			<param name="count" regex="am.common.onlynumeric" />
+		</url>
+		<url path="/RUMActions.do" method="GET" operation-param="method" operation-value="getTableInsight" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceId">
+			<param name="rowName" regex="String" max-len="1000"/>
+		</url>
+		<url path="/RUMActions.do" method="GET" operation-param="method" operation-value="getResponseTimeAndCountData" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceId"></url>
+		<url path="/RUMActions.do" method="GET" operation-param="method" operation-value="listUserSessionData" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceId">
+			<param name="active" type="boolean"/>
+			<param name="live" type="boolean"/>
+			<param name="expired" type="boolean"/>		
+		</url>
+		<url path="/RUMActions.do" method="GET" operation-param="method" operation-value="getRUMTab" authentication="required" roles="am.role.ADMIN.EA.DE">
+			<param name="addmonitor" type="boolean"/>
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+			<param name="plugin_view" type="boolean" />
+			<param name="PRINTER_FRIENDLY" type="boolean" max-occurrences="2"/>
+		</url>
+	 </urls>
+	 <urls throwallerrors="true" api="true">
+	 	<param name="apikey" max-len="35" regex="am.alphanumeric" secret="true"/>
+	 	<param name="version" regex="am.common.build.version"/>
+		<param name="agentName" max-len="250" regex="am.hostname.ipaddress"/>
+		<param name="method" max-len="20" regex="^(getmonitorconfig|pushrumdata|pushmetrackdata)$"/>
+		<param name="agentPort" type="int" range="0-65353"/>
+		<param name="agentId" type="long"/>		
+		<url path="/rum/getmonitorconfig" method="GET">
+			<param name="appKey" max-len="50" regex="am.alphanumeric" secret="true"/>
+			<param name="agentIP" max-len="50" regex="am.hostname"/>	
+			<param name="agentProtocol" max-len="5" regex="am_prometheus_http_protocol_types"/>
+			<param name="geoAPIEnabled" type="boolean"/>
+		</url>
+		<url path="/rum/pushrumdata" method="POST">
+			<param name="UNMANAGED_MONITORS" regex="am.rum.monitor.resids" max-len="100000"/>
+			<param name="UNDER_MAINTENANCE" regex="am.rum.monitor.resids"  max-len="100000"/>
+			<param name="fetchall" type="boolean"/>
+			<file allowed-extensions="txt" content-type-name="recorder" max-size="1000" name="DataMetrics">
+		 		<filename regex="am.common.extended.filename" max-len="250"/>
+			</file>
+			<file allowed-extensions="txt" content-type-name="recorder" max-size="1000" name="TraceMetrics">
+				<filename regex="am.common.extended.filename" max-len="250"/>
+			</file>
+		</url>
+		<url path="/rum/pushmetrackdata" method="POST">
+			<param name="CollectionTime" type="long"/>
+			<param name="InstallationStartTime" type="long"/>
+		 	<param name="InstallationEndTime" type="long"/>
+		 	<param name="AgentFirstStartedTime" type="long"/>
+		 	<param name="AgentFirstSuccessfullyStartedTime" type="long"/>
+		 	<param name="AgentStartedTime" type="long"/>
+		 	<param name="AgentSuccessfullyStartedTime" type="long"/>
+		 	<param name="APMFirstConnectivityTime" type="long"/>
+		 	<param name="APMConnectivityTime" type="long"/>
+		 	<param name="MemoryConsumption" type="long"/>
+		 	<param name="NoOfMonitorsInCache" type="int"/>
+		 	<param name="OSType" regex="am.common.alphaNumeric.ext4" max-len="50"/>
+		</url>
+	</urls>
+	<!-- Real User Monitor URL configuration ends -->
+	<urls method="GET"  throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url path="/confActions.do" operation-param="method" operation-value="getRUMAgentDetails" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+		 	<param name="selectedServer" type="long" />
+		</url>
+		<url path="/importHAR.do" authentication="required" roles="am.role.ADMIN.EA.DE" />
+		<url path="/WTRInfo.do" authentication="required" roles="am.role.ADMIN.EA.DE" />
+		<url path="/SeleniumActions.do" operation-param="method" operation-value="showSeleniumTestCaseImporter" authentication="required" roles="am.role.ADMIN.EA"></url>
+		<url path="/SeleniumActions.do" operation-param="method" operation-value="getAgentDetails" authentication="required" roles="am.role.ADMIN.EA"></url>
+		<url path="/SeleniumActions.do" operation-param="method" operation-value="getDIDKey" authentication="required" roles="am.role.ADMIN.EA"></url>
+		<url path="/SeleniumActions.do" operation-param="method" operation-value="isEUMParent" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resid">
+			<param name="resid" type="long"/>
+		 </url>
+		<url path="/SeleniumActions.do" operation-param="method" operation-value="showScript" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid">
+			<param name="resourceid" type="long" />
+		</url>
+		<url path="/SeleniumActions.do" operation-param="method" operation-value="showScreenShots" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+			<param name="resourceType" regex="am.recorder.rbm.screenshotType" max-len="30"/>
+			<param name="resourceid" type="long" />
+			<param name="sTime" type="long" />
+			<param name="showHistory" type="boolean" />
+		</url>
+		<url path="/adminAction.do" operation-param="method" operation-value="showRESTAPIPage" authentication="required" roles="am.role.ADMIN.EA"/>
+		<url path="/adminAction.do" operation-param="method" operation-value="checkUrlAvailability" authentication="required" roles="am.role.ADMIN.EA">
+			<param name="urlcheck" regex="am.url.ext" max-len="40"/>
+		</url>
+		<url path="/adminAction.do" operation-param="method" operation-value="getAPIKey" authentication="required" roles="am.role.ADMIN.EA" >
+			<param name="service" regex="am.threshold.admin.view" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+		<url path="/wsm.do" operation-param="method" operation-value="showoperations" authentication="required" roles="am.role.ADMIN"  privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+			<param name="value" regex="am.webservice.operation.value" max-len="30"/>
+		</url>
+		<url path="/wsm.do" operation-param="method" operation-value="manageoperations" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+		</url>
+		<url path="/wsm.do" operation-param="method" operation-value="refreshoperations" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+		</url>
+		<url path="/wsm.do" operation-param="method" operation-value="variableMethods" authentication="required" roles="am.role.ADMIN.EA"></url>
+		<url path="/wsm.do" operation-param="method" operation-value="getSOAPInfo" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resId">
+			<param name="resId" type="long"/>
+			<param name="operationId" type="long"/>
+			<param name="type" regex="am.webservice.operation.requestOrResponse" max-len="20"/>
+			<param name="isConfigured" regex="am.isconfigured.value"  max-len="1000"/>
+		</url>
+		<url path="/wsm.do" operation-param="method" operation-value="getSOAPRequestInfo" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid">
+			<param name="operationID" type="int"/>
+			<param name="resourceid" type="long" min-occurrences="1"/>
+		</url>
+		<url path="/wsm.do" operation-param="method" operation-value="showdetails" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+			<param name="frompage" regex="am.webservice.operation.frompage" max-len="20"/>
+		</url>
+		<url path="/wsm.do" operation-param="method" operation-value="updateRequest" authentication="required" roles="am.role.ADMIN" dynamic-redirect="true" redirect-url-template="/wsm.do?method=getSOAPInfo&amp;operationId=$operationId$&amp;resId=$resourceId$&amp;type=request">
+			<param name="resourceId" type="long"/>
+			<param name="operationId" type="int"/>
+		</url>
+		<url path="/wsm.do" operation-param="method" operation-value="enabledisablereports" authentication="required" roles="am.role.ADMIN" dynamic-redirect="true" redirect-url-template="/wsm.do?method=getSOAPInfo&amp;operationId=$operationId$&amp;resId=$resourceId$&amp;type=response">
+			<param name="resourceId" type="long"/>
+			<param name="operationId" type="int"/>
+		</url>
+		<url path="/updateUrl.do" operation-param="actionmethod" operation-value="editUrlMonitor" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid">
+			<param name="monitorname" regex="am.displayname.common" description="am.webclient.common.displayname.text" max-len="515"/>
+			<param name="resourceid" type="long"/>
+			<param name="type" regex="am.urlmon.urltype" max-len="20"/>
+			<param name="parentname" type="String" max-len="515"/>
+			<param name="parentid" type="long"/>
+			<param name="haid" type="long"/>
+		 </url>
+		 <url path="/showAgent.do" operation-param="method" operation-value="showEumSnapshot" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="resTypeValue" regex="am.eum.monitorTypes" max-len="20"/>
+			<param name="severity" regex="am.eum.severitylevel"/>
+			<param name="selectedServer" regex="am.common.longandnull"/>
+			<param name="plugin_view" type="boolean"/>
+			<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		 </url>
+		 <url path="/confActions.do" operation-param="method" operation-value="checkConnectivityForBRM" authentication="required" roles="am.role.ADMIN.EA"></url>
+		 <url path="/WebToken.do" operation-param="method" operation-value="listWebTokens" authentication="required" roles="am.role.ADMIN.EA.DE">
+		     <param name="service" regex="alphanumeric" max-len="100"/>
+			 <param name="reqForAdminLayout" type="boolean" />
+			 <param name="from"  regex="am.oauth.from" max-len="30"/>
+		 	 <param name="action"  regex="am.webToken.action" max-len="30"/>
+		</url>
+		<url path="/WebToken.do" operation-param="method" operation-value="openWebTokenForm" authentication="required" roles="am.role.ADMIN.EA.DE" custom-scope-validator="com.adventnet.appmanager.utils.client.WebPrivilegeHandler:checkIfWebTokenIsEditable">
+			 <param name="from"  regex="am.oauth.from" max-len="30"/>
+		 	 <param name="action"  regex="am.webToken.action" max-len="30"/>
+		 	 <param name="TOKENID"  type="long"/>
+		</url>
+		<url path="/showAgent.do" operation-param="method" operation-value="getAgentDetails" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="ajaxRequest" type="boolean"/>
+			<param name="selectedServer" regex="am.common.longandnull"/>
+			<param name="isRBM" type="boolean"/>
+			<param name="fromWhere" regex="^(?i)(CONF)$" />
+		</url>
+		<url path="/OAuthProvider.do" operation-param="method" operation-value="listOAuthProviders" authentication="required" roles="am.role.ADMIN.EA.DE">
+			<param name="from"  regex="am.oauth.from" max-len="30"/>
+			<param name="service" regex="am.certificate.service" max-len="20"/>
+			<param name="reqForAdminLayout"  type="boolean" />
+		</url>
+		<url path="/rbmresources.do" operation-param="method" operation-value="showRBMDashboard" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="date" regex="am.common.javascriptDate" max-len="250"/>
+		</url>
+		<url path="/confActions.do" operation-param="method" operation-value="overwriteOriginalContentWDM" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+		</url>
+		<url path="/RestAPIAction.do" operation-param="method" operation-value="viewSequenceResponseDetails" authentication="required" roles="am.role.ADMIN.EA.OP.US" privilege-identifier="resourceid">
+			<param name="resourceid" type="long"/>
+			<param name="rowId" type="long"/>
+	 	</url>
+	 	<url path="/OAuthCallBack" authentication="required" roles="am.role.ADMIN.EA">
+	 		<extraparam type="String" max-len="100000" limit="1000" max-occurrences="1000" description="To allow extra parameters and values"/>
+	 	</url>
+	 	<url path="/jsp/OAuthCallBack.jsp" authentication="required" roles="am.role.ADMIN.EA">
+		 	<param name="code" max-len="10000" type="String" secret="true"/>
+			<param name="error" max-len="10000" type="String" />
+	 	</url>
+	 	<url path="/jsp/EditEumDetails.jsp" authentication="required" roles="am.role.ADMIN">
+			<param name="agentId" type="long" />
+			<param name="agentName" max-len="255" type="String" />
+			<param name="agentIp" max-len="25" regex="ipaddress" />
+			<param name="SUBREQUEST" type="boolean" />			
+		</url>
+		<url path="/jsp/reports/eumReportsDropDown.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="monType" max-len="20" regex="am.eum.monitorTypes" />
+		</url>
+		<url path="/jsp/wsmigraph.jsp" authentication="required" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="selectedskin" regex="am.common.selectedSkin" />
+			<param name="resourceid" type="long" />
+			<param name="instanceid" type="long" />
+		</url>
+		<url path="/jsp/ProxyConfiguration.jsp" authentication="required" roles="am.role.ADMIN.EA.DE">
+			<param name="admin" type="boolean" />
+		    <param name="ispopup" type="boolean" />
+			<param name="service" regex="am.action.fromadminlayout.service" />
+			<param name="reqForAdminLayout" type="boolean" />
+		</url>
+		<url path="/jsp/RBM_new.jsp" authentication="required" roles="am.role.ADMIN.EA.DE" />
+		<url path="/jsp/URLSequence_HAR_Import.jsp" authentication="required" roles="am.role.ADMIN.EA.DE" />
+	</urls>
+	
+	<urls method="POST" throwallerrors="true" >
+		<param-group name="am.additional.extra.params" />
+		<param name="TOKENID"  type="long" />
+		<param name="TOKENNAME"  regex="am.displayname.common" max-len="255"/>
+		<param name="ENDPOINTURL"  regex="am.common.url.schemaandlength.validator" max-len="10000" />
+		<param name="REFRESHINTERVAL"  type="int"/>
+		<param name="TOKENREQUESTMETHOD"  regex="am.request.method" max-len="10"/>
+		<param name="TOKENREQUESTPAYLOADTYPE"  regex="am.restapi.payloadType" max-len="10" />
+		<param name="TOKENREQUESTPAYLOAD"  type="String" max-len="10000"/>
+		<param name="TOKENREQUESTUSERNAME"  type="String" max-len="255"/>
+		<param name="TOKENREQUESTPASSWORD"  type="String" max-len="255" secret="true"/>
+		<param name="TOKENREQUESTCLIENTCERTPASSWORD"  type="String" max-len="255" secret="true"/>		
+		<param name="AUTHREQUESTMETHOD"  regex="^(HEADER|URIPARAM)$" max-len="10"/>
+		<param name="AUTHREQUESTPARAM"  type="String" max-len="255"/>
+		<param name="TOKENRESPONSEFORMAT"  regex="^(Text|JSON|XML|ResponseHeader)$" max-len="20"/>
+		<param name="TOKENRESPONSEPATH"  type="String" max-len="10000"/>
+		<param name="TOKENREQUESTHEADERS"  type="String" max-len="10000"/>		
+		<param name="CERTFILENAMEHIDDEN"  regex="am.common.cert.filename" max-len="150"/>
+		<param name="action" regex="^(AddWebToken|UpdateWebToken|ADD_MAPPING|DELETE_MAPPING|DeleteWebToken)$" />
+		<!-- Roles attribute is not required when sync-admin="only" attribute is used.
+    			sync-admin="only" - Only Admin to MAS sync request will be allowed 
+    		-->
+		<url path="/AppManager/xml/WebTokenSync" api="true" authentication="required" sync-admin="only" >
+			<param name="RESOURCEID" regex="-1andnumeric" />
+			<param name="SYNCACTION" type="boolean"/>
+			<param name="apikey" regex="apikey" secret="true" />
+			<param name="WEBTOKEN" type="String" max-len="100000" secret="true"/>
+			<param name="LASTUPDATEDTIME" type="long" max-len="500"/>
+			<param name="LASTUPDATEDTIME_FORMATTED" regex="am.downtimescheduler.timezone"/>
+			<param name="TOKENREQUESTCLIENTCERTNAME" regex="am.common.cert.filename" max-len="150"/> 
+		</url>
+		<url path="/WebToken.do" method="POST" csrf="true" operation-param="method" operation-value="saveWebToken" authentication="required" roles="am.role.ADMIN.EA" custom-scope-validator="com.adventnet.appmanager.utils.client.WebPrivilegeHandler:checkIfWebTokenIsEditable"> 
+			<file allowed-extensions=".p12"	content-type-name="recorder" max-size="5000" name="TOKENREQUESTCLIENTCERTNAME">
+				<filename regex="am.common.cert.filename" max-len="150"/>
+			</file>
+		</url>
+	</urls>
+	
+	<urls method="POST"  throwallerrors="true">
+		<param-group name="am.additional.extra.params" />		
+		<url path="/SeleniumActions.do" csrf="true" operation-param="method" operation-value="doTestPlayBack" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid">
+			<param name="RBMscript" type="String" max-len="50000" />
+			<param name="resourceid" type="long" />
+		</url>
+		<url path="/SeleniumActions.do" csrf="true" operation-param="method" operation-value="saveScript" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid">
+			<param name="RBMscript" type="String" max-len="50000" />
+			<param name="resourceid" type="long" />
+		 </url>
+		 <url path="/SeleniumActions.do" csrf="true" operation-param="method" operation-value="importSeleniumTestCase" authentication="required" roles="am.role.ADMIN.EA">
+			<param name="rbmDisplayName" regex="am.displayname.common" max-len="515" />
+			<file name="rbmTCfile" allowed-extensions="html,side" content-type-name="recorder" max-size="5120">
+				<filename regex="am.common.extended.filename" max-len="250" />
+			</file>
+			<param name="rbmPollingInterval" type="int" range="1-4320" />
+			<param name="rbmPageLoadTime" type="int" range="1-60" />
+			<param name="rbmThinkTime" type="int" range="1-10" />
+			<param name="rbmShowScreenshot" type="boolean"/>
+			<param name="rbmShowPerformance" type="boolean" />
+			<param name="rbmAcceptCertificate" type="boolean" />
+			<param name="browserType" regex="am.recorder.rbm.browserValue" />
+			<param name="runOnAgent" regex="am.recorder.rbm.runonagent" max-len="20"/>
+			<param name="selectAllAgents" regex="onlyon" max-len="20"/>
+			<param name="selectedAgents" type="long" max-occurrences="10000"/>
+			<param name="testPlay" type="boolean"/>
+			<param name="JTC" type="boolean"/>
+			<param name="haid" regex="am.common.longandnull" max-occurrences="1000"/>
+			<param name="groupname" regex="am.displayname.common"  max-len="515"/>
+		 </url>
+		 <url path="/wsm.do" csrf="true" operation-param="method" operation-value="saveoperation" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid">
+			<param name="operation" type="int"/>
+			<param name="operationName" type="String"/>
+			<param name="soapAction" type="String" max-len="10000"/>
+			<param name="soapRequest" type="String" max-len="500000"/>
+			<param name="XSLTInput" type="String" max-len="500000"/>
+			<param name="resourceid" type="long"/>
+			<param name="value" regex="am.webservice.operation.type" max-len="20"/>
+		</url>
+		<url path="/wsm.do" csrf="true" operation-param="method" operation-value="updateRequest" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceId" custom-scope-validator="com.adventnet.appmanager.utils.client.WebPrivilegeHandler:checkIfWebServiceOperationIsOwned">
+			<param name="resourceId" type="long"/>
+			<param name="operationId" type="int"/>
+			<param name="operationName" type="String" max-len="100"/>
+			<param name="soapAction" type="String" max-len="10000"/>
+			<param name="soapRequest" type="String" max-len="500000"/>
+			<param name="XSLTInput" type="String" max-len="500000"/>
+		</url>
+		<url path="/wsm.do" csrf="true" operation-param="method" operation-value="testOperation" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid">
+			<param name="XSLTInput" type="String" max-len="500000"/>
+			<param name="operation" type="int" />
+			<param name="operationName" type="String" max-len="100"/>
+			<param name="resourceid" type="long" />
+			<param name="soapAction" type="String" max-len="10000"/>
+			<param name="soapRequest" type="String" max-len="500000" />
+			<param name="operationId" type="long"/>
+			<param name="resourceId" type="long"/>
+		</url>
+		<url path="/showAgent.do" csrf="true" operation-param="method" operation-value="enableOrDisableAgents" authentication="required" roles="am.role.ADMIN">
+			<param name="agentIds" type="String" max-len="250000"/>
+			<param name="flag" regex="am.trap.status"/>
+		</url>
+		<url path="/showAgent.do" csrf="true" operation-param="method" operation-value="editAgentDetails" authentication="required" roles="am.role.ADMIN">
+			<param name="agentId" type="long"/>
+			<param name="agentIp" regex="am.hostname"/>
+			<!-- ZVE-2022-3642,ZVE-2022-3643,ZVE-2022-3644,ZVE-2022-3645,ZVE-2022-3650,ZVE-2022-3654,ZVE-2022-3657,ZVE-2022-3658 - XSS in Agent Display Name - Fixed -->
+			<param name="agentName" max-len="515" regex="am.eum.agent.displayName"/>
+			<param name="oldName" type="String" max-len="515"/>
+		</url>
+		<url path="/showAgent.do" csrf="true" operation-param="method" operation-value="getAgentStatus,deleteAgents" authentication="required" roles="am.role.ADMIN">
+			<param name="agentIds" type="String" max-len="250000"/>
+		</url>
+		<url path="/confActions.do" csrf="true" operation-param="method" operation-value="getWebpagesWDM" authentication="required" roles="am.role.ADMIN.EA" privilege-identifier="resourceid">
+			<param name="DomainURL" regex="am.common.url.schemaandlength.validator" max-len="10000"/>
+			<param name="resourceid" regex="am.common.longandnull" max-len="20"/>
+			<param name="UserName" type="String" max-len="250"/>
+			<param name="Password" type="String" max-len="250" secret="true"/>
+		</url>
+		<url path="/adminAction.do" csrf="true" operation-param="method" operation-value="configurePHP" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid">
+			<param name="serverpath" regex="am.webserver.uri" max-len="255"/>
+			<param name="sslenabled" regex="onlyon"/>
+			<param name="resourcename" type="String" max-len="515" />
+			<param name="resourcetype" regex="am.config.resourcetype" max-len="20"/>
+			<param name="applicationname" type="String" />
+			<param name="displayname" type="String" max-len="515"/>
+			<param name="haid" regex="am.sqljobaction.haid"/>
+			<param name="moname" type="String" max-len="2000"/>
+			<param name="pollInterval" type="int" range="1-4320"/>
+			<param name="resourceid" type="long" />
+			<param name="type" regex="am.config.resourcetype" max-len="20"/>
+		</url>
+		<url path="/adminAction.do" csrf="true" operation-param="method" operation-value="configureMailOrWeb" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceid">
+			<param name="resourcename" type="String" max-len="515" />
+			<param name="resourcetype" regex="am.config.resourcetype" max-len="20"/>
+			<param name="applicationname" type="String" />
+			<param name="displayname" type="String" max-len="515"/>
+			<param name="haid" regex="am.sqljobaction.haid"/>
+			<param name="moname" type="String" max-len="2000"/>
+			<param name="pollInterval" type="int" range="1-4320"/>
+			<param name="resourceid" type="long" />
+			<param name="type" regex="am.config.resourcetype" max-len="20"/>
+		</url>
+		<url path="/showresource.do" csrf="true" operation-param="method" operation-value="editUrlSequenceDetails" authentication="required" roles="am.role.ADMIN" privilege-identifier="seqid">
+			<param name="displayname" type="String" max-len="515"/>
+			<param name="moname" type="String" max-len="515"/>
+			<param name="pollInterval" type="int"/>
+			<param name="seqid" type="long"/>
+		 </url> 
+		 <url path="/RestAPIAction.do" csrf="true" operation-param="method" operation-value="enabledisablereports" authentication="required" roles="am.role.ADMIN" custom-scope-validator="com.adventnet.appmanager.utils.client.WebPrivilegeHandler:checkIfRestAPICustomAttribtutesAreOwned">
+			<param name="resourceid" type="long"/>
+			<param name="enable" type="boolean"/>
+			<param name="custom" type="long" max-occurrences="100" min-occurrences="0" />
+			<param name="reportsCheck" regex="am.mailserver.serverauth.types" max-len="20"/>
+	 	</url>
+	 	<url path="/ConfigureProxy.do" csrf="true" authentication="required" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="updateCredentials" type="boolean"/>
+			<param name="bypassproxy" type="boolean" />
+			<param name="dontProxyfor" type="String" max-len="20000"/>
+			<param name="host" regex="am.hostname" />
+			<param name="password" type="String" secret="true" max-len="515"/>
+			<param name="port" regex="am.port" />
+			<param name="useproxy" type="boolean" />
+			<param name="userId" type="String" max-len="515"/>
+		</url>
+		<url path="/wsm.do" csrf="true" operation-param="method" operation-value="enabledisablereports" authentication="required" roles="am.role.ADMIN" privilege-identifier="resourceId" custom-scope-validator="com.adventnet.appmanager.utils.client.WebPrivilegeHandler:checkIfWebServiceAttributesAreOwned">
+			<param name="resourceId" type="long"/>
+			<param name="xslt" type="long" max-occurrences="100" min-occurrences="0" />
+			<param name="operationId" type="long"/>
+			<param name="enable" type="boolean" />
+			<param name="reportsCheck" regex="am.mailserver.serverauth.types" max-len="20"/>		
+		</url>
+		<url path="/RestAPIAction.do" csrf="true" operation-param="method" operation-value="updateInput" authentication="required" roles="am.role.ADMIN" custom-scope-validator="com.adventnet.appmanager.utils.client.WebPrivilegeHandler:checkIfRestAPICustomAttribtutesAreOwned">
+	 		<param name="resID" type="long"/>
+			<param name="inputType" regex="^(JSONSCHEMA|XSLTINPUT)$" max-len="20"/>
+			<param name="input" type="String" max-len="-1"/>
+			<param name="fromAPISequence" type="boolean"/>
+	 	</url>
+	</urls>		
+	
+   <!-- ********************************************* REST-API WAF **************************************************************** -->
+    <urls throwallerrors="true" method="POST" api="true">
+    	<param-group name="am.additional.extra.params" />
+		<url path="/AppManager/json/ApmAdminServices/getRUMTotalPageViewsCount" >
+			<param name="serverId" type="int" />
+			<param name="eeSyncKey" regex="am.encodedauthkey" secret="true" />
+			<param name="masId" type="int" />			
+		</url>
+	</urls>
+    <urls throwallerrors="true" method="POST" api="true" authentication="required" deny-del-admin="true" roles="am.role.ADMIN.EA">
+		<param-group name="am.additional.extra.params" />
+		<param name="apikey" regex="apikey" secret="true" />
+		<url path="/AppManager/json/rbmAddOnLogin" >
+			<param name="version" type="double" />
+		</url>
+		<url path="/AppManager/json/getCredentialsManagerList" >
+			<param name="fromRecorder" type="boolean" />
+			<param name="type" regex="^(UrlMonitor)$" />
+		</url>
+    </urls>
+    <!-- Roles attribute is not required when sync-admin="only" is used attribute.
+    	sync-admin="only" -> Only Admin to MAS sync request will be allowed -->
+	<urls throwallerrors="true" method="POST" api="true" authentication="required" sync-admin="only">
+	   	<param name="apikey" regex="apikey" secret="true" />
+	    <url path="/AppManager/xml/SyncOAuth">
+			<param name="Action" regex="^(?i)(ADD|UPDATE|DELETE|ADD_MAPPING|UPDATE_MAPPING)$" max-len="30" />
+			<param name="ProviderID" type="long" />
+			<param name="providerID" type="long" />
+			<param name="resourceID" type="long" />
+			<param name="GrantType" regex="am.oauth.grantType" max-len="20" />
+			<param name="Grant_Type" regex="am.oauth.grantType" max-len="20" />
+			<param name="Provider_Name" regex="am.oauth.form.params" />
+			<param name="Redirect_Uri" regex="am.common.url.schemaandlength.validator" />
+			<param name="Client_ID" regex="am.oauth.form.params" max-len="500" secret="true" />
+			<param name="Client_Secret" type="String" max-len="500" secret="true" />
+			<param name="authEndpointUrl" regex="am.common.url.schemaandlength.validator" />
+			<param name="Authorization_Url" regex="am.common.url.schemaandlength.validator" />
+			<param name="Scope" regex="am.oauth.form.params" max-len="3000" />
+			<param name="scope" regex="am.oauth.form.params" max-len="3000" />
+			<param name="AuthorizedReq_Param_Name" regex="am.oauth.form.params" max-len="2000" />
+			<param name="AuthCode_Req_Params" regex="am.oauth.form.params" max-len="2000" />
+			<param name="authCodeReqPrams" regex="am.oauth.form.params" max-len="2000" />				
+			<param name="AuthorizedReq_Param_Value" regex="password" max-len="2000" secret="true" />	
+			<param name="tokenUri" regex="am.common.url.schemaandlength.validator" />
+			<param name="AccessToken_Uri" regex="am.common.url.schemaandlength.validator" />
+			<param name="tokenReqMethod" regex="am.common.one.two" max-len="5" />
+			<param name="reqAuthMethod" regex="am.common.one.two" max-len="5" />
+			<param name="AuthorizedReq_Method"  regex="am.common.one.two" max-len="5" />
+			<param name="AccessToken_Req_Method"  regex="am.common.one.two" max-len="5" />			
+			<param name="AccessToken_Req_Params" type="String" max-len="2000" />					
+			<param name="authorizationCode" regex="am.oauth.form.params" max-len="3000" secret="true" />
+			<param name="Authorization_Code" regex="am.oauth.form.params" max-len="3000" secret="true" />
+			<param name="resOwnerUsername" regex="am.oauth.form.params" max-len="500" />
+			<param name="ResourceOwner_Username" regex="am.oauth.form.params" max-len="500" />
+			<param name="resOwnerPwd"  regex="^.{1,500}$" max-len="500" secret="true" />			
+			<param name="ResourceOwner_Password" regex="^.{1,500}$" max-len="500" secret="true" />
+			<param name="access_token" type="String" max-len="100000" secret="true"/>
+			<param name="refresh_token" type="String" max-len="100000" secret="true"/>
+			<param name="expires_in" type="long" />
+			<param name="expiry_time" regex="am.report.timestamp" />
+			<param name="Status" regex="^$|^[a-zA-Z \.\']{0,1024}$" max-len="50" />
+			<param name="UpdateAccessToken" type="boolean" />
+		</url>
+		<url path="/AppManager/xml/syncSAMLAuth">
+			<param name="Action" regex="^(?i)(ADD|UPDATE|DELETE|ADD_MAPPING|UPDATE_MAPPING|DELETE_MAPPING)$" max-len="30" />
+			<param name="displayName" regex="am.displayname.common" max-len="100"/>
+			<param name="redirectURL" regex="am.common.url.schemaandlength.validator" max-len="10000"/>
+			<param name="method" regex="^(G|P)$" max-len="1"/>	
+			<param name="formbased" regex="am.common.TFNull" max-len="6"/>
+			<param name="payloadtype" regex="^(F|T|X|J)$" max-len="1"/>
+			<param name="formname" type="String" max-len="250"/>
+			<param name="queryString" type="String" max-len="10000" secret="true"/>
+			<param name="ssl" regex="am.sslCertificateMonitor.protocol" max-len="8"/>
+			<param name="loginURL" regex="am.common.url.schemaandlength.validator" max-len="10000"/>
+			<param name="requestBinding" regex="^(R|P)$" max-len="1"/>
+			<param name="responseBinding" regex="^(R|P)$" max-len="1"/>
+			<param name="username" type="String" max-len="250"/>
+			<param name="password" type="String" max-len="250" secret="true"/>
+			<param name="usernameAttribute" type="String" max-len="250"/>
+			<param name="passwordAttribute" type="String" max-len="250"/>
+			<param name="acsURL" regex="am.common.url.schemaandlength.validator" max-len="10000"/>
+			<param name="configId" regex="-1andnumeric" max-len="12"/>
+			<param name="edit" regex="am.common.TFNull" max-len="6"/>
+			<param name="headers" type="String" max-len="40000" secret="true"/>
+			<param name="resourceId" regex="-1andnumeric" max-len="12"/>
+		</url>
+    </urls>
+
+	<!-- ********************************************* Deny operations **************************************************************** -->
+	<urls throwallerrors="true" method="get" deny-operation="true" >
+		<url path="/SeleniumActions.do" operation-param="method" operation-value="doTestPlayBack,saveScript,importSeleniumTestCase"/>
+		<url path="/updateUrl.do" operation-param="actionmethod" operation-value="createUrlMonitor,updateUrlMonitor,checkMonitorAvailability" redirect-url="/showresource.do?method=showResourceTypes&amp;network=UrlMonitor&amp;detailspage=true" />
+		<url path="/createurlsequence.do" operation-param="actionmethod" operation-value="createMonitorfromHAR" redirect-url="/importHAR.do"/>
+		<url path="/createurlsequence.do" operation-param="actionmethod" operation-value="importHARFile" />
+		<url path="/showAgent.do" operation-param="method" operation-value="enableOrDisableAgents,editAgentDetails,getAgentStatus,deleteAgents" />
+		<url path="/WebToken.do" operation-param="method" operation-value="saveWebToken,deleteWebToken" />
+		<url path="/OAuthProvider.do" operation-param="method" operation-value="deleteOAuthProvider,saveCredentials" />
+		<url path="/RestAPIAction.do" operation-param="method" operation-value="updateInput,enabledisablereports" />
+		<url path="/wsm.do" operation-param="method" operation-value="saveoperation,deleteoperations,editmonitor,testOperation"/>
+		<url path="/wsm.do" operation-param="method" operation-value="addMonitor" redirect-url="/adminAction.do?method=reloadHostDiscoveryForm&amp;type=Web Service&amp;restype=Web Service"/>
+		<url path="/adminAction.do" operation-param="method" operation-value="configurePHP,configureMailOrWeb"/>
+		<url path="/showresource.do" operation-param="method" operation-value="editUrlSequenceDetails"/>
+		<url path="/confActions.do" operation-param="method" operation-value="getWebpagesWDM"/>
+		<url path="/AppManager/xml/WebTokenSync" />	
+		<url path="/AppManager/json/updateRestAPIMonitorSchema" />
+		<url path="/AppManager/xml/updateRestAPIMonitorSchema" />
+		<url path="/AppManager/json/rbmAddOnLogin" />
+		<url path="/AppManager/json/getCredentialsManagerList" />
+		<url path="/AppManager/json/GetUrlSeqNames" />
+		<url path="/AppManager/json/GetUrlSequenceElements" />
+		<url path="/AppManager/json/ListAgents" />
+		<url path="/AppManager/json/getRBMPlaybackStatus" />
+		<url path="/AppManager/json/ApmAdminServices/isEUMAllowed" />
+		<url path="/AppManager/json/ApmAdminServices/getRUMTotalPageViewsCount" />
+		<url path="/AppManager/xml/SyncOAuth" />
+		<url path="/AppManager/RBMTestPlayBack" />
+		<url path="/AppManager/json/AddMonitorRecorder" />
+		<url path="/rum/pushrumdata"/>
+        <url path="/rum/pushmetrackdata"/>
+		<url path="/FileUploadServlet"/>
+		<url path="/AppManager/xml/syncSAMLAuth"/>
+		<url path="/Agent" operation-param="method" operation-value="isValidAPIKey,checkforupdate,getconfig,updatereport,shutdownagent,getSeleniumScript,updateagent,downloadAgent,imgFileUpload,metrackDataPush"/>
+	</urls>
+	
+	<urls throwallerrors="true" method="post" deny-operation="true" >
+		<url path="/OAuthProvider.do" operation-param="method" operation-value="showOAuthProviderDetails,listOAuthProviders,newOAuthProvider"/>
+		<url path="/SeleniumActions.do" operation-param="method" operation-value="showSeleniumTestCaseImporter,showScript,showScreenShots,getAgentDetails,getDIDKey,isEUMParent"/>
+		<url path="/adminAction.do" operation-param="method" operation-value="checkUrlAvailability,showRESTAPIPage,getAPIKey" />			
+		<url path="/wsm.do" operation-param="method" operation-value="showoperations,manageoperations,refreshoperations,variableMethods,getSOAPInfo,getSOAPRequestInfo,showdetails"/>
+		<url path="/updateUrl.do" operation-param="actionmethod" operation-value="editUrlMonitor" />
+		<url path="/showAgent.do" operation-param="method" operation-value="showEumSnapshot,getAgentDetails" />
+		<url path="/RUMActions.do" operation-param="method" operation-value="getMapData,getSessionDetails,getDomainInsight,getJSErrorTableData,getTxnInsightsData,getTableInsight,getResponseTimeAndCountData" />
+		<url path="/rbmresources.do" operation-param="method" operation-value="showRBMDashboard	" />
+		<url path="/WebToken.do" operation-param="method" operation-value="openWebTokenForm,listWebTokens" />
+		<url path="/confActions.do" operation-param="method" operation-value="getRUMAgentDetails,checkConnectivityForBRM,overwriteOriginalContentWDM" />
+		<url path="/RestAPIAction.do" operation-param="method" operation-value="viewSequenceResponseDetails" />
+	   	<url path="/AppManager/json/ApmAdminServices/CheckRecorderCompatibility" />
+	   	<url path="/rum/getmonitorconfig" />
+		<url path="/Debug-Info/URL${am.restapi.url.ext}" url-type="dynamic" />
+		<url path="/OAuthCallBack" />
+		<url path="/jsp/OAuthCallBack.jsp" />
+		<url path="/jsp/EditEumDetails.jsp" />
+		<url path="/jsp/RBM_new.jsp" />
+		<url path="/jsp/URLSequence_HAR_Import.jsp" />
+		<url path="/jsp/reports/eumReportsDropDown.jsp" />
+		<url path="/jsp/wsmigraph.jsp" />
+		<url path="/jsp/ProxyConfiguration.jsp" />
+		<url path="/importHAR.do" />
+		<url path="/WTRInfo.do" />
+	</urls>
+	
+	<urls throwallerrors="true" method="get,post" deny-operation="true" >
+		<url path="/RUMActions.do" operation-param="method" operation-value="showResourcesTab,showCopyScriptTab,showGeographicTab,showBrowserTab,showUserSessionTab,showWebpagesTab,showDevicesTab,showErrorsTab,showAjaxTab,showISPTab,showSummaryTab,showSnapshotTab"/>
+		<url path="/SeleniumActions.do" operation-param="method" operation-value="authenticate"/>
+		<url path="/confActions.do" operation-param="method" operation-value="getTabDetailsForWPA,getTabDetailsForWDM"/>
+		<url path="/updateUrl.do" operation-param="actionmethod" operation-value="createUrlSequence"/>
+		<url path="/AppManager/json/WebTokenSync" />
+		<url path="/Appmanager/xml/rbmAddOnLogin" />
+		<url path="/AppManager/xml/getCredentialsManagerList" />
+		<url path="/AppManager/xml/ListAgents" />
+		<url path="/AppManager/xml/getRBMPlaybackStatus" />
+		<url path="/AppManager/xml/ApmAdminServices/isEUMAllowed" />
+		<url path="/AppManager/json/SyncOAuth" />
+		<url path="/AppManager/xml/GetUrlSequenceElements" />
+		<url path="/AppManager/xml/GetUrlSeqNames" />
+		<url path="/AppManager/xml/ApmAdminServices/CheckRecorderCompatibility" />
+		<url path="/AppManager/xml/ApmAdminServices/getRUMTotalPageViewsCount" />
+		<url path="/AppManager/json/getRUMTotalPageViewsCount" />
+		<url path="/AppManager/xml/getRUMTotalPageViewsCount" />
+		<url path="/AppManager/xml/AddMonitorRecorder" />
+		<url path="/AppManager/json/DomainDetails" />
+		<url path="/AppManager/xml/DomainDetails" />
+		<url path="/AppManager/json/isEUMAllowed" />
+		<url path="/AppManager/xml/isEUMAllowed" />
+		<url path="/AppManager/json/CheckRecorderCompatibility" />
+		<url path="/AppManager/xml/CheckRecorderCompatibility" />
+		<url path="/AppManager/json/syncSAMLAuth"/>
+	</urls>
+</security>

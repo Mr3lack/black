@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+	<!-- $Id : $ -->
+	<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./conf/security-apm.xsd">
+	
+	
+		<urls prefix="/AppManager/(xml|json)" api="true" method="post" url-type="dynamic" deny-del-admin="true" authentication="required" sync-admin="apicallfrom" status-on-sso="only_synch_req" roles="am.role.ADMIN.EA">
+			<param name="apikey" regex="apikey" max-len="32" min-len="32" secret="true" />
+			<param name="apicallfrom" regex="^(admin)$"/>	
+			<param name="key" regex="am.globalconfig.key.value" max-len="50" />
+			<url path="/globalconfig/update" >
+				<param name="value" regex="am.globalconfig.value" max-len="5000" />
+				<param name="accLockout" type="boolean"/>
+				<param name="accLockoutTimeout" type="int"/>
+				<param name="accLockOutCount" type="int"/>
+				<param name="singleSession" type="boolean"/>
+				<param name="singleSessionBehavior" regex="^(RestrictLatestLogin|AllowLatestLogin)$"/>
+				<param name="pwdPolicy" type="boolean"/>
+				<param name="accForceUpdatePassword" type="boolean"/>
+				<param name="businessHours" type="boolean"/>
+				<param name="userOperationRestriction" type="boolean"/>
+				<param name="resetPassword" type="boolean"/>
+				<param name="pwdExpiry" type="boolean"/>
+				<param name="pwdExpiryDays" type="int"/>
+				<param name="pwdMinLength" type="long"/>
+				<param name="tabname" regex="^(AccPolicytab)$" />
+			</url>
+			<url path="/globalconfig/insert" >
+				<param name="value" regex="am.globalconfig.value" max-len="5000" />
+			</url>		
+			<url path="/globalconfig/delete" />
+		</urls>
+		<urls prefix="/AppManager/(xml|json)" api="true" url-type="dynamic" authentication="required" sync-admin="apicallfrom" roles="am.role.ADMIN.EA" throwallerrors="true">
+			<param name="apikey" regex="apikey" max-len="32" min-len="32" secret="true"/>
+			<param name="apicallfrom" regex="am.emailaction.create.server"/>
+	<!-- Users Rest API -->	
+		
+			<url path="/Users/create" status-on-sso="only_synch_req" method="post"  deny-del-admin="true">
+				<param name="userName" type="String"/>
+				<param name="password" regex="am.usermanagement.user.password" max-len="255" secret="true"/>
+				<param name="role" regex="am.usermanagement.roles"/>
+				<param name="aamUserId" regex="am.common.longandnull"/>
+				<param name="email" regex="email" max-len="50"/>
+				<param name="description" type="String" max-len="1000"/>
+				<param name="apikeyofuser" regex="apikey" max-len="32" min-len="32" secret="true"/>
+				<param name="domainname" type="String"/>
+				<param name="domainid" type="int"/>										<!-- select id from AM_DOMAINCONTROLLERS -->
+				<param name="delegatedadmin" type="boolean"/>
+				<param name="businessHourAssociatedToUser" regex="am.common.TFNull"/>
+				<param name="selectedBusinessHourID" regex="am.common.longandnull"/>
+				<param name="businessType" regex="zeroandone.ornull"/>
+				<param name="associateAllMonitorGroupsToUser" type="boolean"/>
+				<param name="groupId" regex="am.common.numberandcomma"/>
+				<param name="groupName" regex="am.custom.monitortype.type"/>
+				<param name="usergroupId" regex="am.common.numberandcomma" />
+				<param name="usergroupName" regex="am.custom.monitortype.type"/>
+				<param name="forceadd" type="boolean"/>
+				<param name="dn" type="String" max-len="250"/>
+				<param name="bCryptPassword" type="boolean"/>
+				<param name="profilecreationscript" type="boolean" />
+				<param name="userStatus" regex="^(Active|InActive)$" />
+				<param name="IsHashedPassword" type="boolean"/>
+				<param name="Salt" type="String"/>
+				<param name="HashedAlgorithm" regex="^(bcrypt|SHA-256)$" />
+	        </url>
+	        
+	        <url path="/Users/delete" status-on-sso="only_synch_req" method="post" deny-del-admin="true">
+	        	<param name="userId" regex="am.discovery.digits.commaseperated.orAll" max-len="10000000"/>
+	        	<param name="userName" type="String"/>
+	        </url>
+	        
+	        <url path="/Users/update" status-on-sso="only_synch_req" method="post" roles="am.role.ADMIN.EA.OP.US.MA" >
+	        	<param name="userId" type="long"/>
+	        	<param name="userName" type="String"/>
+				<param name="password" regex="am.usermanagement.user.password" max-len="255" secret="true"/>
+				<param name="oldPassword" type="String" max-len="250" secret="true"/>
+				<param name="role" regex="am.usermanagement.roles"/>
+				<param name="email" regex="email" max-len="50"/>
+				<param name="description" type="String" max-len="1000"/>
+				<param name="delegatedadmin" type="boolean"/>
+				<param name="businessHourAssociatedToUser" regex="am.common.TFNull"/>
+				<param name="selectedBusinessHourID" regex="am.common.longandnull"/>
+				<param name="businessType" regex="zeroandone.ornull"/>
+				<param name="associateAllMonitorGroupsToUser" type="boolean"/>
+				<param name="associateGroupId" regex="am.common.numberandcomma" />
+				<param name="associateUsergroupId" regex="am.common.numberandcomma" />		<!-- select HAID from AM_HOLISTICAPPLICATION -->
+				<param name="removeGroupId" regex="am.common.numberandcomma" />
+				<param name="removeUsergroupId" regex="am.common.numberandcomma" />
+				<param name="userdomainids" regex="am.common.numberandcomma" />
+				<param name="associateGroupName" regex="am.displayname.common" />
+				<param name="associateUsergroupName" regex="am.displayname.common" />
+				<param name="removeGroupName" regex="am.displayname.common" />
+				<param name="removeUsergroupName" regex="am.displayname.common" />
+				<param name="domainuser" type="boolean" />
+				<param name="profilecreationscript" type="boolean" />
+				<param name="bCryptPassword" type="boolean"/>
+				<param name="updateChk" type="boolean"/>
+				<param name="userStatus" regex="^(Active|InActive)$" />
+				<param name="IsHashedPassword" type="boolean"/>
+				<param name="Salt" type="String"/>
+				<param name="HashedAlgorithm" regex="^(bcrypt|SHA-256)$" />
+	        </url>      
+	        <url path="/Users/roles" status-on-sso="only_synch_req" method="get" />
+	    	<url path="/Users/[A-Za-z0-9\~@#\_\.\(\)\- ]+$" method="get" status-on-sso="only_synch_req" deny-del-admin="true"/>
+		</urls>
+		
+		
+		<urls prefix="/AppManager/(xml|json)" api="true" url-type="dynamic" method="GET" throwallerrors="true" authentication="required" sync-admin="apicallfrom" roles="am.role.ADMIN.EA">
+			<param name="apikey" regex="apikey" max-len="32" min-len="32" secret="true"/>
+			<url path="/domain" method="GET" deny-del-admin="true"/>
+			<url path="/Users" method="GET" roles="am.role.ADMIN.EA.OP.US.MA"/>
+		</urls>
+		
+	        
+		<urls prefix="/AppManager/(xml|json)" api="true" url-type="dynamic" method="post" throwallerrors="true" authentication="required" sync-admin="apicallfrom" roles="am.role.ADMIN.EA" deny-del-admin="true" status-on-sso="only_synch_req">
+			<param name="apikey" regex="apikey" max-len="32" min-len="32" secret="true"/>
+			<param name="apicallfrom" regex="am.emailaction.create.server"/>
+			<param name="domainid" regex="am.common.longandall"/>
+			<param name="domainport" type="int"/>
+			<param name="domainname" type="String"/>
+			<param name="permission" type="int"/>
+			<param name="domaincontroller" type="String"/>
+			<param name="username" type="String"/>
+			<param name="password" type="String" max-len="250" secret="true"/>
+			<param name="sslenabled" type="boolean"/>
+			<param name="service" type="String"/>
+			<param name="aamDomainId" type="int"/>
+			<param name="forceadd" type="boolean"/>
+			<param name="storeADPassword" type="boolean"/>
+			<param name="TO_DELETE" type="String"/>
+			<url path="/domain"/>
+		</urls>
+		
+<!-- User Group Rest API -->
+	
+		<urls prefix="/AppManager/(xml|json)" api="true" url-type="dynamic" method="get" throwallerrors="true" authentication="required" roles="am.role.ADMIN.EA" status-on-sso="only_synch_req" sync-admin="apicallfrom" >
+			<param name="apikey" regex="apikey" max-len="32" min-len="32" secret="true"/>
+			<url path="/refreshUserResources" deny-del-admin="true">		
+				<param name="userIds" regex="am.common.numberandcomma" />		
+			</url>
+			<url path="/UsergroupDetails" deny-del-admin="true"/>		
+		</urls>
+		
+		<urls prefix="/AppManager/(xml|json)" api="true" url-type="dynamic" method="post" throwallerrors="true" authentication="required" sync-admin="apicallfrom" roles="am.role.ADMIN.EA" deny-del-admin="true">
+			<param name="apikey" regex="apikey" max-len="32" min-len="32" secret="true"/>
+			<param name="apicallfrom" regex="am.emailaction.create.server" />
+			<url path="/Usergroup/create" method="post" status-on-sso="only_synch_req" >
+				<param name="usergroupName" type="String" />
+				<param name="groupId" regex="am.common.numberandcomma" />			<!-- select HAID from AM_HOLISTICAPPLICATION -->
+				<param name="groupName" regex="am.custom.monitortype.type" />		<!-- select resourcename from AM_ManagedObject WHERE TYPE='HAI' -->
+				<param name="userId" regex="am.common.numberandcomma" />			<!-- select USERID from AM_UserPasswordTable -->
+				<param name="userName" type="String" />								<!-- select USERNAME from AM_UserPasswordTable -->
+				<param name="forceadd" type="boolean" />
+				<param name="domainid" regex="am.common.numberandcomma" /> 			<!-- [comma sep] AM_DOMAINUSERGROUP_MAPPING  -->
+				<param name="domainname" type="String" />
+				<param name="aamUsergroupId" type="int" />							<!-- select GROUPID from AM_USERGROUP_CONFIG -->
+				<param name="profilecreationscript" type="boolean" />
+			</url>		
+			
+			<url path="/Usergroup/delete" status-on-sso="only_synch_req" >
+				<param name="usergroupId" regex="am.discovery.digits.commaseperated.orAll" />			<!-- select GROUPID from AM_USERGROUP_CONFIG -->
+				<param name="usergroupName" type="String" />
+	        </url>
+	
+	        <url path="/Usergroup/update" status-on-sso="only_synch_req" >
+				<param name="usergroupId" regex="am.common.long" />			<!-- select GROUPID from AM_USERGROUP_CONFIG -->
+				<param name="usergroupName" type="String" />	
+				<param name="associateGroupId" regex="am.common.numberandcomma" />		<!-- select HAID from AM_HOLISTICAPPLICATION -->
+				<param name="associateGroupName" regex="am.displayname.common" />		<!-- select resourcename from AM_ManagedObject WHERE TYPE='HAI' -->
+				<param name="associateUserId" regex="am.common.numberandcomma" />	
+				<param name="associateUserName" regex="am.windows.username" />	 		<!-- select username from AM_UserPasswordTable -->
+				<param name="removeGroupId" regex="am.common.numberandcomma" />			<!-- select HAID from AM_HOLISTICAPPLICATION -->
+				<param name="removeGroupName" regex="am.displayname.common" />	
+				<param name="removeUserId" regex="am.common.numberandcomma" />			<!-- select HAID from AM_HOLISTICAPPLICATION -->
+				<param name="removeUserName" regex="am.displayname.common" />	
+				<param name="domainusergroup" type="boolean" />	
+				<param name="usergrouprole" regex="am.usermanagement.roles" />		<!-- select userloginrole from AM_USERGROUP_CONFIG -->
+				<param name="usergroupdomains" regex="am.common.numberandcomma" />		<!-- select ID from AM_DOMAINCONTROLLERS -->
+				<param name="newusergroupname" regex="am.displayname.common" />	
+				<param name="profilecreationscript" type="boolean" />
+	        </url>
+	        
+	        <url path="/Usergroup/[A-Za-z0-9\~@#\_\.\(\)\- ]+$" method="get" status-on-sso="only_synch_req"/>
+	
+		</urls>
+
+		<urls>
+			<url path="/AppManager/json/ApmAdminServices/SetWorkloadsToMonitor" method="post" sync-admin="apicallfrom">
+				<param name="eeSyncKey" regex="am.encodedauthkey" secret="true" />
+				<param name="apikey" regex="apikey" max-len="32" min-len="32" secret="true" />
+				<param name="probeId" type="int" />
+				<param name="masId" type="int" />
+				<param name="resourceid" type="long" min-occurrences="1"/>
+				<param name="workloadstomonitor" regex="am.istio.workloads.commaseparated.with.dot.hyphen" max-len="30000"/>
+			</url>
+			<url path="/AppManager/json/ApmAdminServices/SetWorkloadsToMonitor" method="GET" deny-operation="true"/>
+			<url path="/AppManager/xml/ApmAdminServices/SetWorkloadsToMonitor" method="GET,POST" deny-operation="true"/>
+			<url path="/AppManager/json/ApmAdminServices/syncMETrackerDetails" method="GET" deny-operation="true"/>
+			<url path="/AppManager/json/ApmAdminServices/syncMETrackerErrorDetails" method="GET" deny-operation="true"/>
+			<url path="/AppManager/xml/ApmAdminServices/syncMETrackerDetails" method="GET,POST" deny-operation="true"/>
+			<url path="/AppManager/xml/ApmAdminServices/syncMETrackerErrorDetails" method="GET,POST" deny-operation="true"/>
+		</urls>
+				
+		
+		<urls prefix="/AppManager/(xml|json)" url-type="dynamic" method="get" throwallerrors="true">
+			<param name="PRINTER_FRIENDLY"  type="boolean" />
+			<param name="apikey" regex="apikey" max-occurrences="1" secret="true"/>
+			<url path="/getBasicConfigurationDetails" />
+		</urls>
+		
+		<!-- Deny operations -->
+		<urls prefix="/AppManager/(xml|json)" url-type="dynamic" deny-operation="true" >
+			<url path="/syncMETrackerDetails" method="GET,POST" />
+			<url path="/syncMETrackerErrorDetails" method="GET,POST" />
+			<url path="/DomainDetails" method="GET,POST"  />
+			<url path="/SetWorkloadsToMonitor" method="get,post" />
+			<url path="/refreshUserResources" method="post" />
+			<url path="/UsergroupDetails" method="post" />
+			<url path="/Usergroup/create" method="get" />
+			<url path="/Usergroup/delete" method="get" />
+			<url path="/Usergroup/update" method="get" />
+			<url path="/Users" method="POST" />
+			<url path="/Users/create" method="GET" />
+			<url path="/Users/delete" method="GET" />
+			<url path="/Users/update" method="GET" />	
+			<url path="/Users/roles" method="POST" />	
+			<url path="/globalconfig/delete" method="GET" />
+			<url path="/globalconfig/insert" method="GET" />
+			<url path="/globalconfig/update" method="GET" />
+		</urls>
+		
+		<urls prefix="/AppManager/(xml|json)" api="true" url-type="dynamic" authentication="required" >
+	<param-group name="am.additional.extra.params" />
+	<param name="apikey" regex="apikey" secret="true"/>	
+	<param name="apicallfrom" regex="am.emailaction.create.server"/>
+		<url path="/ListServer" method="get" roles="am.role.ADMIN.EA.OP.US" user-scope="AppManager.Monitors.READ">
+			<param name="type" regex="am.hostname" />
+			<param name="ipaddress" regex="am.hostname" />
+		</url>
+		<url path="/service/add" method="post" roles="am.role.ADMIN.EA" privilege-identifier="resourceid" >
+			<param name="resourceid" type="long" />
+			<param name="name" type="String" max-len="250" />
+			<param name="displayname" type="String" max-len="250" />
+			<param name="matchcriteria" type="String" />			
+		</url>
+		<url path="/process/add" method="post" roles="am.role.ADMIN.EA" privilege-identifier="resourceid" >
+			<param name="resourceid" type="long" />
+			<param name="name" type="String" max-len="250" />
+			<param name="command" type="String" max-len="2147483647" />
+			<param name="matchcriteria" type="String" />
+			<param name="displayname" type="String" max-len="250" />
+		</url>
+		<url path="/process/delete" method="post" roles="am.role.ADMIN.EA" >
+			<param name="monitorid" regex="am.common.numberandcomma" max-len="10000000" />
+			<param name="processid" regex="am.common.numberandcomma" max-len="10000000" />
+		</url>
+		<url path="/process/edit" method="post" roles="am.role.ADMIN.EA" privilege-identifier="processid" priv-delim="," >
+			<param name="type" regex="^0$" />
+			<param name="processid" regex="am.common.numberandcomma" max-len="10000000" />
+			<param name="name" type="String" max-len="250" />
+			<param name="command" type="String" max-len="2147483647" />
+			<param name="matchcriteria" type="String" />
+			<param name="displayname" type="String" max-len="250" />
+		</url>
+		<url path="/logrule" method="get" roles="am.role.ADMIN.EA" />
+		<url path="/logrule" method="post" roles="am.role.ADMIN.EA" >
+			<param name="rulename" type="String" />
+			<param name="eventid" type="long" />
+			<param name="source" type="String" />
+			<param name="category" type="String" />
+			<param name="eventtype" regex="am.eventlog.eventtype" />
+			<param name="severity" type="int" />
+			<param name="ruletype" type="int" />
+			<param name="status" regex="am.alarms.eventlogs.status" />
+			<param name="resourceids" regex="am.alarms.eventlogs.monitorcategory.selectmonitors.commaseperated.resids" max-len="1000000"/>
+			<param name="logCategoryName" type="String" />
+			<param name="ruleid" type="long" />
+			<param name="ruleids" regex="am.common.numberandcomma" />
+			<param name="servertypes" regex="am.monitor.type.withcomma" max-len="350"/>
+			<param name="haid" type="long" />
+			<param name="TimeFrame" type="int" />
+			<param name="applyto" type="String" />
+			<param name="rulescope" type="String" />
+			<param name="message" type="String" max-len="2000" />
+			<param name="displayname" regex="am.displayname.common" />
+			<param name="username" regex="am.windows.username" />
+			<param name="prerulestatus" type="int" />
+			<param name="savetype" regex="am.alarms.eventlogs.saveTypes" />
+			<param name="type" type="String" />
+			<param name="action" regex="am.alarms.eventlogs.action" />
+			<param name="TO_DELETE" regex="^true$" />
+			<param name="log_endtime" regex="am.alarms.eventlogs.startendtime.format.24hrs.hhmm" />
+			<param name="log_starttime" regex="am.alarms.eventlogs.startendtime.format.24hrs.hhmm" />
+			<param name="matchRules" type="int" />
+			<param name="cleartype" type="int" />
+			<param name="clearpollscount" type="long" />
+			<param name="pollstoretry" type="long" />
+			<param name="alarmcount" type="long" />
+			<param name="clearevent" type="int" />
+			<param name="cleareventcategory" type="String" />
+			<param name="cleareventsource" type="String" /> 
+			<param name="cleareventusername" type="String" />
+			<param name="matchcount" type="int" />			
+			<param name="ismessageRegex" type="int" />
+			<param name="monitorchooser" regex="am.alarms.eventlogs.monitorcategory.values" />
+			<param name="prescope" type="String" />
+			<param name="matchrules" type="int" />
+			<param name="isadd" type="boolean" />
+			<param name="fromadmin"	type="boolean" />
+			<param name="thresholdid" type="long" />			
+		</url>
+		<url path="/logfile" method="get" roles="am.role.ADMIN.EA" />
+		<url path="/logfile" method="post" roles="am.role.ADMIN.EA" >
+			<param name="logFileName" type="String" />
+			<param name="category" type="String" />
+			<param name="ruletype" type="int" />
+			<param name="TO_DELETE" regex="^true$" />
+		</url>
+	<!-- DENY -->
+		<url path="/service/add" method="get" deny-operation="true" />
+		<url path="/process/add" method="get" deny-operation="true" />
+		<url path="/process/edit" method="get" deny-operation="true" />		
+		<url path="/process/delete" method="get" deny-operation="true" />		
+		<url path="/ListServer" method="post" deny-operation="true" />
+	</urls>	
+	
+	<urls api="true" url-type="dynamic" authentication="required" roles="am.role.ADMIN.EA">
+	<param-group name="am.additional.extra.params" />
+	<param name="apikey" regex="apikey" min-occurrences="1" secret="true" />	
+	<param name="apicallfrom" regex="am.emailaction.create.server"/>
+		<url path="/AppManager/xml/cron" method="post">
+			<param name="cronid" type="int" />
+			<param name="endpoint" type="String" />
+			<param name="id" type="long" />
+			<param name="exitcode" type="long" />
+		</url>
+		<url path="/AppManager/json/processattributelist" method="post" privilege-identifier="processmolist" priv-delim=",">
+			<param name="attributethresholdmap" type="String" max-len="25000" />
+			<param name="processmolist" regex="am.template.numberCommaNull" />
+		</url>
+	<!-- deny -->
+		<url path="/AppManager/json/processattributelist" method="get" deny-operation="true" />
+		<url path="/AppManager/xml/cron" method="get" deny-operation="true" />
+		<url path="/AppManager/xml/processattributelist" method="get,post" deny-operation="true" />
+		<url path="/AppManager/json/cron" method="get,post" deny-operation="true" />
+	</urls>
+		
+		<urls prefix="/AppManager/(xml|json)" api="true" url-type="dynamic" authentication="required">
+			<param-group name="am.additional.extra.params" />
+			<param name="apikey" regex="apikey" min-occurrences="1"/>	
+			<param name="apicallfrom" regex="am.emailaction.create.server"/>
+			<url path="/AlarmAction" method="post" roles="am.role.ADMIN.EA.OP.US" privilege-identifier="entity" priv-delim="," priv-split="_">
+				<param name="action" regex="am.alarmsaction.restapi"/>
+				<param name="entity" regex="am.comma.seperated.entity" max-len="10000"/>
+				<param name="message" type="String" max-len="10000"/>
+				<param name="username" regex="am.windows.username"/>
+			</url>
+			
+			<url path="/threshold" method="get" roles="am.role.ADMIN.EA.OP.US"/>
+			
+			<url path="/threshold" method="post" roles="ADMIN,ENTERPRISEADMIN">
+				<param max-len="32" min-len="32" name="apikey" regex="apikey"/>
+				<param name="criticalpolls" regex="am.threshold.polltotry"/>
+				<param name="min_criticalpolls" regex="am.threshold.polltotry"/>
+				<param name="min_clearpolls" regex="am.threshold.polltotry"/>
+				<param name="min_warningpolls" regex="am.threshold.polltotry"/>
+				<param name="warningpolls" regex="am.threshold.polltotry"/>
+				<param name="clearpolls" regex="am.threshold.polltotry"/>
+				<param name="adminAPIRequest" regex="am.common.TFNull"/>
+				<param name="criticalmessage" type="String" max-len="250"/>
+				<param name="thresholdname" type="String" max-len="250"/>
+				<param name="clearmessage" type="String" max-len="250"/>
+				<param name="type" regex="am.threshold.typeNumeric"/>
+				<param name="criticalcondition" regex="am.threshold.condition"/>
+				<param name="warningcondition" regex="am.threshold.condition"/>
+				<param name="clearcondition" regex="am.threshold.condition"/>
+				<param name="warningmessage" type="String" max-len="250"/>
+				<param max-len="1000" name="warningvalue" type="String"/>
+				<param max-len="1000" name="criticalvalue" type="String"/>
+				<param max-len="1000" name="clearvalue" type="String"/>
+				<param name="thresholdType" regex="am.common.ZeroOne"/>
+				<param name="adaptiveBaseWeek" regex="am.threshold.baseweek"/>
+				<param name="adaptiveHigherPercentage" regex="am.common.ZeroOne"/>
+				<param name="adaptiveType" regex="am.common.ZeroOne"/>
+				<param name="adaptiveBaseformulaType" regex="am.common.ZeroOne"/>
+				<param name="description" type="String" max-len="250"/>
+				<param name="thresholdid" regex="am.threshold.toDeleteThreshold" max-len="1500"/>
+				<param name="newthresholdname" type="String" max-len="250"/>
+				<param name="TO_DELETE" regex="am.common.TFNull"/>
+				<param name="secondarycriticalexist" regex="am.common.TFNull"/>
+				<param name="secondarywarningexist" regex="am.common.TFNull"/>
+				<param name="secondaryinfoexist" regex="am.common.TFNull"/>
+				<param name="criticalconditionjoiner" regex="am.common.Conjunction"/>
+				<param name="warningconditionjoiner" regex="am.common.Conjunction"/>
+				<param name="infoconditionjoiner" regex="am.common.Conjunction"/>
+				<param name="secondarycriticalthresholdvalue" type="String"/>
+				<param name="secondarywarningthresholdvalue" type="String"/>
+				<param name="secondaryinfothresholdvalue" type="String"/>
+				<param name="secondarycriticalthresholdcondition" regex="am.threshold.condition"/>
+				<param name="secondarywarningthresholdcondition" regex="am.threshold.condition"/>
+				<param name="secondaryinfothresholdcondition" regex="am.threshold.condition"/>
+				<param name="businessHourAssociatedToThreshold" regex="am.threshold.businessHourAssociatedToThreshold.value" />
+				<param name="businessType" regex="am.common.ZeroOne" />
+				<param name="selectedBusinessHourID" type="long"/>
+				<param name="isDefault" regex="am.common.ZeroOne" />
+			</url>
+			
+			<url path="/mapDependencies" method="post" roles="ADMIN,ENTERPRISEADMIN" privilege-identifier="resourceid">
+				<param name="resourceid" type="long"/>
+				<param name="attributeid" type="long"/>
+				<param name="dependentResources" regex="am.common.numberaandcolonpluscomma" max-len="1000"/>
+				<param name="dependenciesCount" regex="am.twodigit.naturalnumber"/>
+				<param name="removeMapping" type="boolean"/>
+			</url>
+			
+			<url path="/listDependencies" method="get" roles="ADMIN,ENTERPRISEADMIN" privilege-identifier="resourceid">
+				<param name="resourceid" type="long"/>
+				<param name="attributeid" type="long"/>
+			</url>
+			
+			<url path="/ListAlarms" method="get" roles="am.role.ADMIN.EA.OP.US.DE" privilege-identifier="resourceid">
+				<param name="resourceid" type="long"/>
+				<param name="type" regex="am.monitor.type.withcomma"/>
+				<param name="topN" type="int"/>
+				<param name="groupName" type="String" />
+				<param name="time" type="long"/>
+				<param name="acknowledgedAlerts" type="boolean"/>
+				<param name="includeConfiguredTrapAlerts" type="boolean"/>
+				<!--param name="AVAILABILITYSEVERITY" regcx="polling_interval" />
+				<param name="HEALTHSEVERITY" regex="polling_interval" />
+				<param name="TECHNICIAN" regex="am.alarmsdetails.technician" />
+				<param name="ANNOTATION" regex="" />
+				<param name="DetailsPageURL" regex="" /-->
+			</url>
+			
+			<url path="/clearAlerts" method="get" roles="am.role.ADMIN.EA.OP" privilege-identifier="entity" priv-delim="," priv-split="_">
+				<param name="entity" regex="^[\d]+[\_][\d]+$" max-len="1000"/>
+				<param name="incrementedIdVal" type="int"/>
+			</url>
+			
+			<url path="/generateAlert" method="get" roles="ADMIN,ENTERPRISEADMIN" privilege-identifier="resourceid">
+				<param name="apikey" regex="apikey" />
+				<param name="resourceid" type="long" />
+				<param name="attributeid" type="long" />
+				<param name="severity" regex="am.generateAlert.severity"/>
+				<param name="entity" regex="^[\d]+[\_][\d]+$" />
+				<param name="alarmMessage" type="String" max-len="2147483647"/>
+				<param name="actualAlarmMessage" type="String" max-len="2147483647"/>
+				<param name="eventParams" type="JSONObject" template="am.generateAlert.eventParams" max-len="2147483647"/>
+				<param name="fromMas" type="boolean"/>
+			</url>
+			
+			<url path="/associatethresholdactions" method="post" roles="ADMIN,ENTERPRISEADMIN" privilege-identifier="resourceid">
+				<param name="resourceid" type="long"/>
+				<param name="attributeid" regex="am.common.numberandcomma"/>
+				<param name="thresholdid" type="long"/>
+				<param name="thresholdType" regex="am.common.one.two"/>
+				<param name="criticalactionid" regex="am.webclient.resIds.commaSeparated" max-len="1000"/>
+				<param name="warningactionid" regex="am.webclient.resIds.commaSeparated" max-len="1000"/>
+				<param name="clearactionid" regex="am.webclient.resIds.commaSeparated" max-len="1000"/>
+				<param name="removeAlarms" regex="am.common.booleanandnull" />				
+			</url>
+			
+			<url path="/configurealarms" method="post" roles="ADMIN,ENTERPRISEADMIN" privilege-identifier="resourceid">
+				<param name="groupTemplate" regex="am.common.TFNull" />
+				<param name="haid" regex="am.sqljobaction.haid" />
+				<param name="resourceIDsToSynch" regex="am.number.withcomma.separated" max-len="1000000"/>
+				<param name="criticalactionid" regex="am.webclient.resIds.commaSeparated" max-len="10000"/>
+				<param name="warningactionid" regex="am.webclient.resIds.commaSeparated" max-len="10000"/>
+				<param name="clearactionid" regex="am.webclient.resIds.commaSeparated" max-len="10000"/>
+				<param name="criticalactionname" type="String" />
+				<param name="warningactionname" type="String" />
+				<param name="clearactionname" type="String" />
+				<param name="removeRCA" regex="am.common.TFNull" />
+				<param name="similarmonitors" regex="am.number.withcomma.separated" max-len="1000000"/>
+				<param name="availabilityCriticalPollCount" type="int" />
+				<param name="availabilityClearPollCount" type="int" />
+				<param name="resIDsToNotApplyTemplate" regex="am.number.withcomma.separated" max-len="1000000"/>
+				<param name="requesttype" regex="am.configurealarm.requesttype" />
+				<param name="thresholdactionparams" type="String" max-len="1000000" />
+				<param name="thresholdid" type="long" />
+				<param name="thresholdname" type="String" max-len="250" />
+				<param name="thresholdType" regex="am.rhev.discoverVM" />
+				<param name="resourceid" type="long" />
+				<param name="monitorname" type="String" max-len="515"/>
+				<param name="multimonitors" regex="am.usermanagement.userGroupMG" />
+				<param name="overrideConfig" regex="am.configure.alarm.overrideThresholdConfig" />
+				<param name="overrideConf" regex="am.configure.alarm.overrideThresholdConfig" />
+				<param name="deleteConfigType" regex="am.configure.alarm.deleteTempConfig" />
+				<param name="attributeid" regex="am.webclient.resIds.commaSeparated" />
+				<param name="displayname" type="String" />
+				<param name="type" regex="am.threshold.typeNumeric" />
+				<param name="resourceType" regex="am.custom.monitortype.type" />
+				<param name="description" type="String" max-len="1000" />
+				<param name="newthresholdid" type="long" />
+				<param name="criticalthresholdvalue" regex="am.threshold.value" max-len="1000"/>
+				<param name="criticalthresholdcondition" regex="am.threshold.condition" />
+				<param name="consecutive_criticalpolls" type="int" />
+				<param name="criticalthresholdmessage" type="String" max-len="1000" />
+				<param name="warningthresholdvalue" regex="am.threshold.value" max-len="1000"/>
+				<param name="warningthresholdcondition" regex="am.threshold.condition" />
+				<param name="consecutive_warningpolls" type="int" />
+				<param name="warningthresholdmessage" type="String" max-len="1000" />
+				<param name="infothresholdvalue" regex="am.threshold.value" max-len="1000"/>
+				<param name="infothresholdcondition" regex="am.threshold.condition" />
+				<param name="consecutive_clearpolls" type="int" />
+				<param name="infothresholdmessage" type="String" max-len="1000" />
+				<param name="adminAPIRequest" regex="am.common.TFNull" />
+				<param name="similarmonitors_selected" type="long" max-occurrences="10000" />
+			</url>
+			
+			<url path="/disassociatemgtemplate" method="post" roles="ADMIN,ENTERPRISEADMIN" privilege-identifier="resourceid">
+				<param name="resourceid" regex="am.webclient.resIds.commaSeparated" />
+				<param name="groupid" type="long"/>
+				<param name="adminAPIRequest" type="boolean" />
+			</url>
+			<url path="/GetQueryOutput" method="get,post" roles="ADMIN,ENTERPRISEADMIN">
+				<param name="query" type="String" max-len="1000000"/>
+			</url>
+			<!-- DENY -->
+			<url path="/associatethresholdactions" method="get" deny-operation="true" />
+			<url path="/configurealarms" method="get" deny-operation="true" />
+			<url path="/disassociatemgtemplate" method="get" deny-operation="true" />
+			<url path="/mapDependencies" method="get" deny-operation="true" />
+			<url path="/AlarmAction" method="get" deny-operation="true" />
+			<url path="/generateAlert" method="post" deny-operation="true" />
+			<url path="/clearAlerts" method="post" deny-operation="true" />
+			<url path="/ListAlarms" method="post" deny-operation="true" />
+			<url path="/listDependencies" method="post" deny-operation="true" />
+			<url path="/getBasicConfigurationDetails" method="post" deny-operation="true" />
+		</urls>
+		
+	</security>

@@ -1,0 +1,4 @@
+
+ 20240220_10_30_40 - APMSWUpgrade :: Reading ppm location from ppmname.txt file : /opt/ManageEngine/AppManager16/working/ppmname.txt
+ 20240220_10_30_40 - APMSWUpgrade :: File does not exist : /opt/ManageEngine/AppManager16/working/ppmname.txt
+ 20240220_10_30_40 - APMSWUpgrade :: Since PPM Location is invalid, exiting.

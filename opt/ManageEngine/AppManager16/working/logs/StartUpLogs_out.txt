@@ -1,0 +1,1218 @@
+[10:30:54:444]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  System details starts|
+	java.vendor = Azul Systems, Inc.
+	sun.java.launcher = SUN_STANDARD
+	javax.net.ssl.trustStorePassword = changeit
+	sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+	product.started.time = 1708425053372
+	os.name = Linux
+	sun.boot.class.path = /opt/ManageEngine/AppManager16/working/jre/lib/resources.jar:/opt/ManageEngine/AppManager16/working/jre/lib/rt.jar:/opt/ManageEngine/AppManager16/working/jre/lib/sunrsasign.jar:/opt/ManageEngine/AppManager16/working/jre/lib/jsse.jar:/opt/ManageEngine/AppManager16/working/jre/lib/jce.jar:/opt/ManageEngine/AppManager16/working/jre/lib/charsets.jar:/opt/ManageEngine/AppManager16/working/jre/lib/jfr.jar:/opt/ManageEngine/AppManager16/working/jre/lib/cat.jar:/opt/ManageEngine/AppManager16/working/jre/classes
+	java.util.logging.config.file = apache/tomcat/conf/logging.properties
+	java.vm.specification.vendor = Oracle Corporation
+	java.runtime.version = 1.8.0_352-b08
+	wrapper.native_library = wrapper
+	https.protocols = TLSv1.3,TLSv1.2,TLSv1.1,TLSv1
+	wrapper.key = yNrOr-uOKBYjzWxItmhQE-H7M_NAJiK5
+	user.name = root
+	javax.net.ssl.trustStoreType = JKS
+	logger.class = com.adventnet.appmanager.logging.AMLog
+	wrapper.jvm.port.min = 31000
+	user.language = en
+	java.naming.factory.initial = weblogic.jndi.WLInitialContextFactory
+	sun.boot.library.path = /opt/ManageEngine/AppManager16/working/jre/lib/amd64
+	java.version = 1.8.0_352
+	java.util.logging.manager = org.apache.juli.ClassLoaderLogManager
+	user.timezone = Etc/UTC
+	apminsight.home = /opt/ManageEngine/AppManager16/working/apminsight/self-monitor
+	sun.arch.data.model = 64
+	org.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER = true
+	java.endorsed.dirs = /opt/ManageEngine/AppManager16/working/jre/lib/endorsed
+	sun.cpu.isalist = 
+	product.name = Applications Manager
+	sun.jnu.encoding = UTF-8
+	file.encoding.pkg = sun.io
+	file.separator = /
+	java.specification.name = Java Platform API Specification
+	java.class.version = 52.0
+	java.home = /opt/ManageEngine/AppManager16/working/jre
+	java.vm.info = mixed mode
+	wrapper.version = 3.5.46-pro
+	os.version = 6.2.0-1017-aws
+	path.separator = :
+	java.vm.version = 25.352-b08
+	wrapper.pid = 11480
+	wrapper.jvm.port.max = 31999
+	wrapper.lang.folder = ../lang
+	am.server.wrapper = true
+	wrapper.java.pid = 11598
+	java.awt.printerjob = sun.print.PSPrinterJob
+	sun.io.unicode.encoding = UnicodeLittle
+	java.specification.maintenance.version = 4
+	awt.toolkit = sun.awt.X11.XToolkit
+	webserver.rootdir = /opt/ManageEngine/AppManager16/working/apache/tomcat
+	user.home = /root
+	log4j2.configurationFile = ./classes/log4j_conf.xml
+	java.specification.vendor = Oracle Corporation
+	java.library.path = ./lib/
+	java.vendor.url = http://www.azul.com/
+	javax.net.ssl.keyStoreType = JKS
+	java.vm.vendor = Azul Systems, Inc.
+	wrapper.jvmid = 1
+	java.runtime.name = OpenJDK Runtime Environment
+	sun.java.command = org.tanukisoftware.wrapper.WrapperSimpleApp com.adventnet.appmanager.server.startup.StartServer ../working
+	java.class.path = ../:../lib/ext/classes12.zip:../logs:apache:apache/tomcat:apache/tomcat/bin/bootstrap.jar:apache/tomcat/bin/commons-logging-1.1.3.jar:apache/tomcat/bin/tomcat-juli.jar:apache/tomcat/lib/el-api.jar:apache/tomcat/lib/jasper-el.jar:apache/tomcat/lib/jasper.jar:apache/tomcat/lib/jsp-api.jar:apache/tomcat/lib/servlet-api.jar:apache/tomcat/lib/tomcat-api.jar:appln_mon/classes:appln_mon/classes/ApplnMonitorCommon.jar:appln_mon/classes/ApplnMonitorServer.jar:classes:classes/AdventNetAppManager.jar:classes/AdventNetNPrevalent.jar:classes/AdventNetOPExtn.jar:classes/ApiUtils.jar:classes/CommonUtils.jar:classes/commons-net-2.0.jar:classes/dnsjava-2.0.6.jar:classes/jcommon.jar:classes/jfreechart.jar:classes/json.jar:classes/jt400.jar:classes/postgresql-42.2.19.jar:classes/stax-1.2.0.jar:classes/stax-api-1.0.1.jar:classes/wrapper.jar:apminsight/self-monitor/apminsight-javaagent.jar
+	wrapper.lang.domain = wrapper
+	java.vm.specification.name = Java Virtual Machine Specification
+	java.vm.specification.version = 1.8
+	catalina.home = apache/tomcat
+	sun.cpu.endian = little
+	sun.os.patch.level = unknown
+	java.awt.headless = true
+	jdk.serialFilter = *;maxbytes=209715200;maxarray=209715200
+	wrapper.cpu.timeout = 10
+	java.io.tmpdir = ./tmp
+	java.vendor.url.bug = http://www.azul.com/support/
+	java.awt.graphicsenv = sun.awt.X11GraphicsEnvironment
+	os.arch = amd64
+	java.ext.dirs = /opt/ManageEngine/AppManager16/working/jre/lib/ext:/usr/java/packages/lib/ext
+	user.dir = /opt/ManageEngine/AppManager16/working
+	logsDir = ../logs/
+	line.separator = 
+
+	java.vm.name = OpenJDK 64-Bit Server VM
+	webnms.rootdir = /opt/ManageEngine/AppManager16/working
+	jdk.vendor.version = Zulu 8.66.0.15-CA-linux64
+	cmd.os.arch = 64
+	file.encoding = UTF-8
+	isConsole = false
+	java.specification.version = 1.8
+	com.sun.jndi.ldap.object.disableEndpointIdentification = true
+	wrapper.port = 32000
+	wrapper.arch = x86
+
+[10:30:54:455]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  System details ends|
+[10:30:54:455]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Current Build Number : 16841|
+[10:30:54:455]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Log files had been initialized|
+[10:30:54:456]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Tomcat Version used in our product is  :: 9.0.70|
+[10:30:54:459]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  HOST obtianed : 43.205.195.84|
+[10:30:54:463]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[25]:  DeleteImages : Exiting Thread|
+[10:30:54:479]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMCryptKey entry is added successfully in DB_Crypt.properties and is backed up |
+[10:30:54:479]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Trying to store the webserver port and other details got in the install shield|
+[10:30:54:491]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  database_params.conf file updated in conf|
+[10:30:54:491]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Locale : en_US|
+[10:30:54:492]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Callservice: before getting the property=>false|
+[10:30:54:492]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Callservice: after getting the property=>false|
+[10:30:54:492]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Trying to close the Input Stream for the install.txt|
+[10:30:54:492]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Install.txt has been deleted:: true|
+[10:30:54:495]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  DBType got from AMServer.properties file is pgsql|
+[10:30:54:500]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMServerStartupFileChecks.checkPostgresExtMainFile() isNewFile : false isKeyMissing : false|
+[10:30:54:500]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : Checking for space|
+[10:30:54:500]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Checking whether the minimal space is available|
+[10:30:54:504]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  The space is available|
+[10:30:54:504]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  The disk has :26759 MB|
+[10:30:54:504]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : started...|
+[10:30:54:504]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : Script extension => .sh|
+[10:30:54:511]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : File check done for server.xml|
+[10:30:54:512]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : File check done for AMServer.properties|
+[10:30:54:524]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : File check done for setEnv.sh|
+[10:30:54:525]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : File check done for startPGSQL.sh|
+[10:30:54:528]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : File check done for logging_parameters.conf|
+[10:30:54:530]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : File check done for DatabaseSchema.conf|
+[10:30:54:530]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : File check done for Login.html|
+[10:30:54:531]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : File check done for DatabaseSchema.conf|
+[10:30:54:532]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : File check done for postgres_ext.conf|
+[10:30:54:532]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : finished...|
+[10:30:54:532]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : Initial file backups done|
+[10:30:54:537]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Calling out the AMServerStartup class|
+[10:30:54:829]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  *********************************************************************|
+[10:30:54:829]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  WARNING! IT SEEMS THAT THE DISPLAY VARIABLE HAD NOT BEEN SET PROPERLY|
+[10:30:54:829]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  *********************************************************************|
+[10:30:54:829]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  |
+[10:30:54:829]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  dbServerType pgsql|
+[10:30:55:415]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMAutomaticPortChanger.callfirst() :: [ID Range check] :: ServerID range before setting to cache :: [N.A]|
+[10:30:55:416]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  HTTPClient.host : 43.205.195.84|
+[10:30:55:416]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  HTTPClient.hostDomain :  |
+[10:30:55:416]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMAutomaticPortChanger::setHttpPortCommentedinbackupXML called|
+[10:30:55:638]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMAutomaticPortChanger::isValidPort "SSL_PORT"|
+[10:30:55:638]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMAutomaticPortChanger::setHttpPortCommentedinbackupXML is HTTP port enabled in /backup/server.xml : true|
+[10:30:55:639]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  updated the serverparameters file for the locale|
+[10:30:55:639]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  updated the updateManager file for the locale|
+[10:30:55:640]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  OLD_WEBSERVER_PORT:9090|
+[10:30:55:640]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  OLD_SSL_PORT:8443|
+[10:30:55:640]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  OLD_PGSQL_PORT:15432|
+[10:30:55:640]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  OLD_TOMCATSHUTDOWN_PORT:18005|
+[10:30:55:643]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  OLD_WEBCONTAINER_PORT:18009|
+[10:30:55:643]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  OLD_TCP_PORT:12000|
+[10:30:55:643]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  OLD_TRAPLISTENER_PORT:1620|
+[10:30:55:643]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Checking for the webserver port|
+[10:30:55:644]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  New port for webserver is 9090|
+[10:30:55:644]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Checking for the webserver ssl port|
+[10:30:55:645]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  New port for webserver is 8443|
+[10:30:55:645]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Checking for the tomcat shutdown port|
+[10:30:55:645]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  New port for tomcat shutdown is 18005|
+[10:30:55:645]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Checking for the webcontainer port|
+[10:30:55:646]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  New port for webcontainer is 18009|
+[10:30:55:646]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Checking for the tcp port|
+[10:30:55:646]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  New port for tcp is 12000|
+[10:30:55:646]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Checking for the trap listener port|
+[10:30:55:646]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  New port for trap listener is 1620|
+[10:30:55:646]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Checking for the pgsql port|
+[10:30:55:647]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  New port for pgsql is 15432|
+[10:30:55:650]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  NEW_WEBSERVER_PORT:9090|
+[10:30:55:650]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  NEW_SSL_PORT:8443|
+[10:30:55:650]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  NEW_PGSQL_PORT:15432|
+[10:30:55:650]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  NEW_TOMCATSHUTDOWN_PORT:18005|
+[10:30:55:650]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  NEW_WEBCONTAINER_PORT:18009|
+[10:30:55:650]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  NEW_TCP_PORT:12000|
+[10:30:55:650]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  NEW_TRAPLISTENER_PORT:1620|
+[10:30:55:655]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Linux library files checks completed|
+[10:30:55:655]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Checking for the license|
+[10:30:55:764]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMServerStartup : backupLicenseFiles() : backup done.|
+[10:30:55:764]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  License check finished|
+[10:30:55:764]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  jdbc:postgresql://localhost:15432/amdb?ApplicationName=ApplicationsManager&dontTrackOpenResources=true&useUnicode=true&characterEncoding=UTF-8|
+[10:30:55:764]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Sanity check gets over|
+[10:30:55:765]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  checking for the lib/ext directory|
+[10:30:55:765]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  About to create the directories needed|
+[10:30:55:795]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Calling the Enterprise resourcetypes|
+[10:30:55:795]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Trying to copy the AppplicationDiscovery.xml for the Professional edition|
+[10:30:55:796]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  ApplicationDiscovery.xml has been succssfully copied.|
+[10:30:55:796]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  The properties file going to be initialized is ::: /opt/ManageEngine/AppManager16/working/html/en/EnglishToNative.properties|
+[10:30:55:968]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  ResourceGroupDisplayMap to be returned ::: {SER=Services, APP=Application Servers, SAN=Storage Devices, CIF=Converged Infrastructure, ERP=ERP, MS=Mail Servers, EMO=Site24x7 Monitors, MOM=Middleware/Portal, SYS=Servers, URL=Web Server/Services, CAM=Custom Monitors, HAI=Monitor Group, DBS=Database Servers, NWD=Network Devices, CLD=Cloud Apps, NET=Networks, VIR=Virtualization}|
+[10:30:55:968]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  *******************************************************|
+[10:30:55:968]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  The Build edition is the Enterprise|
+[10:30:55:968]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  *******************************************************|
+[10:30:55:977]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  ProcessBuilderUtil :: runProcess() :: Command to be executed :: xdg-open|
+[10:30:55:978]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  ProcessBuilderUtil :: runProcess() :: going to execute :: ScriptExecutionCmd :: xdg-open /opt/ManageEngine/AppManager16/working/webclient.html|
+[10:30:55:978]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  ProcessBuilderUtil :: runProcess() :: Arguments passed for the command to be executed :: [/opt/ManageEngine/AppManager16/working/webclient.html]|
+[10:30:55:980]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  ProcessBuilderUtil :: runProcess() :: Command :: xdg-open :: Exception occurred while running a process :: Exception :: Cannot run program "xdg-open": error=2, No such file or directory|
+[10:30:55:981]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  isconsole false|
+[10:30:55:982]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Command going to execute : [/bin/sh, -c, stat /opt/ManageEngine/AppManager16/working/pgsql/data/amdb | egrep -i "Access: \(" ]|
+[10:30:56:038]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  command output : 0700|
+[10:30:56:038]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartServer : Starting Linux Bundled PostGres |
+[10:30:56:052]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  POSTGRES STARTUP ISSUES: isPostgresRunning() false|
+[10:30:56:052]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  POSTGRES STARTUP ISSUES: Partial postgres process is not running...|
+[10:30:56:064]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Args passed for command execution : [-c, /opt/ManageEngine/AppManager16/working/bin/startPGSQL.sh]|
+[10:30:56:064]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  ProcessBuilderUtil :: runProcess() :: Command to be executed :: /bin/sh|
+[10:30:56:064]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  ProcessBuilderUtil :: runProcess() :: going to execute :: ScriptExecutionCmd :: /bin/sh -c /opt/ManageEngine/AppManager16/working/bin/startPGSQL.sh|
+[10:30:56:064]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  ProcessBuilderUtil :: runProcess() :: Arguments passed for the command to be executed :: [-c, /opt/ManageEngine/AppManager16/working/bin/startPGSQL.sh]|
+[10:30:56:468]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  ProcessBuilderUtil :: runProcess() :: Command :: /bin/sh :: Process is terminated already|
+[10:30:56:469]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  PGSQLStartupHandler :: startPgsqlAndParseLog():: Postgres server started successfully by using pg_ctl utility after 405 ms |
+[10:30:56:469]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Startserver   :: Main -> CreateSchema :: Linux |
+[10:30:56:479]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Plugin : false :: DBType ? PGSQL :: isBundledPgsql ? True|
+[10:30:56:479]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  isDBUserPassOutdated ? true updateDBUserKey ? false :: isROUserPassOutdated ? true :: isSUUserPassOutdated ? true :: isNewCryptKeyGenerated ? true :: Hence updating the db password|
+[10:30:56:481]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  CreateSchema :: updateDataBaseParams_PGSQL() - db credentials successfully updated in database_params.conf |
+[10:30:56:481]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  CreateSchema :: updateDataBaseParams_PGSQL() - ReInitialzing the DBParamsParser |
+[10:30:56:483]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  CreateSchema :: /conf/PGSQL/database_params.props is sucessfully updated  |
+[10:30:56:490]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  CreateSchema :: instantiateConnection :: urlstr --> jdbc:postgresql://localhost:15432/amdb?ApplicationName=ApplicationsManager&dontTrackOpenResources=true&useUnicode=true&characterEncoding=UTF-8|
+[10:30:57:140]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  The function for postgres CREATE EXTENSION pgcrypto,citext,pg_stat_statements,amcheck is created|
+[10:30:57:181]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  postgres : password updated successfully for user :  postgres|
+[10:30:57:190]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  PostgreSQL User dbuser created successfully|
+[10:30:57:198]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  PostgreSQL User rouser created successfully|
+[10:30:57:610]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Admin_Config|
+[10:30:57:618]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HostInodeUsageDataCollected|
+[10:30:57:629]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Admin_VMenu|
+[10:30:57:672]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Admin_HMenu|
+[10:30:57:685]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Admin_HMenuLinks|
+[10:30:57:688]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ObjectTypes|
+[10:30:57:700]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ManagedObject|
+[10:30:57:712]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MapContainer|
+[10:30:57:723]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table TopoObject|
+[10:30:57:730]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Node|
+[10:30:57:737]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Network|
+[10:30:57:753]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table IpAddress|
+[10:30:57:765]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SnmpNode|
+[10:30:57:779]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SnmpInterface|
+[10:30:57:791]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table TL1Node|
+[10:30:57:802]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table TL1Interface|
+[10:30:57:805]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table TOPOUSERPROPS|
+[10:30:57:807]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ALERTUSERPROPS|
+[10:30:57:809]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table EVENTUSERPROPS|
+[10:30:57:820]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table USERTABLE|
+[10:30:57:825]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table HOSTS|
+[10:30:57:858]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PORTS|
+[10:30:57:864]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ENGINES|
+[10:30:57:871]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table USERS|
+[10:30:57:878]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table POLLUSERPROPS|
+[10:30:57:880]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ANNOTATION|
+[10:30:57:892]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Alert|
+[10:30:57:906]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Alert_Marker|
+[10:30:57:918]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MapDB|
+[10:30:57:961]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MapSymbol|
+[10:30:57:973]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MapLink|
+[10:30:57:980]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MAPUSERPROPS|
+[10:30:57:991]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Event|
+[10:30:58:003]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PolledData|
+[10:30:58:006]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ALERTLOGGER|
+[10:30:58:008]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table EVENTLOGGER|
+[10:30:58:010]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CUSTOMMAPS|
+[10:30:58:012]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DBINTERFACES|
+[10:30:58:014]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DEFAULTMAPS|
+[10:30:58:021]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table TrapDisabledMO|
+[10:30:58:039]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CHILDRENSTATUS|
+[10:30:58:046]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CUSTOMPROPS|
+[10:30:58:049]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table OBJECTSTOLINK|
+[10:30:58:063]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table TOPODBSPECIALKEY|
+[10:30:58:070]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DBMAP|
+[10:30:58:077]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DBEVENT|
+[10:30:58:083]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DBALERT|
+[10:30:58:093]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DBPOLL|
+[10:30:58:100]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ObjectSchedulerRUNNABLE|
+[10:30:58:113]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MapGroup|
+[10:30:58:119]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ManagedGroupObject|
+[10:30:58:121]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table GroupTable|
+[10:30:58:130]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table TaskAudit|
+[10:30:58:132]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DeviceAudit|
+[10:30:58:135]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AttributeAudit|
+[10:30:58:150]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ConfigTasks|
+[10:30:58:153]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ConfigTaskDetails|
+[10:30:58:159]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ConfigAttributes|
+[10:30:58:161]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PendingTasks|
+[10:30:58:169]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PendingDevices|
+[10:30:58:171]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DeviceList|
+[10:30:58:173]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DeviceListDetails|
+[10:30:58:180]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DeviceUserProps|
+[10:30:58:184]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ConfigProvider|
+[10:30:58:191]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PollingObjects|
+[10:30:58:193]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table TaskToDeviceListMap|
+[10:30:58:195]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PollingAttributes|
+[10:30:58:202]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Providers|
+[10:30:58:209]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table StatsTables|
+[10:30:58:215]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ThresholdObjects|
+[10:30:58:225]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CustomView|
+[10:30:58:264]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CustomViewProps|
+[10:30:58:276]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CustomViewColumns|
+[10:30:58:282]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PanelTree|
+[10:30:58:288]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PanelProps|
+[10:30:58:294]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PollFilters|
+[10:30:58:325]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table GenericFaultTable|
+[10:30:58:328]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table TrapFilter|
+[10:30:58:334]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table TrapEventParser|
+[10:30:58:340]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table EventAlertFilter|
+[10:30:58:347]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Reports|
+[10:30:58:349]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DataCollectionAttributes|
+[10:30:58:360]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table UserPasswordTable|
+[10:30:58:390]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table UserGroupTable|
+[10:30:58:401]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ViewPropertiesTable|
+[10:30:58:408]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ViewsToGroupTable|
+[10:30:58:415]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ViewToOperationsTable|
+[10:30:58:421]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table OperationsTreeTable|
+[10:30:58:423]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table NamedViewToAuthorizedViewTable|
+[10:30:58:425]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AuthAudit|
+[10:30:58:431]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table NotificationLog|
+[10:30:58:438]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table VarBindLog|
+[10:30:58:445]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AgentDefValObject|
+[10:30:58:452]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PolicyObject|
+[10:30:58:459]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PolicyActionCondition|
+[10:30:58:461]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table POLICYUSERPROPS|
+[10:30:58:491]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DBPOLICY|
+[10:30:58:493]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PolicyScheduleTime|
+[10:30:58:500]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AlertPolicyObject|
+[10:30:58:506]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ENGINETABLE|
+[10:30:58:518]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table USMTABLE|
+[10:30:58:524]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SwitchObject|
+[10:30:58:531]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PortObject|
+[10:30:58:538]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Printer|
+[10:30:58:544]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table OperationsTable|
+[10:30:58:546]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table BEFailOver|
+[10:30:58:550]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PollIDToKeyMap|
+[10:30:58:552]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ProvisioningVariantProps|
+[10:30:58:558]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ProvisioningVariant|
+[10:30:58:564]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table UserConfTable|
+[10:30:58:581]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CORBANode|
+[10:30:58:591]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table NetworkInventory|
+[10:30:58:597]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SgaStatus|
+[10:30:58:607]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table InetService|
+[10:30:58:617]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SmtpServer|
+[10:30:58:628]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table WebServer|
+[10:30:58:639]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table HostDetails|
+[10:30:58:650]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOSTINFO|
+[10:30:58:661]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOST_PROCESS_INFO|
+[10:30:58:668]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOST_PROCESS_INSTANCE|
+[10:30:58:674]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOST_PROCESS_CPUMEM|
+[10:30:58:680]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOST_PROCESS_ENABLEREPORTS|
+[10:30:58:690]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table OracleCollectData|
+[10:30:58:744]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SessionInfo|
+[10:30:58:753]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DataFiles|
+[10:30:58:760]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DataFilesExt|
+[10:30:58:763]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table HostDataDailyCollected|
+[10:30:58:769]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DnsServer|
+[10:30:58:776]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table InstanceDetails|
+[10:30:58:779]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table HostDataHourlyCollected|
+[10:30:58:789]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SqlServer|
+[10:30:58:796]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table InstanceStatus|
+[10:30:58:803]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table HostCpuMemDataCollected|
+[10:30:58:810]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table HostSysLoadDataCollected|
+[10:30:58:818]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table HostDiskUtilDataCollected|
+[10:30:58:832]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOSTPGSPACEDATACOLLECTED|
+[10:30:58:839]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table HostDiskIODataCollected|
+[10:30:58:851]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table HostPrintQueueDataCollected|
+[10:30:58:858]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table HostDataCollected|
+[10:30:58:867]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table PopServer|
+[10:30:58:877]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table FtpServer|
+[10:30:58:879]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table RedoLogs|
+[10:30:58:889]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CollectData|
+[10:30:58:904]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ImapServer|
+[10:30:58:910]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table TableSpaceDetails|
+[10:30:58:916]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SgaDetailsExt|
+[10:30:58:926]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MailServer|
+[10:30:58:932]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table TableSpaceStatus|
+[10:30:58:938]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SgaDetails|
+[10:30:58:944]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table RollbackData|
+[10:30:58:953]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ComponentsConfig|
+[10:30:58:997]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ResourceConfig|
+[10:30:59:007]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RESOURCECONFIG|
+[10:30:59:013]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RESOURCECONFIG_EXT|
+[10:30:59:016]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDBCData|
+[10:30:59:023]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_JMSData|
+[10:30:59:028]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_SAFData|
+[10:30:59:030]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EJBCacheData|
+[10:30:59:033]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EJBPoolData|
+[10:30:59:034]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EJBTxData|
+[10:30:59:036]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_ServletData|
+[10:30:59:038]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_CLUSTER|
+[10:30:59:040]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_ClusterData|
+[10:30:59:043]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_WebAppData|
+[10:30:59:045]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_JDBCData|
+[10:30:59:052]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_GCData|
+[10:30:59:057]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_MemPoolData|
+[10:30:59:063]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_GCImpactData|
+[10:30:59:065]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JB_JDBCData|
+[10:30:59:072]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JB_WebAppData|
+[10:30:59:074]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JB_EJBData|
+[10:30:59:076]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EJBMethodDetails|
+[10:30:59:078]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JVMData|
+[10:30:59:088]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_ThreadData|
+[10:30:59:094]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_ThreadData_EXT|
+[10:30:59:098]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_NON_NMS_SCALAR_DATA|
+[10:30:59:104]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WEBLOGIC_ARGS|
+[10:30:59:105]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table Applications|
+[10:30:59:115]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_ManagedObject|
+[10:30:59:117]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CONFIGURED_EVENTS|
+[10:30:59:123]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_VMWARE_EVENTS|
+[10:30:59:128]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_DeletedResourceIDs|
+[10:30:59:134]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RESYNCH_REPORTS_TABLES|
+[10:30:59:172]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_ManagedResourceType|
+[10:30:59:179]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ManagedObjectDataCollectionInfo|
+[10:30:59:185]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOLISTICAPPLICATION|
+[10:30:59:195]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PARENTCHILDMAPPER|
+[10:30:59:201]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_Temp_HA_ResourceMapper|
+[10:30:59:207]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JBOSS_DETAILS|
+[10:30:59:213]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JBOSS_AUTHINFO|
+[10:30:59:215]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JVMFreeMemoryData|
+[10:30:59:220]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ACTIONPROFILE|
+[10:30:59:226]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ACTION_BUSINESSHOURMAPPER|
+[10:30:59:254]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ACTIONHOST_MAPPER|
+[10:30:59:263]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_EMAILACTION|
+[10:30:59:273]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SMSACTION|
+[10:30:59:279]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SMSMODEMACTION|
+[10:30:59:288]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RESTAPI_ACTION|
+[10:30:59:294]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EXECUTE_ACTION_STATUS|
+[10:30:59:303]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SMSGATEWAYACTION|
+[10:30:59:320]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SMSGATEWAY|
+[10:30:59:330]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SMSGATEWAY_TEMPLATE|
+[10:30:59:340]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SMS_OUT|
+[10:30:59:342]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SMS_IN|
+[10:30:59:352]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SERVERCMDACTION|
+[10:30:59:361]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_V1_TRAPACTION|
+[10:30:59:375]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_V2_TRAPACTION|
+[10:30:59:391]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_V3_TRAPACTION|
+[10:30:59:396]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_VIEW_FILTERS|
+[10:30:59:402]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_VIEW_FILTERS_MONITOR|
+[10:30:59:408]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_VIEW_FILTER_ELEMENTS|
+[10:30:59:420]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_THRESHOLDCONFIG|
+[10:30:59:429]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ADAPTIVECONFIG|
+[10:30:59:434]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_FLOAT_THRESHOLDCONFIG|
+[10:30:59:440]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ATTRIBUTEACTIONMAPPER|
+[10:30:59:451]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PredefinedAction|
+[10:30:59:457]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ATTRIBUTEACTIONSTATUS|
+[10:30:59:463]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ATTRIBUTETHRESHOLDMAPPER|
+[10:30:59:469]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQLDETAILS|
+[10:30:59:474]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQLPERFORMANCE|
+[10:30:59:481]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQLSERVERTUNING|
+[10:30:59:488]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQLDBTUNING|
+[10:30:59:493]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQLTABLELOCKS|
+[10:30:59:500]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQLMEMORY|
+[10:30:59:506]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQLQUERYSTATS|
+[10:30:59:513]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQLREPLICATION|
+[10:30:59:562]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQLREPLICATION_STATS|
+[10:30:59:567]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQL_GROUPREPL_MEMBER_INFO|
+[10:30:59:577]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQL_GROUPREPL_MEMBER_STATS|
+[10:30:59:582]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQL_QUERY_BY_CPU|
+[10:30:59:594]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQLDETAILS|
+[10:30:59:600]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_CONFIGDETAILS|
+[10:30:59:605]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_CONFIGDETAILSMAPPING|
+[10:30:59:612]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQLBUFFERDETAILS|
+[10:30:59:648]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQLGENERALDETAILS|
+[10:30:59:655]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQLLOCKDETAILS|
+[10:30:59:661]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQLLATCHES|
+[10:30:59:667]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQLCACHEDETAILS|
+[10:30:59:672]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQLMEMORYDETAILS|
+[10:30:59:678]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQLSQLDETAILS|
+[10:30:59:683]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DATABASES|
+[10:30:59:691]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_DATABASEDETAILS|
+[10:30:59:698]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_DATAFILESIZEDETAILS|
+[10:30:59:704]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQLACCESSMETHODDETAILS|
+[10:30:59:711]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQLJOBDETAILS|
+[10:30:59:728]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_USERSLIST|
+[10:30:59:735]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MSSQLCLUSTER_CONFIG|
+[10:30:59:745]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MSSQLCLUSTER_NODES|
+[10:30:59:754]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MSSQLCLUSTER_NETWORKS|
+[10:30:59:764]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MSSQLCLUSTER_DISK|
+[10:30:59:774]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MSSQLCLUSTER_RESOURCEGROUP|
+[10:30:59:828]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DB2DETAILS|
+[10:30:59:834]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DB2DATABASEDETAILS|
+[10:30:59:840]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DB2DATABASESTATUS|
+[10:30:59:845]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DB2BUFFERPOOLSTATS|
+[10:30:59:851]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DB2CONNECTION_AGENTS|
+[10:30:59:856]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EXCHANGESTATS|
+[10:30:59:865]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EXCHANGE_SERVICES|
+[10:30:59:871]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DOTNET_PERFORMANCE|
+[10:30:59:876]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DOTNET_APPSTATS|
+[10:30:59:881]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HARDWARE_TEMPERATURE|
+[10:30:59:943]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HARDWARE_FAN|
+[10:30:59:950]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HARDWARE_POWERSUPPLY|
+[10:30:59:956]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HARDWARE_VOLTAGE|
+[10:30:59:961]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HARDWARE_ARRAY|
+[10:30:59:966]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TOMCATINFO|
+[10:30:59:972]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TOMCATDETAILS|
+[10:30:59:977]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TOMCATTHREADSTATS|
+[10:30:59:983]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TOMCATPERFORMANCESTATS|
+[10:30:59:989]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TOMCATRESPONSESTATS|
+[10:30:59:993]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TOMCATWEBAPPSTATS|
+[10:31:00:008]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TOMCATSESSIONDETAILS|
+[10:31:00:015]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TOMCATSERVLETSTATS|
+[10:31:00:038]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TC_WAR|
+[10:31:00:044]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TC_URL|
+[10:31:00:054]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PORTCONFIG|
+[10:31:00:060]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EAR|
+[10:31:00:062]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WAR|
+[10:31:00:069]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EJB|
+[10:31:00:081]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_URL|
+[10:31:00:083]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_URLSequence|
+[10:31:00:094]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_URLData|
+[10:31:00:100]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_URLData_EXT|
+[10:31:00:106]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RBMDATA|
+[10:31:00:117]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RBMAGENTDATA|
+[10:31:00:123]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RBMAGENTSCHEDULE|
+[10:31:00:132]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RESOURCE_AGENT_MAPPING|
+[10:31:00:140]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EUM_PARENTCHILD_MAPPING|
+[10:31:00:142]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDBC|
+[10:31:00:144]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_Thread|
+[10:31:00:146]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_Servlet|
+[10:31:00:153]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DataCollectionConfig|
+[10:31:00:163]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ManagedObjectData|
+[10:31:00:173]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONITOR_ERRORS|
+[10:31:00:178]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONITORERROR_STATUS|
+[10:31:00:180]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_ServerDetails|
+[10:31:00:185]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SearchKeywords|
+[10:31:00:191]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SearchTables|
+[10:31:00:196]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SearchColumns|
+[10:31:00:203]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SearchKeywordsColumnsMapper|
+[10:31:00:208]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SearchKeywordActualValue|
+[10:31:00:214]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SearchResultsHandler|
+[10:31:00:227]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MailServerConfig|
+[10:31:00:236]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_POPServerConfig|
+[10:31:00:246]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SMTPServerConfig|
+[10:31:00:256]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ProxyServerConfig|
+[10:31:00:265]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ATTRIBUTES|
+[10:31:00:299]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ArchiverConfig|
+[10:31:00:308]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ArchiverCAMConfig|
+[10:31:00:319]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ManagedObjectHistoryData|
+[10:31:00:327]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MinMaxAvgData|
+[10:31:00:333]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MO_DowntimeData|
+[10:31:00:342]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EUMAGENT_DOWNTIMEDATA|
+[10:31:00:351]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DOWNTIMEREASON|
+[10:31:00:361]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EventHistoryData|
+[10:31:00:367]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ATTRIBUTESDEPENDENCY|
+[10:31:00:372]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RCAMAPPER|
+[10:31:00:383]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RCARULESMAPPER|
+[10:31:00:388]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TEMP_LATESTSTATUS|
+[10:31:00:394]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TEMP_LATESTDATACOLLECTIONTIMES|
+[10:31:00:402]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_GLOBALCONFIG|
+[10:31:00:410]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table METRACK|
+[10:31:00:419]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table METRACK_CLOUD|
+[10:31:00:428]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table METRACKDETAILS|
+[10:31:00:465]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table StartupLogDetails|
+[10:31:00:474]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ErrorLogDetails|
+[10:31:00:486]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SERVERCONFIG|
+[10:31:00:495]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_THRESHOLDCONFIG_EXT|
+[10:31:00:501]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MAILSETTINGS|
+[10:31:00:506]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ATTRIBUTETYPECONSTANTS|
+[10:31:00:537]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DataCleanupInfo|
+[10:31:00:543]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PredefinedThreshold|
+[10:31:00:548]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_SCREEN|
+[10:31:00:554]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_SCREEN_TYPES|
+[10:31:00:563]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_DC_GROUPS|
+[10:31:00:572]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_DC_ATTRIBUTES|
+[10:31:00:579]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_DC_RESOURCE_ATTRIBUTES_MAPPER|
+[10:31:00:584]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_SCREEN_ATTRIBUTE_MAPPING|
+[10:31:00:589]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_NUMERIC_DATA|
+[10:31:00:638]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_STRING_DATA|
+[10:31:00:647]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_COLUMNAR_DATA|
+[10:31:00:653]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_TABLE_COLUMN_MAPPER|
+[10:31:00:658]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_DISPLAYTYPECONSTANTS|
+[10:31:00:663]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_ATTRIBUTETYPECONSTANTS|
+[10:31:00:675]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_FILEDIR|
+[10:31:00:685]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_FILE|
+[10:31:00:697]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DIR|
+[10:31:00:703]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ALERTRULE|
+[10:31:00:709]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ALERTTYPEMAPPER|
+[10:31:00:714]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ALERTACTIONMAPPER|
+[10:31:00:720]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ALERTRULETYPECONSTANT|
+[10:31:00:729]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PING|
+[10:31:00:734]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PINGDATA|
+[10:31:00:746]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_QUERY_EXETIME_MAPPER|
+[10:31:00:760]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ScriptArgs|
+[10:31:00:771]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCRIPTHOSTDETAILS|
+[10:31:00:780]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCRIPTHOST_MAPPER|
+[10:31:00:790]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCRIPT_ROWS|
+[10:31:00:795]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_Script_Resource_Attributes_Mapper|
+[10:31:00:801]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_Script_String_Data|
+[10:31:00:807]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_QEngineScript_Responsetime|
+[10:31:00:812]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_Script_Numeric_Data|
+[10:31:00:886]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCRIPT_TABLES|
+[10:31:00:891]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCRIPT_TABULAR_NUMERIC_DATA|
+[10:31:00:896]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TABLE_ATTRIBUTES|
+[10:31:00:901]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TABLE_ROWS|
+[10:31:00:907]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PHPPATH|
+[10:31:00:912]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PHPDETAILS|
+[10:31:00:921]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ApacheDetails|
+[10:31:00:931]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_APACHE_CONFIG|
+[10:31:00:942]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SearchDocLinks|
+[10:31:00:947]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SearchDocLinksKeywordsMapper|
+[10:31:00:960]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_UserPasswordTable|
+[10:31:00:969]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_UserSession|
+[10:31:00:979]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_IncorrectLoginDetails|
+[10:31:00:988]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE SAMLSP|
+[10:31:01:003]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE SAMLIDP|
+[10:31:01:008]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE SAMLIDPAUTHCONFIG|
+[10:31:01:013]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_SAML_MONITORGROUPMAPPER|
+[10:31:01:019]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_USER_BUSINESSHOURSMAPPER|
+[10:31:01:025]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_UserGroupTable|
+[10:31:01:035]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_UserTokenDetails|
+[10:31:01:041]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_USER_ROLESCOPE_MAPPER|
+[10:31:01:047]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_USERGROUP_CONFIG|
+[10:31:01:051]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_USERGROUP_OWNERS|
+[10:31:01:063]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_USERGROUP_MAPPING|
+[10:31:01:068]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_DOMAINUSERGROUP_MAPPING|
+[10:31:01:080]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_TASK_SCHEDULER_DETAILS|
+[10:31:01:089]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MAINTENANCECONFIG|
+[10:31:01:095]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_DAILYMAINTENANCE|
+[10:31:01:100]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_CUSTOMMAINTENANCE|
+[10:31:01:107]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WEEKLYMAINTENANCE|
+[10:31:01:112]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TASKIDRESOURCEIDMAPPER|
+[10:31:01:154]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TRAPLISTENERCONFIG|
+[10:31:01:161]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_V1TRAPCONFIG|
+[10:31:01:167]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_V2CTRAPCONFIG|
+[10:31:01:201]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_V3TRAPCONFIG|
+[10:31:01:212]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SLA|
+[10:31:01:217]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SLO_TYPE|
+[10:31:01:222]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SLO|
+[10:31:01:228]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SLO_APPLICATIONAVAILABLITY|
+[10:31:01:235]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SLO_SYSTEMAVAILABLITY|
+[10:31:01:265]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SLO_TROUBLETICKETVOLUME|
+[10:31:01:271]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SLA_RESID_MAPPER|
+[10:31:01:275]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SLA_ACTION_MAPPER|
+[10:31:01:280]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOLISTICAPPLICATION_EXT|
+[10:31:01:285]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SLASITEINFO|
+[10:31:01:295]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SNMP_EXT_INFO|
+[10:31:01:304]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MX4J_EXT_INFO|
+[10:31:01:310]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CONSECUTIVE_POLLSDATA|
+[10:31:01:316]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TABLE_CONSECUTIVE_POLLSDATA|
+[10:31:01:365]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MBEANOPERATIONACTION|
+[10:31:01:371]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MBEANOPERATIONACTION_ARGDETAILS|
+[10:31:01:381]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MBEANOPERATIONACTION_ARGVALUES|
+[10:31:01:391]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PATTERNMATCHERCONFIG|
+[10:31:01:401]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JMXNOTIFICATION_PROFILES|
+[10:31:01:413]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MAS_SERVER|
+[10:31:01:419]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RETRIES_CONFIG|
+[10:31:01:434]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PREDEFINED_RETRIES_CONFIG|
+[10:31:01:440]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOLISTICAPPLICATION_OWNERS|
+[10:31:01:446]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MANAGEDOBJECT_TO_WTA|
+[10:31:01:452]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_KeyWord|
+[10:31:01:458]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_Package|
+[10:31:01:464]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_Class|
+[10:31:01:470]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_Method|
+[10:31:01:477]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_Argument|
+[10:31:01:484]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_MethodIdentifier|
+[10:31:01:491]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_MethodIdentifierToSQL|
+[10:31:01:521]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_URL|
+[10:31:01:527]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_Transaction|
+[10:31:01:534]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_TransactionStats|
+[10:31:01:546]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_MethodInstance|
+[10:31:01:553]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_MethodTree|
+[10:31:01:563]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_ArgumentValue|
+[10:31:01:569]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_ClassToClassType|
+[10:31:01:575]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_ClassType|
+[10:31:01:606]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_ClassStat|
+[10:31:01:614]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_Config|
+[10:31:01:622]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_Config_Package|
+[10:31:01:628]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WTA_Config_Package_Map|
+[10:31:01:635]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table FEED_URL|
+[10:31:01:645]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table FEED_LOGIN_PARAMS|
+[10:31:01:651]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SERVICEDESK_CONFIG|
+[10:31:01:660]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ADDONPRODUCTS_URL|
+[10:31:01:698]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SDESK_TICKET_DETAILS|
+[10:31:01:704]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_GMapCountryCoord|
+[10:31:01:709]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_GMapCountryResourceRel|
+[10:31:01:715]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_UnManagedNodes|
+[10:31:01:721]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAS_HostData|
+[10:31:01:727]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAS_ProcessData|
+[10:31:01:737]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAS_JVMData|
+[10:31:01:742]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAS_EJB|
+[10:31:01:749]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAS_EJBData|
+[10:31:01:759]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAS_WebAppData|
+[10:31:01:765]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAS_ServletData|
+[10:31:01:771]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAS_JMS|
+[10:31:01:777]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAS_JMSData|
+[10:31:01:784]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAS_HTTPServerData|
+[10:31:01:789]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAS_DataSourceData|
+[10:31:01:795]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAS_TOMCATRESPONSESTATS|
+[10:31:01:825]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCHEDULEDETAILS|
+[10:31:01:835]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCHEDULERTIME|
+[10:31:01:871]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCHEDULER_REPORTTYPE|
+[10:31:01:881]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCHEDULER_REPORTTYPE_MAPPING|
+[10:31:01:890]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCHEDULER_RESOURCETYPE|
+[10:31:01:899]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCHEDULER_RESOURCETYPE_MAPPING|
+[10:31:01:909]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCHEDULE_ACTION_MAPPING|
+[10:31:01:915]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DAILYTIME|
+[10:31:01:926]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WEEKLYTIME|
+[10:31:01:935]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONTHLYTIME|
+[10:31:01:940]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WMI_RETURNCODE|
+[10:31:01:952]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_GLOBALEVENTLOGRULES|
+[10:31:01:957]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EVENTLOGATTRIBUTEMAPPING|
+[10:31:01:959]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_EVENTLOGRESOURCEIDMAPPER|
+[10:31:01:966]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_EVENTLOGRESOURCESTATUS|
+[10:31:01:971]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EVENTTYPE|
+[10:31:01:977]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOURLYTIME|
+[10:31:01:982]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RULETYPE|
+[10:31:01:995]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EVENTLOGMONITORDATA|
+[10:31:02:001]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCHEDULEDTASKSMONITORDATA|
+[10:31:02:007]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SCHEDULED_TASK_SKIP_ALERT_CONFIG|
+[10:31:02:011]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOSTEVENTLOGSTATUS|
+[10:31:02:017]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SLA_DISABLEMAIL|
+[10:31:02:022]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_GROUP_INSTANCE_MAPPING|
+[10:31:02:034]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_WMI_EXT_INFO|
+[10:31:02:039]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAM_WMI_CLASS_INFO|
+[10:31:02:044]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ARCHIVERCONFIG_EXTN|
+[10:31:02:057]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_Config|
+[10:31:02:062]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_ClassTypes|
+[10:31:02:067]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_Class|
+[10:31:02:076]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_Operation|
+[10:31:02:080]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_OperationWSDLMap|
+[10:31:02:086]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_Argument|
+[10:31:02:091]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_BeanProperty|
+[10:31:02:099]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_Instance|
+[10:31:02:132]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_InstanceAttributeMapper|
+[10:31:02:141]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_ArgumentValue|
+[10:31:02:150]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_BeanPropertyValue|
+[10:31:02:159]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_OperationData|
+[10:31:02:168]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WSM_WebServiceData|
+[10:31:02:177]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_GLOBAL_DISABLECOLLECTION|
+[10:31:02:184]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table OracleBufferGets|
+[10:31:02:208]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table OracleDiskReads|
+[10:31:02:211]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table OracleSessionWaits|
+[10:31:02:214]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLI_BPM|
+[10:31:02:216]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLI_AI|
+[10:31:02:217]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLI_MB|
+[10:31:02:226]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_Config|
+[10:31:02:236]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_OSINFO|
+[10:31:02:244]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_VMINFO|
+[10:31:02:250]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_THREADINFO|
+[10:31:02:256]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_MEMORYINFO|
+[10:31:02:261]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_HEAPMEMORYINFO|
+[10:31:02:268]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_NONHEAPMEMORYINFO|
+[10:31:02:304]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CONFIGURATION_INFO|
+[10:31:02:310]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ATTRIBUTES_CONFIG|
+[10:31:02:315]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ATTRIBUTES_CONFIG_EXT|
+[10:31:02:320]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_GCINFO|
+[10:31:02:325]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONITOR_DEBUG_INFO|
+[10:31:02:331]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_HEAPMEMORYINFO_BGC|
+[10:31:02:336]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_NONHEAPMEMORYINFO_BGC|
+[10:31:02:343]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_HEAPMEMORYINFO_AGC|
+[10:31:02:349]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_NONHEAPMEMORYINFO_AGC|
+[10:31:02:351]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SessionInfoExt|
+[10:31:02:353]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table OracleBlockers|
+[10:31:02:355]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table OracleWaiters|
+[10:31:02:357]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table OracleLocks|
+[10:31:02:372]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AssociatedExtDevices|
+[10:31:02:382]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_INTEGRATEDPRODUCTS|
+[10:31:02:392]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PROMETHEUS_DETAILS|
+[10:31:02:402]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PROMETHEUS_DISCOVERED_MONITORS|
+[10:31:02:408]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_PROMETHEUS_SELECTED_MONITORTYPES|
+[10:31:02:417]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_PROMETHEUS_SPECIFICMONITORING_INSTANCES|
+[10:31:02:449]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MONITOR_TYPES|
+[10:31:02:459]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_Custom_Archival_Mapping|
+[10:31:02:472]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CUSTOM_ARGS|
+[10:31:02:485]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CUSTOM_DEFAULTS|
+[10:31:02:490]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CUSTOM_MONITOR_GROUPS_CAPTION|
+[10:31:02:496]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CUSTOM_MONITOR_GROUPS_DEFINITION|
+[10:31:02:525]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table RackDetails|
+[10:31:02:531]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table WorkFlowDetails|
+[10:31:02:540]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ExternalDeviceDetails|
+[10:31:02:546]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SWDetails|
+[10:31:02:553]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SERVERID_IP|
+[10:31:02:558]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOTFIXDETAILS|
+[10:31:02:563]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOTFIXTIMESTAMPDETAILS|
+[10:31:02:572]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MGVIEW|
+[10:31:02:605]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ATTRIBUTES_EXT|
+[10:31:02:610]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ManagedObject_DCSTARTED|
+[10:31:02:620]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_Config|
+[10:31:02:632]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_WorkProcessInfo|
+[10:31:02:637]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_BackgroundInfo|
+[10:31:02:642]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_BufferInfo|
+[10:31:02:648]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_DialogInfo|
+[10:31:02:654]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_UpdateInfo|
+[10:31:02:660]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_WorkProcessMetricInfo|
+[10:31:02:687]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_EnqueueInfo|
+[10:31:02:692]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_OSInfo|
+[10:31:02:699]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_SpoolInfo|
+[10:31:02:709]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_Alerts|
+[10:31:02:719]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_BACKGROUNDJOBINFO|
+[10:31:02:730]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_TRFCCallInfo|
+[10:31:02:740]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_QSchedularInfo|
+[10:31:02:782]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_QoutData|
+[10:31:02:792]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAP_QinData|
+[10:31:02:798]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ATTRIBUTES_ARCHIVEDTIME_MAPPING|
+[10:31:02:807]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MIGRATIONVALUES|
+[10:31:02:813]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DB2_TABLESPACESTATS|
+[10:31:02:819]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DB2_ROWSTATS|
+[10:31:02:833]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DB2_SESSION_DETAILS|
+[10:31:02:844]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DB2_LONGRUNNING_QUERY|
+[10:31:02:850]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WLS_DISABLE_STATS|
+[10:31:02:859]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SERVICE_DISCOVERY|
+[10:31:02:864]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SYBASEDETAILS|
+[10:31:02:871]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SYBASEMEMORYDETAILS|
+[10:31:02:877]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SYBASECOMMANDPROCESSDETAILS|
+[10:31:02:882]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SYBASECONNECTIONDETAILS|
+[10:31:02:896]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SYBASEDATABASEDETAILS|
+[10:31:02:902]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SYBASETRANSACTIONDETAILS|
+[10:31:02:937]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_NETWORKINTERFACE|
+[10:31:02:943]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_NETWORKADAPTER|
+[10:31:02:952]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HEALTH_ALERTDATA|
+[10:31:02:965]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_BUSINESSHOURSDETAILS|
+[10:31:02:971]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_FLASHVIEW_COORDINATES|
+[10:31:02:981]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONITORGROUP_FLASHVIEWCONFIG|
+[10:31:03:015]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_FLASHVIEW_FILTER|
+[10:31:03:026]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ExternalDeviceInterfaceDetails|
+[10:31:03:028]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table StandaloneMonitorGroupList|
+[10:31:03:032]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_CONFIGURATION|
+[10:31:03:036]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_STATUS|
+[10:31:03:038]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_POOL|
+[10:31:03:041]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_JOBS|
+[10:31:03:047]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_MONITOREDJOBS|
+[10:31:03:050]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_JOBTYPES|
+[10:31:03:056]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_MESSAGES|
+[10:31:03:059]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_SUBSYSTEM|
+[10:31:03:066]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_SUBSYSTEMMONITORING|
+[10:31:03:068]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_SPOOL|
+[10:31:03:071]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_PRINTER|
+[10:31:03:073]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_DISK|
+[10:31:03:074]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_PROBLEMS|
+[10:31:03:076]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_ALERTSTATUS|
+[10:31:03:078]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_HISTORYLOGS|
+[10:31:03:084]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_COMMANDS|
+[10:31:03:090]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_QUEUES|
+[10:31:03:128]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_MONITOREDDATAQUEUES|
+[10:31:03:140]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_MONITOREDJOBQUEUES|
+[10:31:03:149]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_MONITOREDOUTQUEUES|
+[10:31:03:157]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONITOR_MESSAGES|
+[10:31:03:162]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DASHBOARD_TYPES|
+[10:31:03:168]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DASHBOARD_FORPAGES|
+[10:31:03:179]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DASHBOARDS|
+[10:31:03:194]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGES|
+[10:31:03:199]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_ASSOCIATED_USERS|
+[10:31:03:204]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_ASSOCIATED_USER_ROLES|
+[10:31:03:214]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_WIDGETS|
+[10:31:03:220]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WIDGET_ALLTYPES|
+[10:31:03:226]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_WIDGET_ATTRIBUTES|
+[10:31:03:232]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_WIDGET_MONITORS|
+[10:31:03:237]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_WIDGET_FLASHVIEWS|
+[10:31:03:246]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_WIDGET_ATT_RESTYPE_MAPPING|
+[10:31:03:251]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_LAYOUT|
+[10:31:03:257]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_WIDGET_MAPPING|
+[10:31:03:265]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_WIDGET_CATEGORY|
+[10:31:03:274]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_WIDGET_TYPES|
+[10:31:03:283]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_PUBLISHKEYS|
+[10:31:03:288]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_INAPP_NOTIFICATION|
+[10:31:03:298]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_INAPP_NOTIFICATION_DETAILS|
+[10:31:03:303]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_INAPP_NOTIFICATION_USERROLE_MAPPING|
+[10:31:03:308]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_INAPP_NOTIFICATION_USER_OPERATION|
+[10:31:03:314]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HARULE|
+[10:31:03:320]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_HA_RULE_CONDITION_CONFIG|
+[10:31:03:325]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_SELECTEDMONITORS_CONDITION|
+[10:31:03:326]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DEPENDENTMONITOR|
+[10:31:03:336]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ANOMALYDETECTIONDETAILS|
+[10:31:03:341]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ANOMALYTHRESHOLDMAPPER|
+[10:31:03:346]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_TEMPLATE_MGS|
+[10:31:03:356]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_BOOKMARKS|
+[10:31:03:358]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MAS_SYNCHDETAILS|
+[10:31:03:363]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_STANDALONE_VIEWDETAILS|
+[10:31:03:365]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_STANDALONE_VIEW_MONITORGROUP_ASSOCIATION|
+[10:31:03:370]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_STANDALONE_VIEWCOLUMN_ASSOCIATION|
+[10:31:03:371]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_STANDALONE_VIEWCOLUMN_DETAILS|
+[10:31:03:377]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table BS_Integ_Info|
+[10:31:03:390]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RESOURCEGROUP_DESCRIPTION|
+[10:31:03:396]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WIDGETS_ASSOCIATEDTYPES|
+[10:31:03:402]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONITOR_DISABLECOLLECTION|
+[10:31:03:411]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONITOR_DC_SETTINGS|
+[10:31:03:417]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HARDWARE_ATTRIBUTES_ENABLE|
+[10:31:03:422]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DEFAULT_DASHBOARDS|
+[10:31:03:427]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table NetflowRouters|
+[10:31:03:433]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table NetflowInterfaces|
+[10:31:03:439]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_UserPasswordHistory|
+[10:31:03:444]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_UserStatus|
+[10:31:03:449]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PROBE_MODULES|
+[10:31:03:454]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONITORGROUP_TYPES|
+[10:31:03:459]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONITORGROUP_TYPE_MAPPING|
+[10:31:03:465]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_VM_GUESTOSMAPPING|
+[10:31:03:470]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_Amazon_EC2InstanceOSMAPPING|
+[10:31:03:474]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONITORGROUP_TYPE_ORDER|
+[10:31:03:479]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_JREACTIONS|
+[10:31:03:488]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MANAGEDSERVER_DEPENDENTDEVICE|
+[10:31:03:493]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JVMTOTALMEM|
+[10:31:03:498]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MAINTENANCETASK_USER_MAPPING|
+[10:31:03:506]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_QUERYACTIONS|
+[10:31:03:515]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SQLJOBACTION|
+[10:31:03:520]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CUSTOMERINFO|
+[10:31:03:525]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SITEINFO|
+[10:31:03:531]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SITETOMANAGEDSERVERMAPPING|
+[10:31:03:536]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE TicketProfileRequesterMapping|
+[10:31:03:538]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE SCHEDULEDETAILS_CUSTOMER|
+[10:31:03:543]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MAS_TASKDETAILS|
+[10:31:03:548]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MAS_COMM_DETAILS|
+[10:31:03:557]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYSQL_CONFIGURATION_INFO|
+[10:31:03:567]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MAS_SERVER_EXT|
+[10:31:03:576]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PROCESS_TEMPLATE|
+[10:31:03:585]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TEMPLATE_PROCESS_DEFINITION|
+[10:31:03:590]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TEMPLATE_MONITOR_ASSOCIATION|
+[10:31:03:595]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TEMPLATE_THRESHOLD_ASSOCIATION|
+[10:31:03:600]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TEMPLATE_ACTION_ASSOCIATION|
+[10:31:03:606]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TEMPLATE_MG_ASSOCIATION|
+[10:31:03:611]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TEMPLATE_SERVERTYPE_ASSOCIATION|
+[10:31:03:616]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TEMPLATE_REGEX_MAPPING|
+[10:31:03:624]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOST_CONFIG_INFO|
+[10:31:03:634]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYFIELDS_METADATA|
+[10:31:03:639]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYFIELDS_TEMPLATEDATA|
+[10:31:03:644]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYFIELDS_LABELDATA|
+[10:31:03:649]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYFIELDS_LISTDATA|
+[10:31:03:678]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYFIELDS_TEXTDATA|
+[10:31:03:684]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYPAGE_WIDGET_CUSTOMFIELD|
+[10:31:03:689]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYFIELDS_ENTITYDATA|
+[10:31:03:698]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYFIELDS_ENTITY_METADATA|
+[10:31:03:711]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYFIELDS_LOCATION|
+[10:31:03:720]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYFIELDS_SYSTEMDATA|
+[10:31:03:726]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MYFIELDS_USERDATA|
+[10:31:03:735]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_TABS|
+[10:31:03:741]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_TABUSERMAPPING|
+[10:31:03:747]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ACTION_ASSOCIATED_RESOURCES|
+[10:31:03:756]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WINSERVICEACTION_SERVICE_SELECTED|
+[10:31:03:766]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RHEV_ARGS|
+[10:31:03:778]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_VCENTER_ARGS|
+[10:31:03:783]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_VMWARECLUSTER_METRICS|
+[10:31:03:788]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DATASTORE_RESOURCE_MAPPING|
+[10:31:03:798]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OVM_ARGS|
+[10:31:03:803]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OVMFILESYSTEM_METRICS|
+[10:31:03:812]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OVMFILESYSTEM_MinMaxAvgData|
+[10:31:03:813]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SERVER_STARTUP_DETAILS|
+[10:31:03:819]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CUSTOMFIELDS_MASSYNCH_DETAILS|
+[10:31:03:824]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ADMINMONITORGROUP_ASSOCIATED_MONITOR_DETAILS|
+[10:31:03:831]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_VMWARECLUSTER_MinMaxAvgData|
+[10:31:03:837]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_HEAPMEMORYINFO_EXT|
+[10:31:03:844]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_JDK15_NONHEAPMEMORYINFO_EXT|
+[10:31:03:853]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DOMAINCONTROLLERS|
+[10:31:03:858]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DOMAINUSER_MAPPER|
+[10:31:03:864]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_applications|
+[10:31:03:872]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_applicationdetails|
+[10:31:03:882]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_instances|
+[10:31:03:890]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_webtransactions|
+[10:31:03:897]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_dboperations|
+[10:31:03:907]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_slowtransactions|
+[10:31:03:914]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_partitioninfo|
+[10:31:03:919]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_jvminfo|
+[10:31:03:926]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_components|
+[10:31:03:933]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_componentsinfo|
+[10:31:03:942]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_agentconfiginfo|
+[10:31:03:948]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_agentconfighistory|
+[10:31:03:954]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_exceptions|
+[10:31:03:960]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_app_parameters|
+[10:31:03:970]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_app_param_view|
+[10:31:03:978]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_APM_Insight_MinMaxAvgData|
+[10:31:03:987]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_agentconfig_profile|
+[10:31:03:990]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_agentconfig_profile_mapping|
+[10:31:04:002]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_instances_ext|
+[10:31:04:005]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_applications_ext|
+[10:31:04:006]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_lama_critical_txns|
+[10:31:04:008]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table apm_lama_critical_apps|
+[10:31:04:022]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DIAGNOSTIC_CONF|
+[10:31:04:031]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DIAG_PROPS|
+[10:31:04:041]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DIAGNOSTICSEVENT|
+[10:31:04:052]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DIAGNOSTICSALERT|
+[10:31:04:058]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DIAGNOSTICSANNOTATION|
+[10:31:04:063]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table RESELLERINFO|
+[10:31:04:072]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table REBRANDINFO|
+[10:31:04:079]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CUSTOMERTORESELLERMAPPING|
+[10:31:04:088]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SERVICEDESK_RESTAPI|
+[10:31:04:099]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SDP_WORKORDERID|
+[10:31:04:104]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAPACITY_PLANNING_REPORTS|
+[10:31:04:110]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAPACITY_PLANNING_THRESHOLDS|
+[10:31:04:121]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAPACITY_PLANNING_RULES|
+[10:31:04:126]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAPACITY_PLANNING_REPORTS_RULES_MAPPER|
+[10:31:04:132]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAPACITY_PLANNING_RULES_THRESHOLDS_MAPPER|
+[10:31:04:139]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CAPACITY_PLANNING_NOTES|
+[10:31:04:149]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_PushNotificationDevices|
+[10:31:04:157]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MAPVIEW|
+[10:31:04:166]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MAPVIEWDEVICE|
+[10:31:04:179]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MAPVIEWLINK|
+[10:31:04:192]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MAPVIEWSHORTCUT|
+[10:31:04:198]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MAPVIEWMAPPING|
+[10:31:04:211]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE IT360DAILYCOLLECTION|
+[10:31:04:223]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE IT360MONTHLYCOLLECTION|
+[10:31:04:228]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_HOST_DRIVETYPE|
+[10:31:04:233]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ATTRIBUTES_ARCHIVAL|
+[10:31:04:240]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CONF_SCHEDULE|
+[10:31:04:249]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AssociatedExternalMonitors|
+[10:31:04:254]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_VMWARERESOURCEPOOL_METRICS|
+[10:31:04:261]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_VMWARERESOURCEPOOL_MinMaxAvgData|
+[10:31:04:266]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MAS_SYNCH_UPDATES|
+[10:31:04:275]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ExternalLUNDetails|
+[10:31:04:281]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MG_RULEMANAGER|
+[10:31:04:286]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CREDENTIALMANAGER|
+[10:31:04:294]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CREDENTIALDETAILS|
+[10:31:04:304]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RESOURCEPOOL_ARGS|
+[10:31:04:309]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RESOURCEPOOL_METRICS|
+[10:31:04:315]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table CREDENTIALTORESOURCEMAPPING|
+[10:31:04:324]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SIEBEL_TASK|
+[10:31:04:326]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table SYNCHTASKDETAILS|
+[10:31:04:331]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table WMICONFIGDETAILS|
+[10:31:04:338]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MAS_COMM_SYNCHDETAILS|
+[10:31:04:339]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_EVENTLOGHAIDMAPPER|
+[10:31:04:347]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MG_DEPENDENTGROUPS|
+[10:31:04:352]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_USERRESOURCESTABLE|
+[10:31:04:357]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ACTIVE_SESSION_USERS|
+[10:31:04:371]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_VMHORIZON_ARGS|
+[10:31:04:380]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_CMDB_CI|
+[10:31:04:382]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HD_SETTINGS|
+[10:31:04:388]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HIGHAVAILABILITYAGENT_CONFIG|
+[10:31:04:393]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MAS_HAAGENTS|
+[10:31:04:406]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_CONFIGTOUSER_MAPPING|
+[10:31:04:412]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_AS400_DC_PROPS|
+[10:31:04:417]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SeleniumTestScriptData|
+[10:31:04:426]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SeleniumScriptData|
+[10:31:04:432]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SELENIUMIMAGEDATA|
+[10:31:04:436]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table USEADDM|
+[10:31:04:444]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ADDMGROUPAUTOMANUALCONNECTIONS|
+[10:31:04:447]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ADDMBLOCKEDMONIOTRS|
+[10:31:04:456]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ADMDISCOVERYINFO|
+[10:31:04:462]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ADMDISCOVERYINFOHISTORY|
+[10:31:04:472]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DISCOVERYINFO|
+[10:31:04:479]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DISCOVEREDDEVICESINFO|
+[10:31:04:486]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DISCOVEREDSERVICESINFO|
+[10:31:04:492]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DISCOVERYTOCREDENTIALMAPPING|
+[10:31:04:501]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE DISCOVERYSCANDETAILS|
+[10:31:04:509]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_AUDIT_OPERATIONS|
+[10:31:04:511]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_AUDIT_CREATEDTABLES_INFO|
+[10:31:04:518]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_QRYBYIO|
+[10:31:04:524]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_QRYBYCPU|
+[10:31:04:531]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_QRYBYCLR|
+[10:31:04:537]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_QRYBYMOE|
+[10:31:04:543]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_QRYBYMOB|
+[10:31:04:550]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_QRYBYLPR|
+[10:31:04:556]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_QRYBYCMI|
+[10:31:04:562]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_QRYBYSRQ|
+[10:31:04:568]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_MEMORYUSEDBYCOMP|
+[10:31:04:574]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_WAITSTATS|
+[10:31:04:579]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_DATABASEDETAILS_EXT|
+[10:31:04:585]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HostThreadCount|
+[10:31:04:590]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HostProcessDetails|
+[10:31:04:600]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RESTAPI_DETAILS|
+[10:31:04:610]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_BACKUP|
+[10:31:04:616]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_RESTOREBACKUP|
+[10:31:04:626]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_LOGSHIPPING|
+[10:31:04:632]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MSSQL_REPLPUBLICATIONS|
+[10:31:04:644]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MSSQL_REPLSUBSCRIPTIONDETAILS|
+[10:31:04:654]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MSSQL_REPLAGENTDETAILS|
+[10:31:04:659]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_VLFDETAILS|
+[10:31:04:664]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_DBDETAILS|
+[10:31:04:675]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MSSQL_DATAFILE_DETAILS|
+[10:31:04:686]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MSSQL_LOGFILE_DETAILS|
+[10:31:04:692]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MSSQL_MIRRORINGMONITOR_DETAILS|
+[10:31:04:697]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_MSSQL_MIRRORINGPERFORMANCECOUNTER_DETAILS|
+[10:31:04:699]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_LOCKS|
+[10:31:04:705]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_DBCONNECTION|
+[10:31:04:714]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_SITE24x7_RUM_USERS|
+[10:31:04:719]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_WDM_TOTALCONTENT|
+[10:31:04:733]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_PII_CONSENT|
+[10:31:04:743]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_EXPORTINFO|
+[10:31:04:759]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAUTHPROVIDER|
+[10:31:04:768]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAUTH_AUTHCODEGRANT|
+[10:31:04:777]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAUTH_CLIENTCREDGRANT|
+[10:31:04:789]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAUTH_RESOWNERGRANT|
+[10:31:04:794]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_OAUTHTORESOURCEMAPPING|
+[10:31:04:806]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_INPRODAD_DETAILS|
+[10:31:04:811]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CLOSEDAD_DETAILS|
+[10:31:04:825]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOST_CRONJOB_INFO|
+[10:31:04:831]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOST_CRONJOB_MONITOR_DATA|
+[10:31:04:837]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONTHLYMAINTENANCE|
+[10:31:04:842]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONTHLYMAINTENANCE_DATEWISE|
+[10:31:04:848]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MONTHLYMAINTENANCE_WEEKWISE|
+[10:31:04:853]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_PLUGIN_AUTHKEY|
+[10:31:04:868]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_TRAPLISTENERCONFIG_EXT|
+[10:31:04:876]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table am_msg_qlinks_groups|
+[10:31:04:886]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table am_quicklinks|
+[10:31:04:897]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table am_msg_content|
+[10:31:04:906]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table am_msg_content_url|
+[10:31:04:937]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table am_msg_qlinks_userstatus|
+[10:31:04:943]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HostPgMemDataCollected|
+[10:31:04:950]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HostDateTimeDataCollected|
+[10:31:04:956]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_AVAILABILITYGROUP|
+[10:31:04:962]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_AVAILABILITYREPLICA|
+[10:31:04:968]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_AVAILABILITYDATABASE|
+[10:31:04:973]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOSTNLBSTATE|
+[10:31:04:987]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOST_NLB_CLUSTERED_NODES|
+[10:31:04:996]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SLACK_ACTION|
+[10:31:05:007]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_LOGSHIPPING_SECONDARYSERVER|
+[10:31:05:016]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_MSSQL_LOGSHIPPING_CONFIGURATION|
+[10:31:05:024]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table MapName|
+[10:31:05:027]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DependencyMapServers|
+[10:31:05:029]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DependencyMapPosition|
+[10:31:05:041]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_DBBackupDetails|
+[10:31:05:048]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_ScheduleBackupDetails|
+[10:31:05:059]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_PostgresMigrationStatus|
+[10:31:05:071]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DEKStore|
+[10:31:05:098]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WINDOWSSERVICE_SNMP_INDEXMAPPER|
+[10:31:05:106]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HYPERVCLUSTER_CSV_METRICS|
+[10:31:05:116]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HYPERVCLUSTER_NETWORKS_METRICS|
+[10:31:05:123]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ANOMALY_RESOURCEATTRIBUTE_MAPPER|
+[10:31:05:140]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_ADDONS_NOTIFICATION|
+[10:31:05:149]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOSTMEMDATACOLLECTED_EXT|
+[10:31:05:157]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOSTNETSTATDATACOLLECTED|
+[10:31:05:163]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOSTKERNELDATACOLLECTED|
+[10:31:05:173]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOSTNTPDATACOLLECTED|
+[10:31:05:180]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOSTCPUENTITLEMENTDATACOLLECTED|
+[10:31:05:193]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOSTERRORLOGDATACOLLECTED|
+[10:31:05:205]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE CMDB_TYPE_DETAILS|
+[10:31:05:214]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE CMDB_FIELDS|
+[10:31:05:233]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_WEB_TOKEN_DETAILS|
+[10:31:05:238]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_WEB_TOKEN_RESOURCE_MAPPER|
+[10:31:05:251]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RUM_USER_SESSION_DATA_RAW|
+[10:31:05:254]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RUM_TRANSACTION_DATA_RAW|
+[10:31:05:264]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RUM_ERRORTRACE_DATA|
+[10:31:05:271]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RUM_RESOURCE_DATA|
+[10:31:05:279]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RUM_AJACXALLS_DATA|
+[10:31:05:285]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RUM_MONITOR_DETAILS|
+[10:31:05:295]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RUM_MAS_DETAILS|
+[10:31:05:304]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RUM_SERVER_DETAILS|
+[10:31:05:314]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_RUMAGENTDATA|
+[10:31:05:319]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table RUMAGENT_MONITOR_MAPPER|
+[10:31:05:325]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table RUMAGENT_METRACKDATA|
+[10:31:05:333]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table EUMAGENT_METRACKDATA|
+[10:31:05:346]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_USERTWOFACTOR_TOTPDETAILS|
+[10:31:05:353]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_BROWSERCOOKIE_TOKENDETAILS|
+[10:31:05:365]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_InventoryDetails|
+[10:31:05:376]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table RESTAPISEQUENCE_CHILD_DETAILS|
+[10:31:05:382]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_CMDB_TOSYNC_IDS|
+[10:31:05:387]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table DBPREPOPULATION_STATUS|
+[10:31:05:402]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAML_ADFS_DETAILS|
+[10:31:05:408]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SAML_ADFS_RESOURCE_MAPPER|
+[10:31:05:415]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_DOWNTIME_USER_TABLE|
+[10:31:05:424]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_VIRTUAL_IP_CONFIG|
+[10:31:05:432]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ID_MIGRATION_STATUS|
+[10:31:05:438]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE NEW_SERVERID_MAPPING|
+[10:31:05:451]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table ID_MIGRATION_TABLE_STATUS|
+[10:31:05:466]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_LAMA_DETAILS|
+[10:31:05:476]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_LAMA_EXCHANGEDETAILS|
+[10:31:05:483]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_LAMA_SKIP_POLL_INFO|
+[10:31:05:496]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_LAMA_DATA_PUSH|
+[10:31:05:506]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_LAMADATACONFIG|
+[10:31:05:517]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SYNC_TABLE_DETAILS|
+[10:31:05:527]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SYNC_TABLE_SCHEMA|
+[10:31:05:541]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_ATTRIBUTE_GROUP_MAPPER|
+[10:31:05:549]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_ATTRIBUTE_ERROR_RESPONSE|
+[10:31:05:555]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_ADVANCEDREPORTS_DETAILS|
+[10:31:05:566]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_ADVANCEDREPORTS_PARAMS|
+[10:31:05:579]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SSHKEY|
+[10:31:05:586]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SSHKEY_MAPPER|
+[10:31:05:596]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_SSH_ALGORITHM_SETTINGS|
+[10:31:05:606]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE CPKeys|
+[10:31:05:612]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE CPSettings|
+[10:31:05:624]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE CPDetails|
+[10:31:05:673]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE PAMResources|
+[10:31:05:686]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE PAMAccounts|
+[10:31:05:692]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE PAMResourceMapping|
+[10:31:05:699]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE PAMAccountsMapping|
+[10:31:05:710]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE PAMSyncTask|
+[10:31:05:720]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE PAMSyncResources|
+[10:31:05:730]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE PAMSyncAccounts|
+[10:31:05:736]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE CPSyncSchedule|
+[10:31:05:747]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE CPConnectionStatus|
+[10:31:05:755]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created TABLE AM_RESOLVED_HOSTS|
+[10:31:05:762]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Created table AM_HOST_SERVICE_DC_INFO|
+[10:31:07:257]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Server Starting : got db connection |
+[10:31:07:419]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:persistAESMasterKey Master Key verification initiated.|
+[10:31:07:420]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:persistAESMasterKey Master Key status : -1|
+[10:31:07:420]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:persistAESMasterKey createNewDEK status : MASTERKEY - true, i=0, existing=-1|
+[10:31:07:421]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:getKeyMeta Retrieving keytoken from DB : 'MASTERKEY'|
+[10:31:07:421]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:getKeyMeta Creating new DEK : 'MASTERKEY'|
+[10:31:07:421]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:createNewDEK New Encryption Request Recieved:::MASTERKEY|
+[10:31:07:428]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:createNewDEK DEK status : true|
+[10:31:07:429]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:persistAESMasterKey createNewDEK status : credentials - true, i=1, existing=-1|
+[10:31:07:429]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:getKeyMeta Retrieving keytoken from DB : 'credentials'|
+[10:31:07:429]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:getKeyMeta Creating new DEK : 'credentials'|
+[10:31:07:429]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:createNewDEK New Encryption Request Recieved:::credentials|
+[10:31:07:431]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:createNewDEK DEK status : true|
+[10:31:07:431]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:persistAESMasterKey createNewDEK status : reports - true, i=2, existing=-1|
+[10:31:07:431]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:getKeyMeta Retrieving keytoken from DB : 'reports'|
+[10:31:07:432]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:getKeyMeta Creating new DEK : 'reports'|
+[10:31:07:432]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:createNewDEK New Encryption Request Recieved:::reports|
+[10:31:07:434]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMEncryption:createNewDEK DEK status : true|
+[10:31:07:437]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  API key created for the module :: APMINSIGHT|
+[10:31:07:446]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  API key created for the module :: EUM|
+[10:31:07:452]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  API key created for the module :: RUM|
+[10:31:07:695]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Instantiated transaction scheduler with 1 threads |
+[10:31:07:832]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StandAloneLogger : [AMPreparedStatementHandler]: Unable to create statement for sql SELECT NAME,ID FROM AM_BUSINESSHOURSDETAILS where STATUS='enable'|
+[10:31:07:832]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StandAloneLogger : [AMPreparedStatementHandler]: Unable to create statement for sql INSERT INTO AM_ACTION_BUSINESSHOURMAPPER(ACTIONID,BUSINESSHOURID,TYPE) VALUES(?,?,?)|
+[10:31:07:832]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StandAloneLogger : [AMPreparedStatementHandler]: Unable to create statement for sql UPDATE AM_ACTION_BUSINESSHOURMAPPER SET BUSINESSHOURID=?, TYPE=? WHERE ACTIONID=?|
+[10:31:07:833]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StandAloneLogger : [AMPreparedStatementHandler]: Unable to create statement for sql DELETE FROM AM_ACTION_BUSINESSHOURMAPPER WHERE ACTIONID=?|
+[10:31:07:833]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StandAloneLogger : [AMPreparedStatementHandler]: Unable to create statement for sql DELETE FROM AM_ACTION_BUSINESSHOURMAPPER WHERE BUSINESSHOURID=?|
+[10:31:07:833]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StandAloneLogger : [AMPreparedStatementHandler]: Unable to create statement for sql DELETE FROM AM_ACTION_BUSINESSHOURMAPPER WHERE ACTIONID=? AND BUSINESSHOURID=?|
+[10:31:07:833]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StandAloneLogger : [AMPreparedStatementHandler]: Unable to create statement for sql INSERT INTO AM_ATTRIBUTEACTIONSTATUS (RESOURCEID, ATTRIBUTEID, SEVERITY, ACTIONTRIGGEREDCOUNT) VALUES (?,?,?,?)|
+[10:31:07:833]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StandAloneLogger : [AMPreparedStatementHandler]: Unable to create statement for sql INSERT INTO AM_SERVER_STARTUP_DETAILS (STARTTIME) VALUES (?)|
+[10:31:07:834]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StandAloneLogger : [AMPreparedStatementHandler]: Unable to create statement for sql UPDATE AM_SERVER_STARTUP_DETAILS SET ENDTIME=?, SHUTDOWNTYPE=?, SHUTDOWNMESSAGE=? WHERE STARTTIME=?|
+[10:31:07:834]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StandAloneLogger : [AMPreparedStatementHandler]: Unable to create statement for sql insert into AM_PARENTCHILDMAPPER(RELATIONSHIPID,PARENTID,CHILDID) values(?,?,?)|
+[10:31:07:834]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMConnectionPool : Error while executing query : select MAX(RELATIONSHIPID) from AM_PARENTCHILDMAPPER. Error Message : null|
+[10:31:07:834]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMConnectionPool : Error while executing query : select VALUE from AM_SERVERCONFIG where NAME='am.subgrouplevels.count'. Error Message : null|
+[10:31:07:835]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMConnectionPool : Error while executing query : select * from AM_VM_GUESTOSMAPPING . Error Message : null|
+[10:31:07:835]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMConnectionPool : Error while executing query : select * from AM_Amazon_EC2InstanceOSMAPPING . Error Message : null|
+[10:31:07:837]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  UserCreationUtil :: migrateUserPassword() :: User Hashed Password was migrated to bcrypt algorithm for the admin username.|
+[10:31:07:837]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartServer :: updatePassforAWS() :: Updated AWS Instance ID as a Password for Super Admin User|
+[10:31:07:855]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Data prepopulation | Proceeding to check for Refresh DB operation|
+[10:31:07:863]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Server Starting : got db connection |
+[10:31:07:865]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Data prepopulation | Refresh DB check/operation completed|
+[10:31:07:865]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  KeyStore check started|
+[10:31:07:865]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : Backup done for Truststore.truststore|
+[10:31:08:028]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : Backup done for appmanager.keystore|
+[10:31:08:029]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartUpChecks : Backup done for cacerts|
+[10:31:08:089]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  KeyStore check finished|
+[10:31:08:096]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Server Starting : got db connection |
+[10:31:08:101]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Server Starting : got db connection |
+[10:31:08:112]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Method to migrated custom type is called..|
+[10:31:08:118]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Server Starting : got db connection |
+[10:31:08:130]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Server Starting : got db connection |
+[10:31:08:134]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartupThresholdProfileAssociationHandler :: max threshold id got before startup is 0|
+[10:31:08:134]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  StartServer: Calling out the AMInitWebSvr class|
+[10:31:08:136]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  System properties has been set|
+[10:31:08:136]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Started Copying web.xml from /backup directory|
+[10:31:08:137]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Copying web.xml from /backup directory is success|
+[10:31:08:144]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Server Starting : got db connection |
+[10:31:08:146]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  copying the backup server.xml into the main one|
+[10:31:08:148]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  AMAutomaticPortChanger::isHttpPortCommentedinbackupXML HTTP Port status : false|
+[10:31:08:148]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  InitWebSvr::main am.enablehttp.port: true
+    	<Connector port="WEBSERVER_PORT" maxThreads="200" minSpareThreads="25" enableLookups="false" redirectPort="SSL_PORT" acceptCount="150" connectionTimeout="20000" disableUploadTimeout="true" URIEncoding="UTF-8" compression="on" compressionMinSize="2048" noCompressionUserAgents="gozilla, traviata" compressibleMimeType="text/html,text/xml,text/javascript,text/css,application/x-javascript,application/javascript" allowTrace="false" server="AppManager" relaxedQueryChars="[]|{}^\`&quot;&lt;&gt;"/>|
+[10:31:08:193]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Encryption in server.xml for keystore and truststore password is done|
+[10:31:08:203]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Encryption in server.xml for keystore and truststore password is done|
+[10:31:08:204]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  setModelPathInZlabsConfigurationFile :::/opt/ManageEngine/AppManager16/working/mldata/models|
+[10:31:08:207]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  NATIVE PING ENABLED false|
+[10:31:08:214]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Server Starting : got db connection |
+[10:31:08:216]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  Got inside the nmsstarter class|
+[10:31:08:216]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  System properties has been set|
+[10:31:08:216]|[02-20-2024]|[STARTUP_OUT]|[DEBUG]|[18]:  nms had been called finally|

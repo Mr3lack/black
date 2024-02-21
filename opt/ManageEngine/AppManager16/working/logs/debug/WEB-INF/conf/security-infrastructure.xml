@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+	<!-- EventLogRules Action starts -->
+	<urls path="/eventlogrules.do" operation-param="method" authentication="required" roles="am.role.ADMIN.EA.DE" throwallerrors="true" skip-bad-input-encoding="true">
+		<param-group name="am.additional.extra.params" />
+		<url method="GET" operation-value="view" >
+			<param name="reqForAdminLayout" type="boolean" />
+			<param name="service" regex="am.alphanumeric" />
+			<param name="successMsg" type="String" max-len="2000" />
+			<param name="errorMsg" type="String" max-len="2000" />
+		</url>
+		<url method="GET" operation-value="showForm"
+		custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="am.alarms.eventlogs.category.paramNames" name-regex="true" regex="am.alarms.eventlogs.category.values" />
+			<param name="ruletype" type="long" />
+			<param name="ruleid" type="long" />
+			<param name="savetype" regex="am.alarms.eventlogs.saveTypes" />
+		</url>
+		<url method="POST" csrf="true" operation-value="addNewEventLog" deny-del-admin="true">
+			<param name="eventname" type="String" />
+			<param name="eventaction" type="String" max-len="50" />
+		</url>
+		<url method="POST" csrf="true" operation-value="checkRuleNameAlreadyExists" 
+		custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="cacheid" type="long" />
+			<param name="enteredName" type="String" max-len="1000" />
+			<param name="ruleid" type="long" />
+		</url>
+		<url method="POST" csrf="true" operation-value="deleteEventLog" deny-del-admin="true">
+			<param name="ruletype" type="long" />
+			<param name="savetype" regex="am.alarms.eventlogs.saveTypes" />
+			<param name="am.alarms.eventlogs.category.paramNames" name-regex="true" regex="am.alarms.eventlogs.category.values" />
+		</url>
+		<url method="POST" csrf="true" operation-value="editEventLog" deny-del-admin="true">
+			<param name="eventname" type="String" />
+			<param name="ruleName" type="String" />
+			<param name="ruleid" type="long" />
+			<param name="eventaction" type="String" max-len="50" />
+		</url>
+		<url method="POST" csrf="true" operation-value="globalDelete,globalEnableDisable"
+		custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="am.alarms.eventlogs.category.paramNames" name-regex="true" regex="am.alarms.eventlogs.category.values" />
+			<param name="rules" type="long" min-occurrences="1" max-occurrences="-1" />
+			<param name="ruletype" type="long" />
+			<param name="savetype" regex="am.alarms.eventlogs.saveTypes" />
+		</url>
+		<url method="POST" csrf="true" operation-value="save"
+		custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin">
+			<param name="advancedUser" type="String" max-len="50" />
+			<param name="category" type="String" />
+			<param name="clearevent" type="int" />
+			<param name="cleareventcategory" type="String" />
+			<param name="cleareventsource" type="String" /> 
+			<param name="cleareventusername" type="String" />
+			<param name="clearpollscount" type="long" />
+			<param name="cleartype" type="int" />
+			<param name="displayname" regex="am.eventlogs.displayname" max-len="255"/>
+			<param name="errorCode" type="String" />
+			<param name="errorMessage" type="String" max-len="255" />
+			<param name="eventid" type="int" />
+			<param name="eventtype_any" regex="onlyon" />
+			<param name="eventtype_error" regex="onlyon" />
+			<param name="eventtype_information" regex="onlyon" />
+			<param name="eventtype_warning" regex="onlyon" />
+			<param name="haid" type="long" />
+			<param name="ismessageRegex" type="int" />
+			<param name="am.alarms.eventlogs.category.paramNames" name-regex="true" regex="am.alarms.eventlogs.category.values" />
+			<param name="log_endTime" regex="am.alarms.eventlogs.startendtime.format.24hrs.hhmm" />
+			<param name="log_startTime" regex="am.alarms.eventlogs.startendtime.format.24hrs.hhmm" />
+			<param name="matchRules" type="int" />
+			<param name="matchcount" type="int" />
+			<param name="message" type="String" max-len="255" />
+			<param name="monitorchooser" regex="am.alarms.eventlogs.monitorcategory.values" />
+			<param name="resourceid" regex="am.alarms.eventlogs.monitorcategory.selectmonitors.commaseperated.resids" max-len="10000" />
+			<param name="pollstoretry" type="long" />
+			<param name="prerulestatus" type="long" />
+			<param name="ruleScope" type="int" />
+			<param name="ruleid" type="long" />
+			<param name="ruletype" type="long" />
+			<param name="savetype" regex="am.alarms.eventlogs.saveTypes" />
+			<param name="servertypelist" type="String" max-len="500" />
+			<param name="severity" type="long" />
+			<param name="source" type="String" />
+			<param name="status" type="long" />
+			<param name="thresholdid" type="int" />
+			<param name="timeFrame" type="int" />
+			<param name="username" type="String" />
+			<param name="servertypecheckbox" type="String" max-occurrences="30" />
+		</url>
+	</urls>
+	<!-- EventLogRules Action ends -->
+	
+	<!--WMI Performance Counter action urls starts-->
+	<urls path="/WMIPerfCounters.do" operation-param="method" authentication="required" throwallerrors="true"
+		privilege-identifier="resourceid">
+		<param-group name="am.additional.extra.params" />
+		<url method="GET" operation-value="getDetails" roles="ADMIN">
+			<param name="resourceid" regex="am.common.longandnull" min-occurrences="1"/>
+			<param name="addedAttributes" type="boolean"/>
+		</url>
+		<url method="GET" operation-value="showDetails,showGraph" roles="am.role.ADMIN.EA">
+			<param name="resourceid" regex="am.common.longandnull" min-occurrences="1"/>
+			<param name="addedAttributes" type="boolean"/>
+		</url>
+		<url method="GET" operation-value="showClasses" roles="ADMIN">
+			<param name="resourceid" type="long" min-occurrences="1"/>
+		</url>
+		<url method="GET" operation-value="showSingleGraphScreen" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="resourceid" type="long" min-occurrences="1"/>
+			<param name="attributeid" regex="am.wmi.performance.counters.attributes.id.format" min-occurrences="1"/>
+		</url>
+		<url method="GET" operation-value="showEditHostDetailsForm" roles="ADMIN">
+			<param name="resourceid" type="long" min-occurrences="1"/>
+			<param name="hostid" type="long" min-occurrences="1"/>
+		</url>
+		<url method="POST" operation-value="showAttributesForClasses" roles="ADMIN" csrf="true">
+			<param name="resourceid" type="long" min-occurrences="1"/>
+			<param name="classes" type="String" max-len="200" min-occurrences="1" max-occurrences="500" />
+		</url>
+		<url method="POST" operation-value="addAttributes" roles="am.role.ADMIN.EA" csrf="true">
+			<param name="resourceid" type="long" min-occurrences="1" />
+			<param name="hostname" regex="am.hostname" min-occurrences="1"/>
+			<param name="multipleselectioncheckbox" regex="am.common.alphaNumeric.ext1" max-occurrences="10000"/>
+			<param name="am.wmi.class.name" name-regex="true" type="String" max-len="300"/>
+			<param name="attributes" regex="am.wmi.performance.counters.attributes.name.format" max-len="250" min-occurrences="1" max-occurrences="10000"/>
+		</url>
+		<url method="POST" operation-value="changeReportStatus,deleteAttributes" roles="am.role.ADMIN.EA" csrf="true">
+			<param name="resourceid" type="long" min-occurrences="1"/>
+			<param name="reports" regex="am.wmi.performance.counters.report.status" />
+			<param name="headercheckbox" regex="onlyon" />
+			<param name="attributes" regex="am.wmi.performance.counters.attributes.id.format" min-occurrences="1" max-occurrences="10000"/>
+		</url>
+		<url  method="POST" operation-value="createWMIPerfmonitor" roles="am.role.ADMIN.EA" csrf="true">
+			<param name="addtoha" regex="am.common.TFNull"/>
+			<param name="displayname" regex="am.displayname.common" description="am.webclient.common.name.text" max-len="515"/>
+			<param name="type" regex="am.noconf.type"/>
+			<param name="description" type="String" description="am.webclient.wmi.descritption.text" max-len="250"/>
+			<param name="pollInterval" type="int" description="am.webclient.common.pollinginterval.text"/>
+			<param name="choosehost" regex="am.filemon.choosehost" description="am.webclient.wmi.choosehost"/>
+			<param name="haid" regex="am.common.longbooleanandnull" max-occurrences="2147483647" />
+			<param name="host" regex="am.hostname" description="am.webclient.hostdiscovery.hostname" max-len="255"/>
+			<param name="username" regex="am.windows.username" description="am.webclient.hostdiscovery.username" max-len="255"/>
+			<param name="password" secret="true" type="String" description="am.webclient.hostdiscovery.password" max-len="250"/>
+			<param name="groupname" regex="am.displayname.common"  max-len="515"/>
+			<param name="updatemonitor" type="boolean" />
+			<param name="resourceid" regex="am.common.longandnull" />
+			<param name="hideFieldsForIT360" regex="am.common.TFNull" />
+			<param name="masSelectType" regex="am.enterprise.masselecttype" />
+			<param name="selectedServer" regex="am.enterprise.selectedserver" />
+			<param name="masGroupName" type="String" max-len="250" />
+		</url>
+		<url method="POST" operation-value="deleteHost" roles="am.role.ADMIN.EA" csrf="true">
+			<param name="host" type="int" />
+		</url>
+		<url method="POST" operation-value="updatetHostDetails" roles="ADMIN" csrf="true">
+			<param name="resourceid" type="long" min-occurrences="1"/>
+			<param name="hostid" type="long" min-occurrences="1"/>
+			<param name="host" regex="am.hostname" />
+			<param name="username" type="String" min-occurrences="1" max-len="256"/>
+			<param name="password" secret="true" type="String" min-occurrences="1" max-len="256"/>
+		</url>
+		<url method="POST" operation-value="validateCredentials" roles="am.role.ADMIN.EA" csrf="true">
+			<param name="hostname" regex="am.hostname" min-occurrences="1"/>
+			<param name="username" type="String" min-occurrences="1" max-len="256"/>
+			<param name="password" secret="true" type="String" min-occurrences="1" max-len="256"/>
+		</url>
+	</urls>
+	<!--WMI Performance Counter action urls ends-->
+	
+	<!-- Istio Workload Action Starts -->
+	 <urls path="/istioWorkloadAction.do" operation-param="method" roles="am.role.ADMIN.EA" authentication="required" privilege-identifier="resourceid" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url method="GET" operation-value="getWorkloadList">
+			<param name="resourceid" type="long" min-occurrences="1"/>
+			<param name="_" type="long"/>
+		</url>
+		<url method="GET" operation-value="getWorkloadMetrics,viewWorkloadPopup">
+			<param name="resourceid" type="long" min-occurrences="1"/>
+			<param name="rowId" type="long" min-occurrences="1"/>
+			<param name="rate" type="int" min-occurrences="1"/> 
+		</url>
+		<url method="POST" operation-value="setWorkloadsToMonitor" csrf="true">
+			<param name="resourceid" type="long" min-occurrences="1"/>
+			<param name="workloadstomonitor" regex="am.istio.workloads.commaseparated.with.dot.hyphen" max-len="30000"/>
+		</url>
+	</urls>
+	<!-- Istio Workload Action Ends -->
+	
+	<!-- CiscoUCS WAF config Starts -->
+	 <urls path="/confActions.do" operation-param="method" authentication="required" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url method="GET" operation-value="getCiscoUCSFaults" privilege-identifier="resourceid" roles="am.role.ADMIN.EA.OP.US.DE" >
+			<param name="resourceid" type="long" min-occurrences="1"/>
+			<param name="_" type="long"/>
+		</url>
+	</urls>
+	<!-- CiscoUCS WAF config Ends -->
+	
+	<urls path="/showresource.do" operation-param="method" authentication="required" roles="am.role.ADMIN.EA" throwallerrors="true">
+		<param-group name="am.additional.extra.params" />
+		<url method="GET" operation-value="selectMonitors">
+			<param name="haid" type="long" min-occurrences="1"/>
+			<param name="attributetype" type="long" min-occurrences="1"/>
+			<param name="sid" type="long" min-occurrences="1"/>
+			<param name="countSeverity" regex="am.generateAlert.entity" min-occurrences="1"/>
+		</url>
+	</urls>
+	
+	<urls path="/HostResourceDispatch.do" operation-param="method" method="GET" throwallerrors="true">
+		<param-group name="am.additional.extra.params"/>
+		<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		<param name="plugin_view" type="boolean"/>
+		<param name="opm_user" regex="am.opm.username" max-len="255"/>
+		<url operation-value="winServAction" roles="am.role.ADMIN.EA.DE" authentication="required"
+		 custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isConfigOwnedByDelAdmin" >
+			<param name="haid" regex="am.common.longandnull"/>
+			<param name="global" type="boolean"/>
+			<param name="returnpath" type="String" max-len="2000" description="The URL of page that called winServAction"/>
+			<param name="actionid" regex="am.common.longandnull" />
+			<param name="type" regex="^(winservact)$" />
+		</url>
+		<url operation-value="getEventLogDetails,getNLBDetails,getScheduledTasksDetails,getPrintQueueDetails" privilege-identifier="resourceid" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required">
+			<param name="resourceid" type="long" min-occurrences="1"/>
+			<param name="resourcename" type="String" max-len="250" description="Resourcename of the monitor"/>
+			<param name="resourceType" regex="am.servermonitor.os.undefined"/>
+			<param name="mode" regex="am.servermonitor.mode"/>
+			<param name="randid" regex="am.common.longandnull"/>
+		</url>
+		<url operation-value="getPrintQueueDetailsInJson" privilege-identifier="resourceid" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required">
+			<param name="resourceid" type="long" min-occurrences="1"/>
+			<param name="_" type="long" />
+		</url>
+		<url operation-value="getServicesFromTemplate" roles="am.role.ADMIN.EA.DE" authentication="required" >
+			<param name="winservaction" type="boolean" />
+		</url>
+		<url operation-value="showWinServActDetails" roles="am.role.ADMIN.EA.OP.DE" authentication="required" 
+		custom-scope-validator="com.adventnet.appmanager.utils.client.UserConfigurationUtil:isTestActionAllowedForUser">
+			<param name="actionid" type="long" />
+			<param name="remote" type="boolean" />
+			<param name="isPluginNotification" regex="am.common.booleanandnull" />
+		</url>
+	</urls>
+	<urls method="GET" throwallerrors="true" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<param name="sid" type="String" max-len="200" />
+		<url path="/jsp/HostDiskDetails.jsp" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="resourceid" type="long" />
+			<param name="resourcename" regex="am.displayname.common" />
+			<param name="resourceType" regex="am.monitor.type" />
+			<param name="mode" regex="am.servermonitor.mode.undefined"/> />
+			<param name="randid" regex="am.common.longandnull"/>	
+		</url>
+		<url path="/jsp/TemplateProcessChooser.jsp" roles="am.role.ADMIN.EA.DE">
+			<param name="templatetype" type="int" />
+			<param name="winservaction" type="boolean" />
+		</url>
+		<url path="/jsp/RemoveDisk.jsp" roles="am.role.ADMIN.EA">
+			<param name="resourceid" type="long" />
+			<param name="type" regex="^(Disk|NetInterface|NetAdapter)$" />
+		</url>
+		<url path="/jsp/AddNewEventLog.jsp" roles="am.role.ADMIN.EA" skip-bad-input-encoding="true" >
+			<param name="method" regex="am.eventlogs.methods"/>
+			<param name="ruleName" type="String" max-len="255" />
+			<param name="ruleid" type="long" />
+		</url>
+		<url path="/jsp/AjaxAttributeDetails.jsp" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="k1" regex="am.monitor.type"/>
+			<param name="haid" regex="am.common.longandnull" />
+			<param name="polledtime" type="long" />
+			<param name="temparray" type="String" max-len="2147483646" />
+			<param name="iscustom" regex="am.common.longandnull" />
+			<param name="alerts" regex="am.common.booleanandnull" />
+			<param name="currenttime" type="long"/>
+		</url>
+		<url path="/jsp/HostNameDiscovery.jsp" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="hostName" regex="am.hostname" max-len="255" />
+		</url>
+		<url path="/jsp/EditDisplaynames.jsp" roles="am.role.ADMIN.EA.OP.US.DE">
+			<param name="resids" regex="am.threshold.toDeleteThreshold" max-len="10000000"/>
+			<param name="vmResids" regex="am.common.comma.longandnull" max-len="10000000"/>
+		</url>
+	</urls>
+	<!--  Deny configurations for POST starts -->
+	<urls throwallerrors="true" method="POST" deny-operation="true" >
+		<url path="/jsp/RemoveDisk.jsp" />
+		<url path="/jsp/TemplateProcessChooser.jsp" />
+		<url path="/jsp/HostDiskDetails.jsp" />
+		<url path="/jsp/AddNewEventLog.jsp" />
+		<url path="/jsp/AjaxAttributeDetails.jsp" />
+		<url path="/jsp/HostNameDiscovery.jsp" />
+		<url path="/jsp/EditDisplaynames.jsp" />
+		<url path="/showresource.do" operation-param="method" operation-value="selectMonitors"/>
+		<url path="/HostResourceDispatch.do" operation-param="method" operation-value="winServAction,getEventLogDetails,getNLBDetails,getScheduledTasksDetails,getPrintQueueDetails,getPrintQueueDetailsInJson,getServicesFromTemplate,showWinServActDetails"/>
+	</urls>
+	<!--  Deny configurations for POST Ends -->
+	<!--  Deny configurations for POST,GET starts -->
+	<urls throwallerrors="true" method="get,post" deny-operation="true" >
+		<url path="/HostResourceDispatch.do" operation-param="method" operation-value="manualExecWinServiceAction" />
+	</urls>
+	<!--  Deny configurations for POST,GET starts -->
+	<!--  Configuration done by Rishi starts -->
+	<urls  method="GET" operation-param="method" throwallerrors="true" roles="am.role.ADMIN.EA.OP.US.DE" authentication="required">
+		<param-group name="am.additional.extra.params" />
+		<url path="/showresource.do" operation-value="getAssociateMonitors" roles ="am.role.ADMIN.EA.DE">
+			<param name="hostid" type="long" />
+			<param name="type" regex="am.associateMonitor.type" />
+		</url>
+		<url path="/showActionProfiles.do" roles ="am.role.ADMIN.EA.DE" operation-value="getHAProfiles" authentication="required">
+			<param name="haid" type="long" />
+		</url>
+		<url path="/showresource.do" operation-value="getSelectedMonitors" >
+			<param name="allSelectedMonitors" regex="am.recorder.long.commaSeparated" max-len="5000"/>
+			<param name="_" type="long"/>
+		</url>
+		<url path="/showresource.do" method="GET" operation-param="method" operation-value="selectMonitorFilter">
+			<param name="attributetype" type="int" />
+			<param name="haid" type="long" />
+			<param name="type" regex="am.monitor.type" />
+		</url>
+	</urls>
+	<!-- Configuration done by Rishi ends -->
+</security>

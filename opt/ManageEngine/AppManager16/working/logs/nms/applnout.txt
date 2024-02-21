@@ -1,0 +1,27 @@
+[10:31:09:262]|[02-20-2024]|[HEADER]|[ERROR]|[18]: Logging Started|
+[10:31:10:711]|[02-20-2024]|[APPLNOUT]|[FATAL]|[71]: 	  ******************* Logging Started *******************
+	  -------General Information------
+	  Product = Applications Manager 16(Build 16841)
+	  OS Name = Linux
+	  OS Version = 6.2.0-1017-aws
+	  OS Architecture = amd64
+	  Tomcat version = 9.0.70
+	  Java Version = 1.8.0_352
+	  Java Vendor = Azul Systems, Inc.
+	  Java Specification = Java Platform API Specification
+	  Java Specification Version = 1.8
+	  Java VM Name = OpenJDK 64-Bit Server VM
+	  Java VM Information = mixed mode
+	  Java Compiler = null
+	  ********************************************************
+	  -------RDBMS Related Information------
+	  Database Product Name = PostgreSQL
+	  Database Product Version = 11.16
+	  Database Driver Name = PostgreSQL JDBC Driver
+	  Database Driver Version = 42.4.0
+	  Database User Name = dbuser
+	  Database URL = jdbc:postgresql://localhost:15432/amdb?ApplicationName=ApplicationsManager&dontTrackOpenResources=true&useUnicode=true&characterEncoding=UTF-8
+	  ********************************************************|
+[10:31:10:711]|[02-20-2024]|[APPLNOUT]|[FATAL]|[71]: ********************		LOGGING STARTED FOR STANDALONE SERVER		******************|
+[10:33:49:491]|[02-20-2024]|[APPLNOUT]|[FATAL]|[73]: Application Discovery: Scheduling Application Discovery for -- IF-43.205.195.84|
+[10:33:54:307]|[02-20-2024]|[APPLNOUT]|[FATAL]|[214]: NonSnmp Data Collection started for 43.205.195.84-Node|

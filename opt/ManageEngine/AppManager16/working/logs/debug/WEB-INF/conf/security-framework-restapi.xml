@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id : $ -->
+<security name="APM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./security-apm.xsd">
+
+		<urls prefix="/AppManager/(xml|json)" url-type="dynamic" method="GET" throwallerrors="true" authentication="required" >
+			<param name="resourceid" regex="am.common.comma.longandnull" max-len="5500" />
+			<param name="apikey" regex="apikey" max-len="32" min-len="32" secret="true" />
+			<param-group name="am.additional.extra.params" />
+			<url path="/ListMonitor" privilege-identifier="resourceid" priv-delim="," roles="am.role.ADMIN.EA.OP.US.DE" user-scope="AppManager.Monitors.READ">		
+				<param name="type" regex="am.monitor.type" max-len="115" />
+				<param name="samCategory" regex="^(servers|applications|internetServices)$" />
+				<param name="managed" type="boolean" />
+				<param name="monitorname" regex="am.monitor.type.withcomma" max-len="2000" />
+				<param name="avoidGroupDetailsToSpeedUp" type="boolean" />
+				<param name="SortOrder" regex="^(?i)(desc|asc)$" />
+				<param name="SortBy" regex="am.restapi.sortby.column.name" max-len="250" />
+				<param name="masRange" type="long" />
+				<param name="fromOPMPlus" type="boolean" />
+			</url>
+			<url path="/GetMonitorData" privilege-identifier="resourceid" priv-delim="," roles="am.role.ADMIN.EA.OP.US.DE" user-scope="AppManager.Monitors.READ"/>
+			<url path="/ListMonitorTypes" roles="am.role.ADMIN.EA.OP.US.DE" user-scope="AppManager.Monitors.READ">
+				<param name="type" regex="am.monitor.type" max-len="115" />
+			</url>
+			<url path="/PollNow" privilege-identifier="resourceid" roles="am.role.ADMIN.EA.OP.US.DE" >
+				<param name="eeSyncKey" regex="am.encodedauthkey" secret="true" />
+				<param name="probeId" type="long" />
+				<param name="resourceid" type="long" />
+			</url>
+			<url path="/Ping" roles="am.role.ADMIN.EA.OP.US.DE">
+				<param name="host" regex="am.hostname.ipaddress"></param>
+			</url>
+			<url path="/ListMonitorData" privilege-identifier="resourceid" priv-delim="," roles="am.role.ADMIN.EA.OP.US.DE" user-scope="AppManager.Monitors.READ"/>
+			<url path="/GetDowntimeDetails" privilege-identifier="resourceid" priv-delim="," roles="am.role.ADMIN.EA.OP.US.DE">
+				<param name="type" regex="am.custom.monitortype.type"></param>
+				<param name="period" type="int" range="0,1,2,3,6,7,11,12,4"></param>
+				<param name="showFullDetails" type="boolean"></param>
+				<param name="bhid" type="long"></param>
+				<param name="endTimeInMillis" type="long"></param>
+				<param name="startTimeInMillis" type="long"></param>
+				<param name="ServiceGroup" type="boolean"></param>
+			</url>
+		</urls>
+		<urls prefix="/AppManager/(xml|json)" url-type="dynamic" api="true" method="POST" throwallerrors="true" authentication="required" >
+			<param name="apikey" regex="apikey" max-len="32" min-len="32" secret="true" />
+			<param name="resourceid" regex="am.common.comma.longandnull" max-len="2000" />
+			<param-group name="am.restapi.additional.extra.params" />
+			<param-group name="am.additional.extra.params" />
+			<url path="/DeleteMonitor" privilege-identifier="resourceid" priv-delim="," roles="am.role.ADMIN.EA" user-scope="AppManager.Manage.Monitors.WRITE"/>
+		</urls>	
+		<urls prefix="/AppManager/(xml|json)" url-type="dynamic" api="true" method="POST" throwallerrors="true" authentication="required" >
+			<param-group name="am.additional.extra.params" />
+			<param name="apikey" regex="apikey" max-len="32" min-len="32" secret="true" />
+			<url path="/deleteDowntime" deny-del-admin="true" roles="am.role.ADMIN.EA" >
+				<param name="from" regex="am.date.restapi.value" />
+				<param name="to" regex="am.date.restapi.value" />
+				<param name="toInMillis" type="long" />
+				<param name="fromInMillis" type="long" />
+				<param name="resourceid" regex="am.common.longandnull" />
+			</url>	
+			<url path="/ApplyLicense" deny-del-admin="true" roles="am.role.ADMIN.EA" >
+				<param name="filePath" type="String" max-len="500" />
+				<file allowed-extensions="xml" content-type-name="p12" max-size="51200" name="theFile" >
+					<filename type="String" />
+				</file>
+				<param name="Submit" regex="^(Register)$" />
+				<param name="isElementBasedLicense" type="boolean"></param>
+			</url>
+			<url path="/LicenseInfo" method="GET" roles="am.role.ADMIN.EA" deny-del-admin="true" />	
+		</urls>
+			
+		<!-- Deny operations -->
+		<urls prefix="/AppManager/(xml|json)" url-type="dynamic" deny-operation="true" >
+			<url path="/ListMonitor" method="POST" />
+			<url path="/PollNow" method="POST" />
+			<url path="/ListMonitorTypes" method="POST" />
+			<url path="/GetMonitorData" method="POST" />
+			<url path="/ListMonitorData" method="POST" />
+			<url path="/DeleteMonitor" method="GET" />
+			<url path="/deleteDowntime" method="GET" />
+			<url path="/ApplyLicense" method="GET" />
+			<url path="/LicenseInfo" method="POST" />
+			<url path="/Ping" method="POST" />
+			<url path="/GetDowntimeDetails" method="POST"/>
+			<url path="/AddMonitor" method="GET" />
+		</urls>
+</security>

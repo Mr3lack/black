@@ -1,0 +1,1 @@
+[18:50:46:452]|[02-20-2024]|[com.adventnet.appmanager.util.SupportZipUtil]|[INFO]: Unable to get connection to database. So couldn't get output for performance queries|

@@ -1,0 +1,1561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--$Id$-->
+<!DOCTYPE tiles-definitions PUBLIC
+          "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+	<definition name="default"
+	            path="/jsp/BasicLayout.jsp">
+		<put name="title"
+		     value="Application Manager"/>
+		<put name="Header"
+		     value="/jsp/header.jsp"/>
+		<put name="LeftArea"
+		     value="/jsp/AlarmLeftPage.jsp"/>
+		<put name="UserArea"
+		     value="/jsp/test.jsp"/>
+		<put name="footer"
+		     value="/jsp/footer.jsp"/>
+     	</definition>
+
+	<definition name="NewAdminLayout"
+	                 path="/jsp/NewAdminLayout.jsp">
+		<put name="UserArea"
+			value="/jsp/test.jsp"/>
+		<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		<put name="Footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+
+	<definition name="Tile.Exception"
+	            extends="default">
+		<put name="LeftArea"
+		     value="/jsp/AlarmLeftPage.jsp"/>
+		<put name="UserArea"
+		     value="/jsp/ErrorMessage.jsp"/>
+	</definition>
+	<definition name="Tile.DiscoveredDevices"  path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"  value="Application Manager"/>
+		<put name="Header"  value="/jsp/header.jsp"/>
+		<put name="UserArea" value="/jsp/DiscoveredDevices.jsp"/>
+		  <put name="footer" value="/jsp/footer.jsp"/>
+  </definition>
+  	<definition name="Tile.DiscoveryStatus"  path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"  value="Application Manager"/>
+		<put name="Header"  value="/jsp/header.jsp"/>
+		<put name="UserArea" value="/jsp/DeviceSelection.jsp"/>
+		  <put name="footer" value="/jsp/footer.jsp"/>
+  </definition>
+	<definition name="Tile.NewMonitorList"
+		            path="/jsp/BasicLayoutNoLeft.jsp">
+			<put name="title"
+			     value="Monitors List Page"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=3"/>			
+			<put name="UserArea"
+			     value="/jsp/MonitorsList.jsp"/>
+			     <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	<definition name="Tile.CloudTab" path="/jsp/BasicLayoutNoLeft.jsp">
+			<put name="title" value="Cloud Tab"/>
+			<put name="Header" value="/jsp/header.jsp?tabtoselect=4"/>			
+			<put name="UserArea" value="/jsp/CloudTabView.jsp"/>
+			<put name="footer" value="/jsp/footer.jsp"/>
+	</definition>
+	<definition name="Tile.AnalyticsPlus"		
+		            path="/jsp/BasicLayoutNoLeft.jsp">		
+			<put name="title"		
+			     value="Advance Analytics Page"/>		
+			<put name="Header"		
+			     value="/jsp/header.jsp?tabtoselect=3"/>					
+			<put name="UserArea"		
+			     value="/jsp/AdvAnalytics.jsp"/>		
+			     <put name="footer"		
+		     value="/jsp/footer.jsp"/>		
+	</definition>
+	<definition name="Tile.AlarmsOne"		
+		            path="/jsp/BasicLayoutNoLeft.jsp">		
+			<put name="title"		
+			     value="AlarmsOne Integration page"/>		
+			<put name="Header"		
+			     value="/jsp/header.jsp?tabtoselect=3"/>					
+			<put name="UserArea"		
+			     value="/jsp/AlarmsOne.jsp"/>		
+			     <put name="footer"		
+		     value="/jsp/footer.jsp"/>		
+	</definition>
+	<definition name="Tile.AdminConf"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Admin Page"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=3"/>			
+		<put name="UserArea"
+				value="/jsp/NewAdmin.jsp"/>
+			     <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	<definition name="Tile.EnterpriseAdminConf"
+	                 path="/jsp/BasicLayoutNoLeft.jsp">
+			<put name="title"
+			     value="Admin Page"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=3"/>			
+			<put name="UserArea"
+			      value="/jsp/EnterpriseAdmin.jsp"/>
+			  <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>		  
+	<definition name="Tile.USERGROUPS"
+		            extends="NewAdminLayout">
+			<put name="UserArea"
+				value="/jsp/showUsers.jsp"/>
+			<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		<put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition>
+   	<definition name="Tile.SLA.Admin"
+		            extends="NewAdminLayout">
+			<put name="UserArea"
+				value="/jsp/ServiceLevelAgreement.jsp"/>
+			<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		<put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition>	
+     	<definition name="Tile.SLA.Conf"
+		  path="/jsp/ManagerLayout.jsp">
+		<put name="title"
+		     value="SLA "/>	
+			<put name="UserArea"
+				value="/jsp/ServiceLevelAgreement.jsp"/>
+			<put name="Header"
+				value="/jsp/header.jsp"/>
+				<put name="footer"
+		     value="/jsp/footer.jsp"/>
+		
+     </definition>
+ 	<definition name="Tile.SLA.Manager"
+		 path="/jsp/ManagerLayout.jsp">
+				<put name="title"
+		     value="SLA"/>
+			<put name="UserArea"
+				value="/jsp/ServiceLevelAgreement.jsp"/>
+			<put name="Header"
+				value="/jsp/ManagerHeader.jsp"/>
+				<put name="footer"
+		     value="/jsp/footer.jsp"/>
+		
+     </definition>
+	<definition name="Tile.usergroups.Conf"
+		            extends="NewAdminLayout">
+			<put name="UserArea"
+				value="/jsp/configureUsers.jsp"/>
+			<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		<put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition>
+
+    <definition name="RegisterLicense"
+		            extends="NewAdminLayout">
+			<put name="UserArea"
+				value="/webclient/common/jsp/registerLicence.jsp"/>
+			<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		<put name="Footer"
+		     value="/jsp/footer.jsp"/>
+    </definition>
+	<definition name=".EmailActions"
+	             path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="E-Mail Action"/>
+		<put name="Header"
+		     value="/jsp/header.jsp"/>
+		<put name="UserArea"
+		     value="/jsp/EMailActionForm.jsp"/>
+		 <put name="footer"
+		     value="/jsp/footer.jsp"/>		     
+    </definition>
+	<definition name=".AdminEmailActions"
+	             extends="Tile.AdminConf">
+		 <put name="title"
+		     value="E-Mail Action"/>
+		 <put name="LeftArea"
+		     value="/jsp/AdminLeftLinks.jsp"/>
+		 <put name="UserArea"
+		     value="/jsp/EMailActionForm.jsp"/>
+	</definition>
+	<definition name=".SqlJobAction"
+	            extends="Tile.AdminConf">
+		<put name="title"
+		     value="Sql Job Action"/>
+		<put name="LeftArea"
+		     value="/jsp/ActionLeftLinks.jsp?Head=1"/>
+		<put name="UserArea"
+		     value="/jsp/SqlJobAction.jsp"/>
+    </definition>	
+	<definition name=".ThreadDumpActions"
+	             path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="Java Thread Dump Action"/>
+			<put name="Header"
+		     value="/jsp/header.jsp"/>		
+		<put name="UserArea"
+		     value="/jsp/ThreadDumpActionForm.jsp"/>
+		 <put name="footer"
+		     value="/jsp/footer.jsp"/>	
+    </definition>
+	<definition name=".TicketActions"
+			 extends="Tile.AdminConf">
+		 <put name="title"
+			 value="Ticket Action"/>
+		 <put name="LeftArea"
+			 value="/jsp/ActionLeftLinks.jsp?Head=6"/>
+		 <put name="UserArea"
+			 value="/jsp/TicketActionForm.jsp"/>
+	</definition>
+	<definition name=".SMSActions"
+	             path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="SMS Action"/>
+		<put name="Header"
+		     value="/jsp/header.jsp"/>		
+		<put name="UserArea"
+		     value="/jsp/SMSActionForm.jsp"/>
+		      <put name="footer"
+		     value="/jsp/footer.jsp"/>	
+	</definition>
+	<definition name=".ExecProg"
+	            path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="Execute Program Action"/>
+		<put name="Header"
+		     value="/jsp/header.jsp"/>		
+		<put name="UserArea"
+		     value="/jsp/ExecProgramActionForm.jsp"/>
+		     <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	<definition name=".SendTrap"
+	               path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="Send Trap Action"/>
+		<put name="Header"
+		     value="/jsp/header.jsp"/>		
+		<put name="UserArea"
+		     value="/jsp/SendTrapActionForm.jsp"/>
+		     <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	<definition name=".MBeanOperationActions"
+		            path="/jsp/BasicLayoutNoLeft.jsp">
+			<put name="title"
+			     value="MBean Operation Execution Action"/>
+			<put name="Header"
+		     value="/jsp/header.jsp"/>
+			<put name="UserArea"
+			     value="/jsp/mopaction_initialscreen.jsp"/>
+			     <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	<definition name=".MBeanOperationActions2"
+			            extends=".MBeanOperationActions">
+				  <put name="UserArea"
+				     value="/jsp/mopaction_showdomains.jsp"/>
+	</definition>
+	<definition name=".MBeanOperationActions3"
+				            extends=".MBeanOperationActions">
+					  <put name="UserArea"
+					     value="/jsp/mopaction_showmbeans.jsp"/>
+	</definition>
+	<definition name=".NoMBeanOperationActions"
+				            extends=".MBeanOperationActions">
+					  <put name="UserArea"
+					     value="/jsp/mopaction_nombeans.jsp"/>
+	</definition>
+	
+	<definition name=".MBeanOperationActions4"
+			            extends=".MBeanOperationActions">
+				  <put name="UserArea"
+				     value="/jsp/mopaction_opvaluesscreen.jsp"/>
+	</definition>
+	<definition name=".NoMBeanOperations"
+				  extends=".MBeanOperationActions">
+				<put name="UserArea"
+				   value="/jsp/mopaction_nombeans.jsp"/>
+	</definition>
+	<definition name=".ActionProfiles"
+	           path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="List of Actions"/>
+		 <put name="Header"
+		     value="/jsp/header.jsp"/>
+		<put name="UserArea"
+		     value="/jsp/ActionProfiles.jsp"/>
+		     <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	
+	<definition name=".ShowMBeanOperationExecutionAction"
+		    extends="Tile.AdminConf">
+		<put name="title"
+		     value="Edit MBean Operation Execution Action"/>
+		<put name="LeftArea"
+		     value="/jsp/ActionLeftLinks.jsp?Head=5"/>
+		<put name="UserArea"
+		     value="/jsp/mopaction_editscreen.jsp"/>
+	</definition>
+	<definition name=".ThresholdConf"
+	            path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+			value="Threshold/Anomaly Profile"/>	
+				<put name="Header"
+		     value="/jsp/header.jsp?tabtoselect=4"/>
+		<put name="UserArea"
+		     value="/jsp/ThresholdForm.jsp"/>
+		  <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	<definition name=".PatternConf"
+		     extends="Tile.AdminConf">
+		<put name="title"
+		     value="Pattern Matcher Profile"/>
+		<put name="LeftArea"
+		     value="/jsp/ActionLeftLinks.jsp?Threshold=1"/>
+		<put name="UserArea"
+		     value="/jsp/PatternMatcherForm.jsp"/>
+	</definition>
+	<definition name=".ThresholdProf"
+	          path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+			value="List of created Threshold/Anomaly Profiles"/>
+		<put name="Header"
+		     value="/jsp/header.jsp?tabtoselect=4"/>
+		<put name="UserArea"
+		     value="/jsp/ThresholdProfiles.jsp"/>
+		 <put name="footer"
+		     value="/jsp/footer.jsp"/>
+    </definition>
+
+
+     <definition name=".ManagedServer"
+			 extends="Tile.EnterpriseAdminConf">
+		 <put name="title"
+			 value="List of Managed Servers"/>
+		 <put name="LeftArea"
+			 value="/jsp/AdminLeftLinks.jsp"/>
+		 <put name="UserArea"
+			 value="/jsp/ManagedServers.jsp"/>
+	</definition>
+
+	<definition name=".NewManagedServer"
+	          extends="Tile.EnterpriseAdminConf">
+		 <put name="title"
+		      value="Add New Managed Server"/>
+		 <put name="LeftArea"
+		      value="/jsp/AdminLeftLinks.jsp"/>
+	     <put name="UserArea"
+		      value="/jsp/newManagedServer.jsp"/>
+	</definition>		  
+
+	<definition name=".EditManagedServer"
+			extends="Tile.EnterpriseAdminConf">
+		<put name="title"
+			value="Edit Managed Server"/>
+		<put name="LeftArea"
+			value="/jsp/AdminLeftLinks.jsp"/>
+		<put name="UserArea"
+			value="/jsp/EditManagedServer.jsp"/>
+	</definition>
+
+	<definition name=".Inventory" extends="default">
+    			<put name="title"
+    			     value="Monitor Group View"/>
+	<put name="Header"
+		     value="/jsp/header.jsp?tabtoselect=6"/>
+		<put name="UserArea"
+		     value="/jsp/inventory.jsp"/>
+			
+	<put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	<definition name=".Reports"
+	            path="/jsp/reports/Reports.jsp">
+		<put name="title"
+		     value="Reports"/>
+		<put name="Header"
+		     value="/jsp/header.jsp?tabtoselect=4"/>
+		<put name="ReportsLeftArea"
+		     value="/jsp/reports/ReportLeftArea.jsp"/>
+		<put name="ReportContent"
+		     value="/jsp/reports/ReportList.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportNumber.jsp"/>
+		<put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	<definition name=".HAHealth"
+	            extends=".Reports">
+		<put name="ReportContent"
+		     value="/jsp/reports/HAHealthReport.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+	<definition name=".ServerUtil"
+	            extends=".Reports">
+		<put name="ReportContent"
+		     value="/jsp/reports/ServerUtilizationReport.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+	<definition name=".HealthReport"
+	            extends=".HAHealth">
+		<put name="ReportContent"
+		     value="/jsp/reports/HealthReport.jsp"/>
+	</definition>
+	<definition name=".HAAvailability"
+	            extends=".Reports">
+		<put name="ReportContent"
+		     value="/jsp/reports/HAAvailabilityReport.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+	<definition name=".AvailabilityReport"
+	            extends=".HAAvailability">
+		<put name="ReportContent"
+		     value="/jsp/reports/AvailabilityReport.jsp"/>
+	</definition>
+        <definition name=".SummaryReport"
+	            extends=".Reports">
+		<put name="ReportContent"
+		     value="/jsp/reports/SummaryReport.jsp"/>
+                 <put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>    
+	</definition>
+        <definition name=".MttrReport"
+	            extends=".Reports">
+		<put name="ReportContent"
+		     value="/jsp/Popup_AvailabilityData.jsp"/>
+                 <put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>    
+	</definition>
+	<definition name=".Performance"
+	            extends=".Reports">
+		<put name="ReportContent"
+		     value="/jsp/reports/PerformanceReport.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+        <definition name=".HASnapshot"
+	            extends=".Reports">
+		<put name="ReportContent"
+		     value="/jsp/reports/HASnapshot.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+         <definition name=".AvailabilitySnapshot"
+	            extends=".Reports">
+		<put name="ReportContent"
+		     value="/jsp/reports/AvailabilitySnapshot.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+          <definition name=".outagereport"
+	            extends=".Reports">
+		<put name="ReportContent"
+		     value="/jsp/reports/OutageReport.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+         <definition name=".availabilitytrendreport"
+	            extends=".Reports">
+		<put name="ReportContent"
+		     value="/jsp/reports/AvailabilityTrendReport.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+	<definition name=".availabilitytrenddowntimereport"
+			 extends=".Reports">
+		 <put name="ReportContent"
+			  value="/jsp/reports/AvailabilityTrendDowntimeReport.jsp"/>
+		 <put name="ReportsRightArea"
+			  value="/jsp/reports/ReportPeriod.jsp"/>
+	 </definition>
+	<definition name=".Message"
+	            extends=".Reports">
+		<put name="title"
+		     value="Message"/>
+		<put name="ReportContent"
+		     value="/jsp/reports/Message.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+	<definition name=".Eventreport"
+	            extends=".Reports">
+		<put name="ReportContent"
+		     value="/jsp/reports/HAEventReport.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+	<definition name=".CAMAttributes"
+	            extends=".Reports">
+		<put name="title"
+		     value="Custom Application Attributes List"/>
+		<put name="ReportContent"
+		     value="/jsp/reports/ShowCAMAttributes.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportNumber.jsp"/>
+	</definition>
+	<definition name=".AttributeReport"
+	            extends=".Reports">
+		<put name="title"
+		     value="Custom Application Attributes List"/>
+		<put name="ReportContent"
+		     value="/jsp/reports/AttributeReport.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+     </definition>
+     <definition name=".AtAGlanceReport" extends=".Reports">
+	<put name="ReportContent" value="/jsp/reports/GlanceReport.jsp"/>
+	<put name="ReportsRightArea" value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+	<definition name=".EUMAtAGlanceReport" extends=".Reports">
+		<put name="ReportContent" value="/jsp/reports/eumGlanceReport.jsp"/>
+		<put name="ReportsRightArea" value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+	
+	<definition name=".EumSummartReport" extends=".Reports">
+		<put name="ReportContent" value="/jsp/reports/eumSummary.jsp"/>
+		<put name="ReportsRightArea" value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+<definition name=".Capacityplanningindividualreport"
+  	                     extends=".Reports">
+  	                 <put name="ReportContent"     value="/jsp/reports/IndividualCapacityReports.jsp"/>
+  	                 <put name="ReportsRightArea"
+  	                      value="/jsp/reports/ReportPeriod.jsp"/>
+  	         </definition>
+	<definition name=".UnderSized" extends=".Reports">
+  	                   
+		<put name="ReportContent"		     value="/jsp/reports/UnderSizedMonitors.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+	<definition name=".ServerDiskPartition" extends=".Reports">
+  	                   
+		<put name="ReportContent"		     value="/jsp/reports/ServerDiskPartition.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportPeriod.jsp"/>
+	</definition>
+   	          <definition name=".OverSized" extends=".Reports">
+  	                     
+  	                 <put name="ReportContent"   value="/jsp/reports/OverSizedMonitors.jsp"/>
+  	                 <put name="ReportsRightArea"  value="/jsp/reports/ReportPeriod.jsp"/>
+  	                     
+  	         </definition>
+  	         <definition name=".IdleMonitors"    extends=".Reports">
+  	                 <put name="ReportContent" value="/jsp/reports/IdleMonitorsReports.jsp"/>
+  	                 <put name="ReportsRightArea"  value="/jsp/reports/ReportPeriod.jsp"/>
+  	         </definition>		
+  	         
+  	         
+	<definition name="serverlayout"
+	            path="/jsp/ServerLayout.jsp">
+		<put name="title"
+		     value="ManageEngine Applications Manager"/>
+		<put name="Header"
+		     value="/jsp/header.jsp"/>
+		<put name="ServerLeftArea"
+		     value="/jsp/AlarmLeftPage.jsp"/>		     
+		<put name="UserArea"
+		     value="/jsp/test.jsp"/>
+		<put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	<definition name=".hostresource.editprocess"
+			 extends="serverlayout">
+			 <put name="ServerLeftArea"
+			 value="/jsp/HostLeftPage.jsp"/>
+			 <put name="UserArea"
+			 value="/jsp/HostResourceConfig.jsp"/>
+	</definition>
+	<definition name=".hostresource.editservice"
+			 extends="serverlayout">
+			 <put name="ServerLeftArea"
+			 value="/jsp/HostLeftPage.jsp"/>
+			 <put name="UserArea"
+			 value="/jsp/HostResourceConfig.jsp"/>
+			 </definition>
+	<definition name=".JMXNotifications2"
+			     extends="Tile.AdminConf">
+			<put name="UserArea"
+			     value="/jsp/jmxnotification_showdomains.jsp"/>
+	</definition>
+	<definition name=".JMXNotifications3"
+			     extends="Tile.AdminConf">
+			<put name="UserArea"
+			     value="/jsp/jmxnotification_showmbeans.jsp"/>
+	</definition>
+	<definition name=".JMXNotifications4"
+			     extends="Tile.AdminConf">
+		<put name="UserArea"
+			     value="/jsp/createjmxnotification.jsp"/>
+	</definition>
+	<definition name=".NoJMXNotifications"
+				     extends="Tile.AdminConf">
+			<put name="UserArea"
+				     value="/jsp/jmxnotification_nombeans.jsp"/>
+     </definition>
+     <definition name=".webservice.details"
+	            extends="serverlayout">
+		<put name="Header"
+			value="/jsp/header.jsp?tabtoselect=1"/>
+		<put name="ServerLeftArea"
+		     value="/jsp/WSMLeftArea.jsp"/>		     
+		<put name="UserArea"
+		     value="/jsp/WSMDetails.jsp"/>
+		<put name="title"
+    		     value="Web Services Details"/>
+	     </definition>
+     <definition name=".webservice.operations"
+	            extends=".webservice.details">
+		<put name="UserArea"
+		     value="/jsp/wsmoperations.jsp"/>
+	</definition>
+     <definition name=".webservice.moperations"
+	            extends=".webservice.details">
+	<put name="UserArea"
+		     value="/jsp/wsmmanageoperations.jsp"/>
+	</definition>
+	<definition name=".webservice.operation.details"
+	            path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="UserArea"
+		     value="/jsp/SOAPDetails.jsp"/>
+		<put name="title"
+    		     value="Web Services Details"/>
+    	<put name="Header"
+		     value="/jsp/header.jsp"/>
+		<put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+     <!--definition name="Tile.ShutdownServer"
+    		            extends="default">
+    			<put name="title"
+    			     value="Admin Page"/>
+    			<put name="Header"
+    			     value="/jsp/header.jsp?tabtoselect=3"/>
+    			<put name="LeftArea"
+    			     value="/jsp/AdminLeftLinks.jsp"/>
+    			<put name="UserArea"
+    			     value="/jsp/AM_ShutdownServer.jsp"/>
+	</definition-->
+
+<definition name="Tile.ShutdownServer"
+    		            extends="NewAdminLayout">
+    			<put name="UserArea"
+    			     value="/jsp/AM_ShutdownServer.jsp"/>
+	</definition>
+	
+	<definition name=".MGView"
+    		            extends="default">
+    			<put name="title"
+    			     value="Monitor Group View"/>
+    			<put name="Header"
+    			     value="/jsp/header.jsp?tabtoselect=1"/>
+    			<put name="UserArea"
+    			     value="/jsp/MGView.jsp"/>
+   			     <put name="footer"
+    			     value="/jsp/footer.jsp"/>
+	</definition>
+
+        <!-- <definition name=".CredentialManager"
+	             path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="Credential Manager"/>
+		<put name="Header"
+		     value="/jsp/header.jsp"/>
+		<put name="UserArea"
+		     value="/jsp/CredentialManager.jsp"/>
+		      <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition> -->
+		
+	<!-- <definition name=".NewCredentialManager"
+	             path="/jsp/NewAdminLayout.jsp">
+		<put name="UserArea"
+			value="/jsp/CredentialManager.jsp"/>
+		<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		<put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition> -->
+	
+     <definition name=".Newshowalltemplates"
+	             path="/jsp/NewAdminLayout.jsp">
+		<put name="UserArea"
+			value="/jsp/ViewProcessTemplates.jsp"/>
+		<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		<put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition>
+
+     <definition name=".Newcreatetemplates"
+	             path="/jsp/NewAdminLayout.jsp">
+		<put name="UserArea"
+			value="/jsp/CreateProcessTemplate.jsp"/>
+		<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		<put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition>
+
+     <definition name=".Newtemplatethresholdactionconfig"
+	             path="/jsp/NewAdminLayout.jsp">
+		<put name="UserArea"
+			value="/jsp/TemplateThresholdConfiguration.jsp"/>
+		<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		<put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition>
+
+     <definition name=".Neweditprocess"
+	             path="/jsp/NewAdminLayout.jsp">
+		<put name="UserArea"
+			value="/jsp/TemplateProcessChooser.jsp"/>
+		<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		<put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition>
+
+     <!--definition name=".ActionProfiles"
+	            path="/jsp/NewAdminLayout.jsp">
+		<put name="UserArea"
+			value="/jsp/ActionProfiles.jsp"/>
+		<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		<put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition-->
+
+     <!--definition name=".ThresholdProf"
+	          path="/jsp/NewAdminLayout.jsp">
+		<put name="UserArea"
+			value="/jsp/ThresholdProfiles.jsp"/>
+		<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		 <put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition-->
+      <definition name=".ManageMonotirType"
+	          path="/jsp/NewAdminLayout.jsp">
+		<put name="UserArea"
+			value="/jsp/ManageMonitorType.jsp"/>
+		<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		 <put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition>
+
+     <definition name=".NewMonitorType"
+	          path="/jsp/NewAdminLayout.jsp">
+		<put name="UserArea"
+			value="/jsp/NewMonitorType.jsp"/>
+		<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		 <put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition>
+
+        <definition name=".ShowCredentialTypeRelatedRows"
+                        path="/jsp/ShowCredentialTypeValues.jsp">
+		<!--put name="UserArea"
+		     value="/jsp/ShowCredentialTypeValues.jsp"/-->
+	</definition>
+
+        <definition name=".RuleManager"
+	             path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="Rule Manager"/>
+		<put name="Header"
+		     value="/jsp/header.jsp"/>
+		<put name="UserArea"
+		     value="/jsp/MonitorGrpRuleManager.jsp"/>
+		      <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	
+	<definition name=".AddRulePage" path="/jsp/CreateRuleManager.jsp">
+	</definition>
+        
+	<!-- <definition name=".MonitorsToCredentialPage"
+                        path="/jsp/ShowMonitorsToCredentialPage.jsp">		
+	</definition> -->
+
+	<definition name="APMDiagAlertHistory" path="/jsp/BasicLayoutNoLeft.jsp" >
+			<put name="title"
+			     value=""/>
+			<put name="Header"
+			     value="/jsp/header.jsp"/>
+			<put name="UserArea"
+				value="/jsp/DiagnosticsAlertHistory.jsp"/> 	
+			<put name="footer"
+		    		 value="/jsp/footer.jsp"/>
+		</definition>
+
+			<definition name="APMDiagAlertsList" path="/jsp/BasicLayoutNoLeft.jsp" >
+			<put name="title"
+			     value=""/>
+			<put name="Header"
+			     value="/jsp/header.jsp"/>
+			<put name="UserArea"
+				value="/jsp/DiagnosticsAlertsList.jsp"/> 
+			<put name="footer"
+		     		value="/jsp/footer.jsp"/>	
+		</definition>
+
+	<!-- TILE DEFINITIONS RELATED TO IT360 - STARTS  -->
+	<definition name="IT360Default"
+	            path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="ManageEngine IT360"/>
+		<put name="Header"
+		     value="/jsp/header.jsp"/>
+		<put name="UserArea"
+		     value="/jsp/test.jsp"/>
+		<put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	
+	    <!-- IT30-M2M CHANGES STARTS - Ammuraj -->
+		<definition name="IT360.DCIMHome" extends="IT360Default">
+  	        	<put name="title" value="Facilities Home"/>
+  	        	<put name="Header" value="/jsp/header.jsp?tabtoselect=0"/>
+  	        	<put name="UserArea" value="/it360/jsp/it360Iframe.jsp?service=Facilities&amp;url=/home/Homepage.do?fromIT360=true&amp;viewId=Home&amp;displayName=Home"/>
+     		</definition>
+
+		<definition name="IT360.DCIMDevices" extends="IT360Default">
+  	        	<put name="title" value="Facilities Devices"/>
+  	        	<put name="Header" value="/jsp/header.jsp?tabtoselect=12"/>
+  	        	<put name="UserArea" value="/it360/jsp/it360Iframe.jsp?service=Facilities&amp;url=/topo/NetworkInventory.do?fromIT360=true&amp;viewId=Network+Database.CompleteView&amp;displayName=Complete+View"/>
+		</definition>
+
+		<definition name="IT360.DCIMConfiguration" extends="IT360Default">
+  	        	<put name="title" value="Facilities Configuration"/>
+  	        	<put name="Header" value="/jsp/header.jsp?tabtoselect=12"/>
+  	        	<put name="UserArea" value="/it360/jsp/it360Iframe.jsp?service=Facilities&amp;url=/report/RTUConfigurations.do?fromIT360=true&amp;viewId=rtuPage&amp;displayName=RTUConfig"/>
+		</definition>
+
+		<definition name="IT360.DCIMAdmin" extends="IT360Default">
+  	        	<put name="title" value="Facilities Admin"/>
+  	        	<put name="Header" value="/jsp/header.jsp?tabtoselect=12"/>
+  	        	<put name="UserArea" value="/it360/jsp/it360Iframe.jsp?service=Facilities&amp;url=/admin/CompleteAdminPanel.do?fromIT360=true&amp;viewId=admincomplete&amp;displayName=Complete+View"/>
+     		</definition>
+
+		<definition name="IT360.DCIMReports" extends="IT360Default">
+			<put name="title" value="Facilities Reports"/>
+			<put name="Header" value="/jsp/header.jsp?tabtoselect=5"/>
+			<put name="UserArea" value="/it360/jsp/it360Iframe.jsp?service=Facilities&amp;url=/report/ReportViewAction.do?fromIT360=true&amp;viewId=reportPage&amp;displayName=Reports"/>
+		</definition>
+
+		<definition name="IT360.DCIMAlarms" extends="IT360Default">
+			<put name="title" value="Facilities Alarms"/>
+			<put name="Header" value="/jsp/header.jsp?tabtoselect=4"/>
+			<put name="UserArea" value="/it360/jsp/it360Iframe.jsp?service=Facilities&amp;url=/fault/AlarmView.do?fromIT360=true&amp;viewId=Alerts&amp;displayName=Alarms"/>
+		</definition>
+		<!-- IT30-M2M CHANGES ENDS - Ammuraj -->
+	
+	<!-- IT30-SAN CHANGES STARTS -->
+  	<definition name="IT360.SAN"
+  	                extends="IT360Default">
+  	        <put name="title"
+  	             value="Storage View"/>
+  	        <put name="Header"
+  	             value="/jsp/header.jsp?tabtoselect=9"/>
+  	        <put name="UserArea"
+  	             value="/it360/jsp/storageInterface.jsp"/>
+  	</definition>
+  	<definition name="IT360.EnterpriseSAN"
+  	                extends="IT360Default">
+  	        <put name="title"
+  	             value="Storage View"/>
+  	        <put name="Header"
+  	             value="/jsp/header.jsp?tabtoselect=9"/>
+  	        <put name="UserArea"
+  	             value="/it360/jsp/storageInterface.jsp"/>
+  	</definition>
+  	<definition name="IT360.SANAlarms"
+  	                extends="IT360Default">
+  	        <put name="title" 
+  	             value="SAN Alarms"/>
+  	        <put name="Header"
+  	             value="/jsp/header.jsp?tabtoselect=4"/>
+  	        <put name="UserArea"
+  	             value="/it360/jsp/it360Iframe.jsp?service=OpStor&amp;url=/alarms.do?method=viewAlarms&amp;severity=7&amp;category=Any&amp;timeperiod=today"/>
+  	</definition>
+  	<!-- IT30-SAN CHANGES ENDS -->
+	
+	<definition name="IT360.Servers"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Servers View"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=2"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360ServersTab.jsp"/>
+	</definition>
+	
+	<definition name="IT360.Applications"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Applications View"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=3"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360ApplicationsTab.jsp"/>
+	</definition>
+	
+	<definition name="New.Admin"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Admin Page"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=3"/>
+		     <!--put name="LeftArea"
+		     	  value="/it360/jsp/admin/it360AdminLeftLinks.jsp"/-->
+			<put name="UserArea"
+				value="/jsp/NewAdmin.jsp"/>
+	</definition>
+	
+	<definition name="IT360.MonitorsGroupView"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Monitor Group View"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=7"/>
+			<put name="UserArea"
+			     value="/showresource.do?method=showMonitorGroupView"/>
+	</definition>
+	
+	<definition name="IT360.ReportsView"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Reports"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=5"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360ReportsTab.jsp"/>
+	 </definition>
+
+     <!--IT360 SP Changes : to avoid footer in reports starts here-->
+
+	<definition name="IT360.Reports"
+	            path="/jsp/reports/Reports.jsp">
+		<put name="title"
+		     value="Reports"/>
+		<put name="ReportsLeftArea"
+		     value="/jsp/reports/ReportLeftArea.jsp"/>
+		<put name="ReportContent"
+		     value="/jsp/reports/ReportList.jsp"/>
+		<put name="ReportsRightArea"
+		     value="/jsp/reports/ReportNumber.jsp"/>
+		<put name="footer"
+		     value="/jsp/test.jsp"/>
+     </definition>
+     <!--IT360 SP Changes : to avoid footer in reports ends here-->
+	
+    <definition name="IT360.VoIPMonitors"
+		            extends="IT360Default">
+			<put name="title"
+			     value="VoIP Monitors"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/overview.do?operation=showVoipDashboard_ajax&amp;selectedTab=Maps&amp;isFromInfra=yes"/>
+	</definition>
+	
+	<definition name="IT360.WANRTTMonitors"
+		            extends="IT360Default">
+			<put name="title"
+			     value="WANRTT Monitors"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/overview.do?operation=RttDashboard&amp;selectedTab=Maps&amp;isFromHome=yes&amp;period=16"/>
+	</definition>
+	
+	<definition name="IT360.Netflow"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Netflow Traffic"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=NetflowAnalyzer&amp;url=/jspui/index.jsp"/>
+	</definition>
+	
+	<definition name="IT360.NetflowDashboard"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Netflow Dashboard" />
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=11"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=NetflowAnalyzer&amp;url=/jspui/dashBoard.do?setTab=dBoard&amp;chgDBoard=true"/>
+	</definition>
+	<definition name="IT360.NetflowDevices"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Netflow Devices" />
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=11"/>
+			<put name="UserArea"
+				value="/it360/jsp/it360Iframe.jsp?service=NetflowAnalyzer&amp;url=/jspui/index.jsp?view=global&amp;grID=-1&amp;grDisp=Global View - DashBoard View&amp;setTab=index"/>
+	</definition>
+	<definition name="IT360.NetflowNBARCBQoSConfig"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Netflow NBARConfig" />
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=11"/>
+			<put name="UserArea"
+				value="/it360/jsp/it360Iframe.jsp?service=NetflowAnalyzer&amp;url=/jspui/dashBoard.do?dId=3&amp;frmConfPage=true&amp;setTab=nbarConfig"/>
+	</definition>
+	<definition name="IT360.NetflowIPSLA"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Netflow IPSLA" />
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=11"/>
+			<put name="UserArea"
+				value="/it360/jsp/it360Iframe.jsp?service=NetflowAnalyzer&amp;url=/jspui/ipsla/overview.do?operation=showVoipDashboard_ajax"/>
+	</definition>
+	<definition name="IT360.NetflowCiscoWAAS"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Netflow Cisco WAAS" />
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=11"/>
+			<put name="UserArea"
+				value="/it360/jsp/it360Iframe.jsp?service=NetflowAnalyzer&amp;url=/jspui/waasReportFrame.jsp?setTab=callWaas"/>
+	</definition>
+	<definition name="IT360.NetflowMediaTrace"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Netflow MediaTrace" />
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=11"/>
+			<put name="UserArea"
+				value="/it360/jsp/it360Iframe.jsp?service=NetflowAnalyzer&amp;url=/jspui/mediatraceReports.jsp?setTab=media"/>
+	</definition>
+	<definition name="IT360.NetflowSecurityAnalytics"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Netflow Security Analytics" />
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=11"/>
+			<put name="UserArea"
+				value="/it360/jsp/it360Iframe.jsp?service=NetflowAnalyzer&amp;url=/jspui/nbaReportFrame.jsp?setTab=Asam&amp;report=/nba/jspui/nbaSnapshot.do"/>
+	</definition>
+	<definition name="IT360.NetflowBilling"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Netflow Billing" />
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=11"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=NetflowAnalyzer&amp;url=/jspui/BillPlanList.jsp?setTab=BillPlanList"/>
+	</definition>
+	
+	<definition name="IT360.NetworkRouters"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Netflow Dashboard"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=%2Fmap%2FMapView.do%3FselectedNode%3DRouters_Map.netmap%26viewId%3DRouters_Map.netmap"/>
+	</definition>
+
+	<definition name="IT360HomeSearch"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Search"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+	         	     value="/it360/jsp/searchLayout.jsp"/>
+	</definition>
+
+
+	<definition name="IT360.NetworkAlarms"
+					extends="IT360Default">
+			<put name="title" 
+				 value="Network Alarms"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=4"/>
+		     <put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/fault/AlarmView.do?viewId=ActiveAlarms&amp;selectedTab=Alarms+View"/>
+	</definition>
+	
+	<definition name="IT360.NetworkReports"
+					extends="IT360Default">
+			<put name="title" 
+				 value="Network Reports"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=5"/>
+		     <put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/reports/ReportsIndex.do?selectedTab=Reports"/>
+	</definition>
+	
+	<definition name="IT360.Support"
+					extends="IT360Default">
+			<put name="title" 
+				 value="ManageEngine IT360 Support"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=-1"/>
+		     <put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=Console&amp;url=/IT360SupportInfoView.cc&amp;iframeHeight=1000px"/>
+	</definition>
+	
+	<!-- Qucik Cofniguration Wizard -->
+	<definition name="IT360.QCWizard"
+					extends="IT360Default">
+			<put name="title" 
+				 value="ManageEngine IT360 Quick Configuration Wizard"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=-1"/>
+		     <put name="UserArea"
+			     value="/it360/jsp/QCWizardIntro.jsp"/>
+	</definition>	
+	<!-- Qucik Cofniguration Wizard -->
+	
+	<definition name="IT360.EnterpriseNetworks"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Network View"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/enterpriseNetworks.jsp"/>
+	</definition>	
+	
+	<definition name="IT360.ProbeSettings"
+		            extends="default">
+			<put name="title"
+			     value="Probe Settings"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=6"/>
+			<put name="UserArea"
+			     value="/it360/jsp/probeSettings.jsp"/>
+	     </definition>
+
+	     <definition name="IT360.Search"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Search"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+		     <put name="LeftArea"
+		     	  value="/it360/jsp/admin/it360AdminLeftLinks.jsp"/>
+			<put name="UserArea"
+			     value="/it360/jsp/NewSearchLayout.jsp"/>
+	     </definition>
+
+
+	     <definition name="IT360.SearchLayout"
+		            extends="default">
+			<put name="title"
+			     value="searchGUI"/>
+			<put name="Header"
+			     value="/it360/jsp/searchHeader.jsp"/>
+		     <put name="LeftArea"
+		     	  value="/it360/jsp/searchLeftArea.jsp"/>
+			<put name="UserArea"
+			     value="/it360/jsp/probeSettings.jsp"/>
+	     </definition>
+
+
+
+
+<definition name="IT360.LicAdministration"
+		            extends="default">
+			<put name="title"
+			     value="Manage Licensing"/>
+			<put name="Header"
+				value="/jsp/header.jsp?tabtoselect=6"/>
+			<put name="LeftArea"
+		     	  value=""/>
+			<put name="UserArea"
+			     value="/it360/jsp/license/licenseManage.jsp"/>
+		</definition>
+         <definition name="IT360.ManageLicense"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Manage Licensing"/>
+			<put name="Header"
+			     value="/jsp/header.jsp"/>
+			<put name="UserArea"
+			     value="/it360/jsp/license/licenseManage.jsp"/>
+	</definition>
+		<definition name="IT360.OperatorManageLicense"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Manage Licensing"/>
+			<put name="Header"
+			     value="/jsp/header.jsp"/>
+			<put name="UserArea"
+				value="/it360/jsp/license/operatorLicensePage.jsp"/>
+	</definition>
+	
+		
+		<definition name="IT360.CustomersSummary"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Customer Summary"/>
+			<put name="Header"
+			     value="/jsp/header.jsp"/>
+			<put name="UserArea"
+				value="/it360/jsp/customersSummary.jsp"/>
+	</definition>
+
+	<definition name="IT360.CustomersSelect"
+		     		extends="IT360Default">
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=9"/>
+			<put name="UserArea"
+			     value="/it360/jsp/SelectCustomer.jsp"/>
+	</definition>		
+	<definition name="IT360.LicenseExpirePage"
+		            extends="IT360Default">
+			<put name="title"
+			     value="License Expired"/>
+			<put name="Header"
+			     value="/jsp/header.jsp"/>
+			<put name="UserArea"
+				value="/it360/jsp/license/LicenseExpirePage.jsp"/> 
+	</definition>
+	<definition name="IT360.IT360LicReject"
+		            extends="IT360Default">
+			<put name="title"
+			     value="LICENSE DOESN't ALLOW"/>
+			<put name="Header"
+			     value="/jsp/header.jsp"/>
+			<put name="UserArea"
+			     value="/it360/jsp/IT360LicReject.jsp"/>
+	</definition>
+	<definition name="DiagAlertHistory"  extends="IT360Default">
+			<put name="title"
+			     value=""/>
+			<put name="Header"
+			     value="/jsp/header.jsp"/>
+			<put name="UserArea"
+				value="/it360/jsp/IT360DiagnosticsAlertHistory.jsp"/> 	
+		</definition>
+
+			<definition name="DiagAlertsList"  extends="IT360Default">
+			<put name="title"
+			     value=""/>
+			<put name="Header"
+			     value="/jsp/header.jsp"/>
+			<put name="UserArea"
+				value="/it360/jsp/IT360DiagnosticsAlertsList.jsp"/> 	
+		</definition>
+	
+	<definition name="IT360.BSUserHome"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Customer Summary"/>
+			<put name="Header"
+			     value="/jsp/header.jsp"/>
+			<put name="UserArea"
+				value="/it360/jsp/it360BSUserHome.jsp"/>
+	</definition>
+	<definition name=".AmazonInstanceAction"
+				     path="/jsp/BasicLayoutNoLeft.jsp">
+			  <put name="title"
+			       value="Amazon Instance Action"/>
+			  <put name="Header"
+		    	 value="/jsp/header.jsp"/>
+			  <put name="UserArea"
+				value="/jsp/ThreadDumpActionForm.jsp"/>
+			<put name="footer"
+   				value="/jsp/footer.jsp"/>		
+	</definition>
+	<definition name="IT360.USERGROUPS"
+		            extends="default">
+			<put name="title"
+			     value="User/Groups"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=3"/>
+			<put name="UserArea"
+			     value="/jsp/showUsers.jsp"/>
+	</definition>
+	<definition name=".VMActions"
+	            path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="VM Action"/>
+		<put name="Header"
+			     value="/jsp/header.jsp"/>
+		<put name="UserArea"
+		     value="/jsp/VMActionForm.jsp"/>
+		 <put name="footer"
+    		value="/jsp/footer.jsp"/>
+    </definition>
+	<definition name=".WinServiceAction"
+	            path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="Windows Services Action"/>
+		<put name="Header"
+			     value="/jsp/header.jsp"/>
+		<put name="UserArea"
+		     value="/jsp/WindowsServiceAction.jsp"/>
+		 <put name="footer"
+    				value="/jsp/footer.jsp"/>
+    </definition>    	
+
+
+	<definition name="IT360.IPAM"
+		            extends="IT360Default">
+			<put name="title"
+			     value="IPAM"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/overview.do?operation=OpUtilsIPAM&amp;pluginMode=inline"/>
+	     </definition>
+	     <definition name="IT360.SPM"
+		            extends="IT360Default">
+			<put name="title"
+			     value="SPM"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/overview.do?operation=OpUtilsSPM&amp;pluginMode=inline"/>
+	</definition>
+	<definition name="IT360.Layer2"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Networks Layer2 Topology Map"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/map/MapView.do?objectName=Maps&amp;jgraphMap=true&amp;selectedNode=TopoMap.netmap&amp;viewId=TopoMap.netmap&amp;displayName=Maps&amp;isNetworkView=true"/>
+	</definition>
+	<!-- Network Module - IT  Automation -->
+	<definition name="IT360.ITA"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Networks - IT  Automation"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/admin/RunBookAdmin.do?operation=showWfList&amp;selectedTab=webclient.tab.workflow&amp;selitem=All Workflows"/>
+	</definition>
+	<!-- Network Module - IT  Automation -->
+	
+	<!-- Network Module - Config Mgmt -->
+	<definition name="IT360.NCMDASHBOARD"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Config Mgmt - Dashboard"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/TabMenu.do?list=NCMdownload"/>
+	</definition>
+	<definition name="IT360.NCMHOME"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Configuration Management - Overview"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/TabMenu.do?list=ncmTabs&amp;path=NCMHomeView.cc"/>
+	</definition>
+	<definition name="IT360.NCMINVENTORY"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Configuration Management - Inventory"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/TabMenu.do?list=ncmTabs&amp;path=NCMInventoryView.cc"/>
+	</definition>
+	<definition name="IT360.NCMCOMPLIANCE"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Configuration Management - Compliance"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/TabMenu.do?list=ncmTabs&amp;path=NCMComplianceView.cc"/>
+	</definition>
+	<definition name="IT360.NCMCHANGE"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Configuration Management - Change"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/TabMenu.do?list=ncmTabs&amp;path=NCMChangeView.cc"/>
+	</definition>
+	<definition name="IT360.NCMADMIN"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Configuration Management - Settings"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/TabMenu.do?list=ncmTabs&amp;path=NCMAdminView.cc"/>
+	</definition>
+	<definition name="IT360.NCMREPORTS"
+		            extends="IT360Default">
+			<put name="title"
+			     value="Configuration Management - Reports"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=1"/>
+			<put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/TabMenu.do?list=ncmTabs&amp;path=NCMReportsMainView.cc"/>
+     	</definition>
+	<!-- Network Module - Config Mgmt -->
+	
+	<definition name="IT360.NetworkDevicetoWatch"
+					extends="IT360Default">
+			<put name="title" 
+				 value="Device to watch"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=4"/>
+		        <put name="UserArea"
+			     value="/it360/jsp/it360Iframe.jsp?service=OpManager&amp;url=/map/MapView.do?selectedTab=Alarms%20View&amp;selectedNode=Failed_Objects_Map.netmap&amp;viewId=Failed_Objects_Map.netmap&amp;displayName=Devices%20to%20watch&amp;selitem=webclient.tab.Devicewatch"/>
+	</definition>
+		
+   <!-- TILE DEFINITIONS RELATED TO IT360 - ENDS  -->
+     
+     <definition name="Tile.NewBusinessService"
+		            path="/jsp/BasicLayoutNoLeft.jsp">
+			<put name="title"
+			     value="Create Business Service"/>
+			<put name="Header"
+			     value="/jsp/header.jsp?tabtoselect=3"/>			
+			<put name="UserArea"
+			     value="/jsp/createBusinessService.jsp"/>
+			     <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>	
+	<definition name="Tile.AddDependentMGGroups" path="/jsp/BasicLayoutNoLeft.jsp">
+			<put name="title" value="Select Monitor / Monitor Group"/>	
+			<put name="Header" value="/jsp/test.jsp"/>	
+			<put name="UserArea" value="/jsp/SelectDependentMGroups.jsp"/>
+			<put name="footer" value="/jsp/test.jsp"/>
+	</definition>
+	
+	<!--Storage Mapping Tab Entry END-->
+
+	<definition name="Tile.AuditLog"  path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"  value="Application Manager"/>
+		<put name="Header"  value="/jsp/header.jsp"/>
+		<put name="UserArea" value="/jsp/AuditLog.jsp"/>
+		  <put name="footer" value="/jsp/footer.jsp"/>
+  	</definition>
+  	
+	<definition name="Tiles.Admin.Layout"
+	            path="/jsp/AdminLayout.jsp">
+		<put name="title"
+		     value="IT360"/>
+		<put name="Header"
+			value="/jsp/header.jsp"/>
+		<put name="MainMenu"
+			value="/jsp/test.jsp"/>
+		<put name="LeftMenu"
+			value="/jsp/test.jsp"/>
+		<put name="rightMenu"
+			value="/jsp/test.jsp"/>
+		<put name="UserArea"
+		     value="/jsp/test.jsp"/>
+		<put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	
+	<definition name="Tile.General"
+		            extends="Tiles.Admin.Layout">
+		            <put name="UserArea"
+			     value="/jsp/test.jsp"/>
+	</definition>
+	
+	<definition name=".listOAuthProviders"
+	             path="/jsp/NewAdminLayout.jsp">
+		<put name="UserArea"
+			value="/jsp/OAuthProvider.jsp"/>
+		<put name="HelpContent"
+			value="/jsp/test.jsp"/>
+		<put name="Footer"
+		     value="/jsp/footer.jsp"/>
+     </definition>
+	
+	<definition name=".RestAPIAction"
+	            path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="Rest API Action"/>
+		<put name="Header"
+		     value="/jsp/header.jsp"/>		
+		<put name="UserArea"
+		     value="/jsp/RestAPIAction.jsp"/>
+		     <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+	
+	     <definition name=".SlackAction"
+	            path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title"
+		     value="Slack Action"/>
+		<put name="Header"
+		     value="/jsp/header.jsp"/>		
+		<put name="UserArea"
+		     value="/jsp/SlackAction.jsp"/>
+		     <put name="footer"
+		     value="/jsp/footer.jsp"/>
+	</definition>
+     
+	
+     
+	<!-- APM Insight tiles definition -->
+
+	<definition name="ApmInsight.Default" path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title" value="APM-Insight HOME" />
+		<put name="Header" value="/jsp/header.jsp?tabtoselect=3" />
+		<put name="UserArea" value="/jsp/test.jsp" />
+		<put name="footer" value="/jsp/footer.jsp" />
+	</definition>
+	
+	<definition name="ApmInsight.Home" extends="ApmInsight.Default">
+		<put name="title" value="APM-Insight Home" />
+		<put name="UserArea" value="/jsp/apminsight/APMInsightHome.jsp" />
+	</definition>
+	
+	<definition name="ApmInsight.Edit" extends="ApmInsight.Default">
+		<put name="title" value="APM-Insight Application Edit" />
+		<put name="UserArea" value="/jsp/apminsight/EditApplication.jsp" />
+	</definition>
+	<!-- APM Insight tiles definition ends-->
+	
+	<definition name=".WebToken" path="/jsp/NewAdminLayout.jsp">
+   		<put name="UserArea" value="/jsp/WebToken.jsp" />
+   		<put name="HelpContent" value="/jsp/test.jsp" />
+   		<put name="Footer" value="/jsp/footer.jsp" />
+   	</definition>
+	
+	<definition name="Tile.RUMTab" path="/jsp/BasicLayoutNoLeft.jsp">
+		<put name="title" value="RUM Tab"/>
+		<put name="Header" value="/jsp/header.jsp?tabtoselect=4"/>
+		<put name="UserArea" value="/jsp/rum/RUMTabView.jsp"/>
+		<put name="footer" value="/jsp/footer.jsp"/>
+	</definition>
+     
+</tiles-definitions>

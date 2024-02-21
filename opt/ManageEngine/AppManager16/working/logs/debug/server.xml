@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ --><Server port="TOMCAT_SHUTDOWNPORT" shutdown="SHUTDOWN">
+	<Listener className="org.apache.catalina.startup.VersionLoggerListener"/>
+	<GlobalNamingResources>
+ 		<Resource auth="Container" driverClassName="JDBC_DRIVER" factory="com.manageengine.appmanager.tomcatagent.dbcp.EncryptedDataSourceFactory" maxActive="100" maxIdle="30" maxWait="10000" name="jdbc/AMDS" password="DB_PASSWORD" type="javax.sql.DataSource" url="DB_PORT_DIR" username="DB_USERNAME"/>
+	</GlobalNamingResources>
+
+ 	<Service name="Catalina">
+    	<!-- Define a non-SSL Coyote HTTP/1.1 Connector on port 8080-->
+    	<Connector URIEncoding="UTF-8" acceptCount="150" allowTrace="false" compressibleMimeType="text/html,text/xml,text/javascript,text/css,application/x-javascript,application/javascript" compression="on" compressionMinSize="2048" connectionTimeout="20000" disableUploadTimeout="true" enableLookups="false" maxThreads="200" minSpareThreads="25" noCompressionUserAgents="gozilla, traviata" port="WEBSERVER_PORT" redirectPort="SSL_PORT" relaxedQueryChars="[]|{}^\`&quot;&lt;&gt;" server="AppManager"/>
+    	<!-- Define a SSL Coyote HTTP/1.1 Connector on port 8443 -->    
+    	<Connector SSLEnabled="true" URIEncoding="UTF-8" acceptCount="150" allowTrace="false" ciphers="TLS_AES_256_GCM_SHA384,TLS_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384" clientAuth="false" compressibleMimeType="text/html,text/xml,text/javascript,text/css,application/x-javascript,application/javascript" compression="on" compressionMinSize="2048" disableUploadTimeout="true" enableLookups="false" encryptedKeystorePass="gKFu7hpAix5EYHXTOw4U4w==" keystoreFile="KEYSTORE_FILE" maxThreads="200" minSpareThreads="25" noCompressionUserAgents="gozilla, traviata" port="SSL_PORT" protocol="com.manageengine.appmanager.tomcatagent.http11.EncryptedHttp11NioProtocol" redirectPort="WEBSERVER_PORT" relaxedQueryChars="[]|{}^\`&quot;&lt;&gt;" scheme="https" secure="true" server="AppManager" sslEnabledProtocols="SSL_ENABLED_PROTOCOLS" sslProtocol="TLS" useBodyEncodingForURI="true" useServerCipherSuitesOrder="true"/>
+
+		<Engine defaultHost="localhost" name="Catalina">
+	 <!-- <Valve className="com.adventnet.appmanager.tomcatagent.ver5.valve.BadInputFilterValve"/> --> 
+			<Valve className="com.adventnet.appmanager.tomcatagent.ver5.valve.AdventNetHostValve"/>
+			<Host appBase="webapps" autoDeploy="true" errorReportValveClass="com.adventnet.appmanager.tomcatagent.ver5.valve.CustomErrorReportValve" name="localhost" unpackWARs="true">
+				<Valve className="com.adventnet.appmanager.tomcatagent.ver5.valve.APMAccessLogValve" directory="../../../logs/tomcat" pattern="[%{HH:mm:ss:SSS}t]|[%{MM-dd-yyyy}t]|[ACCESS_LOG]|[%m]|[%s]: Remote Host name:[%h] Remote user that was authenticated:[%u] &quot;%r&quot; Response code:%s Size(bytes):%b Time(sec):%T Thread:%I|" prefix="localhost_access_log" suffix=".txt"/> 
+ 				<!-- <Valve className="org.apache.catalina.valves.AccessLogValve"
+                 directory="logs"  prefix="localhost_access_log." suffix=".txt"
+				 pattern="%h %l %u %t [ %D / %T ] %s %b '%r' " resolveHosts="false"/>  --> 
+				<Context docBase="APPMANAGER_HELP" path="/help" privileged="true"/>
+				<Context docBase="WEBNMS_ROOT_DIR" path="" privileged="true">
+					<Valve characterEncoding="UTF-8" className="com.manageengine.appmanager.tomcat.authenticator.APMFormAuthenticator"/>
+					<Valve className="com.adventnet.appmanager.tomcatagent.ver5.valve.TaintFilterValve"/>
+					<Realm className="com.manageengine.appmanager.tomcatagent.ver5.realm.AMAuthenticatorRealm" dataSourceName="jdbc/AMDS"/>
+		    		<ResourceLink global="jdbc/AMDS" name="jdbc/AMDS" type="javax.sql.DataSource"/>
+				</Context>
+      		</Host>
+		</Engine>
+	</Service>
+</Server>

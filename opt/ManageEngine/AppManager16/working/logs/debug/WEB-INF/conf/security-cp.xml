@@ -1,0 +1,30 @@
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security.xsd" name="NCM">
+    <default-response-headers disable-safe-headers="Pragma,Cache-Control,Expires"/>
+    <urls csrf="false">
+        <param name="apiKey" regex="apikey" max-occurrences="2" allow-empty="true" secret="true"/>
+        <url path="/pam/api/cp/v1/configureCP" method="POST">
+            <param name="protocol" regex="^(http|https)$" min-occurrences="1"/>
+            <param name="service_name" regex="^(PMP|PAM360|CYBERARK)$" min-occurrences="1"/>
+            <param name="server_name" type="String" max-len="255" min-occurrences="1"/>
+            <param name="server_port" type="int" min-occurrences="1"/>
+            <param name="enabled" type="boolean"/>
+            <param name="auth_token" type="String" secret="true" max-len="1000"/>
+            <param name="app_server_name" type="String" max-len="255"/>
+            <param name="username" type="String" max-len="255"/>
+            <param name="password" type="String" secret="true" max-len="255"/>
+            <param name="safe_name" type="String" max-len="500"/>
+        </url>
+
+        <url path="/pam/api/cp/v1/forceSync" method="POST">
+        </url>
+
+        <url path="/pam/api/cp/v1/changePassword" method="POST">
+            <param name="account_id" type="String" max-len="500" min-occurrences="1" />
+            <param name="new_password" type="String" secret="true" max-len="255" min-occurrences="1"/>
+        </url>
+
+        <url path="/pam/api/cp/v1/isCPConfigured" method="POST">
+        </url>
+
+    </urls>
+</security>
